@@ -1,5 +1,12 @@
 import ky, { HTTPError } from "ky";
 import { z } from "zod";
+import {
+  type CacheBinding,
+  type CacheClientOptions,
+  type CacheLookup,
+  createHttpCache,
+  type HttpCache,
+} from "./cache/http-cache.js";
 import type { Provenance } from "./models.js";
 import { env } from "./runtime/env.js";
 
@@ -31,7 +38,7 @@ export class HttpResponseError extends ApiError {
     super(message, status);
   }
 }
-export interface ClientOptions {
+export interface ClientOptions extends CacheClientOptions {
   apiKey?: string;
   baseUrl?: string;
   fetch?: typeof globalThis.fetch;
@@ -46,6 +53,8 @@ export interface HttpTransportOptions extends Omit<ClientOptions, "apiKey"> {
   baseUrl: string;
   sourceName: string;
   headers?: HeadersInit;
+  /** The connector's Python cache name and overrides; absent means this connector never caches. */
+  cache?: CacheBinding;
 }
 export interface TransportRequestOptions {
   maxBytes?: number;
@@ -63,6 +72,8 @@ export interface TransportRequestOptions {
   allowedHosts?: string[];
   /** Expose up to 64 KiB of Ky's bounded error body as an HttpResponseError for connector inspection. */
   readErrorBody?: boolean;
+  /** False skips the response cache for this request. */
+  cache?: false;
 }
 export interface TransportResult<T> {
   data: T;
@@ -94,12 +105,15 @@ export class GenericHttpTransport {
   private readonly headers: Headers;
   private readonly maxResponseBytes: number;
   private readonly sourceName: string;
+  /** The response cache, when this connector has one and caching is on. */
+  readonly httpCache: HttpCache | undefined;
   constructor(options: HttpTransportOptions) {
     this.baseUrl = new URL(options.baseUrl);
     secureUrl(this.baseUrl);
     if (this.baseUrl.search)
       throw new ConfigurationError("baseUrl must not contain a query.");
     this.sourceName = options.sourceName;
+    this.httpCache = createHttpCache(options, options.cache);
     this.maxResponseBytes = z
       .number()
       .int()
@@ -235,12 +249,28 @@ export class GenericHttpTransport {
       )
         sourceUrl.searchParams.delete(key);
     }
-    const provenance = (): Provenance => ({
+    const provenance = (
+      cached?: { storedAt: number; fresh: boolean } | undefined,
+    ): Provenance => ({
       source_url: sourceUrl.href,
       source_name: this.sourceName,
-      retrieved_at: new Date().toISOString(),
-      cache_hit: false,
+      // As in Python, a cached body keeps the time it was first fetched.
+      retrieved_at: new Date(cached?.storedAt ?? Date.now()).toISOString(),
+      cache_hit: cached?.fresh ?? false,
     });
+    const decode = (bytes: Uint8Array): unknown => {
+      if (mode === "bytes") return bytes;
+      const text = new TextDecoder().decode(bytes);
+      return mode === "text" ? text : JSON.parse(text);
+    };
+    const tooLarge = (status: number) =>
+      this.error(
+        `${this.sourceName} response exceeds the configured size limit.`,
+        status,
+        "RESPONSE_TOO_LARGE",
+      );
+    const cache =
+      method === "GET" && options.cache !== false ? this.httpCache : undefined;
     try {
       for (let redirects = 0; redirects <= 5; redirects++) {
         const sameOrigin = url.origin === this.baseUrl.origin;
@@ -251,6 +281,21 @@ export class GenericHttpTransport {
           new Headers(options.headers).forEach((value, key) => {
             headers.set(key, value);
           });
+        const lookup: CacheLookup | undefined = cache
+          ? await cache.lookup(url, headers)
+          : undefined;
+        if (lookup?.hit) {
+          if (lookup.hit.body.byteLength > maxBytes)
+            throw tooLarge(lookup.hit.status);
+          return {
+            data: decode(lookup.hit.body),
+            provenance: provenance(lookup.hit),
+            headers: lookup.hit.headers,
+            status: lookup.hit.status,
+          };
+        }
+        for (const [name, value] of Object.entries(lookup?.conditional ?? {}))
+          headers.set(name, value);
         const response = await this.http(url, {
           method,
           signal,
@@ -261,6 +306,23 @@ export class GenericHttpTransport {
           ...(options.form ? { body: new URLSearchParams(options.form) } : {}),
           ...(options.rawBody === undefined ? {} : { body: options.rawBody }),
         });
+        if (response.status === 304 && lookup?.revalidate && cache) {
+          await response.body?.cancel();
+          const hit = await cache.notModified(lookup, response.headers);
+          if (!hit)
+            throw this.error(
+              `${this.sourceName} revalidation failed.`,
+              304,
+              "NETWORK_ERROR",
+            );
+          if (hit.body.byteLength > maxBytes) throw tooLarge(hit.status);
+          return {
+            data: decode(hit.body),
+            provenance: provenance(hit),
+            headers: hit.headers,
+            status: hit.status,
+          };
+        }
         if (response.status >= 300 && response.status < 400) {
           const location = response.headers.get("location");
           if (
@@ -330,17 +392,20 @@ export class GenericHttpTransport {
           bytes.set(chunk, position);
           position += chunk.byteLength;
         }
-        const text =
-          mode === "bytes" ? undefined : new TextDecoder().decode(bytes);
-        const data: unknown =
-          mode === "bytes"
-            ? bytes
-            : mode === "text"
-              ? text
-              : JSON.parse(text ?? "");
+        const data = decode(bytes);
+        const fetchedAt = Date.now();
+        if (lookup && cache && response.status !== 206)
+          await cache.store(
+            lookup,
+            url,
+            response.status,
+            response.headers,
+            bytes,
+            fetchedAt,
+          );
         return {
           data,
-          provenance: provenance(),
+          provenance: provenance({ storedAt: fetchedAt, fresh: false }),
           headers: response.headers,
           status: response.status,
         };
@@ -410,7 +475,8 @@ export class GenericHttpTransport {
   }
 }
 export class OdpTransport extends GenericHttpTransport {
-  constructor(options: ClientOptions = {}) {
+  /** `cacheName` is Python's: `uspto_odp`, or `uspto_office_actions` for the Office Action clients. */
+  constructor(options: ClientOptions = {}, cacheName = "uspto_odp") {
     const apiKey = options.apiKey || env("USPTO_ODP_API_KEY");
     if (!apiKey?.trim())
       throw new ConfigurationError(
@@ -420,6 +486,7 @@ export class OdpTransport extends GenericHttpTransport {
       ...options,
       baseUrl: options.baseUrl ?? "https://api.uspto.gov",
       sourceName: "USPTO Open Data Portal",
+      cache: { name: cacheName },
       headers: { "X-API-KEY": apiKey },
     });
   }

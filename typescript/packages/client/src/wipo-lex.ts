@@ -1,3 +1,4 @@
+import { CachedClient } from "./cache/client.js";
 import { parseDocument, squash } from "./google-patents/dom.js";
 import type { Provenance } from "./models.js";
 import {
@@ -112,14 +113,16 @@ function formDate(value: string, label: string): string {
   return `${match[3]}/${match[2]}/${match[1]}`;
 }
 
-export class WipoLexClient {
+export class WipoLexClient extends CachedClient {
   private readonly http: GenericHttpTransport;
   constructor(options: Omit<ClientOptions, "apiKey"> = {}) {
+    super();
     this.http = new GenericHttpTransport({
       timeoutMs: 60_000,
       ...options,
       baseUrl: options.baseUrl ?? WIPO_LEX_ORIGIN,
       sourceName: WIPO_LEX_SOURCE,
+      cache: { name: "wipo_lex" },
       headers: {
         "user-agent":
           "patent-client-agents-wipolex/0.1 (+https://patentclient.com)",

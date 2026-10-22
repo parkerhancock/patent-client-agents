@@ -31,8 +31,20 @@ describe("hosted configuration", () => {
       termsVersion: "2026-04-23",
       hiddenTools: ["search_trademarks"],
       corpora: { cacheDir: "/app/corpora" },
+      httpCache: "memory",
     });
     expect(config.google).toBeUndefined();
+  });
+
+  test("the HTTP response cache defaults to memory and accepts off or sqlite", () => {
+    for (const value of ["off", "memory", "sqlite"] as const)
+      expect(
+        loadConfig({ AUTH_BYPASS: "true", PATENT_CLIENT_AGENTS_CACHE: value })
+          .httpCache,
+      ).toBe(value);
+    expect(() =>
+      loadConfig({ AUTH_BYPASS: "true", PATENT_CLIENT_AGENTS_CACHE: "disk" }),
+    ).toThrow(HostedConfigError);
   });
 
   test("OAuth mode requires Google credentials and strong secrets", () => {

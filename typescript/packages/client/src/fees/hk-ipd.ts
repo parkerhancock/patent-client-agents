@@ -1,4 +1,5 @@
 import { parseHTML } from "linkedom";
+import { CachedClient } from "../cache/client.js";
 import {
   ApiError,
   type ClientOptions,
@@ -608,13 +609,17 @@ const COVERAGE_NOTE: Record<Right, string> = {
 };
 
 /** Fetches the IPD forms-and-fees pages and projects the patent, trademark and design schedules. */
-export class HkIpdFeesClient {
+export class HkIpdFeesClient extends CachedClient {
   private readonly http: GenericHttpTransport;
   constructor(options: Omit<ClientOptions, "apiKey"> = {}) {
+    super();
     this.http = new GenericHttpTransport({
       ...options,
       baseUrl: options.baseUrl ?? HK_IPD_BASE,
       sourceName: HK_IPD_FEES_SOURCE,
+      cache: { name: "hk_ipd_fees" },
+      // Python's DEFAULT_TTL_SECONDS: the default age for cacheClearExpired, not freshness.
+      ttlSeconds: options.ttlSeconds ?? 7 * 24 * 3600,
       headers: { accept: "text/html", "user-agent": USER_AGENT },
     });
   }

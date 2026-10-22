@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { CachedClient } from "./cache/client.js";
 import type { Provenance } from "./models.js";
 import {
   ApiError,
@@ -259,16 +260,18 @@ const decodeEntities = (value: string) =>
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">");
 
-export class CafcClient {
+export class CafcClient extends CachedClient {
   private readonly http: GenericHttpTransport;
   private nonce: { value: string; at: number } | undefined;
   private draw = 1;
   constructor(options: Omit<ClientOptions, "apiKey"> = {}) {
+    super();
     this.http = new GenericHttpTransport({
       ...options,
       timeoutMs: options.timeoutMs ?? 60_000,
       baseUrl: options.baseUrl ?? CAFC_ORIGIN,
       sourceName: CAFC_SOURCE,
+      cache: { name: "cafc" },
       // The court's edge has rejected non-browser user agents on the AJAX endpoint.
       headers: {
         "user-agent":

@@ -1,4 +1,5 @@
 import { parseHTML } from "linkedom";
+import { CachedClient } from "../cache/client.js";
 import {
   ApiError,
   type ClientOptions,
@@ -547,13 +548,17 @@ function coverage(
 }
 
 /** Fetches the PRV patent, trademark and design fee pages. */
-export class PrvFeesClient {
+export class PrvFeesClient extends CachedClient {
   private readonly http: GenericHttpTransport;
   constructor(options: Omit<ClientOptions, "apiKey"> = {}) {
+    super();
     this.http = new GenericHttpTransport({
       ...options,
       baseUrl: options.baseUrl ?? "https://www.prv.se",
       sourceName: PRV_FEES_SOURCE,
+      cache: { name: "prv_se_fees" },
+      // Python's DEFAULT_TTL_SECONDS: the default age for cacheClearExpired, not freshness.
+      ttlSeconds: options.ttlSeconds ?? 7 * 24 * 3600,
       headers: { accept: "text/html", "user-agent": USER_AGENT },
     });
   }

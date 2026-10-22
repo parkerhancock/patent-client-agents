@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { CachedClient } from "./cache/client.js";
 import type { RequestOptions } from "./models.js";
 import {
   identifier,
@@ -26,10 +27,11 @@ function request(
     z.number().int().min(1).max(500).parse(options.limit);
   return recordRequest(options, download, format);
 }
-export class PetitionsClient {
+export class PetitionsClient extends CachedClient {
   private readonly transport: OdpTransport;
   private readonly path = "/api/v1/petition/decisions";
   constructor(options: ClientOptions = {}) {
+    super();
     this.transport = new OdpTransport(options);
   }
   search(

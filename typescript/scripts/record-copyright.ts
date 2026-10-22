@@ -1,3 +1,5 @@
+// Recording must reach the network: the response cache stays off.
+import "../tests/no-cache.js";
 import { copyrightRecording } from "../tests/copyright-recordings.js";
 
 /** Record a Copyright Office session. Prints counts, never bodies. */

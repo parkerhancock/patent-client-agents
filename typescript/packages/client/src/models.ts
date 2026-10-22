@@ -7,7 +7,8 @@ export const ProvenanceSchema = z.object({
   source_name: z.string().min(1),
   as_of_status: z.string().optional(),
   retrieved_at: z.iso.datetime(),
-  cache_hit: z.literal(false),
+  /** True when the HTTP response cache served the body without contacting the source. */
+  cache_hit: z.boolean(),
 });
 export type Provenance = z.infer<typeof ProvenanceSchema>;
 export const CorpusProvenanceSchema = ProvenanceSchema.extend({

@@ -1,3 +1,4 @@
+import { CachedClient } from "../cache/client.js";
 import { pdfPageTexts } from "../runtime/pdf.js";
 import {
   ApiError,
@@ -470,7 +471,7 @@ const COMMON =
   "Amounts exclude 16% VAT (IVA), which Disposición Sexta adds. Rows eligible for the Disposición Cuarta 50% reduction have a large row at the published amount and a small row at half; other rows have no tier. Procedural fees of Articles 16-18 and 27-34 appear in every schedule. Article 35 (PCT) refers to WIPO's tariff and is omitted, as are Madrid and Hague fees paid to WIPO in CHF.";
 
 /** Fetches IMPI's tariff and projects the patent, utility model, design and trade mark schedules. */
-export class ImpiFeesClient {
+export class ImpiFeesClient extends CachedClient {
   private readonly http: GenericHttpTransport;
   private pending: Promise<{
     rows: ImpiRow[];
@@ -478,10 +479,14 @@ export class ImpiFeesClient {
     provenance: FeeSchedule["provenance"];
   }> | null = null;
   constructor(options: Omit<ClientOptions, "apiKey"> = {}) {
+    super();
     this.http = new GenericHttpTransport({
       ...options,
       baseUrl: options.baseUrl ?? "https://www.gob.mx",
       sourceName: IMPI_FEES_SOURCE,
+      cache: { name: "impi_fees" },
+      // Python's DEFAULT_TTL_SECONDS: the default age for cacheClearExpired, not freshness.
+      ttlSeconds: options.ttlSeconds ?? 7 * 24 * 3600,
       headers: { accept: "application/pdf", "user-agent": USER_AGENT },
     });
   }

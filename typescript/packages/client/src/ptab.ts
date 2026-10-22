@@ -1,3 +1,4 @@
+import { CachedClient } from "./cache/client.js";
 import type { RequestOptions } from "./models.js";
 import {
   identifier,
@@ -35,7 +36,7 @@ const getExportFacetsPaths = new Set([
   "/api/v1/patent/interferences/decisions",
 ]);
 // Concrete ODP record routes share payload and response contracts across PTAB datasets.
-class PtabRecords<K extends string> {
+class PtabRecords<K extends string> extends CachedClient {
   protected readonly transport: OdpTransport;
   constructor(
     options: ClientOptions,
@@ -43,6 +44,7 @@ class PtabRecords<K extends string> {
     protected readonly key: K,
     protected readonly downloadKey = "patentTrialData",
   ) {
+    super();
     this.transport = new OdpTransport(options);
   }
   protected searchRecords(

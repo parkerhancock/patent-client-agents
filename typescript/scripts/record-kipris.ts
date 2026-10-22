@@ -1,3 +1,5 @@
+// Recording must reach the network: the response cache stays off.
+import "../tests/no-cache.js";
 import { readFileSync, renameSync } from "node:fs";
 import {
   KIPRIS_REPLAY_KEY,

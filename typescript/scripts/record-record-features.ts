@@ -1,3 +1,5 @@
+// Recording must reach the network: the response cache stays off.
+import "../tests/no-cache.js";
 import { recordFeatures } from "../tests/record-feature-recordings.js";
 
 const record = Bun.argv.includes("--record"),

@@ -1,3 +1,5 @@
+// Recording must reach the network: the response cache stays off.
+import "../tests/no-cache.js";
 import { usitcRecording } from "../tests/usitc-recordings.js";
 
 /** Record public EDIS metadata and HTS calls. Prints counts, never bodies. */

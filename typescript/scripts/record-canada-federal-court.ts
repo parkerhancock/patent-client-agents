@@ -1,3 +1,5 @@
+// Recording must reach the network: the response cache stays off.
+import "../tests/no-cache.js";
 import { canadaFederalCourtRecording } from "../tests/canada-federal-court-recordings.js";
 
 /** Record a Canada Federal Court session. Prints counts, never bodies. */

@@ -1,4 +1,5 @@
 import { parseHTML } from "linkedom";
+import { CachedClient } from "../cache/client.js";
 import {
   ApiError,
   type ClientOptions,
@@ -739,16 +740,20 @@ function recurringCoverage(
 const OMITTED = `Fees stated only as variable or paid to WIPO (${[...VARIABLE_CODES].join(", ")}) are omitted.`;
 
 /** Fetches the USPTO fee schedule page and projects the patent, design and trademark schedules. */
-export class UsptoFeesClient {
+export class UsptoFeesClient extends CachedClient {
   private readonly http: GenericHttpTransport;
   private pending: Promise<
     Page & { provenance: FeeSchedule["provenance"] }
   > | null = null;
   constructor(options: Omit<ClientOptions, "apiKey"> = {}) {
+    super();
     this.http = new GenericHttpTransport({
       ...options,
       baseUrl: options.baseUrl ?? "https://www.uspto.gov",
       sourceName: USPTO_FEES_SOURCE,
+      cache: { name: "uspto_fees" },
+      // Python's DEFAULT_TTL_SECONDS: the default age for cacheClearExpired, not freshness.
+      ttlSeconds: options.ttlSeconds ?? 7 * 24 * 3600,
       headers: { accept: "text/html" },
     });
   }

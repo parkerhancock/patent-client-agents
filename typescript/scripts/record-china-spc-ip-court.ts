@@ -1,3 +1,5 @@
+// Recording must reach the network: the response cache stays off.
+import "../tests/no-cache.js";
 import { chinaSpcRecording } from "../tests/china-spc-ip-court-recordings.js";
 
 /** Record a China SPC IP Court session. Prints counts and IDs, never bodies. */

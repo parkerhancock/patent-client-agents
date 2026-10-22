@@ -175,6 +175,36 @@ try {
       }).getEpcSchedule()
     ).fees[0]?.amount;
   }
+  // HTTP response cache: IndexedDB persists across client instances; the
+  // browser default is memory. Runs last so it cannot serve the relay leg.
+  let feedCalls = 0;
+  const cachedFeed = (async () => {
+    feedCalls++;
+    return Response.json(
+      [
+        {
+          data: { feeCode: "001", feeDescription: "Filing", amount: "135,00" },
+          children: [],
+        },
+      ],
+      { headers: { "cache-control": "max-age=600" } },
+    );
+  }) as unknown as typeof fetch;
+  const idbOptions = {
+    fetch: cachedFeed,
+    useCache: true,
+    cacheStorage: "indexeddb",
+  } as const;
+  await new EpoFeesClient(idbOptions).getEpcSchedule();
+  const idb = new EpoFeesClient(idbOptions);
+  const again = await idb.getEpcSchedule();
+  const idbStats = await idb.cacheStats();
+  results.idb_cache = `${idbStats.storage}:${idbStats.entryCount}:${feedCalls}:${again.fees[0]?.amount}`;
+  await idb.cacheClear();
+  const memoryDefault = new EpoFeesClient({ fetch: cachedFeed });
+  results.default_cache = memoryDefault.cacheEnabled
+    ? (await memoryDefault.cacheStats()).storage
+    : "off";
   report({ ok: true, ...results });
 } catch (error) {
   report({ ok: false, error: String(error), stack: (error as Error).stack });

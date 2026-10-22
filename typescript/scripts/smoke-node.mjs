@@ -3,16 +3,19 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { createServer } from "node:http";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { gunzipSync, zstdCompressSync } from "node:zlib";
 import {
   ApiError,
+  CachedClient,
   DpmaStatutesClient,
   downloadPatentPdfClean,
   EpcClient,
   EpoFeesClient,
   EpoOpsClient,
+  GenericHttpTransport,
   GooglePatentsClient,
   getPatentClaims,
   IlpoStatutesClient,
@@ -30,6 +33,8 @@ import {
 } from "@patent-client-agents/client";
 import { verifyCorpusFile } from "@patent-client-agents/client/corpus-bootstrap";
 
+// Only the explicit cache check below writes a cache, and only to a temporary directory.
+process.env.PATENT_CLIENT_AGENTS_CACHE = "off";
 const fixture = (path) => new URL(`../tests/fixtures/${path}`, import.meta.url);
 const results = {};
 
@@ -267,6 +272,52 @@ try {
   results.bootstrap_verify = "ok";
 } finally {
   await rm(scratch, { recursive: true });
+}
+
+// HTTP response cache on node:sqlite: a second client instance reads the first one's file.
+{
+  let served = 0;
+  const pdf = new Uint8Array(70_000).map((_, i) => (i * 7) % 256);
+  const upstream = createServer((_request, response) => {
+    served++;
+    response.writeHead(200, {
+      "cache-control": "max-age=60",
+      "content-type": "application/pdf",
+    });
+    response.end(pdf);
+  });
+  await new Promise((resolve) => upstream.listen(0, "127.0.0.1", resolve));
+  const cachePath = await mkdtemp(join(tmpdir(), "smoke-cache-"));
+  class CacheProbe extends CachedClient {
+    constructor() {
+      super();
+      this.http = new GenericHttpTransport({
+        baseUrl: `http://127.0.0.1:${upstream.address().port}`,
+        sourceName: "Smoke",
+        cache: { name: "smoke" },
+        useCache: true,
+        cachePath,
+      });
+    }
+  }
+  try {
+    const first = await new CacheProbe().http.bytes("GET", "/doc.pdf");
+    const probe = new CacheProbe();
+    const second = await probe.http.bytes("GET", "/doc.pdf");
+    assert.deepEqual(second.data, pdf);
+    assert.equal(first.provenance.cache_hit, false);
+    assert.equal(second.provenance.cache_hit, true);
+    assert.equal(served, 1);
+    const stats = await probe.cacheStats();
+    assert.equal(stats.storage, "sqlite");
+    assert.equal(stats.databasePath, join(cachePath, "smoke.db"));
+    assert.equal(stats.entryCount, 1);
+    assert.equal(await probe.cacheClear(), 1);
+    results.http_cache = `${stats.storage}:${stats.entryCount}`;
+  } finally {
+    upstream.close();
+    await rm(cachePath, { recursive: true });
+  }
 }
 
 for (const client of [

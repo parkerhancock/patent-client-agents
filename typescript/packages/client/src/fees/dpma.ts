@@ -1,3 +1,4 @@
+import { CachedClient } from "../cache/client.js";
 import { pdfPageTexts } from "../runtime/pdf.js";
 import {
   ApiError,
@@ -329,13 +330,17 @@ export function dpmaPatentFees(rows: DpmaRow[]): {
 }
 
 /** Fetches DPMA form A 9510.1 and projects the patent schedule. */
-export class DpmaFeesClient {
+export class DpmaFeesClient extends CachedClient {
   private readonly http: GenericHttpTransport;
   constructor(options: Omit<ClientOptions, "apiKey"> = {}) {
+    super();
     this.http = new GenericHttpTransport({
       ...options,
       baseUrl: options.baseUrl ?? "https://www.dpma.de",
       sourceName: DPMA_FEES_SOURCE,
+      cache: { name: "dpma_fees" },
+      // Python's DEFAULT_TTL_SECONDS: the default age for cacheClearExpired, not freshness.
+      ttlSeconds: options.ttlSeconds ?? 7 * 24 * 3600,
       headers: { accept: "application/pdf", "user-agent": USER_AGENT },
     });
   }

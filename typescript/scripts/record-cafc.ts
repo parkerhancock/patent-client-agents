@@ -1,3 +1,5 @@
+// Recording must reach the network: the response cache stays off.
+import "../tests/no-cache.js";
 import { cafcRecording } from "../tests/cafc-recordings.js";
 
 /** Record a CAFC session. Prints counts, never bodies. */

@@ -1,3 +1,5 @@
+// Recording must reach the network: the response cache stays off.
+import "../tests/no-cache.js";
 import { japanIpHighCourtRecording } from "../tests/japan-ip-high-court-recordings.js";
 
 /** Record the court's weekly workbook. Prints counts, never bodies. */

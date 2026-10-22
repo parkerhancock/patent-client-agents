@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { CachedClient } from "../cache/client.js";
 import type { Provenance } from "../models.js";
 import {
   ApiError,
@@ -365,10 +366,11 @@ export interface GooglePatentsClientOptions
  * search endpoint is the site's own JSON backend, so markup changes break
  * parsing; archived fixtures pin the expected structure.
  */
-export class GooglePatentsClient {
+export class GooglePatentsClient extends CachedClient {
   private readonly http: GenericHttpTransport;
   private readonly limiter: GooglePatentsRateLimiter;
   constructor(options: GooglePatentsClientOptions = {}) {
+    super();
     const { rateLimiter, ...transport } = options;
     this.limiter = rateLimiter ?? sharedLimiter;
     this.http = new GenericHttpTransport({
@@ -378,6 +380,8 @@ export class GooglePatentsClient {
       ...transport,
       baseUrl: options.baseUrl ?? ORIGIN,
       sourceName: GOOGLE_PATENTS_SOURCE,
+      // Python's Google Patents cache: every GET 200 for 30 days, regardless of headers.
+      cache: { name: "google_patents_html", forceTtlSeconds: 30 * 24 * 3600 },
       headers: { "accept-language": "en-US,en;q=0.9" },
     });
   }
@@ -486,6 +490,8 @@ export class GooglePatentsClient {
     const query = buildGoogleQuery(search);
     const result = await this.fetch("text", "/xhr/query", {
       ...options,
+      // Python never caches search.
+      cache: false,
       headers: { accept: "application/json" },
       searchParams: { url: query },
     });

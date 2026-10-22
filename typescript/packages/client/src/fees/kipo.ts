@@ -1,4 +1,5 @@
 import { parseHTML } from "linkedom";
+import { CachedClient } from "../cache/client.js";
 import {
   ApiError,
   type ClientOptions,
@@ -988,14 +989,18 @@ const DISCOUNTS =
   "KIPO grants fee reductions (individuals, SMEs, universities and others) under a separate rule on fee reduction and refund; they are not on this schedule, so every fee has tier none.";
 
 /** Fetches KIPO's two English fee pages and projects the patent, trademark and design schedules. */
-export class KipoFeesClient {
+export class KipoFeesClient extends CachedClient {
   private readonly http: GenericHttpTransport;
   private readonly pending = new Map<string, Promise<Page>>();
   constructor(options: Omit<ClientOptions, "apiKey"> = {}) {
+    super();
     this.http = new GenericHttpTransport({
       ...options,
       baseUrl: options.baseUrl ?? "https://www.kipo.go.kr",
       sourceName: KIPO_FEES_SOURCE,
+      cache: { name: "kipo_fees" },
+      // Python's DEFAULT_TTL_SECONDS: the default age for cacheClearExpired, not freshness.
+      ttlSeconds: options.ttlSeconds ?? 7 * 24 * 3600,
       headers: { accept: "text/html", "user-agent": USER_AGENT },
     });
   }

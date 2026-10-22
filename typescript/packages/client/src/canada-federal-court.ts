@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { CachedClient } from "./cache/client.js";
 import type { Provenance } from "./models.js";
 import {
   ApiError,
@@ -406,10 +407,11 @@ const division = (value: CourtDivision | undefined): CourtDivision => {
 };
 
 /** Read-only client for the official Federal Court Court Files JSON endpoints. */
-export class CanadaFederalCourtClient {
+export class CanadaFederalCourtClient extends CachedClient {
   private readonly http: GenericHttpTransport;
   private readonly origin: string;
   constructor(options: Omit<ClientOptions, "apiKey"> = {}) {
+    super();
     this.origin = (options.baseUrl ?? CANADA_FEDERAL_COURT_ORIGIN).replace(
       /\/+$/,
       "",
@@ -419,6 +421,7 @@ export class CanadaFederalCourtClient {
       timeoutMs: options.timeoutMs ?? 60_000,
       baseUrl: this.origin,
       sourceName: CANADA_FEDERAL_COURT_SOURCE,
+      cache: { name: "canada_federal_court" },
       headers: { accept: "application/json", "user-agent": USER_AGENT },
     });
   }

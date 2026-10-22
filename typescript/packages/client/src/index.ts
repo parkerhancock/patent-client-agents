@@ -3,6 +3,29 @@ export { ApplicationsClient, STUB_APPLICATION_FIELDS } from "./applications.js";
 export * from "./applications-models.js";
 export * from "./assignments.js";
 export * from "./bulkdata.js";
+export { CachedClient, type CacheStats } from "./cache/client.js";
+export {
+  type CacheBinding,
+  type CacheClientOptions,
+  type CacheStorageKind,
+  HttpCache,
+  type HttpCacheStats,
+} from "./cache/http-cache.js";
+export {
+  IndexedDbCacheStorage,
+  indexedDbAvailable,
+} from "./cache/indexeddb.js";
+export {
+  type SqlDatabase,
+  SqliteCacheStorage,
+  type SqlStatement,
+} from "./cache/sqlite.js";
+export {
+  type CacheRecord,
+  type HttpCacheStorage,
+  MemoryBudget,
+  MemoryCacheStorage,
+} from "./cache/storage.js";
 export * from "./cafc.js";
 export * from "./canada-federal-court.js";
 export * from "./china-spc-ip-court.js";

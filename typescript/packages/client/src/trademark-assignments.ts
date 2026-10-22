@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { CachedClient } from "./cache/client.js";
 import {
   nonnegative,
   parseRegister,
@@ -48,13 +49,15 @@ const schema = z.object({
     totalRows: z.coerce.number().int().nonnegative().optional(),
   }),
 });
-export class TrademarkAssignmentClient {
+export class TrademarkAssignmentClient extends CachedClient {
   private readonly http: GenericHttpTransport;
   constructor(options: Omit<ClientOptions, "apiKey"> = {}) {
+    super();
     this.http = new GenericHttpTransport({
       ...options,
       baseUrl: options.baseUrl ?? "https://assignmentcenter.uspto.gov",
       sourceName: "USPTO Trademark Assignment Center",
+      cache: { name: "uspto_trademark_assignments" },
       timeoutMs: options.timeoutMs ?? 60000,
     });
   }

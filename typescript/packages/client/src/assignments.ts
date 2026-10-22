@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { CachedClient } from "./cache/client.js";
 import type { Provenance } from "./models.js";
 import {
   AssignmentDetailSchema,
@@ -44,13 +45,15 @@ const responseSchema = z.looseObject({
     backendPagination: z.boolean().optional(),
   }),
 });
-export class AssignmentCenterClient {
+export class AssignmentCenterClient extends CachedClient {
   private readonly http: GenericHttpTransport;
   constructor(options: Omit<ClientOptions, "apiKey"> = {}) {
+    super();
     this.http = new GenericHttpTransport({
       ...options,
       baseUrl: options.baseUrl ?? "https://assignmentcenter.uspto.gov",
       sourceName: "USPTO Assignment Center",
+      cache: { name: "uspto_assignments" },
       timeoutMs: options.timeoutMs ?? 60000,
     });
   }

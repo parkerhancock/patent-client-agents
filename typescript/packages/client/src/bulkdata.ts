@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { CachedClient } from "./cache/client.js";
 import type { RequestOptions } from "./models.js";
 import {
   type BulkDataProduct,
@@ -48,9 +49,10 @@ function productSegment(value: string): string {
 function dateBound(value: string | undefined) {
   return value === undefined ? undefined : z.iso.date().parse(value.trim());
 }
-export class BulkDataClient {
+export class BulkDataClient extends CachedClient {
   private readonly transport: OdpTransport;
   constructor(options: ClientOptions = {}) {
+    super();
     this.transport = new OdpTransport(options);
   }
   search(options: BulkSearchOptions = {}): Promise<BulkDataResponse> {

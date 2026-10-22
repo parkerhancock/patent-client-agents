@@ -21,6 +21,7 @@
     "entities": "8.1.0",
     "fast-xml-parser": "5.11.2",
     "fflate": "0.8.3",
+    "http-cache-semantics": "4.3.0",
     "ky": "2.2.0",
     "linkedom": "0.18.13",
     "pdf-lib": "1.17.1",
@@ -36,6 +37,15 @@
       },
       "bun": "./src/runtime/files.ts",
       "default": "./dist/runtime/files.js"
+    },
+    "#cache-sqlite": {
+      "types": "./src/runtime/cache-sqlite.ts",
+      "browser": {
+        "bun": "./src/runtime/cache-sqlite.browser.ts",
+        "default": "./dist/runtime/cache-sqlite.browser.js"
+      },
+      "bun": "./src/runtime/cache-sqlite.ts",
+      "default": "./dist/runtime/cache-sqlite.js"
     }
   }
 }

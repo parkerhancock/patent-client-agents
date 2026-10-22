@@ -1,4 +1,5 @@
 import { parseHTML } from "linkedom";
+import { CachedClient } from "../cache/client.js";
 import {
   ApiError,
   type ClientOptions,
@@ -321,13 +322,17 @@ export function ipaustraliaRenewalFees(html: string): FeeItem[] {
 }
 
 /** Fetches IP Australia's fee and renewal pages and projects the patent schedule. */
-export class IpAustraliaFeesClient {
+export class IpAustraliaFeesClient extends CachedClient {
   private readonly http: GenericHttpTransport;
   constructor(options: Omit<ClientOptions, "apiKey"> = {}) {
+    super();
     this.http = new GenericHttpTransport({
       ...options,
       baseUrl: options.baseUrl ?? "https://www.ipaustralia.gov.au",
       sourceName: IPAU_FEES_SOURCE,
+      cache: { name: "ipaustralia_fees" },
+      // Python's DEFAULT_TTL_SECONDS: the default age for cacheClearExpired, not freshness.
+      ttlSeconds: options.ttlSeconds ?? 7 * 24 * 3600,
       headers: { accept: "text/html", "user-agent": USER_AGENT },
     });
   }

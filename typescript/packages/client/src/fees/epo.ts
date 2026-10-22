@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { CachedClient } from "../cache/client.js";
 import {
   ApiError,
   type ClientOptions,
@@ -292,13 +293,17 @@ function coverage(fees: FeeItem[], years: number[]) {
 }
 
 /** Fetches the EPO fee feed and projects the EPC and Unitary Patent schedules. */
-export class EpoFeesClient {
+export class EpoFeesClient extends CachedClient {
   private readonly http: GenericHttpTransport;
   constructor(options: Omit<ClientOptions, "apiKey"> = {}) {
+    super();
     this.http = new GenericHttpTransport({
       ...options,
       baseUrl: options.baseUrl ?? "https://fees.apps.epo.org",
       sourceName: EPO_FEES_SOURCE,
+      cache: { name: "epo_fees" },
+      // Python's DEFAULT_TTL_SECONDS: the default age for cacheClearExpired, not freshness.
+      ttlSeconds: options.ttlSeconds ?? 7 * 24 * 3600,
       headers: { accept: "application/json" },
     });
   }
