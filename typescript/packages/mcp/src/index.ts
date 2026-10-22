@@ -24,6 +24,8 @@ import {
   IlpoStatutesClient,
   IpoInMpppClient,
   IpoInStatutesClient,
+  IposManualsClient,
+  IposStatutesClient,
   JapanIpHighCourtClient,
   KiprisClient,
   MoppClient,
@@ -85,6 +87,11 @@ import {
   type IpoInStatutesReader,
   registerIpoInTools,
 } from "./ipo-in.js";
+import {
+  type IposManualsReader,
+  type IposStatutesReader,
+  registerIposTools,
+} from "./ipos.js";
 import { registerJapanIpHighCourtTools } from "./japan-ip-high-court.js";
 import { registerKiprisTools } from "./kipris.js";
 import { registerMpepTools } from "./mpep.js";
@@ -183,6 +190,9 @@ export interface ServerOptions {
   ipoInMppp?: IpoInMpppReader;
   /** ILPO Israel statutes corpus reader; omitted, it uses the default artifact path. */
   ilpoStatutes?: IlpoStatutesReader;
+  /** IPOS Singapore statutes and manuals corpus readers; omitted, they use their default artifact paths. */
+  iposStatutes?: IposStatutesReader;
+  iposManuals?: IposManualsReader;
   /** Download URLs; pass `blobStore` (for example a GcsBlobStore) for URLs that outlive the process. */
   downloads?: DownloadOptions;
   /** Defaults to MCP identity settings; audience must intentionally cover document REST access. */
@@ -462,6 +472,8 @@ export function createServer(options: ServerOptions = {}): FastMCP {
   const ipoInStatutes = options.ipoInStatutes ?? own(new IpoInStatutesClient());
   const ipoInMppp = options.ipoInMppp ?? own(new IpoInMpppClient());
   const ilpoStatutes = options.ilpoStatutes ?? own(new IlpoStatutesClient());
+  const iposStatutes = options.iposStatutes ?? own(new IposStatutesClient());
+  const iposManuals = options.iposManuals ?? own(new IposManualsClient());
   const applications =
     provided.applications ?? lazyClient(() => new ApplicationsClient());
   const client = options.client ?? applications;
@@ -934,6 +946,11 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     server,
     ilpoStatutes,
     options.auth ? requireScopes("ilpo:read") : undefined,
+  );
+  registerIposTools(
+    server,
+    { statutes: iposStatutes, manuals: iposManuals },
+    options.auth ? requireScopes("ipos:read") : undefined,
   );
   registerUsitcTools(
     server,

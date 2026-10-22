@@ -15,6 +15,7 @@ export * from "./fees/index.js";
 export * from "./google-patents/index.js";
 export * from "./ilpo-statutes.js";
 export * from "./ipo-in.js";
+export * from "./ipos.js";
 export * from "./japan-ip-high-court.js";
 export * from "./kipris.js";
 export * from "./models.js";

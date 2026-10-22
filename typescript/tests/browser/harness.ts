@@ -11,6 +11,7 @@ import {
   getPatentClaims,
   IlpoStatutesClient,
   IpoInMpppClient,
+  IposManualsClient,
   MpepClient,
   parseHearingNotice,
   parseJapanIpHighCourtWorkbook,
@@ -71,6 +72,10 @@ try {
   results.ilpo_section = (
     await ilpo.getSectionByCitation("Article 13 Commercial Torts Law")
   )?.section_label;
+  const singapore = new IposManualsClient({
+    source: () => bytes("/fixtures/ipos/ipos_manuals.db"),
+  });
+  results.ipos_manual = (await singapore.getByCitation("IPOS PEG 8.12")).title;
   const pathOnly = new MpepClient({ corpusPath: "/nowhere/mpep.db" });
   results.path_in_browser = (await pathOnly.getCorpusStatus()).error?.code;
   results.fee = (

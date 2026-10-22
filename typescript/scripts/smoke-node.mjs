@@ -17,6 +17,7 @@ import {
   getPatentClaims,
   IlpoStatutesClient,
   IpoInStatutesClient,
+  IposStatutesClient,
   MoppClient,
   MpepClient,
   parseHearingNotice,
@@ -126,6 +127,15 @@ results.ipo_in_section = (
   await india.getSectionByCitation("Section 3(d) Patents Act")
 ).section_number;
 assert.equal(results.ipo_in_section, "3");
+const singapore = new IposStatutesClient({
+  source: new Uint8Array(
+    zstdCompressSync(await readFile(fixture("ipos/ipos_statutes.db"))),
+  ),
+});
+results.ipos_section = (
+  await singapore.getByCitation("Section 13 Patents Act")
+).section_label;
+assert.equal(results.ipos_section, "13");
 
 // Network clients with synthetic upstreams.
 const fees = new EpoFeesClient({

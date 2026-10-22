@@ -180,6 +180,7 @@ try {
     ipo_in_mppp?: string;
     jp_court?: string;
     ilpo_section?: string;
+    ipos_manual?: string;
   };
   if (
     !checked.ok ||
@@ -192,7 +193,8 @@ try {
     checked.tw_hits !== "12,13" ||
     checked.jp_court !== "34/219:令和7年（行ケ）第10084号" ||
     checked.ipo_in_mppp !== "09.03.05.04" ||
-    checked.ilpo_section !== "Section 13 Commercial Torts Law"
+    checked.ilpo_section !== "Section 13 Commercial Torts Law" ||
+    checked.ipos_manual !== "Discoveries"
   )
     process.exitCode = 1;
 } finally {
