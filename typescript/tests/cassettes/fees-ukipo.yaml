@@ -1,0 +1,1415 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://assets.publishing.service.gov.uk/media/690a33c57a88fd270a95fda9/Trade_marks_list_of_current_and_new_fees.csv
+    headers:
+      accept:
+      - text/csv
+      user-agent:
+      - patent-client-agents (+https://github.com/parkerhancock/patent-client-agents)
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      accept-ranges:
+      - bytes
+      age:
+      - "933"
+      alt-svc:
+      - h3=":443";ma=86400,h3-29=":443";ma=86400,h3-27=":443";ma=86400
+      cache-control:
+      - max-age=1800, public
+      connection:
+      - keep-alive
+      content-disposition:
+      - inline; filename="Trade_marks_list_of_current_and_new_fees.csv"
+      content-type:
+      - text/csv
+      date:
+      - Thu, 22 Oct 2026 15:32:29 GMT
+      etag:
+      - "\"690a33c5-ab7\""
+      fastly-backend-name:
+      - awsorigin
+      last-modified:
+      - Tue, 04 Nov 2025 17:11:33 GMT
+      link:
+      - >-
+        <https://www.gov.uk/government/news/intellectual-property-office-fees-to-increase-from-april-2026>; rel="up"
+      permissions-policy:
+      - interest-cohort=()
+      server:
+      - nginx
+      strict-transport-security:
+      - max-age=31536000; preload
+      via:
+      - 1.1 varnish
+      x-amz-server-side-encryption:
+      - AES256
+      x-cache:
+      - HIT
+      x-cache-hits:
+      - "1"
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - DENY
+      x-served-by:
+      - cache-dfw-kdal2120110-DFW
+      x-timer:
+      - S1792683150.898817,VS0,VE3
+    body:
+      type: binary
+      content: >-
+        5472616465204d61726b73202d20446f6d65737469632c466f726d2c43757272656e74204665652c4e6577204665650d0a4170706c7920666f722061207472616465206d61726b20287061706572206170706c69636174696f6e292c544d332ca33230302e30302ca33235302e30300d0a4170706c7920666f722061207472616465206d61726b20286f6e6c696e65206170706c69636174696f6e292c652d544d332ca33137302e30302ca33230352e30300d0a5265717565737420666f7220657870656469746564206578616d696e6174696f6e2c652d544d332ca33330302e30302ca33337302e30300d0a4170706c7920666f722061207472616465206d61726b20287061706572206170706c69636174696f6e2920636c617373206665652c544d33202ca335302e30302ca336302e30300d0a4170706c7920666f722061207472616465206d61726b20286f6e6c696e65206170706c69636174696f6e2920636c617373206665652c652d544d332ca335302e30302ca336302e30300d0a53657269657320666565202d2070617065722c544d33202ca335302e30302ca336302e30300d0a53657269657320666565202d206f6e6c696e652c652d544d332ca335302e30302ca336302e30300d0a4170706c69636174696f6e20666f72206164646974696f6e616c20636c617373657320666f6c6c6f77696e67206578616d696e6174696f6e2c544d33412ca335302e30302ca336302e30300d0a5265636f7264206368616e6765206f66206f776e6572736869702c544d31362ca335302e30302ca336302e30300d0a5265636f7264207061727469616c2061737369676e6d656e742c544d3136502ca335302e30302ca336302e30300d0a52656e6577207472616465206d61726b20726567697374726174696f6e20286f6e6c696e65292c544d31312ca33230302e30302ca33234352e30300d0a52656e6577207472616465206d61726b20726567697374726174696f6e20287061706572292c544d31312ca33230302e30302ca33234352e30300d0a52656e6577207472616465206d61726b20726567697374726174696f6e20286f6e6c696e652920636c617373206665652c544d31312ca335302e30302ca336302e30300d0a52656e6577207472616465206d61726b20726567697374726174696f6e202870617065722920636c617373206665652c544d31312ca335302e30302ca336302e30300d0a4c6174652072656e6577616c2c544d31312ca335302e30302ca336302e30300d0a526573746f726520616e642072656e6577206120726567697374726174696f6e2c544d31332ca33130302e30302ca33132352e30300d0a5265717565737420696e666f726d6174696f6e2061626f757420554b207472616465206d61726b206576656e74732028706572206576656e74292c544d3331432ca332302e30302ca332352e30300d0a5265717565737420696e666f726d6174696f6e2061626f757420696e7465726e6174696f6e616c20544d206576656e74732028706572206576656e74292c544d33314d2ca332302e30302ca332352e30300d0a526571756573742063657274696669656420636f7079202870657220636f7079292c544d3331522ca332302e30302ca332352e30300d0a457874656e73696f6e206f662074696d6520286265666f726520646561646c696e65292c544d392ca33130302e30302ca33132352e30300d0a457874656e73696f6e206f662074696d652028616674657220646561646c696e65292c544d39522ca33130302e30302ca33132352e30300d0a41707065616c20746f206170706f696e74656420706572736f6e2028696e74657220706172746573292c544d3535502ca33235302e30302ca33330302e30300d0a526571756573742073746174656d656e74206f6620726561736f6e7320666f72206465636973696f6e2c544d352ca33130302e30302ca33132352e30300d0a4e6f74696365206f66206f70706f736974696f6e202853656374696f6e20352831292f35283229206f6e6c79292c544d372ca33130302e30302ca33132352e30300d0a4e6f74696365206f66206f70706f736974696f6e20286f746865722067726f756e6473292c544d372ca33230302e30302ca33235302e30300d0a4661737420747261636b206f70706f736974696f6e2c544d37462ca33130302e30302ca33132352e30300d0a4164642067726f756e647320746f206e6f74696365206f66206f70706f736974696f6e2c544d37472ca33130302e30302ca33132352e30300d0a4170706c69636174696f6e20746f20737461727420696e76616c69646174696f6e2070726f63656564696e67732c544d3236492ca33230302e30302ca33235302e30300d0a4170706c69636174696f6e20746f207265766f6b6520286e6f6e2d757365292c544d32364e2ca33230302e30302ca33235302e30300d0a4170706c69636174696f6e20746f207265766f6b6520286f7468657220726561736f6e73292c544d32364f2ca33230302e30302ca33235302e30300d0a5265636f72642f616d656e6420736563757269747920696e7465726573742c544d32342ca335302e30302ca336302e30300d0a4170706c69636174696f6e20746f2063616e63656c206120736563757269747920696e7465726573742c544d3234432ca335302e30302ca336302e30300d0a4170706c69636174696f6e20746f207265636f72642061206c6963656e7365652c544d35302ca335302e30302ca336302e30300d0a4170706c69636174696f6e20746f2072656d6f7665206f7220616d656e6420746865207265636f7264616c206f662061206c6963656e73652c544d35312ca335302e30302ca336302e30300d0a5265717565737420746f2064697669646520616e206170706c69636174696f6e2c544d31322ca33130302e30302ca33132352e30300d0a526567756c6174696f6e7320676f7665726e696e672074686520757365206f662063657274696669636174696f6e206f7220636f6c6c656374697665206d61726b732c544d33352ca33230302e30302ca33235302e30300d0a4170706c69636174696f6e20746f20616d656e642074686520726567756c6174696f6e7320676f7665726e696e672074686520757365206f66206d61726b732c544d33362ca33130302e30302ca33132352e30300d0a5269676874205374617274204170706c69636174696f6e202d20537461676520312c2ca33130302e30302ca33132352e30300d0a5269676874205374617274204170706c69636174696f6e202d20537461676520322c2ca33130302e30302ca33132352e30300d0a5269676874205374617274204170706c69636174696f6e202d20537461676520312041646469746f6e616c20436c6173732c2ca332352e30302ca333302e30300d0a5269676874205374617274204170706c69636174696f6e202d20537461676520322041646469746f6e616c20436c6173732c2ca332352e30302ca333302e30300d0a2c2c2c0d0a5472616465204d61726b73202d20496e7465726e6174696f6e616c2c466f726d2c4665652c4e6577204665650d0a4170706c69636174696f6e20746f20726567697374657220616e20496e7465726e6174696f6e616c207472616465206d61726b2c4d4d322ca334302e30302ca335302e30300d0a52656e6577616c206f6620616e20696e7465726e6174696f6e616c20726567697374726174696f6e2c2ca332302e30302ca332352e30300d0a
+  recorded_at: 2026-10-22T15:32:29.910Z
+- request:
+    method: GET
+    uri: >-
+      https://assets.publishing.service.gov.uk/media/698b663346be5092a1cfd89c/Patents_list_of_current_and_new_fees___4_.csv
+    headers:
+      accept:
+      - text/csv
+      user-agent:
+      - patent-client-agents (+https://github.com/parkerhancock/patent-client-agents)
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      accept-ranges:
+      - bytes
+      age:
+      - "934"
+      alt-svc:
+      - h3=":443";ma=86400,h3-29=":443";ma=86400,h3-27=":443";ma=86400
+      cache-control:
+      - max-age=1800, public
+      connection:
+      - keep-alive
+      content-disposition:
+      - inline; filename="Patents_list_of_current_and_new_fees___4_.csv"
+      content-type:
+      - text/csv
+      date:
+      - Thu, 22 Oct 2026 15:32:29 GMT
+      etag:
+      - "\"698b6633-1056\""
+      fastly-backend-name:
+      - awsorigin
+      last-modified:
+      - Tue, 10 Feb 2026 17:09:07 GMT
+      link:
+      - >-
+        <https://www.gov.uk/government/news/intellectual-property-office-fees-to-increase-from-april-2026>; rel="up"
+      permissions-policy:
+      - interest-cohort=()
+      server:
+      - nginx
+      strict-transport-security:
+      - max-age=31536000; preload
+      via:
+      - 1.1 varnish
+      x-amz-server-side-encryption:
+      - AES256
+      x-cache:
+      - HIT
+      x-cache-hits:
+      - "1"
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - DENY
+      x-served-by:
+      - cache-dfw-kdal2120140-DFW
+      x-timer:
+      - S1792683150.913176,VS0,VE4
+    body:
+      type: text
+      content: "\uFEFFPatents,Form,Current Fee,New Fee\r\nApplication fee (if paid on filing),1,£90.00,£120.00\r\nApplication fee (if paid on filing online),1,£60.00,£75.00\r\nApplication fee (if paid later),AF1,£112.50,£150.00\r\nApplication fee (if paid later online),AF1,£75.00,£95.00\r\nInitiation of proceedings before the Comptroller (including reviews of opinions),2,£50.00,£65.00\r\nLate declaration of priority,3,£150.00,£200.00\r\nLate claim of priority,3,£40.00,£55.00\r\nContinuation of proceedings before the Comptroller,4,£350.00,£450.00\r\nRequest a search (international application),9A,£150.00,£200.00\r\nRequest a search (international application online ),9A,£120.00,£160.00\r\nRequest a search (UK application),9A,£180.00,£240.00\r\nRequest a search (UK application online),9A,£150.00,£200.00\r\nExcess claims fee (for each claim over 25),9A,£20.00,£27.00\r\nRequest a further or supplementary search under section 17(6) or section 17(8),9A,£180.00,£240.00\r\nRequest a further or supplementary search under section 17(6) or section 17(8) - online,9A,£150.00,£200.00\r\nRequest for a substantive examination - paper,10,£130.00,£170.00\r\nRequest for a substantive examination - online,10,£100.00,£130.00\r\nExcess page fee (each page of description over 35),10,£10.00,£13.00\r\nRequest to reinstate a patent application,14,£150.00,£200.00\r\nNotice of opposition to proceedings before the Comptroller,15,£50.00,£65.00\r\nApplication to restore a patent,16,£135.00,£180.00\r\nRequest for opinion as to the validity or infringement of a patent,17,£200.00,£250.00\r\nApplication to register or give notice of rights,21,£50.00,£65.00\r\nRequest for a certified copy of a document or a register entry,23,£20.00,£27.00\r\nRequest for an uncertified copy of a document or a register entry,23,£5.00,£7.00\r\nGrant fee for patent application - per excess claim over 25 (online),34,£20.00,£27.00\r\nGrant fee for patent application - per excess description page over 35,34,£10.00,£13.00\r\nRequest to be informed of future events relating to a patent application or patent,49,£25.00,£35.00\r\nRequest to extend a prescribed time limit,52,£135.00,£175.00\r\nNational processing of international patent (UK) application,NP1,£30.00,£40.00\r\nPublication of translation of international application,NP1,£12.00,£16.00\r\nTransmit an international application to the International Bureau and the International Searching Authority,,£75.00,£100.00\r\nRequest restoration of the right of priority of an international application,,£150.00,£200.00\r\nRenewal year 5,12,£70.00,£90.00\r\nRenewal year 6,12,£90.00,£120.00\r\nRenewal year 7,12,£110.00,£150.00\r\nRenewal year 8,12,£130.00,£170.00\r\nRenewal year 9,12,£150.00,£200.00\r\nRenewal year 10,12,£170.00,£230.00\r\nRenewal year 11,12,£190.00,£250.00\r\nRenewal year 12,12,£220.00,£290.00\r\nRenewal year 13,12,£260.00,£340.00\r\nRenewal year 14,12,£300.00,£400.00\r\nRenewal year 15,12,£360.00,£480.00\r\nRenewal year 16,12,£420.00,£560.00\r\nRenewal year 17,12,£470.00,£620.00\r\nRenewal year 18,12,£520.00,£690.00\r\nRenewal year 19,12,£570.00,£760.00\r\nRenewal year 20,12,£610.00,£810.00\r\nLate renewal month 2,12,£24.00,£32.00\r\nLate renewal month 3,12,£48.00,£64.00\r\nLate renewal month 4,12,£72.00,£96.00\r\nLate renewal month 5,12,£96.00,£128.00\r\nLate renewal month 6,12,£120.00,£160.00\r\nApplication for grant of a supplementary protection certificate,SP1,£250.00,£330.00\r\n\"Application for declaration of lapse or invalidity, or to revoke an extension of the duration of an SPC\",SP3,£50.00,£65.00\r\nApplication to extend a supplementary protection certificate,SP4,£200.00,£270.00\r\nSPC fee (Year 1),SP2,£600.00,£800.00\r\nSPC fee (Year 2),SP2,£700.00,£940.00\r\nSPC fee (Year 3),SP2,£800.00,\"£1,070.00\"\r\nSPC fee (Year 4),SP2,£900.00,\"£1,200.00\"\r\nSPC fee (Year 5),SP2,\"£1,000.00\",\"£1,330.00\"\r\nSPC late payment fee (Year 1),SP2,£300.00,£400.00\r\nSPC late payment fee (Year 2),SP2,£350.00,£470.00\r\nSPC late payment fee (Year 3),SP2,£400.00,£535.00\r\nSPC late payment fee (Year 4),SP2,£450.00,£600.00\r\nSPC late payment fee (Year 5),SP2,£500.00,£665.00\r\nRenewal License of Rights,,50% of renewal fee,50% of renewal fee\r\n"
+  recorded_at: 2026-10-22T15:32:29.924Z
+- request:
+    method: GET
+    uri: >-
+      https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents
+    headers:
+      accept:
+      - text/html
+      user-agent:
+      - patent-client-agents (+https://github.com/parkerhancock/patent-client-agents)
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      accept-ranges:
+      - bytes
+      age:
+      - "27"
+      alt-svc:
+      - h3=":443";ma=86400,h3-29=":443";ma=86400,h3-27=":443";ma=86400
+      cache-control:
+      - max-age=300, public
+      connection:
+      - keep-alive
+      content-security-policy:
+      - "default-src 'self'; base-uri 'none'; script-src 'self' www.google-analytics.com ssl.google-analytics.com stats.g.doubleclick.net www.googletagmanager.com www.region1.google-analytics.com region1.google-analytics.com www.google.co.uk analytics.google.com *.analytics.google.com www.google.com www.gstatic.com *.ytimg.com www.youtube.com www.youtube-nocookie.com 'nonce-PO8/quprDNt0VLhXCAlQDw=='; style-src 'self' www.gstatic.com; font-src 'self'; object-src 'none'; frame-src 'self' *.publishing.service.gov.uk www.gov.uk *.dev.gov.uk www.youtube.com www.youtube-nocookie.com; frame-ancestors 'self' *.publishing.service.gov.uk www.gov.uk *.dev.gov.uk; report-uri https://csp-reporter.publishing.service.gov.uk/report; img-src 'self' *.publishing.service.gov.uk www.gov.uk *.dev.gov.uk www.google-analytics.com ssl.google-analytics.com stats.g.doubleclick.net www.googletagmanager.com www.region1.google-analytics.com region1.google-analytics.com www.google.co.uk analytics.google.com *.analytics.google.com www.google.com lux.speedcurve.com assets.digital.cabinet-office.gov.uk https://img.youtube.com https://i.ytimg.com https://api.os.uk data: https://tiles.openfreemap.org data:; connect-src 'self' *.publishing.service.gov.uk www.gov.uk *.dev.gov.uk www.google-analytics.com ssl.google-analytics.com stats.g.doubleclick.net www.googletagmanager.com www.region1.google-analytics.com region1.google-analytics.com www.google.co.uk analytics.google.com *.analytics.google.com www.google.com lux.speedcurve.com beacon.speedcurve.com https://tiles.openfreemap.org data:"
+      content-type:
+      - text/html; charset=utf-8
+      date:
+      - Thu, 22 Oct 2026 15:32:29 GMT
+      etag:
+      - W/"918c1a96df50de09087b58ae928b568c"
+      fastly-backend-name:
+      - origin
+      link:
+      - >-
+        </assets/frontend/views/_html-publication-d183ff6655d34a5cea8d3f6f863d5b6c74654d40325c0a970e8e96ca046b4d07.css>; rel=preload; as=style; nopush,</assets/frontend/views/_csv_preview-ddf66f9f13d0fb5e8672480d53d092910344fca34f35e21fc2220e1500143904.css>; rel=preload; as=style; nopush,</assets/frontend/govuk_publishing_components/vendor/lux/lux-measurer-d66192b1b665d415e1874e49a48138b7ae339548aa6cdb8687c7f9933e72b969.js>; rel=preload; as=script; nopush,</assets/frontend/govuk_publishing_components/rum-custom-data-b9e1806d1da2fa8ef1855d01aa71ba5eb0afc010dd2c4de3672cc7c7a39b0c8c.js>; rel=modulepreload; as=script; nopush,</assets/frontend/govuk_publishing_components/rum-loader-a65b10e18ceeba3bd8a2eac507c7f2c513cdc82f35097df903fdea87f1dc2e33.js>; rel=preload; as=script; nopush,</assets/frontend/govuk_publishing_components/load-analytics-ff724c80496b9d34f978fe930106f9e76b7924f60371d38b278ba0fb0ba48774.js>; rel=modulepreload; as=script; nopush
+      permissions-policy:
+      - interest-cohort=()
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      server:
+      - nginx
+      server-timing:
+      - cacheHit
+      strict-transport-security:
+      - max-age=31536000; preload
+      vary:
+      - Accept-Encoding
+      via:
+      - 1.1 router, 1.1 varnish
+      x-cache:
+      - HIT
+      x-cache-hits:
+      - "1"
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - c2b209fd-847a-44cd-b174-5bf954bafdf8
+      x-runtime:
+      - "0.035882"
+      x-served-by:
+      - cache-dfw-kdal2120121-DFW
+      x-timer:
+      - S1792683150.827936,VS0,VE1
+      x-xss-protection:
+      - "0"
+    body:
+      type: text
+      content: |
+        
+        
+        <!DOCTYPE html>
+        <html class="govuk-template" lang="en">
+          <head>
+            <meta charset="utf-8">
+            <title lang="en">New fees from 1 April 2026 for designs, trade marks and patents - GOV.UK</title>
+        
+            <script src="/assets/frontend/govuk_publishing_components/vendor/lux/lux-measurer-d66192b1b665d415e1874e49a48138b7ae339548aa6cdb8687c7f9933e72b969.js" async="async"></script>
+            <script src="/assets/frontend/govuk_publishing_components/rum-custom-data-b9e1806d1da2fa8ef1855d01aa71ba5eb0afc010dd2c4de3672cc7c7a39b0c8c.js" type="module"></script>
+            <script src="/assets/frontend/govuk_publishing_components/rum-loader-a65b10e18ceeba3bd8a2eac507c7f2c513cdc82f35097df903fdea87f1dc2e33.js" async="async" data-lux-reporter-script="/assets/frontend/govuk_publishing_components/vendor/lux/lux-reporter-24dca204ac4a486a1476264633ed99609a35e5e41ebaf4d8f812e04c7b9c09cf.js"></script>
+        
+            <meta name="govuk:components_gem_version" content="70.2.1">
+            <script src="/assets/frontend/govuk_publishing_components/load-analytics-ff724c80496b9d34f978fe930106f9e76b7924f60371d38b278ba0fb0ba48774.js" type="module"></script>
+        
+            <meta name="csrf-param" content="authenticity_token" />
+        <meta name="csrf-token" content="DRYZS9fsf8z4Xhd0Z7BLWrC45A7rZCjqwWOY4iiB7wpbTEwvo-pD6M8xXwiDj8UwRPb8sRzsiVYUdO7WsJU4TA" />
+        
+            <link rel="stylesheet" href="/assets/frontend/application-6e189aff5de80d92bf053c7dce798dbed965a8583edaa42a6dc1c6f179457d0e.css" media="all" />
+            <link rel="icon" sizes="48x48" href="/assets/frontend/favicon-24f9fbe064118d58937932e73edafd1d50cb60f7bd84f52308382a309bc2d655.ico">
+            <link rel="icon" sizes="any" href="/assets/frontend/favicon-d962d21b5bb443f546c097ea21b567cde639adef7370da45be5e349ba8d62d33.svg" type="image/svg+xml">
+            <link rel="mask-icon" href="/assets/frontend/govuk-icon-mask-cdf4265165f8d7f9eec54aa2c1dfbb3d8b6d297c5d7919f0313e0836a5804bb6.svg" color="#1d70b8">
+            <link rel="apple-touch-icon" href="/assets/frontend/govuk-icon-180-d45a306f0549414cfa5085f16e4a3816a77558b139e5bc226f23162d1d0decb0.png">
+        
+            <meta name="theme-color" content="#1d70b8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+            <meta property="og:image" content="https://www.gov.uk/assets/frontend/govuk-opengraph-image-4196a4d6333cf92aaf720047f56cfd91b3532d7635fc21ebcf0d5897df6b5f77.png">
+        
+              
+        <script type="application/ld+json">
+          {
+          "@context": "http://schema.org",
+          "@type": "FAQPage",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents"
+          },
+          "name": "New fees from 1 April 2026 for designs, trade marks and patents",
+          "datePublished": "2026-01-12T09:00:01+00:00",
+          "dateModified": "2026-03-12T14:04:07+00:00",
+          "text": null,
+          "publisher": {
+            "@type": "Organization",
+            "name": "GOV.UK",
+            "url": "https://www.gov.uk",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://www.gov.uk/assets/frontend/govuk_publishing_components/govuk-logo-b8553f688131fad665e52a8c2df7633f9cd1c0fffb9f69703cc68c728e7b3b74.png"
+            }
+          },
+          "image": [
+            "https://www.gov.uk/assets/frontend/govuk_publishing_components/govuk-schema-placeholder-1x1-2672c0fb7a5d5f947d880522c509ebe7f2be090885883cc94418f6860e812e15.png",
+            "https://www.gov.uk/assets/frontend/govuk_publishing_components/govuk-schema-placeholder-4x3-194fde4197f00e669f6f52c182df2ed707bfb2024c9ef39f7a2ed20da62b90eb.png",
+            "https://www.gov.uk/assets/frontend/govuk_publishing_components/govuk-schema-placeholder-16x9-30e6c0e035636ee6b9dc72ae254bcd4a925182805afe7c5b7170cf2394894b28.png"
+          ],
+          "author": {
+            "@type": "Organization",
+            "name": "Intellectual Property Office",
+            "url": "https://www.gov.uk/government/organisations/intellectual-property-office"
+          },
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "1. Introduction ",
+              "url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents#introduction",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents#introduction",
+                "text": "\u003cp\u003eOn 1 April 2026, the government will be increasing fees for designs, patents, and trade marks. The fee changes have been laid in parliament under the statutory instrument:  \u003ca rel=\"external\" href=\"https://www.legislation.gov.uk/uksi/2026/183/contents/made\"\u003eThe Intellectual Property Fees (Miscellaneous Amendments, Revocation and Transitional Provisions) Rules 2026\u003c/a\u003e.\u003c/p\u003e\u003cp\u003eThe Intellectual Property Office (\u003cabbr title=\"Intellectual Property Office\"\u003eIPO\u003c/abbr\u003e) has prepared this guidance for customers who may have fees due around 1 April 2026 and explains when and how the new fees will apply.  Please note you are responsible for paying the correct fee.\u003c/p\u003e\u003cp\u003eIn this guidance, “old fee” refers to the fee amount which applies before 1 April 2026, and “new fee” to the amount which applies on and after 1 April 2026. \u003c/p\u003e"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "2. Fee changes ",
+              "url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents#fee-changes",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents#fee-changes",
+                "text": "\u003cp\u003eYou can view the old and new fees for each right:  \u003c/p\u003e\u003cp\u003e\u003ca href=\"https://www.gov.uk/csv-preview/698b663346be5092a1cfd89c/Patents_list_of_current_and_new_fees___4_.csv\"\u003ePatents fees table\u003c/a\u003e \u003c/p\u003e\u003cp\u003e\u003ca href=\"https://www.gov.uk/csv-preview/690a33c57a88fd270a95fda9/Trade_marks_list_of_current_and_new_fees.csv\"\u003eTrade marks fees table\u003c/a\u003e\u003c/p\u003e\u003cp\u003e\u003ca href=\"https://www.gov.uk/csv-preview/694140e158a21370f58f2f98/Registered-Designs-list-of-current-and-new-fees.csv\"\u003eRegistered designs fees table\u003c/a\u003e\u003c/p\u003e\u003cp\u003e\u003ca href=\"https://www.gov.uk/csv-preview/694140fa5431f4f94d7f0a9c/Unregistered-Designs-list-of-current-and-new-fees.csv\"\u003eUnregistered designs fees table\u003c/a\u003e\u003c/p\u003e"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "3. When the new fees will be introduced ",
+              "url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents#when-the-new-fees-will-be-introduced",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents#when-the-new-fees-will-be-introduced",
+                "text": "\u003cp\u003eThe new fees will take effect on 1 April 2026. Fees will be charged at the old fee rate up to and including 31 March 2026. \u003c/p\u003e"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "4. Why fees are increasing ",
+              "url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents#why-fees-are-increasing",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents#why-fees-are-increasing",
+                "text": "\u003cp\u003eThe \u003cabbr title=\"Intellectual Property Office\"\u003eIPO\u003c/abbr\u003e’s fees have not increased since 2018 for patents, 2016 for designs and 1998 for trade marks. During this time, the \u003cabbr title=\"Intellectual Property Office\"\u003eIPO\u003c/abbr\u003e has avoided fee increases by improving efficiency and investing in digital services using existing reserves. However there has been a 32% rise in inflation since 2016.   \u003c/p\u003e\u003cp\u003eFees will increase by an average of 25% on 1 April 2026. This increase will allow the \u003cabbr title=\"Intellectual Property Office\"\u003eIPO\u003c/abbr\u003e to address both the rise in inflation and future cost pressures that cannot be fully offset through further efficiency savings or existing reserves. The fee increases will mean the \u003cabbr title=\"Intellectual Property Office\"\u003eIPO\u003c/abbr\u003e can continue to invest in its systems and provide high quality services. \u003c/p\u003e"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "5.  Application fees ",
+              "url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents#application-fees",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents#application-fees",
+                "text": "\u003cp\u003eIf you are applying for a trade mark, patent or registered design, or paying an application fee  on or  after 1 April 2026, you will  generally pay the new fee. \u003c/p\u003e\u003cp\u003ePlease note that using the ‘save for later’ or ‘draft’ function does not count as submitting the application. You will have to pay the new fee if submitting the application on or after  1 April 2026.  \u003c/p\u003e\u003cp\u003eIf you are applying for a trade mark or a registered design, then you may need to consider the specific points set out below.  \u003c/p\u003e\u003ch3 id=\"designs-deferral-fee\"\u003e5.1. Designs: deferral fee \u003c/h3\u003e\u003cp\u003eIf you make a request to register a deferred design on or after 1 April 2026, the new fee will apply, even if your original application was submitted before that date.  \u003c/p\u003e\u003ch3 id=\"trade-marks-period-of-grace\"\u003e5.2. Trade Marks: period of grace\u003c/h3\u003e\u003cp\u003eIf you apply for a trade mark before 1 April 2026, and you are relying on the period of grace to pay the application fee on or after 1 April 2026, you will pay the old fee, provided it is paid within the deadline given. This includes any additional class or series fees.   \u003c/p\u003e\u003ch3 id=\"trade-marks-right-start\"\u003e5.3. Trade Marks: Right Start \u003c/h3\u003e\u003cp\u003eIf you have submitted a Right Start application for a trade mark and paid the initial  fee before 1 April 2026, the fee you will pay to complete your registration will be the old fee (provided it is paid within the deadline given, even if that is  on or after 1 April 2026).   \u003c/p\u003e"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "6. Renewal fees ",
+              "url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents#renewal-fees",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents#renewal-fees",
+                "text": "\u003cp\u003eTo stay in force, IP rights must be renewed on a regular basis – patents every year, designs every 5 years, and trade marks every 10 years.   \u003c/p\u003e\u003cp\u003eThe renewal fee is normally due by a specific date or within a specific period. It can be paid up to 3 months in advance for patents, and up to 6 months in advance for designs and trade marks. There is also a 6 month period in which you can pay the fee late, although this is subject to a separate late renewal fee.  \u003c/p\u003e\u003cp\u003eWhether you pay the old or new fee for your renewal will depend on the date your renewal is due and when you pay the renewal fee.  This does not apply to the late renewal  fee. If you are paying for a renewal that is late on or after 1 April 2026, any late renewal fee will be the new fee.   \u003c/p\u003e\u003cp\u003eYou should consult the table below to see which fee will apply in your circumstances:\u003c/p\u003e\u003ctable\u003e\n  \u003cthead\u003e\n    \u003ctr\u003e\n      \u003ctd\u003e\u003c/td\u003e\n      \u003cth scope=\"col\"\u003ePayment made before 1 April 2026\u003c/th\u003e\n      \u003cth scope=\"col\"\u003ePayment made on or after 1 April 2026 (with no late fee due)\u003c/th\u003e\n      \u003cth scope=\"col\"\u003ePayment made on or after 1 April 2026 (late fee due)\u003c/th\u003e\n    \u003c/tr\u003e\n  \u003c/thead\u003e\n  \u003ctbody\u003e\n    \u003ctr\u003e\n      \u003cth scope=\"row\"\u003eRenewal due date before 1 April 2026\u003c/th\u003e\n      \u003ctd\u003eOld fee\u003c/td\u003e\n      \u003ctd\u003eOld fee\u003c/td\u003e\n      \u003ctd\u003eOld renewal fee + new late fee\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003cth scope=\"row\"\u003eRenewal due date on or after 1 April 2026\u003c/th\u003e\n      \u003ctd\u003eOld fee\u003c/td\u003e\n      \u003ctd\u003eNew Fee\u003c/td\u003e\n      \u003ctd\u003eNew renewal fee + new late fee\u003c/td\u003e\n    \u003c/tr\u003e\n  \u003c/tbody\u003e\n\u003c/table\u003e\u003cp\u003eThe following IP rights can be renewed in advance before 1 April 2026:\u003c/p\u003e\u003cul\u003e\n  \u003cli\u003epatents with a renewal due date in April or May 2026 (those with a renewal date in June 2026 can only be renewed from 1 April 2026 onwards)\u003c/li\u003e\n  \u003cli\u003etrade marks with a renewal due date up to and including 30 September 2026 \u003c/li\u003e\n  \u003cli\u003edesigns with a renewal due date up to and including 30 September 2026\u003c/li\u003e\n\u003c/ul\u003e"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "7. Patent grant fees",
+              "url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents#patent-grant-fees",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents#patent-grant-fees",
+                "text": "\u003cp\u003eIf a notification of grant under section 18(4) is issued before 1 April 2026, and a grant fee is required, the old fees for excess claims and excess pages will apply - even if you pay the fee on or after 1 April 2026 (more information on this is outlined under rule 30A in \u003ca href=\"https://www.gov.uk/government/publications/the-patents-rules-2007-and-patents-fees-rules-2007\"\u003eThe Patents Rules and Fees Rules 2007\u003c/a\u003e).\u003c/p\u003e\u003cp\u003eIf this applies to you, and you are paying the grant fee on or after 1 April, please note that due to technical limitations, our online payment service will only calculate the fee for excess claims and pages based on the new fee amount. You may either:\u003c/p\u003e\u003cul\u003e\n  \u003cli\u003efile using the online service, paying the new fees, and we will refund the difference after filing, or\u003c/li\u003e\n  \u003cli\u003efile using our \u003ca href=\"https://www.gov.uk/government/publications/grant-fee-for-patent-application\"\u003epaper form\u003c/a\u003e and pay the old fees directly.\u003c/li\u003e\n\u003c/ul\u003e"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "8. International fees",
+              "url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents#international-fees",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents#international-fees",
+                "text": "\u003ch3 id=\"international-trade-mark-fees\"\u003e8.1 International trade mark fees\u003c/h3\u003e\u003cp\u003eFees for international trade marks are paid in Swiss francs directly to the World Intellectual Property Organisation (\u003cabbr title=\"World Intellectual Property Organisation\"\u003eWIPO\u003c/abbr\u003e). There are individual fees for international trade marks that designate the UK, and these will also increase on 1 April 2026. You can find the updated fees in \u003ca rel=\"external\" href=\"https://www.wipo.int/documents/d/madrid-system/information-notices-en-2026-madrid_2026_5_e.pdf\"\u003ethe Madrid System Information Notice no. 5/2026\u003c/a\u003e.\u003c/p\u003e\u003ch3 id=\"international-trade-mark-renewals\"\u003e8.2 International trade mark renewals\u003c/h3\u003e\u003cp\u003eYou can pay renewal fees for international trade marks up to 6 months before the renewal due date.\u003c/p\u003e\u003cp\u003eUnder rule 34(7)(d) of the Madrid Regulations, the old fee will apply if:\u003c/p\u003e\u003cul\u003e\n  \u003cli\u003eyou pay the renewal fee before 1 April 2026, even when the renewal due date is on or after 1 April 2026\u003c/li\u003e\n  \u003cli\u003ethe renewal fee is due before 1 April 2026 but is paid on or after that date\u003c/li\u003e\n\u003c/ul\u003e\u003cp\u003eThe new fee will apply if the renewal fee is both due and paid on or after 1 April 2026.\u003c/p\u003e\u003cp\u003eIf you pay more than 6 months before the renewal due date, \u003cabbr title=\"World Intellectual Property Organisation\"\u003eWIPO\u003c/abbr\u003e will treat the payment as being received 6 months before the due date. This may affect whether the old fee or the new fee applies.\u003c/p\u003e"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "9. What happens if you pay the old fee by mistake",
+              "url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents#what-happens-if-you-pay-the-old-fee-by-mistake",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents#what-happens-if-you-pay-the-old-fee-by-mistake",
+                "text": "\u003cp\u003eYou have to pay the correct fee by the date it is due. If you pay only part of the fee that is due, your form or request will not be treated as having been submitted until you pay the remainder. If you do not pay the remainder in time, you may miss a deadline. This could have serious implications for your application or right.\u003c/p\u003e"
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "10. Enquiries",
+              "url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents#enquiries",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents#enquiries",
+                "text": "\u003cp\u003eIf you have any questions about the contents of this guidance, please contact our customer support centre. You can \u003ca href=\"https://www.gov.uk/government/organisations/intellectual-property-office/about/access-and-opening\"\u003efind out when the customer support centre is open for enquiries\u003c/a\u003e at the ‘contact details’ section of our office access and opening times page.\u003c/p\u003e\u003cul\u003e\n  \u003cli\u003eemail: \u003ca href=\"mailto:information@ipo.gov.uk\"\u003einformation@ipo.gov.uk\u003c/a\u003e\n\u003c/li\u003e\n  \u003cli\u003etelephone: 0300 300 2000\u003c/li\u003e\n\u003c/ul\u003e"
+              }
+            }
+          ]
+        }
+        </script>
+        
+        <link rel="canonical" href="https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents">
+        
+        <meta property="og:site_name" content="GOV.UK">
+        <meta property="og:type" content="article">
+        <meta property="og:url" content="https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents">
+        <meta property="og:title" content="New fees from 1 April 2026 for designs, trade marks and patents">
+        <meta property="og:description" content="">
+        
+          <meta name="twitter:card" content="summary">
+        
+        
+          <link rel="stylesheet" href="/assets/frontend/views/_html-publication-d183ff6655d34a5cea8d3f6f863d5b6c74654d40325c0a970e8e96ca046b4d07.css" />
+          <link rel="stylesheet" href="/assets/frontend/views/_csv_preview-ddf66f9f13d0fb5e8672480d53d092910344fca34f35e21fc2220e1500143904.css" />
+        
+          <meta name="csp-nonce" content="PO8/quprDNt0VLhXCAlQDw==" />
+        
+        <link title="Search" rel="search" type="application/opensearchdescription+xml" href="/search/opensearch.xml">
+        
+          
+          <meta name="govuk:format" content="html_publication">
+          <meta name="govuk:publishing-app" content="whitehall">
+          <meta name="govuk:rendering-app" content="frontend">
+          <meta name="govuk:schema-name" content="html_publication">
+          <meta name="govuk:content-id" content="8bd798d3-cb44-4238-9a89-b993cd4de4dd">
+          <meta name="govuk:ga4-base-path" content="/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents">
+          <meta name="govuk:first-published-at" content="2026-01-12T09:00:01+00:00">
+          <meta name="govuk:updated-at" content="2026-10-14T11:22:26+01:00">
+          <meta name="govuk:public-updated-at" content="2026-03-12T14:04:07+00:00">
+          <meta name="govuk:primary-publishing-organisation" content="Intellectual Property Office">
+          <meta name="govuk:organisations" content="&lt;EA34&gt;">
+        
+        
+        
+        
+        
+        
+        
+        
+          </head>
+          <body class="gem-c-layout-for-public govuk-template__body">
+            <script nonce="PO8/quprDNt0VLhXCAlQDw==">
+        //<![CDATA[
+              document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');
+        
+        //]]>
+        </script>      
+        <div id="global-cookie-message" data-module="cookie-banner" data-nosnippet="" aria-label="Cookies on GOV.UK" class="gem-c-cookie-banner govuk-clearfix govuk-cookie-banner js-banner-wrapper" role="region" hidden="hidden">
+          <div class="govuk-cookie-banner__message govuk-width-container">
+            <div class="govuk-grid-row">
+              <div class="govuk-grid-column-two-thirds">
+                <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on GOV.UK</h2>
+                <div tabindex="-1" class="govuk-cookie-banner__content gem-c-cookie-banner__confirmation">
+                  <div class="gem-c-cookie-banner__content"><p class='govuk-body'>We use some essential cookies to make this website work.</p><p class='govuk-body'>We’d like to set additional cookies to understand how you use GOV.UK, remember your settings and improve government services.</p><p class='govuk-body'>We also use cookies set by other sites to help us deliver content from their services.</p></div>
+                  <p class="gem-c-cookie-banner__confirmation-message--accepted govuk-body" hidden
+                    data-ga4-cookie-banner 
+                    data-module="ga4-link-tracker"
+                    data-ga4-set-indexes
+                    data-ga4-link='{"event_name":"navigation","type":"cookie banner","section":"You have accepted additional cookies"}'
+                  >You have accepted additional cookies. <span class="gem-c-cookie-banner__confirmation-message">You can <a class="govuk-link" href="/help/cookies">change your cookie settings</a> at any time.</span></p>
+                  <p class="gem-c-cookie-banner__confirmation-message--rejected govuk-body" hidden>You have rejected additional cookies. <span class="gem-c-cookie-banner__confirmation-message">You can <a class="govuk-link" href="/help/cookies">change your cookie settings</a> at any time.</span></p>
+                </div>
+              </div>
+            </div>
+            <div class="js-confirmation-buttons govuk-button-group">
+              
+        
+          <button class="gem-c-button govuk-button" type="submit" data-accept-cookies="true" data-cookie-types="all">Accept additional cookies</button>
+        
+        
+              
+        
+          <button class="gem-c-button govuk-button" type="submit" data-reject-cookies="true">Reject additional cookies</button>
+        
+        
+              <a class="govuk-link" href="/help/cookies">View cookies</a>
+            </div>
+            <div hidden class="js-hide-button govuk-button-group">
+              <button
+                class="gem-c-cookie-banner__hide-button govuk-button"
+                data-hide-cookie-banner="true"
+                data-module="ga4-event-tracker"
+                 data-ga4-event='{"event_name":"select_content","type":"cookie banner","action":"closed","section":"You have accepted additional cookies"}' >
+                  Hide cookie message
+                </button>
+            </div>
+          </div>
+        </div>
+              <a data-module="govuk-skip-link" class="gem-c-skip-link govuk-skip-link govuk-!-display-none-print" href="#content">Skip to main content</a>
+        
+              <header>
+                    <div data-module="ga4-event-tracker ga4-link-tracker" data-ga4-expandable="" class="gem-c-layout-super-navigation-header">
+        <div class="gem-c-layout-super-navigation-header__nav-wrapper">
+          <div class="gem-c-layout-super-navigation-header__container govuk-width-container">
+            <nav
+              aria-labelledby="super-navigation-menu-heading"
+              class="gem-c-layout-super-navigation-header__content"
+              data-module="super-navigation-mega-menu">
+              <div class="gem-c-layout-super-navigation-header__header-logo">
+                <a class="govuk-header__homepage-link" data-ga4-link='{"event_name":"navigation","type":"header menu bar","external":"false","text":"GOV.UK","section":"Logo","index_link":1,"index_section":0,"index_section_count":2,"index_total":1}' id="logo" aria-label="Go to the GOV.UK homepage" href="/">
+                  <svg
+          xmlns="http://www.w3.org/2000/svg"
+          focusable="false"
+          role="img"
+          viewBox="0 0 324 60"
+          height="30"
+          width="162"
+          fill="currentcolor"
+          class="govuk-header__logotype"
+          aria-label="GOV.UK">
+          <title>GOV.UK</title>
+          <g>
+            <circle cx="20" cy="17.6" r="3.7"></circle>
+            <circle cx="10.2" cy="23.5" r="3.7"></circle>
+            <circle cx="3.7" cy="33.2" r="3.7"></circle>
+            <circle cx="31.7" cy="30.6" r="3.7"></circle>
+            <circle cx="43.3" cy="17.6" r="3.7"></circle>
+            <circle cx="53.2" cy="23.5" r="3.7"></circle>
+            <circle cx="59.7" cy="33.2" r="3.7"></circle>
+            <circle cx="31.7" cy="30.6" r="3.7"></circle>
+            <path d="M33.1,9.8c.2-.1.3-.3.5-.5l4.6,2.4v-6.8l-4.6,1.5c-.1-.2-.3-.3-.5-.5l1.9-5.9h-6.7l1.9,5.9c-.2.1-.3.3-.5.5l-4.6-1.5v6.8l4.6-2.4c.1.2.3.3.5.5l-2.6,8c-.9,2.8,1.2,5.7,4.1,5.7h0c3,0,5.1-2.9,4.1-5.7l-2.6-8ZM37,37.9s-3.4,3.8-4.1,6.1c2.2,0,4.2-.5,6.4-2.8l-.7,8.5c-2-2.8-4.4-4.1-5.7-3.8.1,3.1.5,6.7,5.8,7.2,3.7.3,6.7-1.5,7-3.8.4-2.6-2-4.3-3.7-1.6-1.4-4.5,2.4-6.1,4.9-3.2-1.9-4.5-1.8-7.7,2.4-10.9,3,4,2.6,7.3-1.2,11.1,2.4-1.3,6.2,0,4,4.6-1.2-2.8-3.7-2.2-4.2.2-.3,1.7.7,3.7,3,4.2,1.9.3,4.7-.9,7-5.9-1.3,0-2.4.7-3.9,1.7l2.4-8c.6,2.3,1.4,3.7,2.2,4.5.6-1.6.5-2.8,0-5.3l5,1.8c-2.6,3.6-5.2,8.7-7.3,17.5-7.4-1.1-15.7-1.7-24.5-1.7h0c-8.8,0-17.1.6-24.5,1.7-2.1-8.9-4.7-13.9-7.3-17.5l5-1.8c-.5,2.5-.6,3.7,0,5.3.8-.8,1.6-2.3,2.2-4.5l2.4,8c-1.5-1-2.6-1.7-3.9-1.7,2.3,5,5.2,6.2,7,5.9,2.3-.4,3.3-2.4,3-4.2-.5-2.4-3-3.1-4.2-.2-2.2-4.6,1.6-6,4-4.6-3.7-3.7-4.2-7.1-1.2-11.1,4.2,3.2,4.3,6.4,2.4,10.9,2.5-2.8,6.3-1.3,4.9,3.2-1.8-2.7-4.1-1-3.7,1.6.3,2.3,3.3,4.1,7,3.8,5.4-.5,5.7-4.2,5.8-7.2-1.3-.2-3.7,1-5.7,3.8l-.7-8.5c2.2,2.3,4.2,2.7,6.4,2.8-.7-2.3-4.1-6.1-4.1-6.1h10.6,0Z"></path>
+          </g>
+          <circle class="govuk-logo-dot" cx="226" cy="36" r="7.3"></circle>
+          <path d="M93.94 41.25c.4 1.81 1.2 3.21 2.21 4.62 1 1.4 2.21 2.41 3.61 3.21s3.21 1.2 5.22 1.2 3.61-.4 4.82-1c1.4-.6 2.41-1.4 3.21-2.41.8-1 1.4-2.01 1.61-3.01s.4-2.01.4-3.01v.14h-10.86v-7.02h20.07v24.08h-8.03v-5.56c-.6.8-1.38 1.61-2.19 2.41-.8.8-1.81 1.2-2.81 1.81-1 .4-2.21.8-3.41 1.2s-2.41.4-3.81.4a18.56 18.56 0 0 1-14.65-6.63c-1.6-2.01-3.01-4.41-3.81-7.02s-1.4-5.62-1.4-8.83.4-6.02 1.4-8.83a20.45 20.45 0 0 1 19.46-13.65c3.21 0 4.01.2 5.82.8 1.81.4 3.61 1.2 5.02 2.01 1.61.8 2.81 2.01 4.01 3.21s2.21 2.61 2.81 4.21l-7.63 4.41c-.4-1-1-1.81-1.61-2.61-.6-.8-1.4-1.4-2.21-2.01-.8-.6-1.81-1-2.81-1.4-1-.4-2.21-.4-3.61-.4-2.01 0-3.81.4-5.22 1.2-1.4.8-2.61 1.81-3.61 3.21s-1.61 2.81-2.21 4.62c-.4 1.81-.6 3.71-.6 5.42s.8 5.22.8 5.22Zm57.8-27.9c3.21 0 6.22.6 8.63 1.81 2.41 1.2 4.82 2.81 6.62 4.82S170.2 24.39 171 27s1.4 5.62 1.4 8.83-.4 6.02-1.4 8.83-2.41 5.02-4.01 7.02-4.01 3.61-6.62 4.82-5.42 1.81-8.63 1.81-6.22-.6-8.63-1.81-4.82-2.81-6.42-4.82-3.21-4.41-4.01-7.02-1.4-5.62-1.4-8.83.4-6.02 1.4-8.83 2.41-5.02 4.01-7.02 4.01-3.61 6.42-4.82 5.42-1.81 8.63-1.81Zm0 36.73c1.81 0 3.61-.4 5.02-1s2.61-1.81 3.61-3.01 1.81-2.81 2.21-4.41c.4-1.81.8-3.61.8-5.62 0-2.21-.2-4.21-.8-6.02s-1.2-3.21-2.21-4.62c-1-1.2-2.21-2.21-3.61-3.01s-3.21-1-5.02-1-3.61.4-5.02 1c-1.4.8-2.61 1.81-3.61 3.01s-1.81 2.81-2.21 4.62c-.4 1.81-.8 3.61-.8 5.62 0 2.41.2 4.21.8 6.02.4 1.81 1.2 3.21 2.21 4.41s2.21 2.21 3.61 3.01c1.4.8 3.21 1 5.02 1Zm36.32 7.96-12.24-44.15h9.83l8.43 32.77h.4l8.23-32.77h9.83L200.3 58.04h-12.24Zm74.14-7.96c2.18 0 3.51-.6 3.51-.6 1.2-.6 2.01-1 2.81-1.81s1.4-1.81 1.81-2.81a13 13 0 0 0 .8-4.01V13.9h8.63v28.15c0 2.41-.4 4.62-1.4 6.62-.8 2.01-2.21 3.61-3.61 5.02s-3.41 2.41-5.62 3.21-4.62 1.2-7.02 1.2-5.02-.4-7.02-1.2c-2.21-.8-4.01-1.81-5.62-3.21s-2.81-3.01-3.61-5.02-1.4-4.21-1.4-6.62V13.9h8.63v26.95c0 1.61.2 3.01.8 4.01.4 1.2 1.2 2.21 2.01 2.81.8.8 1.81 1.4 2.81 1.81 0 0 1.34.6 3.51.6Zm34.22-36.18v18.92l15.65-18.92h10.82l-15.03 17.32 16.03 26.83h-10.21l-11.44-20.21-5.62 6.22v13.99h-8.83V13.9"></path>
+        </svg>
+        
+        </a></div>      <h2 id="super-navigation-menu-heading" class="govuk-visually-hidden">
+                Navigation menu
+              </h2>
+        
+        
+              <div class="gem-c-layout-super-navigation-header__navigation-item">
+                <a class="gem-c-layout-super-navigation-header__navigation-item-link" href="/browse"><span class="gem-c-layout-super-navigation-header__navigation-item-link-inner">            Menu
+        </span></a>
+                <button aria-controls="super-navigation-menu" aria-expanded="false" aria-label="Show navigation menu" class="gem-c-layout-super-navigation-header__navigation-top-toggle-button" data-text-for-hide="Hide navigation menu" data-text-for-show="Show navigation menu" data-toggle-desktop-group="top" data-toggle-mobile-group="top" data-ga4-event='{"event_name":"select_content","type":"header menu bar","text":"Menu","index_section":1,"index_section_count":2,"section":"Menu"}' hidden="hidden" id="super-navigation-menu-toggle" type="button">
+                  <span class="gem-c-layout-super-navigation-header__navigation-top-toggle-button-inner">Menu</span>
+        </button>      </div>
+              <div id="super-navigation-menu" hidden="hidden" class="gem-c-layout-super-navigation-header__navigation-dropdown-menu">
+                <div class="govuk-grid-row gem-c-layout-super-navigation-header__navigation-items">
+        
+        
+                    <div class="govuk-grid-column-two-thirds-from-desktop gem-c-layout-super-navigation-header__column--services-and-information">
+                      <h3 class="govuk-heading-m gem-c-layout-super-navigation-header__column-header">
+                        Services and information
+                      </h3>
+                      <ul class="gem-c-layout-super-navigation-header__navigation-second-items gem-c-layout-super-navigation-header__navigation-second-items--services-and-information">
+                            <li class="gem-c-layout-super-navigation-header__dropdown-list-item">
+                              <a class="govuk-link gem-c-layout-super-navigation-header__navigation-second-item-link" data-ga4-link='{"event_name":"navigation","type":"header menu bar","index_section":1,"index_link":1,"index_section_count":3,"index_total":16,"section":"Services and information"}' href="/browse/benefits">Benefits</a>
+                              
+                            </li>
+                            <li class="gem-c-layout-super-navigation-header__dropdown-list-item">
+                              <a class="govuk-link gem-c-layout-super-navigation-header__navigation-second-item-link" data-ga4-link='{"event_name":"navigation","type":"header menu bar","index_section":1,"index_link":2,"index_section_count":3,"index_total":16,"section":"Services and information"}' href="/browse/births-deaths-marriages">Births, death, marriages and care</a>
+                              
+                            </li>
+                            <li class="gem-c-layout-super-navigation-header__dropdown-list-item">
+                              <a class="govuk-link gem-c-layout-super-navigation-header__navigation-second-item-link" data-ga4-link='{"event_name":"navigation","type":"header menu bar","index_section":1,"index_link":3,"index_section_count":3,"index_total":16,"section":"Services and information"}' href="/browse/business">Business and self-employed</a>
+                              
+                            </li>
+                            <li class="gem-c-layout-super-navigation-header__dropdown-list-item">
+                              <a class="govuk-link gem-c-layout-super-navigation-header__navigation-second-item-link" data-ga4-link='{"event_name":"navigation","type":"header menu bar","index_section":1,"index_link":4,"index_section_count":3,"index_total":16,"section":"Services and information"}' href="/browse/childcare-parenting">Childcare and parenting</a>
+                              
+                            </li>
+                            <li class="gem-c-layout-super-navigation-header__dropdown-list-item">
+                              <a class="govuk-link gem-c-layout-super-navigation-header__navigation-second-item-link" data-ga4-link='{"event_name":"navigation","type":"header menu bar","index_section":1,"index_link":5,"index_section_count":3,"index_total":16,"section":"Services and information"}' href="/browse/citizenship">Citizenship and living in the UK</a>
+                              
+                            </li>
+                            <li class="gem-c-layout-super-navigation-header__dropdown-list-item">
+                              <a class="govuk-link gem-c-layout-super-navigation-header__navigation-second-item-link" data-ga4-link='{"event_name":"navigation","type":"header menu bar","index_section":1,"index_link":6,"index_section_count":3,"index_total":16,"section":"Services and information"}' href="/browse/justice">Crime, justice and the law</a>
+                              
+                            </li>
+                            <li class="gem-c-layout-super-navigation-header__dropdown-list-item">
+                              <a class="govuk-link gem-c-layout-super-navigation-header__navigation-second-item-link" data-ga4-link='{"event_name":"navigation","type":"header menu bar","index_section":1,"index_link":7,"index_section_count":3,"index_total":16,"section":"Services and information"}' href="/browse/disabilities">Disabled people</a>
+                              
+                            </li>
+                            <li class="gem-c-layout-super-navigation-header__dropdown-list-item">
+                              <a class="govuk-link gem-c-layout-super-navigation-header__navigation-second-item-link" data-ga4-link='{"event_name":"navigation","type":"header menu bar","index_section":1,"index_link":8,"index_section_count":3,"index_total":16,"section":"Services and information"}' href="/browse/driving">Driving and transport</a>
+                              
+                            </li>
+                            <li class="gem-c-layout-super-navigation-header__dropdown-list-item">
+                              <a class="govuk-link gem-c-layout-super-navigation-header__navigation-second-item-link" data-ga4-link='{"event_name":"navigation","type":"header menu bar","index_section":1,"index_link":9,"index_section_count":3,"index_total":16,"section":"Services and information"}' href="/browse/education">Education and learning</a>
+                              
+                            </li>
+                            <li class="gem-c-layout-super-navigation-header__dropdown-list-item">
+                              <a class="govuk-link gem-c-layout-super-navigation-header__navigation-second-item-link" data-ga4-link='{"event_name":"navigation","type":"header menu bar","index_section":1,"index_link":10,"index_section_count":3,"index_total":16,"section":"Services and information"}' href="/browse/employing-people">Employing people</a>
+                              
+                            </li>
+                            <li class="gem-c-layout-super-navigation-header__dropdown-list-item">
+                              <a class="govuk-link gem-c-layout-super-navigation-header__navigation-second-item-link" data-ga4-link='{"event_name":"navigation","type":"header menu bar","index_section":1,"index_link":11,"index_section_count":3,"index_total":16,"section":"Services and information"}' href="/browse/environment-countryside">Environment and countryside</a>
+                              
+                            </li>
+                            <li class="gem-c-layout-super-navigation-header__dropdown-list-item">
+                              <a class="govuk-link gem-c-layout-super-navigation-header__navigation-second-item-link" data-ga4-link='{"event_name":"navigation","type":"header menu bar","index_section":1,"index_link":12,"index_section_count":3,"index_total":16,"section":"Services and information"}' href="/browse/housing-local-services">Housing and local services</a>
+                              
+                            </li>
+                            <li class="gem-c-layout-super-navigation-header__dropdown-list-item">
+                              <a class="govuk-link gem-c-layout-super-navigation-header__navigation-second-item-link" data-ga4-link='{"event_name":"navigation","type":"header menu bar","index_section":1,"index_link":13,"index_section_count":3,"index_total":16,"section":"Services and information"}' href="/browse/tax">Money and tax</a>
+                              
+                            </li>
+                            <li class="gem-c-layout-super-navigation-header__dropdown-list-item">
+                              <a class="govuk-link gem-c-layout-super-navigation-header__navigation-second-item-link" data-ga4-link='{"event_name":"navigation","type":"header menu bar","index_section":1,"index_link":14,"index_section_count":3,"index_total":16,"section":"Services and information"}' href="/browse/abroad">Passports, travel and living abroad</a>
+                              
+                            </li>
+                            <li class="gem-c-layout-super-navigation-header__dropdown-list-item">
+                              <a class="govuk-link gem-c-layout-super-navigation-header__navigation-second-item-link" data-ga4-link='{"event_name":"navigation","type":"header menu bar","index_section":1,"index_link":15,"index_section_count":3,"index_total":16,"section":"Services and information"}' href="/browse/visas-immigration">Visas and immigration</a>
+                              
+                            </li>
+                            <li class="gem-c-layout-super-navigation-header__dropdown-list-item">
+                              <a class="govuk-link gem-c-layout-super-navigation-header__navigation-second-item-link" data-ga4-link='{"event_name":"navigation","type":"header menu bar","index_section":1,"index_link":16,"index_section_count":3,"index_total":16,"section":"Services and information"}' href="/browse/working">Working, jobs and pensions</a>
+                              
+                            </li>
+                      </ul>
+                    </div>
+        
+                    <div class="govuk-grid-column-one-third-from-desktop gem-c-layout-super-navigation-header__column--government-activity">
+                      <h3 class="govuk-heading-m gem-c-layout-super-navigation-header__column-header">
+                        Government activity
+                      </h3>
+                      <ul class="gem-c-layout-super-navigation-header__navigation-second-items gem-c-layout-super-navigation-header__navigation-second-items--government-activity">
+                            <li class="gem-c-layout-super-navigation-header__dropdown-list-item">
+                              <a class="govuk-link gem-c-layout-super-navigation-header__navigation-second-item-link gem-c-layout-super-navigation-header__navigation-second-item-link--with-description" data-ga4-link='{"event_name":"navigation","type":"header menu bar","index_section":2,"index_link":1,"index_section_count":3,"index_total":6,"section":"Government activity"}' href="/government/organisations">Departments</a>
+                              <p class="gem-c-layout-super-navigation-header__navigation-second-item-description">Departments, agencies and public bodies</p>
+                            </li>
+                            <li class="gem-c-layout-super-navigation-header__dropdown-list-item">
+                              <a class="govuk-link gem-c-layout-super-navigation-header__navigation-second-item-link gem-c-layout-super-navigation-header__navigation-second-item-link--with-description" data-ga4-link='{"event_name":"navigation","type":"header menu bar","index_section":2,"index_link":2,"index_section_count":3,"index_total":6,"section":"Government activity"}' href="/search/news-and-communications">News</a>
+                              <p class="gem-c-layout-super-navigation-header__navigation-second-item-description">News stories, speeches, letters and notices</p>
+                            </li>
+                            <li class="gem-c-layout-super-navigation-header__dropdown-list-item">
+                              <a class="govuk-link gem-c-layout-super-navigation-header__navigation-second-item-link gem-c-layout-super-navigation-header__navigation-second-item-link--with-description" data-ga4-link='{"event_name":"navigation","type":"header menu bar","index_section":2,"index_link":3,"index_section_count":3,"index_total":6,"section":"Government activity"}' href="/search/guidance-and-regulation">Guidance and regulation</a>
+                              <p class="gem-c-layout-super-navigation-header__navigation-second-item-description">Detailed guidance, regulations and rules</p>
+                            </li>
+                            <li class="gem-c-layout-super-navigation-header__dropdown-list-item">
+                              <a class="govuk-link gem-c-layout-super-navigation-header__navigation-second-item-link gem-c-layout-super-navigation-header__navigation-second-item-link--with-description" data-ga4-link='{"event_name":"navigation","type":"header menu bar","index_section":2,"index_link":4,"index_section_count":3,"index_total":6,"section":"Government activity"}' href="/search/research-and-statistics">Research and statistics</a>
+                              <p class="gem-c-layout-super-navigation-header__navigation-second-item-description">Reports, analysis and official statistics</p>
+                            </li>
+                            <li class="gem-c-layout-super-navigation-header__dropdown-list-item">
+                              <a class="govuk-link gem-c-layout-super-navigation-header__navigation-second-item-link gem-c-layout-super-navigation-header__navigation-second-item-link--with-description" data-ga4-link='{"event_name":"navigation","type":"header menu bar","index_section":2,"index_link":5,"index_section_count":3,"index_total":6,"section":"Government activity"}' href="/search/policy-papers-and-consultations">Policy papers and consultations</a>
+                              <p class="gem-c-layout-super-navigation-header__navigation-second-item-description">Consultations and strategy</p>
+                            </li>
+                            <li class="gem-c-layout-super-navigation-header__dropdown-list-item">
+                              <a class="govuk-link gem-c-layout-super-navigation-header__navigation-second-item-link gem-c-layout-super-navigation-header__navigation-second-item-link--with-description" data-ga4-link='{"event_name":"navigation","type":"header menu bar","index_section":2,"index_link":6,"index_section_count":3,"index_total":6,"section":"Government activity"}' href="/search/transparency-and-freedom-of-information-releases">Transparency</a>
+                              <p class="gem-c-layout-super-navigation-header__navigation-second-item-description">Data, Freedom of Information releases and corporate reports</p>
+                            </li>
+                      </ul>
+                    </div>
+                </div>
+        </div>      <div class="gem-c-layout-super-navigation-header__search-item">
+                <button id="super-search-menu-toggle" class="gem-c-layout-super-navigation-header__search-toggle-button" aria-controls="super-search-menu" aria-expanded="true" aria-label="Hide search menu" data-text-for-hide="Hide search menu" data-text-for-show="Show search menu" data-toggle-mobile-group="top" data-toggle-desktop-group="top" data-ga4-event='{"event_name":"select_content","type":"header menu bar","text":"Search","index_section":2,"index_section_count":2,"section":"Search"}' hidden="hidden" type="button">
+                  <span class="govuk-visually-hidden">
+                    Search GOV.UK
+                  </span>
+                  
+        <svg
+          class="gem-c-layout-super-navigation-header__search-toggle-button-link-icon"
+          width="27"
+          height="27"
+          viewBox="0 0 27 27"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+          focusable="false">
+          <circle
+            cx="12.0161"
+            cy="11.0161"
+            r="8.51613"
+            stroke="currentColor"
+            stroke-width="3" />
+          <line
+            x1="17.8668"
+            y1="17.3587"
+            x2="26.4475"
+            y2="25.9393"
+            stroke="currentColor"
+            stroke-width="3" />
+        </svg>
+        
+                  <span
+                    aria-hidden="true"
+                    class="gem-c-layout-super-navigation-header__navigation-top-toggle-close-icon">
+                    &times;
+                  </span>
+        </button>
+                <a class="gem-c-layout-super-navigation-header__search-item-link" href="/search">
+                  <span class="govuk-visually-hidden">
+                    Search GOV.UK
+                  </span>
+                  
+        <svg
+          class="gem-c-layout-super-navigation-header__search-item-link-icon"
+          width="27"
+          height="27"
+          viewBox="0 0 27 27"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+          focusable="false">
+          <circle
+            cx="12.0161"
+            cy="11.0161"
+            r="8.51613"
+            stroke="currentColor"
+            stroke-width="3" />
+          <line
+            x1="17.8668"
+            y1="17.3587"
+            x2="26.4475"
+            y2="25.9393"
+            stroke="currentColor"
+            stroke-width="3" />
+        </svg>
+        
+        </a>      </div>
+              <div id="super-search-menu" hidden="hidden" class="gem-c-layout-super-navigation-header__navigation-dropdown-menu">
+                <div class="gem-c-layout-super-navigation-header__search-container gem-c-layout-super-navigation-header__search-items">
+                  <h3 class="govuk-visually-hidden">
+                    Search
+                  </h3>
+                  <div class="govuk-grid-row">
+                    <div class="govuk-grid-column-full">
+                      <form class="gem-c-layout-super-navigation-header__search-form" id="search" data-module="ga4-search-tracker" data-ga4-search-type="header menu bar" data-ga4-search-url="/search/all" data-ga4-search-section="Search GOV.UK" data-ga4-search-index-section="3" data-ga4-search-index-section-count="3" action="/search/all" method="get" role="search" aria-label="Site-wide">
+                        <div class="gem-c-search-with-autocomplete gem-c-search-with-autocomplete--large govuk-!-margin-bottom-0" data-module="gem-search-with-autocomplete" data-source-url="https://www.gov.uk/api/search/autocomplete.json" data-source-key="suggestions">
+          <div data-module="gem-toggle-input-class-on-focus" class="gem-c-search govuk-!-display-none-print gem-c-search--large gem-c-search--on-white gem-c-search--separate-label govuk-!-margin-bottom-0">
+            <label for="search-main-9703a5a2" class="govuk-label govuk-label--m gem-c-layout-super-navigation-header__search-label--large-navbar">Search GOV.UK</label>
+          <div class="gem-c-search__item-wrapper">
+            <div class="js-search-input-wrapper">
+              <input enterkeyhint="search" class="gem-c-search__item gem-c-search__input js-class-toggle" id="search-main-9703a5a2" name="keywords" title="Search" type="search" value="" autocorrect="off" autocapitalize="off">
+            </div>
+            <div class="gem-c-search__item gem-c-search__submit-wrapper">
+              <button class="gem-c-search__submit" type="submit" enterkeyhint="search">
+                Search
+                
+        <svg
+          class="gem-c-search__icon"
+          width="27"
+          height="27"
+          viewBox="0 0 27 27"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+          focusable="false">
+          <circle
+            cx="12.0161"
+            cy="11.0161"
+            r="8.51613"
+            stroke="currentColor"
+            stroke-width="3" />
+          <line
+            x1="17.8668"
+            y1="17.3587"
+            x2="26.4475"
+            y2="25.9393"
+            stroke="currentColor"
+            stroke-width="3" />
+        </svg>
+        
+        </button>    </div>
+          </div>
+        </div>
+        </div>
+        </form>            </div>
+                  </div>
+                </div>
+        </div>    </nav>
+          </div>
+        </div>
+        </div>
+        
+                
+        
+        </header>
+              
+          
+        
+          <div class="govuk-width-container">
+        
+              
+        <div class="gem-c-contextual-breadcrumbs">
+            
+        <script type="application/ld+json">
+          {
+          "@context": "http://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "item": {
+                "name": "Home",
+                "@id": "https://www.gov.uk/"
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "item": {
+                "name": "Business and industry",
+                "@id": "https://www.gov.uk/business-and-industry"
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "item": {
+                "name": "Business regulation",
+                "@id": "https://www.gov.uk/business-and-industry/business-regulation"
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 4,
+              "item": {
+                "name": "Intellectual property",
+                "@id": "https://www.gov.uk/business/intellectual-property"
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 5,
+              "item": {
+                "name": "Designs",
+                "@id": "https://www.gov.uk/business/designs"
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 6,
+              "item": {
+                "name": "Intellectual Property Office: new fees from 1 April 2026",
+                "@id": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026"
+              }
+            }
+          ]
+        }
+        </script>
+        
+        <nav data-module="ga4-link-tracker" aria-label="Breadcrumb" class="gem-c-breadcrumbs govuk-breadcrumbs govuk-!-display-none-print govuk-breadcrumbs--collapse-on-mobile">
+          <ol class="govuk-breadcrumbs__list">
+                <li class="govuk-breadcrumbs__list-item">
+                  <a data-ga4-link='{"event_name":"navigation","type":"breadcrumb","index_link":"1","index_total":"6"}' class="govuk-breadcrumbs__link" href="/">Home</a>
+                </li>
+                <li class="govuk-breadcrumbs__list-item">
+                  <a data-ga4-link='{"event_name":"navigation","type":"breadcrumb","index_link":"2","index_total":"6"}' class="govuk-breadcrumbs__link" href="/business-and-industry">Business and industry</a>
+                </li>
+                <li class="govuk-breadcrumbs__list-item">
+                  <a data-ga4-link='{"event_name":"navigation","type":"breadcrumb","index_link":"3","index_total":"6"}' class="govuk-breadcrumbs__link" href="/business-and-industry/business-regulation">Business regulation</a>
+                </li>
+                <li class="govuk-breadcrumbs__list-item">
+                  <a data-ga4-link='{"event_name":"navigation","type":"breadcrumb","index_link":"4","index_total":"6"}' class="govuk-breadcrumbs__link" href="/business/intellectual-property">Intellectual property</a>
+                </li>
+                <li class="govuk-breadcrumbs__list-item">
+                  <a data-ga4-link='{"event_name":"navigation","type":"breadcrumb","index_link":"5","index_total":"6"}' class="govuk-breadcrumbs__link" href="/business/designs">Designs</a>
+                </li>
+                <li class="govuk-breadcrumbs__list-item">
+                  <a data-ga4-link='{"event_name":"navigation","type":"breadcrumb","index_link":"6","index_total":"6"}' class="govuk-breadcrumbs__link" href="/government/publications/intellectual-property-office-new-fees-from-1-april-2026">Intellectual Property Office: new fees from 1 April 2026</a>
+                </li>
+          </ol>
+        </nav>
+        </div>
+        
+            
+        
+            <main id="content" class="govuk-main-wrapper  " >
+              <span id="Top"></span>
+              
+          <div class="publication-external">
+            <ul class="organisation-logos">
+                <li class="organisation-logos__logo">
+                  
+        <div class="gem-c-organisation-logo brand--department-for-energy-security-net-zero">
+            <a class="gem-c-organisation-logo__container gem-c-organisation-logo__link gem-c-organisation-logo__crest gem-c-organisation-logo__crest--single-identity brand__border-color" href="/government/organisations/intellectual-property-office">
+              <span class="gem-c-organisation-logo__name">Intellectual<br/>Property <br/>Office</span>
+        </a></div>
+                </li>
+            </ul>
+          </div>
+        
+          <header class="gem-c-inverse-header gem-c-inverse-header--html-publication-header govuk-!-padding-top-6 govuk-!-padding-bottom-6" dir="ltr">
+            
+          
+        <div class="gem-c-heading  gem-c-heading--inverse govuk-!-margin-bottom-0">
+              <span class="govuk-caption-xl gem-c-heading__context" >
+            Guidance
+          </span>
+        
+        
+          <h1 class="gem-c-heading__text govuk-heading-xl">
+            New fees from 1 April 2026 for designs, trade marks and patents
+        </h1></div>
+        
+            <p class="gem-c-inverse-header__subtext">Updated 12 March 2026</p>
+        </header>
+        
+        
+        
+        
+        <div id="contents">
+          <div class="govuk-grid-row gem-print-columns-none">
+            <div class="govuk-grid-column-one-quarter-from-desktop sticky-column">
+                  <nav data-module="ga4-link-tracker" aria-label="Contents" class="gem-c-contents-list govuk-!-margin-bottom-4">
+            <h2 class="gem-c-contents-list__title">
+              Contents
+        </h2>
+            <ol class="gem-c-contents-list__list">
+                <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--numbered" >
+                  <span class="gem-c-contents-list__list-item-dash" aria-hidden="true"></span>
+                  <a class="gem-c-contents-list__link govuk-link gem-print-force-link-styles govuk-link--no-underline" data-ga4-link='{"event_name":"select_content","section":"Contents","type":"contents list","index_total":10,"index_link":1}' href="#introduction"><span class="gem-c-contents-list__number">1. </span><span class="gem-c-contents-list__numbered-text">Introduction</span></a>
+                </li>
+                <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--numbered" >
+                  <span class="gem-c-contents-list__list-item-dash" aria-hidden="true"></span>
+                  <a class="gem-c-contents-list__link govuk-link gem-print-force-link-styles govuk-link--no-underline" data-ga4-link='{"event_name":"select_content","section":"Contents","type":"contents list","index_total":10,"index_link":2}' href="#fee-changes"><span class="gem-c-contents-list__number">2. </span><span class="gem-c-contents-list__numbered-text">Fee changes</span></a>
+                </li>
+                <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--numbered" >
+                  <span class="gem-c-contents-list__list-item-dash" aria-hidden="true"></span>
+                  <a class="gem-c-contents-list__link govuk-link gem-print-force-link-styles govuk-link--no-underline" data-ga4-link='{"event_name":"select_content","section":"Contents","type":"contents list","index_total":10,"index_link":3}' href="#when-the-new-fees-will-be-introduced"><span class="gem-c-contents-list__number">3. </span><span class="gem-c-contents-list__numbered-text">When the new fees will be introduced</span></a>
+                </li>
+                <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--numbered" >
+                  <span class="gem-c-contents-list__list-item-dash" aria-hidden="true"></span>
+                  <a class="gem-c-contents-list__link govuk-link gem-print-force-link-styles govuk-link--no-underline" data-ga4-link='{"event_name":"select_content","section":"Contents","type":"contents list","index_total":10,"index_link":4}' href="#why-fees-are-increasing"><span class="gem-c-contents-list__number">4. </span><span class="gem-c-contents-list__numbered-text">Why fees are increasing</span></a>
+                </li>
+                <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--numbered" >
+                  <span class="gem-c-contents-list__list-item-dash" aria-hidden="true"></span>
+                  <a class="gem-c-contents-list__link govuk-link gem-print-force-link-styles govuk-link--no-underline" data-ga4-link='{"event_name":"select_content","section":"Contents","type":"contents list","index_total":10,"index_link":5}' href="#application-fees"><span class="gem-c-contents-list__number">5. </span><span class="gem-c-contents-list__numbered-text">Application fees</span></a>
+                </li>
+                <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--numbered" >
+                  <span class="gem-c-contents-list__list-item-dash" aria-hidden="true"></span>
+                  <a class="gem-c-contents-list__link govuk-link gem-print-force-link-styles govuk-link--no-underline" data-ga4-link='{"event_name":"select_content","section":"Contents","type":"contents list","index_total":10,"index_link":6}' href="#renewal-fees"><span class="gem-c-contents-list__number">6. </span><span class="gem-c-contents-list__numbered-text">Renewal fees</span></a>
+                </li>
+                <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--numbered" >
+                  <span class="gem-c-contents-list__list-item-dash" aria-hidden="true"></span>
+                  <a class="gem-c-contents-list__link govuk-link gem-print-force-link-styles govuk-link--no-underline" data-ga4-link='{"event_name":"select_content","section":"Contents","type":"contents list","index_total":10,"index_link":7}' href="#patent-grant-fees"><span class="gem-c-contents-list__number">7. </span><span class="gem-c-contents-list__numbered-text">Patent grant fees</span></a>
+                </li>
+                <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--numbered" >
+                  <span class="gem-c-contents-list__list-item-dash" aria-hidden="true"></span>
+                  <a class="gem-c-contents-list__link govuk-link gem-print-force-link-styles govuk-link--no-underline" data-ga4-link='{"event_name":"select_content","section":"Contents","type":"contents list","index_total":10,"index_link":8}' href="#international-fees"><span class="gem-c-contents-list__number">8. </span><span class="gem-c-contents-list__numbered-text">International fees</span></a>
+                </li>
+                <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--numbered" >
+                  <span class="gem-c-contents-list__list-item-dash" aria-hidden="true"></span>
+                  <a class="gem-c-contents-list__link govuk-link gem-print-force-link-styles govuk-link--no-underline" data-ga4-link='{"event_name":"select_content","section":"Contents","type":"contents list","index_total":10,"index_link":9}' href="#what-happens-if-you-pay-the-old-fee-by-mistake"><span class="gem-c-contents-list__number">9. </span><span class="gem-c-contents-list__numbered-text">What happens if you pay the old fee by mistake</span></a>
+                </li>
+                <li class="gem-c-contents-list__list-item gem-c-contents-list__list-item--numbered" >
+                  <span class="gem-c-contents-list__list-item-dash" aria-hidden="true"></span>
+                  <a class="gem-c-contents-list__link govuk-link gem-print-force-link-styles govuk-link--no-underline" data-ga4-link='{"event_name":"select_content","section":"Contents","type":"contents list","index_total":10,"index_link":10}' href="#enquiries"><span class="gem-c-contents-list__number">10. </span><span class="gem-c-contents-list__numbered-text">Enquiries</span></a>
+                </li>
+            </ol>
+        </nav>
+              <div class="gem-c-print-link govuk-!-display-none-print govuk-!-margin-bottom-6">
+          
+        
+          <button class="gem-c-button__outline gem-c-button__outline--print govuk-!-margin-bottom-0" type="button" rel="alternate" data-module="print-link">Print this page</button>
+        
+        
+        </div>
+            </div>
+        
+            <div class="print-metadata">
+              <p>
+          <img class="print-metadata__licence" src="/assets/frontend/open-government-licence-min-93b6a51b518ff99714a1aa2a7d2162735c155ec3cb073c75fb88b2a332fa83d3.png" />
+        </p>
+        <p>
+          © Crown copyright 2026
+        </p>
+        <p>
+          This publication is licensed under the terms of the Open Government Licence v3.0 except where otherwise stated. To view this licence, visit <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3">nationalarchives.gov.uk/doc/open-government-licence/version/3</a> or write to the Information Policy Team, The National Archives, Kew, London TW9 4DU, or email: <a href="mailto:psi@nationalarchives.gov.uk">psi@nationalarchives.gov.uk</a>.
+        </p>
+        <p>
+          Where we have identified any third party copyright information you will need to obtain permission from the copyright holders concerned.
+        </p>
+        <p>
+          This publication is available at https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents
+        </p>
+        
+            </div>
+        
+            <div class="govuk-grid-column-three-quarters-from-desktop contents-container">
+              <div class="gem-c-govspeak-html-publication">
+          <div data-module="govspeak" class="gem-c-govspeak gem-c-govspeak--direction-ltr govuk-!-margin-bottom-0">
+            
+            
+                <div class="govspeak"><h2 id="introduction">1. Introduction </h2>
+        
+        <p>On 1 April 2026, the government will be increasing fees for designs, patents, and trade marks. The fee changes have been laid in parliament under the statutory instrument:  <a rel="external" href="https://www.legislation.gov.uk/uksi/2026/183/contents/made">The Intellectual Property Fees (Miscellaneous Amendments, Revocation and Transitional Provisions) Rules 2026</a>.</p>
+        
+        <p>The Intellectual Property Office (<abbr title="Intellectual Property Office">IPO</abbr>) has prepared this guidance for customers who may have fees due around 1 April 2026 and explains when and how the new fees will apply.  Please note you are responsible for paying the correct fee.</p>
+        
+        <p>In this guidance, “old fee” refers to the fee amount which applies before 1 April 2026, and “new fee” to the amount which applies on and after 1 April 2026. </p>
+        
+        <h2 id="fee-changes">2. Fee changes </h2>
+        
+        <p>You can view the old and new fees for each right:  </p>
+        
+        <p><a href="https://www.gov.uk/csv-preview/698b663346be5092a1cfd89c/Patents_list_of_current_and_new_fees___4_.csv">Patents fees table</a> </p>
+        
+        <p><a href="https://www.gov.uk/csv-preview/690a33c57a88fd270a95fda9/Trade_marks_list_of_current_and_new_fees.csv">Trade marks fees table</a></p>
+        
+        <p><a href="https://www.gov.uk/csv-preview/694140e158a21370f58f2f98/Registered-Designs-list-of-current-and-new-fees.csv">Registered designs fees table</a></p>
+        
+        <p><a href="https://www.gov.uk/csv-preview/694140fa5431f4f94d7f0a9c/Unregistered-Designs-list-of-current-and-new-fees.csv">Unregistered designs fees table</a></p>
+        
+        <h2 id="when-the-new-fees-will-be-introduced">3. When the new fees will be introduced </h2>
+        
+        <p>The new fees will take effect on 1 April 2026. Fees will be charged at the old fee rate up to and including 31 March 2026. </p>
+        
+        <h2 id="why-fees-are-increasing">4. Why fees are increasing </h2>
+        
+        <p>The <abbr title="Intellectual Property Office">IPO</abbr>’s fees have not increased since 2018 for patents, 2016 for designs and 1998 for trade marks. During this time, the <abbr title="Intellectual Property Office">IPO</abbr> has avoided fee increases by improving efficiency and investing in digital services using existing reserves. However there has been a 32% rise in inflation since 2016.   </p>
+        
+        <p>Fees will increase by an average of 25% on 1 April 2026. This increase will allow the <abbr title="Intellectual Property Office">IPO</abbr> to address both the rise in inflation and future cost pressures that cannot be fully offset through further efficiency savings or existing reserves. The fee increases will mean the <abbr title="Intellectual Property Office">IPO</abbr> can continue to invest in its systems and provide high quality services. </p>
+        
+        <h2 id="application-fees">5.  Application fees </h2>
+        
+        <p>If you are applying for a trade mark, patent or registered design, or paying an application fee  on or  after 1 April 2026, you will  generally pay the new fee. </p>
+        
+        <p>Please note that using the ‘save for later’ or ‘draft’ function does not count as submitting the application. You will have to pay the new fee if submitting the application on or after  1 April 2026.  </p>
+        
+        <p>If you are applying for a trade mark or a registered design, then you may need to consider the specific points set out below.  </p>
+        
+        <h3 id="designs-deferral-fee">5.1. Designs: deferral fee </h3>
+        
+        <p>If you make a request to register a deferred design on or after 1 April 2026, the new fee will apply, even if your original application was submitted before that date.  </p>
+        
+        <h3 id="trade-marks-period-of-grace">5.2. Trade Marks: period of grace</h3>
+        
+        <p>If you apply for a trade mark before 1 April 2026, and you are relying on the period of grace to pay the application fee on or after 1 April 2026, you will pay the old fee, provided it is paid within the deadline given. This includes any additional class or series fees.   </p>
+        
+        <h3 id="trade-marks-right-start">5.3. Trade Marks: Right Start </h3>
+        
+        <p>If you have submitted a Right Start application for a trade mark and paid the initial  fee before 1 April 2026, the fee you will pay to complete your registration will be the old fee (provided it is paid within the deadline given, even if that is  on or after 1 April 2026).   </p>
+        
+        <h2 id="renewal-fees">6. Renewal fees </h2>
+        
+        <p>To stay in force, IP rights must be renewed on a regular basis – patents every year, designs every 5 years, and trade marks every 10 years.   </p>
+        
+        <p>The renewal fee is normally due by a specific date or within a specific period. It can be paid up to 3 months in advance for patents, and up to 6 months in advance for designs and trade marks. There is also a 6 month period in which you can pay the fee late, although this is subject to a separate late renewal fee.  </p>
+        
+        <p>Whether you pay the old or new fee for your renewal will depend on the date your renewal is due and when you pay the renewal fee.  This does not apply to the late renewal  fee. If you are paying for a renewal that is late on or after 1 April 2026, any late renewal fee will be the new fee.   </p>
+        
+        <p>You should consult the table below to see which fee will apply in your circumstances:</p>
+        
+        <table>
+          <thead>
+            <tr>
+              <td></td>
+              <th scope="col">Payment made before 1 April 2026</th>
+              <th scope="col">Payment made on or after 1 April 2026 (with no late fee due)</th>
+              <th scope="col">Payment made on or after 1 April 2026 (late fee due)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Renewal due date before 1 April 2026</th>
+              <td>Old fee</td>
+              <td>Old fee</td>
+              <td>Old renewal fee + new late fee</td>
+            </tr>
+            <tr>
+              <th scope="row">Renewal due date on or after 1 April 2026</th>
+              <td>Old fee</td>
+              <td>New Fee</td>
+              <td>New renewal fee + new late fee</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <p>The following IP rights can be renewed in advance before 1 April 2026:</p>
+        
+        <ul>
+          <li>patents with a renewal due date in April or May 2026 (those with a renewal date in June 2026 can only be renewed from 1 April 2026 onwards)</li>
+          <li>trade marks with a renewal due date up to and including 30 September 2026 </li>
+          <li>designs with a renewal due date up to and including 30 September 2026</li>
+        </ul>
+        
+        <h2 id="patent-grant-fees">7. Patent grant fees</h2>
+        
+        <p>If a notification of grant under section 18(4) is issued before 1 April 2026, and a grant fee is required, the old fees for excess claims and excess pages will apply - even if you pay the fee on or after 1 April 2026 (more information on this is outlined under rule 30A in <a href="https://www.gov.uk/government/publications/the-patents-rules-2007-and-patents-fees-rules-2007">The Patents Rules and Fees Rules 2007</a>).</p>
+        
+        <p>If this applies to you, and you are paying the grant fee on or after 1 April, please note that due to technical limitations, our online payment service will only calculate the fee for excess claims and pages based on the new fee amount. You may either:</p>
+        
+        <ul>
+          <li>file using the online service, paying the new fees, and we will refund the difference after filing, or</li>
+          <li>file using our <a href="https://www.gov.uk/government/publications/grant-fee-for-patent-application">paper form</a> and pay the old fees directly.</li>
+        </ul>
+        
+        <h2 id="international-fees">8. International fees</h2>
+        
+        <h3 id="international-trade-mark-fees">8.1 International trade mark fees</h3>
+        
+        <p>Fees for international trade marks are paid in Swiss francs directly to the World Intellectual Property Organisation (<abbr title="World Intellectual Property Organisation">WIPO</abbr>). There are individual fees for international trade marks that designate the UK, and these will also increase on 1 April 2026. You can find the updated fees in <a rel="external" href="https://www.wipo.int/documents/d/madrid-system/information-notices-en-2026-madrid_2026_5_e.pdf">the Madrid System Information Notice no. 5/2026</a>.</p>
+        
+        <h3 id="international-trade-mark-renewals">8.2 International trade mark renewals</h3>
+        
+        <p>You can pay renewal fees for international trade marks up to 6 months before the renewal due date.</p>
+        
+        <p>Under rule 34(7)(d) of the Madrid Regulations, the old fee will apply if:</p>
+        
+        <ul>
+          <li>you pay the renewal fee before 1 April 2026, even when the renewal due date is on or after 1 April 2026</li>
+          <li>the renewal fee is due before 1 April 2026 but is paid on or after that date</li>
+        </ul>
+        
+        <p>The new fee will apply if the renewal fee is both due and paid on or after 1 April 2026.</p>
+        
+        <p>If you pay more than 6 months before the renewal due date, <abbr title="World Intellectual Property Organisation">WIPO</abbr> will treat the payment as being received 6 months before the due date. This may affect whether the old fee or the new fee applies.</p>
+        
+        <h2 id="what-happens-if-you-pay-the-old-fee-by-mistake">9. What happens if you pay the old fee by mistake</h2>
+        
+        <p>You have to pay the correct fee by the date it is due. If you pay only part of the fee that is due, your form or request will not be treated as having been submitted until you pay the remainder. If you do not pay the remainder in time, you may miss a deadline. This could have serious implications for your application or right.</p>
+        
+        <h2 id="enquiries">10. Enquiries</h2>
+        
+        <p>If you have any questions about the contents of this guidance, please contact our customer support centre. You can <a href="https://www.gov.uk/government/organisations/intellectual-property-office/about/access-and-opening">find out when the customer support centre is open for enquiries</a> at the ‘contact details’ section of our office access and opening times page.</p>
+        
+        <ul>
+          <li>email: <a href="mailto:information@ipo.gov.uk">information@ipo.gov.uk</a>
+        </li>
+          <li>telephone: 0300 300 2000</li>
+        </ul>
+        
+        </div>
+        
+        
+        </div></div>
+            </div>
+          </div>
+        
+          <div class="govuk-grid-row back-to-top-wrapper">
+            
+        <a class="govuk-link gem-c-back-to-top-link govuk-!-display-none-print" href="#contents">
+            <svg class="gem-c-back-to-top-link__icon" xmlns="http://www.w3.org/2000/svg" width="13" height="17" viewBox="0 0 13 17" aria-hidden="true" focusable="false">
+              <path fill="currentColor" d="M6.5 0L0 6.5 1.4 8l4-4v12.7h2V4l4.3 4L13 6.4z" />
+            </svg>
+            Back to top
+        </a>
+          </div>
+        </div>
+        
+            </main>
+          </div>
+          
+        
+        
+              <div class="govuk-width-container">
+                  
+        <div data-module="feedback ga4-event-tracker" class="gem-c-feedback govuk-!-display-none-print">
+          
+        <div class="gem-c-feedback__prompt gem-c-feedback__js-show js-prompt" tabindex="-1">
+          <div class="gem-c-feedback__prompt-content">
+            <div class="gem-c-feedback__prompt-questions js-prompt-questions" hidden>
+              <div class="gem-c-feedback__prompt-question-answer">
+                <h2 class="gem-c-feedback__prompt-question">Is this page useful?</h2>
+                <ul class="gem-c-feedback__option-list">
+                  <li class="gem-c-feedback__option-list-item govuk-visually-hidden" hidden>
+                    <a class="gem-c-feedback__prompt-link" role="button" hidden="hidden" href="/contact/govuk">
+                      Maybe
+        </a>          </li>
+                  <li class="gem-c-feedback__option-list-item">
+                    <button class="govuk-button gem-c-feedback__prompt-link js-page-is-useful" data-ga4-event='{"event_name":"form_submit","type":"feedback","text":"Yes","section":"Is this page useful?","tool_name":"Is this page useful?"}'>
+                      Yes <span class="govuk-visually-hidden">this page is useful</span>
+        </button>          </li>
+                  <li class="gem-c-feedback__option-list-item">
+        
+                    <button class="govuk-button gem-c-feedback__prompt-link js-toggle-form js-page-is-not-useful" aria-controls="page-is-not-useful" data-ga4-event='{"event_name":"form_submit","type":"feedback","text":"No","section":"Is this page useful?","tool_name":"Is this page useful?"}'>
+                      No <span class="govuk-visually-hidden">this page is not useful</span>
+        </button>          </li>
+                </ul>
+              </div>
+            </div>
+        
+            <div class="gem-c-feedback__prompt-questions gem-c-feedback__prompt-success js-prompt-success" role="alert" hidden>
+              Thank you for your feedback
+            </div>
+        
+            <div class="gem-c-feedback__prompt-questions gem-c-feedback__prompt-questions--something-is-wrong js-prompt-questions" hidden>
+              <button class="govuk-button gem-c-feedback__prompt-link js-toggle-form js-something-is-wrong" aria-controls="something-is-wrong" data-ga4-event='{"event_name":"form_submit","type":"feedback","text":"Report a problem with this page","section":"Is this page useful?","tool_name":"Is this page useful?"}'>
+                Report a problem with this page
+        </button>    </div>
+          </div>
+        </div>
+        
+          <form action="/contact/govuk/problem_reports"
+          id="something-is-wrong"
+          class="gem-c-feedback__form js-feedback-form"
+          method="post"
+          hidden>
+        
+          <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+              <div class="gem-c-feedback__error-summary gem-c-feedback__js-show js-errors" tabindex="-1" hidden></div>
+        
+              <input type="hidden" name="url" value="https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents">
+        
+              <h2 class="gem-c-feedback__form-heading">Help us improve GOV.UK</h2>
+              <p id="feedback_explanation" class="gem-c-feedback__form-paragraph">Do not include personal or financial information like your National Insurance number or credit card details.</p>
+        
+              <div class="govuk-visually-hidden" aria-hidden="true">
+                <label for="giraffe">This field is for robots only. Please leave blank</label>
+                <input id="giraffe" name="giraffe" type="text" pattern=".{0}" tabindex="-1" autocomplete="off">
+              </div>
+        
+              <div class="gem-c-textarea govuk-form-group govuk-!-margin-bottom-6">
+            
+          <label for="textarea-249347f8" class="gem-c-label govuk-label">What were you doing?</label>
+        
+        
+        
+        
+        
+          <textarea name="what_doing" class="govuk-textarea" id="textarea-249347f8" rows="3" spellcheck="true" aria-describedby="feedback_explanation">
+        </textarea>
+             
+        </div>
+        
+              <div class="gem-c-textarea govuk-form-group govuk-!-margin-bottom-6">
+            
+          <label for="textarea-c9643c24" class="gem-c-label govuk-label">What went wrong?</label>
+        
+        
+        
+        
+        
+          <textarea name="what_wrong" class="govuk-textarea" id="textarea-c9643c24" rows="3" spellcheck="true">
+        </textarea>
+             
+        </div>
+        
+        
+              <div class="gem-c-feedback__button-wrapper">
+                
+        
+          <button class="gem-c-button govuk-button govuk-!-margin-bottom-6" type="submit" data-ga4-event='{"event_name":"form_submit","type":"feedback","text":"Send","section":"Help us improve GOV.UK","tool_name":"Help us improve GOV.UK"}'>Send</button>
+        
+        
+        
+                
+        
+          <button class="gem-c-button govuk-button gem-c-button--secondary-quiet govuk-!-margin-bottom-0 js-close-form" type="submit" aria-controls="something-is-wrong">Cancel</button>
+        
+        
+              </div>
+            </div>
+          </div>
+        </form>
+        
+        
+         <script nonce="PO8/quprDNt0VLhXCAlQDw==">
+        //<![CDATA[
+          document.addEventListener("DOMContentLoaded", function () {
+            var input = document.querySelector("#giraffe"),
+              form = document.querySelector("#something-is-wrong")
+        
+            form.addEventListener("submit", spamCapture);
+        
+            function spamCapture(e) {
+              if (input.value.length !== 0) return;
+              e.preventDefault();
+            }
+          });
+        
+        //]]>
+        </script>
+          <div id="page-is-not-useful" class="gem-c-feedback__form gem-c-feedback__form--email gem-c-feedback__js-show js-feedback-form">
+          <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds" id="survey-wrapper">
+              <div class="gem-c-feedback__error-summary js-errors" tabindex="-1" hidden></div>
+        
+              <h2 class="gem-c-feedback__form-heading">Help us improve GOV.UK</h2>
+              <p id="survey_explanation" class="gem-c-feedback__form-paragraph">
+                To help us improve GOV.UK, we’d like to know more about your visit today.
+                <a href="https://www.smartsurvey.co.uk/s/gov-uk-banner/?c=no-js" class="govuk-link" target="_blank" rel="noopener noreferrer external">Please fill in this survey (opens in a new tab<noscript> and requires JavaScript</noscript>)</a>.
+              </p>
+        
+              <div class="gem-c-feedback__close">
+                
+        
+          <button class="gem-c-button govuk-button gem-c-button--secondary-quiet govuk-!-margin-bottom-6 js-close-form" type="submit" aria-controls="page-is-not-useful">Cancel</button>
+        
+        
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        </div>
+              </div>
+        
+                <footer data-module="ga4-link-tracker" class="gem-c-layout-footer govuk-footer">
+          <div class="govuk-width-container">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              focusable="false"
+              role="presentation"
+              viewBox="0 0 64 60"
+              height="30"
+              width="32"
+              fill="currentcolor"
+              class="govuk-footer__crown">
+              <g>
+                <circle cx="20" cy="17.6" r="3.7"></circle>
+                <circle cx="10.2" cy="23.5" r="3.7"></circle>
+                <circle cx="3.7" cy="33.2" r="3.7"></circle>
+                <circle cx="31.7" cy="30.6" r="3.7"></circle>
+                <circle cx="43.3" cy="17.6" r="3.7"></circle>
+                <circle cx="53.2" cy="23.5" r="3.7"></circle>
+                <circle cx="59.7" cy="33.2" r="3.7"></circle>
+                <circle cx="31.7" cy="30.6" r="3.7"></circle>
+                <path d="M33.1,9.8c.2-.1.3-.3.5-.5l4.6,2.4v-6.8l-4.6,1.5c-.1-.2-.3-.3-.5-.5l1.9-5.9h-6.7l1.9,5.9c-.2.1-.3.3-.5.5l-4.6-1.5v6.8l4.6-2.4c.1.2.3.3.5.5l-2.6,8c-.9,2.8,1.2,5.7,4.1,5.7h0c3,0,5.1-2.9,4.1-5.7l-2.6-8ZM37,37.9s-3.4,3.8-4.1,6.1c2.2,0,4.2-.5,6.4-2.8l-.7,8.5c-2-2.8-4.4-4.1-5.7-3.8.1,3.1.5,6.7,5.8,7.2,3.7.3,6.7-1.5,7-3.8.4-2.6-2-4.3-3.7-1.6-1.4-4.5,2.4-6.1,4.9-3.2-1.9-4.5-1.8-7.7,2.4-10.9,3,4,2.6,7.3-1.2,11.1,2.4-1.3,6.2,0,4,4.6-1.2-2.8-3.7-2.2-4.2.2-.3,1.7.7,3.7,3,4.2,1.9.3,4.7-.9,7-5.9-1.3,0-2.4.7-3.9,1.7l2.4-8c.6,2.3,1.4,3.7,2.2,4.5.6-1.6.5-2.8,0-5.3l5,1.8c-2.6,3.6-5.2,8.7-7.3,17.5-7.4-1.1-15.7-1.7-24.5-1.7h0c-8.8,0-17.1.6-24.5,1.7-2.1-8.9-4.7-13.9-7.3-17.5l5-1.8c-.5,2.5-.6,3.7,0,5.3.8-.8,1.6-2.3,2.2-4.5l2.4,8c-1.5-1-2.6-1.7-3.9-1.7,2.3,5,5.2,6.2,7,5.9,2.3-.4,3.3-2.4,3-4.2-.5-2.4-3-3.1-4.2-.2-2.2-4.6,1.6-6,4-4.6-3.7-3.7-4.2-7.1-1.2-11.1,4.2,3.2,4.3,6.4,2.4,10.9,2.5-2.8,6.3-1.3,4.9,3.2-1.8-2.7-4.1-1-3.7,1.6.3,2.3,3.3,4.1,7,3.8,5.4-.5,5.7-4.2,5.8-7.2-1.3-.2-3.7,1-5.7,3.8l-.7-8.5c2.2,2.3,4.2,2.7,6.4,2.8-.7-2.3-4.1-6.1-4.1-6.1h10.6,0Z"></path>
+              </g>
+            </svg>
+              <div class="govuk-footer__navigation">
+                    <div class="govuk-grid-column-two-thirds govuk-!-display-none-print">
+                      <h2 class="govuk-footer__heading govuk-heading-m">Services and information</h2>
+                        <ul class="govuk-footer__list govuk-footer__list--columns-2">
+                              <li class="govuk-footer__list-item">
+                                <a class="govuk-footer__link" data-ga4-link='{"event_name":"navigation","type":"footer","index_link":"1","index_section":"1","index_section_count":"5","index_total":"16","section":"Services and information"}' href="/browse/benefits">Benefits</a>
+                              </li>
+                              <li class="govuk-footer__list-item">
+                                <a class="govuk-footer__link" data-ga4-link='{"event_name":"navigation","type":"footer","index_link":"2","index_section":"1","index_section_count":"5","index_total":"16","section":"Services and information"}' href="/browse/births-deaths-marriages">Births, death, marriages and care</a>
+                              </li>
+                              <li class="govuk-footer__list-item">
+                                <a class="govuk-footer__link" data-ga4-link='{"event_name":"navigation","type":"footer","index_link":"3","index_section":"1","index_section_count":"5","index_total":"16","section":"Services and information"}' href="/browse/business">Business and self-employed</a>
+                              </li>
+                              <li class="govuk-footer__list-item">
+                                <a class="govuk-footer__link" data-ga4-link='{"event_name":"navigation","type":"footer","index_link":"4","index_section":"1","index_section_count":"5","index_total":"16","section":"Services and information"}' href="/browse/childcare-parenting">Childcare and parenting</a>
+                              </li>
+                              <li class="govuk-footer__list-item">
+                                <a class="govuk-footer__link" data-ga4-link='{"event_name":"navigation","type":"footer","index_link":"5","index_section":"1","index_section_count":"5","index_total":"16","section":"Services and information"}' href="/browse/citizenship">Citizenship and living in the UK</a>
+                              </li>
+                              <li class="govuk-footer__list-item">
+                                <a class="govuk-footer__link" data-ga4-link='{"event_name":"navigation","type":"footer","index_link":"6","index_section":"1","index_section_count":"5","index_total":"16","section":"Services and information"}' href="/browse/justice">Crime, justice and the law</a>
+                              </li>
+                              <li class="govuk-footer__list-item">
+                                <a class="govuk-footer__link" data-ga4-link='{"event_name":"navigation","type":"footer","index_link":"7","index_section":"1","index_section_count":"5","index_total":"16","section":"Services and information"}' href="/browse/disabilities">Disabled people</a>
+                              </li>
+                              <li class="govuk-footer__list-item">
+                                <a class="govuk-footer__link" data-ga4-link='{"event_name":"navigation","type":"footer","index_link":"8","index_section":"1","index_section_count":"5","index_total":"16","section":"Services and information"}' href="/browse/driving">Driving and transport</a>
+                              </li>
+                              <li class="govuk-footer__list-item">
+                                <a class="govuk-footer__link" data-ga4-link='{"event_name":"navigation","type":"footer","index_link":"9","index_section":"1","index_section_count":"5","index_total":"16","section":"Services and information"}' href="/browse/education">Education and learning</a>
+                              </li>
+                              <li class="govuk-footer__list-item">
+                                <a class="govuk-footer__link" data-ga4-link='{"event_name":"navigation","type":"footer","index_link":"10","index_section":"1","index_section_count":"5","index_total":"16","section":"Services and information"}' href="/browse/employing-people">Employing people</a>
+                              </li>
+                              <li class="govuk-footer__list-item">
+                                <a class="govuk-footer__link" data-ga4-link='{"event_name":"navigation","type":"footer","index_link":"11","index_section":"1","index_section_count":"5","index_total":"16","section":"Services and information"}' href="/browse/environment-countryside">Environment and countryside</a>
+                              </li>
+                              <li class="govuk-footer__list-item">
+                                <a class="govuk-footer__link" data-ga4-link='{"event_name":"navigation","type":"footer","index_link":"12","index_section":"1","index_section_count":"5","index_total":"16","section":"Services and information"}' href="/browse/housing-local-services">Housing and local services</a>
+                              </li>
+                              <li class="govuk-footer__list-item">
+                                <a class="govuk-footer__link" data-ga4-link='{"event_name":"navigation","type":"footer","index_link":"13","index_section":"1","index_section_count":"5","index_total":"16","section":"Services and information"}' href="/browse/tax">Money and tax</a>
+                              </li>
+                              <li class="govuk-footer__list-item">
+                                <a class="govuk-footer__link" data-ga4-link='{"event_name":"navigation","type":"footer","index_link":"14","index_section":"1","index_section_count":"5","index_total":"16","section":"Services and information"}' href="/browse/abroad">Passports, travel and living abroad</a>
+                              </li>
+                              <li class="govuk-footer__list-item">
+                                <a class="govuk-footer__link" data-ga4-link='{"event_name":"navigation","type":"footer","index_link":"15","index_section":"1","index_section_count":"5","index_total":"16","section":"Services and information"}' href="/browse/visas-immigration">Visas and immigration</a>
+                              </li>
+                              <li class="govuk-footer__list-item">
+                                <a class="govuk-footer__link" data-ga4-link='{"event_name":"navigation","type":"footer","index_link":"16","index_section":"1","index_section_count":"5","index_total":"16","section":"Services and information"}' href="/browse/working">Working, jobs and pensions</a>
+                              </li>
+                        </ul>
+                    </div>
+                    <div class="govuk-grid-column-one-third govuk-!-display-none-print">
+                      <h2 class="govuk-footer__heading govuk-heading-m">Government activity</h2>
+                        <ul class="govuk-footer__list govuk-footer__list--columns-1">
+                              <li class="govuk-footer__list-item">
+                                <a class="govuk-footer__link" data-ga4-link='{"event_name":"navigation","type":"footer","index_link":"1","index_section":"2","index_section_count":"5","index_total":"8","section":"Government activity"}' href="/government/organisations">Departments</a>
+                              </li>
+                              <li class="govuk-footer__list-item">
+                                <a class="govuk-footer__link" data-ga4-link='{"event_name":"navigation","type":"footer","index_link":"2","index_section":"2","index_section_count":"5","index_total":"8","section":"Government activity"}' href="/search/news-and-communications">News</a>
+                              </li>
+                              <li class="govuk-footer__list-item">
+                                <a class="govuk-footer__link" data-ga4-link='{"event_name":"navigation","type":"footer","index_link":"3","index_section":"2","index_section_count":"5","index_total":"8","section":"Government activity"}' href="/search/guidance-and-regulation">Guidance and regulation</a>
+                              </li>
+                              <li class="govuk-footer__list-item">
+                                <a class="govuk-footer__link" data-ga4-link='{"event_name":"navigation","type":"footer","index_link":"4","index_section":"2","index_section_count":"5","index_total":"8","section":"Government activity"}' href="/search/research-and-statistics">Research and statistics</a>
+                              </li>
+                              <li class="govuk-footer__list-item">
+                                <a class="govuk-footer__link" data-ga4-link='{"event_name":"navigation","type":"footer","index_link":"5","index_section":"2","index_section_count":"5","index_total":"8","section":"Government activity"}' href="/search/policy-papers-and-consultations">Policy papers and consultations</a>
+                              </li>
+                              <li class="govuk-footer__list-item">
+                                <a class="govuk-footer__link" data-ga4-link='{"event_name":"navigation","type":"footer","index_link":"6","index_section":"2","index_section_count":"5","index_total":"8","section":"Government activity"}' href="/search/transparency-and-freedom-of-information-releases">Transparency</a>
+                              </li>
+                              <li class="govuk-footer__list-item">
+                                <a class="govuk-footer__link" data-ga4-link='{"event_name":"navigation","type":"footer","index_link":"7","index_section":"2","index_section_count":"5","index_total":"8","section":"Government activity"}' href="/government/how-government-works">How government works</a>
+                              </li>
+                              <li class="govuk-footer__list-item">
+                                <a class="govuk-footer__link" data-ga4-link='{"event_name":"navigation","type":"footer","index_link":"8","index_section":"2","index_section_count":"5","index_total":"8","section":"Government activity"}' href="/government/get-involved">Get involved</a>
+                              </li>
+                        </ul>
+                    </div>
+              </div>
+        
+              <hr class="govuk-footer__section-break govuk-!-display-none-print">
+            <div class="govuk-footer__meta">
+              <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
+                  <h2 class="govuk-visually-hidden">Support links</h2>
+                  <ul class="govuk-footer__inline-list govuk-!-display-none-print">
+                      <li class="govuk-footer__inline-list-item">
+                        <a class="govuk-footer__link" data-ga4-link='{"event_name":"navigation","type":"footer","index_link":"1","index_section":"3","index_section_count":"5","index_total":"8","section":"Support links"}' href="/help">Help</a>
+                      </li>
+                      <li class="govuk-footer__inline-list-item">
+                        <a class="govuk-footer__link" data-ga4-link='{"event_name":"navigation","type":"footer","index_link":"2","index_section":"3","index_section_count":"5","index_total":"8","section":"Support links"}' href="/help/privacy-notice">Privacy</a>
+                      </li>
+                      <li class="govuk-footer__inline-list-item">
+                        <a class="govuk-footer__link" data-ga4-link='{"event_name":"navigation","type":"footer","index_link":"3","index_section":"3","index_section_count":"5","index_total":"8","section":"Support links"}' href="/help/cookies">Cookies</a>
+                      </li>
+                      <li class="govuk-footer__inline-list-item">
+                        <a class="govuk-footer__link" data-ga4-link='{"event_name":"navigation","type":"footer","index_link":"4","index_section":"3","index_section_count":"5","index_total":"8","section":"Support links"}' href="/help/accessibility-statement">Accessibility statement</a>
+                      </li>
+                      <li class="govuk-footer__inline-list-item">
+                        <a class="govuk-footer__link" data-ga4-link='{"event_name":"navigation","type":"footer","index_link":"5","index_section":"3","index_section_count":"5","index_total":"8","section":"Support links"}' href="/contact">Contact</a>
+                      </li>
+                      <li class="govuk-footer__inline-list-item">
+                        <a class="govuk-footer__link" data-ga4-link='{"event_name":"navigation","type":"footer","index_link":"6","index_section":"3","index_section_count":"5","index_total":"8","section":"Support links"}' href="/help/terms-conditions">Terms and conditions</a>
+                      </li>
+                      <li class="govuk-footer__inline-list-item">
+                        <a class="govuk-footer__link" lang="cy" data-ga4-link='{"event_name":"navigation","type":"footer","index_link":"7","index_section":"3","index_section_count":"5","index_total":"8","section":"Support links"}' href="/cymraeg">Rhestr o Wasanaethau Cymraeg</a>
+                      </li>
+                      <li class="govuk-footer__inline-list-item">
+                        <a class="govuk-footer__link" data-ga4-link='{"event_name":"navigation","type":"footer","index_link":"8","index_section":"3","index_section_count":"5","index_total":"8","section":"Support links"}' href="/government/organisations/government-digital-service">Government Digital Service</a>
+                      </li>
+                  </ul>
+                  <svg aria-hidden="true" focusable="false" class="govuk-footer__licence-logo" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 483.2 195.7" height="17" width="41">
+                    <path
+                      fill="currentColor"
+                      d="M421.5 142.8V.1l-50.7 32.3v161.1h112.4v-50.7zm-122.3-9.6A47.12 47.12 0 0 1 221 97.8c0-26 21.1-47.1 47.1-47.1 16.7 0 31.4 8.7 39.7 21.8l42.7-27.2A97.63 97.63 0 0 0 268.1 0c-36.5 0-68.3 20.1-85.1 49.7A98 98 0 0 0 97.8 0C43.9 0 0 43.9 0 97.8s43.9 97.8 97.8 97.8c36.5 0 68.3-20.1 85.1-49.7a97.76 97.76 0 0 0 149.6 25.4l19.4 22.2h3v-87.8h-80l24.3 27.5zM97.8 145c-26 0-47.1-21.1-47.1-47.1s21.1-47.1 47.1-47.1 47.2 21 47.2 47S123.8 145 97.8 145" />
+                  </svg>
+                  <span
+                    class="govuk-footer__licence-description"
+                    data-ga4-link='{"event_name":"navigation","section":"Licence","index_section":"4","index_link":"1","index_section_count":"5","text":"Open Government Licence v3.0","index_total":"1","type":"footer"}'>
+                    All content is available under the <a class="govuk-footer__link" href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence v3.0</a>, except where otherwise stated
+                  </span>
+              </div>
+              <div
+                class="govuk-footer__meta-item"
+                data-ga4-link='{"event_name":"navigation","section":"Copyright","index_section":"5","index_link":"1","index_section_count":"5","text":"© Crown copyright","index_total":"1","type":"footer"}'>
+                <a class="govuk-footer__link govuk-footer__copyright-logo" href="https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/">© Crown copyright</a>
+              </div>
+            </div>
+          </div>
+        </footer>
+            <script src="/assets/frontend/application-8899802f37c21a1a4208b45b8cfb7689aeaafae55e20d6ce572f3d77f52246ee.js" type="module"></script>
+        </body></html>
+  recorded_at: 2026-10-22T15:32:29.841Z

@@ -8,7 +8,7 @@ import {
 } from "@patent-client-agents/client";
 import { Client } from "@prefecthq/fastmcp-ts/client";
 import { createServer } from "../packages/mcp/src/index.js";
-import { usptoFeePage } from "./fees-recordings.js";
+import { recordedFeeResponse, usptoFeePage } from "./fees-recordings.js";
 
 type Envelope = {
   summary: string;
@@ -183,7 +183,10 @@ function feesClient() {
         ? new Response(usptoFeePage(), {
             headers: { "content-type": "text/html" },
           })
-        : Response.json([
+        : (recordedFeeResponse(
+            String(input instanceof Request ? input.url : input),
+          ) ??
+          Response.json([
             {
               data: {
                 feeCode: "001",
@@ -217,7 +220,7 @@ function feesClient() {
               },
               children: [],
             },
-          ])) as unknown as typeof fetch,
+          ]))) as unknown as typeof fetch,
   });
 }
 
@@ -617,6 +620,17 @@ test("get_fees covers schedule, lookup and jurisdictions, and names unported off
       "US/USPTO/design",
       "EP/EPO/patent",
       "UP/EPO-UP/patent",
+      "ES/OEPM/patent",
+      "ES/OEPM/trademark",
+      "ES/OEPM/design",
+      "SE/PRV/patent",
+      "SE/PRV/trademark",
+      "SE/PRV/design",
+      "GB/UKIPO/patent",
+      "GB/UKIPO/trademark",
+      "WO/WIPO-PCT/patent",
+      "WO/WIPO-MADRID/trademark",
+      "WO/WIPO-HAGUE/design",
     ]);
     expect(list.summary).toContain("Not yet ported: EUIPO trademark");
     // USPTO is served by routing alone; refresh is accepted for USPTO only.

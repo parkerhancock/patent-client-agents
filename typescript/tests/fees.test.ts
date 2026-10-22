@@ -17,6 +17,7 @@ import { createServer } from "../packages/mcp/src/index.js";
 import {
   feeRecording,
   feeRecordings,
+  recordedFeeResponse,
   usptoFeePage,
 } from "./fees-recordings.js";
 
@@ -229,6 +230,17 @@ test("jurisdiction resolution matches Python and separates unported offices", as
     "USPTO/design",
     "EPO/patent",
     "EPO-UP/patent",
+    "OEPM/patent",
+    "OEPM/trademark",
+    "OEPM/design",
+    "PRV/patent",
+    "PRV/trademark",
+    "PRV/design",
+    "UKIPO/patent",
+    "UKIPO/trademark",
+    "WIPO-PCT/patent",
+    "WIPO-MADRID/trademark",
+    "WIPO-HAGUE/design",
   ]);
   expect(resolveFeeJurisdiction("United States", "design")).toEqual([
     "US",
@@ -242,11 +254,15 @@ test("jurisdiction resolution matches Python and separates unported offices", as
   ).toBe("UNSUPPORTED_RIGHT");
 });
 
-/** EPO feed fake plus the recorded USPTO page, routed by host. */
-const feeFetch = (async (input: RequestInfo | URL) =>
-  String(input instanceof Request ? input.url : input).includes("uspto.gov")
-    ? new Response(usptoFeePage(), { headers: { "content-type": "text/html" } })
-    : Response.json(feesFromCassetteBody())) as unknown as typeof fetch;
+/** EPO feed fake plus the recorded USPTO page and other recorded offices, routed by URL. */
+const feeFetch = (async (input: RequestInfo | URL) => {
+  const url = String(input instanceof Request ? input.url : input);
+  if (url.includes("uspto.gov"))
+    return new Response(usptoFeePage(), {
+      headers: { "content-type": "text/html" },
+    });
+  return recordedFeeResponse(url) ?? Response.json(feesFromCassetteBody());
+}) as unknown as typeof fetch;
 function feesFromCassetteBody() {
   return [
     node("001", "Filing fee - EP direct", null, [
@@ -331,6 +347,17 @@ test("fee MCP tools forward filters and report gaps and unported offices", async
       "US/USPTO/design",
       "EP/EPO/patent",
       "UP/EPO-UP/patent",
+      "ES/OEPM/patent",
+      "ES/OEPM/trademark",
+      "ES/OEPM/design",
+      "SE/PRV/patent",
+      "SE/PRV/trademark",
+      "SE/PRV/design",
+      "GB/UKIPO/patent",
+      "GB/UKIPO/trademark",
+      "WO/WIPO-PCT/patent",
+      "WO/WIPO-MADRID/trademark",
+      "WO/WIPO-HAGUE/design",
     ]);
     await expect(
       client.callTool("get_fee_schedule", { jurisdiction: "JPO" }),

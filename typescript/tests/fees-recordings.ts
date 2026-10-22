@@ -4,7 +4,11 @@ import { useCassette } from "cassetter";
 import {
   EpoFeesClient,
   type FeeSchedule,
+  OepmFeesClient,
+  PrvFeesClient,
+  UkipoFeesClient,
   UsptoFeesClient,
+  WipoFeesClient,
 } from "../packages/client/src/index.js";
 
 const epo = () => new EpoFeesClient({ retryLimit: 0 });
@@ -21,8 +25,48 @@ export const feeOperations: Record<string, () => Promise<FeeSchedule[]>> = {
   "epo-epc": async () => [await epo().getEpcSchedule()],
   "epo-unitary": async () => [await epo().getUnitaryPatentSchedule()],
   uspto,
+  /** One PDF serves all three OEPM schedules. */
+  oepm: async () => {
+    const client = new OepmFeesClient({ retryLimit: 0 });
+    return Promise.all([
+      client.getPatentSchedule(),
+      client.getTrademarkSchedule(),
+      client.getDesignSchedule(),
+    ]);
+  },
+  prv: async () => {
+    const client = new PrvFeesClient({ retryLimit: 0 });
+    return [
+      await client.getPatentSchedule(),
+      await client.getTrademarkSchedule(),
+      await client.getDesignSchedule(),
+    ];
+  },
+  /** The guidance page is fetched once for both CSVs. */
+  ukipo: async () => {
+    const client = new UkipoFeesClient({ retryLimit: 0 });
+    return Promise.all([
+      client.getPatentSchedule(),
+      client.getTrademarkSchedule(),
+    ]);
+  },
+  wipo: async () => {
+    const client = new WipoFeesClient({ retryLimit: 0 });
+    return [
+      await client.getPctSchedule(),
+      await client.getMadridSchedule(),
+      await client.getHagueSchedule(),
+    ];
+  },
 };
-export type FeeOperation = "epo-epc" | "epo-unitary" | "uspto";
+export type FeeOperation =
+  | "epo-epc"
+  | "epo-unitary"
+  | "uspto"
+  | "oepm"
+  | "prv"
+  | "ukipo"
+  | "wipo";
 export const feeCassette = (name: string) =>
   resolve(import.meta.dir, "cassettes", `fees-${name}.yaml`);
 
@@ -65,4 +109,35 @@ export function usptoFeePage(): string {
   const body = cassette.interactions[0]?.response.body.content;
   if (typeof body !== "string") throw new Error("USPTO fee cassette changed.");
   return body;
+}
+
+/** A recorded fee response by exact URL, for fake fetches that serve several offices. */
+export function recordedFeeResponse(url: string): Response | null {
+  for (const name of ["oepm", "prv", "ukipo", "wipo"] as const) {
+    if (!existsSync(feeCassette(name))) continue;
+    const cassette = Bun.YAML.parse(
+      readFileSync(feeCassette(name), "utf8"),
+    ) as {
+      interactions: {
+        request: { uri: string };
+        response: {
+          status: number;
+          headers: Record<string, string[]>;
+          body: { type: string; content?: string };
+        };
+      }[];
+    };
+    const hit = cassette.interactions.find((i) => i.request.uri === url);
+    if (!hit) continue;
+    const { body, headers, status } = hit.response;
+    const content = body.content ?? "";
+    return new Response(
+      body.type === "binary" ? Buffer.from(content, "hex") : content,
+      {
+        status,
+        headers: { "content-type": headers["content-type"]?.[0] ?? "" },
+      },
+    );
+  }
+  return null;
 }
