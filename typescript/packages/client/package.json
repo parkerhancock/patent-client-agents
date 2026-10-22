@@ -8,6 +8,11 @@
       "types": "./dist/index.d.ts",
       "bun": "./src/index.ts",
       "default": "./dist/index.js"
+    },
+    "./corpus-bootstrap": {
+      "types": "./dist/corpus/bootstrap.d.ts",
+      "bun": "./src/corpus/bootstrap.ts",
+      "default": "./dist/corpus/bootstrap.js"
     }
   },
   "dependencies": {

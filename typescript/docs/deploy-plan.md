@@ -24,7 +24,7 @@ adds:
 | Downloads | `blob_store.py` supports GCS objects with V4 signed URLs (IAM `signBlob`), but the deploy Terraform sets no `LAW_TOOLS_CORE_GCS_BUCKET`; links go through the HMAC `/downloads` route behind `downloads.patentclient.com` | Done locally: `GcsBlobStore` with V4 signed URLs through `signBlob`, enabled by `DOWNLOAD_BUCKET` ([downloads.md](downloads.md)); without it, HMAC-signed URLs served by the process |
 | Web pages | Landing page, `/static` icons, `robots.txt`, favicon, `/-/health`, browser redirect on `GET /mcp`, security headers | None |
 | Hidden tools | `search_trademarks`, `search_upc_decisions` hidden on the demo | Facade has no visibility filter; UPC decisions is already unported |
-| Corpora | Bootstrap pulls zstd blobs from `gs://patentclient-mcp-corpora/manifest.json` at start; UPC baked in | Reads prepared DELETE-mode `.zst` files; none are published, and the EPO corpora have not been prepared |
+| Corpora | Bootstrap pulls zstd blobs from `gs://patentclient-mcp-corpora/manifest.json` at start; UPC baked in | Reads prepared DELETE-mode `.zst` files; all twelve, EPO included, are packaged locally with a bootstrap and publish script ([corpus bootstrap](corpus-bootstrap.md)), none published yet |
 
 Credentials: the EDIS and DataWeb tokens in Secret Manager expired (May 27 and
 September 27), no KIPRIS Plus key exists, and the WAF token secret is refreshed
@@ -67,6 +67,11 @@ No GCP writes.
    (`gs://patentclient-mcp-corpora/ts/manifest.json`), checks sha256 and
    fails the container on mismatch, as Python does. The total is small enough
    that baking them into the image is the fallback.
+   **Done locally (October 22):** all twelve corpora the curated server reads
+   are packaged under `.data/` (37,442,379 bytes compressed), the bootstrap is
+   `@patent-client-agents/client/corpus-bootstrap`, and
+   `scripts/publish-corpora.ts` has been run only as a dry run. See
+   [corpus bootstrap](corpus-bootstrap.md). The upload is Phase 1, step 1.
 3. Dockerfile on `oven/bun`, run with the Node and Bun smoke tests.
 4. Tests against the Firestore emulator and a fake GCS; an end-to-end local
    run with Claude Code against the container, using auth bypass.

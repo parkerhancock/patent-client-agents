@@ -3,8 +3,8 @@ import { readdir, readFile } from "node:fs/promises";
 import { join, relative } from "node:path";
 
 const root = join(import.meta.dir, "..", "packages", "client", "src");
-/** The one server-only module, selected through the #files import condition. */
-const serverOnly = new Set(["runtime/files.ts"]);
+/** Server-only modules: the #files adapter and the corpus bootstrap, which the index does not export. */
+const serverOnly = new Set(["runtime/files.ts", "corpus/bootstrap.ts"]);
 
 async function sources(directory: string): Promise<string[]> {
   const entries = await readdir(directory, { withFileTypes: true });
@@ -55,4 +55,6 @@ test("the browser bundle builds and resolves the browser file adapter", async ()
   expect(code).not.toMatch(/from\s*["']node:/);
   expect(code).not.toMatch(/from\s*["']bun:/);
   expect(code).toContain("File paths are unavailable in browsers");
+  // The server-only corpus bootstrap stays out of the index.
+  expect(code).not.toContain("CorpusBootstrapError");
 });

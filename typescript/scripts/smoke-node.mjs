@@ -1,7 +1,10 @@
 // Runs the compiled client (packages/client/dist) under Node, outside Bun.
 // Usage: bun run build && node scripts/smoke-node.mjs
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
+import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { gunzipSync, zstdCompressSync } from "node:zlib";
 import {
   DpmaStatutesClient,
@@ -16,6 +19,7 @@ import {
   TwTradeSecretsClient,
   UpcStatutesClient,
 } from "@patent-client-agents/client";
+import { verifyCorpusFile } from "@patent-client-agents/client/corpus-bootstrap";
 
 const fixture = (path) => new URL(`../tests/fixtures/${path}`, import.meta.url);
 const results = {};
@@ -130,6 +134,33 @@ const google = GooglePatentsClient.parsePatent(
 );
 assert.equal(google.claims.length, 26);
 results.google_claims = google.claims.length;
+
+// The server-only bootstrap subpath: stream-verify a packaged artifact under Node.
+const sha = (bytes) => createHash("sha256").update(bytes).digest("hex");
+const scratch = await mkdtemp(join(tmpdir(), "pca-smoke-"));
+try {
+  const decoded = await readFile(fixture("epo-legal/epc.db"));
+  const packed = zstdCompressSync(decoded);
+  const packedPath = join(scratch, "epc.db.zst");
+  await writeFile(packedPath, packed);
+  const pins = {
+    file_sha256: sha(packed),
+    file_bytes: packed.length,
+    decoded_sha256: sha(decoded),
+    decoded_bytes: decoded.length,
+  };
+  assert.equal(await verifyCorpusFile(packedPath, pins), null);
+  assert.match(
+    await verifyCorpusFile(packedPath, {
+      ...pins,
+      decoded_sha256: "0".repeat(64),
+    }),
+    /decoded sha256/,
+  );
+  results.bootstrap_verify = "ok";
+} finally {
+  await rm(scratch, { recursive: true });
+}
 
 for (const client of [
   epcByPath,
