@@ -22,6 +22,7 @@ import {
   jpoFeePage,
   recordedFeeFetch,
   recordedFeeResponse,
+  recordedFeeResponseByUrl,
   usptoFeePage,
 } from "./fees-recordings.js";
 
@@ -242,6 +243,17 @@ test("jurisdiction resolution matches Python and separates unported offices", as
       "JPO/trademark",
       "JPO/design",
       "IPIN/patent",
+      "OEPM/patent",
+      "OEPM/trademark",
+      "OEPM/design",
+      "PRV/patent",
+      "PRV/trademark",
+      "PRV/design",
+      "UKIPO/patent",
+      "UKIPO/trademark",
+      "WIPO-PCT/patent",
+      "WIPO-MADRID/trademark",
+      "WIPO-HAGUE/design",
     ]),
   );
   expect(resolveFeeJurisdiction("United States", "design")).toEqual([
@@ -269,6 +281,8 @@ const feeFetch = (async (input: RequestInfo | URL) => {
     return new Response(jpoFeePage(), {
       headers: { "content-type": "text/html" },
     });
+  const recorded = recordedFeeResponseByUrl(url);
+  if (recorded) return recorded;
   return url.includes("uspto.gov")
     ? new Response(usptoFeePage(), { headers: { "content-type": "text/html" } })
     : Response.json(feesFromCassetteBody());
@@ -379,6 +393,17 @@ test("fee MCP tools forward filters and report gaps and unported offices", async
         "JP/JPO/trademark",
         "JP/JPO/design",
         "IN/IPIN/patent",
+        "ES/OEPM/patent",
+        "ES/OEPM/trademark",
+        "ES/OEPM/design",
+        "SE/PRV/patent",
+        "SE/PRV/trademark",
+        "SE/PRV/design",
+        "GB/UKIPO/patent",
+        "GB/UKIPO/trademark",
+        "WO/WIPO-PCT/patent",
+        "WO/WIPO-MADRID/trademark",
+        "WO/WIPO-HAGUE/design",
       ]),
     );
     await expect(

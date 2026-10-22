@@ -19,7 +19,11 @@ import {
   type RightType,
   RightTypeSchema,
 } from "./models.js";
+import { OepmFeesClient } from "./oepm.js";
+import { PrvFeesClient } from "./prv-se.js";
+import { UkipoFeesClient } from "./ukipo.js";
 import { UsptoFeesClient } from "./uspto.js";
+import { WipoFeesClient } from "./wipo.js";
 
 export * from "./aliases.js";
 export * from "./cipo.js";
@@ -33,7 +37,11 @@ export * from "./ipindia.js";
 export * from "./jpo.js";
 export * from "./kipo.js";
 export * from "./models.js";
+export * from "./oepm.js";
+export * from "./prv-se.js";
+export * from "./ukipo.js";
 export * from "./uspto.js";
+export * from "./wipo.js";
 
 export type FeeRouteErrorCode =
   | "UNKNOWN_JURISDICTION"
@@ -128,6 +136,10 @@ export class FeesClient {
     const kipo = new KipoFeesClient(options);
     const jpo = new JpoFeesClient(options);
     const ipindia = new IpIndiaFeesClient(options);
+    const oepm = new OepmFeesClient(options);
+    const prv = new PrvFeesClient(options);
+    const ukipo = new UkipoFeesClient(options);
+    const wipo = new WipoFeesClient(options);
     this.routes = new Map<string, Loader>([
       ["USPTO/patent", (o) => uspto.getPatentSchedule(o)],
       ["USPTO/trademark", (o) => uspto.getTrademarkSchedule(o)],
@@ -152,6 +164,17 @@ export class FeesClient {
       ["JPO/trademark", (o) => jpo.getTrademarkSchedule(o)],
       ["JPO/design", (o) => jpo.getDesignSchedule(o)],
       ["IPIN/patent", (o) => ipindia.getPatentSchedule(o)],
+      ["OEPM/patent", (o) => oepm.getPatentSchedule(o)],
+      ["OEPM/trademark", (o) => oepm.getTrademarkSchedule(o)],
+      ["OEPM/design", (o) => oepm.getDesignSchedule(o)],
+      ["PRV/patent", (o) => prv.getPatentSchedule(o)],
+      ["PRV/trademark", (o) => prv.getTrademarkSchedule(o)],
+      ["PRV/design", (o) => prv.getDesignSchedule(o)],
+      ["UKIPO/patent", (o) => ukipo.getPatentSchedule(o)],
+      ["UKIPO/trademark", (o) => ukipo.getTrademarkSchedule(o)],
+      ["WIPO-PCT/patent", (o) => wipo.getPctSchedule(o)],
+      ["WIPO-MADRID/trademark", (o) => wipo.getMadridSchedule(o)],
+      ["WIPO-HAGUE/design", (o) => wipo.getHagueSchedule(o)],
     ]);
   }
   /** Schedules available in this runtime, as `office/right` keys. */

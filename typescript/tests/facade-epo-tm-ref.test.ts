@@ -184,7 +184,19 @@ function feesClient() {
   return new FeesClient({
     retryLimit: 0,
     fetch: recordedFeeFetch(
-      ["cnipa", "dpma", "ipaustralia", "ilpo", "impi", "kipo", "ipindia"],
+      [
+        "cnipa",
+        "dpma",
+        "ipaustralia",
+        "ilpo",
+        "impi",
+        "kipo",
+        "ipindia",
+        "oepm",
+        "prv",
+        "ukipo",
+        "wipo",
+      ],
       cipoFixtureFetch((async (input: RequestInfo | URL) =>
         String(input instanceof Request ? input.url : input).includes(
           "jpo.go.jp",
@@ -644,6 +656,17 @@ test("get_fees covers schedule, lookup and jurisdictions, and names unported off
         "JP/JPO/trademark",
         "JP/JPO/design",
         "IN/IPIN/patent",
+        "ES/OEPM/patent",
+        "ES/OEPM/trademark",
+        "ES/OEPM/design",
+        "SE/PRV/patent",
+        "SE/PRV/trademark",
+        "SE/PRV/design",
+        "GB/UKIPO/patent",
+        "GB/UKIPO/trademark",
+        "WO/WIPO-PCT/patent",
+        "WO/WIPO-MADRID/trademark",
+        "WO/WIPO-HAGUE/design",
       ]),
     );
     expect(list.summary).toContain("Not yet ported: EUIPO trademark");
