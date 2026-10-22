@@ -15,6 +15,7 @@ import {
   EpoOpsClient,
   GooglePatentsClient,
   getPatentClaims,
+  IlpoStatutesClient,
   IpoInStatutesClient,
   MoppClient,
   MpepClient,
@@ -74,6 +75,18 @@ results.dpma_section = (
   await dpma.getSectionByCitation("§ 14 MarkenG")
 ).statute;
 assert.equal(results.dpma_section, "MarkenG");
+const ilpo = new IlpoStatutesClient({
+  source: new Uint8Array(
+    zstdCompressSync(await readFile(fixture("ilpo-statutes/ilpo_statutes.db"))),
+  ),
+});
+results.ilpo_section = (
+  await ilpo.getSectionByCitation("Section 6 Commercial Torts Law")
+)?.title;
+assert.equal(
+  results.ilpo_section,
+  "Prohibition against misappropriation of a trade secret",
+);
 const tmep = new TmepClient({
   source: new Uint8Array(await readFile(fixture("tmep/tmep.db"))),
 });
@@ -215,6 +228,7 @@ for (const client of [
   tmep,
   mopp,
   dpma,
+  ilpo,
   tw,
 ])
   client.close();

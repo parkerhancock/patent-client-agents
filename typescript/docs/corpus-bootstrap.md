@@ -59,6 +59,7 @@ reference only. Corpus ids and the reader variables they set:
 | `dpma_statutes` | `DPMA_STATUTES` |
 | `ipo_in_statutes` | `IPO_IN_STATUTES` |
 | `ipo_in_mppp` | `IPO_IN_MPPP` |
+| `ilpo_statutes` | `ILPO_STATUTES` |
 
 Each prefix yields `<PREFIX>_CORPUS_PATH`, `<PREFIX>_CORPUS_SHA256` (decoded
 SQLite) and `<PREFIX>_CORPUS_FILE_SHA256` (distributed file). The mapping is
@@ -169,6 +170,7 @@ files left all twelve readers available from the returned variables.
 | `dpma_statutes` | 2026-10-22 | `dpma_statutes/dpma_statutes.db.zst` | 402,417 | `2a59048b1775ef370dcaf41f6196d3990e02412d50005a5af58fd390341bc83c` | 1,470,464 | `211bf701e26fb7f9719d0a20929596424711ae89e43130f30d220b8e74cefee2` |
 | `ipo_in_statutes` | 2026-10-22 | `ipo-in/ipo_in_statutes.db.zst` | 388,487 | `96aeed06437c05bdaef4f943c7b1b81599dd6f315ee433d158fe151a8bf9f55f` | 1,404,928 | `82bfaea2cabe9dda467590bed2af231edafaf683308f69f09015ee72b5314671` |
 | `ipo_in_mppp` | 2026-10-22 | `ipo-in/ipo_in_mppp.db.zst` | 199,121 | `00905acf0d481c4323fd8cd6ebb47915a49b7c55c515749c7b5a426770affe7d` | 688,128 | `b2e440776a7b45048ec20b37b5054d327cde309978cb87a4c2899911bc9f6b5b` |
+| `ilpo_statutes` | 2026-10-22 | `ilpo_statutes/ilpo_statutes.db.zst` | 250,922 | `2b78e6dec05ad9abaea1f6a292b683eeb75b81ae38a357cfc443ebfa69e2de68` | 892,928 | `733e534fbe2508af8bf4ff30e97d148e2fa400f7e0a70dc25050e1fd9cc3fe11` |
 
 Total: 37,481,312 bytes compressed (35.7 MiB) and 99,717,120 bytes decoded
 (95.1 MiB). Baking the files into the image would add about 36 MB; the

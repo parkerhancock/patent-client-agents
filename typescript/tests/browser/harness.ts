@@ -9,6 +9,7 @@ import {
   EpoOpsClient,
   GooglePatentsClient,
   getPatentClaims,
+  IlpoStatutesClient,
   IpoInMpppClient,
   MpepClient,
   TwTradeSecretsClient,
@@ -62,6 +63,12 @@ try {
     source: () => bytes("/fixtures/ipo-in/ipo_in_mppp.db"),
   });
   results.ipo_in_mppp = (await india.getSection("MPPP 9.3.5.4")).section_number;
+  const ilpo = new IlpoStatutesClient({
+    source: () => bytes("/fixtures/ilpo-statutes/ilpo_statutes.db"),
+  });
+  results.ilpo_section = (
+    await ilpo.getSectionByCitation("Article 13 Commercial Torts Law")
+  )?.section_label;
   const pathOnly = new MpepClient({ corpusPath: "/nowhere/mpep.db" });
   results.path_in_browser = (await pathOnly.getCorpusStatus()).error?.code;
   results.fee = (

@@ -32,6 +32,7 @@ export const CORPUS_ENV_PREFIXES = {
   dpma_statutes: "DPMA_STATUTES",
   ipo_in_statutes: "IPO_IN_STATUTES",
   ipo_in_mppp: "IPO_IN_MPPP",
+  ilpo_statutes: "ILPO_STATUTES",
 } as const;
 export type CorpusId = keyof typeof CORPUS_ENV_PREFIXES;
 export const CORPUS_IDS = Object.keys(CORPUS_ENV_PREFIXES) as CorpusId[];

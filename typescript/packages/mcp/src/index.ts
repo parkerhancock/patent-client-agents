@@ -19,6 +19,7 @@ import {
   GooglePatentsClient,
   HtsClient,
   IdsClient,
+  IlpoStatutesClient,
   IpoInMpppClient,
   IpoInStatutesClient,
   KiprisClient,
@@ -70,6 +71,10 @@ import { type EpoLegalClients, registerEpoLegalTools } from "./epo-legal.js";
 import { registerFacadeTools } from "./facade/index.js";
 import { registerFeeTools } from "./fees.js";
 import { registerGooglePatentsTools } from "./google-patents.js";
+import {
+  type IlpoStatutesReader,
+  registerIlpoStatutesTools,
+} from "./ilpo-statutes.js";
 import {
   type IpoInMpppReader,
   type IpoInStatutesReader,
@@ -167,6 +172,8 @@ export interface ServerOptions {
   /** IPO India statutes and MPPP corpus readers; omitted, they use their default artifact paths. */
   ipoInStatutes?: IpoInStatutesReader;
   ipoInMppp?: IpoInMpppReader;
+  /** ILPO Israel statutes corpus reader; omitted, it uses the default artifact path. */
+  ilpoStatutes?: IlpoStatutesReader;
   /** Download URLs; pass `blobStore` (for example a GcsBlobStore) for URLs that outlive the process. */
   downloads?: DownloadOptions;
   /** Defaults to MCP identity settings; audience must intentionally cover document REST access. */
@@ -445,6 +452,7 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     options.twTradeSecrets ?? own(new TwTradeSecretsClient());
   const ipoInStatutes = options.ipoInStatutes ?? own(new IpoInStatutesClient());
   const ipoInMppp = options.ipoInMppp ?? own(new IpoInMpppClient());
+  const ilpoStatutes = options.ilpoStatutes ?? own(new IlpoStatutesClient());
   const applications =
     provided.applications ?? lazyClient(() => new ApplicationsClient());
   const client = options.client ?? applications;
@@ -898,6 +906,11 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     server,
     { statutes: ipoInStatutes, mppp: ipoInMppp },
     options.auth ? requireScopes("ipoin:read") : undefined,
+  );
+  registerIlpoStatutesTools(
+    server,
+    ilpoStatutes,
+    options.auth ? requireScopes("ilpo:read") : undefined,
   );
   registerUsitcTools(
     server,

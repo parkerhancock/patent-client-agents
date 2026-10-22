@@ -169,6 +169,7 @@ try {
     dpma_section?: string;
     tw_hits?: string;
     ipo_in_mppp?: string;
+    ilpo_section?: string;
   };
   if (
     !checked.ok ||
@@ -179,7 +180,8 @@ try {
     checked.upc_instrument !== "upca" ||
     checked.dpma_section !== "139" ||
     checked.tw_hits !== "12,13" ||
-    checked.ipo_in_mppp !== "09.03.05.04"
+    checked.ipo_in_mppp !== "09.03.05.04" ||
+    checked.ilpo_section !== "Section 13 Commercial Torts Law"
   )
     process.exitCode = 1;
 } finally {
