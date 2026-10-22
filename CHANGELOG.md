@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.31.0] — 2026-10-21
+
 ### Changed
 
 - HTTP goes through `httpx2` instead of `httpx`, on `mcp-data-core` 0.14.0
@@ -2102,7 +2104,8 @@ release so existing internal callers don't break.
   bool` field on the result so callers can distinguish authoritative
   vs estimated values.
 
-[Unreleased]: https://github.com/parkerhancock/patent-client-agents/compare/v0.30.0...HEAD
+[Unreleased]: https://github.com/parkerhancock/patent-client-agents/compare/v0.31.0...HEAD
+[0.31.0]: https://github.com/parkerhancock/patent-client-agents/compare/v0.30.0...v0.31.0
 [0.30.0]: https://github.com/parkerhancock/patent-client-agents/compare/v0.29.0...v0.30.0
 [0.29.0]: https://github.com/parkerhancock/patent-client-agents/compare/v0.28.0...v0.29.0
 [0.28.0]: https://github.com/parkerhancock/patent-client-agents/compare/v0.27.1...v0.28.0
