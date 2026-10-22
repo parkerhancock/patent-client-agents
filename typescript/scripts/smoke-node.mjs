@@ -9,6 +9,7 @@ import {
   EpoOpsClient,
   GooglePatentsClient,
   MpepClient,
+  UpcStatutesClient,
 } from "@patent-client-agents/client";
 
 const fixture = (path) => new URL(`../tests/fixtures/${path}`, import.meta.url);
@@ -45,6 +46,13 @@ const zst = new MpepClient({
 const zstStatus = await zst.getCorpusStatus();
 assert.equal(zstStatus.available, true);
 results.mpep_whole_file = zstStatus.compression;
+const upc = new UpcStatutesClient({
+  source: new Uint8Array(
+    zstdCompressSync(await readFile(fixture("upc-statutes/upc_statutes.db"))),
+  ),
+});
+results.upc_instrument = (await upc.getInstrument("statute")).instrument;
+assert.equal(results.upc_instrument, "upca");
 
 // Network clients with synthetic upstreams.
 const fees = new EpoFeesClient({
@@ -81,5 +89,5 @@ const google = GooglePatentsClient.parsePatent(
 assert.equal(google.claims.length, 26);
 results.google_claims = google.claims.length;
 
-for (const client of [epcByPath, epcBytes, mpep, zst]) client.close();
+for (const client of [epcByPath, epcBytes, mpep, zst, upc]) client.close();
 console.log(JSON.stringify({ runtime: `node ${process.version}`, ...results }));

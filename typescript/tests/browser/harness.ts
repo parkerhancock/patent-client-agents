@@ -8,6 +8,7 @@ import {
   EpoOpsClient,
   GooglePatentsClient,
   MpepClient,
+  UpcStatutesClient,
 } from "../../packages/client/src/index.js";
 
 configureWasm({ sqlite: "/wasm/sqlite3.wasm", zstd: "/wasm/zstd.wasm" });
@@ -36,6 +37,12 @@ try {
     : false;
   const zst = new MpepClient({ source: () => bytes("/fixtures/plain.db.zst") });
   results.mpep_whole_file = (await zst.getCorpusStatus()).compression;
+  const upc = new UpcStatutesClient({
+    source: () => bytes("/fixtures/upc-statutes/upc_statutes.db"),
+  });
+  results.upc_instrument = (
+    await upc.search({ query: "opt-out", limit: 1 })
+  ).hits[0]?.instrument;
   const pathOnly = new MpepClient({ corpusPath: "/nowhere/mpep.db" });
   results.path_in_browser = (await pathOnly.getCorpusStatus()).error?.code;
   results.fee = (

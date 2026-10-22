@@ -1,6 +1,7 @@
 import { CorpusError } from "@patent-client-agents/client";
 import type { FastMCP } from "@prefecthq/fastmcp-ts/server";
 import { z } from "zod";
+import { registerUpcStatutesSearchAndGet } from "../upc-statutes.js";
 import {
   getWipoLexLegislation,
   searchWipoLexLegislation,
@@ -306,5 +307,12 @@ export function registerLegalReferenceFacade(
     },
     ({ legislation_id }) =>
       getWipoLexLegislation(clients.wipoLex, legislation_id),
+  );
+  // UPC keys off instrument + language with no per-section get, so Python
+  // re-exposes its two tools verbatim instead of folding them into the enum.
+  registerUpcStatutesSearchAndGet(
+    server,
+    clients.upcStatutes,
+    facadeToolOptions(auth),
   );
 }

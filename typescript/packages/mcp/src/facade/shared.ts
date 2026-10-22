@@ -26,6 +26,7 @@ import {
   detailEnvelopeSchema,
   listEnvelopeSchema,
 } from "../shared.js";
+import type { UpcStatutesReader } from "../upc-statutes.js";
 
 export {
   type AuthCheck,
@@ -57,6 +58,7 @@ export interface FacadeClients {
   copyright: CopyrightClient;
   wipoLex: WipoLexClient;
   epoLegal: EpoLegalClients;
+  upcStatutes: UpcStatutesReader;
   tsdr?: TsdrClient | undefined;
   epoOps?: EpoOpsClient | undefined;
 }
@@ -70,11 +72,7 @@ export type FacadeRegistrar = (
  * Python facade tools that have no TypeScript connector yet. They are not
  * registered; patent_client_status lists them.
  */
-export const UNPORTED_FACADE_TOOLS = [
-  "get_upc_section",
-  "search_upc_statutes",
-  "search_upc_decisions",
-] as const;
+export const UNPORTED_FACADE_TOOLS = ["search_upc_decisions"] as const;
 
 /** A facade sub-mode whose connector is not ported yet. */
 export function notPorted(feature: string, alternative?: string): never {

@@ -26,6 +26,7 @@ import {
   TrademarkAssignmentClient,
   TrademarkSearchClient,
   TsdrClient,
+  UpcStatutesClient,
   WipoLexClient,
 } from "@patent-client-agents/client";
 import {
@@ -66,6 +67,10 @@ import {
 } from "./relay.js";
 import { registerUsptoResources } from "./resources.js";
 import { registerPortalSearchTools } from "./search-portals.js";
+import {
+  registerUpcStatutesTools,
+  type UpcStatutesReader,
+} from "./upc-statutes.js";
 import { registerWipoLexTools } from "./wipo-lex.js";
 
 export interface UsptoClients {
@@ -109,6 +114,8 @@ export interface ServerOptions {
   clients?: Partial<UsptoClients>;
   /** EPO legal corpus readers; omitted books use their default artifact paths. */
   epoLegal?: Partial<EpoLegalClients>;
+  /** UPC statutes corpus reader; omitted, it uses the default artifact path. */
+  upcStatutes?: UpcStatutesReader;
   downloads?: DownloadOptions;
   /** Defaults to MCP identity settings; audience must intentionally cover document REST access. */
   downloadAuth?: { jwksUri: string; issuer: string; audience: string };
@@ -308,6 +315,7 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     upGuidelines:
       options.epoLegal?.upGuidelines ?? own(new EpoUpGuidelinesClient()),
   };
+  const upcStatutes = options.upcStatutes ?? own(new UpcStatutesClient());
   const applications =
     provided.applications ?? lazyClient(() => new ApplicationsClient());
   const client = options.client ?? applications;
@@ -468,6 +476,7 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     copyright: provided.copyright ?? new CopyrightClient(),
     wipoLex: provided.wipoLex ?? new WipoLexClient(),
     epoLegal,
+    upcStatutes,
     tsdr: tsdrClient,
     epoOps: epoOpsClient,
   };
@@ -695,6 +704,11 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     server,
     epoLegal,
     options.auth ? requireScopes("epo:read") : undefined,
+  );
+  registerUpcStatutesTools(
+    server,
+    upcStatutes,
+    options.auth ? requireScopes("upc:read") : undefined,
   );
   return server;
 }
