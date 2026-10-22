@@ -1,6 +1,6 @@
 """Unit tests for ``patent_client_agents.canlii.client``.
 
-Uses ``httpx.MockTransport`` rather than VCR cassettes because the CanLII
+Uses ``httpx2.MockTransport`` rather than VCR cassettes because the CanLII
 API requires a personal API key, which makes recording brittle for
 contributors who don't have one yet. The tests assert on URL shape, query
 parameter injection, and model parsing against canonical response bodies
@@ -14,7 +14,7 @@ from __future__ import annotations
 
 from datetime import date
 
-import httpx
+import httpx2
 import pytest
 
 from mcp_data_core.exceptions import ApiError, ConfigurationError
@@ -104,7 +104,7 @@ LEGISLATION_METADATA_PAYLOAD = {
 
 def _mock_client(handler) -> CanLIIClient:
     """Build a ``CanLIIClient`` wired to a ``MockTransport`` handler."""
-    transport_client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+    transport_client = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
     return CanLIIClient(api_key="test-key", client=transport_client)
 
 
@@ -123,11 +123,11 @@ class TestConfiguration:
 class TestCases:
     @pytest.mark.asyncio
     async def test_list_case_databases(self) -> None:
-        captured: list[httpx.Request] = []
+        captured: list[httpx2.Request] = []
 
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             captured.append(request)
-            return httpx.Response(200, json=CASE_DATABASES_PAYLOAD)
+            return httpx2.Response(200, json=CASE_DATABASES_PAYLOAD)
 
         async with _mock_client(handler) as client:
             result = await client.list_case_databases()
@@ -139,11 +139,11 @@ class TestCases:
 
     @pytest.mark.asyncio
     async def test_browse_cases_injects_date_filters(self) -> None:
-        captured: list[httpx.Request] = []
+        captured: list[httpx2.Request] = []
 
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             captured.append(request)
-            return httpx.Response(200, json=BROWSE_CASES_PAYLOAD)
+            return httpx2.Response(200, json=BROWSE_CASES_PAYLOAD)
 
         async with _mock_client(handler) as client:
             result = await client.browse_cases(
@@ -165,13 +165,13 @@ class TestCases:
 
     @pytest.mark.asyncio
     async def test_browse_cases_rejects_oversized_page(self) -> None:
-        async with _mock_client(lambda r: httpx.Response(200, json={"cases": []})) as client:
+        async with _mock_client(lambda r: httpx2.Response(200, json={"cases": []})) as client:
             with pytest.raises(ValueError, match="result_count"):
                 await client.browse_cases(database_id="fct", result_count=10_001)
 
     @pytest.mark.asyncio
     async def test_get_case_parses_dunsmuir(self) -> None:
-        async with _mock_client(lambda r: httpx.Response(200, json=DUNSMUIR_PAYLOAD)) as client:
+        async with _mock_client(lambda r: httpx2.Response(200, json=DUNSMUIR_PAYLOAD)) as client:
             case = await client.get_case(database_id="csc-scc", case_id="2008scc9")
 
         assert case.case_id == "2008scc9"
@@ -183,11 +183,11 @@ class TestCases:
 class TestCitator:
     @pytest.mark.asyncio
     async def test_get_cited_cases_uses_english_path(self) -> None:
-        captured: list[httpx.Request] = []
+        captured: list[httpx2.Request] = []
 
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             captured.append(request)
-            return httpx.Response(200, json=CITED_CASES_PAYLOAD)
+            return httpx2.Response(200, json=CITED_CASES_PAYLOAD)
 
         async with _mock_client(handler) as client:
             result = await client.get_cited_cases(database_id="onca", case_id="1999canlii1527")
@@ -200,7 +200,7 @@ class TestLegislation:
     @pytest.mark.asyncio
     async def test_list_legislation_databases(self) -> None:
         async with _mock_client(
-            lambda r: httpx.Response(200, json=LEGISLATION_DATABASES_PAYLOAD)
+            lambda r: httpx2.Response(200, json=LEGISLATION_DATABASES_PAYLOAD)
         ) as client:
             result = await client.list_legislation_databases()
 
@@ -211,7 +211,7 @@ class TestLegislation:
     @pytest.mark.asyncio
     async def test_browse_legislation(self) -> None:
         async with _mock_client(
-            lambda r: httpx.Response(200, json=BROWSE_LEGISLATION_PAYLOAD)
+            lambda r: httpx2.Response(200, json=BROWSE_LEGISLATION_PAYLOAD)
         ) as client:
             result = await client.browse_legislation(database_id="cas")
         assert result.legislations[0].legislation_id == "rsc-1985-c-p-4"
@@ -220,7 +220,7 @@ class TestLegislation:
     @pytest.mark.asyncio
     async def test_get_legislation_parses_dates_and_parts(self) -> None:
         async with _mock_client(
-            lambda r: httpx.Response(200, json=LEGISLATION_METADATA_PAYLOAD)
+            lambda r: httpx2.Response(200, json=LEGISLATION_METADATA_PAYLOAD)
         ) as client:
             leg = await client.get_legislation(
                 database_id="cas",
@@ -242,7 +242,7 @@ class TestTooLongEnvelope:
             "message": "This content is larger than 10MB.",
         }
 
-        async with _mock_client(lambda r: httpx.Response(200, json=too_long_body)) as client:
+        async with _mock_client(lambda r: httpx2.Response(200, json=too_long_body)) as client:
             with pytest.raises(ApiError) as exc_info:
                 await client.list_case_databases()
         assert exc_info.value.status_code == 413
@@ -256,11 +256,11 @@ class TestModuleLevelApi:
         """Install a CanLIIClient factory that returns ``payload`` for every call."""
         from patent_client_agents.canlii import api as canlii_api
 
-        def handler(request: httpx.Request) -> httpx.Response:
-            return httpx.Response(200, json=payload)
+        def handler(request: httpx2.Request) -> httpx2.Response:
+            return httpx2.Response(200, json=payload)
 
         def _factory(*args, **kwargs):
-            transport_client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+            transport_client = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
             return CanLIIClient(api_key="test-key", client=transport_client)
 
         monkeypatch.setattr(canlii_api, "CanLIIClient", _factory)
@@ -372,16 +372,16 @@ class TestModuleLevelApi:
         """One-shot list helpers build a client from the env key, call it once, close it."""
         from patent_client_agents.canlii import api as canlii_api
 
-        requests: list[httpx.Request] = []
+        requests: list[httpx2.Request] = []
         opened: list[CanLIIClient] = []
 
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             requests.append(request)
-            return httpx.Response(200, json=payload)
+            return httpx2.Response(200, json=payload)
 
         class TrackedClient(CanLIIClient):
             def __init__(self) -> None:
-                super().__init__(client=httpx.AsyncClient(transport=httpx.MockTransport(handler)))
+                super().__init__(client=httpx2.AsyncClient(transport=httpx2.MockTransport(handler)))
                 self.closes = 0
                 opened.append(self)
 

@@ -12,7 +12,7 @@ import json
 from datetime import date
 from pathlib import Path
 
-import httpx
+import httpx2
 import pytest
 
 from patent_client_agents.euipo_designs import EuipoDesignsClient, Status
@@ -54,7 +54,7 @@ DESIGN_DETAIL = {
 }
 
 
-def _client(handler, seen: list[httpx.Request]) -> EuipoDesignsClient:
+def _client(handler, seen: list[httpx2.Request]) -> EuipoDesignsClient:
     return EuipoDesignsClient(
         client_id="id",
         client_secret="secret",
@@ -66,10 +66,10 @@ def _client(handler, seen: list[httpx.Request]) -> EuipoDesignsClient:
 
 async def test_search_sends_rsql_query_paging_sort_and_fields() -> None:
     fixture = json.loads((FIXTURES / "design_list_size10.json").read_text())
-    seen: list[httpx.Request] = []
+    seen: list[httpx2.Request] = []
     query = "applicants.name==*Apple* and locarnoClasses=in=(14.03,14.04)"
 
-    async with _client(lambda r: httpx.Response(200, json=fixture), seen) as client:
+    async with _client(lambda r: httpx2.Response(200, json=fixture), seen) as client:
         result = await client.search(
             query=query, page=3, size=100, sort="applicationDate:asc", fields="!(views)"
         )
@@ -99,9 +99,9 @@ async def test_search_sends_rsql_query_paging_sort_and_fields() -> None:
 
 async def test_search_defaults_send_only_page_and_size() -> None:
     fixture = json.loads((FIXTURES / "design_list_size10.json").read_text())
-    seen: list[httpx.Request] = []
+    seen: list[httpx2.Request] = []
 
-    async with _client(lambda r: httpx.Response(200, json=fixture), seen) as client:
+    async with _client(lambda r: httpx2.Response(200, json=fixture), seen) as client:
         await client.search()
 
     (request,) = api_requests(seen)
@@ -115,17 +115,17 @@ async def test_search_defaults_send_only_page_and_size() -> None:
 async def test_search_rejects_out_of_range_paging_without_a_request(
     kwargs: dict, message: str
 ) -> None:
-    seen: list[httpx.Request] = []
-    async with _client(lambda r: httpx.Response(200, json={}), seen) as client:
+    seen: list[httpx2.Request] = []
+    async with _client(lambda r: httpx2.Response(200, json={}), seen) as client:
         with pytest.raises(ValueError, match=message):
             await client.search(**kwargs)
     assert seen == []
 
 
 async def test_get_design_requests_detail_path_and_parses_record() -> None:
-    seen: list[httpx.Request] = []
+    seen: list[httpx2.Request] = []
 
-    async with _client(lambda r: httpx.Response(200, json=DESIGN_DETAIL), seen) as client:
+    async with _client(lambda r: httpx2.Response(200, json=DESIGN_DETAIL), seen) as client:
         design = await client.get_design("099037115-0001")
 
     (request,) = api_requests(seen)
@@ -161,10 +161,10 @@ async def test_media_methods_request_media_path_and_return_raw_bytes(
     method: str, args: tuple, path: str, content_type: str
 ) -> None:
     body = b"\x00\x01binary-" + method.encode()
-    seen: list[httpx.Request] = []
+    seen: list[httpx2.Request] = []
 
     async with _client(
-        lambda r: httpx.Response(200, content=body, headers={"Content-Type": content_type}), seen
+        lambda r: httpx2.Response(200, content=body, headers={"Content-Type": content_type}), seen
     ) as client:
         result = await getattr(client, method)("099037115-0001", *args)
 

@@ -2,7 +2,7 @@
 
 Exercises the multi-host URL routing (``_build_url`` passthrough), the
 shared simple-search body builder, and per-method dispatch using
-``httpx.MockTransport`` so the suite is offline.
+``httpx2.MockTransport`` so the suite is offline.
 
 Live smoke calls (one per endpoint) record VCR cassettes that pin the
 upstream response shape — see the test_live_* functions below.
@@ -14,7 +14,7 @@ import json
 from collections.abc import Callable
 from pathlib import Path
 
-import httpx
+import httpx2
 import pytest
 
 from patent_client_agents.prv_se import PrvClient
@@ -28,8 +28,8 @@ from patent_client_agents.prv_se.client import (
 )
 
 
-def _mock(handler: Callable[[httpx.Request], httpx.Response]) -> httpx.MockTransport:
-    return httpx.MockTransport(handler)
+def _mock(handler: Callable[[httpx2.Request], httpx2.Response]) -> httpx2.MockTransport:
+    return httpx2.MockTransport(handler)
 
 
 def _fixture(name: str) -> dict:
@@ -104,11 +104,11 @@ def test_body_merges_extra() -> None:
 
 @pytest.mark.asyncio
 async def test_search_patents_routes_to_patents_host() -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, json=_fixture("patents-search.json"))
+        return httpx2.Response(200, json=_fixture("patents-search.json"))
 
     async with PrvClient(transport=_mock(handler), use_cache=False) as client:
         result = await client.search_patents(text="Volvo", page_size=5)
@@ -129,11 +129,11 @@ async def test_search_patents_routes_to_patents_host() -> None:
 
 @pytest.mark.asyncio
 async def test_search_trademarks_routes_to_dv_host() -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, json=_fixture("tm-search.json"))
+        return httpx2.Response(200, json=_fixture("tm-search.json"))
 
     async with PrvClient(transport=_mock(handler), use_cache=False) as client:
         await client.search_trademarks(text="IKEA")
@@ -143,11 +143,11 @@ async def test_search_trademarks_routes_to_dv_host() -> None:
 
 @pytest.mark.asyncio
 async def test_search_designs_routes_to_dv_host() -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, json=_fixture("design-search.json"))
+        return httpx2.Response(200, json=_fixture("design-search.json"))
 
     async with PrvClient(transport=_mock(handler), use_cache=False) as client:
         await client.search_designs(text="stol")
@@ -157,11 +157,11 @@ async def test_search_designs_routes_to_dv_host() -> None:
 
 @pytest.mark.asyncio
 async def test_get_patent_routes_to_api_host_with_query_param() -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, json=_fixture("patent-get.json"))
+        return httpx2.Response(200, json=_fixture("patent-get.json"))
 
     async with PrvClient(transport=_mock(handler), use_cache=False) as client:
         await client.get_patent("SE2615555-6")
@@ -173,11 +173,11 @@ async def test_get_patent_routes_to_api_host_with_query_param() -> None:
 
 @pytest.mark.asyncio
 async def test_get_patent_accepts_application_type_override() -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, json=_fixture("patent-get.json"))
+        return httpx2.Response(200, json=_fixture("patent-get.json"))
 
     async with PrvClient(transport=_mock(handler), use_cache=False) as client:
         await client.get_patent("SE2615555-6", application_type="EP")
@@ -188,7 +188,7 @@ async def test_get_patent_accepts_application_type_override() -> None:
 @pytest.mark.asyncio
 async def test_get_patent_rejects_empty_application_number() -> None:
     async with PrvClient(
-        transport=_mock(lambda _: httpx.Response(200, json={})), use_cache=False
+        transport=_mock(lambda _: httpx2.Response(200, json={})), use_cache=False
     ) as client:
         with pytest.raises(ValueError):
             await client.get_patent("")
@@ -264,11 +264,11 @@ def test_advanced_body_respects_explicit_match_type() -> None:
 
 @pytest.mark.asyncio
 async def test_search_spcs_routes_to_patents_host_with_wrapper_body() -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, json=_fixture("spc-search.json"))
+        return httpx2.Response(200, json=_fixture("spc-search.json"))
 
     async with PrvClient(transport=_mock(handler), use_cache=False) as client:
         await client.search_spcs(applicants="AstraZeneca")
@@ -283,7 +283,7 @@ async def test_search_spcs_routes_to_patents_host_with_wrapper_body() -> None:
 @pytest.mark.asyncio
 async def test_search_spcs_rejects_empty_filters() -> None:
     async with PrvClient(
-        transport=_mock(lambda _: httpx.Response(200, json={})), use_cache=False
+        transport=_mock(lambda _: httpx2.Response(200, json={})), use_cache=False
     ) as client:
         with pytest.raises(ValueError, match="search_spcs requires"):
             await client.search_spcs()

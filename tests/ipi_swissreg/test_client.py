@@ -4,7 +4,7 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 from urllib.parse import parse_qs
 
-import httpx
+import httpx2
 import pytest
 
 from mcp_data_core.exceptions import (
@@ -26,15 +26,15 @@ from patent_client_agents.ipi_swissreg.client import (
 def _client_for(
     fixture_dir: Path,
     fixture_name: str,
-    captured: list[httpx.Request] | None = None,
+    captured: list[httpx2.Request] | None = None,
     *,
     totp_token: str | None = None,
 ) -> IpiSwissregClient:
-    async def handler(request: httpx.Request) -> httpx.Response:
+    async def handler(request: httpx2.Request) -> httpx2.Response:
         if captured is not None:
             captured.append(request)
         if str(request.url) == TOKEN_URL:
-            return httpx.Response(
+            return httpx2.Response(
                 200,
                 json={
                     "access_token": "mock-access",
@@ -42,13 +42,13 @@ def _client_for(
                     "expires_in": 600,
                 },
             )
-        return httpx.Response(200, content=(fixture_dir / fixture_name).read_bytes())
+        return httpx2.Response(200, content=(fixture_dir / fixture_name).read_bytes())
 
     return IpiSwissregClient(
         "explicit-user",
         "explicit-password",
         totp_token=totp_token,
-        transport=httpx.MockTransport(handler),
+        transport=httpx2.MockTransport(handler),
     )
 
 
@@ -56,7 +56,7 @@ def _client_for(
 async def test_patent_search_authenticates_builds_contract_and_parses_metadata(
     fixture_dir: Path,
 ) -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
     async with _client_for(
         fixture_dir, "patent_search.xml", captured, totp_token="123456"
     ) as client:
@@ -100,7 +100,7 @@ async def test_patent_search_authenticates_builds_contract_and_parses_metadata(
 
 @pytest.mark.asyncio
 async def test_continuation_request_contains_only_cursor(fixture_dir: Path) -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
     async with _client_for(fixture_dir, "patent_search.xml", captured) as client:
         await client.search_patents("ignored", cursor="opaque-cursor")
 
@@ -154,7 +154,7 @@ async def test_other_action_schemas(
 async def test_get_uses_identifier_query(
     fixture_dir: Path, method: str, fixture: str, request_tag: str, request_field: str
 ) -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
     async with _client_for(fixture_dir, fixture, captured) as client:
         row = await getattr(client, method)("CH-MOCK")
     root = ET.fromstring(captured[1].content)
@@ -181,13 +181,13 @@ async def test_error_malformed_empty_and_not_found(fixture_dir: Path) -> None:
         with pytest.raises(ApiError, match="Invalid Swiss IPI query"):
             await client.search_patents("bad")
 
-    async def malformed(request: httpx.Request) -> httpx.Response:
+    async def malformed(request: httpx2.Request) -> httpx2.Response:
         if str(request.url) == TOKEN_URL:
-            return httpx.Response(200, json={"access_token": "token", "expires_in": 600})
-        return httpx.Response(200, content=b"not xml")
+            return httpx2.Response(200, json={"access_token": "token", "expires_in": 600})
+        return httpx2.Response(200, content=b"not xml")
 
     async with IpiSwissregClient(
-        "user", "password", transport=httpx.MockTransport(malformed)
+        "user", "password", transport=httpx2.MockTransport(malformed)
     ) as client:
         with pytest.raises(ApiError, match="malformed XML"):
             await client.search_patents("bad")
@@ -196,13 +196,13 @@ async def test_error_malformed_empty_and_not_found(fixture_dir: Path) -> None:
 
     empty = b'<core:ApiResponse xmlns:core="urn:ige:schema:xsd:datadeliverycore-1.0.0"><core:Result success="true"/></core:ApiResponse>'
 
-    async def no_rows(request: httpx.Request) -> httpx.Response:
+    async def no_rows(request: httpx2.Request) -> httpx2.Response:
         if str(request.url) == TOKEN_URL:
-            return httpx.Response(200, json={"access_token": "token", "expires_in": 600})
-        return httpx.Response(200, content=empty)
+            return httpx2.Response(200, json={"access_token": "token", "expires_in": 600})
+        return httpx2.Response(200, content=empty)
 
     async with IpiSwissregClient(
-        "user", "password", transport=httpx.MockTransport(no_rows)
+        "user", "password", transport=httpx2.MockTransport(no_rows)
     ) as client:
         with pytest.raises(NotFoundError):
             await client.get_patent("missing")
@@ -212,38 +212,40 @@ async def test_error_malformed_empty_and_not_found(fixture_dir: Path) -> None:
 async def test_auth_rate_limit_refresh_and_one_401_retry(fixture_dir: Path) -> None:
     calls = 0
 
-    async def unauthorized(request: httpx.Request) -> httpx.Response:
+    async def unauthorized(request: httpx2.Request) -> httpx2.Response:
         nonlocal calls
         if str(request.url) == TOKEN_URL:
             calls += 1
-            return httpx.Response(200, json={"access_token": f"token-{calls}", "expires_in": 600})
+            return httpx2.Response(200, json={"access_token": f"token-{calls}", "expires_in": 600})
         if request.headers["Authorization"] == "Bearer token-1":
-            return httpx.Response(401)
-        return httpx.Response(200, content=(fixture_dir / "patent_search.xml").read_bytes())
+            return httpx2.Response(401)
+        return httpx2.Response(200, content=(fixture_dir / "patent_search.xml").read_bytes())
 
     async with IpiSwissregClient(
-        "user", "password", transport=httpx.MockTransport(unauthorized)
+        "user", "password", transport=httpx2.MockTransport(unauthorized)
     ) as client:
         rows, _ = await client.search_patents("q")
     assert rows and calls == 2
 
-    async def throttled(request: httpx.Request) -> httpx.Response:
+    async def throttled(request: httpx2.Request) -> httpx2.Response:
         if str(request.url) == TOKEN_URL:
-            return httpx.Response(429, headers={"Retry-After": "9"}, text="slow")
+            return httpx2.Response(429, headers={"Retry-After": "9"}, text="slow")
         raise AssertionError("unexpected API call")
 
     # A different account, so this client has to log in rather than reuse the token above.
     async with IpiSwissregClient(
-        "user-2", "password", transport=httpx.MockTransport(throttled)
+        "user-2", "password", transport=httpx2.MockTransport(throttled)
     ) as client:
         with pytest.raises(RateLimitError) as raised:
             await client.search_patents("q")
     assert raised.value.retry_after == 9
 
-    async def denied(_: httpx.Request) -> httpx.Response:
-        return httpx.Response(401, text="credentials rejected")
+    async def denied(_: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(401, text="credentials rejected")
 
-    async with IpiSwissregClient("user", "secret", transport=httpx.MockTransport(denied)) as client:
+    async with IpiSwissregClient(
+        "user", "secret", transport=httpx2.MockTransport(denied)
+    ) as client:
         with pytest.raises(AuthenticationError) as raised_auth:
             await client.search_patents("q")
     assert raised_auth.value.response_body is None

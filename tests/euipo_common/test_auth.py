@@ -8,7 +8,7 @@ from __future__ import annotations
 
 from urllib.parse import parse_qs
 
-import httpx
+import httpx2
 import pytest
 
 from mcp_data_core.exceptions import (
@@ -31,8 +31,8 @@ CLIENTS = [
 ]
 
 
-def _bytes_ok(request: httpx.Request) -> httpx.Response:
-    return httpx.Response(200, content=b"model-bytes")
+def _bytes_ok(request: httpx2.Request) -> httpx2.Response:
+    return httpx2.Response(200, content=b"model-bytes")
 
 
 @pytest.fixture
@@ -69,7 +69,7 @@ async def test_first_request_fetches_token_and_sends_both_auth_headers(
 ) -> None:
     if env_var:
         monkeypatch.setenv("EUIPO_ENV", env_var)
-    seen: list[httpx.Request] = []
+    seen: list[httpx2.Request] = []
 
     async with client_cls(
         client_id="app-id-1",
@@ -107,7 +107,7 @@ async def test_credentials_resolve_from_env_and_constructor_wins(
     monkeypatch.setenv("EUIPO_CLIENT_ID", "env-id")
     monkeypatch.setenv("EUIPO_CLIENT_SECRET", "env-secret")
 
-    seen: list[httpx.Request] = []
+    seen: list[httpx2.Request] = []
     async with client_cls(transport=euipo_transport(_bytes_ok, seen), use_cache=False) as client:
         await client.get_model("x")
     body = parse_qs(seen[0].content.decode())
@@ -129,7 +129,7 @@ async def test_credentials_resolve_from_env_and_constructor_wins(
 
 @pytest.mark.parametrize(("client_cls", "api_prefix"), CLIENTS)
 async def test_token_is_reused_across_requests(client_cls: type, api_prefix: str) -> None:
-    seen: list[httpx.Request] = []
+    seen: list[httpx2.Request] = []
     async with client_cls(
         client_id="id",
         client_secret="s",
@@ -149,13 +149,13 @@ async def test_rejected_token_is_refreshed_once_and_request_retried(
 ) -> None:
     calls = {"api": 0}
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         calls["api"] += 1
         if calls["api"] == 1:
-            return httpx.Response(401, json={"title": "Unauthorized", "status": 401})
-        return httpx.Response(200, content=b"ok")
+            return httpx2.Response(401, json={"title": "Unauthorized", "status": 401})
+        return httpx2.Response(200, content=b"ok")
 
-    seen: list[httpx.Request] = []
+    seen: list[httpx2.Request] = []
     async with client_cls(
         client_id="id", client_secret="s", transport=euipo_transport(handler, seen), use_cache=False
     ) as client:
@@ -170,12 +170,12 @@ async def test_custom_auth_handler_replaces_oauth_but_keeps_client_id_header(
 ) -> None:
     monkeypatch.delenv("EUIPO_CLIENT_SECRET", raising=False)
 
-    class _StaticBearer(httpx.Auth):
+    class _StaticBearer(httpx2.Auth):
         def auth_flow(self, request):  # type: ignore[override]
             request.headers["Authorization"] = "Bearer caller-supplied"
             yield request
 
-    seen: list[httpx.Request] = []
+    seen: list[httpx2.Request] = []
     async with client_cls(
         client_id="id-9",
         auth=_StaticBearer(),
@@ -203,8 +203,8 @@ async def test_custom_auth_handler_replaces_oauth_but_keeps_client_id_header(
 async def test_api_errors_map_to_typed_exceptions(
     client_cls: type, api_prefix: str, status: int, error: type
 ) -> None:
-    def handler(request: httpx.Request) -> httpx.Response:
-        return httpx.Response(
+    def handler(request: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(
             status,
             headers={"Content-Type": "application/problem+json", "Retry-After": "7"},
             json={"type": "/problems/error", "title": "Error", "status": status},

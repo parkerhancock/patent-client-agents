@@ -7,7 +7,7 @@ from datetime import date, datetime
 from typing import Any
 from urllib.parse import urljoin
 
-import httpx
+import httpx2
 from lxml import html
 
 from mcp_data_core.exceptions import NotFoundError, ParseError
@@ -276,7 +276,7 @@ class ChinaSpcIpCourtClient(ConnectorClient):
     CACHE_NAME = "china_spc_ip_court"
     DEFAULT_TIMEOUT = 60.0
 
-    def __init__(self, *, client: httpx.AsyncClient | None = None, **kwargs: Any) -> None:
+    def __init__(self, *, client: httpx2.AsyncClient | None = None, **kwargs: Any) -> None:
         kwargs.setdefault("ttl_seconds", 600)
         super().__init__(client=client, headers=_BROWSER_HEADERS, **kwargs)
         if client is not None:

@@ -7,7 +7,7 @@ import datetime as dt
 import time
 from unittest.mock import AsyncMock
 
-import httpx
+import httpx2
 import pytest
 
 from mcp_data_core.exceptions import NotFoundError, RetryableAuthenticationError
@@ -27,7 +27,7 @@ class TestOpsAuthTokenExpiry:
     @staticmethod
     def _store_token(auth: OpsAuth, access_token: str = "test-token") -> None:
         auth._store_token(
-            httpx.Response(
+            httpx2.Response(
                 200,
                 json={
                     "issued_at": str(int(time.time() * 1000)),
@@ -60,8 +60,8 @@ class TestOpsAuthTokenExpiry:
         assert dt.timedelta(minutes=19) < remaining <= dt.timedelta(minutes=20)
 
 
-def _token_response(token: str) -> httpx.Response:
-    return httpx.Response(
+def _token_response(token: str) -> httpx2.Response:
+    return httpx2.Response(
         200,
         json={
             "issued_at": str(int(time.time() * 1000)),
@@ -71,7 +71,7 @@ def _token_response(token: str) -> httpx.Response:
     )
 
 
-class _StreamingTokenBody(httpx.AsyncByteStream):
+class _StreamingTokenBody(httpx2.AsyncByteStream):
     async def __aiter__(self):
         yield (
             b'{"issued_at":"'
@@ -82,18 +82,18 @@ class _StreamingTokenBody(httpx.AsyncByteStream):
 
 class TestOpsAuthFlow:
     async def test_reads_streamed_token_response_before_parsing(self) -> None:
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             if request.url.path.endswith("/auth/accesstoken"):
-                return httpx.Response(
+                return httpx2.Response(
                     200,
                     headers={"content-type": "application/json"},
                     stream=_StreamingTokenBody(),
                 )
             assert request.headers["Authorization"] == "Bearer token-1"
-            return httpx.Response(200, text="ok")
+            return httpx2.Response(200, text="ok")
 
-        async with httpx.AsyncClient(
-            auth=OpsAuth("key", "secret"), transport=httpx.MockTransport(handler)
+        async with httpx2.AsyncClient(
+            auth=OpsAuth("key", "secret"), transport=httpx2.MockTransport(handler)
         ) as client:
             response = await client.get(f"{BASE_URL}/rest-services/test")
 
@@ -102,15 +102,15 @@ class TestOpsAuthFlow:
     async def test_fetches_token_before_first_data_request(self) -> None:
         paths: list[str] = []
 
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             paths.append(request.url.path)
             if request.url.path.endswith("/auth/accesstoken"):
                 return _token_response("token-1")
             assert request.headers["Authorization"] == "Bearer token-1"
-            return httpx.Response(200, text="ok")
+            return httpx2.Response(200, text="ok")
 
-        async with httpx.AsyncClient(
-            auth=OpsAuth("key", "secret"), transport=httpx.MockTransport(handler)
+        async with httpx2.AsyncClient(
+            auth=OpsAuth("key", "secret"), transport=httpx2.MockTransport(handler)
         ) as client:
             response = await client.get(f"{BASE_URL}/rest-services/test")
 
@@ -120,17 +120,17 @@ class TestOpsAuthFlow:
     async def test_invalid_unexpired_token_refreshes_and_replays_once(self) -> None:
         token_calls = 0
 
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             nonlocal token_calls
             if request.url.path.endswith("/auth/accesstoken"):
                 token_calls += 1
                 return _token_response(f"token-{token_calls}")
             if request.headers["Authorization"] == "Bearer token-1":
-                return httpx.Response(400, text="<message>invalid_access_token</message>")
-            return httpx.Response(200, text="ok")
+                return httpx2.Response(400, text="<message>invalid_access_token</message>")
+            return httpx2.Response(200, text="ok")
 
-        async with httpx.AsyncClient(
-            auth=OpsAuth("key", "secret"), transport=httpx.MockTransport(handler)
+        async with httpx2.AsyncClient(
+            auth=OpsAuth("key", "secret"), transport=httpx2.MockTransport(handler)
         ) as client:
             response = await client.get(f"{BASE_URL}/rest-services/test")
 
@@ -142,7 +142,7 @@ class TestOpsAuthFlow:
         old_token_requests = 0
         both_old_requests_started = asyncio.Event()
 
-        async def handler(request: httpx.Request) -> httpx.Response:
+        async def handler(request: httpx2.Request) -> httpx2.Response:
             nonlocal old_token_requests, refresh_calls
             if request.url.path.endswith("/auth/accesstoken"):
                 refresh_calls += 1
@@ -152,12 +152,12 @@ class TestOpsAuthFlow:
                 if old_token_requests == 2:
                     both_old_requests_started.set()
                 await both_old_requests_started.wait()
-                return httpx.Response(400, text="<message>invalid_access_token</message>")
-            return httpx.Response(200, text="ok")
+                return httpx2.Response(400, text="<message>invalid_access_token</message>")
+            return httpx2.Response(200, text="ok")
 
         auth = OpsAuth("key", "secret")
         auth._store_token(_token_response("token-1"))
-        async with httpx.AsyncClient(auth=auth, transport=httpx.MockTransport(handler)) as client:
+        async with httpx2.AsyncClient(auth=auth, transport=httpx2.MockTransport(handler)) as client:
             first, second = await asyncio.gather(
                 client.get(f"{BASE_URL}/rest-services/one"),
                 client.get(f"{BASE_URL}/rest-services/two"),
@@ -169,15 +169,15 @@ class TestOpsAuthFlow:
     async def test_second_invalid_token_is_retryable_auth_error(self) -> None:
         token_calls = 0
 
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             nonlocal token_calls
             if request.url.path.endswith("/auth/accesstoken"):
                 token_calls += 1
                 return _token_response(f"token-{token_calls}")
-            return httpx.Response(400, text="<message>invalid_access_token</message>")
+            return httpx2.Response(400, text="<message>invalid_access_token</message>")
 
-        async with httpx.AsyncClient(
-            auth=OpsAuth("key", "secret"), transport=httpx.MockTransport(handler)
+        async with httpx2.AsyncClient(
+            auth=OpsAuth("key", "secret"), transport=httpx2.MockTransport(handler)
         ) as client:
             with pytest.raises(RetryableAuthenticationError):
                 await client.get(f"{BASE_URL}/rest-services/test")
@@ -187,27 +187,27 @@ class TestOpsAuthFlow:
     async def test_non_auth_400_does_not_refresh(self) -> None:
         token_calls = 0
 
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             nonlocal token_calls
             if request.url.path.endswith("/auth/accesstoken"):
                 token_calls += 1
                 return _token_response("unexpected")
-            return httpx.Response(400, text="<message>invalid query</message>")
+            return httpx2.Response(400, text="<message>invalid query</message>")
 
         auth = OpsAuth("key", "secret")
         auth._store_token(_token_response("token-1"))
-        async with httpx.AsyncClient(auth=auth, transport=httpx.MockTransport(handler)) as client:
+        async with httpx2.AsyncClient(auth=auth, transport=httpx2.MockTransport(handler)) as client:
             response = await client.get(f"{BASE_URL}/rest-services/test")
 
         assert response.status_code == 400
         assert token_calls == 0
 
     async def test_rejected_credentials_are_not_retryable(self) -> None:
-        def handler(_request: httpx.Request) -> httpx.Response:
-            return httpx.Response(401, text="<message>invalid_client</message>")
+        def handler(_request: httpx2.Request) -> httpx2.Response:
+            return httpx2.Response(401, text="<message>invalid_client</message>")
 
-        async with httpx.AsyncClient(
-            auth=OpsAuth("key", "secret"), transport=httpx.MockTransport(handler)
+        async with httpx2.AsyncClient(
+            auth=OpsAuth("key", "secret"), transport=httpx2.MockTransport(handler)
         ) as client:
             with pytest.raises(OpsAuthenticationError):
                 await client.get(f"{BASE_URL}/rest-services/test")
@@ -265,9 +265,9 @@ class TestForbiddenErrorBuilder:
     """Tests for the forbidden error builder."""
 
     def test_builds_error_with_all_headers(self) -> None:
-        import httpx
+        import httpx2
 
-        response = httpx.Response(
+        response = httpx2.Response(
             403,
             headers={
                 "X-Rejection-Reason": "IndividualQuotaPerHour",
@@ -284,9 +284,9 @@ class TestForbiddenErrorBuilder:
         )
 
     def test_builds_error_with_no_headers(self) -> None:
-        import httpx
+        import httpx2
 
-        response = httpx.Response(403, headers={})
+        response = httpx2.Response(403, headers={})
         error = EpoOpsClient._build_forbidden_error(response)
         assert "rate limited or quota exceeded" in str(error)
 

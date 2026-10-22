@@ -4,7 +4,7 @@ import json
 from datetime import UTC, datetime
 from unittest.mock import AsyncMock
 
-import httpx
+import httpx2
 import pytest
 from lxml import html
 
@@ -15,7 +15,7 @@ from patent_client_agents.fees.scrapers.uspto import USPTOFeesClient, _parse_eff
 async def test_cached_bytes_keep_retrieval_time_and_refresh_rechecks(tmp_path):
     async with USPTOFeesClient(cache_path=tmp_path) as client:
         client._request = AsyncMock(
-            return_value=httpx.Response(
+            return_value=httpx2.Response(
                 200,
                 content=b"fees",
                 extensions={"hishel_from_cache": True, "hishel_created_at": 1000000000.0},
@@ -24,7 +24,7 @@ async def test_cached_bytes_keep_retrieval_time_and_refresh_rechecks(tmp_path):
         await client.fetch_html()
         initial = dict(client.source_metadata)
         assert initial["bytes_retrieved_at"] == datetime.fromtimestamp(1000000000, UTC).isoformat()
-        client._request.return_value = httpx.Response(
+        client._request.return_value = httpx2.Response(
             200,
             content=b"fees",
             extensions={
@@ -39,8 +39,8 @@ async def test_cached_bytes_keep_retrieval_time_and_refresh_rechecks(tmp_path):
         assert client.source_metadata["refresh_outcome"] == "succeeded"
         assert client._request.call_args.kwargs["headers"] == {"Cache-Control": "no-cache"}
         before_failure = dict(client.source_metadata)
-        client._request.side_effect = httpx.ConnectError("failed")
-        with pytest.raises(httpx.ConnectError):
+        client._request.side_effect = httpx2.ConnectError("failed")
+        with pytest.raises(httpx2.ConnectError):
             await client.fetch_html(refresh=True)
         failed = json.loads((tmp_path / "uspto-fees-receipt.json").read_text())
         assert failed["bytes_retrieved_at"] == before_failure["bytes_retrieved_at"]
@@ -52,10 +52,10 @@ async def test_cached_bytes_keep_retrieval_time_and_refresh_rechecks(tmp_path):
 @pytest.mark.asyncio
 async def test_replaced_bytes_change_hash(tmp_path):
     async with USPTOFeesClient(cache_path=tmp_path) as client:
-        client._request = AsyncMock(return_value=httpx.Response(200, content=b"old"))
+        client._request = AsyncMock(return_value=httpx2.Response(200, content=b"old"))
         await client.fetch_html()
         old_hash = client.source_metadata["content_sha256"]
-        client._request.return_value = httpx.Response(200, content=b"new")
+        client._request.return_value = httpx2.Response(200, content=b"new")
         await client.fetch_html(refresh=True)
         assert client.source_metadata["content_sha256"] != old_hash
 
@@ -70,9 +70,9 @@ def test_effective_and_revision_dates_do_not_collapse():
 @pytest.mark.asyncio
 async def test_cached_other_version_does_not_borrow_check_time(tmp_path):
     async with USPTOFeesClient(cache_path=tmp_path) as client:
-        client._request = AsyncMock(return_value=httpx.Response(200, content=b"new"))
+        client._request = AsyncMock(return_value=httpx2.Response(200, content=b"new"))
         await client.fetch_html()
-        client._request.return_value = httpx.Response(
+        client._request.return_value = httpx2.Response(
             200,
             content=b"old",
             extensions={"hishel_from_cache": True, "hishel_created_at": 1000000000.0},

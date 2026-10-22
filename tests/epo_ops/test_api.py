@@ -1,7 +1,7 @@
 """Tests for the EPO OPS module-level API.
 
 The one-shot helpers run through a real ``EpoOpsClient`` built by
-``client_from_env`` whose network layer is an ``httpx.MockTransport``: the OPS
+``client_from_env`` whose network layer is an ``httpx2.MockTransport``: the OPS
 OAuth token exchange, URL building and XML parsing all run as in production.
 """
 
@@ -15,7 +15,7 @@ from io import BytesIO
 from pathlib import Path
 from typing import Any, cast
 
-import httpx
+import httpx2
 import pytest
 from pypdf import PdfReader, PdfWriter
 
@@ -92,15 +92,15 @@ REGISTER_XML = "<reg:register-documents xmlns:reg='http://www.epo.org/register'/
 class FakeOps:
     """OPS stand-in: issues an OAuth token and answers data requests with ``reply``."""
 
-    def __init__(self, reply: Callable[[httpx.Request], httpx.Response]) -> None:
+    def __init__(self, reply: Callable[[httpx2.Request], httpx2.Response]) -> None:
         self.reply = reply
-        self.token_requests: list[httpx.Request] = []
-        self.data_requests: list[httpx.Request] = []
+        self.token_requests: list[httpx2.Request] = []
+        self.data_requests: list[httpx2.Request] = []
 
-    def handle(self, request: httpx.Request) -> httpx.Response:
+    def handle(self, request: httpx2.Request) -> httpx2.Response:
         if request.url.path == "/3.2/auth/accesstoken":
             self.token_requests.append(request)
-            return httpx.Response(
+            return httpx2.Response(
                 200,
                 json={
                     "issued_at": str(int(time.time() * 1000)),
@@ -110,17 +110,17 @@ class FakeOps:
             )
         self.data_requests.append(request)
         if request.headers.get("Authorization") != "Bearer ops-token":
-            return httpx.Response(401, text="<fault>invalid_access_token</fault>")
+            return httpx2.Response(401, text="<fault>invalid_access_token</fault>")
         return self.reply(request)
 
     @property
-    def request(self) -> httpx.Request:
+    def request(self) -> httpx2.Request:
         (only,) = self.data_requests
         return only
 
 
-def _xml(body: str) -> Callable[[httpx.Request], httpx.Response]:
-    return lambda _request: httpx.Response(200, text=body)
+def _xml(body: str) -> Callable[[httpx2.Request], httpx2.Response]:
+    return lambda _request: httpx2.Response(200, text=body)
 
 
 class Harness:
@@ -136,7 +136,7 @@ class Harness:
             def __init__(self, **kwargs: Any) -> None:
                 super().__init__(
                     **kwargs,
-                    transport=httpx.MockTransport(harness.ops.handle),
+                    transport=httpx2.MockTransport(harness.ops.handle),
                     cache_path=tmp_path,
                 )
                 harness.opened.append(self)
@@ -342,10 +342,10 @@ def _blank_pdf_page() -> bytes:
 async def test_download_pdf_stitches_pages(harness: Harness) -> None:
     page = _blank_pdf_page()
 
-    def reply(request: httpx.Request) -> httpx.Response:
+    def reply(request: httpx2.Request) -> httpx2.Response:
         if request.url.path.endswith("/images"):
-            return httpx.Response(200, text=IMAGES_XML)
-        return httpx.Response(200, content=page, headers={"Content-Type": "application/pdf"})
+            return httpx2.Response(200, text=IMAGES_XML)
+        return httpx2.Response(200, content=page, headers={"Content-Type": "application/pdf"})
 
     harness.ops.reply = reply
 

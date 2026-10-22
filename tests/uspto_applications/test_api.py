@@ -1,7 +1,7 @@
 """Tests for the USPTO applications/PTAB module-level API.
 
 The one-shot helpers run through a real ``UsptoOdpClient`` whose HTTP client
-sits on an ``httpx.MockTransport``, so URL building, payloads and response
+sits on an ``httpx2.MockTransport``, so URL building, payloads and response
 parsing run as in production.
 """
 
@@ -12,7 +12,7 @@ import json
 from collections.abc import Awaitable, Callable
 from typing import Any
 
-import httpx
+import httpx2
 import pytest
 
 from patent_client_agents.uspto_applications import api as apps_api
@@ -30,16 +30,16 @@ class FakeOdp:
 
     def __init__(self) -> None:
         self.reply: dict[str, Any] = {"count": 0}
-        self.requests: list[httpx.Request] = []
+        self.requests: list[httpx2.Request] = []
         self.opened: list[UsptoOdpClient] = []
         self.closes = 0
 
-    def handle(self, request: httpx.Request) -> httpx.Response:
+    def handle(self, request: httpx2.Request) -> httpx2.Response:
         self.requests.append(request)
-        return httpx.Response(200, json=self.reply)
+        return httpx2.Response(200, json=self.reply)
 
     @property
-    def request(self) -> httpx.Request:
+    def request(self) -> httpx2.Request:
         (only,) = self.requests
         return only
 
@@ -51,7 +51,7 @@ class FakeOdp:
                 fake.closes += 1
                 await super().close()
 
-        http = httpx.AsyncClient(transport=httpx.MockTransport(self.handle))
+        http = httpx2.AsyncClient(transport=httpx2.MockTransport(self.handle))
         client = TrackedClient(api_key="test-key", client=http)
         self.opened.append(client)
         return client
@@ -64,7 +64,7 @@ def odp(monkeypatch: pytest.MonkeyPatch) -> FakeOdp:
     return fake
 
 
-def _body(request: httpx.Request) -> dict[str, Any]:
+def _body(request: httpx2.Request) -> dict[str, Any]:
     return json.loads(request.content)
 
 

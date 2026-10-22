@@ -12,7 +12,7 @@ import json
 from datetime import date
 from pathlib import Path
 
-import httpx
+import httpx2
 import pytest
 
 from patent_client_agents.euipo_trademarks import (
@@ -70,7 +70,7 @@ TRADEMARK_DETAIL = {
 }
 
 
-def _client(handler, seen: list[httpx.Request]) -> EuipoTrademarksClient:
+def _client(handler, seen: list[httpx2.Request]) -> EuipoTrademarksClient:
     return EuipoTrademarksClient(
         client_id="id",
         client_secret="secret",
@@ -82,10 +82,10 @@ def _client(handler, seen: list[httpx.Request]) -> EuipoTrademarksClient:
 
 async def test_search_sends_rsql_query_paging_sort_and_fields() -> None:
     fixture = json.loads((FIXTURES / "tm_apple_size10.json").read_text())
-    seen: list[httpx.Request] = []
+    seen: list[httpx2.Request] = []
     query = "wordMarkSpecification.verbalElement==*Apple* and status==REGISTERED"
 
-    async with _client(lambda r: httpx.Response(200, json=fixture), seen) as client:
+    async with _client(lambda r: httpx2.Response(200, json=fixture), seen) as client:
         result = await client.search(
             query=query, page=2, size=10, sort="applicationDate:desc", fields="!(goodsAndServices)"
         )
@@ -116,9 +116,9 @@ async def test_search_sends_rsql_query_paging_sort_and_fields() -> None:
 
 async def test_search_defaults_send_only_page_and_size() -> None:
     fixture = json.loads((FIXTURES / "tm_list_size10.json").read_text())
-    seen: list[httpx.Request] = []
+    seen: list[httpx2.Request] = []
 
-    async with _client(lambda r: httpx.Response(200, json=fixture), seen) as client:
+    async with _client(lambda r: httpx2.Response(200, json=fixture), seen) as client:
         result = await client.search()
 
     (request,) = api_requests(seen)
@@ -133,17 +133,17 @@ async def test_search_defaults_send_only_page_and_size() -> None:
 async def test_search_rejects_out_of_range_paging_without_a_request(
     kwargs: dict, message: str
 ) -> None:
-    seen: list[httpx.Request] = []
-    async with _client(lambda r: httpx.Response(200, json={}), seen) as client:
+    seen: list[httpx2.Request] = []
+    async with _client(lambda r: httpx2.Response(200, json={}), seen) as client:
         with pytest.raises(ValueError, match=message):
             await client.search(**kwargs)
     assert seen == []
 
 
 async def test_get_trademark_requests_detail_path_and_parses_record() -> None:
-    seen: list[httpx.Request] = []
+    seen: list[httpx2.Request] = []
 
-    async with _client(lambda r: httpx.Response(200, json=TRADEMARK_DETAIL), seen) as client:
+    async with _client(lambda r: httpx2.Response(200, json=TRADEMARK_DETAIL), seen) as client:
         tm = await client.get_trademark("000428557")
 
     (request,) = api_requests(seen)
@@ -174,8 +174,8 @@ async def test_get_trademark_parses_multilingual_description_and_disclaimer() ->
         "description": [{"language": "en", "text": "The mark is golden."}],
         "disclaimer": [{"language": "en", "text": "No exclusive right to 'Apple'."}],
     }
-    seen: list[httpx.Request] = []
-    async with _client(lambda r: httpx.Response(200, json=payload), seen) as client:
+    seen: list[httpx2.Request] = []
+    async with _client(lambda r: httpx2.Response(200, json=payload), seen) as client:
         tm = await client.get_trademark("000428557")
     assert [(d.language, d.text) for d in tm.description] == [("en", "The mark is golden.")]
     assert [(d.language, d.text) for d in tm.disclaimer] == [
@@ -197,10 +197,10 @@ async def test_media_methods_request_media_path_and_return_raw_bytes(
     method: str, path: str, content_type: str
 ) -> None:
     body = b"\x00\x01binary-" + method.encode()
-    seen: list[httpx.Request] = []
+    seen: list[httpx2.Request] = []
 
     async with _client(
-        lambda r: httpx.Response(200, content=body, headers={"Content-Type": content_type}), seen
+        lambda r: httpx2.Response(200, content=body, headers={"Content-Type": content_type}), seen
     ) as client:
         result = await getattr(client, method)("W01234567")
 

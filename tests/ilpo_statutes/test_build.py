@@ -6,7 +6,7 @@ smoke task, not a unit test. We do exercise:
 * ``parse_sections`` on synthetic, easy-to-read plaintext.
 * ``write_corpus`` round-trip (rows + meta).
 * The argparse main loop with a mocked ``build_corpus`` coroutine.
-* ``IlpoStatutesFetcher`` HTTP shape with ``httpx.MockTransport``.
+* ``IlpoStatutesFetcher`` HTTP shape with ``httpx2.MockTransport``.
 """
 
 from __future__ import annotations
@@ -17,7 +17,7 @@ from collections.abc import Callable
 from pathlib import Path
 from unittest.mock import AsyncMock, patch
 
-import httpx
+import httpx2
 import pytest
 
 from patent_client_agents.ilpo_statutes.corpus.build import (
@@ -34,8 +34,8 @@ from patent_client_agents.ilpo_statutes.corpus.build import (
 from patent_client_agents.ilpo_statutes.corpus.schema import SCHEMA_VERSION
 
 
-def _mock_http(handler: Callable[[httpx.Request], httpx.Response]) -> httpx.AsyncClient:
-    return httpx.AsyncClient(transport=httpx.MockTransport(handler))
+def _mock_http(handler: Callable[[httpx2.Request], httpx2.Response]) -> httpx2.AsyncClient:
+    return httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
 
 
 # ──────────────────────────────────────────────────────────────────────
@@ -162,11 +162,11 @@ def test_write_corpus_overwrites_existing(tmp_path: Path) -> None:
 
 @pytest.mark.asyncio
 async def test_fetcher_gets_pdf_bytes() -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, content=b"%PDF-1.4 ...")
+        return httpx2.Response(200, content=b"%PDF-1.4 ...")
 
     async with IlpoStatutesFetcher() as fetcher:
         # Swap the internal client to the mock so we don't actually call WIPO.
@@ -205,12 +205,12 @@ def test_build_corpus_fetch_failure_skips(tmp_path: Path) -> None:
     """A fetch failure for one statute should not abort the whole build."""
 
     async def bad_fetch(*_args: object, **_kwargs: object) -> bytes:
-        raise httpx.HTTPError("simulated")
+        raise httpx2.HTTPError("simulated")
 
     output = tmp_path / "ilpo.db"
     with patch("patent_client_agents.ilpo_statutes.corpus.build.IlpoStatutesFetcher") as mock_cls:
         instance = mock_cls.return_value.__aenter__.return_value
-        instance.fetch = AsyncMock(side_effect=httpx.HTTPError("simulated"))
+        instance.fetch = AsyncMock(side_effect=httpx2.HTTPError("simulated"))
         # `build_corpus` swallows fetch errors per-statute and still writes
         # the (possibly empty) corpus.
         count = asyncio.run(build_corpus(output, sources=SOURCES[:1]))

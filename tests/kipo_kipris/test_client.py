@@ -8,7 +8,7 @@ Layers exercised:
 * KIPRIS date parsing (``YYYYMMDD``, empty, ``"00000000"``, None).
 * ``paginate()`` page-walking behaviour incl. short-page termination
   and ``max_pages`` cap.
-* Per-service methods using ``httpx.MockTransport`` to confirm the
+* Per-service methods using ``httpx2.MockTransport`` to confirm the
   upstream URL shape (service prefix + operation) and parsing pipeline.
 
 No live KIPRIS traffic is recorded (no ``serviceKey`` available in v1 —
@@ -20,7 +20,7 @@ from __future__ import annotations
 from collections.abc import Callable
 from pathlib import Path
 
-import httpx
+import httpx2
 import pytest
 
 from mcp_data_core.exceptions import ApiError, ConfigurationError
@@ -40,10 +40,10 @@ from patent_client_agents.kipo_kipris.client import (
 
 
 def _mock_http(
-    handler: Callable[[httpx.Request], httpx.Response],
-) -> httpx.AsyncClient:
+    handler: Callable[[httpx2.Request], httpx2.Response],
+) -> httpx2.AsyncClient:
     """Build an AsyncClient with a MockTransport for offline tests."""
-    return httpx.AsyncClient(transport=httpx.MockTransport(handler))
+    return httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
 
 
 def _read_fixture(name: str) -> bytes:
@@ -246,8 +246,8 @@ async def test_paginate_walks_pages_and_terminates_on_short(
     ]
     page_iter = iter(page_xmls)
 
-    def handler(request: httpx.Request) -> httpx.Response:
-        return httpx.Response(200, content=next(page_iter))
+    def handler(request: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(200, content=next(page_iter))
 
     async with KiprisClient(client=_mock_http(handler)) as client:
         rows = []
@@ -276,8 +276,8 @@ async def test_paginate_max_pages_caps_iteration(
     page_xmls = [_read_fixture("pat_utl_word_search_page1_full.xml")]
     page_iter = iter(page_xmls)
 
-    def handler(request: httpx.Request) -> httpx.Response:
-        return httpx.Response(200, content=next(page_iter))
+    def handler(request: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(200, content=next(page_iter))
 
     async with KiprisClient(client=_mock_http(handler)) as client:
         rows = []
@@ -298,11 +298,11 @@ async def test_paginate_clamps_num_of_rows_to_max(
 ) -> None:
     """``num_of_rows`` over ``MAX_NUM_OF_ROWS`` is clamped before the request."""
     monkeypatch.setenv("KIPO_KIPRIS_API_KEY", "k")
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, content=_read_fixture("pat_utl_word_search_empty.xml"))
+        return httpx2.Response(200, content=_read_fixture("pat_utl_word_search_empty.xml"))
 
     async with KiprisClient(client=_mock_http(handler)) as client:
         async for _ in client.paginate(
@@ -326,11 +326,11 @@ async def test_search_patents_word_url_and_params(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setenv("KIPO_KIPRIS_API_KEY", "live-key")
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, content=_read_fixture("pat_utl_word_search_2rows.xml"))
+        return httpx2.Response(200, content=_read_fixture("pat_utl_word_search_2rows.xml"))
 
     async with KiprisClient(client=_mock_http(handler)) as client:
         items, pagination = await client.search_patents_word(
@@ -352,11 +352,11 @@ async def test_search_patents_advanced_passes_filters(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setenv("KIPO_KIPRIS_API_KEY", "k")
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, content=_read_fixture("pat_utl_word_search_2rows.xml"))
+        return httpx2.Response(200, content=_read_fixture("pat_utl_word_search_2rows.xml"))
 
     async with KiprisClient(client=_mock_http(handler)) as client:
         await client.search_patents_advanced(
@@ -379,11 +379,11 @@ async def test_search_patents_advanced_passes_filters(
 @pytest.mark.asyncio
 async def test_get_patent_by_number(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("KIPO_KIPRIS_API_KEY", "k")
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, content=_read_fixture("pat_utl_get_single.xml"))
+        return httpx2.Response(200, content=_read_fixture("pat_utl_get_single.xml"))
 
     async with KiprisClient(client=_mock_http(handler)) as client:
         items, _ = await client.get_patent("1020230012345")
@@ -403,11 +403,11 @@ async def test_search_trademarks_word_shape(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setenv("KIPO_KIPRIS_API_KEY", "k")
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, content=_read_fixture("tm_word_search_2rows.xml"))
+        return httpx2.Response(200, content=_read_fixture("tm_word_search_2rows.xml"))
 
     async with KiprisClient(client=_mock_http(handler)) as client:
         items, _ = await client.search_trademarks_word(word="GALAXY")
@@ -424,11 +424,11 @@ async def test_search_trademarks_advanced_passes_filters(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setenv("KIPO_KIPRIS_API_KEY", "k")
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, content=_read_fixture("tm_word_search_2rows.xml"))
+        return httpx2.Response(200, content=_read_fixture("tm_word_search_2rows.xml"))
 
     async with KiprisClient(client=_mock_http(handler)) as client:
         await client.search_trademarks_advanced(
@@ -449,11 +449,11 @@ async def test_search_trademarks_advanced_passes_filters(
 @pytest.mark.asyncio
 async def test_get_trademark_by_number(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("KIPO_KIPRIS_API_KEY", "k")
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, content=_read_fixture("tm_get_single.xml"))
+        return httpx2.Response(200, content=_read_fixture("tm_get_single.xml"))
 
     async with KiprisClient(client=_mock_http(handler)) as client:
         items, _ = await client.get_trademark("4020230123456")
@@ -471,11 +471,11 @@ async def test_get_trademark_by_number(monkeypatch: pytest.MonkeyPatch) -> None:
 @pytest.mark.asyncio
 async def test_search_designs_word_shape(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("KIPO_KIPRIS_API_KEY", "k")
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, content=_read_fixture("design_word_search_1row.xml"))
+        return httpx2.Response(200, content=_read_fixture("design_word_search_1row.xml"))
 
     async with KiprisClient(client=_mock_http(handler)) as client:
         items, _ = await client.search_designs_word(word="휴대용 전화기")
@@ -490,11 +490,11 @@ async def test_search_designs_advanced_passes_filters(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setenv("KIPO_KIPRIS_API_KEY", "k")
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, content=_read_fixture("design_word_search_1row.xml"))
+        return httpx2.Response(200, content=_read_fixture("design_word_search_1row.xml"))
 
     async with KiprisClient(client=_mock_http(handler)) as client:
         await client.search_designs_advanced(
@@ -512,11 +512,11 @@ async def test_search_designs_advanced_passes_filters(
 @pytest.mark.asyncio
 async def test_get_design_by_number(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("KIPO_KIPRIS_API_KEY", "k")
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, content=_read_fixture("design_get_single.xml"))
+        return httpx2.Response(200, content=_read_fixture("design_get_single.xml"))
 
     async with KiprisClient(client=_mock_http(handler)) as client:
         items, _ = await client.get_design("3020230012345")
@@ -550,8 +550,8 @@ async def test_non_success_status_raises_api_error(
 ) -> None:
     monkeypatch.setenv("KIPO_KIPRIS_API_KEY", "k")
 
-    def handler(request: httpx.Request) -> httpx.Response:
-        return httpx.Response(500, text="upstream blew up")
+    def handler(request: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(500, text="upstream blew up")
 
     async with KiprisClient(client=_mock_http(handler)) as client:
         with pytest.raises(ApiError, match="500"):
@@ -566,8 +566,8 @@ async def test_rate_limit_raises_rate_limit_error(
     monkeypatch.setenv("KIPO_KIPRIS_API_KEY", "k")
     from mcp_data_core.exceptions import RateLimitError
 
-    def handler(request: httpx.Request) -> httpx.Response:
-        return httpx.Response(429, text="slow down")
+    def handler(request: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(429, text="slow down")
 
     async with KiprisClient(client=_mock_http(handler)) as client:
         with pytest.raises(RateLimitError):

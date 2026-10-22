@@ -6,7 +6,7 @@ import itertools
 import json
 from collections.abc import Awaitable, Callable
 
-import httpx
+import httpx2
 
 BASE = "https://ppubs.uspto.gov"
 SESSION = "/api/users/me/session"
@@ -41,7 +41,7 @@ DOCUMENT = {
     "imageLocation": "pgpub/2023/0123/456",
 }
 
-Reply = httpx.Response | Exception | Callable[[httpx.Request], Awaitable[httpx.Response]]
+Reply = httpx2.Response | Exception | Callable[[httpx2.Request], Awaitable[httpx2.Response]]
 
 
 class FakePpubs:
@@ -54,7 +54,7 @@ class FakePpubs:
     """
 
     def __init__(self) -> None:
-        self.requests: list[httpx.Request] = []
+        self.requests: list[httpx2.Request] = []
         self._case_ids = itertools.chain((123, 456, 789), itertools.count(1000))
         self.case_id: int | None = None
         self.token: str | None = None
@@ -64,20 +64,20 @@ class FakePpubs:
         """Answer the next requests to ``path`` with ``replies``, in order."""
         self._queued.setdefault(path, []).extend(replies)
 
-    def always(self, path: str, reply: httpx.Response) -> None:
+    def always(self, path: str, reply: httpx2.Response) -> None:
         self.queue(path, *[reply] * 50)
 
     def expire_session(self) -> None:
         self.case_id = None
         self.token = None
 
-    def hits(self, path: str) -> list[httpx.Request]:
+    def hits(self, path: str) -> list[httpx2.Request]:
         return [r for r in self.requests if r.url.path == path]
 
-    def transport(self) -> httpx.MockTransport:
-        return httpx.MockTransport(self._handle)
+    def transport(self) -> httpx2.MockTransport:
+        return httpx2.MockTransport(self._handle)
 
-    async def _handle(self, request: httpx.Request) -> httpx.Response:
+    async def _handle(self, request: httpx2.Request) -> httpx2.Response:
         self.requests.append(request)
         path = request.url.path
         queued = self._queued.get(path)
@@ -85,46 +85,46 @@ class FakePpubs:
             reply = queued.pop(0)
             if isinstance(reply, Exception):
                 raise reply
-            if isinstance(reply, httpx.Response):
+            if isinstance(reply, httpx2.Response):
                 return reply
             return await reply(request)
         if path == "/pubwebapp/":
-            return httpx.Response(200, text="<html></html>")
+            return httpx2.Response(200, text="<html></html>")
         if path == SESSION:
             self.case_id = next(self._case_ids)
             self.token = f"token-{self.case_id}"
-            return httpx.Response(
+            return httpx2.Response(
                 200,
                 json={"userCase": {"caseId": self.case_id}},
                 headers={"X-Access-Token": self.token},
             )
         if not self.session_ok(request):
-            return httpx.Response(403, text="session expired")
+            return httpx2.Response(403, text="session expired")
         return self.default_api_reply(request)
 
-    def session_ok(self, request: httpx.Request) -> bool:
+    def session_ok(self, request: httpx2.Request) -> bool:
         if self.token is None or request.headers.get("X-Access-Token") != self.token:
             return False
         return case_id_of(request) in (None, self.case_id)
 
-    def default_api_reply(self, request: httpx.Request) -> httpx.Response:
+    def default_api_reply(self, request: httpx2.Request) -> httpx2.Response:
         path = request.url.path
         if path == COUNTS:
-            return httpx.Response(200, json={"numResults": 1})
+            return httpx2.Response(200, json={"numResults": 1})
         if path == SEARCH:
-            return httpx.Response(200, json=SEARCH_PAGE)
+            return httpx2.Response(200, json=SEARCH_PAGE)
         if path == f"{HIGHLIGHT}/{DOCUMENT['guid']}":
-            return httpx.Response(200, json=DOCUMENT)
+            return httpx2.Response(200, json=DOCUMENT)
         if path == PRINT_REQUEST:
-            return httpx.Response(200, text='"job-1"')
+            return httpx2.Response(200, text='"job-1"')
         if path == PRINT_STATUS:
-            return httpx.Response(200, json=[{"printStatus": "COMPLETED", "pdfName": "doc.pdf"}])
+            return httpx2.Response(200, json=[{"printStatus": "COMPLETED", "pdfName": "doc.pdf"}])
         if path == f"{PRINT_SAVE}/doc.pdf":
-            return httpx.Response(200, content=PDF_BYTES)
-        return httpx.Response(404)
+            return httpx2.Response(200, content=PDF_BYTES)
+        return httpx2.Response(404)
 
 
-def case_id_of(request: httpx.Request) -> int | None:
+def case_id_of(request: httpx2.Request) -> int | None:
     if not request.content:
         return None
     body = json.loads(request.content)

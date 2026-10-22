@@ -2,7 +2,7 @@
 
 Constructor wiring + ``POST /search/quick`` body shaping + the
 ``GET /trade-mark/{n}`` detail path. HTTP mocked with
-``httpx.MockTransport``; no live API calls.
+``httpx2.MockTransport``; no live API calls.
 """
 
 from __future__ import annotations
@@ -10,7 +10,7 @@ from __future__ import annotations
 import json
 from collections.abc import Callable
 
-import httpx
+import httpx2
 import pytest
 
 from mcp_data_core.exceptions import ConfigurationError
@@ -25,16 +25,16 @@ def _au_env(monkeypatch: pytest.MonkeyPatch) -> None:
 
 
 def _mock_transport(
-    handler: Callable[[httpx.Request], httpx.Response],
-) -> httpx.MockTransport:
+    handler: Callable[[httpx2.Request], httpx2.Response],
+) -> httpx2.MockTransport:
     """Serve the OAuth token endpoint, and hand API requests to ``handler``."""
 
-    def route(request: httpx.Request) -> httpx.Response:
+    def route(request: httpx2.Request) -> httpx2.Response:
         if request.url.path.endswith("/access_token"):
-            return httpx.Response(200, json={"access_token": "tok", "expires_in": 3600})
+            return httpx2.Response(200, json={"access_token": "tok", "expires_in": 3600})
         return handler(request)
 
-    return httpx.MockTransport(route)
+    return httpx2.MockTransport(route)
 
 
 def test_missing_env_raises_configuration_error(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -62,11 +62,11 @@ def test_sandbox_environment_swaps_host(monkeypatch: pytest.MonkeyPatch) -> None
 
 @pytest.mark.asyncio
 async def test_search_posts_quick_endpoint_with_query(_au_env: None) -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(
+        return httpx2.Response(
             200,
             json={
                 "results": [
@@ -100,11 +100,11 @@ async def test_search_posts_quick_endpoint_with_query(_au_env: None) -> None:
 
 @pytest.mark.asyncio
 async def test_search_serializes_quick_search_type_filter(_au_env: None) -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, json={"results": [], "total": 0})
+        return httpx2.Response(200, json={"results": [], "total": 0})
 
     async with IpAustraliaTrademarksClient(
         transport=_mock_transport(handler), use_cache=False
@@ -131,11 +131,11 @@ async def test_search_serializes_quick_search_type_filter(_au_env: None) -> None
 
 @pytest.mark.asyncio
 async def test_search_omits_optional_blocks_when_unset(_au_env: None) -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, json={"results": [], "total": 0})
+        return httpx2.Response(200, json={"results": [], "total": 0})
 
     async with IpAustraliaTrademarksClient(
         transport=_mock_transport(handler), use_cache=False
@@ -150,11 +150,11 @@ async def test_search_omits_optional_blocks_when_unset(_au_env: None) -> None:
 
 @pytest.mark.asyncio
 async def test_get_trademark_hits_detail_endpoint(_au_env: None) -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(
+        return httpx2.Response(
             200,
             json={
                 "serialNumber": "1234567",

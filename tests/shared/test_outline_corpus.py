@@ -9,7 +9,7 @@ import sqlite3
 import warnings
 from pathlib import Path
 
-import httpx
+import httpx2
 import pytest
 
 from mcp_data_core.corpus_db import OutlineCorpusDB
@@ -290,7 +290,7 @@ def test_section_input_accepts_href_alias() -> None:
 # --- epo.org crawls ----------------------------------------------------------
 
 
-def _book_pages(request: httpx.Request) -> str | None:
+def _book_pages(request: httpx2.Request) -> str | None:
     path = request.url.path
     if path.endswith("/toc.html"):
         return '<a href="x1.html"></a><a href="x2.html"></a><a href="x3.html"></a>'
@@ -300,7 +300,7 @@ def _book_pages(request: httpx.Request) -> str | None:
     return f"<html><main><nav>menu</nav><h1>Title {name}</h1><p>Body {name}</p></main></html>"
 
 
-async def _discover(client: httpx.AsyncClient, base_path: str) -> list[str]:
+async def _discover(client: httpx2.AsyncClient, base_path: str) -> list[str]:
     toc = await epo_legal.fetch_text(client, f"{base_path}/toc.html")
     return sorted(set(re.findall(r'href="(x\d)\.html"', toc)))
 
@@ -336,7 +336,7 @@ def test_build_book_corpus_skips_failed_pages(
     assert requested[-1] == "https://www.epo.org/en/legal/demo/2030/x3"
 
 
-def _guidelines_pages(request: httpx.Request) -> str | None:
+def _guidelines_pages(request: httpx2.Request) -> str | None:
     path = request.url.path
     if path == "/en/legal/guidelines-pct/2024/index.html":
         return '<a href="/en/legal/guidelines-pct/2024/a.html">A</a>'

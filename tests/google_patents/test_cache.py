@@ -7,7 +7,7 @@ import time
 from collections.abc import Generator
 from pathlib import Path
 
-import httpx
+import httpx2
 import pytest
 
 from patent_client_agents.google_patents.cache import (
@@ -85,10 +85,10 @@ class TestCachingAsyncClient:
 
     @pytest.mark.asyncio
     async def test_get_caches_successful_response(self, temp_cache: PatentCache) -> None:
-        def handler(request: httpx.Request) -> httpx.Response:
-            return httpx.Response(200, text="<html>Mocked response</html>")
+        def handler(request: httpx2.Request) -> httpx2.Response:
+            return httpx2.Response(200, text="<html>Mocked response</html>")
 
-        mock_transport = httpx.MockTransport(handler)
+        mock_transport = httpx2.MockTransport(handler)
         client = CachingAsyncClient(cache=temp_cache, transport=mock_transport)
 
         async with client:
@@ -106,12 +106,12 @@ class TestCachingAsyncClient:
 
         call_count = 0
 
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             nonlocal call_count
             call_count += 1
-            return httpx.Response(200, text="<html>Fresh content</html>")
+            return httpx2.Response(200, text="<html>Fresh content</html>")
 
-        mock_transport = httpx.MockTransport(handler)
+        mock_transport = httpx2.MockTransport(handler)
         client = CachingAsyncClient(cache=temp_cache, transport=mock_transport)
 
         async with client:
@@ -127,15 +127,15 @@ class TestCachingAsyncClient:
         pdf = b"%PDF-1.4\n\xe2\xe3\xcf\xd3\n1 0 obj\n\xff\xfe\x00binary"
         calls = 0
 
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             nonlocal calls
             calls += 1
-            return httpx.Response(200, content=pdf, headers={"content-type": "application/pdf"})
+            return httpx2.Response(200, content=pdf, headers={"content-type": "application/pdf"})
 
         url = "https://patentimages.storage.googleapis.com/x/US10123456.pdf"
         for _ in range(2):
             async with CachingAsyncClient(
-                cache=temp_cache, transport=httpx.MockTransport(handler)
+                cache=temp_cache, transport=httpx2.MockTransport(handler)
             ) as client:
                 response = await client.get(url)
             assert response.content == pdf
@@ -144,10 +144,10 @@ class TestCachingAsyncClient:
 
     @pytest.mark.asyncio
     async def test_get_without_cache(self) -> None:
-        def handler(request: httpx.Request) -> httpx.Response:
-            return httpx.Response(200, text="Response without caching")
+        def handler(request: httpx2.Request) -> httpx2.Response:
+            return httpx2.Response(200, text="Response without caching")
 
-        mock_transport = httpx.MockTransport(handler)
+        mock_transport = httpx2.MockTransport(handler)
         client = CachingAsyncClient(cache=None, transport=mock_transport)
 
         async with client:
@@ -157,10 +157,10 @@ class TestCachingAsyncClient:
 
     @pytest.mark.asyncio
     async def test_get_does_not_cache_non_200(self, temp_cache: PatentCache) -> None:
-        def handler(request: httpx.Request) -> httpx.Response:
-            return httpx.Response(404, text="Not found")
+        def handler(request: httpx2.Request) -> httpx2.Response:
+            return httpx2.Response(404, text="Not found")
 
-        mock_transport = httpx.MockTransport(handler)
+        mock_transport = httpx2.MockTransport(handler)
         client = CachingAsyncClient(cache=temp_cache, transport=mock_transport)
 
         async with client:
@@ -174,11 +174,11 @@ class TestCachingAsyncClient:
     async def test_custom_headers(self, temp_cache: PatentCache) -> None:
         captured_headers = {}
 
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             captured_headers.update(request.headers)
-            return httpx.Response(200, text="OK")
+            return httpx2.Response(200, text="OK")
 
-        mock_transport = httpx.MockTransport(handler)
+        mock_transport = httpx2.MockTransport(handler)
         client = CachingAsyncClient(
             cache=temp_cache,
             headers={"X-Custom-Header": "test-value"},

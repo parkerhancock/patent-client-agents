@@ -3,7 +3,7 @@ from __future__ import annotations
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
-import httpx
+import httpx2
 import pytest
 
 from patent_client_agents.ipi_swissreg import api
@@ -30,12 +30,12 @@ def wire(
     requests: list[ET.Element] = []
     closed: list[IpiSwissregClient] = []
 
-    async def handler(request: httpx.Request) -> httpx.Response:
+    async def handler(request: httpx2.Request) -> httpx2.Response:
         if str(request.url) == TOKEN_URL:
-            return httpx.Response(200, json={"access_token": "mock-access", "expires_in": 600})
+            return httpx2.Response(200, json={"access_token": "mock-access", "expires_in": 600})
         assert str(request.url) == BASE_URL
         requests.append(ET.fromstring(request.content))
-        return httpx.Response(200, content=(fixture_dir / served["file"]).read_bytes())
+        return httpx2.Response(200, content=(fixture_dir / served["file"]).read_bytes())
 
     class Tracked(IpiSwissregClient):
         async def __aexit__(self, *exc: object) -> None:
@@ -43,7 +43,7 @@ def wire(
             closed.append(self)
 
     def factory() -> IpiSwissregClient:
-        return Tracked("api-user", "api-password", transport=httpx.MockTransport(handler))
+        return Tracked("api-user", "api-password", transport=httpx2.MockTransport(handler))
 
     monkeypatch.setattr(api, "IpiSwissregClient", factory)
     return served, requests, closed

@@ -10,7 +10,7 @@ from collections.abc import Callable
 from pathlib import Path
 from typing import Any
 
-import httpx
+import httpx2
 import pytest
 
 from patent_client_agents.shared.corpus import (
@@ -153,14 +153,14 @@ def test_load_jsonl_seed_rejects_bad_rows(tmp_path: Path, line: str, message: st
 
 
 def test_fetch_text_follows_redirects() -> None:
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         if request.url.path == "/old":
-            return httpx.Response(301, headers={"Location": "/new"})
-        return httpx.Response(200, text="body")
+            return httpx2.Response(301, headers={"Location": "/new"})
+        return httpx2.Response(200, text="body")
 
     async def run() -> str:
-        async with httpx.AsyncClient(
-            base_url="https://example.test", transport=httpx.MockTransport(handler)
+        async with httpx2.AsyncClient(
+            base_url="https://example.test", transport=httpx2.MockTransport(handler)
         ) as client:
             return await fetch_text(client, "/old")
 

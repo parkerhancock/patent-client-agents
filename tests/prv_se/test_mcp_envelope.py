@@ -12,7 +12,7 @@ from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from pathlib import Path
 
-import httpx
+import httpx2
 import pytest
 
 from mcp_data_core.envelope import ListEnvelope
@@ -34,7 +34,7 @@ def _fixture(name: str) -> dict:
 
 @asynccontextmanager
 async def _mock_client(handler) -> AsyncIterator[PrvClient]:  # type: ignore[no-untyped-def]
-    client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+    client = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
     async with PrvClient(client=client) as wrapped:
         yield wrapped
 
@@ -46,12 +46,12 @@ async def _mock_client(handler) -> AsyncIterator[PrvClient]:  # type: ignore[no-
 
 @pytest.mark.asyncio
 async def test_search_prv_patents_envelope(monkeypatch: pytest.MonkeyPatch) -> None:
-    def handler(_req: httpx.Request) -> httpx.Response:
-        return httpx.Response(200, json=_fixture("patents-search.json"))
+    def handler(_req: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(200, json=_fixture("patents-search.json"))
 
     @asynccontextmanager
     async def _factory() -> AsyncIterator[PrvClient]:
-        client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        client = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
         async with PrvClient(client=client) as c:
             yield c
 
@@ -78,12 +78,12 @@ async def test_search_prv_patents_envelope(monkeypatch: pytest.MonkeyPatch) -> N
 async def test_get_prv_patent_envelope_lean_drops_drawing(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    def handler(_req: httpx.Request) -> httpx.Response:
-        return httpx.Response(200, json=_fixture("patent-get.json"))
+    def handler(_req: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(200, json=_fixture("patent-get.json"))
 
     @asynccontextmanager
     async def _factory() -> AsyncIterator[PrvClient]:
-        client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        client = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
         async with PrvClient(client=client) as c:
             yield c
 
@@ -108,12 +108,12 @@ async def test_get_prv_patent_envelope_lean_drops_drawing(
 async def test_get_prv_patent_envelope_full_keeps_drawing(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    def handler(_req: httpx.Request) -> httpx.Response:
-        return httpx.Response(200, json=_fixture("patent-get.json"))
+    def handler(_req: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(200, json=_fixture("patent-get.json"))
 
     @asynccontextmanager
     async def _factory() -> AsyncIterator[PrvClient]:
-        client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        client = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
         async with PrvClient(client=client) as c:
             yield c
 
@@ -130,15 +130,15 @@ async def test_get_prv_patent_envelope_full_keeps_drawing(
 
 @pytest.mark.asyncio
 async def test_get_prv_patent_accepts_list(monkeypatch: pytest.MonkeyPatch) -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, json=_fixture("patent-get.json"))
+        return httpx2.Response(200, json=_fixture("patent-get.json"))
 
     @asynccontextmanager
     async def _factory() -> AsyncIterator[PrvClient]:
-        client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        client = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
         async with PrvClient(client=client) as c:
             yield c
 
@@ -156,14 +156,14 @@ async def test_get_prv_patent_accepts_list(monkeypatch: pytest.MonkeyPatch) -> N
 async def test_get_prv_patent_list_reports_missing_number(monkeypatch: pytest.MonkeyPatch) -> None:
     from mcp_data_core.exceptions import NotFoundError
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         if "9999" in str(request.url):
-            return httpx.Response(404, json={"message": "not found"})
-        return httpx.Response(200, json=_fixture("patent-get.json"))
+            return httpx2.Response(404, json={"message": "not found"})
+        return httpx2.Response(200, json=_fixture("patent-get.json"))
 
     @asynccontextmanager
     async def _factory() -> AsyncIterator[PrvClient]:
-        client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        client = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
         async with PrvClient(client=client) as c:
             yield c
 
@@ -198,12 +198,12 @@ async def test_get_prv_patent_rejects_empty_input() -> None:
 async def test_search_prv_trademarks_envelope(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    def handler(_req: httpx.Request) -> httpx.Response:
-        return httpx.Response(200, json=_fixture("tm-search.json"))
+    def handler(_req: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(200, json=_fixture("tm-search.json"))
 
     @asynccontextmanager
     async def _factory() -> AsyncIterator[PrvClient]:
-        client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        client = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
         async with PrvClient(client=client) as c:
             yield c
 
@@ -228,12 +228,12 @@ async def test_search_prv_trademarks_envelope(
 async def test_search_prv_designs_envelope(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    def handler(_req: httpx.Request) -> httpx.Response:
-        return httpx.Response(200, json=_fixture("design-search.json"))
+    def handler(_req: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(200, json=_fixture("design-search.json"))
 
     @asynccontextmanager
     async def _factory() -> AsyncIterator[PrvClient]:
-        client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        client = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
         async with PrvClient(client=client) as c:
             yield c
 
@@ -256,12 +256,12 @@ async def test_search_prv_designs_envelope(
 
 @pytest.mark.asyncio
 async def test_search_prv_spcs_envelope(monkeypatch: pytest.MonkeyPatch) -> None:
-    def handler(_req: httpx.Request) -> httpx.Response:
-        return httpx.Response(200, json=_fixture("spc-search.json"))
+    def handler(_req: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(200, json=_fixture("spc-search.json"))
 
     @asynccontextmanager
     async def _factory() -> AsyncIterator[PrvClient]:
-        client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        client = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
         async with PrvClient(client=client) as c:
             yield c
 

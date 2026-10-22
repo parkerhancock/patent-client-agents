@@ -32,7 +32,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
-import httpx
+import httpx2
 from lxml import html
 
 from mcp_data_core.corpus_compression import finalize_outline_corpus
@@ -176,12 +176,12 @@ class EpoGuidelinesClient(EpoLegalClient[ResponseT, SectionT, VersionT]):
 # -- Build side ----------------------------------------------------------------
 
 
-def http_client(base_url: str, user_agent: str) -> httpx.AsyncClient:
+def http_client(base_url: str, user_agent: str) -> httpx2.AsyncClient:
     """The HTTP client the epo.org crawls use."""
-    return httpx.AsyncClient(
+    return httpx2.AsyncClient(
         base_url=base_url,
         headers={"User-Agent": user_agent, "Accept": "text/html"},
-        timeout=httpx.Timeout(30.0, connect=10.0),
+        timeout=httpx2.Timeout(30.0, connect=10.0),
     )
 
 
@@ -235,7 +235,7 @@ def _book_meta(base_url: str, base_path: str, year_key: str, year: str) -> list[
     ]
 
 
-async def _fetch_page(client: httpx.AsyncClient, path: str) -> str | None:
+async def _fetch_page(client: httpx2.AsyncClient, path: str) -> str | None:
     try:
         return await fetch_text(client, path)
     except Exception as exc:
@@ -271,7 +271,7 @@ async def build_book_corpus(
     year_key: str,
     year: str,
     pages: BookPages,
-    discover: Callable[[httpx.AsyncClient, str], Awaitable[list[str]]],
+    discover: Callable[[httpx2.AsyncClient, str], Awaitable[list[str]]],
     base_url: str = DEFAULT_BASE_URL,
     user_agent: str = DEFAULT_USER_AGENT,
     pause: float = 0.3,

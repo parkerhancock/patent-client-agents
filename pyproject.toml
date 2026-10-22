@@ -19,16 +19,16 @@ classifiers = [
     "Topic :: Scientific/Engineering",
 ]
 dependencies = [
-    "mcp-data-core>=0.13.0",
+    "mcp-data-core>=0.14.0",
     "anyio>=4.4",
-    "httpx>=0.27",
+    "httpx2>=2.13.1",
     "h2>=4.1",
     "lxml>=5.2",
     "cssselect>=1.2",
     "pydantic>=2.7",
     "python-dateutil>=2.9",
     "tenacity>=8.4",
-    "hishel[async]>=1.1.3",
+    "hishel[async,httpx2]>=1.4.0",
     # Google Patents description HTML -> Markdown (google_patents/markdown.py).
     "markdownify>=1.2",
     "beautifulsoup4>=4.12",

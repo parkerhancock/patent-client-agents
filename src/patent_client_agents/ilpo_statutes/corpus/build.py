@@ -35,7 +35,7 @@ from datetime import UTC, datetime
 from io import BytesIO
 from pathlib import Path
 
-import httpx
+import httpx2
 from pypdf import PdfReader
 
 from mcp_data_core.resilience import default_retryer
@@ -246,9 +246,9 @@ class IlpoStatutesFetcher:
         timeout: float = 120.0,
         user_agent: str = DEFAULT_USER_AGENT,
     ) -> None:
-        self._client = httpx.AsyncClient(
+        self._client = httpx2.AsyncClient(
             headers={"User-Agent": user_agent, "Accept": "application/pdf"},
-            timeout=httpx.Timeout(timeout, connect=10.0),
+            timeout=httpx2.Timeout(timeout, connect=10.0),
             follow_redirects=True,
         )
 

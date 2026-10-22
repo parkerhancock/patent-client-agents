@@ -1,7 +1,7 @@
 """Behavioral tests for the TIPO module-level helpers.
 
 Each helper is exercised end to end through a real ``TipoClient`` wired to an
-``httpx.MockTransport``: the outgoing query string, the parsed rows, and that
+``httpx2.MockTransport``: the outgoing query string, the parsed rows, and that
 the client is exited after the call.
 """
 
@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from typing import Any
 
-import httpx
+import httpx2
 import pytest
 
 import patent_client_agents.tipo_opdata.api as api
@@ -20,18 +20,18 @@ from patent_client_agents.tipo_opdata.client import TipoClient
 @pytest.fixture
 def wire(
     monkeypatch: pytest.MonkeyPatch,
-) -> tuple[list[httpx.Request], list[TipoClient]]:
+) -> tuple[list[httpx2.Request], list[TipoClient]]:
     """Route ``api`` through a real client answering one ``sequence: 7`` row.
 
     Returns ``(captured, closed)``: requests and exited clients.
     """
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
     closed: list[TipoClient] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
         payload = {"status": "OK", "total-count": 1, "wrapper": {"content": [{"sequence": 7}]}}
-        return httpx.Response(200, json=payload)
+        return httpx2.Response(200, json=payload)
 
     class Tracked(TipoClient):
         async def __aexit__(self, *exc: object) -> None:
@@ -39,7 +39,7 @@ def wire(
             closed.append(self)
 
     def factory() -> TipoClient:
-        http = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        http = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
         return Tracked(tk="test-tk", client=http)
 
     monkeypatch.setattr(api, "TipoClient", factory)
@@ -67,7 +67,7 @@ def wire(
     ],
 )
 async def test_search_helpers_send_filters_and_paging(
-    wire: tuple[list[httpx.Request], list[TipoClient]],
+    wire: tuple[list[httpx2.Request], list[TipoClient]],
     helper: str,
     path: str,
     row_type: type[Any],
@@ -94,7 +94,7 @@ async def test_search_helpers_send_filters_and_paging(
 
 @pytest.mark.asyncio
 async def test_search_helper_defaults_reach_the_wire(
-    wire: tuple[list[httpx.Request], list[TipoClient]],
+    wire: tuple[list[httpx2.Request], list[TipoClient]],
 ) -> None:
     captured, closed = wire
 
@@ -129,7 +129,7 @@ async def test_search_helper_defaults_reach_the_wire(
     ],
 )
 async def test_get_helpers_fetch_by_application_number(
-    wire: tuple[list[httpx.Request], list[TipoClient]],
+    wire: tuple[list[httpx2.Request], list[TipoClient]],
     helper: str,
     path: str,
     row_type: type[Any],

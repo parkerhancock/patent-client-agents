@@ -22,7 +22,7 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import Any
 
-import httpx
+import httpx2
 
 from mcp_data_core.resilience import default_retryer
 
@@ -46,7 +46,7 @@ def atomic_output(output_path: Path) -> Iterator[Path]:
     os.replace(tmp_path, output_path)
 
 
-async def fetch_text(client: httpx.AsyncClient, url: str) -> str:
+async def fetch_text(client: httpx2.AsyncClient, url: str) -> str:
     """GET ``url`` with redirects and the default retry policy; return the body."""
     retryer = default_retryer()
     async for attempt in retryer:

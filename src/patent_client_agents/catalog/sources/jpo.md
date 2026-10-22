@@ -284,7 +284,7 @@ The API returns a `result.statusCode` on every JSON response. Mapping:
 | 400 | Invalid request | Raises `ApiError` |
 | 999 | Unexpected server error | Raises `ApiError` |
 
-HTTP-level errors propagate as vanilla httpx exceptions, except 429
+HTTP-level errors propagate as vanilla httpx2 exceptions, except 429
 which becomes `RateLimitError`.
 
 ## Quirks worth knowing

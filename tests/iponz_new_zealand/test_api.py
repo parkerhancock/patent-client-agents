@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import date
 from pathlib import Path
 
-import httpx
+import httpx2
 import pytest
 
 from patent_client_agents.iponz_new_zealand import api
@@ -13,19 +13,19 @@ from patent_client_agents.iponz_new_zealand.client import PRODUCTION_BASE_URL, I
 @pytest.fixture
 def wire(
     monkeypatch: pytest.MonkeyPatch, fixture_dir: Path
-) -> tuple[dict[str, str], list[httpx.Request], list[IponzClient]]:
+) -> tuple[dict[str, str], list[httpx2.Request], list[IponzClient]]:
     """Route ``api`` through a real client on a mock transport.
 
     Returns ``(served, captured, closed)``: set ``served["file"]`` to the fixture
     to answer with; requests land in ``captured``; exited clients in ``closed``.
     """
     served: dict[str, str] = {}
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
     closed: list[IponzClient] = []
 
-    async def handler(request: httpx.Request) -> httpx.Response:
+    async def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, content=(fixture_dir / served["file"]).read_bytes())
+        return httpx2.Response(200, content=(fixture_dir / served["file"]).read_bytes())
 
     class Tracked(IponzClient):
         async def __aexit__(self, *exc: object) -> None:
@@ -34,7 +34,7 @@ def wire(
 
     def factory() -> IponzClient:
         return Tracked(
-            "mock-subscription", environment="production", transport=httpx.MockTransport(handler)
+            "mock-subscription", environment="production", transport=httpx2.MockTransport(handler)
         )
 
     monkeypatch.setattr(api, "IponzClient", factory)
@@ -69,7 +69,7 @@ def wire(
     ],
 )
 async def test_get_helpers_fetch_record(
-    wire: tuple[dict[str, str], list[httpx.Request], list[IponzClient]],
+    wire: tuple[dict[str, str], list[httpx2.Request], list[IponzClient]],
     helper: str,
     fixture: str,
     number: str,
@@ -117,7 +117,7 @@ async def test_get_helpers_fetch_record(
     ],
 )
 async def test_list_helpers_send_date_range(
-    wire: tuple[dict[str, str], list[httpx.Request], list[IponzClient]],
+    wire: tuple[dict[str, str], list[httpx2.Request], list[IponzClient]],
     helper: str,
     fixture: str,
     path: str,

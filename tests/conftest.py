@@ -53,13 +53,13 @@ os.environ.setdefault("TIPO_API_KEY", "test_tipo_tk")
 # ``serviceKey`` (ToS §11 BYOK) and an operator-supplied HTTPS endpoint.
 # The placeholders below register the tools for tests; neither value
 # reaches the network because every KIPRIS request test uses
-# httpx.MockTransport (no live cassettes recorded for KIPRIS in v1 — see
+# httpx2.MockTransport (no live cassettes recorded for KIPRIS in v1 — see
 # tests/kipo_kipris/conftest.py docstring for the rationale).
 os.environ.setdefault("KIPO_KIPRIS_API_KEY", "test_kipris_servicekey")
 os.environ.setdefault("KIPO_KIPRIS_BASE_URL", "https://kipris.test/openapi/service")
 
 # DPMAconnectPlus tools need both Basic-auth values. DPMA tests use only
-# synthetic XML fixtures and httpx.MockTransport, so these placeholders never
+# synthetic XML fixtures and httpx2.MockTransport, so these placeholders never
 # reach the live service.
 os.environ.setdefault("DPMA_CONNECTPLUS_USERNAME", "test_dpma_user")
 os.environ.setdefault("DPMA_CONNECTPLUS_PASSWORD", "test_dpma_password")

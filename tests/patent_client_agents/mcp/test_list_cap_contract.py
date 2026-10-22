@@ -23,7 +23,7 @@ import asyncio, json, os, sys
 sys.path.insert(0, {scripts!r})
 from validate_mcp_contracts import CONTRACT_ENV
 os.environ.update(CONTRACT_ENV)
-import httpx
+import httpx2
 from mcp_data_core.exceptions import ValidationError
 from patent_client_agents.shared.fanout import LIST_CAP
 import patent_client_agents.mcp.full as full
@@ -37,7 +37,7 @@ EXTRA = {{
 async def no_network(*args, **kwargs):
     raise AssertionError("request before validation")
 
-httpx.AsyncClient.send = no_network
+httpx2.AsyncClient.send = no_network
 
 async def main():
     offenders = set()

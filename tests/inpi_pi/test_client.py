@@ -1,6 +1,6 @@
 """Client-level tests for :class:`InpiPiClient`.
 
-Uses :class:`httpx.MockTransport` everywhere — no live INPI traffic.
+Uses :class:`httpx2.MockTransport` everywhere — no live INPI traffic.
 Covers:
 
 * SolR query builder (``_build_solr_query``) — q only, q + filters,
@@ -24,7 +24,7 @@ from collections.abc import Callable
 from pathlib import Path
 from xml.etree import ElementTree as ET
 
-import httpx
+import httpx2
 import pytest
 
 from mcp_data_core.exceptions import (
@@ -59,10 +59,10 @@ def _set_cookie(name: str, value: str) -> str:
 
 
 def _make_auth_handler(
-    extra_handlers: dict[str, Callable[[httpx.Request], httpx.Response]] | None = None,
+    extra_handlers: dict[str, Callable[[httpx2.Request], httpx2.Response]] | None = None,
     *,
     require_bearer: bool = True,
-) -> Callable[[httpx.Request], httpx.Response]:
+) -> Callable[[httpx2.Request], httpx2.Response]:
     """Build a MockTransport handler that handles XSRF + login + custom routes.
 
     The returned callable services:
@@ -79,16 +79,16 @@ def _make_auth_handler(
     """
     extras = extra_handlers or {}
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         path = request.url.path
         if path == BOOTSTRAP_PATH:
-            return httpx.Response(
+            return httpx2.Response(
                 200,
                 headers=[("Set-Cookie", _set_cookie(XSRF_COOKIE_NAME, "xsrf-001"))],
                 json={},
             )
         if path == LOGIN_PATH:
-            return httpx.Response(
+            return httpx2.Response(
                 200,
                 headers=[
                     ("Set-Cookie", _set_cookie("access_token", "AAA")),
@@ -106,7 +106,7 @@ def _make_auth_handler(
         for prefix, fn in extras.items():
             if path.startswith(prefix):
                 return fn(request)
-        return httpx.Response(404, text=f"unhandled mock path {path!r}")
+        return httpx2.Response(404, text=f"unhandled mock path {path!r}")
 
     return handler
 
@@ -432,10 +432,10 @@ class TestParseSearchEnvelope:
 # ---------------------------------------------------------------------------
 
 
-def _make_client(handler: Callable[[httpx.Request], httpx.Response]) -> InpiPiClient:
+def _make_client(handler: Callable[[httpx2.Request], httpx2.Response]) -> InpiPiClient:
     """Build an InpiPiClient backed by a mocked transport."""
-    transport = httpx.MockTransport(handler)
-    httpx_client = httpx.AsyncClient(transport=transport, base_url=BASE_URL)
+    transport = httpx2.MockTransport(handler)
+    httpx_client = httpx2.AsyncClient(transport=transport, base_url=BASE_URL)
     return InpiPiClient(username="u", password="p", client=httpx_client)
 
 
@@ -443,11 +443,11 @@ def _make_client(handler: Callable[[httpx.Request], httpx.Response]) -> InpiPiCl
 async def test_search_trademarks_happy_path() -> None:
     body = json.loads((FIXTURES_DIR / "tm_search_2hits.json").read_text())
 
-    def search_handler(request: httpx.Request) -> httpx.Response:
+    def search_handler(request: httpx2.Request) -> httpx2.Response:
         # Confirm SolR query + pagination params plumbed through
         params = dict(request.url.params)
         assert "q" in params
-        return httpx.Response(200, json=body)
+        return httpx2.Response(200, json=body)
 
     handler = _make_auth_handler({"/services/apidiffusion/api/marques/search": search_handler})
     async with _make_client(handler) as client:
@@ -462,8 +462,8 @@ async def test_search_trademarks_happy_path() -> None:
 async def test_search_trademarks_empty_result() -> None:
     body = json.loads((FIXTURES_DIR / "tm_search_empty.json").read_text())
 
-    def search_handler(request: httpx.Request) -> httpx.Response:
-        return httpx.Response(200, json=body)
+    def search_handler(request: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(200, json=body)
 
     handler = _make_auth_handler({"/services/apidiffusion/api/marques/search": search_handler})
     async with _make_client(handler) as client:
@@ -510,8 +510,8 @@ async def test_get_trademark_single_json() -> None:
         "MarkCurrentStatusCode": "registered",
     }
 
-    def notice_handler(request: httpx.Request) -> httpx.Response:
-        return httpx.Response(
+    def notice_handler(request: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(
             200,
             headers=[("Content-Type", "application/json")],
             json=notice_body,
@@ -533,11 +533,11 @@ async def test_get_trademark_serial_list_calls() -> None:
 
     calls: list[str] = []
 
-    def notice_handler(request: httpx.Request) -> httpx.Response:
+    def notice_handler(request: httpx2.Request) -> httpx2.Response:
         # Path looks like /services/apidiffusion/api/marques/<appno>
         calls.append(request.url.path.rsplit("/", 1)[-1])
         notice_body["ApplicationNumber"] = request.url.path.rsplit("/", 1)[-1]
-        return httpx.Response(200, json=dict(notice_body))
+        return httpx2.Response(200, json=dict(notice_body))
 
     handler = _make_auth_handler({"/services/apidiffusion/api/marques/": notice_handler})
     async with _make_client(handler) as client:
@@ -550,8 +550,8 @@ async def test_get_trademark_serial_list_calls() -> None:
 async def test_get_trademark_xml_body_parsed() -> None:
     xml_bytes = (FIXTURES_DIR / "tm_notice_st66.xml").read_bytes()
 
-    def notice_handler(request: httpx.Request) -> httpx.Response:
-        return httpx.Response(
+    def notice_handler(request: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(
             200,
             headers=[("Content-Type", "application/xml")],
             content=xml_bytes,
@@ -581,8 +581,8 @@ async def test_get_trademark_too_many_raises() -> None:
 async def test_search_designs_happy_path() -> None:
     body = json.loads((FIXTURES_DIR / "design_search_2hits.json").read_text())
 
-    def search_handler(request: httpx.Request) -> httpx.Response:
-        return httpx.Response(200, json=body)
+    def search_handler(request: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(200, json=body)
 
     handler = _make_auth_handler({"/services/apidiffusion/api/dessins/search": search_handler})
     async with _make_client(handler) as client:
@@ -611,8 +611,8 @@ async def test_search_designs_limit_overflow_raises() -> None:
 async def test_get_design_xml_body() -> None:
     xml_bytes = (FIXTURES_DIR / "design_notice_st86.xml").read_bytes()
 
-    def notice_handler(request: httpx.Request) -> httpx.Response:
-        return httpx.Response(
+    def notice_handler(request: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(
             200,
             headers=[("Content-Type", "application/xml")],
             content=xml_bytes,
@@ -649,11 +649,11 @@ async def test_401_retries_with_fresh_session() -> None:
     body = json.loads((FIXTURES_DIR / "tm_search_empty.json").read_text())
     attempt_counter = {"n": 0}
 
-    def search_handler(request: httpx.Request) -> httpx.Response:
+    def search_handler(request: httpx2.Request) -> httpx2.Response:
         attempt_counter["n"] += 1
         if attempt_counter["n"] == 1:
-            return httpx.Response(401, text="expired")
-        return httpx.Response(200, json=body)
+            return httpx2.Response(401, text="expired")
+        return httpx2.Response(200, json=body)
 
     handler = _make_auth_handler(
         {"/services/apidiffusion/api/marques/search": search_handler},
@@ -680,8 +680,8 @@ def no_retry_backoff(monkeypatch: pytest.MonkeyPatch) -> None:
 
 @pytest.mark.asyncio
 async def test_429_raises_rate_limit_error(no_retry_backoff: None) -> None:
-    def search_handler(request: httpx.Request) -> httpx.Response:
-        return httpx.Response(429, text="throttled")
+    def search_handler(request: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(429, text="throttled")
 
     handler = _make_auth_handler({"/services/apidiffusion/api/marques/search": search_handler})
     async with _make_client(handler) as client:
@@ -691,8 +691,8 @@ async def test_429_raises_rate_limit_error(no_retry_backoff: None) -> None:
 
 @pytest.mark.asyncio
 async def test_5xx_raises_api_error(no_retry_backoff: None) -> None:
-    def search_handler(request: httpx.Request) -> httpx.Response:
-        return httpx.Response(500, text="boom")
+    def search_handler(request: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(500, text="boom")
 
     handler = _make_auth_handler({"/services/apidiffusion/api/marques/search": search_handler})
     async with _make_client(handler) as client:
@@ -702,10 +702,10 @@ async def test_5xx_raises_api_error(no_retry_backoff: None) -> None:
 
 @pytest.mark.asyncio
 async def test_get_design_non_json_non_xml_body_raises() -> None:
-    def notice_handler(request: httpx.Request) -> httpx.Response:
+    def notice_handler(request: httpx2.Request) -> httpx2.Response:
         # Content-type says text/plain → ``_coerce_notice`` falls into
         # the json branch and raises ApiError on parse failure.
-        return httpx.Response(
+        return httpx2.Response(
             200,
             headers=[("Content-Type", "text/plain")],
             content=b"not-json-or-xml",
@@ -723,16 +723,16 @@ async def test_session_reuse_skips_relogin(monkeypatch: pytest.MonkeyPatch) -> N
     body = json.loads((FIXTURES_DIR / "tm_search_empty.json").read_text())
     login_calls = {"n": 0}
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         path = request.url.path
         if path == BOOTSTRAP_PATH:
-            return httpx.Response(
+            return httpx2.Response(
                 200,
                 headers=[("Set-Cookie", _set_cookie(XSRF_COOKIE_NAME, "xsrf"))],
             )
         if path == LOGIN_PATH:
             login_calls["n"] += 1
-            return httpx.Response(
+            return httpx2.Response(
                 200,
                 headers=[
                     ("Set-Cookie", _set_cookie("access_token", "AAA")),
@@ -740,7 +740,7 @@ async def test_session_reuse_skips_relogin(monkeypatch: pytest.MonkeyPatch) -> N
                 ],
                 json={"access_token": "AAA", "refresh_token": "BBB", "expires_in": 1800},
             )
-        return httpx.Response(200, json=body)
+        return httpx2.Response(200, json=body)
 
     async with _make_client(handler) as client:
         await client.search_trademarks()
@@ -765,8 +765,8 @@ _ = asyncio
 
 @pytest.mark.asyncio
 async def test_404_raises_not_found_error(no_retry_backoff: None) -> None:
-    def search_handler(request: httpx.Request) -> httpx.Response:
-        return httpx.Response(404, text="no such record")
+    def search_handler(request: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(404, text="no such record")
 
     handler = _make_auth_handler({"/services/apidiffusion/api/marques/search": search_handler})
     async with _make_client(handler) as client:
@@ -779,10 +779,10 @@ async def test_clients_for_the_same_account_share_one_login() -> None:
     body = json.loads((FIXTURES_DIR / "tm_search_2hits.json").read_text())
     logins = 0
     base = _make_auth_handler(
-        {"/services/apidiffusion/api/marques/search": lambda r: httpx.Response(200, json=body)}
+        {"/services/apidiffusion/api/marques/search": lambda r: httpx2.Response(200, json=body)}
     )
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         nonlocal logins
         if request.url.path == LOGIN_PATH:
             logins += 1

@@ -1,6 +1,6 @@
 """Unit tests for ``patent_client_agents.wipo_lex``.
 
-Uses ``httpx.MockTransport`` plus minimal HTML fixtures rather than VCR
+Uses ``httpx2.MockTransport`` plus minimal HTML fixtures rather than VCR
 cassettes because:
 
 1. WIPO Lex pages are large (~100 KB each) and would bloat the repo.
@@ -14,7 +14,7 @@ When WIPO restyles the page, update the fixtures in this file and the
 
 from __future__ import annotations
 
-import httpx
+import httpx2
 import pytest
 
 from patent_client_agents.wipo_lex import (
@@ -71,18 +71,18 @@ DETAIL_HTML = """\
 
 
 def _mock_client(handler) -> WipoLexClient:
-    transport_client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+    transport_client = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
     return WipoLexClient(client=transport_client)
 
 
 class TestSearchLegislation:
     @pytest.mark.asyncio
     async def test_search_parses_unique_hits(self) -> None:
-        captured: list[httpx.Request] = []
+        captured: list[httpx2.Request] = []
 
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             captured.append(request)
-            return httpx.Response(200, text=SEARCH_RESULTS_HTML)
+            return httpx2.Response(200, text=SEARCH_RESULTS_HTML)
 
         async with _mock_client(handler) as client:
             result = await client.search_legislation(
@@ -108,11 +108,11 @@ class TestSearchLegislation:
 
     @pytest.mark.asyncio
     async def test_include_historical_flag(self) -> None:
-        captured: list[httpx.Request] = []
+        captured: list[httpx2.Request] = []
 
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             captured.append(request)
-            return httpx.Response(200, text=SEARCH_RESULTS_HTML)
+            return httpx2.Response(200, text=SEARCH_RESULTS_HTML)
 
         async with _mock_client(handler) as client:
             await client.search_legislation(country_codes=["CA"], include_historical=True)
@@ -121,11 +121,11 @@ class TestSearchLegislation:
 
     @pytest.mark.asyncio
     async def test_multiple_country_codes_repeat_param(self) -> None:
-        captured: list[httpx.Request] = []
+        captured: list[httpx2.Request] = []
 
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             captured.append(request)
-            return httpx.Response(200, text=SEARCH_RESULTS_HTML)
+            return httpx2.Response(200, text=SEARCH_RESULTS_HTML)
 
         async with _mock_client(handler) as client:
             await client.search_legislation(country_codes=["CA", "US"])
@@ -140,7 +140,7 @@ class TestSearchLegislation:
 class TestGetLegislationDetail:
     @pytest.mark.asyncio
     async def test_detail_parses_meta_and_files(self) -> None:
-        async with _mock_client(lambda r: httpx.Response(200, text=DETAIL_HTML)) as client:
+        async with _mock_client(lambda r: httpx2.Response(200, text=DETAIL_HTML)) as client:
             detail = await client.get_legislation("23293")
 
         assert detail.legislation_id == "23293"
@@ -163,7 +163,7 @@ class TestGetLegislationDetail:
             <meta name="description" content="Ruritania - whatever" />
         </head><body></body></html>"""
 
-        async with _mock_client(lambda r: httpx.Response(200, text=sparse_html)) as client:
+        async with _mock_client(lambda r: httpx2.Response(200, text=sparse_html)) as client:
             detail = await client.get_legislation("99999")
 
         assert detail.title == "Foo Law"
@@ -178,11 +178,11 @@ class TestModuleLevelApi:
     async def test_search_via_module_api(self, monkeypatch) -> None:
         from patent_client_agents.wipo_lex import api as lex_api
 
-        def handler(request: httpx.Request) -> httpx.Response:
-            return httpx.Response(200, text=SEARCH_RESULTS_HTML)
+        def handler(request: httpx2.Request) -> httpx2.Response:
+            return httpx2.Response(200, text=SEARCH_RESULTS_HTML)
 
         def _factory(*args, **kwargs):
-            return WipoLexClient(client=httpx.AsyncClient(transport=httpx.MockTransport(handler)))
+            return WipoLexClient(client=httpx2.AsyncClient(transport=httpx2.MockTransport(handler)))
 
         monkeypatch.setattr(lex_api, "WipoLexClient", _factory)
 
@@ -195,11 +195,11 @@ class TestModuleLevelApi:
     async def test_get_legislation_accepts_bare_id(self, monkeypatch) -> None:
         from patent_client_agents.wipo_lex import api as lex_api
 
-        def handler(request: httpx.Request) -> httpx.Response:
-            return httpx.Response(200, text=DETAIL_HTML)
+        def handler(request: httpx2.Request) -> httpx2.Response:
+            return httpx2.Response(200, text=DETAIL_HTML)
 
         def _factory(*args, **kwargs):
-            return WipoLexClient(client=httpx.AsyncClient(transport=httpx.MockTransport(handler)))
+            return WipoLexClient(client=httpx2.AsyncClient(transport=httpx2.MockTransport(handler)))
 
         monkeypatch.setattr(lex_api, "WipoLexClient", _factory)
 

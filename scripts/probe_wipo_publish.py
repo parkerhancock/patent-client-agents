@@ -27,7 +27,7 @@ import json
 import sys
 from dataclasses import dataclass
 
-import httpx
+import httpx2
 
 # Candidate offices to probe. The probe iterates the URL candidates per
 # entry in order and stops at the first 200; if none, the office is
@@ -117,7 +117,7 @@ class Result:
         return self.status == 200 and "wopublish" in (self.note or "").lower()
 
 
-async def probe_one(client: httpx.AsyncClient, host: str, path: str) -> tuple[int | str, str]:
+async def probe_one(client: httpx2.AsyncClient, host: str, path: str) -> tuple[int | str, str]:
     """Return (status, note)."""
     for scheme in ("https", "http"):
         url = f"{scheme}://{host}{path}"
@@ -130,15 +130,15 @@ async def probe_one(client: httpx.AsyncClient, host: str, path: str) -> tuple[in
             elif "tomcat" in body and "wopublish-search" in body:
                 note = "tomcat error mentions wopublish-search"
             return r.status_code, note
-        except (httpx.ConnectError, httpx.ConnectTimeout):
+        except (httpx2.ConnectError, httpx2.ConnectTimeout):
             continue
-        except httpx.HTTPError as e:
+        except httpx2.HTTPError as e:
             return f"err:{type(e).__name__}", ""
     return "dns_or_refused", ""
 
 
 async def probe_office(
-    client: httpx.AsyncClient, juris: str, name: str, hosts: list[str]
+    client: httpx2.AsyncClient, juris: str, name: str, hosts: list[str]
 ) -> Result:
     for host in hosts:
         for path in PATH_VARIANTS:
@@ -155,7 +155,7 @@ async def main() -> int:
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
 
-    async with httpx.AsyncClient(follow_redirects=True, verify=False) as client:
+    async with httpx2.AsyncClient(follow_redirects=True, verify=False) as client:
         results = await asyncio.gather(*[probe_office(client, j, n, h) for j, n, h in CANDIDATES])
 
     confirmed = [r for r in results if r.confirmed or (r.status == 200 and "wopublish" in r.path)]

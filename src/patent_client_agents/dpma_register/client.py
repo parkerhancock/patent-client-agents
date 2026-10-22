@@ -12,7 +12,7 @@ import xml.etree.ElementTree as ET
 from typing import Any, TypeVar
 from urllib.parse import quote
 
-import httpx
+import httpx2
 
 from mcp_data_core.exceptions import ApiError, ConfigurationError, NotFoundError, RateLimitError
 from patent_client_agents.shared.client import ConnectorClient
@@ -189,7 +189,7 @@ class DpmaRegisterClient(ConnectorClient):
         password: str | None = None,
         *,
         base_url: str | None = None,
-        client: httpx.AsyncClient | None = None,
+        client: httpx2.AsyncClient | None = None,
     ) -> None:
         resolved_username = username or os.getenv("DPMA_CONNECTPLUS_USERNAME")
         resolved_password = password or os.getenv("DPMA_CONNECTPLUS_PASSWORD")
@@ -201,7 +201,7 @@ class DpmaRegisterClient(ConnectorClient):
         resolved_base = (base_url or BASE_URL).rstrip("/")
         if client is None and not resolved_base.startswith("https://"):
             raise ConfigurationError("DPMAconnectPlus requires an HTTPS base URL")
-        auth = httpx.BasicAuth(resolved_username, resolved_password)
+        auth = httpx2.BasicAuth(resolved_username, resolved_password)
         super().__init__(
             base_url=resolved_base,
             client=client,

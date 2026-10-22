@@ -6,7 +6,7 @@ import time
 from datetime import UTC, datetime
 from pathlib import Path
 
-import httpx
+import httpx2
 import pytest
 from fastmcp import Client, FastMCP
 
@@ -28,12 +28,12 @@ class _Client(ConnectorClient):
     CACHE_NAME = "provenance_test"
 
 
-def _cacheable(request: httpx.Request) -> httpx.Response:
-    return httpx.Response(200, json={"ok": True}, headers={"Cache-Control": "max-age=600"})
+def _cacheable(request: httpx2.Request) -> httpx2.Response:
+    return httpx2.Response(200, json={"ok": True}, headers={"Cache-Control": "max-age=600"})
 
 
 async def test_live_then_cached_response(tmp_path: Path) -> None:
-    async with _Client(cache_path=tmp_path, transport=httpx.MockTransport(_cacheable)) as client:
+    async with _Client(cache_path=tmp_path, transport=httpx2.MockTransport(_cacheable)) as client:
         with track_fetches():
             before = datetime.now(UTC)
             await client._request("GET", "/a")
@@ -53,7 +53,7 @@ async def test_live_then_cached_response(tmp_path: Path) -> None:
 
 
 async def test_mixed_call_is_not_a_cache_hit_and_reports_oldest_fetch(tmp_path: Path) -> None:
-    async with _Client(cache_path=tmp_path, transport=httpx.MockTransport(_cacheable)) as client:
+    async with _Client(cache_path=tmp_path, transport=httpx2.MockTransport(_cacheable)) as client:
         with track_fetches():
             await client._request("GET", "/a")
             first = provenance_for(URL, "Source").retrieved_at
@@ -69,7 +69,7 @@ async def test_mixed_call_is_not_a_cache_hit_and_reports_oldest_fetch(tmp_path: 
 
 async def test_explicit_values_win_and_no_scope_falls_back(tmp_path: Path) -> None:
     fixed = datetime(2020, 1, 1, tzinfo=UTC)
-    async with _Client(cache_path=tmp_path, transport=httpx.MockTransport(_cacheable)) as client:
+    async with _Client(cache_path=tmp_path, transport=httpx2.MockTransport(_cacheable)) as client:
         await client._request("GET", "/a")
         with track_fetches():
             await client._request("GET", "/a")
@@ -89,7 +89,7 @@ async def test_mcp_tool_calls_report_cache_hits_through_the_middleware(
     @child.tool
     async def get_record() -> ListEnvelope[dict]:
         async with _Client(
-            cache_path=tmp_path, transport=httpx.MockTransport(_cacheable)
+            cache_path=tmp_path, transport=httpx2.MockTransport(_cacheable)
         ) as client:
             data = (await client._request("GET", "/a")).json()
         return ListEnvelope[dict](summary="one", items=[data], provenance=provenance_for(URL, "S"))
@@ -115,7 +115,7 @@ def test_server_registers_fetch_tracking() -> None:
 
 @pytest.mark.parametrize("from_cache", [True, False])
 async def test_hook_is_installed_once_on_injected_clients(from_cache: bool) -> None:
-    shared = httpx.AsyncClient(transport=httpx.MockTransport(_cacheable))
+    shared = httpx2.AsyncClient(transport=httpx2.MockTransport(_cacheable))
     _Client(client=shared, use_cache=False)
     _Client(client=shared, use_cache=False)
     assert len(shared.event_hooks["response"]) == 1

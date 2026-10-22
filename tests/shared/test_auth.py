@@ -10,7 +10,7 @@ import asyncio
 import json
 from pathlib import Path
 
-import httpx
+import httpx2
 import pytest
 
 from patent_client_agents.euipo_trademarks import EuipoTrademarksClient
@@ -27,13 +27,13 @@ def _token_counting(token_path_suffix: str, body: object = None, **response: obj
     """Transport that answers the token endpoint and counts token requests."""
     hits = {"token": 0}
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         if request.url.path.endswith(token_path_suffix) or str(request.url) == token_path_suffix:
             hits["token"] += 1
-            return httpx.Response(200, json={"access_token": "tok", "expires_in": 3600})
-        return httpx.Response(200, json=body if body is not None else {}, **response)  # type: ignore[arg-type]
+            return httpx2.Response(200, json={"access_token": "tok", "expires_in": 3600})
+        return httpx2.Response(200, json=body if body is not None else {}, **response)  # type: ignore[arg-type]
 
-    return httpx.MockTransport(handler), hits
+    return httpx2.MockTransport(handler), hits
 
 
 async def test_ip_australia_clients_share_one_token(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -68,15 +68,15 @@ async def test_euipo_clients_share_one_token(monkeypatch: pytest.MonkeyPatch) ->
 async def test_swiss_ipi_clients_share_one_login() -> None:
     hits = {"token": 0}
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         if str(request.url) == IPI_TOKEN_URL:
             hits["token"] += 1
-            return httpx.Response(200, json={"access_token": "tok", "expires_in": 600})
-        return httpx.Response(200, content=(IPI_FIXTURES / "patent_search.xml").read_bytes())
+            return httpx2.Response(200, json={"access_token": "tok", "expires_in": 600})
+        return httpx2.Response(200, content=(IPI_FIXTURES / "patent_search.xml").read_bytes())
 
     for _ in range(3):
         async with IpiSwissregClient(
-            "user", "password", transport=httpx.MockTransport(handler)
+            "user", "password", transport=httpx2.MockTransport(handler)
         ) as client:
             await client.search_patents("q")
     assert hits["token"] == 1
@@ -85,17 +85,17 @@ async def test_swiss_ipi_clients_share_one_login() -> None:
 async def test_jpo_clients_share_one_token_and_one_rate_budget() -> None:
     hits = {"token": 0}
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         if request.url.path == "/auth/token":
             hits["token"] += 1
-            return httpx.Response(200, json={"access_token": "tok", "expires_in": 3600})
-        return httpx.Response(
+            return httpx2.Response(200, json={"access_token": "tok", "expires_in": 3600})
+        return httpx2.Response(
             200, content=json.dumps({"result": {"statusCode": "107", "data": {}}})
         )
 
     clients = []
     for _ in range(3):
-        http = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        http = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
         async with JpoClient("user", "password", client=http) as client:
             await client.get_patent_progress("2020123456")
             clients.append(client)

@@ -4,14 +4,14 @@ from __future__ import annotations
 
 from typing import Any
 
-import httpx
+import httpx2
 
 from mcp_data_core.base_client import BaseAsyncClient
 
 from .provenance import record_response
 
 
-def install_fetch_recording(client: httpx.AsyncClient) -> None:
+def install_fetch_recording(client: httpx2.AsyncClient) -> None:
     """Add the provenance response hook to ``client`` once."""
     hooks = client.event_hooks.setdefault("response", [])
     if record_response not in hooks:

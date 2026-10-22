@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-import httpx
+import httpx2
 import pytest
 
 from patent_client_agents.thai_dip import api
@@ -119,13 +119,13 @@ async def test_helpers_post_dataset_query_and_parse(
     field: str,
     value: str,
 ) -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
     closed: list[ThaiDipClient] = []
 
-    async def handler(request: httpx.Request) -> httpx.Response:
+    async def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
         filename = _FIXTURE_BY_ENDPOINT[request.url.path.rsplit("/", 1)[-1]]
-        return httpx.Response(200, content=(fixture_dir / filename).read_bytes())
+        return httpx2.Response(200, content=(fixture_dir / filename).read_bytes())
 
     class Tracked(ThaiDipClient):
         async def __aexit__(self, *exc: object) -> None:
@@ -133,7 +133,7 @@ async def test_helpers_post_dataset_query_and_parse(
             closed.append(self)
 
     monkeypatch.setattr(
-        api, "ThaiDipClient", lambda: Tracked("token", transport=httpx.MockTransport(handler))
+        api, "ThaiDipClient", lambda: Tracked("token", transport=httpx2.MockTransport(handler))
     )
 
     result = await getattr(api, helper)(argument, **kwargs)
@@ -154,11 +154,13 @@ async def test_helpers_post_dataset_query_and_parse(
 async def test_search_patents_limit_truncates_rows(
     monkeypatch: pytest.MonkeyPatch, fixture_dir: Path
 ) -> None:
-    async def handler(_: httpx.Request) -> httpx.Response:
-        return httpx.Response(200, content=(fixture_dir / "patent.json").read_bytes())
+    async def handler(_: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(200, content=(fixture_dir / "patent.json").read_bytes())
 
     monkeypatch.setattr(
-        api, "ThaiDipClient", lambda: ThaiDipClient("token", transport=httpx.MockTransport(handler))
+        api,
+        "ThaiDipClient",
+        lambda: ThaiDipClient("token", transport=httpx2.MockTransport(handler)),
     )
 
     rows, total = await api.search_thai_dip_patents("sensor", limit=1)

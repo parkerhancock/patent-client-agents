@@ -14,7 +14,7 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from typing import Any, Generic, Literal, TypeVar
 
-import httpx
+import httpx2
 
 from mcp_data_core.exceptions import (
     ApiError,
@@ -336,8 +336,8 @@ class IpiSwissregClient(ConnectorClient):
         totp_token: str | None = None,
         base_url: str | None = None,
         token_url: str | None = None,
-        client: httpx.AsyncClient | None = None,
-        transport: httpx.AsyncBaseTransport | None = None,
+        client: httpx2.AsyncClient | None = None,
+        transport: httpx2.AsyncBaseTransport | None = None,
     ) -> None:
         self.username = username or os.getenv("IPI_DATA_USERNAME")
         self.password = password or os.getenv("IPI_DATA_PASSWORD")
@@ -413,7 +413,7 @@ class IpiSwissregClient(ConnectorClient):
         return await self._fetch_token(refresh=bool(self._tokens.refresh_token))
 
     @staticmethod
-    def _rate_limit(response: httpx.Response) -> RateLimitError:
+    def _rate_limit(response: httpx2.Response) -> RateLimitError:
         value = response.headers.get("Retry-After")
         try:
             retry_after = float(value) if value is not None else None

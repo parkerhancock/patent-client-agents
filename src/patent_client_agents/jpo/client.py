@@ -21,7 +21,7 @@ import time
 from collections import deque
 from typing import Any
 
-import httpx
+import httpx2
 
 from mcp_data_core.exceptions import (
     ApiError,
@@ -111,7 +111,7 @@ class TokenManager:
         self._token_expiry: float = 0
         self._lock = LoopLock()
 
-    async def get_token(self, client: httpx.AsyncClient) -> str:
+    async def get_token(self, client: httpx2.AsyncClient) -> str:
         """Get a valid access token, refreshing if needed.
 
         Args:
@@ -161,7 +161,7 @@ class TokenManager:
                     raise RuntimeError("Token acquisition failed")
                 return self._token
 
-            except httpx.HTTPStatusError as e:
+            except httpx2.HTTPStatusError as e:
                 raise AuthenticationError(
                     f"Failed to acquire JPO token: {e}",
                     e.response.status_code,
@@ -240,7 +240,7 @@ class JpoClient(ConnectorClient):
         *,
         base_url: str | None = None,
         token_path: str = TOKEN_PATH,
-        client: httpx.AsyncClient | None = None,
+        client: httpx2.AsyncClient | None = None,
     ) -> None:
         """Initialize the JPO API client.
 
@@ -249,7 +249,7 @@ class JpoClient(ConnectorClient):
             password: JPO-issued password. Falls back to ``JPO_API_PASSWORD``.
             base_url: Override the default API base URL.
             token_path: Override the token endpoint path.
-            client: Existing httpx.AsyncClient to use (for testing).
+            client: Existing httpx2.AsyncClient to use (for testing).
 
         Raises:
             ConfigurationError: If credentials are not provided.
@@ -303,7 +303,7 @@ class JpoClient(ConnectorClient):
         *,
         params: dict[str, Any] | None = None,
         retry_auth: bool = True,
-    ) -> httpx.Response:
+    ) -> httpx2.Response:
         """Make an authenticated raw request and return the httpx response.
 
         This is the path used by document-download endpoints that may return

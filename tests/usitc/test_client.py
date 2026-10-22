@@ -5,7 +5,7 @@ from __future__ import annotations
 import base64
 import json
 
-import httpx
+import httpx2
 import pytest
 
 from mcp_data_core.exceptions import AuthenticationError
@@ -45,12 +45,12 @@ class TestEdisClient:
         monkeypatch.delenv("USITC_EDIS_TOKEN", raising=False)
 
     @pytest.fixture
-    def mock_client(self) -> httpx.AsyncClient:
-        def handler(request: httpx.Request) -> httpx.Response:
+    def mock_client(self) -> httpx2.AsyncClient:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             path = request.url.path
 
             if "/investigation" in path:
-                return httpx.Response(
+                return httpx2.Response(
                     200,
                     text="""
                     <root>
@@ -63,7 +63,7 @@ class TestEdisClient:
                     """,
                 )
             elif "/document" in path and "/download" not in path and "/attachment" not in path:
-                return httpx.Response(
+                return httpx2.Response(
                     200,
                     text="""
                     <root>
@@ -76,7 +76,7 @@ class TestEdisClient:
                     """,
                 )
             elif "/attachment" in path and "/download" not in path:
-                return httpx.Response(
+                return httpx2.Response(
                     200,
                     text="""
                     <root>
@@ -89,7 +89,7 @@ class TestEdisClient:
                     """,
                 )
             elif "/download" in path:
-                return httpx.Response(
+                return httpx2.Response(
                     200,
                     content=b"PDF content",
                     headers={
@@ -98,9 +98,9 @@ class TestEdisClient:
                     },
                 )
 
-            return httpx.Response(404, text="Not found")
+            return httpx2.Response(404, text="Not found")
 
-        return httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        return httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
 
     def test_init_does_not_send_browser_user_agent(self, monkeypatch: pytest.MonkeyPatch) -> None:
         """edis.usitc.gov (Akamai) 403s any User-Agent that looks like a
@@ -117,7 +117,7 @@ class TestEdisClient:
         assert "law-tools-edis" not in ua, f"the Akamai-blocked law-tools-edis UA snuck back: {ua}"
 
     @pytest.mark.asyncio
-    async def test_list_investigations(self, mock_client: httpx.AsyncClient) -> None:
+    async def test_list_investigations(self, mock_client: httpx2.AsyncClient) -> None:
         client = EdisClient(client=mock_client)
         result = await client.list_investigations()
         assert len(result) == 1
@@ -125,7 +125,7 @@ class TestEdisClient:
         assert result[0].investigation_number == "337-TA-1234"
 
     @pytest.mark.asyncio
-    async def test_list_documents(self, mock_client: httpx.AsyncClient) -> None:
+    async def test_list_documents(self, mock_client: httpx2.AsyncClient) -> None:
         client = EdisClient(client=mock_client)
         result = await client.list_documents()
         assert len(result) == 1
@@ -133,7 +133,7 @@ class TestEdisClient:
         assert result[0].id == 12345
 
     @pytest.mark.asyncio
-    async def test_list_attachments(self, mock_client: httpx.AsyncClient) -> None:
+    async def test_list_attachments(self, mock_client: httpx2.AsyncClient) -> None:
         client = EdisClient(client=mock_client)
         result = await client.list_attachments(document_id=12345)
         assert len(result) == 1
@@ -142,7 +142,7 @@ class TestEdisClient:
 
     @pytest.mark.asyncio
     async def test_download_attachment(
-        self, mock_client: httpx.AsyncClient, monkeypatch: pytest.MonkeyPatch
+        self, mock_client: httpx2.AsyncClient, monkeypatch: pytest.MonkeyPatch
     ) -> None:
         monkeypatch.setenv("USITC_EDIS_TOKEN", "test_token")
         client = EdisClient(client=mock_client)
@@ -159,17 +159,17 @@ class TestEdisClient:
         monkeypatch.setenv("USITC_EDIS_TOKEN", "test_token")
         captured_headers: dict[str, str] = {}
 
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             if "/download" in request.url.path:
                 captured_headers.update(request.headers)
-                return httpx.Response(
+                return httpx2.Response(
                     200,
                     content=b"PDF content",
                     headers={"Content-Type": "application/pdf"},
                 )
-            return httpx.Response(404)
+            return httpx2.Response(404)
 
-        mock = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        mock = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
         client = EdisClient(client=mock)
         await client.download_attachment(document_id=12345, attachment_id=999)
 
@@ -181,14 +181,14 @@ class TestEdisClient:
         """Verify investigation_number is sent as a path segment, not a query param."""
         captured_paths: list[str] = []
 
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             captured_paths.append(request.url.path)
-            return httpx.Response(
+            return httpx2.Response(
                 200,
                 text="<root><investigation><investigationNumber>337-1234</investigationNumber></investigation></root>",
             )
 
-        mock = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        mock = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
         client = EdisClient(client=mock)
         await client.list_investigations(investigation_number="337-1234")
         assert captured_paths[0].endswith("/investigation/337-1234")
@@ -198,14 +198,14 @@ class TestEdisClient:
         """Verify number + phase are both path segments."""
         captured_paths: list[str] = []
 
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             captured_paths.append(request.url.path)
-            return httpx.Response(
+            return httpx2.Response(
                 200,
                 text="<root><investigation><investigationNumber>337-1234</investigationNumber></investigation></root>",
             )
 
-        mock = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        mock = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
         client = EdisClient(client=mock)
         await client.list_investigations(
             investigation_number="337-1234", investigation_phase="Final"
@@ -229,12 +229,12 @@ class TestEdisClient:
 
         request_attempts = 0
 
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             nonlocal request_attempts
             request_attempts += 1
-            return httpx.Response(200, text="<root/>")
+            return httpx2.Response(200, text="<root/>")
 
-        mock = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        mock = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
         client = EdisClient(client=mock)
         with pytest.raises(AuthenticationError, match="USITC_EDIS_TOKEN expired"):
             await client.list_investigations()
@@ -242,7 +242,7 @@ class TestEdisClient:
 
     @pytest.mark.asyncio
     async def test_fresh_jwt_passes_through(
-        self, monkeypatch: pytest.MonkeyPatch, mock_client: httpx.AsyncClient
+        self, monkeypatch: pytest.MonkeyPatch, mock_client: httpx2.AsyncClient
     ) -> None:
         monkeypatch.setenv("USITC_EDIS_TOKEN", _make_jwt(exp_epoch=9999999999))
         client = EdisClient(client=mock_client)
@@ -251,7 +251,7 @@ class TestEdisClient:
 
     @pytest.mark.asyncio
     async def test_non_jwt_token_does_not_break(
-        self, monkeypatch: pytest.MonkeyPatch, mock_client: httpx.AsyncClient
+        self, monkeypatch: pytest.MonkeyPatch, mock_client: httpx2.AsyncClient
     ) -> None:
         """A non-JWT token (no exp to decode) must not block requests."""
         monkeypatch.setenv("USITC_EDIS_TOKEN", "plain-opaque-token")
@@ -265,24 +265,24 @@ class TestDataWebClient:
     """Tests for DataWebClient."""
 
     @pytest.fixture
-    def mock_client(self) -> httpx.AsyncClient:
-        def handler(request: httpx.Request) -> httpx.Response:
+    def mock_client(self) -> httpx2.AsyncClient:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             path = request.url.path
 
             if "/runReport" in path:
-                return httpx.Response(
+                return httpx2.Response(
                     200,
                     json={"dto": {"columns": ["a", "b"], "rows": [[1, 2]]}},
                 )
             elif "/getAllSavedQueries" in path:
-                return httpx.Response(
+                return httpx2.Response(
                     200,
                     json=[{"id": 1, "name": "Test Query"}],
                 )
 
-            return httpx.Response(404)
+            return httpx2.Response(404)
 
-        return httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        return httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
 
     def test_requires_auth_raises(self, monkeypatch: pytest.MonkeyPatch) -> None:
         monkeypatch.delenv("USITC_DATAWEB_TOKEN", raising=False)
@@ -292,7 +292,7 @@ class TestDataWebClient:
 
     @pytest.mark.asyncio
     async def test_run_report(
-        self, mock_client: httpx.AsyncClient, monkeypatch: pytest.MonkeyPatch
+        self, mock_client: httpx2.AsyncClient, monkeypatch: pytest.MonkeyPatch
     ) -> None:
         monkeypatch.setenv("USITC_DATAWEB_TOKEN", "test_token")
         client = DataWebClient(client=mock_client)
@@ -303,7 +303,7 @@ class TestDataWebClient:
 
     @pytest.mark.asyncio
     async def test_list_saved_queries(
-        self, mock_client: httpx.AsyncClient, monkeypatch: pytest.MonkeyPatch
+        self, mock_client: httpx2.AsyncClient, monkeypatch: pytest.MonkeyPatch
     ) -> None:
         monkeypatch.setenv("USITC_DATAWEB_TOKEN", "test_token")
         client = DataWebClient(client=mock_client)
@@ -317,9 +317,9 @@ class TestIdsClient:
     """Tests for IdsClient."""
 
     @pytest.fixture
-    def mock_client(self) -> httpx.AsyncClient:
-        def handler(request: httpx.Request) -> httpx.Response:
-            return httpx.Response(
+    def mock_client(self) -> httpx2.AsyncClient:
+        def handler(request: httpx2.Request) -> httpx2.Response:
+            return httpx2.Response(
                 200,
                 json={
                     "data": [
@@ -332,10 +332,10 @@ class TestIdsClient:
                 },
             )
 
-        return httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        return httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
 
     @pytest.mark.asyncio
-    async def test_list_investigations(self, mock_client: httpx.AsyncClient) -> None:
+    async def test_list_investigations(self, mock_client: httpx2.AsyncClient) -> None:
         client = IdsClient(client=mock_client)
         result = await client.list_investigations()
         assert len(result) == 1
@@ -347,27 +347,27 @@ class TestHtsClient:
     """Tests for HtsClient."""
 
     @pytest.fixture
-    def mock_client(self) -> httpx.AsyncClient:
-        def handler(request: httpx.Request) -> httpx.Response:
+    def mock_client(self) -> httpx2.AsyncClient:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             path = request.url.path
 
             if "/search" in path:
-                return httpx.Response(
+                return httpx2.Response(
                     200,
                     json={"results": [{"htsno": "8471.30.01", "description": "Computers"}]},
                 )
             elif "/exportList" in path:
-                return httpx.Response(
+                return httpx2.Response(
                     200,
                     json=[{"hts": "8471.30.01", "rate": "Free"}],
                 )
 
-            return httpx.Response(404)
+            return httpx2.Response(404)
 
-        return httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        return httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
 
     @pytest.mark.asyncio
-    async def test_search(self, mock_client: httpx.AsyncClient) -> None:
+    async def test_search(self, mock_client: httpx2.AsyncClient) -> None:
         client = HtsClient(client=mock_client)
         result = await client.search("computers")
         assert len(result) == 1
@@ -375,7 +375,7 @@ class TestHtsClient:
         assert result[0].hts_number == "8471.30.01"
 
     @pytest.mark.asyncio
-    async def test_export_range(self, mock_client: httpx.AsyncClient) -> None:
+    async def test_export_range(self, mock_client: httpx2.AsyncClient) -> None:
         client = HtsClient(client=mock_client)
         result = await client.export_range("8471.30.01", "8471.30.99")
         assert isinstance(result, HtsExportResponse)

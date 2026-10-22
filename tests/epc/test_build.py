@@ -5,7 +5,7 @@ from __future__ import annotations
 import asyncio
 from pathlib import Path
 
-import httpx
+import httpx2
 import pytest
 
 from patent_client_agents.epc import get_corpus_status
@@ -28,7 +28,7 @@ _PAGES = {
 }
 
 
-def _pages(request: httpx.Request) -> str | None:
+def _pages(request: httpx2.Request) -> str | None:
     return _PAGES.get(request.url.path)
 
 

@@ -5,7 +5,7 @@ INPI's api-gateway uses a personal ``data.inpi.fr`` account
 currently have credentials issued. INPI Data account signup is
 French-only and acquisition is blocked behind manual approval, so this
 connector ships with **synthesized JSON + ST.66/ST.86 XML fixtures**
-under ``tests/inpi_pi/fixtures/`` and ``httpx.MockTransport`` — no VCR
+under ``tests/inpi_pi/fixtures/`` and ``httpx2.MockTransport`` — no VCR
 cassettes are recorded for INPI in v1.
 
 If/when live ``INPI_USERNAME`` + ``INPI_PASSWORD`` credentials are

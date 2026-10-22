@@ -15,7 +15,7 @@ from enum import StrEnum
 from pathlib import Path
 from typing import Literal, TypedDict
 
-import httpx
+import httpx2
 from pydantic import (
     BaseModel,
     ConfigDict,
@@ -445,13 +445,13 @@ class FeeClientKwargs(TypedDict, total=False):
 
     base_url: str | None
     cache_path: Path | None
-    client: httpx.AsyncClient | None
+    client: httpx2.AsyncClient | None
     use_cache: bool
     ttl_seconds: int | None
     max_retries: int
     headers: dict[str, str] | None
     timeout: float | None
-    auth: httpx.Auth | None
+    auth: httpx2.Auth | None
     http2: bool | None
 
 

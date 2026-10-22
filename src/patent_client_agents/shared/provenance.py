@@ -22,7 +22,7 @@ from contextvars import ContextVar
 from datetime import UTC, datetime
 from typing import Any
 
-import httpx
+import httpx2
 
 from mcp_data_core.envelope import Provenance, make_provenance
 
@@ -41,7 +41,7 @@ def track_fetches() -> Iterator[list[tuple[bool, float]]]:
         _fetches.reset(token)
 
 
-async def record_response(response: httpx.Response) -> None:
+async def record_response(response: httpx2.Response) -> None:
     """httpx response hook: note whether hishel served this from cache, and when it was fetched."""
     fetches = _fetches.get()
     if fetches is None:

@@ -37,7 +37,7 @@ import sys
 from datetime import UTC, datetime
 from pathlib import Path
 
-import httpx
+import httpx2
 from lxml import html
 
 from patent_client_agents.shared.corpus import atomic_output, fetch_text, run_build_cli
@@ -140,8 +140,8 @@ async def build_corpus(
 ) -> int:
     with atomic_output(output_path) as tmp_path:
         headers = {"User-Agent": user_agent, "Accept": "text/html"}
-        async with httpx.AsyncClient(
-            headers=headers, timeout=httpx.Timeout(30.0, connect=10.0)
+        async with httpx2.AsyncClient(
+            headers=headers, timeout=httpx2.Timeout(30.0, connect=10.0)
         ) as client:
             logger.info("Fetching LPI PT consolidation from %s", pt_url)
             pt_html = await fetch_text(client, pt_url)

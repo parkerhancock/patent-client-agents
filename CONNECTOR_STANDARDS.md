@@ -499,7 +499,7 @@ SQLite cache can shadow VCR and silently re-play a stale fixture.
 **Fixture-based contract tests** (`tests/<connector>/fixtures/*.json`) —
 the default for stateless connectors with a small upstream surface. The
 per-connector `conftest.py` loads JSON fixtures and serves them through
-an `httpx.MockTransport` handler. Use when:
+an `httpx2.MockTransport` handler. Use when:
 
 - Upstream responses are stable JSON envelopes with no side channels
   (auth refresh, redirects, etc.).

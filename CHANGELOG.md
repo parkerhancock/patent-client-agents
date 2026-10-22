@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- HTTP goes through `httpx2` instead of `httpx`, on `mcp-data-core` 0.14.0
+  and `hishel` 1.4's `httpx2` cache layer. TLS verification uses the
+  operating system's trust store through `truststore` instead of `certifi`.
+  Code that catches `httpx` exceptions from these clients, or passes in
+  `httpx` clients, transports or auth handlers, needs to switch to `httpx2`.
 - Corpus search tools declare their `limit` (1-100) and `offset` (>= 0) bounds
   in their input schemas, so out-of-range values are rejected before the tool
   runs; a negative `offset` is no longer treated as page 1 (#141).

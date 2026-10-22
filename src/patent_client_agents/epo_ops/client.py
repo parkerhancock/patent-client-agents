@@ -13,7 +13,7 @@ from pathlib import Path
 from typing import Any
 
 import hishel
-import httpx
+import httpx2
 import lxml.etree as etree  # ty: ignore[unresolved-import]  # lxml lacks PEP 561 stubs
 
 from mcp_data_core.cache import build_cached_http_client
@@ -110,7 +110,7 @@ class OpsForbiddenError(RateLimitError):
         self.headers = headers or {}
 
 
-class OpsAuth(httpx.Auth):
+class OpsAuth(httpx2.Auth):
     requires_response_body = True
     token_url = f"{BASE_URL}/auth/accesstoken"
 
@@ -121,7 +121,7 @@ class OpsAuth(httpx.Auth):
         self._expires: dt.datetime | None = None
         self._refresh_lock = asyncio.Lock()
 
-    async def async_auth_flow(self, request: httpx.Request):  # type: ignore[override]
+    async def async_auth_flow(self, request: httpx2.Request):  # type: ignore[override]
         async with self._refresh_lock:
             if self._token_expired():
                 token_response = yield self._build_refresh_request()
@@ -153,7 +153,7 @@ class OpsAuth(httpx.Auth):
                 retry_response.text[:500],
             )
 
-    def _store_token(self, response: httpx.Response) -> None:
+    def _store_token(self, response: httpx2.Response) -> None:
         if response.status_code != 200:
             logger.warning(
                 "EPO OPS token request failed with HTTP %s: %s",
@@ -179,7 +179,7 @@ class OpsAuth(httpx.Auth):
         self.authorization_header = f"Bearer {data['access_token']}"
 
     @staticmethod
-    def _invalid_access_token(response: httpx.Response) -> bool:
+    def _invalid_access_token(response: httpx2.Response) -> bool:
         return response.status_code == 401 or (
             response.status_code == 400 and "invalid_access_token" in response.text
         )
@@ -189,10 +189,10 @@ class OpsAuth(httpx.Auth):
             return True
         return dt.datetime.now(dt.UTC) >= self._expires - dt.timedelta(seconds=30)
 
-    def _build_refresh_request(self) -> httpx.Request:
+    def _build_refresh_request(self) -> httpx2.Request:
         credentials = f"{self.key}:{self.secret}".encode()
         token = base64.b64encode(credentials).decode("ascii")
-        return httpx.Request(
+        return httpx2.Request(
             "POST",
             self.token_url,
             headers={"Authorization": token},
@@ -213,7 +213,7 @@ class EpoOpsClient(ConnectorClient):
         cache_path: Path | None = None,
         timeout: float = 60.0,
         auth: OpsAuth | None = None,
-        transport: httpx.AsyncBaseTransport | None = None,
+        transport: httpx2.AsyncBaseTransport | None = None,
     ) -> None:
         # Build the HTTP client directly to pass EPO-specific kwargs
         # (base_url, policy, http2) that BaseAsyncClient doesn't forward.
@@ -248,14 +248,14 @@ class EpoOpsClient(ConnectorClient):
             return path
         return f"{self.base_url}{path}"
 
-    def _raise_for_status(self, response: httpx.Response, context: str = "") -> None:
+    def _raise_for_status(self, response: httpx2.Response, context: str = "") -> None:
         """Check for 403 (EPO rate limiting) before standard error handling."""
         if response.status_code == 403:
             raise self._build_forbidden_error(response)
         super()._raise_for_status(response, context)
 
     @staticmethod
-    def _build_forbidden_error(response: httpx.Response) -> OpsForbiddenError:
+    def _build_forbidden_error(response: httpx2.Response) -> OpsForbiddenError:
         headers = {k: v for k, v in response.headers.items()}
         details = []
         # Read from response.headers: it's case-insensitive, while the plain dict

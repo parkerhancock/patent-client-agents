@@ -15,7 +15,7 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
-import httpx
+import httpx2
 
 from mcp_data_core.cache import get_default_cache_dir
 
@@ -111,7 +111,7 @@ class PatentCache:
 class CachingAsyncClient:
     """Async HTTP client wrapper with application-level caching.
 
-    Wraps httpx.AsyncClient and adds file-based caching for GET requests.
+    Wraps httpx2.AsyncClient and adds file-based caching for GET requests.
     """
 
     def __init__(
@@ -123,10 +123,10 @@ class CachingAsyncClient:
         self._cache = cache
         self._headers = headers or {}
         self._client_kwargs = client_kwargs
-        self._client: httpx.AsyncClient | None = None
+        self._client: httpx2.AsyncClient | None = None
 
     async def __aenter__(self) -> CachingAsyncClient:
-        self._client = httpx.AsyncClient(headers=self._headers, **self._client_kwargs)
+        self._client = httpx2.AsyncClient(headers=self._headers, **self._client_kwargs)
         return self
 
     async def __aexit__(self, *args: Any) -> None:
@@ -134,10 +134,10 @@ class CachingAsyncClient:
             await self._client.aclose()
             self._client = None
 
-    async def get(self, url: str, **kwargs: Any) -> httpx.Response:
+    async def get(self, url: str, **kwargs: Any) -> httpx2.Response:
         """GET request with caching.
 
-        Supports all httpx.AsyncClient.get() kwargs like follow_redirects, timeout, etc.
+        Supports all httpx2.AsyncClient.get() kwargs like follow_redirects, timeout, etc.
         """
         if self._client is None:
             raise RuntimeError("Client not initialized. Use 'async with' context manager.")
@@ -149,11 +149,11 @@ class CachingAsyncClient:
                 body, status_code, content_type = cached
                 logger.info("Cache HIT for %s", url)
                 # Create a mock response from cache
-                return httpx.Response(
+                return httpx2.Response(
                     status_code=status_code,
                     content=body,
                     headers={"content-type": content_type} if content_type else None,
-                    request=httpx.Request("GET", url),
+                    request=httpx2.Request("GET", url),
                 )
             else:
                 logger.info("Cache MISS for %s", url)
@@ -183,7 +183,7 @@ def build_cached_http_client(
         use_cache: Whether to enable caching
         cache_name: Name for the cache database file
         headers: HTTP headers to send with requests
-        **client_kwargs: Additional kwargs for httpx.AsyncClient
+        **client_kwargs: Additional kwargs for httpx2.AsyncClient
 
     Returns:
         CachingAsyncClient that can be used as async context manager

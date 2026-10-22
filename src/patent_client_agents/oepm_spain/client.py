@@ -12,7 +12,7 @@ import re
 import xml.etree.ElementTree as ET
 from typing import Any, Literal
 
-import httpx
+import httpx2
 
 from mcp_data_core.exceptions import (
     ApiError,
@@ -283,7 +283,7 @@ class OepmSpainClient(ConnectorClient):
         password: str | None = None,
         *,
         base_url: str | None = None,
-        client: httpx.AsyncClient | None = None,
+        client: httpx2.AsyncClient | None = None,
     ) -> None:
         self.username = username or os.getenv("OEPM_CEO_USERNAME")
         self.password = password or os.getenv("OEPM_CEO_PASSWORD")

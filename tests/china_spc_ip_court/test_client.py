@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-import httpx
+import httpx2
 import pytest
 
 from patent_client_agents.china_spc_ip_court import ChinaSpcIpCourtClient
@@ -11,17 +11,17 @@ from .test_parsers import DETAIL_HTML, INDEX_HTML, SEARCH_HTML
 
 
 def _mock_client(handler) -> ChinaSpcIpCourtClient:
-    transport_client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+    transport_client = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
     return ChinaSpcIpCourtClient(client=transport_client)
 
 
 @pytest.mark.asyncio
 async def test_index_uses_public_hearing_path_and_browser_headers() -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, text=INDEX_HTML)
+        return httpx2.Response(200, text=INDEX_HTML)
 
     async with _mock_client(handler) as client:
         result = await client.list_hearing_index(page=2)
@@ -34,7 +34,7 @@ async def test_index_uses_public_hearing_path_and_browser_headers() -> None:
 
 @pytest.mark.asyncio
 async def test_exact_notice_fetch() -> None:
-    async with _mock_client(lambda request: httpx.Response(200, text=DETAIL_HTML)) as client:
+    async with _mock_client(lambda request: httpx2.Response(200, text=DETAIL_HTML)) as client:
         result = await client.get_hearing_notice("5999")
 
     assert result.dispute_type == "发明专利权无效行政纠纷"
@@ -42,18 +42,18 @@ async def test_exact_notice_fetch() -> None:
 
 @pytest.mark.asyncio
 async def test_exact_notice_rejects_official_looking_external_url() -> None:
-    async with _mock_client(lambda request: httpx.Response(200, text=DETAIL_HTML)) as client:
+    async with _mock_client(lambda request: httpx2.Response(200, text=DETAIL_HTML)) as client:
         with pytest.raises(ValueError, match="official SPC IP Court host"):
             await client.get_hearing_notice("https://example.com/zh-cn/news/view-5999.html")
 
 
 @pytest.mark.asyncio
 async def test_site_search_passes_chinese_query() -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, text=SEARCH_HTML)
+        return httpx2.Response(200, text=SEARCH_HTML)
 
     async with _mock_client(handler) as client:
         result = await client.search_site("芯片")

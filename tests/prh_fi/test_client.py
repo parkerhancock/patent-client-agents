@@ -6,7 +6,7 @@ import json
 from collections.abc import Callable
 from pathlib import Path
 
-import httpx
+import httpx2
 import pytest
 
 from patent_client_agents.prh_fi import PrhClient
@@ -27,8 +27,8 @@ from patent_client_agents.prh_fi.client import (
 )
 
 
-def _mock(handler: Callable[[httpx.Request], httpx.Response]) -> httpx.MockTransport:
-    return httpx.MockTransport(handler)
+def _mock(handler: Callable[[httpx2.Request], httpx2.Response]) -> httpx2.MockTransport:
+    return httpx2.MockTransport(handler)
 
 
 def _fixture(name: str) -> dict:
@@ -81,11 +81,11 @@ def test_design_body_has_19_string_fields() -> None:
 
 @pytest.mark.asyncio
 async def test_search_patents_routes_to_patent_host() -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, json=_fixture("patent-search.json"))
+        return httpx2.Response(200, json=_fixture("patent-search.json"))
 
     async with PrhClient(transport=_mock(handler), use_cache=False) as client:
         result = await client.search_patents(applicant="Audience")
@@ -106,11 +106,11 @@ async def test_search_patents_routes_to_patent_host() -> None:
 
 @pytest.mark.asyncio
 async def test_get_patent_routes_to_patent_host() -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, json=_fixture("patent-get.json"))
+        return httpx2.Response(200, json=_fixture("patent-get.json"))
 
     async with PrhClient(transport=_mock(handler), use_cache=False) as client:
         patent = await client.get_patent("20100001")
@@ -124,7 +124,7 @@ async def test_get_patent_routes_to_patent_host() -> None:
 @pytest.mark.asyncio
 async def test_get_patent_rejects_empty_application_number() -> None:
     async with PrhClient(
-        transport=_mock(lambda _: httpx.Response(200, json={})), use_cache=False
+        transport=_mock(lambda _: httpx2.Response(200, json={})), use_cache=False
     ) as client:
         with pytest.raises(ValueError):
             await client.get_patent("")
@@ -132,11 +132,11 @@ async def test_get_patent_rejects_empty_application_number() -> None:
 
 @pytest.mark.asyncio
 async def test_search_trademarks_routes_to_trademark_host() -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, json=_fixture("tm-search.json"))
+        return httpx2.Response(200, json=_fixture("tm-search.json"))
 
     async with PrhClient(transport=_mock(handler), use_cache=False) as client:
         await client.search_trademarks(trademark_word="AUDI")
@@ -146,11 +146,11 @@ async def test_search_trademarks_routes_to_trademark_host() -> None:
 
 @pytest.mark.asyncio
 async def test_search_well_known_routes_to_tmr_path() -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, json=_fixture("tmr-search.json"))
+        return httpx2.Response(200, json=_fixture("tmr-search.json"))
 
     async with PrhClient(transport=_mock(handler), use_cache=False) as client:
         await client.search_well_known_trademarks()
@@ -160,11 +160,11 @@ async def test_search_well_known_routes_to_tmr_path() -> None:
 
 @pytest.mark.asyncio
 async def test_search_designs_routes_to_design_host() -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, json=_fixture("design-search.json"))
+        return httpx2.Response(200, json=_fixture("design-search.json"))
 
     async with PrhClient(transport=_mock(handler), use_cache=False) as client:
         await client.search_designs(applicant_name="Marimekko")
@@ -225,11 +225,11 @@ async def test_live_search_designs_smoke(vcr_cassette: object) -> None:
 
 @pytest.mark.asyncio
 async def test_download_trademark_image_routes_with_regno() -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, content=b"GIF89a fake", headers={"content-type": "image/gif"})
+        return httpx2.Response(200, content=b"GIF89a fake", headers={"content-type": "image/gif"})
 
     async with PrhClient(transport=_mock(handler), use_cache=False) as client:
         content, ct = await client.download_trademark_image("T196503880", "49497")
@@ -241,11 +241,11 @@ async def test_download_trademark_image_routes_with_regno() -> None:
 
 @pytest.mark.asyncio
 async def test_download_trademark_image_without_regno() -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, content=b"GIF", headers={"content-type": "image/gif"})
+        return httpx2.Response(200, content=b"GIF", headers={"content-type": "image/gif"})
 
     async with PrhClient(transport=_mock(handler), use_cache=False) as client:
         await client.download_trademark_image("2007007", variant="thumbnail")
@@ -257,7 +257,7 @@ async def test_download_trademark_image_without_regno() -> None:
 @pytest.mark.asyncio
 async def test_download_trademark_image_rejects_bad_variant() -> None:
     async with PrhClient(
-        transport=_mock(lambda _: httpx.Response(200, b"")), use_cache=False
+        transport=_mock(lambda _: httpx2.Response(200, b"")), use_cache=False
     ) as client:
         with pytest.raises(ValueError, match="variant must be"):
             await client.download_trademark_image("X", variant="huge")
@@ -265,11 +265,11 @@ async def test_download_trademark_image_rejects_bad_variant() -> None:
 
 @pytest.mark.asyncio
 async def test_download_design_image_routes() -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(
+        return httpx2.Response(
             200, content=b"\xff\xd8\xff fake jpeg", headers={"content-type": "image/jpeg"}
         )
 
@@ -285,7 +285,7 @@ async def test_download_design_image_routes() -> None:
 @pytest.mark.asyncio
 async def test_download_design_image_rejects_empty_id() -> None:
     async with PrhClient(
-        transport=_mock(lambda _: httpx.Response(200, b"")), use_cache=False
+        transport=_mock(lambda _: httpx2.Response(200, b"")), use_cache=False
     ) as client:
         with pytest.raises(ValueError, match="image_id must be"):
             await client.download_design_image("")

@@ -18,7 +18,7 @@ from datetime import date
 from pathlib import Path
 from typing import Any, Self
 
-import httpx
+import httpx2
 
 from .clients import (
     ApplicationsClient,
@@ -93,7 +93,7 @@ class UsptoOdpClient:
         *,
         base_url: str = "https://api.uspto.gov",
         cache_path: Path | None = None,
-        client: httpx.AsyncClient | None = None,
+        client: httpx2.AsyncClient | None = None,
     ) -> None:
         """Initialize the client.
 
@@ -101,7 +101,7 @@ class UsptoOdpClient:
             api_key: USPTO ODP API key. Falls back to USPTO_ODP_API_KEY env var.
             base_url: Override the default base URL.
             cache_path: Custom path for the cache directory.
-            client: Existing httpx.AsyncClient to use (for testing).
+            client: Existing httpx2.AsyncClient to use (for testing).
         """
         # Common kwargs for all sub-clients
         kwargs: dict[str, Any] = {

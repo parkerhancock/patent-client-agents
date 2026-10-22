@@ -29,7 +29,7 @@ from __future__ import annotations
 import os
 from typing import Any, Literal
 
-import httpx
+import httpx2
 
 from mcp_data_core.exceptions import ConfigurationError
 from patent_client_agents.shared.auth import shared_oauth2
@@ -67,7 +67,7 @@ class EuipoTrademarksClient(ConnectorClient):
         scope: str = _DEFAULT_SCOPE,
         base_url: str | None = None,
         token_url: str | None = None,
-        auth: httpx.Auth | None = None,
+        auth: httpx2.Auth | None = None,
         **kwargs: Any,
     ) -> None:
         env_raw: str = environment or os.getenv("EUIPO_ENV", "production")

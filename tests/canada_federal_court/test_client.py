@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from datetime import date
 
-import httpx
+import httpx2
 import pytest
 
 from patent_client_agents.canada_federal_court import CanadaFederalCourtClient
@@ -67,17 +67,17 @@ def _docket_row(*, entry_number: int = 10, summary: str = "Defence filed") -> di
 
 
 def _mock_client(handler) -> CanadaFederalCourtClient:
-    transport_client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+    transport_client = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
     return CanadaFederalCourtClient(client=transport_client)
 
 
 @pytest.mark.asyncio
 async def test_party_search_uses_official_endpoint_and_filters_patent_cases() -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(
+        return httpx2.Response(
             200,
             json={
                 "Count": 2,
@@ -99,11 +99,11 @@ async def test_party_search_uses_official_endpoint_and_filters_patent_cases() ->
 
 @pytest.mark.asyncio
 async def test_party_search_with_dates_uses_date_endpoint() -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, json={"Count": 0, "data": []})
+        return httpx2.Response(200, json={"Count": 0, "data": []})
 
     async with _mock_client(handler) as client:
         await client.search_party_cases(
@@ -122,12 +122,12 @@ async def test_party_search_with_dates_uses_date_endpoint() -> None:
 async def test_get_case_fans_out_to_metadata_parties_ip_and_related_cases() -> None:
     paths: list[str] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         paths.append(request.url.path)
         if request.url.path.endswith("proceedingQueriesAddInfo"):
-            return httpx.Response(200, json={"Count": 1, "data": [_case_row()]})
+            return httpx2.Response(200, json={"Count": 1, "data": [_case_row()]})
         if request.url.path.endswith("PublicPartiesListInfo"):
-            return httpx.Response(
+            return httpx2.Response(
                 200,
                 json={
                     "Count": 1,
@@ -141,14 +141,14 @@ async def test_get_case_fans_out_to_metadata_parties_ip_and_related_cases() -> N
                 },
             )
         if request.url.path.endswith("PartyInfoIntlProp"):
-            return httpx.Response(
+            return httpx2.Response(
                 200,
                 json={
                     "Count": 1,
                     "data": [{"INT_PROPERTY_TITLE": "BOSULIF", "INT_PROPERTY_NUMBER": 2688467.0}],
                 },
             )
-        return httpx.Response(200, json={"Count": 0, "data": []})
+        return httpx2.Response(200, json={"Count": 0, "data": []})
 
     async with _mock_client(handler) as client:
         result = await client.get_case("t-2962-24")
@@ -167,7 +167,7 @@ async def test_docket_entries_include_download_url_and_inferred_status() -> None
     ]
 
     async with _mock_client(
-        lambda request: httpx.Response(200, json={"Count": len(rows), "data": rows})
+        lambda request: httpx2.Response(200, json={"Count": len(rows), "data": rows})
     ) as client:
         result = await client.list_docket_entries("T-2962-24")
 
@@ -181,7 +181,7 @@ async def test_docket_entries_include_download_url_and_inferred_status() -> None
 @pytest.mark.asyncio
 async def test_search_rejects_one_sided_date_range() -> None:
     async with _mock_client(
-        lambda request: httpx.Response(200, json={"Count": 0, "data": []})
+        lambda request: httpx2.Response(200, json={"Count": 0, "data": []})
     ) as client:
         with pytest.raises(ValueError, match="supplied together"):
             await client.search_party_cases("Acme", filed_from=date(2024, 1, 1))

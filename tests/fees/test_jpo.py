@@ -22,7 +22,7 @@ from __future__ import annotations
 from decimal import Decimal
 from pathlib import Path
 
-import httpx
+import httpx2
 import pytest
 from lxml import html as L
 
@@ -392,9 +392,9 @@ def patch_fetch(monkeypatch: pytest.MonkeyPatch) -> None:
 async def test_live_xhtml_encoding_declaration_is_parsed_as_bytes(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    async def fake_request(self: jpo.JPOFeesClient, *args, **kwargs) -> httpx.Response:
+    async def fake_request(self: jpo.JPOFeesClient, *args, **kwargs) -> httpx2.Response:
         content = JPO_FIXTURE.read_bytes().removeprefix(b"\xef\xbb\xbf")
-        return httpx.Response(200, content=content)
+        return httpx2.Response(200, content=content)
 
     monkeypatch.setattr(jpo.JPOFeesClient, "_request", fake_request)
 
