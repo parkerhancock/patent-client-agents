@@ -45,6 +45,7 @@ import {
 } from "./downloads.js";
 import { registerEpoTools } from "./epo.js";
 import { type EpoLegalClients, registerEpoLegalTools } from "./epo-legal.js";
+import { registerFacadeTools } from "./facade/index.js";
 import { registerFeeTools } from "./fees.js";
 import { registerGooglePatentsTools } from "./google-patents.js";
 import { registerMpepTools } from "./mpep.js";
@@ -111,6 +112,21 @@ export interface ServerOptions {
    * also become the listener's allowed CORS origins.
    */
   relay?: RelayOptions;
+  /**
+   * "full" (default) serves every TypeScript tool; "curated" serves only the
+   * public facade (the Python patent-client-facade surface). PCA_TOOLSET sets
+   * the default.
+   */
+  toolset?: "full" | "curated";
+}
+
+export function toolsetFromEnv(
+  env: Record<string, string | undefined>,
+): "full" | "curated" {
+  const value = env.PCA_TOOLSET?.trim().toLowerCase();
+  if (value === undefined || value === "" || value === "full") return "full";
+  if (value === "curated") return "curated";
+  throw new ConfigurationError("PCA_TOOLSET must be 'full' or 'curated'.");
 }
 
 export type WafSessionSource =
@@ -403,6 +419,54 @@ export function createServer(options: ServerOptions = {}): FastMCP {
       return downloads.handle(request, owner);
     },
   );
+  const tsdrClient =
+    provided.tsdr ??
+    (process.env.USPTO_TSDR_API_KEY
+      ? lazyClient(() => new TsdrClient())
+      : undefined);
+  const epoOpsClient =
+    provided.epoOps ??
+    ((process.env.EPO_OPS_API_KEY || process.env.EPO_API_KEY) &&
+    (process.env.EPO_OPS_API_SECRET || process.env.EPO_API_SECRET)
+      ? lazyClient(() => new EpoOpsClient())
+      : undefined);
+  const clients = {
+    applications,
+    officeActions:
+      provided.officeActions ?? lazyClient(() => new OfficeActionsClient()),
+    analytics:
+      provided.analytics ?? lazyClient(() => new OfficeActionAnalyticsClient()),
+    trials: provided.trials ?? lazyClient(() => new PtabTrialsClient()),
+    appeals: provided.appeals ?? lazyClient(() => new PtabAppealsClient()),
+    interferences:
+      provided.interferences ?? lazyClient(() => new PtabInterferencesClient()),
+    petitions: provided.petitions ?? lazyClient(() => new PetitionsClient()),
+    bulk: provided.bulk ?? lazyClient(() => new BulkDataClient()),
+    assignments:
+      provided.assignments ?? lazyClient(() => new AssignmentCenterClient()),
+    trademarkAssignments:
+      provided.trademarkAssignments ??
+      lazyClient(() => new TrademarkAssignmentClient()),
+    publications:
+      provided.publications ?? lazyClient(() => new PublicationsClient()),
+    trademarkSearch:
+      provided.trademarkSearch ??
+      lazyClient(() => configuredTrademarkSearchClient(wafSession)),
+    mpep,
+    fees: provided.fees ?? new FeesClient(),
+    googlePatents: provided.googlePatents ?? new GooglePatentsClient(),
+    epoLegal,
+    tsdr: tsdrClient,
+    epoOps: epoOpsClient,
+  };
+  if ((options.toolset ?? toolsetFromEnv(process.env)) === "curated") {
+    registerFacadeTools(
+      server,
+      clients,
+      options.auth ? requireScopes("tools:read") : undefined,
+    );
+    return server;
+  }
   const common = {
     output: envelopeSchema,
     annotations: {
@@ -550,79 +614,54 @@ export function createServer(options: ServerOptions = {}): FastMCP {
   registerApplicationExtraTools(server, applications, auth);
   registerOfficeActionTools(
     server,
-    {
-      officeActions:
-        provided.officeActions ?? lazyClient(() => new OfficeActionsClient()),
-      analytics:
-        provided.analytics ??
-        lazyClient(() => new OfficeActionAnalyticsClient()),
-    },
+    { officeActions: clients.officeActions, analytics: clients.analytics },
     auth,
   );
   registerOdpRecordTools(
     server,
     {
-      trials: provided.trials ?? lazyClient(() => new PtabTrialsClient()),
-      appeals: provided.appeals ?? lazyClient(() => new PtabAppealsClient()),
-      interferences:
-        provided.interferences ??
-        lazyClient(() => new PtabInterferencesClient()),
-      petitions: provided.petitions ?? lazyClient(() => new PetitionsClient()),
-      bulk: provided.bulk ?? lazyClient(() => new BulkDataClient()),
+      trials: clients.trials,
+      appeals: clients.appeals,
+      interferences: clients.interferences,
+      petitions: clients.petitions,
+      bulk: clients.bulk,
     },
     auth,
   );
-  const tsdr =
-    provided.tsdr ??
-    (process.env.USPTO_TSDR_API_KEY
-      ? lazyClient(() => new TsdrClient())
-      : undefined);
   const externalAuth = options.auth ? requireScopes("uspto:read") : undefined;
   registerRegisterTools(
     server,
     {
-      assignments:
-        provided.assignments ?? lazyClient(() => new AssignmentCenterClient()),
-      trademarkAssignments:
-        provided.trademarkAssignments ??
-        lazyClient(() => new TrademarkAssignmentClient()),
-      ...(tsdr ? { tsdr } : {}),
+      assignments: clients.assignments,
+      trademarkAssignments: clients.trademarkAssignments,
+      ...(tsdrClient ? { tsdr: tsdrClient } : {}),
     },
     externalAuth,
   );
   registerPortalSearchTools(
     server,
     {
-      publications:
-        provided.publications ?? lazyClient(() => new PublicationsClient()),
-      trademarkSearch:
-        provided.trademarkSearch ??
-        lazyClient(() => configuredTrademarkSearchClient(wafSession)),
+      publications: clients.publications,
+      trademarkSearch: clients.trademarkSearch,
     },
     externalAuth,
   );
   registerUsptoResources(server, auth);
   registerMpepTools(server, mpep, externalAuth);
-  const epoOps =
-    provided.epoOps ??
-    ((process.env.EPO_OPS_API_KEY || process.env.EPO_API_KEY) &&
-    (process.env.EPO_OPS_API_SECRET || process.env.EPO_API_SECRET)
-      ? lazyClient(() => new EpoOpsClient())
-      : undefined);
   registerGooglePatentsTools(
     server,
-    provided.googlePatents ?? new GooglePatentsClient(),
+    clients.googlePatents,
     options.auth ? requireScopes("patents:read") : undefined,
   );
   registerFeeTools(
     server,
-    provided.fees ?? new FeesClient(),
+    clients.fees,
     options.auth ? requireScopes("fees:read") : undefined,
   );
-  if (epoOps)
+  if (epoOpsClient)
     registerEpoTools(
       server,
-      epoOps,
+      epoOpsClient,
       options.auth ? requireScopes("epo:read") : undefined,
     );
   registerEpoLegalTools(
