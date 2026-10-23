@@ -386,7 +386,8 @@ export const cases: Case[] = [
     },
   },
   {
-    name: "fees JPO (unported)",
+    // The JPO refuses this client's honest user agent (docs/fees.md).
+    name: "fees JPO (blocked live)",
     tool: "get_fees",
     args: { mode: "schedule", jurisdiction: "JPO" },
     expect: "error",

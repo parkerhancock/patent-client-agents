@@ -1187,7 +1187,9 @@ which the KIPO, JPO and IPO India clients send. Their tests
 ([KIPO](../tests/fees-kipo.test.ts), [JPO](../tests/fees-jpo.test.ts),
 [IPO India](../tests/fees-ipindia.test.ts)) check counts, published amounts
 for every right, renewal ladders, cohorts, column order, drift handling and
-alias routing. Because `listSchedules` fetches every route with
-`Promise.all`, `list_fee_jurisdictions` fails whenever one source refuses,
-as the JPO does from this machine; making it report per-route failures is a
-change to the shared client and is left for when the remaining offices land.
+alias routing. `listSchedules` returns `{ schedules, unavailable }`: a
+route whose source refuses, as the JPO does from this machine and from Cloud
+Run, is listed in `unavailable` with its error, and `list_fee_jurisdictions`
+and `get_fees(mode='jurisdictions')` name it in the summary instead of
+failing. Python's `list_schedules` fails the whole listing on any one office
+(on October 23, 2026 the deployed demo timed out after 60 seconds).

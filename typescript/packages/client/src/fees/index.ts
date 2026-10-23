@@ -19,6 +19,7 @@ import {
   type FeeCategory,
   type FeeItem,
   type FeeSchedule,
+  type FeeScheduleListing,
   type FeeScheduleSummary,
   type RightType,
   RightTypeSchema,
@@ -255,13 +256,32 @@ export class FeesClient {
     const schedule = await this.getSchedule(jurisdiction, right, options);
     return { schedule, fees: filterFees(schedule.fees, filter) };
   }
+  /**
+   * Fetches every schedule. An office that fails (a block, an outage) is
+   * reported in `unavailable` instead of failing the listing; Python's
+   * `list_schedules` let one office sink the whole call.
+   */
   async listSchedules(
     options: TransportRequestOptions = {},
-  ): Promise<FeeScheduleSummary[]> {
-    const schedules = await Promise.all(
-      [...this.routes.values()].map((loader) => loader(options)),
+  ): Promise<FeeScheduleListing> {
+    const routes = [...this.routes.entries()];
+    const settled = await Promise.allSettled(
+      routes.map(([, loader]) => loader(options)),
     );
-    return schedules.map(summarizeSchedule);
+    const listing: FeeScheduleListing = { schedules: [], unavailable: [] };
+    settled.forEach((result, index) => {
+      if (result.status === "fulfilled")
+        listing.schedules.push(summarizeSchedule(result.value));
+      else
+        listing.unavailable.push({
+          route: routes[index]?.[0] ?? "",
+          error:
+            result.reason instanceof Error
+              ? result.reason.message
+              : String(result.reason),
+        });
+    });
+    return listing;
   }
 }
 

@@ -3,7 +3,8 @@
 // side. Signs in to each with the loopback OAuth flow (the authorization
 // URLs are printed and written to <report>.urls.txt); tokens stay in memory.
 // Usage: bun scripts/compare-facade.ts <report.json> [--only=tool,tool]
-//   [--ts=<base url>] [--py=<base url>]
+//   [--ts=<base url>] [--py=<base url>] [--open]
+// --open opens each sign-in page in the default browser (macOS).
 import { writeFile } from "node:fs/promises";
 import { Client } from "@prefecthq/fastmcp-ts/client";
 import { cases, type Found, type Raw } from "./live-facade-cases.js";
@@ -30,6 +31,7 @@ for (const side of ["ts", "py"] as const) {
       flag: "a",
     });
     console.log(`Open to sign in to ${side} (${servers[side]}):\n${url}\n`);
+    if (Bun.argv.includes("--open")) Bun.spawn(["open", url]);
   });
   clients[side] = await Client.connect(`${servers[side]}/mcp`, {
     auth,

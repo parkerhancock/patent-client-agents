@@ -275,15 +275,17 @@ Related tools: classify_cpc.`,
       if (input.mode === "jurisdictions") {
         if (input.refresh)
           throw new Error("refresh requires mode=schedule or lookup");
-        const rows = await clients.fees.listSchedules();
-        const supported = new Set(
-          rows.map((row) => `${row.office_code}/${row.right}`),
-        );
+        const { schedules: rows, unavailable } =
+          await clients.fees.listSchedules();
+        const supported = new Set(clients.fees.supportedRoutes);
         const unported = PYTHON_FEE_ROUTES.filter(
           ([office, right]) => !supported.has(`${office}/${right}`),
         ).map(([office, right]) => `${office} ${right}`);
+        const failed = unavailable.length
+          ? ` Unavailable right now: ${unavailable.map((u) => `${u.route} (${u.error})`).join("; ")}.`
+          : "";
         return listEnvelope(
-          `${rows.length} fee schedules available: ${rows.map((row) => row.key).join(", ")}. Not yet ported: ${unported.join(", ")}.`,
+          `${rows.length} fee schedules available: ${rows.map((row) => row.key).join(", ")}.${failed} Not yet ported: ${unported.join(", ")}.`,
           rows.map((row) => ({ ...row })),
           {
             source_url: "https://www.epo.org/en/applying/fees",

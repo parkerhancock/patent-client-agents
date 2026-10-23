@@ -30,7 +30,7 @@ output-mode schemas mark defaulted parameters as required.
 | `get_epo`, `search_epo` | Served; need EPO OPS credentials |
 | `search_trademarks`, `get_trademark`, `search_trademark_assignments` | Served; TSDR views need `USPTO_TSDR_API_KEY` |
 | `classify_cpc` | Served; needs EPO OPS credentials. USCLS mapping is rejected (OPS maps CPC, IPC and ECLA). |
-| `get_fees` | Served for the EPO, the Unitary Patent and the USPTO (patent, trademark, design); other offices report not yet ported |
+| `get_fees` | Served for every office the client ports (see [fees](fees.md)); EUIPO reports not yet ported. The JPO refuses this server's honest user agent, so JPO schedules fail live and `mode='jurisdictions'` lists them as unavailable |
 | `search_litigation`, `get_litigation`, `list_ptab_children`, `search_cafc_patent_opinions` | PTAB and CAFC served; UPC decisions not ported (the site now sits behind a Cloudflare challenge); USITC appears only with `USITC_EDIS_TOKEN`, matching the Python EDIS-enabled build (checked by a second contract fixture) |
 | `search_legal_reference`, `get_legal_reference` | All corpora served: MPEP, TMEP, UKIPO MoPP, DPMA, the India statutes and MPPP, the Taiwan Trade Secrets Act and the five EPO corpora. India returns its own hit shape, as Python forwards it. For the statute corpora (`dpma`, `india_statutes`, `tw_trade_secrets`) an omitted `syntax` means all terms, as the description says; Python sent phrase. See [DPMA statutes](dpma-statutes.md), [IPO India](ipo-in.md) and [Taiwan Trade Secrets Act](tw-trade-secrets.md) |
 | `search_bulk_data`, `download_document` | ODP bulk data, patent PDFs, PTAB documents and CAFC opinions served; USITC attachments with `USITC_EDIS_TOKEN`; IP Australia not ported |
@@ -148,6 +148,44 @@ Not facade defects, but visible in the run:
 - `get_epo(view='register_biblio')` summarizes with the first register title,
   which is the German one for EP1000000. The data includes all three.
 - Trademark Search owner names can carry runs of spaces from the source.
+
+## Side by side with the Python demo
+
+On October 23, 2026, [`scripts/compare-facade.ts`](../scripts/compare-facade.ts)
+ran the live cases against the `patent-mcp-ts` shadow (image 757bd7c8) and
+`mcp.patentclient.com` (Python 0.31.0), signed in to each through its Google
+OAuth proxy. The tool lists match: the same 28 visible tools on both
+(`search_trademarks` is hidden on both), with extra optional parameters only on
+TypeScript (`refresh` on `get_fees`, `version` on the legal-reference pair,
+`offset` and `next_cursor` on `search_litigation`).
+
+Of 107 cases, 79 answered alike (same summary, same item count) and 5 failed
+alike as they should (KR without a key, a bad application number, the hidden
+trademark search). The rest:
+
+- **TypeScript fixes Python lacks (12 Python errors).** TSDR `status` and
+  `last_update` (Python fails to decode the response), `list_ptab_children` on
+  a pending trial (Python surfaces ODP's 404), the DPMA, India and Taiwan
+  corpora (not installed on the Python demo), and CAFC opinion PDFs by
+  four-digit appeal number. EPC "novelty" finds Article 54 only on
+  TypeScript.
+- **Intended differences (8 count mismatches).** EP claims split into numbered
+  claims (11 against 3), family and figures return envelopes, the file-history
+  bundle is one artifact, WIPO Lex returns latest versions only (6 against 42,
+  Python's `include_historical` is inverted), and the EPO and USPTO schedules
+  are smaller: Python files the 41 Unitary Patent fees (codes 7xx) under the
+  EPC, so an EPO year-10 renewal lookup also returned the UP fee (code 740),
+  and emits untiered USPTO fees once per tier with design and plant rows in
+  the utility schedule (see [fees](fees.md#uspto)).
+- **Fixed after the run.** `get_fees(mode='jurisdictions')` failed on the JPO
+  403 (Python timed out at 60 seconds); it now lists the JPO as unavailable.
+  `get_legal_reference` summaries gave only the citation; they now carry the
+  section title and source URL, as Python's did.
+- **Not a code difference.** The JPO schedule fails on TypeScript only:
+  Python sends a Chrome user agent and Sec-Fetch headers, which this port
+  does not. One Copyright Office `get` timed out on the shadow during a slow
+  spell (the search before it took 7 seconds); two reruns answered in under 2
+  seconds on both servers.
 
 ## Verification
 

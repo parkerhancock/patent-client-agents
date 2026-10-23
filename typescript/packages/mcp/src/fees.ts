@@ -91,9 +91,12 @@ export function registerFeeTools(
       input: z.object({}),
     },
     async () => {
-      const rows = await client.listSchedules();
+      const { schedules: rows, unavailable } = await client.listSchedules();
+      const failed = unavailable.length
+        ? ` Unavailable right now: ${unavailable.map((u) => `${u.route} (${u.error})`).join("; ")}.`
+        : "";
       return listEnvelope(
-        `${rows.length} fee schedules: ${rows.map((row) => row.key).join(", ")}.`,
+        `${rows.length} fee schedules: ${rows.map((row) => row.key).join(", ")}.${failed}`,
         rows.map((row) => ({ ...row })),
         {
           source_url: "https://www.epo.org/en/applying/fees",

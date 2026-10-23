@@ -118,6 +118,11 @@ answer.
 
 Stop: decide on cutover.
 
+Steps 1 and 2 ran on October 23, 2026: all eight smoke checks passed, and the
+side-by-side comparison is recorded in [the facade doc](facade.md#side-by-side-with-the-python-demo).
+Two fixes from it (the fee jurisdictions listing and section summaries) need a
+new image before step 3.
+
 ## Phase 3: cutover
 
 1. Move `mcp.patentclient.com` to `patent-mcp-ts` (the mapping mechanism is

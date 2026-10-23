@@ -16,7 +16,8 @@ interface Tokens {
 }
 
 /**
- * `onUrl` receives the authorization URL for the person to open; the promise
+ * `onUrl` receives the authorization URL for the person to open (also served
+ * as a redirect from http://127.0.0.1:53682/start); the promise
  * settles when the browser comes back to the loopback callback.
  */
 export async function signIn(
@@ -63,6 +64,7 @@ export async function signIn(
       port: PORT,
       fetch(req) {
         const u = new URL(req.url);
+        if (u.pathname === "/start") return Response.redirect(auth.toString());
         if (u.pathname !== "/callback")
           return new Response("not found", { status: 404 });
         if (u.searchParams.get("state") !== state)

@@ -175,6 +175,11 @@ export type FeeSchedule = z.infer<typeof FeeScheduleSchema>;
 export type FeeScheduleInput = z.input<typeof FeeScheduleSchema>;
 
 /** Lean discovery row for one supported schedule. */
+/** `FeesClient.listSchedules` result: the schedules fetched and the routes that failed. */
+export interface FeeScheduleListing {
+  schedules: FeeScheduleSummary[];
+  unavailable: { route: string; error: string }[];
+}
 export interface FeeScheduleSummary {
   key: string;
   jurisdiction: string;

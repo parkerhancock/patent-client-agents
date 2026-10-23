@@ -345,8 +345,19 @@ export function registerLegalReferenceFacade(
           provenance,
         );
       else item.text = text;
+      // Python's summary named the section's title and source; keep both.
+      // EPO titles already open with the section number ("3.1 Discoveries").
+      const number = section.section_number ?? section.href;
+      const title = typeof item.title === "string" ? item.title : "";
+      const heading = !title
+        ? number
+        : title.startsWith(number)
+          ? title
+          : `${number}: ${title}`;
+      const sourceUrl =
+        typeof item.source_url === "string" ? item.source_url : "";
       return listEnvelope(
-        `${LABEL[input.corpus]} ${section.section_number ?? section.href}.`,
+        `**${LABEL[input.corpus]} ${heading}**${sourceUrl ? `\nSource: ${sourceUrl}` : ""}`,
         [item],
         provenance,
       );

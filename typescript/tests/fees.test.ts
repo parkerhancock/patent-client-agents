@@ -446,6 +446,25 @@ test("fee MCP tools forward filters and report gaps and unported offices", async
   }
 });
 
+test("listSchedules reports a failing office instead of failing the listing", async () => {
+  const fees = new FeesClient({
+    retryLimit: 0,
+    fetch: ((input: RequestInfo | URL, init?: RequestInit) =>
+      String(input instanceof Request ? input.url : input).includes("jpo.go.jp")
+        ? Promise.resolve(new Response("Forbidden", { status: 403 }))
+        : feeFetch(input, init)) as unknown as typeof fetch,
+  });
+  const { schedules, unavailable } = await fees.listSchedules();
+  expect(unavailable.map((u) => u.route)).toEqual([
+    "JPO/patent",
+    "JPO/trademark",
+    "JPO/design",
+  ]);
+  expect(unavailable[0]?.error).toContain("403");
+  expect(schedules.map((s) => s.key)).toContain("EP/EPO/patent");
+  expect(schedules.some((s) => s.office_code === "JPO")).toBe(false);
+});
+
 test("Bun HTTP serves fee tools only to tokens with fees:read", async () => {
   const { privateKey, publicKey } = generateKeyPairSync("rsa", {
     modulusLength: 2048,
