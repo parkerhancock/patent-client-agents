@@ -30,9 +30,9 @@ dependencies = [
     "tenacity>=8.4",
     "hishel[async]>=1.1.3",
     "markitdown[pdf]>=0.1.3",
-    # pypdf 6.15+ changes layout-mode spacing for the PRH fee PDF and
-    # prevents the section parser from recognizing the statutory tables.
-    "pypdf>=4.2,<6.15",
+    # 6.21.0 carries the 2026 security fixes; the fee parsers are verified
+    # against its layout spacing and RTL parenthesis output.
+    "pypdf>=6.21.0",
     "pyyaml>=6.0",
     "zstandard>=0.22",
     "google-cloud-storage>=2.18",
