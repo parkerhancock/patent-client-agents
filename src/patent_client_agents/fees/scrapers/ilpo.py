@@ -248,9 +248,10 @@ def _slice_sections(text: str) -> dict[str, str]:
 # A "top-level" item starts with a 1-3 digit number followed by ".".
 _TOP_ITEM_RE = re.compile(r"^(\d{1,3})\.\s*(.*)$")
 # A sub-item is "(<letter>" or "(<digit>)" — note inconsistent parenthesis
-# closure in the PDF, but the opening "(" is universal.
-_SUB_LETTER_RE = re.compile(r"^\(([א-ת])\)?\b\s*(.*)$")
-_SUB_NUMBER_RE = re.compile(r"^\((\d{1,2})\)?\b\s*(.*)$")
+# closure in the PDF, but the opening "(" is universal. pypdf 6.15+ may
+# emit the RTL-mirrored closing paren first (")(ב"), so allow a leading ")".
+_SUB_LETTER_RE = re.compile(r"^\)?\(([א-ת])\)?\b\s*(.*)$")
+_SUB_NUMBER_RE = re.compile(r"^\)?\((\d{1,2})\)?\b\s*(.*)$")
 # A trailing amount: 1-6 digit numbers with optional thousands commas.
 # Decimal points may appear (e.g., 4.3 NIS per page). Always at the
 # end of a line; we extract the LAST numeric token from each item's
