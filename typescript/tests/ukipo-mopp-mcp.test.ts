@@ -234,6 +234,9 @@ test("the curated facade routes corpus='ukipo_mopp' to the MoPP reader", async (
       href: S4A,
       document: { filename: "ukipo_mopp-4A.txt" },
     });
+    expect(section.structuredContent?.summary.split("\n")[0]).toBe(
+      "**UKIPO MoPP 4A: methods of treatment or diagnosis**",
+    );
     expect(section.structuredContent?.provenance).toMatchObject({
       source_name: "UKIPO Manual of Patent Practice (MoPP)",
       corpus_synced_at: "2026-05-14T00:00:00.000Z",

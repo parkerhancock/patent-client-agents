@@ -581,6 +581,18 @@ test("legal references route MPEP, TMEP and every EPO corpus, and refuse unporte
     citation: { kind: "article", number: "54" },
   });
   expect(String(article.items[0]?.text).length).toBeGreaterThan(20);
+  // Summaries name each number once and drop EPC footnote markers.
+  for (const [corpus, identifier, heading] of [
+    ["epc", "Article 54", "EPC Article 54: Novelty"],
+    ["epc", "Rule 71", "EPC Rule 71: Examination procedure"],
+    ["epc", "Rule 1", "EPC Rule 1: Written proceedings"],
+    ["epo_guidelines", "G-II, 3.1", "EPO Guidelines G-II, 3.1: Discoveries"],
+    ["epo_guidelines", "G-II, 3", "EPO Guidelines G-II, 3: List of exclusions"],
+    ["epo_guidelines", "A-I", "EPO Guidelines A-I: Chapter I – Introduction"],
+  ]) {
+    const got = await call("get_legal_reference", { corpus, identifier });
+    expect(got.summary.split("\n")[0]).toBe(`**${heading}**`);
+  }
   const first = mpepHits.items[0];
   const section = await call("get_legal_reference", {
     corpus: "uspto_mpep",

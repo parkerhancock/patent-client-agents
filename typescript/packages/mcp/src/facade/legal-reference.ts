@@ -346,14 +346,27 @@ export function registerLegalReferenceFacade(
         );
       else item.text = text;
       // Python's summary named the section's title and source; keep both.
-      // EPO titles already open with the section number ("3.1 Discoveries").
+      // Titles often repeat the number: in full ("Article 54", "Section 4A:")
+      // or as its last part ("3.1 Discoveries" under G-II, 3.1). EPC titles
+      // then carry footnote markers ("Article 5442, 43Novelty").
       const number = section.section_number ?? section.href;
-      const title = typeof item.title === "string" ? item.title : "";
-      const heading = !title
-        ? number
-        : title.startsWith(number)
-          ? title
-          : `${number}: ${title}`;
+      let name = typeof item.title === "string" ? item.title : "";
+      for (const prefix of [
+        number,
+        `Section ${number}`,
+        number.split(", ").at(-1) ?? number,
+      ])
+        if (
+          name.startsWith(prefix) &&
+          !/[A-Za-z]/.test(name.charAt(prefix.length))
+        ) {
+          name = name.slice(prefix.length).replace(/^[.:]/, "");
+          if (input.corpus === "epc")
+            name = name.replace(/^\s*\d+(?:\s*,\s*\d+)*/, "");
+          break;
+        }
+      name = name.trim();
+      const heading = name ? `${number}: ${name}` : number;
       const sourceUrl =
         typeof item.source_url === "string" ? item.source_url : "";
       return listEnvelope(
