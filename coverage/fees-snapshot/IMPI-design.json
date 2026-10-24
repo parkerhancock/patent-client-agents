@@ -581,7 +581,7 @@
       "code": "impi-26-bis",
       "condition": null,
       "currency": "MXN",
-      "label": "Suscripci\u00f3n anual de la Colecci\u00f3n de Discos Compactos ESPACE-MEXICO",
+      "label": "Suscripci\u00f3n anual de la Colecci\u00f3n de Discos Compactos ESPACE - MEXICO",
       "notes": "Article 26 BIS.",
       "rights": [
         "design"
@@ -596,7 +596,7 @@
       "code": "impi-26-bis-small",
       "condition": null,
       "currency": "MXN",
-      "label": "Suscripci\u00f3n anual de la Colecci\u00f3n de Discos Compactos ESPACE-MEXICO",
+      "label": "Suscripci\u00f3n anual de la Colecci\u00f3n de Discos Compactos ESPACE - MEXICO",
       "notes": "Article 26 BIS; 50% reduction under Disposici\u00f3n Cuarta (individual inventors, micro/small industry, universities, public research institutes).",
       "rights": [
         "design"
@@ -800,7 +800,7 @@
   "refresh_attempted_at": null,
   "refresh_error": null,
   "refresh_outcome": "not_requested",
-  "retrieved_at": "2026-10-14",
+  "retrieved_at": "2026-10-24",
   "right": "design",
   "schedule_status": "unknown",
   "source_checked_at": null,
