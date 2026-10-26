@@ -1,0 +1,120 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://patents-search-api.prv.se/searchpatent/patentsimplesearch/
+    headers:
+      accept:
+      - application/json
+      content-type:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com; contact data@prv.se)
+    body:
+      type: json
+      content:
+        page: 1
+        pageSize: 2
+        sortColumn: filingDate
+        sortOrder: DESC
+        simpleSearchText: Volvo
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      content-type:
+      - application/json
+      date:
+      - Mon, 26 Oct 2026 20:25:03 GMT
+      expires:
+      - "0"
+      pragma:
+      - no-cache
+      server:
+      - Microsoft-IIS/10.0
+      vary:
+      - Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - DENY
+      x-powered-by:
+      - ARR/3.0
+      x-xss-protection:
+      - "0"
+    body:
+      type: json
+      content:
+        totalHits: 3604
+        totalPages: 1801
+        hits: 2
+        page: 1
+        searchPatentDTOS:
+        - idPatent: 8158497
+          applicants:
+          - name: Volvo Truck Corporation
+            address: Volvo Truck Corporation, x, 405 08 Göteborg, Sverige
+          applicationNumberFormatted: SE2616189-3
+          applicationType: NAT
+          cpcClasses:
+          - B62D35/00
+          dpkClasses: []
+          filingDate: 2026-10-02
+          grantDate: null
+          ipcClasses: []
+          inventors:
+          - name: Joao Figueiredo
+            address: Spring Mountain, Selecionar, Brasilien
+          - name: Leandro Garcia
+            address: Curitiba, Parana, Brasilien
+          - name: Rafael Magri
+            address: São José dos Pinhais, Parana, Brasilien
+          publicationDate: 2026-10-02
+          publicationNumber: ""
+          reference: null
+          representatives:
+          - name: AWA Sweden AB
+            address: AWA Sweden AB, P O Box 5117, 200 71 Malmö, Sverige
+          status:
+            status: "116"
+            statusText: null
+            statusDisplayTextEn: null
+            statusDisplayTextSv: null
+            statusSubText: null
+            statusDisplaySubTextEn: null
+            statusDisplaySubTextSv: null
+          title: ADAPTIVE OPTIMIZATION SYSTEM FOR TRUCK DEFLECTOR HEIGHT
+        - idPatent: 8157612
+          applicants:
+          - name: Volvo Truck Corporation
+            address: Volvo Truck Corporation, ;, 405 08 Göteborg, Sverige
+          applicationNumberFormatted: SE2616184-4
+          applicationType: NAT
+          cpcClasses:
+          - B60R19/24
+          dpkClasses: []
+          filingDate: 2026-10-01
+          grantDate: null
+          ipcClasses: []
+          inventors:
+          - name: Caleb WILKERSON
+            address: Kernersville, USA
+          - name: Hadi NAZARIAN
+            address: Greensboro, USA
+          publicationDate: 2026-10-02
+          publicationNumber: ""
+          reference: null
+          representatives:
+          - name: Zacco Sweden AB
+            address: Zacco Sweden AB, P.O. Box 5581 Löjtnantsgatan 21, 114 85 Stockholm, Sverige
+          status:
+            status: "116"
+            statusText: null
+            statusDisplayTextEn: null
+            statusDisplayTextSv: null
+            statusSubText: null
+            statusDisplaySubTextEn: null
+            statusDisplaySubTextSv: null
+          title: BUMPER ASSEMBLY WITH HOOK AND HANG MOUNTING
+  recorded_at: 2026-10-26T20:25:03.846Z

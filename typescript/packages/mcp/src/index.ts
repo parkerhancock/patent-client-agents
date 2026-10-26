@@ -36,6 +36,7 @@ import {
   OfficeActionAnalyticsClient,
   OfficeActionsClient,
   PetitionsClient,
+  PrvClient,
   PtabAppealsClient,
   PtabInterferencesClient,
   PtabTrialsClient,
@@ -111,6 +112,7 @@ import {
 import { registerMpepTools } from "./mpep.js";
 import { registerOdpRecordTools } from "./odp-records.js";
 import { registerOfficeActionTools } from "./office-actions.js";
+import { registerPrvTools } from "./prv.js";
 import { registerRegisterTools } from "./registers.js";
 import {
   createRelayHandler,
@@ -178,6 +180,7 @@ export interface UsptoClients {
   jpo: JpoClient;
   /** TIPO OpenData; served only when a client is provided or TIPO_API_KEY is set. */
   tipo: TipoClient;
+  prv: PrvClient;
 }
 /** Instantiate a connector only when a tool invokes it, keeping optional credentials local to that family. */
 function lazyClient<T extends object>(factory: () => T): T {
@@ -711,6 +714,7 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     japanIpHighCourt: provided.japanIpHighCourt ?? new JapanIpHighCourtClient(),
     jpo: jpoClient,
     tipo: tipoClient,
+    prv: provided.prv ?? new PrvClient(),
   };
   if ((options.toolset ?? toolsetFromEnv(process.env)) === "curated") {
     registerFacadeTools(
@@ -1015,6 +1019,11 @@ export function createServer(options: ServerOptions = {}): FastMCP {
       jpoClient,
       options.auth ? requireScopes("jpo:read") : undefined,
     );
+  registerPrvTools(
+    server,
+    clients.prv,
+    options.auth ? requireScopes("prv:read") : undefined,
+  );
   if (tipoClient)
     registerTipoTools(
       server,

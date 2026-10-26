@@ -1,0 +1,262 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://api.prv.se/patents/applications/EP00108480.5
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com; contact data@prv.se)
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-methods:
+      - GET
+      access-control-allow-origin:
+      - "*"
+      content-type:
+      - application/json
+      date:
+      - Mon, 26 Oct 2026 20:25:26 GMT
+      x-powered-by:
+      - ARR/3.0
+    body:
+      type: json
+      content:
+        applicationNumber: "001084805"
+        applicationNumberFormatted: EP00108480.5
+        applicationType: EP
+        publicationNumber: "1020461"
+        status: EJIKRAFT
+        statusText: PATENT_EJ_I_KRAFT
+        statusSubText: ""
+        statusDisplayTextSv: Patent ej i kraft
+        statusDisplayTextEn: Patent not in force
+        statusDisplaySubTextSv: ""
+        statusDisplaySubTextEn: ""
+        infoSv: ""
+        infoEn: ""
+        filingDate: 1994-05-27
+        grantDate: 2009-07-22
+        announcementDate: 2009-09-08
+        translationDate: 2009-07-20
+        paymentDate: 2009-07-20
+        title: Användning av alkaliska salter av (-)-enantiomeren av omeprazol
+        reference: AST A1214-EP-ETD
+        applicantsShortFormat: AstraZeneca AB
+        applicants:
+        - AstraZeneca AB, 151 85 Södertälje, Sverige, SE
+        inventors:
+        - Per Lennart Lindberg, Mölndal, Sverige
+        - Sverker Von Unge, Fjärås, Sverige
+        representatives:
+        - >-
+          RWS, RWS Compass House, Vanwall Business Park, Vanwall Road, Maidenhead,
+          Berkshire SL6 4UB, GB
+        ipcClasses:
+        - A61K31/44
+        - A61P1/04
+        - C07D401/12
+        gazetteAnnouncementsSv:
+        - issue: 2016-06
+          type: Europeiska patent som upprätthålls i ändrad lydelse
+          text: ""
+          announcementDate: 2016-02-09
+        - issue: 2011-26
+          type: Inkomna ansökningar om tilläggsskydd
+          text: ""
+          announcementDate: 2011-06-28
+        - issue: 2010-27
+          type: Rättelser och korrigeringar av europeiska patent
+          text: ""
+          announcementDate: 2010-07-06
+        - issue: 2009-46
+          type: Rättelser och korrigeringar av europeiska patent
+          text: ""
+          announcementDate: 2009-11-10
+        - issue: 2009-37
+          type: Meddelade europeiska patent
+          text: ""
+          announcementDate: 2009-09-08
+        gazetteAnnouncementsEn:
+        - issue: 2016-06
+          type: European patents maintained as amended
+          text: ""
+          announcementDate: 2016-02-09
+        - issue: 2011-26
+          type: Recieved SPC applications
+          text: ""
+          announcementDate: 2011-06-28
+        - issue: 2010-27
+          type: Corrections of european patents
+          text: ""
+          announcementDate: 2010-07-06
+        - issue: 2009-46
+          type: Corrections of european patents
+          text: ""
+          announcementDate: 2009-11-10
+        - issue: 2009-37
+          type: Granted European Patents
+          text: ""
+          announcementDate: 2009-09-08
+        electronicAnnouncementsSv: []
+        electronicAnnouncementsEn: []
+        supplementaryProtectionCertificates:
+        - receivedDate: 2011-05-30
+          spcNumber: "11900115"
+        payments:
+        - paymentDate: 2013-05-13
+          year: "20"
+          amount: "6000.00"
+        - paymentDate: 2012-05-11
+          year: "19"
+          amount: "5300.00"
+        - paymentDate: 2011-05-06
+          year: "18"
+          amount: "5000.00"
+        - paymentDate: 2010-05-07
+          year: "17"
+          amount: "4700.00"
+        registryEntriesSv:
+        - date: 2016-02-03
+          event: "Anteckning: Övrigt"
+        - date: 2016-01-21
+          event: "Anteckning: Ändring beträffande ombudskap: RWS Translations, Europa House, Chiltern Park, Chiltern Hill, Chalfont St Peter, Bucks SL9 9FG GB"
+        - date: 2010-12-29
+          event: "Anteckning: Anmälan om att väcka talan"
+        registryEntriesEn:
+        - date: 2016-02-03
+          event: "Note: Other"
+        - date: 2016-01-21
+          event: "Note: Change of representation: RWS Translations, Europa House, Chiltern Park, Chiltern Hill, Chalfont St Peter, Bucks SL9 9FG GB"
+        - date: 2010-12-29
+          event: "Note: Notification on bringing action "
+        patentFamilies:
+        - AT E197452 T1 2000-11-11
+        - AU 676337 B2 1997-03-06
+        - AU 6902494 A 1994-12-20
+        - CA 2139653 A1 1994-12-08
+        - CA 2139653 C 2001-07-10
+        - CA 2337581 A1 1994-12-08
+        - CL 2009000805 A1 2009-08-21
+        - CN 1055469 C 2000-08-16
+        - CN 1107503 C 2003-05-07
+        - CN 1110477 A 1995-10-18
+        - CN 1259346 A 2000-07-12
+        - CY 2224 B1 2003-04-18
+        - CZ 20295 A3 1995-10-18
+        - CZ 287876 B6 2001-03-14
+        - DE 652872 T1 1997-09-04
+        - DE 69426254 D1 2000-12-14
+        - DE 69426254 T2 2001-06-07
+        - DE 69435220 D1 2009-09-03
+        - DE 69435221 D1 2009-09-03
+        - DK 0652872 T3 2001-03-05
+        - DK 1020460 T3 2009-08-10
+        - DK 1020461 T3 2009-08-10
+        - DK 1020461 T4 2016-02-15
+        - DZ 1785 A1 2002-02-17
+        - EE 03157 B1 1999-02-15
+        - EP 0652872 A1 1995-05-17
+        - EP 0652872 B1 2000-11-08
+        - EP 1020460 A2 2000-07-19
+        - EP 1020460 A3 2003-10-15
+        - EP 1020460 B1 2009-07-22
+        - EP 1020461 A2 2000-07-19
+        - EP 1020461 A3 2006-10-04
+        - EP 1020461 B1 2009-07-22
+        - EP 1020461 B2 2015-10-21
+        - ES 2099047 T1 1997-05-16
+        - ES 2099047 T3 2001-03-01
+        - ES 2326404 T3 2009-10-09
+        - ES 2326405 T3 2009-10-09
+        - ES 2326405 T5 2016-02-15
+        - FI 117755 B 2007-02-15
+        - FI 950377 A0 1995-01-27
+        - FI 950377 L 1995-01-27
+        - FI 20070002 A7 2007-01-02
+        - FI 20070002 L 2007-01-02
+        - GR 3035365 T3 2001-05-31
+        - GR 970300012 T1 1997-05-31
+        - HK 1008330 A1 1999-05-07
+        - HK 1028044 A1 2001-02-02
+        - HK 1028045 A1 2001-02-02
+        - HR P940307 A2 1996-12-31
+        - HR P940307 B1 2001-06-30
+        - HU 226824 B1 2009-11-30
+        - HU T71888 A 1996-02-28
+        - IL 109684 A 2002-05-23
+        - IL 109684 A0 1994-12-29
+        - IS 1854 B 2003-02-21
+        - IS 4161 A 1994-11-29
+        - JP 3549111 B2 2004-08-04
+        - JP 3959056 B2 2007-08-15
+        - JP 4039999 B2 2008-01-30
+        - JP H07509499 A 1995-10-19
+        - JP 2004043493 A 2004-02-12
+        - JP 2004043494 A 2004-02-12
+        - KR 100337274 B1 2003-12-31
+        - KR 950702553 A 1995-07-29
+        - LT 3287 B 1995-06-26
+        - LT IP1941 A 1994-12-27
+        - LU 91870 I2 2011-11-21
+        - LV 11034 A 1996-02-20
+        - LV 11034 B 1996-10-20
+        - MA 23210 A1 1994-12-31
+        - MY 121192 A 2006-01-28
+        - NO 307378 B1 2000-03-27
+        - NO 950263 L 1995-01-24
+        - NO 2011009 I1 2011-06-20
+        - NZ 266915 A 1996-10-28
+        - PL 178994 B1 2000-07-31
+        - PL 307261 A1 1995-05-15
+        - PT 652872 E 2001-04-30
+        - PT 1020460 E 2009-07-29
+        - PT 1020461 E 2009-07-29
+        - RU 2137766 C1 1999-09-20
+        - RU 95105587 A 1996-10-27
+        - SA 05260103 B1 2010-01-31
+        - SA 94140756 B1 2006-05-20
+        - SG 49283 A1 1998-05-18
+        - SI 22752 A 2009-10-31
+        - SI 22752 B 2010-01-29
+        - SI 9420002 A 1995-08-31
+        - SI 9420002 B 2009-12-31
+        - SK 10195 A3 1995-09-13
+        - SK 282524 B6 2002-10-08
+        - TN SN94058 A1 1995-04-25
+        - TW 389761 B 2000-05-11
+        - UA 60289 C2 2003-10-15
+        - US 5693818 A 1997-12-02
+        - US 5714504 A 1998-02-03
+        - US 6143771 A 2000-11-07
+        - US 2008312449 A1 2008-12-18
+        - US 2010222591 A1 2010-09-02
+        - WO 9427988 A1 1994-12-08
+        - YU 31494 A 1997-05-28
+        - YU 49065 B 2003-08-29
+        - ZA 943557 B 1995-04-11
+        priorities:
+        - 1993-05-28 SE9301830-7
+        IncreesedFee: false
+        numberOfDrawingPages: 0
+        publications:
+        - title: SE 1020461 T4
+          url: >-
+            https://resources.prv.se/downloadPublication.jsp?applicationType=EP&applicationNumber=001084805&documentReference=SE1020461.T4
+        - title: SE 1020461 T5
+          url: >-
+            https://resources.prv.se/downloadPublication.jsp?applicationType=EP&applicationNumber=001084805&documentReference=SE1020461.T5
+        - title: SE 1020461 T9
+          url: >-
+            https://resources.prv.se/downloadPublication.jsp?applicationType=EP&applicationNumber=001084805&documentReference=SE1020461.T9
+        - title: SE 1020461 T3
+          url: >-
+            https://resources.prv.se/downloadPublication.jsp?applicationType=EP&applicationNumber=001084805&documentReference=SE1020461.T3
+        source: CICS
+        updated: 2026-10-16
+        md5: 76a40f10f8522758ed18d3522d6f4bad
+  recorded_at: 2026-10-26T20:25:26.514Z

@@ -1,0 +1,88 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://dv-search-api.prv.se/searchdesign/dssimplesearch/
+    headers:
+      accept:
+      - application/json
+      content-type:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com; contact data@prv.se)
+    body:
+      type: json
+      content:
+        page: 0
+        pageSize: 2
+        sortColumn: filingDate
+        sortOrder: DESC
+        simpleSearchText: stol
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      content-type:
+      - application/json
+      date:
+      - Mon, 26 Oct 2026 20:25:34 GMT
+      expires:
+      - "0"
+      pragma:
+      - no-cache
+      server:
+      - Microsoft-IIS/10.0
+      vary:
+      - Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - DENY
+      x-powered-by:
+      - ARR/3.0
+      x-xss-protection:
+      - "0"
+    body:
+      type: json
+      content:
+        totalHits: 923
+        totalPages: 461
+        hits: 2
+        page: 0
+        designs:
+        - idDesign: 81504981
+          applicants:
+          - name: Love Liljekvist
+            address: Hårdvallsgatan 14, 1404 115 46 Stockholm, SE
+          applicationNumber: 2026-0151
+          classes:
+          - 06-01
+          designId: "100408757"
+          designNumber: 1
+          designsTotal: 5
+          expiryDate: null
+          filingDate: 2026-09-07
+          productTitle: Stol
+          registrationNumber: ""
+          representatives: []
+          statusEn: Pending
+          statusSv: Pågående
+        - idDesign: 81504984
+          applicants:
+          - name: Love Liljekvist
+            address: Hårdvallsgatan 14, 1404 115 46 Stockholm, SE
+          applicationNumber: 2026-0151
+          classes:
+          - 06-06
+          designId: "100408760"
+          designNumber: 4
+          designsTotal: 5
+          expiryDate: null
+          filingDate: 2026-09-07
+          productTitle: Ryggstöd till stol
+          registrationNumber: ""
+          representatives: []
+          statusEn: Pending
+          statusSv: Pågående
+  recorded_at: 2026-10-26T20:25:36.011Z

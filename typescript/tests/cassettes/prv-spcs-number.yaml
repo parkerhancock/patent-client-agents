@@ -1,0 +1,66 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://patents-search-api.prv.se/searchpatentspc/patentsearchspc/
+    headers:
+      accept:
+      - application/json
+      content-type:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com; contact data@prv.se)
+    body:
+      type: json
+      content:
+        page: 0
+        pageSize: 10
+        sortColumn: ""
+        sortOrder: ASC
+        applicationNumberSpc:
+          value: 1190011-5
+          searchType: STARTS_WITH
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      content-type:
+      - application/json
+      date:
+      - Mon, 26 Oct 2026 20:25:10 GMT
+      expires:
+      - "0"
+      pragma:
+      - no-cache
+      server:
+      - Microsoft-IIS/10.0
+      vary:
+      - Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - DENY
+      x-powered-by:
+      - ARR/3.0
+      x-xss-protection:
+      - "0"
+    body:
+      type: json
+      content:
+        totalHits: 1
+        totalPages: 0
+        hits: 1
+        page: 0
+        searchSpcDTOS:
+        - idSpc: 2756833
+          applicants:
+          - name: AstraZeneca AB
+            address: 151 85 Södertälje, Sverige, SE
+          applicationNumberFormatted: EP00108480.5
+          applicationNumberSpcFormatted: 1190011-5
+          publicationNumber: "1020461"
+          substance: tabletter med modifierad frisättning innehållande naproxen och esomeprazol
+          validFromDate: null
+          validUntilDate: null
+  recorded_at: 2026-10-26T20:25:11.110Z

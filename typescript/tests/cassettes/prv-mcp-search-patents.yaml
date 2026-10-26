@@ -1,0 +1,122 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://patents-search-api.prv.se/searchpatent/patentsimplesearch/
+    headers:
+      accept:
+      - application/json
+      content-type:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com; contact data@prv.se)
+    body:
+      type: json
+      content:
+        page: 0
+        pageSize: 2
+        sortColumn: filingDate
+        sortOrder: DESC
+        simpleSearchText: Volvo
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      content-type:
+      - application/json
+      date:
+      - Mon, 26 Oct 2026 20:25:29 GMT
+      expires:
+      - "0"
+      pragma:
+      - no-cache
+      server:
+      - Microsoft-IIS/10.0
+      vary:
+      - Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - DENY
+      x-powered-by:
+      - ARR/3.0
+      x-xss-protection:
+      - "0"
+    body:
+      type: json
+      content:
+        totalHits: 3604
+        totalPages: 1801
+        hits: 2
+        page: 0
+        searchPatentDTOS:
+        - idPatent: 8162400
+          applicants:
+          - name: Volvo Truck Corporation
+            address: Volvo Truck Corporation, ;, 405 08 GÖTEBORG, Sverige
+          applicationNumberFormatted: SE2616246-1
+          applicationType: NAT
+          cpcClasses: []
+          dpkClasses: []
+          filingDate: 2026-10-15
+          grantDate: null
+          ipcClasses: []
+          inventors:
+          - name: Hampus BERGMAN
+            address: SÄVE, Sverige
+          - name: Simon ARNESSON
+            address: ÖCKERÖ, Sverige
+          - name: Gunnar SAHLIN
+            address: TORSLANDA, Sverige
+          - name: Marcus RÖNNBERG
+            address: TROLLHÄTTAN, Sverige
+          publicationDate: 2026-10-15
+          publicationNumber: ""
+          reference: null
+          representatives:
+          - name: Kransell & Wennborg KB
+            address: Kransell & Wennborg KB, Box 2096, 403 12 GÖTEBORG, Sverige
+          status:
+            status: "116"
+            statusText: null
+            statusDisplayTextEn: null
+            statusDisplayTextSv: null
+            statusSubText: null
+            statusDisplaySubTextEn: null
+            statusDisplaySubTextSv: null
+          title: A BATTERY CELL FIXATION SYSTEM, AND A VEHICLE
+        - idPatent: 8161282
+          applicants:
+          - name: Volvo Construction Equipment AB
+            address: Volvo Construction Equipment AB, ', 631 85 ESKILSTUNA, Sverige
+          applicationNumberFormatted: SE2616224-8
+          applicationType: NAT
+          cpcClasses: []
+          dpkClasses: []
+          filingDate: 2026-10-12
+          grantDate: null
+          ipcClasses: []
+          inventors:
+          - name: Daniel TIGER
+            address: HOVMANTORP, Sverige
+          - name: Jan LÖFGREN
+            address: VÄXJÖ, Sverige
+          publicationDate: 2026-10-12
+          publicationNumber: ""
+          reference: null
+          representatives:
+          - name: Kransell & Wennborg KB
+            address: Kransell & Wennborg KB, Box 2096, 403 12 GÖTEBORG, Sverige
+          status:
+            status: "116"
+            statusText: null
+            statusDisplayTextEn: null
+            statusDisplayTextSv: null
+            statusSubText: null
+            statusDisplaySubTextEn: null
+            statusDisplaySubTextSv: null
+          title: >-
+            AN OIL CONDENSER AND A METHOD FOR CONDENSING OIL VAPOR RELEASED FROM AN OIL
+            TANK OF A WORK MACHINE
+  recorded_at: 2026-10-26T20:25:29.364Z
