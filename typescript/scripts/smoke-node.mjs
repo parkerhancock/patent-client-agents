@@ -10,6 +10,7 @@ import { gunzipSync, zstdCompressSync } from "node:zlib";
 import {
   ApiError,
   CachedClient,
+  CnipaStatutesClient,
   DpmaStatutesClient,
   downloadPatentPdfClean,
   EpcClient,
@@ -105,6 +106,20 @@ results.ilpo_section = (
 assert.equal(
   results.ilpo_section,
   "Prohibition against misappropriation of a trade secret",
+);
+const cnipa = new CnipaStatutesClient({
+  source: new Uint8Array(
+    zstdCompressSync(
+      await readFile(fixture("cnipa-statutes/cnipa_statutes.db")),
+    ),
+  ),
+});
+results.cnipa_section = (
+  await cnipa.getSectionByCitation("Patent Law Art. 22(3)")
+)?.title;
+assert.equal(
+  results.cnipa_section,
+  "Chapter II Requirements for Granting Patent Rights",
 );
 const inpiBr = new InpiBrStatutesClient({
   source: new Uint8Array(
@@ -330,6 +345,7 @@ for (const client of [
   mopp,
   dpma,
   ilpo,
+  cnipa,
   inpiBr,
   legifrance,
   tw,

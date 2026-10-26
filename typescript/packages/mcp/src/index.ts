@@ -6,6 +6,7 @@ import {
   CafcClient,
   CanadaFederalCourtClient,
   ChinaSpcIpCourtClient,
+  CnipaStatutesClient,
   ConfigurationError,
   CopyrightClient,
   DataWebClient,
@@ -76,6 +77,10 @@ import { registerCafcTools } from "./cafc.js";
 import { registerCanadaFederalCourtTools } from "./canada-federal-court.js";
 import { registerChinaSpcIpCourtTools } from "./china-spc-ip-court.js";
 import { registerIlpoTmTools, registerIpaBulkTools } from "./ckan-catalogs.js";
+import {
+  type CnipaStatutesReader,
+  registerCnipaStatutesTools,
+} from "./cnipa-statutes.js";
 import { registerCopyrightTools } from "./copyright.js";
 import {
   type DownloadOptions,
@@ -231,6 +236,8 @@ export interface ServerOptions {
   ipoInMppp?: IpoInMpppReader;
   /** ILPO Israel statutes corpus reader; omitted, it uses the default artifact path. */
   ilpoStatutes?: IlpoStatutesReader;
+  /** CNIPA China statutes corpus reader; omitted, it uses the default artifact path. */
+  cnipaStatutes?: CnipaStatutesReader;
   /** IPOS Singapore statutes and manuals corpus readers; omitted, they use their default artifact paths. */
   iposStatutes?: IposStatutesReader;
   iposManuals?: IposManualsReader;
@@ -517,6 +524,7 @@ export function createServer(options: ServerOptions = {}): FastMCP {
   const ipoInStatutes = options.ipoInStatutes ?? own(new IpoInStatutesClient());
   const ipoInMppp = options.ipoInMppp ?? own(new IpoInMpppClient());
   const ilpoStatutes = options.ilpoStatutes ?? own(new IlpoStatutesClient());
+  const cnipaStatutes = options.cnipaStatutes ?? own(new CnipaStatutesClient());
   const iposStatutes = options.iposStatutes ?? own(new IposStatutesClient());
   const iposManuals = options.iposManuals ?? own(new IposManualsClient());
   const inpiBrStatutes =
@@ -1028,6 +1036,11 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     server,
     ilpoStatutes,
     options.auth ? requireScopes("ilpo:read") : undefined,
+  );
+  registerCnipaStatutesTools(
+    server,
+    cnipaStatutes,
+    options.auth ? requireScopes("cnipa:read") : undefined,
   );
   registerIposTools(
     server,

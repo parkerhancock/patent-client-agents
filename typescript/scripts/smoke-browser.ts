@@ -182,6 +182,7 @@ try {
     ipo_in_mppp?: string;
     jp_court?: string;
     ilpo_section?: string;
+    cnipa_section?: string;
     ipos_manual?: string;
     idb_cache?: string;
     default_cache?: string;
@@ -200,6 +201,7 @@ try {
     checked.jp_court !== "34/219:令和7年（行ケ）第10084号" ||
     checked.ipo_in_mppp !== "09.03.05.04" ||
     checked.ilpo_section !== "Section 13 Commercial Torts Law" ||
+    checked.cnipa_section !== "Rule 20 Patent Implementing Regulations" ||
     checked.ipos_manual !== "Discoveries" ||
     checked.idb_cache !== "indexeddb:1:1:135.00" ||
     checked.default_cache !== "memory"

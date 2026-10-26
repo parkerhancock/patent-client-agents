@@ -1,6 +1,7 @@
 // Bundled for the browser by scripts/smoke-browser.ts. Exercises the client
 // with no Node or Bun APIs available and reports results on window.
 import {
+  CnipaStatutesClient,
   configureWasm,
   createRelayFetch,
   DpmaStatutesClient,
@@ -87,6 +88,12 @@ try {
   });
   results.ilpo_section = (
     await ilpo.getSectionByCitation("Article 13 Commercial Torts Law")
+  )?.section_label;
+  const cnipa = new CnipaStatutesClient({
+    source: () => bytes("/fixtures/cnipa-statutes/cnipa_statutes.db"),
+  });
+  results.cnipa_section = (
+    await cnipa.getSectionByCitation("Rule 20 Implementing Regulations")
   )?.section_label;
   const singapore = new IposManualsClient({
     source: () => bytes("/fixtures/ipos/ipos_manuals.db"),
