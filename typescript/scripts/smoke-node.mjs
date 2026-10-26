@@ -20,6 +20,7 @@ import {
   GooglePatentsClient,
   getPatentClaims,
   IlpoStatutesClient,
+  InpiArStatutesClient,
   InpiBrStatutesClient,
   IpoInStatutesClient,
   IpophlStatutesClient,
@@ -150,6 +151,17 @@ assert.equal(
   results.ipophl_section,
   "Non-Patentable Inventions:Section 5 RA 9502",
 );
+const inpiAr = new InpiArStatutesClient({
+  source: new Uint8Array(
+    zstdCompressSync(
+      await readFile(fixture("inpi-ar-statutes/inpi_ar_statutes.db")),
+    ),
+  ),
+});
+results.inpi_ar_section = (
+  await inpiAr.getSectionByCitation("art. 36 quater ley 11723")
+)?.section_label;
+assert.equal(results.inpi_ar_section, "Artículo 36 quáter Ley 11.723");
 const inpiBr = new InpiBrStatutesClient({
   source: new Uint8Array(
     zstdCompressSync(
@@ -377,6 +389,7 @@ for (const client of [
   rospatent,
   cnipa,
   ipophl,
+  inpiAr,
   inpiBr,
   legifrance,
   tw,

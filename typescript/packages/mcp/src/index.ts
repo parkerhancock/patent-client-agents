@@ -27,6 +27,7 @@ import {
   IlpoRegisterClient,
   IlpoStatutesClient,
   IlpoTmClient,
+  InpiArStatutesClient,
   InpiBrStatutesClient,
   IpAustraliaBulkClient,
   IpoInMpppClient,
@@ -105,6 +106,10 @@ import {
   type IlpoStatutesReader,
   registerIlpoStatutesTools,
 } from "./ilpo-statutes.js";
+import {
+  type InpiArStatutesReader,
+  registerInpiArStatutesTools,
+} from "./inpi-ar-statutes.js";
 import {
   type InpiBrStatutesReader,
   registerInpiBrStatutesTools,
@@ -255,6 +260,8 @@ export interface ServerOptions {
   iposManuals?: IposManualsReader;
   /** INPI Brazil LPI corpus reader; omitted, it uses the default artifact path. */
   inpiBrStatutes?: InpiBrStatutesReader;
+  /** INPI Argentina statutes corpus reader; omitted, it uses the default artifact path. */
+  inpiArStatutes?: InpiArStatutesReader;
   /** Légifrance IP corpus reader; omitted, it uses the default artifact path. */
   legifranceIp?: LegifranceIpReader;
   /** Russian Civil Code Part Four corpus reader; omitted, it uses the default artifact path. */
@@ -545,6 +552,8 @@ export function createServer(options: ServerOptions = {}): FastMCP {
   const iposManuals = options.iposManuals ?? own(new IposManualsClient());
   const inpiBrStatutes =
     options.inpiBrStatutes ?? own(new InpiBrStatutesClient());
+  const inpiArStatutes =
+    options.inpiArStatutes ?? own(new InpiArStatutesClient());
   const legifranceIp = options.legifranceIp ?? own(new LegifranceIpClient());
   const rospatentStatutes =
     options.rospatentStatutes ?? own(new RospatentStatutesClient());
@@ -1074,6 +1083,11 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     server,
     inpiBrStatutes,
     options.auth ? requireScopes("inpibr:read") : undefined,
+  );
+  registerInpiArStatutesTools(
+    server,
+    inpiArStatutes,
+    options.auth ? requireScopes("inpi_ar:read") : undefined,
   );
   registerLegifranceIpTools(
     server,

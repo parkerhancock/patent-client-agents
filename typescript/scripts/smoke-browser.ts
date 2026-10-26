@@ -185,6 +185,7 @@ try {
     rospatent_article?: string;
     cnipa_section?: string;
     ipophl_section?: string;
+    inpi_ar_hits?: string;
     ipos_manual?: string;
     idb_cache?: string;
     default_cache?: string;
@@ -206,6 +207,7 @@ try {
     checked.rospatent_article !== "Article 1484 Civil Code" ||
     checked.cnipa_section !== "Rule 20 Patent Implementing Regulations" ||
     checked.ipophl_section !== "Section 3 RA 10372" ||
+    checked.inpi_ar_hits !== "Artículo 1° Ley 24.766" ||
     checked.ipos_manual !== "Discoveries" ||
     checked.idb_cache !== "indexeddb:1:1:135.00" ||
     checked.default_cache !== "memory"

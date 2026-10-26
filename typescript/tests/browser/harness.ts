@@ -11,6 +11,7 @@ import {
   GooglePatentsClient,
   getPatentClaims,
   IlpoStatutesClient,
+  InpiArStatutesClient,
   InpiBrStatutesClient,
   IpoInMpppClient,
   IpophlStatutesClient,
@@ -109,6 +110,14 @@ try {
   results.ipophl_section = (
     await ipophl.getSectionByCitation("Section 3 RA 10372")
   )?.section_label;
+  const argentina = new InpiArStatutesClient({
+    source: () => bytes("/fixtures/inpi-ar-statutes/inpi_ar_statutes.db"),
+  });
+  results.inpi_ar_hits = (
+    await argentina.search({ query: "informacion secreta" })
+  ).hits
+    .map((hit) => hit.section_label)
+    .join(",");
   const singapore = new IposManualsClient({
     source: () => bytes("/fixtures/ipos/ipos_manuals.db"),
   });
