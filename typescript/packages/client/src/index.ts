@@ -60,6 +60,7 @@ export * from "./ptab.js";
 export * from "./publications.js";
 export * from "./register-models.js";
 export * from "./relay.js";
+export * from "./rospatent-statutes.js";
 export {
   type PdfTextItem,
   pdfPageItems,

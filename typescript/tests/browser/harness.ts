@@ -17,6 +17,7 @@ import {
   MpepClient,
   parseHearingNotice,
   parseJapanIpHighCourtWorkbook,
+  RospatentStatutesClient,
   TwTradeSecretsClient,
   UpcStatutesClient,
 } from "../../packages/client/src/index.js";
@@ -87,6 +88,12 @@ try {
   });
   results.ilpo_section = (
     await ilpo.getSectionByCitation("Article 13 Commercial Torts Law")
+  )?.section_label;
+  const rospatent = new RospatentStatutesClient({
+    source: () => bytes("/fixtures/rospatent-statutes/rospatent_statutes.db"),
+  });
+  results.rospatent_article = (
+    await rospatent.getArticleByCitation("Art. 1484 CC RF")
   )?.section_label;
   const singapore = new IposManualsClient({
     source: () => bytes("/fixtures/ipos/ipos_manuals.db"),

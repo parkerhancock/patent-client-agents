@@ -27,6 +27,7 @@ import {
   MpepClient,
   parseHearingNotice,
   parseJapanIpHighCourtWorkbook,
+  RospatentStatutesClient,
   TmepClient,
   TwTradeSecretsClient,
   UpcStatutesClient,
@@ -105,6 +106,20 @@ results.ilpo_section = (
 assert.equal(
   results.ilpo_section,
   "Prohibition against misappropriation of a trade secret",
+);
+const rospatent = new RospatentStatutesClient({
+  source: new Uint8Array(
+    zstdCompressSync(
+      await readFile(fixture("rospatent-statutes/rospatent_statutes.db")),
+    ),
+  ),
+});
+results.rospatent_article = (
+  await rospatent.getArticleByCitation("Civil Code Art. 1350(1)")
+)?.title;
+assert.equal(
+  results.rospatent_article,
+  "The Conditions for Patentability of an Invention",
 );
 const inpiBr = new InpiBrStatutesClient({
   source: new Uint8Array(
@@ -330,6 +345,7 @@ for (const client of [
   mopp,
   dpma,
   ilpo,
+  rospatent,
   inpiBr,
   legifrance,
   tw,

@@ -1,0 +1,26 @@
+{
+  "source": "WIPO Lex (https://www.wipo.int/wipolex/) English translation of the Civil Code of the Russian Federation; Part Four (Section VII) is parsed",
+  "user_agent": "patent-client-agents (+https://github.com/parkerhancock/patent-client-agents)",
+  "retrieved_at": "2026-10-26T22:35:37Z",
+  "legislation": {
+    "wipolex_id": "22547",
+    "details_url": "https://www.wipo.int/wipolex/en/legislation/details/22547",
+    "wipo_title": "Civil Code (Parts One, Two, Three and Four)",
+    "wipo_summary": "Russian Federation - Year of Version: 2024 - Amended up to: March 22, 2024 - Main IP Laws -                Industrial Property",
+    "pdf_url": "https://wipolex-res.wipo.int/edocs/lexdocs/laws/en/ru/ru421en_1.pdf",
+    "pdf_last_modified": "2024-05-06T09:47:48Z",
+    "retrieved_at": "2026-10-26T22:35:37Z",
+    "pdf_sha256": "9701ca232ab8af4c5c4f3cc489764be5c2c5b0fefd24e44473e7ca12492e4995",
+    "pdf_bytes": 3655337,
+    "pages": 507,
+    "article_count": 329,
+    "repealed_article_count": 1
+  },
+  "latest_record": {
+    "wipolex_id": "23256",
+    "details_url": "https://www.wipo.int/wipolex/en/legislation/details/23256",
+    "wipo_summary": "Russian Federation - Year of Version: 2025 - Amended up to: August 3, 2025 - Main IP Laws -                 Industrial Property",
+    "english_pdf_url": "https://wipolex-res.wipo.int/edocs/lexdocs/laws/en/ru/ru421en_1.pdf",
+    "retrieved_at": "2026-10-26T22:35:35Z"
+  }
+}

@@ -47,6 +47,7 @@ import {
   PtabInterferencesClient,
   PtabTrialsClient,
   PublicationsClient,
+  RospatentStatutesClient,
   SearchOptionsSchema,
   TipoClient,
   TmepClient,
@@ -133,6 +134,10 @@ import {
   relayCredentialsFromEnv,
 } from "./relay.js";
 import { registerUsptoResources } from "./resources.js";
+import {
+  type RospatentStatutesReader,
+  registerRospatentStatutesTools,
+} from "./rospatent-statutes.js";
 import { registerPortalSearchTools } from "./search-portals.js";
 import { registerTipoTools } from "./tipo.js";
 import { registerTmepTools } from "./tmep.js";
@@ -238,6 +243,8 @@ export interface ServerOptions {
   inpiBrStatutes?: InpiBrStatutesReader;
   /** Légifrance IP corpus reader; omitted, it uses the default artifact path. */
   legifranceIp?: LegifranceIpReader;
+  /** Russian Civil Code Part Four corpus reader; omitted, it uses the default artifact path. */
+  rospatentStatutes?: RospatentStatutesReader;
   /** Download URLs; pass `blobStore` (for example a GcsBlobStore) for URLs that outlive the process. */
   downloads?: DownloadOptions;
   /** Defaults to MCP identity settings; audience must intentionally cover document REST access. */
@@ -522,6 +529,8 @@ export function createServer(options: ServerOptions = {}): FastMCP {
   const inpiBrStatutes =
     options.inpiBrStatutes ?? own(new InpiBrStatutesClient());
   const legifranceIp = options.legifranceIp ?? own(new LegifranceIpClient());
+  const rospatentStatutes =
+    options.rospatentStatutes ?? own(new RospatentStatutesClient());
   const applications =
     provided.applications ?? lazyClient(() => new ApplicationsClient());
   const client = options.client ?? applications;
@@ -1043,6 +1052,11 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     server,
     legifranceIp,
     options.auth ? requireScopes("legifrance:read") : undefined,
+  );
+  registerRospatentStatutesTools(
+    server,
+    rospatentStatutes,
+    options.auth ? requireScopes("rospatent:read") : undefined,
   );
   registerUsitcTools(
     server,
