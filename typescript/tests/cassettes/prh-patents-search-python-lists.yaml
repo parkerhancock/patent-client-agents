@@ -1,0 +1,500 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://patenttitietopalvelu.prh.fi/nis-api-gateway-pat/patent
+    headers:
+      accept:
+      - application/json
+      content-type:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com; contact avoindata@prh.fi)
+    body:
+      type: json
+      content:
+        patentTitle: ""
+        applicationNumber: ""
+        registrationNumber: ""
+        priorityNumber: ""
+        applicant: Nokia
+        assignee: ""
+        inventor: ""
+        representative: ""
+        applicationStartDate: ""
+        applicationEndDate: ""
+        filingStartDate: 2024-02-01
+        filingEndDate: 2024-02-29
+        oppositionPeriodStartStartDate: ""
+        oppositionPeriodStartEndDate: ""
+        grantStartDate: ""
+        grantEndDate: ""
+        openStartDate: ""
+        openEndDate: ""
+        publicationStartDate: ""
+        publicationEndDate: ""
+        priorityStartDate: ""
+        priorityEndDate: ""
+        ipcClassification: ""
+        cpcClassification: ""
+        basicSearch: ""
+        noAuthoAppm: ""
+        spcBasePatentNumber: ""
+        dossierStatus:
+        - Application_refused
+        - Application_dismissed
+        - Expired
+        - Renounced
+        - Annulled
+        - Opposition
+        - UMopposition
+        - Appeal
+        - Patent_revoked
+        - Application_withdrawn
+        - Application_filed
+        - Valid
+        - Limited
+        - Approved
+        - Basic_patent_has_lapsed
+        - EP_660_notvalidated
+        - EP_630_oppo_B2
+        - EP_620_grant_B1
+        - EP_632_limit_B3
+        - EP_700_applrefused
+        - EP_800_application_dismissed
+        - EP_600_imported
+        - EP_640_revoked
+        - EP_631_oppo_T4
+        - EP_635_limit_T6
+        - EP_650_appwthdr
+        - EP_621_valid_T3
+        - EP_625_opposition
+        - Lapsed
+        - Revoked
+        - Refused
+        - Reinstated
+        - Withdrawn
+        - Granted
+        - Application_pending
+        - Pending
+        patentTypes:
+        - PatentDossier
+        - PatentDossierUtilityModel
+        - PatentEurope
+        - Spc
+        publicationTypes:
+        - UM_Revoked
+        - UM_Notification
+        - UM_Granted_Y1
+        - UM_Corrected_Y8
+        - UM_AvailableToPublic_U1
+        - UM_AnnulledPartial_Z1
+        - PT_Transferred
+        - PT_SPCWithdrawn
+        - PT_SPCRefused
+        - PT_SPCLapsed
+        - PT_SPCGranted_Certificate
+        - PT_SPCFiled
+        - PT_SPCDismissed
+        - PT_SPCContinuationGranted
+        - PT_SPCContinuationFiled
+        - PT_Revoked
+        - PT_Reinstated
+        - PT_Refused
+        - PT_OppositionAmended_B2
+        - PT_Opposition_Refused
+        - PT_Notification
+        - PT_Limited_B3
+        - PT_Lapsed
+        - PT_Granted_B1
+        - PT_Granted_B
+        - PT_Expired
+        - PT_EPTranslationAmended_T6
+        - PT_EPTranslation_T3
+        - PT_EPTranslation_T2
+        - PT_AvailableToPublic_A1
+        - PT_Application_withdrawn
+        - PT_Application_refused
+        - PT_Application_dismissed
+        - PT_Application_filed
+        - PT_Annulled
+        - PT_AnnulledPartial
+        - PT_AcceptedApplicationT1
+        - PT_AcceptedApplication
+  response:
+    status: 200
+    headers:
+      access-control-allow-methods:
+      - GET, HEAD, POST
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - close
+      content-security-policy:
+      - "default-src 'self'; img-src 'self' data: ; media-src 'self' ; child-src 'none'; manifest-src 'self'; object-src 'none'; worker-src 'none'; connect-src 'self' https://asiointi.prh.fi;"
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Mon, 26 Oct 2026 20:34:57 GMT
+      strict-transport-security:
+      - max-age=63072000; includeSubdomains;
+      x-content-type-options:
+      - nosniff
+      x-dns-prefetch-control:
+      - "off"
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - SAMEORIGIN
+      x-permitted-cross-domain-policies:
+      - none
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      type: json
+      content:
+        totalResults: 8
+        results:
+        - applicationNumber: "20245203"
+          registrationNumber: "131976"
+          dossierStatus: Valid
+          dossierType: PatentDossier
+          applicationDate: 2024-02-19
+          statusDate: 2026-03-20
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications:
+          - classification: H04W 72/04
+          - classification: H04L 5/00
+          - classification: H04J 13/18
+          titles:
+          - title: MERKINANTOMENETELMÄT OCC-AKTIVOIDULLE PUSCHILLE
+            language: FI
+            ordinal: 1
+          - title: |
+              SIGNALERINGSMETOD FÖR OCC-AKTIVERAD PUSCH
+            language: SV
+            ordinal: 2
+          - title: SIGNALING METHODS FOR OCC-ENABLED PUSCH
+            language: EN
+            ordinal: 3
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications:
+          - publicationDate: 2025-08-20
+            type: A1
+            publicationSection: PT_AvailableToPublic_A1
+            ordinal: 1
+          - publicationDate: 2026-03-20
+            type: B1
+            publicationSection: PT_Granted_B1
+            ordinal: 2
+          ordinal: 1
+        - applicationNumber: "20245149"
+          registrationNumber: null
+          dossierStatus: Application_filed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-13
+          statusDate: 2024-02-13
+          applicants:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          classifications:
+          - classification: H04L 5/00
+          - classification: H04W 72/541
+          - classification: H04W 52/14
+          - classification: H04L 27/00
+          - classification: H04L 5/00
+          titles:
+          - title: NOUSEVAN SIIRTOTIEN INTERFERENSSIN KÄSITTELY VIESTINNÄSSÄ
+            language: FI
+            ordinal: 1
+          - title: HANTERING AV UPPLÄNKSINTERFERENS I KOMMUNIKATION
+            language: SV
+            ordinal: 2
+          - title: HANDLING UPLINK INTERFERENCE IN COMMUNICATIONS
+            language: EN
+            ordinal: 3
+          owners:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          appms: []
+          publications:
+          - publicationDate: 2025-09-04
+            type: A1
+            publicationSection: PT_AvailableToPublic_A1
+            ordinal: 1
+          ordinal: 2
+        - applicationNumber: "20245139"
+          registrationNumber: null
+          dossierStatus: Application_filed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-12
+          statusDate: 2024-02-12
+          applicants:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          classifications:
+          - classification: G06F 8/70
+          - classification: G06F 8/30
+          - classification: G06N 20/00
+          - classification: G06F 8/20
+          - classification: G06Q 10/10
+          - classification: G06Q 10/0633
+          - classification: G06N 3/08
+          titles:
+          - title: >-
+              Menetelmä, laitteisto ja tietokoneohjelmatuote työnkulun luomistyökalun
+              aikaansaamiseksi koneoppimistoimintoja varten
+            language: FI
+            ordinal: 1
+          - title: >-
+              Förfarande, apparatur och datorprogramprodukt för att tillhandahålla ett
+              verktyg för att skapa arbetsflöden för maskininlärningsoperationer
+            language: SV
+            ordinal: 2
+          - title: >-
+              A method, an apparatus and a computer program product for providing a workflow
+              authoring tool for machine learning operations
+            language: EN
+            ordinal: 3
+          owners:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          appms: []
+          publications:
+          - publicationDate: 2025-08-13
+            type: A1
+            publicationSection: PT_AvailableToPublic_A1
+            ordinal: 1
+          ordinal: 3
+        - applicationNumber: "20245167"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-15
+          statusDate: 2025-11-08
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications:
+          - classification: H04W 72/1268
+          - classification: H04W 72/0446
+          - classification: H04L 1/1867
+          - classification: H04L 1/1812
+          - classification: H04L 1/08
+          titles:
+          - title: REDUNDANSSIN MÄÄRITYS PUSCH-TOISTOISSA, JOISSA ON ORTOGONAALINEN PEITEKOODI
+            language: FI
+            ordinal: 1
+          - title: BESTÄMNING AV REDUNDANS I PUSCH-UPPREPNINGAR MED EN ORTOGONAL SKYDDSKOD
+            language: SV
+            ordinal: 2
+          - title: REDUNDANCY DETERMINATION IN PUSCH REPETITIONS WITH ORTHOGONAL COVER CODE
+            language: EN
+            ordinal: 3
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications:
+          - publicationDate: 2025-08-19
+            type: A1
+            publicationSection: PT_AvailableToPublic_A1
+            ordinal: 1
+          - publicationDate: 2026-03-16
+            type: ""
+            publicationSection: PT_Dismissed
+            ordinal: 2
+          ordinal: 4
+        - applicationNumber: "20245103"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-02
+          statusDate: 2025-08-12
+          applicants:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          classifications:
+          - classification: H04W 88/12
+          - classification: H04L 41/0833
+          - classification: H04W 24/10
+          - classification: H04W 52/02
+          - classification: H04W 92/12
+          - classification: H04W 24/02
+          titles:
+          - title: Energianhallintakehys radioliityntäverkon älykästä ohjainalustapalvelua varten
+            language: FI
+            ordinal: 1
+          - title: >-
+              Energihanteringsramverk för en intelligent styrenhetsplattformstjänst i ett
+              radioaccessnät 
+            language: SV
+            ordinal: 2
+          - title: >-
+              ENERGY MANAGEMENT FRAMEWORK FOR RADIO ACCESS NETWORK INTELLIGENT CONTROLLER
+              PLATFORM SERVICE
+            language: EN
+            ordinal: 3
+          owners:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          appms: []
+          publications:
+          - publicationDate: 2025-08-15
+            type: A1
+            publicationSection: PT_AvailableToPublic_A1
+            ordinal: 1
+          - publicationDate: 2025-12-11
+            type: ""
+            publicationSection: PT_Dismissed
+            ordinal: 2
+          ordinal: 5
+        - applicationNumber: "20245172"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-15
+          statusDate: 2026-05-12
+          applicants:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          classifications:
+          - classification: H04W 28/02
+          - classification: H04W 28/02
+          - classification: G06N 3/092
+          - classification: G06N 3/098
+          - classification: G06N 20/00
+          - classification: G06N 3/084
+          - classification: H04L 67/101
+          - classification: H04L 67/1008
+          titles:
+          - title: KONEOPPIMISMALLIN KOLLABORATIIVINEN OPETUS ARVIOITU ENERGIANKULUTUS HUOMIOIDEN
+            language: FI
+            ordinal: 1
+          - title: >-
+              KOLLABORATIV TRÄNING AV EN MASKININLÄRNINGSMODELL MED BEAKTANDE AV UPPSKATTAD
+              ENERGIKONSUMTION
+            language: SV
+            ordinal: 2
+          - title: >-
+              COLLABORATIVE TRAINING OF A MACHINE LEARNING MODEL CONSIDERING ESTIMATED ENERGY
+              CONSUMPTION
+            language: EN
+            ordinal: 3
+          owners:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          appms: []
+          publications:
+          - publicationDate: 2025-08-18
+            type: A1
+            publicationSection: PT_AvailableToPublic_A1
+            ordinal: 1
+          - publicationDate: 2026-09-21
+            type: ""
+            publicationSection: PT_Dismissed
+            ordinal: 2
+          ordinal: 6
+        - applicationNumber: "20245199"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-19
+          statusDate: 2025-12-22
+          applicants:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          classifications:
+          - classification: H04W 52/02
+          - classification: H04W 24/02
+          titles:
+          - title: >-
+              YHDEN TAI USEAMMAN VERKKOELEMENTIN ENERGIANKULUTUKSEN JA/TAI
+              HIILIDIOKSIDIPÄÄSTÖJEN OPTIMOINTI
+            language: FI
+            ordinal: 1
+          - title: >-
+              OPTIMERING AV ENERGIFÖRBRUKNING OCH/ELLER KOLDIOXIDUTSLÄPP FÖR ETT ELLER FLERA
+              NÄTVERKSELEMENT
+            language: SV
+            ordinal: 2
+          - title: >-
+              OPTIMIZING ENERGY CONSUMPTION AND/OR CARBON DIOXIDE EMISSIONS OF ONE OR MORE
+              NETWORK ELEMENTS
+            language: EN
+            ordinal: 3
+          owners:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          appms: []
+          publications:
+          - publicationDate: 2025-09-01
+            type: A1
+            publicationSection: PT_AvailableToPublic_A1
+            ordinal: 1
+          - publicationDate: 2026-04-29
+            type: ""
+            publicationSection: PT_Dismissed
+            ordinal: 2
+          ordinal: 7
+        - applicationNumber: "20245213"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-21
+          statusDate: 2026-05-03
+          applicants:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          classifications:
+          - classification: H04B 7/08
+          - classification: H04W 52/14
+          - classification: H04W 52/24
+          titles:
+          - title: |+
+              Laite ja menetelmä verkkolaitetta varten
+              
+            language: FI
+            ordinal: 1
+          - title: Anordning och förfarande för en nätverksenhet
+            language: SV
+            ordinal: 2
+          - title: Apparatus and Method for a Network Device
+            language: EN
+            ordinal: 3
+          owners:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          appms: []
+          publications:
+          - publicationDate: 2025-08-25
+            type: A1
+            publicationSection: PT_AvailableToPublic_A1
+            ordinal: 1
+          - publicationDate: 2026-09-10
+            type: ""
+            publicationSection: PT_Dismissed
+            ordinal: 2
+          ordinal: 8
+  recorded_at: 2026-10-26T20:34:57.726Z

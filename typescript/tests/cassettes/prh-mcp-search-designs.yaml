@@ -1,0 +1,751 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://mallioikeustietopalvelu.prh.fi/nis-api-gateway/design
+    headers:
+      accept:
+      - application/json
+      content-type:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com; contact avoindata@prh.fi)
+    body:
+      type: json
+      content:
+        productTitle: keinutuoli
+        applicationNumber: ""
+        registrationNumber: ""
+        dossierStatus: ""
+        designerName: ""
+        applicantName: ""
+        representativeName: ""
+        businessID: ""
+        applicationStartDate: ""
+        applicationEndDate: ""
+        oppositionPeriodStartStartDate: ""
+        oppositionPeriodStartEndDate: ""
+        publicationDateStartDate: ""
+        publicationDateEndDate: ""
+        registrationStartDate: ""
+        registrationEndDate: ""
+        classNumber: ""
+        filingNumber: ""
+        basicSearch: ""
+  response:
+    status: 200
+    headers:
+      access-control-allow-methods:
+      - GET, HEAD, POST
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - close
+      content-security-policy:
+      - "default-src 'self'; img-src 'self' data: ; media-src 'self' ; child-src 'none'; manifest-src 'self'; object-src 'none'; worker-src 'none'; connect-src 'self' https://asiointi.prh.fi;"
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Mon, 26 Oct 2026 20:35:13 GMT
+      strict-transport-security:
+      - max-age=63072000; includeSubdomains;
+      x-content-type-options:
+      - nosniff
+      x-dns-prefetch-control:
+      - "off"
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - SAMEORIGIN
+      x-permitted-cross-domain-policies:
+      - none
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      type: json
+      content:
+        totalResults: 18
+        results:
+        - dossierId: 807715
+          applicationNumber: M19790629
+          registrationNumber: "4890"
+          dossierStatus: DS_Expired
+          dossierSubType: null
+          applicationDate: 1979-10-10
+          registrationDate: 1980-09-30
+          expirationDate: 1984-10-10
+          applicants:
+          - name: Kainulainen Juha Paavo Tapani
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: null
+          trademarkHasImage: false
+          goodsAndServices: []
+          targetGroup: null
+          locarnos:
+          - classNumber: "06"
+            subClassNumber: "01"
+            ordinal: 1
+          designs:
+          - title: Keinutuoli
+            titleSecondLng: null
+            number: 1
+            dominantViewNumber: 1
+            dominantViewImageUrl: /opendata/design/image/M19790629.1.1
+            dominantViewSmallThumbnailUrl: /opendata/design/thumbnail/M19790629.1.1
+            dominantViewMediumThumbnailUrl: /opendata/design/thumbnail/medium/M19790629.1.1
+            ordinal: 1
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 1
+        - dossierId: 806492
+          applicationNumber: M19800328
+          registrationNumber: "5309"
+          dossierStatus: DS_Expired
+          dossierSubType: null
+          applicationDate: 1980-04-25
+          registrationDate: 1981-04-30
+          expirationDate: 1985-04-25
+          applicants:
+          - name: Välimaa Leo
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: null
+          trademarkHasImage: false
+          goodsAndServices: []
+          targetGroup: null
+          locarnos:
+          - classNumber: "06"
+            subClassNumber: "01"
+            ordinal: 1
+          designs:
+          - title: Keinutuoli
+            titleSecondLng: null
+            number: 1
+            dominantViewNumber: 1
+            dominantViewImageUrl: /opendata/design/image/M19800328.1.1
+            dominantViewSmallThumbnailUrl: /opendata/design/thumbnail/M19800328.1.1
+            dominantViewMediumThumbnailUrl: /opendata/design/thumbnail/medium/M19800328.1.1
+            ordinal: 1
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 2
+        - dossierId: 805100
+          applicationNumber: M19821072
+          registrationNumber: null
+          dossierStatus: DS_Application_dismissed
+          dossierSubType: null
+          applicationDate: 1982-12-10
+          registrationDate: null
+          expirationDate: null
+          applicants:
+          - name: Miljöötuote Oy
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: null
+          trademarkHasImage: false
+          goodsAndServices: []
+          targetGroup: null
+          locarnos:
+          - classNumber: "06"
+            subClassNumber: "01"
+            ordinal: 1
+          - classNumber: "06"
+            subClassNumber: "03"
+            ordinal: 2
+          designs:
+          - title: Tuoli
+            titleSecondLng: null
+            number: 1
+            dominantViewNumber: 1
+            dominantViewImageUrl: /opendata/design/image/M19821072.1.1
+            dominantViewSmallThumbnailUrl: /opendata/design/thumbnail/M19821072.1.1
+            dominantViewMediumThumbnailUrl: /opendata/design/thumbnail/medium/M19821072.1.1
+            ordinal: 1
+          - title: Tuoli
+            titleSecondLng: null
+            number: 2
+            dominantViewNumber: 1
+            dominantViewImageUrl: /opendata/design/image/M19821072.2.1
+            dominantViewSmallThumbnailUrl: /opendata/design/thumbnail/M19821072.2.1
+            dominantViewMediumThumbnailUrl: /opendata/design/thumbnail/medium/M19821072.2.1
+            ordinal: 2
+          - title: Keinutuoli
+            titleSecondLng: null
+            number: 3
+            dominantViewNumber: 1
+            dominantViewImageUrl: /opendata/design/image/M19821072.3.1
+            dominantViewSmallThumbnailUrl: /opendata/design/thumbnail/M19821072.3.1
+            dominantViewMediumThumbnailUrl: /opendata/design/thumbnail/medium/M19821072.3.1
+            ordinal: 3
+          - title: Pöytä
+            titleSecondLng: null
+            number: 4
+            dominantViewNumber: 1
+            dominantViewImageUrl: /opendata/design/image/M19821072.4.1
+            dominantViewSmallThumbnailUrl: /opendata/design/thumbnail/M19821072.4.1
+            dominantViewMediumThumbnailUrl: /opendata/design/thumbnail/medium/M19821072.4.1
+            ordinal: 4
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 3
+        - dossierId: 803527
+          applicationNumber: M19830676
+          registrationNumber: "7980"
+          dossierStatus: DS_Expired
+          dossierSubType: null
+          applicationDate: 1983-08-01
+          registrationDate: 1984-07-31
+          expirationDate: 1988-08-01
+          applicants:
+          - name: Roipu Ky
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: null
+          trademarkHasImage: false
+          goodsAndServices: []
+          targetGroup: null
+          locarnos:
+          - classNumber: "06"
+            subClassNumber: "01"
+            ordinal: 1
+          designs:
+          - title: Lepotuoli (keinutuoli)
+            titleSecondLng: null
+            number: 1
+            dominantViewNumber: 1
+            dominantViewImageUrl: /opendata/design/image/M19830676.1.1
+            dominantViewSmallThumbnailUrl: /opendata/design/thumbnail/M19830676.1.1
+            dominantViewMediumThumbnailUrl: /opendata/design/thumbnail/medium/M19830676.1.1
+            ordinal: 1
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 4
+        - dossierId: 803846
+          applicationNumber: M19830995
+          registrationNumber: "7981"
+          dossierStatus: DS_Expired
+          dossierSubType: null
+          applicationDate: 1983-08-01
+          registrationDate: 1984-07-31
+          expirationDate: 1988-08-01
+          applicants:
+          - name: Roipu Ky
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: null
+          trademarkHasImage: false
+          goodsAndServices: []
+          targetGroup: null
+          locarnos:
+          - classNumber: "06"
+            subClassNumber: "01"
+            ordinal: 1
+          designs:
+          - title: Keinutuoli
+            titleSecondLng: null
+            number: 1
+            dominantViewNumber: 1
+            dominantViewImageUrl: /opendata/design/image/M19830995.1.1
+            dominantViewSmallThumbnailUrl: /opendata/design/thumbnail/M19830995.1.1
+            dominantViewMediumThumbnailUrl: /opendata/design/thumbnail/medium/M19830995.1.1
+            ordinal: 1
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 5
+        - dossierId: 803734
+          applicationNumber: M19830883
+          registrationNumber: "8136"
+          dossierStatus: DS_Expired
+          dossierSubType: null
+          applicationDate: 1983-10-11
+          registrationDate: 1984-09-28
+          expirationDate: 1988-10-11
+          applicants:
+          - name: Ovaska Matti
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: null
+          trademarkHasImage: false
+          goodsAndServices: []
+          targetGroup: null
+          locarnos:
+          - classNumber: "06"
+            subClassNumber: "01"
+            ordinal: 1
+          designs:
+          - title: Keinutuoli
+            titleSecondLng: null
+            number: 1
+            dominantViewNumber: 1
+            dominantViewImageUrl: /opendata/design/image/M19830883.1.1
+            dominantViewSmallThumbnailUrl: /opendata/design/thumbnail/M19830883.1.1
+            dominantViewMediumThumbnailUrl: /opendata/design/thumbnail/medium/M19830883.1.1
+            ordinal: 1
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 6
+        - dossierId: 800800
+          applicationNumber: M19850244
+          registrationNumber: "9474"
+          dossierStatus: DS_Expired
+          dossierSubType: null
+          applicationDate: 1985-03-22
+          registrationDate: 1986-02-28
+          expirationDate: 1990-03-22
+          applicants:
+          - name: Leskinen Tuomo
+            ordinal: 1
+          representatives:
+          - name: Pitkänen Hannu
+            ordinal: 1
+          priorities: []
+          trademarkWord: null
+          trademarkHasImage: false
+          goodsAndServices: []
+          targetGroup: null
+          locarnos:
+          - classNumber: "06"
+            subClassNumber: "01"
+            ordinal: 1
+          designs:
+          - title: Keinutuoli
+            titleSecondLng: null
+            number: 1
+            dominantViewNumber: 1
+            dominantViewImageUrl: /opendata/design/image/M19850244.1.1
+            dominantViewSmallThumbnailUrl: /opendata/design/thumbnail/M19850244.1.1
+            dominantViewMediumThumbnailUrl: /opendata/design/thumbnail/medium/M19850244.1.1
+            ordinal: 1
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 7
+        - dossierId: 799630
+          applicationNumber: M19860332
+          registrationNumber: null
+          dossierStatus: DS_Application_rejected
+          dossierSubType: null
+          applicationDate: 1986-03-05
+          registrationDate: null
+          expirationDate: null
+          applicants:
+          - name: Ylitrukki Martti
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: null
+          trademarkHasImage: false
+          goodsAndServices: []
+          targetGroup: null
+          locarnos:
+          - classNumber: "06"
+            subClassNumber: "06"
+            ordinal: 1
+          designs:
+          - title: Lasten keinutuoli
+            titleSecondLng: null
+            number: 1
+            dominantViewNumber: 1
+            dominantViewImageUrl: /opendata/design/image/M19860332.1.1
+            dominantViewSmallThumbnailUrl: /opendata/design/thumbnail/M19860332.1.1
+            dominantViewMediumThumbnailUrl: /opendata/design/thumbnail/medium/M19860332.1.1
+            ordinal: 1
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 8
+        - dossierId: 797258
+          applicationNumber: M19880180
+          registrationNumber: "12119"
+          dossierStatus: DS_Expired
+          dossierSubType: null
+          applicationDate: 1988-03-03
+          registrationDate: 1989-01-31
+          expirationDate: 1993-03-03
+          applicants:
+          - name: Kaasalainen Anna-Liisa
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: null
+          trademarkHasImage: false
+          goodsAndServices: []
+          targetGroup: null
+          locarnos:
+          - classNumber: "06"
+            subClassNumber: "01"
+            ordinal: 1
+          designs:
+          - title: Keinutuoli (tuoli)
+            titleSecondLng: null
+            number: 1
+            dominantViewNumber: 1
+            dominantViewImageUrl: /opendata/design/image/M19880180.1.1
+            dominantViewSmallThumbnailUrl: /opendata/design/thumbnail/M19880180.1.1
+            dominantViewMediumThumbnailUrl: /opendata/design/thumbnail/medium/M19880180.1.1
+            ordinal: 1
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 9
+        - dossierId: 792955
+          applicationNumber: M19920110
+          registrationNumber: "15698"
+          dossierStatus: DS_Expired
+          dossierSubType: null
+          applicationDate: 1992-02-13
+          registrationDate: 1992-12-31
+          expirationDate: 1997-02-13
+          applicants:
+          - name: Lindström Rolf Holger
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: null
+          trademarkHasImage: false
+          goodsAndServices: []
+          targetGroup: null
+          locarnos:
+          - classNumber: "11"
+            subClassNumber: "02"
+            ordinal: 1
+          - classNumber: "32"
+            subClassNumber: "00"
+            ordinal: 2
+          designs:
+          - title: Keinutuoli (koriste)
+            titleSecondLng: null
+            number: 1
+            dominantViewNumber: 1
+            dominantViewImageUrl: /opendata/design/image/M19920110.1.1
+            dominantViewSmallThumbnailUrl: /opendata/design/thumbnail/M19920110.1.1
+            dominantViewMediumThumbnailUrl: /opendata/design/thumbnail/medium/M19920110.1.1
+            ordinal: 1
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 10
+        - dossierId: 790819
+          applicationNumber: M19950605
+          registrationNumber: "18233"
+          dossierStatus: DS_Expired
+          dossierSubType: null
+          applicationDate: 1995-09-11
+          registrationDate: 1996-05-31
+          expirationDate: 2000-09-11
+          applicants:
+          - name: Urjalan Keinukaluste Ky
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: null
+          trademarkHasImage: false
+          goodsAndServices: []
+          targetGroup: null
+          locarnos:
+          - classNumber: "06"
+            subClassNumber: "01"
+            ordinal: 1
+          designs:
+          - title: Kahdenistuttava keinutuoli
+            titleSecondLng: null
+            number: 1
+            dominantViewNumber: 1
+            dominantViewImageUrl: /opendata/design/image/M19950605.1.1
+            dominantViewSmallThumbnailUrl: /opendata/design/thumbnail/M19950605.1.1
+            dominantViewMediumThumbnailUrl: /opendata/design/thumbnail/medium/M19950605.1.1
+            ordinal: 1
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 11
+        - dossierId: 789663
+          applicationNumber: M19960313
+          registrationNumber: "18724"
+          dossierStatus: DS_Expired
+          dossierSubType: null
+          applicationDate: 1996-04-29
+          registrationDate: 1997-02-28
+          expirationDate: 2001-04-29
+          applicants:
+          - name: Pessinen Janne
+            ordinal: 1
+          - name: Sevon Jukka
+            ordinal: 2
+          - name: Lineri Teemu
+            ordinal: 3
+          - name: Järvinen Kari
+            ordinal: 4
+          - name: Seelbach Jani
+            ordinal: 5
+          - name: Tulonen Markko
+            ordinal: 6
+          - name: Tuomainen Risto
+            ordinal: 7
+          - name: Silander Martti
+            ordinal: 8
+          - name: Pajuniemi Tanja
+            ordinal: 9
+          - name: Nurmi Uolevi
+            ordinal: 10
+          - name: '.'
+            ordinal: 11
+          - name: '.'
+            ordinal: 12
+          - name: Palo Sami
+            ordinal: 13
+          representatives:
+          - name: Sevon Jukka
+            ordinal: 1
+          priorities: []
+          trademarkWord: null
+          trademarkHasImage: false
+          goodsAndServices: []
+          targetGroup: null
+          locarnos:
+          - classNumber: "06"
+            subClassNumber: "01"
+            ordinal: 1
+          designs:
+          - title: Keinutuoli
+            titleSecondLng: null
+            number: 1
+            dominantViewNumber: 1
+            dominantViewImageUrl: /opendata/design/image/M19960313.1.1
+            dominantViewSmallThumbnailUrl: /opendata/design/thumbnail/M19960313.1.1
+            dominantViewMediumThumbnailUrl: /opendata/design/thumbnail/medium/M19960313.1.1
+            ordinal: 1
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 12
+        - dossierId: 788389
+          applicationNumber: M19980825
+          registrationNumber: "20498"
+          dossierStatus: DS_Expired
+          dossierSubType: null
+          applicationDate: 1998-12-22
+          registrationDate: 1999-07-30
+          expirationDate: 2003-12-22
+          applicants:
+          - name: Rajaluoma Toimi
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: null
+          trademarkHasImage: false
+          goodsAndServices: []
+          targetGroup: null
+          locarnos:
+          - classNumber: "06"
+            subClassNumber: "01"
+            ordinal: 1
+          designs:
+          - title: Koottava keinutuoli
+            titleSecondLng: null
+            number: 1
+            dominantViewNumber: 1
+            dominantViewImageUrl: /opendata/design/image/M19980825.1.1
+            dominantViewSmallThumbnailUrl: /opendata/design/thumbnail/M19980825.1.1
+            dominantViewMediumThumbnailUrl: /opendata/design/thumbnail/medium/M19980825.1.1
+            ordinal: 1
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 13
+        - dossierId: 786958
+          applicationNumber: M19990400
+          registrationNumber: "20846"
+          dossierStatus: DS_Expired
+          dossierSubType: null
+          applicationDate: 1999-05-20
+          registrationDate: 1999-12-31
+          expirationDate: 2009-05-20
+          applicants:
+          - name: TA-Kaluste Oy
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: null
+          trademarkHasImage: false
+          goodsAndServices: []
+          targetGroup: null
+          locarnos:
+          - classNumber: "06"
+            subClassNumber: "01"
+            ordinal: 1
+          designs:
+          - title: Keinutuoli
+            titleSecondLng: null
+            number: 1
+            dominantViewNumber: 1
+            dominantViewImageUrl: /opendata/design/image/M19990400.1.1
+            dominantViewSmallThumbnailUrl: /opendata/design/thumbnail/M19990400.1.1
+            dominantViewMediumThumbnailUrl: /opendata/design/thumbnail/medium/M19990400.1.1
+            ordinal: 1
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 14
+        - dossierId: 787427
+          applicationNumber: M19990869
+          registrationNumber: "21183"
+          dossierStatus: DS_Expired
+          dossierSubType: null
+          applicationDate: 1999-11-16
+          registrationDate: 2000-06-30
+          expirationDate: 2014-11-16
+          applicants:
+          - name: Saari Seppo
+            ordinal: 1
+          representatives:
+          - name: Taisto Nieminen Patenttitoimisto T Nieminen Oy
+            ordinal: 1
+          priorities: []
+          trademarkWord: null
+          trademarkHasImage: false
+          goodsAndServices: []
+          targetGroup: null
+          locarnos:
+          - classNumber: "06"
+            subClassNumber: "01"
+            ordinal: 1
+          designs:
+          - title: Keinutuoli
+            titleSecondLng: null
+            number: 1
+            dominantViewNumber: 1
+            dominantViewImageUrl: /opendata/design/image/M19990869.1.1
+            dominantViewSmallThumbnailUrl: /opendata/design/thumbnail/M19990869.1.1
+            dominantViewMediumThumbnailUrl: /opendata/design/thumbnail/medium/M19990869.1.1
+            ordinal: 1
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 15
+        - dossierId: 782878
+          applicationNumber: M20070044
+          registrationNumber: "24266"
+          dossierStatus: DS_Expired
+          dossierSubType: null
+          applicationDate: 2007-03-05
+          registrationDate: 2007-08-31
+          expirationDate: 2012-03-05
+          applicants:
+          - name: Kalle Rankka
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: null
+          trademarkHasImage: false
+          goodsAndServices: []
+          targetGroup: null
+          locarnos:
+          - classNumber: "06"
+            subClassNumber: "01"
+            ordinal: 1
+          designs:
+          - title: Keinutuoli
+            titleSecondLng: null
+            number: 1
+            dominantViewNumber: 1
+            dominantViewImageUrl: /opendata/design/image/M20070044.1.1
+            dominantViewSmallThumbnailUrl: /opendata/design/thumbnail/M20070044.1.1
+            dominantViewMediumThumbnailUrl: /opendata/design/thumbnail/medium/M20070044.1.1
+            ordinal: 1
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 16
+        - dossierId: 782189
+          applicationNumber: M20110162
+          registrationNumber: "25171"
+          dossierStatus: DS_Expired
+          dossierSubType: null
+          applicationDate: 2011-12-23
+          registrationDate: 2012-07-13
+          expirationDate: 2016-12-23
+          applicants:
+          - name: Ari Niemenaho
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: null
+          trademarkHasImage: false
+          goodsAndServices: []
+          targetGroup: null
+          locarnos:
+          - classNumber: "06"
+            subClassNumber: "01"
+            ordinal: 1
+          designs:
+          - title: Keinutuoli
+            titleSecondLng: null
+            number: 1
+            dominantViewNumber: 1
+            dominantViewImageUrl: /opendata/design/image/M20110162.1.1
+            dominantViewSmallThumbnailUrl: /opendata/design/thumbnail/M20110162.1.1
+            dominantViewMediumThumbnailUrl: /opendata/design/thumbnail/medium/M20110162.1.1
+            ordinal: 1
+          - title: 2-istuttava keinutuoli
+            titleSecondLng: null
+            number: 2
+            dominantViewNumber: 1
+            dominantViewImageUrl: /opendata/design/image/M20110162.2.1
+            dominantViewSmallThumbnailUrl: /opendata/design/thumbnail/M20110162.2.1
+            dominantViewMediumThumbnailUrl: /opendata/design/thumbnail/medium/M20110162.2.1
+            ordinal: 2
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 17
+        - dossierId: 842537
+          applicationNumber: M20195051
+          registrationNumber: "26206"
+          dossierStatus: DS_Expired
+          dossierSubType: null
+          applicationDate: 2019-05-31
+          registrationDate: 2019-10-10
+          expirationDate: 2024-05-31
+          applicants:
+          - name: Henri Luostarinen
+            ordinal: 1
+          representatives:
+          - name: Nina Luostarinen
+            ordinal: 1
+          priorities: []
+          trademarkWord: null
+          trademarkHasImage: false
+          goodsAndServices: []
+          targetGroup: null
+          locarnos:
+          - classNumber: "06"
+            subClassNumber: "01"
+            ordinal: 1
+          designs:
+          - title: Keinutuoli
+            titleSecondLng: Gungstol
+            number: 1
+            dominantViewNumber: 12
+            dominantViewImageUrl: /opendata/design/image/M20195051.1.12
+            dominantViewSmallThumbnailUrl: /opendata/design/thumbnail/M20195051.1.12
+            dominantViewMediumThumbnailUrl: /opendata/design/thumbnail/medium/M20195051.1.12
+            ordinal: 1
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 18
+  recorded_at: 2026-10-26T20:35:14.068Z

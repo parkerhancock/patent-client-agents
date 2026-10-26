@@ -50,6 +50,7 @@ export * from "./mpep-release.js";
 export * from "./office-action-analytics.js";
 export * from "./office-actions.js";
 export * from "./petitions.js";
+export * from "./prh.js";
 export * from "./prv.js";
 export * from "./ptab.js";
 export * from "./publications.js";

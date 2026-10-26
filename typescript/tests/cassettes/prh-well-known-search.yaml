@@ -1,0 +1,100 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://tavaramerkkitietopalvelu.prh.fi/nis-api-gateway/tmr
+    headers:
+      accept:
+      - application/json
+      content-type:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com; contact avoindata@prh.fi)
+    body:
+      type: json
+      content:
+        trademarkWord: TAFFEL
+        applicationNumber: ""
+        registrationNumber: ""
+        dossierStatus: ""
+        trademarkKind: ""
+        applicantName: ""
+        representativeName: ""
+        businessID: ""
+        applicationStartDate: ""
+        applicationEndDate: ""
+        oppositionPeriodStartStartDate: ""
+        oppositionPeriodStartEndDate: ""
+        registrationStartDate: ""
+        registrationEndDate: ""
+        expirationStartDate: ""
+        expirationEndDate: ""
+        goodsAndServicesTerm: ""
+        goodsAndServicesClassNumber: ""
+        viennaClass: ""
+        filingNumber: ""
+        basicSearch: ""
+  response:
+    status: 200
+    headers:
+      access-control-allow-methods:
+      - GET, HEAD, POST
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - close
+      content-security-policy:
+      - "default-src 'self'; img-src 'self' data: ; media-src 'self' ; child-src 'none'; manifest-src 'self'; object-src 'none'; worker-src 'none'; connect-src 'self' https://asiointi.prh.fi;"
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Mon, 26 Oct 2026 20:35:04 GMT
+      strict-transport-security:
+      - max-age=63072000; includeSubdomains;
+      x-content-type-options:
+      - nosniff
+      x-dns-prefetch-control:
+      - "off"
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - SAMEORIGIN
+      x-permitted-cross-domain-policies:
+      - none
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      type: json
+      content:
+        totalResults: 1
+        results:
+        - dossierId: 830461
+          applicationNumber: "2007007"
+          registrationNumber: null
+          dossierStatus: TMR_Admitted
+          dossierSubType: Figurative-word
+          applicationDate: 2007-08-15
+          registrationDate: 2008-06-30
+          expirationDate: 2028-06-30
+          applicants:
+          - name: Orkla Suomi Finland Oy Ab
+            ordinal: 1
+          representatives:
+          - name: Berggren Oy
+            ordinal: 1
+          priorities: []
+          trademarkWord: TAFFEL THE ORIGINAL SNACKS
+          trademarkHasImage: true
+          goodsAndServices:
+          - classNumber: 29
+            ordinal: 1
+          - classNumber: 30
+            ordinal: 2
+          targetGroup: 15-44-vuotiaat suomalaiset.
+          locarnos: []
+          designs: []
+          imageUrl: /opendata/trademark/image/2007007
+          thumbnailUrl: /opendata/trademark/thumbnail/2007007
+          largeThumbnailUrl: /opendata/trademark/thumbnail/large/2007007
+          ordinal: 1
+  recorded_at: 2026-10-26T20:35:05.057Z

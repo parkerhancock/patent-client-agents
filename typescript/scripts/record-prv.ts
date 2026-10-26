@@ -38,7 +38,10 @@ for (const [name, [tool, args]] of Object.entries(toolCalls)) {
       () => mcp.callTool<{ items: unknown[] }>(tool, args),
       true,
     );
-    console.log(`mcp-${name}`, result.structuredContent?.items.length);
+    console.log(
+      `mcp-${name}`,
+      result.structuredContent?.items?.length ?? "artifact",
+    );
   } finally {
     await mcp.close();
     await server.close();

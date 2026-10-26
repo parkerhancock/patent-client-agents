@@ -1,0 +1,339 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://mallioikeustietopalvelu.prh.fi/nis-api-gateway/design
+    headers:
+      accept:
+      - application/json
+      content-type:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com; contact avoindata@prh.fi)
+    body:
+      type: json
+      content:
+        productTitle: tuoli
+        applicationNumber: ""
+        registrationNumber: ""
+        dossierStatus: ""
+        designerName: ""
+        applicantName: ""
+        representativeName: ""
+        businessID: ""
+        applicationStartDate: 2015-01-01
+        applicationEndDate: ""
+        oppositionPeriodStartStartDate: ""
+        oppositionPeriodStartEndDate: ""
+        publicationDateStartDate: ""
+        publicationDateEndDate: ""
+        registrationStartDate: ""
+        registrationEndDate: ""
+        classNumber: ""
+        filingNumber: ""
+        basicSearch: ""
+  response:
+    status: 200
+    headers:
+      access-control-allow-methods:
+      - GET, HEAD, POST
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - close
+      content-security-policy:
+      - "default-src 'self'; img-src 'self' data: ; media-src 'self' ; child-src 'none'; manifest-src 'self'; object-src 'none'; worker-src 'none'; connect-src 'self' https://asiointi.prh.fi;"
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Mon, 26 Oct 2026 20:35:06 GMT
+      strict-transport-security:
+      - max-age=63072000; includeSubdomains;
+      x-content-type-options:
+      - nosniff
+      x-dns-prefetch-control:
+      - "off"
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - SAMEORIGIN
+      x-permitted-cross-domain-policies:
+      - none
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      type: json
+      content:
+        totalResults: 7
+        results:
+        - dossierId: 781188
+          applicationNumber: M20150023
+          registrationNumber: "25710"
+          dossierStatus: DS_Expired
+          dossierSubType: null
+          applicationDate: 2015-02-12
+          registrationDate: 2015-09-15
+          expirationDate: 2020-02-12
+          applicants:
+          - name: Ilpo Tapani Lindqvist
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: null
+          trademarkHasImage: false
+          goodsAndServices: []
+          targetGroup: null
+          locarnos:
+          - classNumber: "06"
+            subClassNumber: "01"
+            ordinal: 1
+          designs:
+          - title: Tuoli
+            titleSecondLng: null
+            number: 1
+            dominantViewNumber: 1
+            dominantViewImageUrl: /opendata/design/image/M20150023.1.1
+            dominantViewSmallThumbnailUrl: /opendata/design/thumbnail/M20150023.1.1
+            dominantViewMediumThumbnailUrl: /opendata/design/thumbnail/medium/M20150023.1.1
+            ordinal: 1
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 1
+        - dossierId: 781194
+          applicationNumber: M20150029
+          registrationNumber: "25676"
+          dossierStatus: DS_Expired
+          dossierSubType: null
+          applicationDate: 2015-02-18
+          registrationDate: 2015-05-15
+          expirationDate: 2020-02-18
+          applicants:
+          - name: Lepo Product Oy
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: null
+          trademarkHasImage: false
+          goodsAndServices: []
+          targetGroup: null
+          locarnos:
+          - classNumber: "06"
+            subClassNumber: "01"
+            ordinal: 1
+          designs:
+          - title: Tuoli
+            titleSecondLng: null
+            number: 1
+            dominantViewNumber: 1
+            dominantViewImageUrl: /opendata/design/image/M20150029.1.1
+            dominantViewSmallThumbnailUrl: /opendata/design/thumbnail/M20150029.1.1
+            dominantViewMediumThumbnailUrl: /opendata/design/thumbnail/medium/M20150029.1.1
+            ordinal: 1
+          - title: Tuoli
+            titleSecondLng: null
+            number: 2
+            dominantViewNumber: 1
+            dominantViewImageUrl: /opendata/design/image/M20150029.2.1
+            dominantViewSmallThumbnailUrl: /opendata/design/thumbnail/M20150029.2.1
+            dominantViewMediumThumbnailUrl: /opendata/design/thumbnail/medium/M20150029.2.1
+            ordinal: 2
+          - title: Tuoli
+            titleSecondLng: null
+            number: 3
+            dominantViewNumber: 1
+            dominantViewImageUrl: /opendata/design/image/M20150029.3.1
+            dominantViewSmallThumbnailUrl: /opendata/design/thumbnail/M20150029.3.1
+            dominantViewMediumThumbnailUrl: /opendata/design/thumbnail/medium/M20150029.3.1
+            ordinal: 3
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 2
+        - dossierId: 781237
+          applicationNumber: M20150072
+          registrationNumber: "25706"
+          dossierStatus: DS_Expired
+          dossierSubType: null
+          applicationDate: 2015-05-21
+          registrationDate: 2015-08-14
+          expirationDate: 2020-05-21
+          applicants:
+          - name: Esko Toivainen
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: null
+          trademarkHasImage: false
+          goodsAndServices: []
+          targetGroup: null
+          locarnos:
+          - classNumber: "06"
+            subClassNumber: "01"
+            ordinal: 1
+          designs:
+          - title: Tuoli
+            titleSecondLng: null
+            number: 1
+            dominantViewNumber: 1
+            dominantViewImageUrl: /opendata/design/image/M20150072.1.1
+            dominantViewSmallThumbnailUrl: /opendata/design/thumbnail/M20150072.1.1
+            dominantViewMediumThumbnailUrl: /opendata/design/thumbnail/medium/M20150072.1.1
+            ordinal: 1
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 3
+        - dossierId: 781251
+          applicationNumber: M20150086
+          registrationNumber: "25775"
+          dossierStatus: DS_Expired
+          dossierSubType: null
+          applicationDate: 2015-06-17
+          registrationDate: 2016-01-15
+          expirationDate: 2020-06-17
+          applicants:
+          - name: Vesa Pohto
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: null
+          trademarkHasImage: false
+          goodsAndServices: []
+          targetGroup: null
+          locarnos:
+          - classNumber: "06"
+            subClassNumber: "01"
+            ordinal: 1
+          designs:
+          - title: Tuoli
+            titleSecondLng: null
+            number: 1
+            dominantViewNumber: 1
+            dominantViewImageUrl: /opendata/design/image/M20150086.1.1
+            dominantViewSmallThumbnailUrl: /opendata/design/thumbnail/M20150086.1.1
+            dominantViewMediumThumbnailUrl: /opendata/design/thumbnail/medium/M20150086.1.1
+            ordinal: 1
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 4
+        - dossierId: 781303
+          applicationNumber: M20150138
+          registrationNumber: "25804"
+          dossierStatus: DS_Expired
+          dossierSubType: null
+          applicationDate: 2015-12-15
+          registrationDate: 2016-03-07
+          expirationDate: 2020-12-15
+          applicants:
+          - name: Lepo Product Oy
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: null
+          trademarkHasImage: false
+          goodsAndServices: []
+          targetGroup: null
+          locarnos:
+          - classNumber: "06"
+            subClassNumber: "01"
+            ordinal: 1
+          designs:
+          - title: Tuoli
+            titleSecondLng: Stol
+            number: 1
+            dominantViewNumber: 1
+            dominantViewImageUrl: /opendata/design/image/M20150138.1.1
+            dominantViewSmallThumbnailUrl: /opendata/design/thumbnail/M20150138.1.1
+            dominantViewMediumThumbnailUrl: /opendata/design/thumbnail/medium/M20150138.1.1
+            ordinal: 1
+          - title: Tuoli
+            titleSecondLng: Stol
+            number: 2
+            dominantViewNumber: 1
+            dominantViewImageUrl: /opendata/design/image/M20150138.2.1
+            dominantViewSmallThumbnailUrl: /opendata/design/thumbnail/M20150138.2.1
+            dominantViewMediumThumbnailUrl: /opendata/design/thumbnail/medium/M20150138.2.1
+            ordinal: 2
+          - title: Tuoli
+            titleSecondLng: Stol
+            number: 3
+            dominantViewNumber: 1
+            dominantViewImageUrl: /opendata/design/image/M20150138.3.1
+            dominantViewSmallThumbnailUrl: /opendata/design/thumbnail/M20150138.3.1
+            dominantViewMediumThumbnailUrl: /opendata/design/thumbnail/medium/M20150138.3.1
+            ordinal: 3
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 5
+        - dossierId: 827903
+          applicationNumber: M20175078
+          registrationNumber: "26059"
+          dossierStatus: DS_Expired
+          dossierSubType: null
+          applicationDate: 2017-09-04
+          registrationDate: 2018-02-12
+          expirationDate: 2022-09-04
+          applicants:
+          - name: Emilia Karenina Oy
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: null
+          trademarkHasImage: false
+          goodsAndServices: []
+          targetGroup: null
+          locarnos:
+          - classNumber: "06"
+            subClassNumber: "01"
+            ordinal: 1
+          designs:
+          - title: Tuoli
+            titleSecondLng: Stol
+            number: 2
+            dominantViewNumber: 1
+            dominantViewImageUrl: /opendata/design/image/M20175078.2.1
+            dominantViewSmallThumbnailUrl: /opendata/design/thumbnail/M20175078.2.1
+            dominantViewMediumThumbnailUrl: /opendata/design/thumbnail/medium/M20175078.2.1
+            ordinal: 1
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 6
+        - dossierId: 837409
+          applicationNumber: M20185088
+          registrationNumber: "26151"
+          dossierStatus: DS_Expired
+          dossierSubType: null
+          applicationDate: 2018-11-06
+          registrationDate: 2019-03-06
+          expirationDate: 2023-11-06
+          applicants:
+          - name: Colmio Oy
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: null
+          trademarkHasImage: false
+          goodsAndServices: []
+          targetGroup: null
+          locarnos:
+          - classNumber: "06"
+            subClassNumber: "01"
+            ordinal: 1
+          designs:
+          - title: Tuoli
+            titleSecondLng: Stol
+            number: 1
+            dominantViewNumber: 1
+            dominantViewImageUrl: /opendata/design/image/M20185088.1.1
+            dominantViewSmallThumbnailUrl: /opendata/design/thumbnail/M20185088.1.1
+            dominantViewMediumThumbnailUrl: /opendata/design/thumbnail/medium/M20185088.1.1
+            ordinal: 1
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 7
+  recorded_at: 2026-10-26T20:35:06.523Z
