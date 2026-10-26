@@ -46,6 +46,7 @@ export * from "./ipo-in.js";
 export * from "./ipos.js";
 export * from "./japan-ip-high-court.js";
 export * from "./jpo.js";
+export * from "./kipo-statutes.js";
 export * from "./kipris.js";
 export * from "./legifrance-ip.js";
 export * from "./models.js";

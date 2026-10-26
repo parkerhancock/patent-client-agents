@@ -22,6 +22,7 @@ import {
   InpiBrStatutesClient,
   IpoInStatutesClient,
   IposStatutesClient,
+  KipoStatutesClient,
   LegifranceIpClient,
   MoppClient,
   MpepClient,
@@ -106,6 +107,15 @@ assert.equal(
   results.ilpo_section,
   "Prohibition against misappropriation of a trade secret",
 );
+const kipo = new KipoStatutesClient({
+  source: new Uint8Array(
+    zstdCompressSync(await readFile(fixture("kipo-statutes/kipo_statutes.db"))),
+  ),
+});
+results.kipo_section = (
+  await kipo.getSectionByCitation("Patent Act Art. 29(1)")
+)?.title;
+assert.equal(results.kipo_section, "Requirements for Patent Registration");
 const inpiBr = new InpiBrStatutesClient({
   source: new Uint8Array(
     zstdCompressSync(
@@ -330,6 +340,7 @@ for (const client of [
   mopp,
   dpma,
   ilpo,
+  kipo,
   inpiBr,
   legifrance,
   tw,

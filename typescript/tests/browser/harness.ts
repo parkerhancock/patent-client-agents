@@ -13,6 +13,7 @@ import {
   InpiBrStatutesClient,
   IpoInMpppClient,
   IposManualsClient,
+  KipoStatutesClient,
   LegifranceIpClient,
   MpepClient,
   parseHearingNotice,
@@ -87,6 +88,12 @@ try {
   });
   results.ilpo_section = (
     await ilpo.getSectionByCitation("Article 13 Commercial Torts Law")
+  )?.section_label;
+  const kipo = new KipoStatutesClient({
+    source: () => bytes("/fixtures/kipo-statutes/kipo_statutes.db"),
+  });
+  results.kipo_section = (
+    await kipo.getSectionByCitation("Article 7-2 of the Patent Act")
   )?.section_label;
   const singapore = new IposManualsClient({
     source: () => bytes("/fixtures/ipos/ipos_manuals.db"),
