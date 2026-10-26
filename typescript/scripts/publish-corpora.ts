@@ -54,6 +54,7 @@ export const LOCAL_ARTIFACTS: Record<CorpusId, string> = {
   rospatent_statutes: "rospatent_statutes/rospatent_statutes.db.zst",
   cnipa_statutes: "cnipa_statutes/cnipa_statutes.db.zst",
   ipophl_statutes: "ipophl_statutes/ipophl_statutes.db.zst",
+  thai_dip_statutes: "thai_dip_statutes/thai_dip_statutes.db.zst",
 };
 
 class PublishError extends Error {}

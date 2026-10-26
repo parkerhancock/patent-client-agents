@@ -75,6 +75,8 @@
     "verify:inpi-br-statutes": "bun scripts/verify-inpi-br-statutes.ts",
     "build:legifrance-ip": "bun scripts/build-legifrance-ip-corpus.ts",
     "verify:legifrance-ip": "bun scripts/verify-legifrance-ip.ts",
+    "build:thai-dip-statutes": "bun scripts/build-thai-dip-statutes-corpus.ts",
+    "verify:thai-dip-statutes": "bun scripts/verify-thai-dip-statutes.ts",
     "verify:tmep": "bun scripts/verify-tmep.ts",
     "verify:ukipo-mopp": "bun scripts/verify-ukipo-mopp.ts",
     "verify:ipo-in": "bun scripts/verify-ipo-in.ts",

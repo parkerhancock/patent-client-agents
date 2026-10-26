@@ -186,6 +186,7 @@ try {
     cnipa_section?: string;
     ipophl_section?: string;
     inpi_ar_hits?: string;
+    thai_section?: string;
     ipos_manual?: string;
     idb_cache?: string;
     default_cache?: string;
@@ -208,6 +209,7 @@ try {
     checked.cnipa_section !== "Rule 20 Patent Implementing Regulations" ||
     checked.ipophl_section !== "Section 3 RA 10372" ||
     checked.inpi_ar_hits !== "Artículo 1° Ley 24.766" ||
+    checked.thai_section !== "Section 109/1 Trademark Act" ||
     checked.ipos_manual !== "Discoveries" ||
     checked.idb_cache !== "indexeddb:1:1:135.00" ||
     checked.default_cache !== "memory"

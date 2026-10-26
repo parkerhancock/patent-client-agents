@@ -52,6 +52,7 @@ import {
   PublicationsClient,
   RospatentStatutesClient,
   SearchOptionsSchema,
+  ThaiDipStatutesClient,
   TipoClient,
   TmepClient,
   TrademarkAssignmentClient,
@@ -154,6 +155,10 @@ import {
   registerRospatentStatutesTools,
 } from "./rospatent-statutes.js";
 import { registerPortalSearchTools } from "./search-portals.js";
+import {
+  registerThaiDipStatutesTools,
+  type ThaiDipStatutesReader,
+} from "./thai-dip-statutes.js";
 import { registerTipoTools } from "./tipo.js";
 import { registerTmepTools } from "./tmep.js";
 import {
@@ -266,6 +271,8 @@ export interface ServerOptions {
   legifranceIp?: LegifranceIpReader;
   /** Russian Civil Code Part Four corpus reader; omitted, it uses the default artifact path. */
   rospatentStatutes?: RospatentStatutesReader;
+  /** Thailand IP statutes corpus reader; omitted, it uses the default artifact path. */
+  thaiDipStatutes?: ThaiDipStatutesReader;
   /** Download URLs; pass `blobStore` (for example a GcsBlobStore) for URLs that outlive the process. */
   downloads?: DownloadOptions;
   /** Defaults to MCP identity settings; audience must intentionally cover document REST access. */
@@ -557,6 +564,8 @@ export function createServer(options: ServerOptions = {}): FastMCP {
   const legifranceIp = options.legifranceIp ?? own(new LegifranceIpClient());
   const rospatentStatutes =
     options.rospatentStatutes ?? own(new RospatentStatutesClient());
+  const thaiDipStatutes =
+    options.thaiDipStatutes ?? own(new ThaiDipStatutesClient());
   const applications =
     provided.applications ?? lazyClient(() => new ApplicationsClient());
   const client = options.client ?? applications;
@@ -1098,6 +1107,11 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     server,
     rospatentStatutes,
     options.auth ? requireScopes("rospatent:read") : undefined,
+  );
+  registerThaiDipStatutesTools(
+    server,
+    thaiDipStatutes,
+    options.auth ? requireScopes("thai_dip:read") : undefined,
   );
   registerUsitcTools(
     server,

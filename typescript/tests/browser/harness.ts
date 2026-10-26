@@ -21,6 +21,7 @@ import {
   parseHearingNotice,
   parseJapanIpHighCourtWorkbook,
   RospatentStatutesClient,
+  ThaiDipStatutesClient,
   TwTradeSecretsClient,
   UpcStatutesClient,
 } from "../../packages/client/src/index.js";
@@ -118,6 +119,12 @@ try {
   ).hits
     .map((hit) => hit.section_label)
     .join(",");
+  const thai = new ThaiDipStatutesClient({
+    source: () => bytes("/fixtures/thai-dip-statutes/thai_dip_statutes.db"),
+  });
+  results.thai_section = (
+    await thai.getSectionByCitation("Trademark Act s. 109/1")
+  )?.section_label;
   const singapore = new IposManualsClient({
     source: () => bytes("/fixtures/ipos/ipos_manuals.db"),
   });
