@@ -43,6 +43,7 @@ export * from "./ilpo-register.js";
 export * from "./ilpo-statutes.js";
 export * from "./inpi-br-statutes.js";
 export * from "./ipo-in.js";
+export * from "./ipophl-statutes.js";
 export * from "./ipos.js";
 export * from "./japan-ip-high-court.js";
 export * from "./jpo.js";

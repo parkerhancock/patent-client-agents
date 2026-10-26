@@ -21,6 +21,7 @@ import {
   IlpoStatutesClient,
   InpiBrStatutesClient,
   IpoInStatutesClient,
+  IpophlStatutesClient,
   IposStatutesClient,
   LegifranceIpClient,
   MoppClient,
@@ -105,6 +106,19 @@ results.ilpo_section = (
 assert.equal(
   results.ilpo_section,
   "Prohibition against misappropriation of a trade secret",
+);
+const ipophl = new IpophlStatutesClient({
+  source: new Uint8Array(
+    zstdCompressSync(
+      await readFile(fixture("ipophl-statutes/ipophl_statutes.db")),
+    ),
+  ),
+});
+const ipophlSection = await ipophl.getSectionByCitation("Sec. 22.1 RA 8293");
+results.ipophl_section = `${ipophlSection?.title}:${ipophlSection?.amended_by.join(",")}`;
+assert.equal(
+  results.ipophl_section,
+  "Non-Patentable Inventions:Section 5 RA 9502",
 );
 const inpiBr = new InpiBrStatutesClient({
   source: new Uint8Array(
@@ -330,6 +344,7 @@ for (const client of [
   mopp,
   dpma,
   ilpo,
+  ipophl,
   inpiBr,
   legifrance,
   tw,

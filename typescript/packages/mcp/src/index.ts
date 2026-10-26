@@ -30,6 +30,7 @@ import {
   IpAustraliaBulkClient,
   IpoInMpppClient,
   IpoInStatutesClient,
+  IpophlStatutesClient,
   IposManualsClient,
   IposStatutesClient,
   JapanIpHighCourtClient,
@@ -107,6 +108,10 @@ import {
   type IpoInStatutesReader,
   registerIpoInTools,
 } from "./ipo-in.js";
+import {
+  type IpophlStatutesReader,
+  registerIpophlStatutesTools,
+} from "./ipophl-statutes.js";
 import {
   type IposManualsReader,
   type IposStatutesReader,
@@ -231,6 +236,8 @@ export interface ServerOptions {
   ipoInMppp?: IpoInMpppReader;
   /** ILPO Israel statutes corpus reader; omitted, it uses the default artifact path. */
   ilpoStatutes?: IlpoStatutesReader;
+  /** IPOPHL Philippines statutes corpus reader; omitted, it uses the default artifact path. */
+  ipophlStatutes?: IpophlStatutesReader;
   /** IPOS Singapore statutes and manuals corpus readers; omitted, they use their default artifact paths. */
   iposStatutes?: IposStatutesReader;
   iposManuals?: IposManualsReader;
@@ -517,6 +524,8 @@ export function createServer(options: ServerOptions = {}): FastMCP {
   const ipoInStatutes = options.ipoInStatutes ?? own(new IpoInStatutesClient());
   const ipoInMppp = options.ipoInMppp ?? own(new IpoInMpppClient());
   const ilpoStatutes = options.ilpoStatutes ?? own(new IlpoStatutesClient());
+  const ipophlStatutes =
+    options.ipophlStatutes ?? own(new IpophlStatutesClient());
   const iposStatutes = options.iposStatutes ?? own(new IposStatutesClient());
   const iposManuals = options.iposManuals ?? own(new IposManualsClient());
   const inpiBrStatutes =
@@ -1028,6 +1037,11 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     server,
     ilpoStatutes,
     options.auth ? requireScopes("ilpo:read") : undefined,
+  );
+  registerIpophlStatutesTools(
+    server,
+    ipophlStatutes,
+    options.auth ? requireScopes("ipophl:read") : undefined,
   );
   registerIposTools(
     server,

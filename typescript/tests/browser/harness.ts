@@ -12,6 +12,7 @@ import {
   IlpoStatutesClient,
   InpiBrStatutesClient,
   IpoInMpppClient,
+  IpophlStatutesClient,
   IposManualsClient,
   LegifranceIpClient,
   MpepClient,
@@ -87,6 +88,12 @@ try {
   });
   results.ilpo_section = (
     await ilpo.getSectionByCitation("Article 13 Commercial Torts Law")
+  )?.section_label;
+  const ipophl = new IpophlStatutesClient({
+    source: () => bytes("/fixtures/ipophl-statutes/ipophl_statutes.db"),
+  });
+  results.ipophl_section = (
+    await ipophl.getSectionByCitation("Section 3 RA 10372")
   )?.section_label;
   const singapore = new IposManualsClient({
     source: () => bytes("/fixtures/ipos/ipos_manuals.db"),
