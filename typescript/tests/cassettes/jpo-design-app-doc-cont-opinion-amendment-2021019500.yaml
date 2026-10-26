@@ -1,0 +1,93 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://ip-data.jpo.go.jp/auth/token
+    headers:
+      accept:
+      - application/json
+    body:
+      type: text
+      content: grant_type=password&username=[FILTERED]&password=[FILTERED]
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - no-store
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Thu, 07 May 2026 15:22:54 GMT
+      referrer-policy:
+      - no-referrer
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      via:
+      - 1.1 671f1f27279c7644e32ce35df9d281aa.cloudfront.net (CloudFront)
+      x-cache:
+      - Miss from cloudfront
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      type: text
+      content: '{"access_token": "[FILTERED]", "expires_in": 3600, "refresh_expires_in": 28800, "refresh_token":
+        "[FILTERED]", "token_type": "Bearer", "id_token": "[FILTERED]", "not-before-policy": 0, "session_state":
+        "[FILTERED]", "scope": "openid profile"}'
+  recorded_at: '2026-05-07T15:22:54.000Z'
+- request:
+    method: GET
+    uri: https://ip-data.jpo.go.jp/api/design/v1/app_doc_cont_opinion_amendment/2021019500
+    headers:
+      accept:
+      - application/json, application/zip
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      allow:
+      - GET, HEAD, OPTIONS
+      connection:
+      - keep-alive
+      content-disposition:
+      - attachment;filename=docContOpinionAmendment_2021019500.zip
+      content-type:
+      - application/zip
+      cross-origin-opener-policy:
+      - same-origin
+      date:
+      - Thu, 07 May 2026 15:22:56 GMT
+      referrer-policy:
+      - same-origin
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      vary:
+      - Cookie
+      via:
+      - 1.1 497698df4d6305ce41e0409e999a35b6.cloudfront.net (CloudFront)
+      x-cache:
+      - Miss from cloudfront
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - DENY
+      x-xss-protection:
+      - 1; mode=block
+      x-amzn-remapped-connection:
+      - keep-alive
+      x-amzn-remapped-content-length:
+      - '769'
+      x-amzn-remapped-date:
+      - Thu, 07 May 2026 15:22:56 GMT
+      x-amzn-remapped-server:
+      - gunicorn
+    body:
+      type: binary
+      content: 504b0304140000000000dc02a85c00000000000000000000000011000000413532335f35323230303831333237392f504b0304140000000800dc02a85c128382f5ef0100004d03000021000000413532335f35323230303831333237392f4a504f53474d4c444f4331502e48544db3f108f1f5b1e3e5b2f170757401d1beae218e0a19252505baa985a59965b64acef97925a97925ba219505a94a0ac9109ead52496a45897e46496e8eb54272466251716a896d7046665a49bc9767b012c8207d98894efe2e910ac121913eaeb64a6940edbac59955a9568646052560750141ae404a819ac050df9597abb1b27fe2f47bd3f63456353a2060df8b891ba73e9ab0b97f2248c58475d3e74eb9d2db86aca6a9b0c9bf29a8b1064806360581544dfad89f3ff917aa39d3efcf4804aa0d9ee20724837afa806a8327ff02a96e5ad07464c23354d5930f764f9bb470d2f6aef54076224855dfb49efea6335363fa96355601f9205595fdf95d2f905dd371b9eb05d05c903b021a6b80f6043445348500f9fe201340be68fad0b4bde965df2584197deba79e423603a41a080380668400754780f54254364edb336d4ad3d9697bfacf8054774de95bd7f9beef42d3daa6d74dab9a4ef77af4bee9ef82a99ef818e8d64b085f4d889fb8bad1a17f5daf1bc82d53d64e9c8e118e205b839ac2402103f63134e40da18e057b60e2b9fedb8868eab8dcbf6072fe8cb8ae17a82a7a1ba6dd82a898560d52030938849aa9bfa73920ac9e74bcf32042aee9cce407d3531101846c024214642b6ad0435c32f119d013a1e0a0f36f0a6f0aeb6d03a56c4892b5d107a56c485287642200504b01021403140000000000dc02a85c000000000000000000000000110000000000000000001000ed4100000000413532335f35323230303831333237392f504b01021403140000000800dc02a85c128382f5ef0100004d030000210000000000000000000000a4812f000000413532335f35323230303831333237392f4a504f53474d4c444f4331502e48544d504b050600000000020002008e0000005d0200000000
+  recorded_at: '2026-05-07T15:22:56.000Z'

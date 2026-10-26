@@ -1,0 +1,98 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://ip-data.jpo.go.jp/auth/token
+    headers:
+      accept:
+      - application/json
+    body:
+      type: text
+      content: grant_type=password&username=[FILTERED]&password=[FILTERED]
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - no-store
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Thu, 07 May 2026 14:20:13 GMT
+      referrer-policy:
+      - no-referrer
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      via:
+      - 1.1 ab6fdf5fb199d6495c32e485c23f5728.cloudfront.net (CloudFront)
+      x-cache:
+      - Miss from cloudfront
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      type: text
+      content: '{"access_token": "[FILTERED]", "expires_in": 3600, "refresh_expires_in": 28800, "refresh_token":
+        "[FILTERED]", "token_type": "Bearer", "id_token": "[FILTERED]", "not-before-policy": 0, "session_state":
+        "[FILTERED]", "scope": "openid profile"}'
+  recorded_at: '2026-05-07T14:20:13.000Z'
+- request:
+    method: GET
+    uri: https://ip-data.jpo.go.jp/api/design/v1/app_progress/2020015234
+    headers:
+      accept:
+      - application/json, application/zip
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      allow:
+      - GET, HEAD, OPTIONS
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      cross-origin-opener-policy:
+      - same-origin
+      date:
+      - Thu, 07 May 2026 14:20:16 GMT
+      referrer-policy:
+      - same-origin
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      vary:
+      - Cookie
+      via:
+      - 1.1 fd35f1fff2f9fd0955b7c73222980a2c.cloudfront.net (CloudFront)
+      x-cache:
+      - Miss from cloudfront
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - DENY
+      x-xss-protection:
+      - 1; mode=block
+      x-amzn-remapped-connection:
+      - keep-alive
+      x-amzn-remapped-content-length:
+      - '3531'
+      x-amzn-remapped-date:
+      - Thu, 07 May 2026 14:20:16 GMT
+      x-amzn-remapped-server:
+      - gunicorn
+    body:
+      type: text
+      content: '{"result":{"statusCode":"100","errorMessage":"","remainAccessCount":"793","data":{"applicationNumber":"2020015234","designArticle":"球体転がし用積み木","designClass":"E2112","applicantAttorney":[{"applicantAttorneyCd":"519372777","repeatNumber":"1","name":"大徳木管工業株式会社","applicantAttorneyClass":"1"}],"filingDate":"20200624","publicationDate":"","registrationNumber":"1680736","registrationDate":"20210219","principalDesignApplicationNumber":"","erasureIdentifier":"00","expireDate":"20450624","disappearanceDate":"","priorityRightInformation":[],"parentApplicationInformation":{},"bibliographyInformation":[{"numberType":"01","number":"2020015234","documentList":[{"legalDate":"20200625","irirFlg":"0","availabilityFlag":"1","documentCode":"A63","documentDescription":"意匠登録願","documentNumber":"22011160009","versionNumber":"0001","documentSeparator":"S","numberOfPages":"0","sizeOfDocument":"28613"},{"legalDate":"20200625","irirFlg":"0","availabilityFlag":"0","documentCode":"A80","documentDescription":"新規性の喪失の例外証明書提出書","documentNumber":"22011160141","versionNumber":"0000","documentSeparator":"
+        ","numberOfPages":"0","sizeOfDocument":"0"},{"legalDate":"20200814","irirFlg":"0","availabilityFlag":"1","documentCode":"A231","documentDescription":"出願番号特定通知書","documentNumber":"02320002871","versionNumber":"0001","documentSeparator":"S","numberOfPages":"0","sizeOfDocument":"677"},{"legalDate":"20210108","irirFlg":"0","availabilityFlag":"1","documentCode":"A01","documentDescription":"登録査定","documentNumber":"06320065876","versionNumber":"0001","documentSeparator":"S","numberOfPages":"0","sizeOfDocument":"731"},{"legalDate":"20210108","irirFlg":"0","availabilityFlag":"1","documentCode":"A252","documentDescription":"審査官通知（その他の通知）（期間無）","documentNumber":"06320065875","versionNumber":"0001","documentSeparator":"S","numberOfPages":"0","sizeOfDocument":"1122"},{"legalDate":"20210115","irirFlg":"0","availabilityFlag":"0","documentCode":"A61","documentDescription":"登録料納付","documentNumber":"BBBBBBBBBBB","versionNumber":"0000","documentSeparator":"
+        ","numberOfPages":"0","sizeOfDocument":"0"}]},{"numberType":"06","number":"1680736","documentList":[{"legalDate":"20210108","irirFlg":"0","availabilityFlag":"0","documentCode":"A01","documentDescription":"登録査定","documentNumber":"99999999999","versionNumber":"0000","documentSeparator":"
+        ","numberOfPages":"0","sizeOfDocument":"0"},{"legalDate":"20210113","irirFlg":"0","availabilityFlag":"0","documentCode":"R100","documentDescription":"設定納付書","documentNumber":"99999999999","versionNumber":"0000","documentSeparator":"
+        ","numberOfPages":"0","sizeOfDocument":"0"},{"legalDate":"20210302","irirFlg":"0","availabilityFlag":"0","documentCode":"R150","documentDescription":"登録証","documentNumber":"99999999999","versionNumber":"0000","documentSeparator":"
+        ","numberOfPages":"0","sizeOfDocument":"0"},{"legalDate":"20240214","irirFlg":"0","availabilityFlag":"0","documentCode":"R20","documentDescription":"年金納付書","documentNumber":"99999999999","versionNumber":"0000","documentSeparator":"
+        ","numberOfPages":"0","sizeOfDocument":"0"},{"legalDate":"20240322","irirFlg":"0","availabilityFlag":"0","documentCode":"R250","documentDescription":"年金領収書、年金領収書（分納）","documentNumber":"99999999999","versionNumber":"0000","documentSeparator":"
+        ","numberOfPages":"0","sizeOfDocument":"0"}]}]}}}'
+  recorded_at: '2026-05-07T14:20:16.000Z'

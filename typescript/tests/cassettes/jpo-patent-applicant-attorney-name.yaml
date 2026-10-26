@@ -1,0 +1,91 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://ip-data.jpo.go.jp/auth/token
+    headers:
+      accept:
+      - application/json
+    body:
+      type: text
+      content: grant_type=password&username=[FILTERED]&password=[FILTERED]
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - no-store
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Thu, 07 May 2026 14:19:55 GMT
+      referrer-policy:
+      - no-referrer
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      via:
+      - 1.1 2063124c232c5b97b617efefe26d1e72.cloudfront.net (CloudFront)
+      x-cache:
+      - Miss from cloudfront
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      type: text
+      content: '{"access_token": "[FILTERED]", "expires_in": 3600, "refresh_expires_in": 28800, "refresh_token":
+        "[FILTERED]", "token_type": "Bearer", "id_token": "[FILTERED]", "not-before-policy": 0, "session_state":
+        "[FILTERED]", "scope": "openid profile"}'
+  recorded_at: '2026-05-07T14:19:55.000Z'
+- request:
+    method: GET
+    uri: https://ip-data.jpo.go.jp/api/patent/v1/applicant_attorney/%E3%83%88%E3%83%A8%E3%82%BF%E8%87%AA%E5%8B%95%E8%BB%8A%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE
+    headers:
+      accept:
+      - application/json, application/zip
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      allow:
+      - GET, HEAD, OPTIONS
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      cross-origin-opener-policy:
+      - same-origin
+      date:
+      - Thu, 07 May 2026 14:19:57 GMT
+      referrer-policy:
+      - same-origin
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      vary:
+      - Cookie
+      via:
+      - 1.1 0560e3493bcd525e6e3e19cd7c9abdc0.cloudfront.net (CloudFront)
+      x-cache:
+      - Miss from cloudfront
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - DENY
+      x-xss-protection:
+      - 1; mode=block
+      x-amzn-remapped-connection:
+      - keep-alive
+      x-amzn-remapped-content-length:
+      - '182'
+      x-amzn-remapped-date:
+      - Thu, 07 May 2026 14:19:57 GMT
+      x-amzn-remapped-server:
+      - gunicorn
+    body:
+      type: text
+      content: '{"result":{"statusCode":"100","errorMessage":"","remainAccessCount":"393","data":{"applicantAttorney":[{"applicantAttorneyCd":"000003207","name":"トヨタ自動車株式会社"}]}}}'
+  recorded_at: '2026-05-07T14:19:57.000Z'

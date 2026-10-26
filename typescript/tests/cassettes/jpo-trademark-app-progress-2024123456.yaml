@@ -1,0 +1,92 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://ip-data.jpo.go.jp/auth/token
+    headers:
+      accept:
+      - application/json
+    body:
+      type: text
+      content: grant_type=password&username=[FILTERED]&password=[FILTERED]
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - no-store
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Thu, 07 May 2026 15:16:38 GMT
+      referrer-policy:
+      - no-referrer
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      via:
+      - 1.1 922f380ce54182257be92d6c0111acb4.cloudfront.net (CloudFront)
+      x-cache:
+      - Miss from cloudfront
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      type: text
+      content: '{"access_token": "[FILTERED]", "expires_in": 3600, "refresh_expires_in": 28800, "refresh_token":
+        "[FILTERED]", "token_type": "Bearer", "id_token": "[FILTERED]", "not-before-policy": 0, "session_state":
+        "[FILTERED]", "scope": "openid profile"}'
+  recorded_at: '2026-05-07T15:16:38.000Z'
+- request:
+    method: GET
+    uri: https://ip-data.jpo.go.jp/api/trademark/v1/app_progress/2024123456
+    headers:
+      accept:
+      - application/json, application/zip
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      allow:
+      - GET, HEAD, OPTIONS
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      cross-origin-opener-policy:
+      - same-origin
+      date:
+      - Thu, 07 May 2026 15:16:40 GMT
+      referrer-policy:
+      - same-origin
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      vary:
+      - Cookie
+      via:
+      - 1.1 fd35f1fff2f9fd0955b7c73222980a2c.cloudfront.net (CloudFront)
+      x-cache:
+      - Miss from cloudfront
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - DENY
+      x-xss-protection:
+      - 1; mode=block
+      x-amzn-remapped-connection:
+      - keep-alive
+      x-amzn-remapped-content-length:
+      - '1847'
+      x-amzn-remapped-date:
+      - Thu, 07 May 2026 15:16:40 GMT
+      x-amzn-remapped-server:
+      - gunicorn
+    body:
+      type: text
+      content: '{"result":{"statusCode":"100","errorMessage":"","remainAccessCount":"799","data":{"applicationNumber":"2024123456","applicantAttorney":[{"applicantAttorneyCd":"523086714","name":"ＭＴＪグループ株式会社","applicantAttorneyClass":"1"},{"applicantAttorneyCd":"100099634","name":"平井　安雄","applicantAttorneyClass":"2"}],"filingDate":"20241118","publicationDate":"20241126","registrationNumber":"","registrationDate":"","erasureIdentifier":"","expireDate":"","disappearanceDate":"","trademarkForDisplay":"メタンレス和牛","transliteration":{"0":"メタンレス","1":"メタンレスワギュー"},"viennaClass":{},"goodsServiceInformation":[{"goodsServiceClass":"29","goodsServiceName":"牛肉","similarCode":"32A01"},{"goodsServiceClass":"35","goodsServiceName":"商業イベントの企画・運営，牛肉の小売又は卸売の業務において行われる顧客に対する便益の提供","similarCode":"32A01
+        35A01 35K03"}],"priorityRightInformation":[],"parentApplicationInformation":{},"bibliographyInformation":[{"numberType":"01","number":"2024123456","documentList":[{"legalDate":"20241118","irirFlg":"0","availabilityFlag":"1","documentCode":"A63","documentDescription":"商標登録願","documentNumber":"52402525374","versionNumber":"0001","documentSeparator":"S","numberOfPages":"0","sizeOfDocument":"1567"},{"legalDate":"20250610","irirFlg":"0","availabilityFlag":"1","documentCode":"A131","documentDescription":"拒絶理由通知書","documentNumber":"06425090392","versionNumber":"0001","documentSeparator":"S","numberOfPages":"0","sizeOfDocument":"6173"},{"legalDate":"20260113","irirFlg":"0","availabilityFlag":"1","documentCode":"A02","documentDescription":"拒絶査定","documentNumber":"06426003498","versionNumber":"0001","documentSeparator":"S","numberOfPages":"0","sizeOfDocument":"1234"}]}]}}}'
+  recorded_at: '2026-05-07T15:16:40.000Z'

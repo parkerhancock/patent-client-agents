@@ -1,0 +1,91 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://ip-data.jpo.go.jp/auth/token
+    headers:
+      accept:
+      - application/json
+    body:
+      type: text
+      content: grant_type=password&username=[FILTERED]&password=[FILTERED]
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - no-store
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Thu, 07 May 2026 14:20:07 GMT
+      referrer-policy:
+      - no-referrer
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      via:
+      - 1.1 0560e3493bcd525e6e3e19cd7c9abdc0.cloudfront.net (CloudFront)
+      x-cache:
+      - Miss from cloudfront
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      type: text
+      content: '{"access_token": "[FILTERED]", "expires_in": 3600, "refresh_expires_in": 28800, "refresh_token":
+        "[FILTERED]", "token_type": "Bearer", "id_token": "[FILTERED]", "not-before-policy": 0, "session_state":
+        "[FILTERED]", "scope": "openid profile"}'
+  recorded_at: '2026-05-07T14:20:07.000Z'
+- request:
+    method: GET
+    uri: https://ip-data.jpo.go.jp/api/patent/v1/registration_info/2020123456
+    headers:
+      accept:
+      - application/json, application/zip
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      allow:
+      - GET, HEAD, OPTIONS
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      cross-origin-opener-policy:
+      - same-origin
+      date:
+      - Thu, 07 May 2026 14:20:10 GMT
+      referrer-policy:
+      - same-origin
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      vary:
+      - Cookie
+      via:
+      - 1.1 23e0198e3ba45afaefc61c0d0fc4eacc.cloudfront.net (CloudFront)
+      x-cache:
+      - Miss from cloudfront
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - DENY
+      x-xss-protection:
+      - 1; mode=block
+      x-amzn-remapped-connection:
+      - keep-alive
+      x-amzn-remapped-content-length:
+      - '599'
+      x-amzn-remapped-date:
+      - Thu, 07 May 2026 14:20:10 GMT
+      x-amzn-remapped-server:
+      - gunicorn
+    body:
+      type: text
+      content: '{"result":{"statusCode":"100","errorMessage":"","remainAccessCount":"398","data":{"applicationNumber":"2020123456","filingDate":"20200720","registrationNumber":"7533889","registrationDate":"20240805","decisionDate":"20240704","appealTrialDecisiondDate":"","rightPersonInformation":[{"rightPersonCd":"000114400","rightPersonName":"メイショウ株式会社"}],"inventionTitle":"立体配線構造体の製造方法","numberOfClaims":"005","expireDate":"20400720","nextPensionPaymentDate":"20270805","lastPaymentYearly":"03","erasureIdentifier":"00","disappearanceDate":"","updateDate":"20240821"}}}'
+  recorded_at: '2026-05-07T14:20:10.000Z'

@@ -1,0 +1,104 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://ip-data.jpo.go.jp/auth/token
+    headers:
+      accept:
+      - application/json
+    body:
+      type: text
+      content: grant_type=password&username=[FILTERED]&password=[FILTERED]
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - no-store
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Thu, 07 May 2026 14:19:42 GMT
+      referrer-policy:
+      - no-referrer
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      via:
+      - 1.1 33296fd8128d04868ae5ae8907ff3c6c.cloudfront.net (CloudFront)
+      x-cache:
+      - Miss from cloudfront
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      type: text
+      content: '{"access_token": "[FILTERED]", "expires_in": 3600, "refresh_expires_in": 28800, "refresh_token":
+        "[FILTERED]", "token_type": "Bearer", "id_token": "[FILTERED]", "not-before-policy": 0, "session_state":
+        "[FILTERED]", "scope": "openid profile"}'
+  recorded_at: '2026-05-07T14:19:42.000Z'
+- request:
+    method: GET
+    uri: https://ip-data.jpo.go.jp/api/patent/v1/cite_doc_info/2020123456
+    headers:
+      accept:
+      - application/json, application/zip
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      allow:
+      - GET, HEAD, OPTIONS
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      cross-origin-opener-policy:
+      - same-origin
+      date:
+      - Thu, 07 May 2026 14:19:45 GMT
+      referrer-policy:
+      - same-origin
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      vary:
+      - Cookie
+      via:
+      - 1.1 968842023e92f9868a60ec906f146c2c.cloudfront.net (CloudFront)
+      x-cache:
+      - Miss from cloudfront
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - DENY
+      x-xss-protection:
+      - 1; mode=block
+      x-amzn-remapped-connection:
+      - keep-alive
+      x-amzn-remapped-content-length:
+      - '1422'
+      x-amzn-remapped-date:
+      - Thu, 07 May 2026 14:19:45 GMT
+      x-amzn-remapped-server:
+      - gunicorn
+    body:
+      type: text
+      content: '{"result":{"statusCode":"100","errorMessage":"","remainAccessCount":"93","data":{"applicationNumber":"2020123456","patentDoc":[{"draftDate":"20240220","citationType":"19","citationOrder":"1","documentNumber":"JPA
+        414233033"},{"draftDate":"20240220","citationType":"19","citationOrder":"2","documentNumber":"JPA
+        416064039"},{"draftDate":"20240220","citationType":"19","citationOrder":"3","documentNumber":"JPA
+        404087383"},{"draftDate":"20240220","citationType":"19","citationOrder":"4","documentNumber":"JPA
+        360046093"},{"draftDate":"20240220","citationType":"19","citationOrder":"5","documentNumber":"JPA
+        408167522"},{"draftDate":"20240220","citationType":"89","citationOrder":"1","documentNumber":"JPA
+        409074283"},{"draftDate":"20240704","citationType":"31","citationOrder":"1","documentNumber":"JPA
+        414233033"},{"draftDate":"20240704","citationType":"31","citationOrder":"2","documentNumber":"JPA
+        416064039"},{"draftDate":"20240704","citationType":"31","citationOrder":"3","documentNumber":"JPA
+        404087383"},{"draftDate":"20240704","citationType":"31","citationOrder":"4","documentNumber":"JPA
+        360046093"},{"draftDate":"20240704","citationType":"31","citationOrder":"5","documentNumber":"JPA
+        408167522"},{"draftDate":"20240704","citationType":"31","citationOrder":"6","documentNumber":"JPA
+        409074283"},{"draftDate":"20240704","citationType":"31","citationOrder":"7","documentNumber":"JPA
+        415248131"}],"nonPatentDoc":[]}}}'
+  recorded_at: '2026-05-07T14:19:45.000Z'

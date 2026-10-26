@@ -28,6 +28,7 @@ import {
   IposManualsClient,
   IposStatutesClient,
   JapanIpHighCourtClient,
+  JpoClient,
   KiprisClient,
   LegifranceIpClient,
   MoppClient,
@@ -100,6 +101,7 @@ import {
   registerIposTools,
 } from "./ipos.js";
 import { registerJapanIpHighCourtTools } from "./japan-ip-high-court.js";
+import { registerJpoTools } from "./jpo.js";
 import { registerKiprisTools } from "./kipris.js";
 import {
   type LegifranceIpReader,
@@ -170,6 +172,8 @@ export interface UsptoClients {
   dataweb: DataWebClient;
   kipris: KiprisClient;
   japanIpHighCourt: JapanIpHighCourtClient;
+  /** JPO Patent Information Retrieval API; served only when a client is provided or JPO_API_USERNAME and JPO_API_PASSWORD are set. */
+  jpo: JpoClient;
 }
 /** Instantiate a connector only when a tool invokes it, keeping optional credentials local to that family. */
 function lazyClient<T extends object>(factory: () => T): T {
@@ -636,6 +640,12 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     (edisToken ? new EdisClient({ token: edisToken }) : undefined);
   const datawebToken = usitcTokenFromEnv("USITC_DATAWEB_TOKEN");
   // KIPRIS is BYOK (ToS §11). KIPO_KIPRIS_BASE_URL is an optional HTTPS-only override.
+  // JPO credentials are JPO-issued; the public demo carries none, per JPO's terms.
+  const jpoClient =
+    provided.jpo ??
+    (process.env.JPO_API_USERNAME && process.env.JPO_API_PASSWORD
+      ? lazyClient(() => new JpoClient())
+      : undefined);
   const kiprisClient =
     provided.kipris ??
     (process.env.KIPO_KIPRIS_API_KEY &&
@@ -692,6 +702,7 @@ export function createServer(options: ServerOptions = {}): FastMCP {
       new DataWebClient(datawebToken ? { token: datawebToken } : {}),
     kipris: kiprisClient,
     japanIpHighCourt: provided.japanIpHighCourt ?? new JapanIpHighCourtClient(),
+    jpo: jpoClient,
   };
   if ((options.toolset ?? toolsetFromEnv(process.env)) === "curated") {
     registerFacadeTools(
@@ -990,6 +1001,12 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     },
     options.auth ? requireScopes("usitc:read") : undefined,
   );
+  if (jpoClient)
+    registerJpoTools(
+      server,
+      jpoClient,
+      options.auth ? requireScopes("jpo:read") : undefined,
+    );
   registerJapanIpHighCourtTools(
     server,
     clients.japanIpHighCourt,
