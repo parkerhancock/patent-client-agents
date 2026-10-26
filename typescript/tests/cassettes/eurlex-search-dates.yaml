@@ -1,0 +1,119 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://publications.europa.eu/webapi/rdf/sparql
+    headers:
+      accept:
+      - application/sparql-results+json
+      content-type:
+      - application/x-www-form-urlencoded;charset=UTF-8
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: text
+      content: >-
+        query=PREFIX+cdm%3A+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fontology%2Fcdm%23%3E%0ASELECT+%28COUNT%28DISTINCT+%3Fcelex%29+AS+%3Fn%29+WHERE+%7B%0A++VALUES+%3Fsubject+%7B+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Fcase-law-subject-matter%2FDEMO%3E+%7D%0A++%3Fwork+cdm%3Acase-law_is-about_case-law-subject-matter+%3Fsubject+%3B%0A++++++++cdm%3Aresource_legal_id_celex+%3Fcelex+%3B%0A++++++++cdm%3Awork_date_document+%3Fdate+.%0A++OPTIONAL+%7B+%3Fwork+cdm%3Acase-law_ecli+%3Fecli+%7D%0A++OPTIONAL+%7B+%3Fexpr+cdm%3Aexpression_belongs_to_work+%3Fwork+%3B+cdm%3Aexpression_uses_language+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Flanguage%2FENG%3E+%3B+cdm%3Aexpression_title+%3Ftitle+.+%7D%0A++FILTER%28%3Fdate+%3E%3D+%222025-01-01%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23date%3E%29%0A++FILTER%28%3Fdate+%3C%3D+%222025-12-31%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23date%3E%29%0A%7D
+  response:
+    status: 200
+    headers:
+      accept-ranges:
+      - bytes
+      connection:
+      - keep-alive
+      content-disposition:
+      - filename=sparql_2026-10-26_22-08-42Z.json
+      content-type:
+      - application/sparql-results+json
+      date:
+      - Mon, 26 Oct 2026 22:08:42 GMT
+    body:
+      type: json
+      content:
+        head:
+          link: []
+          vars:
+          - "n"
+        results:
+          distinct: false
+          ordered: true
+          bindings:
+          - "n":
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#integer"
+              value: "31"
+  recorded_at: 2026-10-26T22:08:42.770Z
+- request:
+    method: POST
+    uri: https://publications.europa.eu/webapi/rdf/sparql
+    headers:
+      accept:
+      - application/sparql-results+json
+      content-type:
+      - application/x-www-form-urlencoded;charset=UTF-8
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: text
+      content: >-
+        query=PREFIX+cdm%3A+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fontology%2Fcdm%23%3E%0ASELECT+DISTINCT+%3Fcelex+%3Fecli+%3Fdate+%3Ftitle+WHERE+%7B%0A++VALUES+%3Fsubject+%7B+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Fcase-law-subject-matter%2FDEMO%3E+%7D%0A++%3Fwork+cdm%3Acase-law_is-about_case-law-subject-matter+%3Fsubject+%3B%0A++++++++cdm%3Aresource_legal_id_celex+%3Fcelex+%3B%0A++++++++cdm%3Awork_date_document+%3Fdate+.%0A++OPTIONAL+%7B+%3Fwork+cdm%3Acase-law_ecli+%3Fecli+%7D%0A++OPTIONAL+%7B+%3Fexpr+cdm%3Aexpression_belongs_to_work+%3Fwork+%3B+cdm%3Aexpression_uses_language+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Flanguage%2FENG%3E+%3B+cdm%3Aexpression_title+%3Ftitle+.+%7D%0A++FILTER%28%3Fdate+%3E%3D+%222025-01-01%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23date%3E%29%0A++FILTER%28%3Fdate+%3C%3D+%222025-12-31%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23date%3E%29%0A%7D+ORDER+BY+DESC%28%3Fdate%29+%3Fcelex+LIMIT+2+OFFSET+0
+  response:
+    status: 200
+    headers:
+      accept-ranges:
+      - bytes
+      connection:
+      - keep-alive
+      content-disposition:
+      - filename=sparql_2026-10-26_22-08-42Z.json
+      content-type:
+      - application/sparql-results+json
+      date:
+      - Mon, 26 Oct 2026 22:08:42 GMT
+    body:
+      type: json
+      content:
+        head:
+          link: []
+          vars:
+          - celex
+          - ecli
+          - date
+          - title
+        results:
+          distinct: false
+          ordered: true
+          bindings:
+          - celex:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 62024CJ0323
+            ecli:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: ECLI:EU:C:2025:983
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 2025-12-18
+            title:
+              type: literal
+              "xml:lang": en
+              value: "Judgment of the Court (Second Chamber) of 18 December 2025.#Deity Shoes, S.L. v Mundorama Confort, S.L. and Stay Design, S.L.#Request for a preliminary ruling from the Juzgado de lo Mercantil de Alicante.#Reference for a preliminary ruling – Intellectual property – Community designs – Regulation (EC) No 6/2002 – Articles 4 to 6 and 14 – Conditions for the protection of a design – Novelty – Individual character – Visual characteristics predetermined by a third party – Freedom of the designer in developing the design – Concept of ‘informed user’ – Influence of features linked to fashion trends.#Case C-323/24."
+          - celex:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 62025TJ0081
+            ecli:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: ECLI:EU:T:2025:1098
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 2025-12-10
+            title:
+              type: literal
+              "xml:lang": en
+              value: "Judgment of the General Court (Eighth Chamber) of 10 December 2025.#LTV Leuchten & Lampen Vertriebs GmbH v European Union Intellectual Property Office.#Case T-81/25."
+  recorded_at: 2026-10-26T22:08:42.766Z

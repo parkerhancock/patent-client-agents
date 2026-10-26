@@ -1,0 +1,135 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://publications.europa.eu/webapi/rdf/sparql
+    headers:
+      accept:
+      - application/sparql-results+json
+      content-type:
+      - application/x-www-form-urlencoded;charset=UTF-8
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: text
+      content: >-
+        query=PREFIX+cdm%3A+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fontology%2Fcdm%23%3E%0ASELECT+%28COUNT%28DISTINCT+%3Fcelex%29+AS+%3Fn%29+WHERE+%7B%0A++VALUES+%3Fsubject+%7B+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Fcase-law-subject-matter%2FMARQ%3E+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Fcase-law-subject-matter%2FDEMO%3E+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Fcase-law-subject-matter%2FDADV%3E+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Fcase-law-subject-matter%2FBREV%3E+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Fcase-law-subject-matter%2FPIIC%3E+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Fcase-law-subject-matter%2FOBVE%3E+%7D%0A++%3Fwork+cdm%3Acase-law_is-about_case-law-subject-matter+%3Fsubject+%3B%0A++++++++cdm%3Aresource_legal_id_celex+%3Fcelex+%3B%0A++++++++cdm%3Awork_date_document+%3Fdate+.%0A++OPTIONAL+%7B+%3Fwork+cdm%3Acase-law_ecli+%3Fecli+%7D%0A++%3Fexpr+cdm%3Aexpression_belongs_to_work+%3Fwork+%3B+cdm%3Aexpression_uses_language+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Flanguage%2FENG%3E+%3B+cdm%3Aexpression_title+%3Ftitle+.%0A++FILTER%28SUBSTR%28STR%28%3Fcelex%29%2C+6%2C+1%29+%3D+%22C%22%29%0A++FILTER%28CONTAINS%28LCASE%28STR%28%3Ftitle%29%29%2C+%22likelihood%22%29%29%0A++FILTER%28CONTAINS%28LCASE%28STR%28%3Ftitle%29%29%2C+%22of%22%29%29%0A++FILTER%28CONTAINS%28LCASE%28STR%28%3Ftitle%29%29%2C+%22confusion%22%29%29%0A%7D
+  response:
+    status: 200
+    headers:
+      accept-ranges:
+      - bytes
+      connection:
+      - keep-alive
+      content-disposition:
+      - filename=sparql_2026-10-26_22-08-50Z.json
+      content-type:
+      - application/sparql-results+json
+      date:
+      - Mon, 26 Oct 2026 22:08:50 GMT
+    body:
+      type: json
+      content:
+        head:
+          link: []
+          vars:
+          - "n"
+        results:
+          distinct: false
+          ordered: true
+          bindings:
+          - "n":
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#integer"
+              value: "116"
+  recorded_at: 2026-10-26T22:08:50.956Z
+- request:
+    method: POST
+    uri: https://publications.europa.eu/webapi/rdf/sparql
+    headers:
+      accept:
+      - application/sparql-results+json
+      content-type:
+      - application/x-www-form-urlencoded;charset=UTF-8
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: text
+      content: >-
+        query=PREFIX+cdm%3A+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fontology%2Fcdm%23%3E%0ASELECT+DISTINCT+%3Fcelex+%3Fecli+%3Fdate+%3Ftitle+WHERE+%7B%0A++VALUES+%3Fsubject+%7B+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Fcase-law-subject-matter%2FMARQ%3E+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Fcase-law-subject-matter%2FDEMO%3E+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Fcase-law-subject-matter%2FDADV%3E+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Fcase-law-subject-matter%2FBREV%3E+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Fcase-law-subject-matter%2FPIIC%3E+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Fcase-law-subject-matter%2FOBVE%3E+%7D%0A++%3Fwork+cdm%3Acase-law_is-about_case-law-subject-matter+%3Fsubject+%3B%0A++++++++cdm%3Aresource_legal_id_celex+%3Fcelex+%3B%0A++++++++cdm%3Awork_date_document+%3Fdate+.%0A++OPTIONAL+%7B+%3Fwork+cdm%3Acase-law_ecli+%3Fecli+%7D%0A++%3Fexpr+cdm%3Aexpression_belongs_to_work+%3Fwork+%3B+cdm%3Aexpression_uses_language+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Flanguage%2FENG%3E+%3B+cdm%3Aexpression_title+%3Ftitle+.%0A++FILTER%28SUBSTR%28STR%28%3Fcelex%29%2C+6%2C+1%29+%3D+%22C%22%29%0A++FILTER%28CONTAINS%28LCASE%28STR%28%3Ftitle%29%29%2C+%22likelihood%22%29%29%0A++FILTER%28CONTAINS%28LCASE%28STR%28%3Ftitle%29%29%2C+%22of%22%29%29%0A++FILTER%28CONTAINS%28LCASE%28STR%28%3Ftitle%29%29%2C+%22confusion%22%29%29%0A%7D+ORDER+BY+DESC%28%3Fdate%29+%3Fcelex+LIMIT+3+OFFSET+0
+  response:
+    status: 200
+    headers:
+      accept-ranges:
+      - bytes
+      connection:
+      - keep-alive
+      content-disposition:
+      - filename=sparql_2026-10-26_22-08-50Z.json
+      content-type:
+      - application/sparql-results+json
+      date:
+      - Mon, 26 Oct 2026 22:08:50 GMT
+    body:
+      type: json
+      content:
+        head:
+          link: []
+          vars:
+          - celex
+          - ecli
+          - date
+          - title
+        results:
+          distinct: false
+          ordered: true
+          bindings:
+          - celex:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 62018CJ0714
+            ecli:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: ECLI:EU:C:2020:573
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 2020-07-16
+            title:
+              type: literal
+              "xml:lang": en
+              value: "Judgment of the Court (Second Chamber) of 16 July 2020.#ACTC GmbH v European Union Intellectual Property Office.#Appeal — EU trade mark — Regulation (EC) No 207/2009 — Application for registration of EU word mark tigha — Opposition filed by the proprietor of the earlier EU trade mark TAIGA — Partial dismissal of the application for registration — Article 8(1)(b) — Assessment of the likelihood of confusion — Assessment of the conceptual similarity of the signs at issue — Article 42(2) — Proof of genuine use of the earlier mark — Proof of use ‘in relation to part … of the goods or services’ — Determination of an independent subcategory of goods.#Case C-714/18 P."
+          - celex:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 62018CJ0702
+            ecli:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: ECLI:EU:C:2020:489
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 2020-06-18
+            title:
+              type: literal
+              "xml:lang": en
+              value: "Judgment of the Court (Seventh Chamber) of 18 June 2020.#Przedsiębiorstwo Produkcyjno-Handlowe „Primart” Marek Łukasiewicz v European Union Intellectual Property Office.#Appeal — EU trade mark — Regulation (EC) No 207/2009 — Application for EU figurative mark PRIMART Marek Łukasiewicz — Earlier national trade mark PRIMA — Article 8(1)(b) — Relative ground for refusal — Likelihood of confusion — Article 76(1) — Scope of review by the General Court of the European Union.#Case C-702/18 P."
+          - celex:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 62019CJ0115
+            ecli:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: ECLI:EU:C:2020:469
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 2020-06-11
+            title:
+              type: literal
+              "xml:lang": en
+              value: "Judgment of the Court (Tenth Chamber) of 11 June 2020.#China Construction Bank Corp. v European Union Intellectual Property Office.#Appeal — EU trade mark — Regulation (EC) No 207/2009 — Opposition — Article 8(1)(b) — Likelihood of confusion — Assessment of the similarity of the signs at issue — Assessment of the distinctive character of the earlier mark.#Case C-115/19 P."
+  recorded_at: 2026-10-26T22:08:50.931Z

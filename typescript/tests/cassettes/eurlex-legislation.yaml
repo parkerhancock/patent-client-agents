@@ -1,0 +1,489 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://publications.europa.eu/webapi/rdf/sparql
+    headers:
+      accept:
+      - application/sparql-results+json
+      content-type:
+      - application/x-www-form-urlencoded;charset=UTF-8
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: text
+      content: >-
+        query=PREFIX+cdm%3A+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fontology%2Fcdm%23%3E%0ASELECT+%3Fcelex+%28SAMPLE%28%3Ft%29+AS+%3Ftitle%29+%28SAMPLE%28%3Fd%29+AS+%3Fdate%29+%28SAMPLE%28%3Ff%29+AS+%3Finforce%29+%28MAX%28%3Fc%29+AS+%3Fconsolidated%29+WHERE+%7B%0A++VALUES+%3Fcelex+%7B+%2232017R1001%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23string%3E+%2232015L2436%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23string%3E+%2232002R0006%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23string%3E+%2232024R2822%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23string%3E+%2232024L2823%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23string%3E+%2232012R1257%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23string%3E+%2232012R1260%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23string%3E+%2232009R0469%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23string%3E+%2231996R1610%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23string%3E+%2231998L0044%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23string%3E+%2232016L0943%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23string%3E+%2232004L0048%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23string%3E+%2232013R0608%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23string%3E+%2232001L0029%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23string%3E+%2232019L0790%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23string%3E+%2232009L0024%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23string%3E+%2231996L0009%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23string%3E+%2232023R2411%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23string%3E+%2232024R1143%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23string%3E+%2231994R2100%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23string%3E+%7D%0A++%3Fwork+cdm%3Aresource_legal_id_celex+%3Fcelex+.%0A++OPTIONAL+%7B+%3Fwork+cdm%3Awork_date_document+%3Fd+%7D%0A++OPTIONAL+%7B+%3Fwork+cdm%3Aresource_legal_in-force+%3Ff+%7D%0A++OPTIONAL+%7B+%3Fexpr+cdm%3Aexpression_belongs_to_work+%3Fwork+%3B+cdm%3Aexpression_uses_language+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Flanguage%2FENG%3E+%3B+cdm%3Aexpression_title+%3Ft+%7D%0A++OPTIONAL+%7B+%3Fcw+cdm%3Aact_consolidated_consolidates_resource_legal+%3Fwork+%3B+cdm%3Aresource_legal_id_celex+%3Fc+.+FILTER%28STRSTARTS%28STR%28%3Fc%29%2C+CONCAT%28%220%22%2C+SUBSTR%28STR%28%3Fcelex%29%2C+2%29%2C+%22-%22%29%29%29+%7D%0A%7D+GROUP+BY+%3Fcelex
+  response:
+    status: 200
+    headers:
+      accept-ranges:
+      - bytes
+      connection:
+      - keep-alive
+      content-disposition:
+      - filename=sparql_2026-10-26_22-08-49Z.json
+      content-type:
+      - application/sparql-results+json
+      date:
+      - Mon, 26 Oct 2026 22:08:49 GMT
+    body:
+      type: json
+      content:
+        head:
+          link: []
+          vars:
+          - celex
+          - title
+          - date
+          - inforce
+          - consolidated
+        results:
+          distinct: false
+          ordered: true
+          bindings:
+          - celex:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 31996R1610
+            title:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: >-
+                Regulation (EC) No 1610/96 of the European Parliament and of the Council of 23
+                July 1996 concerning the creation of a supplementary protection certificate for
+                plant protection products
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 1996-07-23
+            inforce:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#boolean"
+              value: "1"
+            consolidated:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 01996R1610-20070101
+          - celex:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 32024R2822
+            title:
+              type: literal
+              "xml:lang": en
+              value: >-
+                Regulation (EU) 2024/2822 of the European Parliament and of the Council of 23
+                October 2024 amending Council Regulation (EC) No 6/2002 on Community designs and
+                repealing Commission Regulation (EC) No 2246/2002 (Text with EEA relevance)
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 2024-10-23
+            inforce:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#boolean"
+              value: "0"
+          - celex:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 32023R2411
+            title:
+              type: literal
+              "xml:lang": en
+              value: >-
+                Regulation (EU) 2023/2411 of the European Parliament and of the Council of
+                18 October 2023 on the protection of geographical indications for craft and
+                industrial products and amending Regulations (EU) 2017/1001 and (EU) 2019/1753 (Text with
+                EEA relevance) 
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 2023-10-18
+            inforce:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#boolean"
+              value: "1"
+            consolidated:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 02023R2411-20231027
+          - celex:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 32001L0029
+            title:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: >-
+                Directive 2001/29/EC of the European Parliament and of the Council of 22 May
+                2001 on the harmonisation of certain aspects of copyright and related rights in the
+                information society
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 2001-05-22
+            inforce:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#boolean"
+              value: "1"
+            consolidated:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 02001L0029-20190606
+          - celex:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 32009R0469
+            title:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: >-
+                Regulation (EC) No 469/2009 of the European Parliament and of the Council of 6
+                May 2009 concerning the supplementary protection certificate for medicinal
+                products (Codified version) (Text with EEA relevance )
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 2009-05-06
+            inforce:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#boolean"
+              value: "1"
+            consolidated:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 02009R0469-20130701
+          - celex:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 32024L2823
+            title:
+              type: literal
+              "xml:lang": en
+              value: >-
+                Directive (EU) 2024/2823 of the European Parliament and of the Council of 23
+                October 2024 on the legal protection of designs (recast) (Text with EEA relevance)
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 2024-10-23
+            inforce:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#boolean"
+              value: "1"
+            consolidated:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 02024L2823-20241118
+          - celex:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 32013R0608
+            title:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: >-
+                Regulation (EU) No 608/2013 of the European Parliament and of the Council of
+                12 June 2013 concerning customs enforcement of intellectual property rights and
+                repealing Council Regulation (EC) No 1383/2003
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 2013-06-12
+            inforce:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#boolean"
+              value: "1"
+            consolidated:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 02013R0608-20130629
+          - celex:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 32016L0943
+            title:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: >-
+                Directive (EU) 2016/943 of the European Parliament and of the Council of 8 June
+                2016 on the protection of undisclosed know-how and business information (trade
+                secrets) against their unlawful acquisition, use and disclosure (Text with EEA
+                relevance)
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 2016-06-08
+            inforce:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#boolean"
+              value: "1"
+            consolidated:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 02016L0943-20160615
+          - celex:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 32024R1143
+            title:
+              type: literal
+              "xml:lang": en
+              value: >-
+                Regulation (EU) 2024/1143 of the European Parliament and of the Council of 11
+                April 2024 on geographical indications for wine, spirit drinks and agricultural
+                products, as well as traditional specialities guaranteed and optional quality terms
+                for agricultural products, amending Regulations (EU) No 1308/2013, (EU) 2019/787
+                and (EU) 2019/1753 and repealing Regulation (EU) No 1151/2012
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 2024-04-11
+            inforce:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#boolean"
+              value: "1"
+            consolidated:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 02024R1143-20260318
+          - celex:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 32009L0024
+            title:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: >-
+                Directive 2009/24/EC of the European Parliament and of the Council of 23 April
+                2009 on the legal protection of computer programs (Codified version) (Text with
+                EEA relevance)
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 2009-04-23
+            inforce:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#boolean"
+              value: "1"
+          - celex:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 31994R2100
+            title:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: >-
+                Council Regulation (EC) No 2100/94 of 27 July 1994 on Community plant variety
+                rights
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 1994-07-27
+            inforce:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#boolean"
+              value: "1"
+            consolidated:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 01994R2100-20040520
+          - celex:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 32017R1001
+            title:
+              type: literal
+              "xml:lang": en
+              value: >-
+                Regulation (EU) 2017/1001 of the European Parliament and of the Council of 14
+                June 2017 on the European Union trade mark (codification) (Text with EEA relevance)
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 2017-06-14
+            inforce:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#boolean"
+              value: "1"
+            consolidated:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 02017R1001-20251201
+          - celex:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 32019L0790
+            title:
+              type: literal
+              "xml:lang": en
+              value: >-
+                Directive (EU) 2019/790 of the European Parliament and of the Council of 17
+                April 2019 on copyright and related rights in the Digital Single Market and amending
+                Directives 96/9/EC and 2001/29/EC (Text with EEA relevance.)
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 2019-04-17
+            inforce:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#boolean"
+              value: "1"
+            consolidated:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 02019L0790-20190517
+          - celex:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 32015L2436
+            title:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: >-
+                Directive (EU) 2015/2436 of the European Parliament and of the Council of 16
+                December 2015 to approximate the laws of the Member States relating to trade marks
+                (recast) (Text with EEA relevance)
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 2015-12-16
+            inforce:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#boolean"
+              value: "1"
+            consolidated:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 02015L2436-20151223
+          - celex:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 32004L0048
+            title:
+              type: literal
+              "xml:lang": en
+              value: >-
+                Directive 2004/48/EC of the European Parliament and of the Council of  of 29
+                April 2004 on the enforcement of intellectual property rights (Text with EEA
+                relevance)
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 2004-04-29
+            inforce:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#boolean"
+              value: "1"
+            consolidated:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 02004L0048-20040430
+          - celex:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 32012R1257
+            title:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: >-
+                Regulation (EU) No 1257/2012 of the European Parliament and of the Council of
+                17 December 2012 implementing enhanced cooperation in the area of the creation of
+                unitary patent protection
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 2012-12-17
+            inforce:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#boolean"
+              value: "1"
+            consolidated:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 02012R1257-20130120
+          - celex:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 32012R1260
+            title:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: >-
+                Council Regulation (EU) No 1260/2012 of 17 December 2012 implementing enhanced
+                cooperation in the area of the creation of unitary patent protection with regard
+                to the applicable translation arrangements
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 2012-12-17
+            inforce:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#boolean"
+              value: "1"
+          - celex:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 32002R0006
+            title:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: Council Regulation (EC) No 6/2002 of 12 December 2001 on Community designs
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 2001-12-12
+            inforce:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#boolean"
+              value: "0"
+            consolidated:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 02002R0006-20260701
+          - celex:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 31998L0044
+            title:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: >-
+                Directive 98/44/EC of the European Parliament and of the Council of 6 July 1998
+                on the legal protection of biotechnological inventions
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 1998-07-06
+            inforce:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#boolean"
+              value: "1"
+            consolidated:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 01998L0044-19980730
+          - celex:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 31996L0009
+            title:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: >-
+                Directive 96/9/EC of the European Parliament and of the Council of 11 March
+                1996 on the legal protection of databases
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 1996-03-11
+            inforce:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#boolean"
+              value: "1"
+            consolidated:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 01996L0009-20190606
+  recorded_at: 2026-10-26T22:08:49.711Z

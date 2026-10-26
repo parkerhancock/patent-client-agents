@@ -17,6 +17,7 @@ import {
   EpoOpsClient,
   EpoPctGuidelinesClient,
   EpoUpGuidelinesClient,
+  EurlexClient,
   FeesClient,
   GooglePatentsClient,
   HtsClient,
@@ -86,6 +87,7 @@ import {
 } from "./dpma-statutes.js";
 import { registerEpoTools } from "./epo.js";
 import { type EpoLegalClients, registerEpoLegalTools } from "./epo-legal.js";
+import { registerEurlexTools } from "./eurlex.js";
 import { registerFacadeTools } from "./facade/index.js";
 import { registerFeeTools } from "./fees.js";
 import { registerGooglePatentsTools } from "./google-patents.js";
@@ -170,6 +172,7 @@ export interface UsptoClients {
   tmep: TmepClient;
   mopp: MoppClient;
   epoOps: EpoOpsClient;
+  eurlex: EurlexClient;
   fees: FeesClient;
   googlePatents: GooglePatentsClient;
   cafc: CafcClient;
@@ -718,6 +721,7 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     ipoInMppp,
     tsdr: tsdrClient,
     epoOps: epoOpsClient,
+    eurlex: provided.eurlex ?? new EurlexClient(),
     edis: edisClient,
     hts: provided.hts ?? new HtsClient(),
     ids: provided.ids ?? new IdsClient(),
@@ -981,6 +985,11 @@ export function createServer(options: ServerOptions = {}): FastMCP {
       kiprisClient,
       options.auth ? requireScopes("kipo:read") : undefined,
     );
+  registerEurlexTools(
+    server,
+    clients.eurlex,
+    options.auth ? requireScopes("eurlex:read") : undefined,
+  );
   registerEpoLegalTools(
     server,
     epoLegal,

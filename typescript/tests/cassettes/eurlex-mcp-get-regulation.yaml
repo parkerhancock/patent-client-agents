@@ -1,0 +1,2304 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://publications.europa.eu/resource/celex/32016L0943
+    headers:
+      accept:
+      - application/xhtml+xml, text/html;q=0.9
+      accept-language:
+      - eng
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: none
+  response:
+    status: 303
+    headers:
+      cache-control:
+      - no-store
+      connection:
+      - keep-alive
+      content-security-policy:
+      - script-src 'self';
+      content-type:
+      - application/xhtml+xml;charset=UTF-8
+      date:
+      - Mon, 26 Oct 2026 22:08:53 GMT
+      location:
+      - >-
+        http://publications.europa.eu/resource/cellar/dc0eda0f-32bc-11e6-b497-01aa75ed71a1.0006.03/DOC_1
+      transfer-encoding:
+      - chunked
+    body:
+      type: none
+  recorded_at: 2026-10-26T22:08:53.243Z
+- request:
+    method: GET
+    uri: >-
+      https://publications.europa.eu/resource/cellar/dc0eda0f-32bc-11e6-b497-01aa75ed71a1.0006.03/DOC_1
+    headers:
+      accept:
+      - application/xhtml+xml, text/html;q=0.9
+      accept-language:
+      - eng
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - no-cache
+      connection:
+      - keep-alive
+      content-language:
+      - ""
+      content-security-policy:
+      - script-src 'self';
+      content-type:
+      - application/xhtml+xml;charset=UTF-8
+      date:
+      - Mon, 26 Oct 2026 22:08:53 GMT
+      etag:
+      - "\"Con-20250206132116000\""
+      last-modified:
+      - Thu, 06 Feb 2025 12:21:16 GMT
+      transfer-encoding:
+      - chunked
+    body:
+      type: text
+      content: |-
+        <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML//EN" "xhtml-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><!-- CONVEX # converter_version:9.16.1 # generated_on:20241213-0517 # ELI version:0.2 --><head>
+              <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+              <link type="text/css" rel="stylesheet" href="oj-convex.css"/>
+              <title>L_2016157EN.01000101.xml</title>
+           </head>
+           <body>
+              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                 <col width="10%"/>
+                 <col width="10%"/>
+                 <col width="60%"/>
+                 <col width="20%"/>
+                 <tbody>
+                    <tr>
+                       <td  >
+                          <p class="oj-hd-date">15.6.2016   </p>
+                       </td>
+                       <td  >
+                          <p class="oj-hd-lg">EN</p>
+                       </td>
+                       <td  >
+                          <p class="oj-hd-ti">Official Journal of the European Union</p>
+                       </td>
+                       <td  >
+                          <p class="oj-hd-oj">L 157/1</p>
+                       </td>
+                    </tr>
+                 </tbody>
+              </table>
+              <hr class="oj-separator"/>
+              <div class="eli-container">
+                 <div class="eli-main-title" id="tit_1">
+                    <p class="oj-doc-ti" id="d1e40-1-1">
+                    DIRECTIVE (EU) 2016/943 OF THE EUROPEAN PARLIAMENT AND OF THE COUNCIL
+                 </p>
+                    <p class="oj-doc-ti">of 8 June 2016
+                 </p>
+                    <p class="oj-doc-ti">on the protection of undisclosed know-how and business information (trade secrets) against their unlawful acquisition, use and disclosure</p>
+                    <p class="oj-doc-ti">(Text with EEA relevance)</p>
+                 </div>
+                 <div class="eli-subdivision" id="pbl_1">
+                    <p class="oj-normal">THE EUROPEAN PARLIAMENT AND THE COUNCIL OF THE EUROPEAN UNION,</p>
+                    <div class="eli-subdivision" id="cit_1">
+                       <p class="oj-normal">Having regard to the Treaty on the Functioning of the European Union, and in particular Article 114 thereof,</p>
+                    </div>
+                    <div class="eli-subdivision" id="cit_2">
+                       <p class="oj-normal">Having regard to the proposal from the European Commission,</p>
+                    </div>
+                    <div class="eli-subdivision" id="cit_3">
+                       <p class="oj-normal">After transmission of the draft legislative act to the national parliaments,</p>
+                    </div>
+                    <div class="eli-subdivision" id="cit_4">
+                       <p class="oj-normal">Having regard to the opinion of the European Economic and Social Committee <a id="ntc1-L_2016157EN.01000101-E0001" href="#ntr1-L_2016157EN.01000101-E0001"
+                             >(<span class="oj-super oj-note-tag">1</span>)</a>,</p>
+                    </div>
+                    <div class="eli-subdivision" id="cit_5">
+                       <p class="oj-normal">Acting in accordance with the ordinary legislative procedure <a id="ntc2-L_2016157EN.01000101-E0002" href="#ntr2-L_2016157EN.01000101-E0002"
+                             >(<span class="oj-super oj-note-tag">2</span>)</a>,</p>
+                    </div>
+                    <p class="oj-normal">Whereas:</p>
+                    <div class="eli-subdivision" id="rct_1">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(1)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">Businesses and non-commercial research institutions invest in acquiring, developing and applying know-how and information which is the currency of the knowledge economy and provides a competitive advantage. This investment in generating and applying intellectual capital is a determining factor as regards their competitiveness and innovation-related performance in the market and therefore their returns on investment, which is the underlying motivation for business research and development. Businesses have recourse to different means to appropriate the results of their innovation-related activities when openness does not allow for the full exploitation of their investment in research and innovation. Use of intellectual property rights, such as patents, design rights or copyright, is one such means. Another means of appropriating the results of innovation is to protect access to, and exploit, knowledge that is valuable to the entity and not widely known. Such valuable know-how and business information, that is undisclosed and intended to remain confidential, is referred to as a trade secret.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_2">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(2)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">Businesses, irrespective of their size, value trade secrets as much as patents and other forms of intellectual property right. They use confidentiality as a business competitiveness and research innovation management tool, and in relation to a diverse range of information that extends beyond technological knowledge to commercial data such as information on customers and suppliers, business plans, and market research and strategies. Small and medium-sized enterprises (SMEs) value and rely on trade secrets even more. By protecting such a wide range of know-how and business information, whether as a complement or as an alternative to intellectual property rights, trade secrets allow creators and innovators to derive profit from their creation or innovation and, therefore, are particularly important for business competitiveness as well as for research and development, and innovation-related performance.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_3">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(3)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">Open innovation is a catalyst for new ideas which meet the needs of consumers and tackle societal challenges, and allows those ideas to find their way to the market. Such innovation is an important lever for the creation of new knowledge, and underpins the emergence of new and innovative business models based on the use of co-created knowledge. Collaborative research, including cross-border cooperation, is particularly important in increasing the levels of business research and development within the internal market. The dissemination of knowledge and information should be considered as being essential for the purpose of ensuring dynamic, positive and equal business development opportunities, in particular for SMEs. In an internal market in which barriers to cross-border collaboration are minimised and cooperation is not distorted, intellectual creation and innovation should encourage investment in innovative processes, services and products. Such an environment conducive to intellectual creation and innovation, and in which employment mobility is not hindered, is also important for employment growth and for improving the competitiveness of the Union economy. Trade secrets have an important role in protecting the exchange of knowledge between businesses, including in particular SMEs, and research institutions both within and across the borders of the internal market, in the context of research and development, and innovation. Trade secrets are one of the most commonly used forms of protection of intellectual creation and innovative know-how by businesses, yet at the same time they are the least protected by the existing Union legal framework against their unlawful acquisition, use or disclosure by other parties.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_4">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(4)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">Innovative businesses are increasingly exposed to dishonest practices aimed at misappropriating trade secrets, such as theft, unauthorised copying, economic espionage or the breach of confidentiality requirements, whether from within or from outside of the Union. Recent developments, such as globalisation, increased outsourcing, longer supply chains, and the increased use of information and communication technology contribute to increasing the risk of those practices. The unlawful acquisition, use or disclosure of a trade secret compromises legitimate trade secret holders' ability to obtain first-mover returns from their innovation-related efforts. Without effective and comparable legal means for protecting trade secrets across the Union, incentives to engage in innovation-related cross-border activity within the internal market are undermined, and trade secrets are unable to fulfil their potential as drivers of economic growth and jobs. Thus, innovation and creativity are discouraged and investment diminishes, thereby affecting the smooth functioning of the internal market and undermining its growth-enhancing potential.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_5">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(5)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">International efforts made in the framework of the World Trade Organisation to address this problem led to the conclusion of the Agreement on Trade-related Aspects of Intellectual Property Rights (the TRIPS Agreement). The TRIPS Agreement contains, inter alia, provisions on the protection of trade secrets against their unlawful acquisition, use or disclosure by third parties, which are common international standards. All Member States, as well as the Union itself, are bound by this Agreement which was approved by Council Decision 94/800/EC <a id="ntc3-L_2016157EN.01000101-E0003" href="#ntr3-L_2016157EN.01000101-E0003"
+                                         >(<span class="oj-super oj-note-tag">3</span>)</a>.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_6">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(6)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">Notwithstanding the TRIPS Agreement, there are important differences in the Member States' legislation as regards the protection of trade secrets against their unlawful acquisition, use or disclosure by other persons. For example, not all Member States have adopted national definitions of a trade secret or the unlawful acquisition, use or disclosure of a trade secret, therefore knowledge on the scope of protection is not readily accessible and that scope differs across the Member States. Furthermore, there is no consistency as regards the civil law remedies available in the event of unlawful acquisition, use or disclosure of trade secrets, as cease and desist orders are not always available in all Member States against third parties who are not competitors of the legitimate trade secret holder. Divergences also exist across the Member States with respect to the treatment of a third party who has acquired the trade secret in good faith but subsequently learns, at the time of use, that the acquisition derived from a previous unlawful acquisition by another party.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_7">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(7)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">National rules also differ as to whether legitimate trade secret holders are allowed to seek the destruction of goods produced by third parties who use trade secrets unlawfully, or the return or destruction of any documents, files or materials containing or embodying the unlawfully acquired or used trade secret. Furthermore, applicable national rules on the calculation of damages do not always take account of the intangible nature of trade secrets, which makes it difficult to demonstrate the actual profits lost or the unjust enrichment of the infringer where no market value can be established for the information in question. Only a few Member States allow for the application of abstract rules on the calculation of damages based on the reasonable royalty or fee which could have been due had a licence for the use of the trade secret existed. Additionally, many national rules do not provide for appropriate protection of the confidentiality of a trade secret where the trade secret holder introduces a claim for alleged unlawful acquisition, use or disclosure of the trade secret by a third party, thereby reducing the attractiveness of the existing measures and remedies and weakening the protection offered.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_8">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(8)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">The differences in the legal protection of trade secrets provided for by the Member States imply that trade secrets do not enjoy an equivalent level of protection throughout the Union, thus leading to fragmentation of the internal market in this area and a weakening of the overall deterrent effect of the relevant rules. The internal market is affected in so far as such differences lower the incentives for businesses to undertake innovation-related cross-border economic activity, including research cooperation or production cooperation with partners, outsourcing or investment in other Member States, which depends on the use of information that enjoys protection as trade secrets. Cross-border network research and development, as well as innovation-related activities, including related production and subsequent cross-border trade, are rendered less attractive and more difficult within the Union, thus also resulting in Union-wide innovation-related inefficiencies.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_9">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(9)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">In addition, there is a higher risk for businesses in Member States with comparatively lower levels of protection, due to the fact that trade secrets may be stolen or otherwise unlawfully acquired more easily. This leads to inefficient allocation of capital to growth-enhancing innovation within the internal market because of the higher expenditure on protective measures to compensate for the insufficient legal protection in some Member States. It also favours the activity of unfair competitors who, subsequent to the unlawful acquisition of trade secrets, could spread goods resulting from such acquisition across the internal market. Differences in legislative regimes also facilitate the importation of goods from third countries into the Union through entry points with weaker protection, when the design, production or marketing of those goods rely on stolen or otherwise unlawfully acquired trade secrets. On the whole, such differences hinder the proper functioning of the internal market.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_10">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(10)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">It is appropriate to provide for rules at Union level to approximate the laws of the Member States so as to ensure that there is a sufficient and consistent level of civil redress in the internal market in the event of unlawful acquisition, use or disclosure of a trade secret. Those rules should be without prejudice to the possibility for Member States of providing for more far-reaching protection against the unlawful acquisition, use or disclosure of trade secrets, as long as the safeguards explicitly provided for in this Directive for protecting the interests of other parties are respected.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_11">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(11)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">This Directive should not affect the application of Union or national rules that require the disclosure of information, including trade secrets, to the public or to public authorities. Nor should it affect the application of rules that allow public authorities to collect information for the performance of their duties, or rules that allow or require any subsequent disclosure by those public authorities of relevant information to the public. Such rules include, in particular, rules on the disclosure by the Union's institutions and bodies or national public authorities of business-related information they hold pursuant to Regulation (EC) No 1049/2001 of the European Parliament and of the Council <a id="ntc4-L_2016157EN.01000101-E0004" href="#ntr4-L_2016157EN.01000101-E0004"
+                                         >(<span class="oj-super oj-note-tag">4</span>)</a>, Regulation (EC) No 1367/2006 of the European Parliament and of the Council <a id="ntc5-L_2016157EN.01000101-E0005" href="#ntr5-L_2016157EN.01000101-E0005"
+                                         >(<span class="oj-super oj-note-tag">5</span>)</a> and Directive 2003/4/EC of the European Parliament and of the Council <a id="ntc6-L_2016157EN.01000101-E0006" href="#ntr6-L_2016157EN.01000101-E0006"
+                                         >(<span class="oj-super oj-note-tag">6</span>)</a>, or pursuant to other rules on public access to documents or on the transparency obligations of national public authorities.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_12">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(12)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">This Directive should not affect the right of social partners to enter into collective agreements, where provided for under labour law, as regards any obligation not to disclose a trade secret or to limit its use, and the consequences of a breach of such an obligation by the party subject to it. This should be on the condition that any such collective agreement does not restrict the exceptions laid down in this Directive when an application for measures, procedures or remedies provided for in this Directive for alleged acquisition, use or disclosure of a trade secret is to be dismissed.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_13">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(13)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">This Directive should not be understood as restricting the freedom of establishment, the free movement of workers or the mobility of workers as provided for in Union law. Nor is it intended to affect the possibility of concluding non-competition agreements between employers and employees, in accordance with applicable law.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_14">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(14)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">It is important to establish a homogenous definition of a trade secret without restricting the subject matter to be protected against misappropriation. Such definition should therefore be constructed so as to cover know-how, business information and technological information where there is both a legitimate interest in keeping them confidential and a legitimate expectation that such confidentiality will be preserved. Furthermore, such know-how or information should have a commercial value, whether actual or potential. Such know-how or information should be considered to have a commercial value, for example, where its unlawful acquisition, use or disclosure is likely to harm the interests of the person lawfully controlling it, in that it undermines that person's scientific and technical potential, business or financial interests, strategic positions or ability to compete. The definition of trade secret excludes trivial information and the experience and skills gained by employees in the normal course of their employment, and also excludes information which is generally known among, or is readily accessible to, persons within the circles that normally deal with the kind of information in question.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_15">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(15)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">It is also important to identify the circumstances in which legal protection of trade secrets is justified. For this reason, it is necessary to establish the conduct and practices which are to be regarded as unlawful acquisition, use or disclosure of a trade secret.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_16">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(16)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">In the interest of innovation and to foster competition, the provisions of this Directive should not create any exclusive right to know-how or information protected as trade secrets. Thus, the independent discovery of the same know-how or information should remain possible. Reverse engineering of a lawfully acquired product should be considered as a lawful means of acquiring information, except when otherwise contractually agreed. The freedom to enter into such contractual arrangements can, however, be limited by law.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_17">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(17)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">In some industry sectors, where creators and innovators cannot benefit from exclusive rights and where innovation has traditionally relied upon trade secrets, products can nowadays be easily reverse-engineered once in the market. In such cases, those creators and innovators can be victims of practices such as parasitic copying or slavish imitations that free-ride on their reputation and innovation efforts. Some national laws dealing with unfair competition address those practices. While this Directive does not aim to reform or harmonise the law on unfair competition in general, it would be appropriate that the Commission carefully examine the need for Union action in that area.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_18">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(18)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">Furthermore, the acquisition, use or disclosure of trade secrets, whenever imposed or permitted by law, should be treated as lawful for the purposes of this Directive. This concerns, in particular, the acquisition and disclosure of trade secrets in the context of the exercise of the rights of workers' representatives to information, consultation and participation in accordance with Union law and national laws and practices, and the collective defence of the interests of workers and employers, including co-determination, as well as the acquisition or disclosure of a trade secret in the context of statutory audits performed in accordance with Union or national law. However, such treatment of the acquisition of a trade secret as lawful should be without prejudice to any obligation of confidentiality as regards the trade secret or any limitation as to its use that Union or national law imposes on the recipient or acquirer of the information. In particular, this Directive should not release public authorities from the confidentiality obligations to which they are subject in respect of information passed on by trade secret holders, irrespective of whether those obligations are laid down in Union or national law. Such confidentiality obligations include, inter alia, the obligations in respect of information forwarded to contracting authorities in the context of procurement procedures, as laid down, for example, in Directive 2014/23/EU of the European Parliament and of the Council <a id="ntc7-L_2016157EN.01000101-E0007" href="#ntr7-L_2016157EN.01000101-E0007"
+                                         >(<span class="oj-super oj-note-tag">7</span>)</a>, Directive 2014/24/EU of the European Parliament and of the Council <a id="ntc8-L_2016157EN.01000101-E0008" href="#ntr8-L_2016157EN.01000101-E0008"
+                                         >(<span class="oj-super oj-note-tag">8</span>)</a> and Directive 2014/25/EU of the European Parliament and of the Council <a id="ntc9-L_2016157EN.01000101-E0009" href="#ntr9-L_2016157EN.01000101-E0009"
+                                         >(<span class="oj-super oj-note-tag">9</span>)</a>.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_19">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(19)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">While this Directive provides for measures and remedies which can consist of preventing the disclosure of information in order to protect the confidentiality of trade secrets, it is essential that the exercise of the right to freedom of expression and information which encompasses media freedom and pluralism, as reflected in Article 11 of the Charter of Fundamental Rights of the European Union (‘the Charter’), not be restricted, in particular with regard to investigative journalism and the protection of journalistic sources.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_20">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(20)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">The measures, procedures and remedies provided for in this Directive should not restrict whistleblowing activity. Therefore, the protection of trade secrets should not extend to cases in which disclosure of a trade secret serves the public interest, insofar as directly relevant misconduct, wrongdoing or illegal activity is revealed. This should not be seen as preventing the competent judicial authorities from allowing an exception to the application of measures, procedures and remedies in a case where the respondent had every reason to believe in good faith that his or her conduct satisfied the appropriate criteria set out in this Directive.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_21">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(21)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">In line with the principle of proportionality, measures, procedures and remedies intended to protect trade secrets should be tailored to meet the objective of a smooth-functioning internal market for research and innovation, in particular by deterring the unlawful acquisition, use and disclosure of a trade secret. Such tailoring of measures, procedures and remedies should not jeopardise or undermine fundamental rights and freedoms or the public interest, such as public safety, consumer protection, public health and environmental protection, and should be without prejudice to the mobility of workers. In this respect, the measures, procedures and remedies provided for in this Directive are aimed at ensuring that competent judicial authorities take into account factors such as the value of a trade secret, the seriousness of the conduct resulting in the unlawful acquisition, use or disclosure of the trade secret and the impact of such conduct. It should also be ensured that the competent judicial authorities have the discretion to weigh up the interests of the parties to the legal proceedings, as well as the interests of third parties including, where appropriate, consumers.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_22">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(22)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">The smooth-functioning of the internal market would be undermined if the measures, procedures and remedies provided for were used to pursue illegitimate intents incompatible with the objectives of this Directive. Therefore, it is important to empower judicial authorities to adopt appropriate measures with regard to applicants who act abusively or in bad faith and submit manifestly unfounded applications with, for example, the aim of unfairly delaying or restricting the respondent's access to the market or otherwise intimidating or harassing the respondent.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_23">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(23)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">In the interest of legal certainty, and considering that legitimate trade secret holders are expected to exercise a duty of care as regards the preservation of the confidentiality of their valuable trade secrets and the monitoring of their use, it is appropriate to restrict substantive claims or the possibility of initiating actions for the protection of trade secrets to a limited period. National law should also specify, in a clear and unambiguous manner, from when that period is to begin to run and under what circumstances that period is to be interrupted or suspended.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_24">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(24)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">The prospect of losing the confidentiality of a trade secret in the course of legal proceedings often deters legitimate trade secret holders from instituting legal proceedings to defend their trade secrets, thus jeopardising the effectiveness of the measures, procedures and remedies provided for. For this reason, it is necessary to establish, subject to appropriate safeguards ensuring the right to an effective remedy and to a fair trial, specific requirements aimed at protecting the confidentiality of the litigated trade secret in the course of legal proceedings instituted for its defence. Such protection should remain in force after the legal proceedings have ended and for as long as the information constituting the trade secret is not in the public domain.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_25">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(25)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">Such requirements should include, as a minimum, the possibility of restricting the circle of persons entitled to have access to evidence or hearings, bearing in mind that all such persons should be subject to the confidentiality requirements set out in this Directive, and of publishing only the non-confidential elements of judicial decisions. In this context, considering that assessing the nature of the information which is the subject of a dispute is one of the main purposes of legal proceedings, it is particularly important to ensure both the effective protection of the confidentiality of trade secrets and respect for the right of the parties to those proceedings to an effective remedy and to a fair trial. The restricted circle of persons should therefore consist of at least one natural person from each of the parties as well as the respective lawyers of the parties and, where applicable, other representatives appropriately qualified in accordance with national law in order to defend, represent or serve the interests of a party in legal proceedings covered by this Directive, who should all have full access to such evidence or hearings. In the event that one of the parties is a legal person, that party should be able to propose a natural person or natural persons who ought to form part of that circle of persons so as to ensure proper representation of that legal person, subject to appropriate judicial control to prevent the objective of the restriction of access to evidence and hearings from being undermined. Such safeguards should not be understood as requiring the parties to be represented by a lawyer or another representative in the course of legal proceedings where such representation is not required by national law. Nor should they be understood as restricting the competence of the courts to decide, in conformity with the applicable rules and practices of the Member State concerned, whether and to what extent relevant court officials should also have full access to evidence and hearings for the exercise of their duties.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_26">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(26)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">The unlawful acquisition, use or disclosure of a trade secret by a third party could have devastating effects on the legitimate trade secret holder, as once publicly disclosed, it would be impossible for that holder to revert to the situation prior to the loss of the trade secret. As a result, it is essential to provide for fast, effective and accessible provisional measures for the immediate termination of the unlawful acquisition, use or disclosure of a trade secret, including where it is used for the provision of services. It is essential that such relief be available without having to await a decision on the merits of the case, while having due respect for the right of defence and the principle of proportionality, and having regard to the characteristics of the case. In certain instances, it should be possible to permit the alleged infringer, subject to the lodging of one or more guarantees, to continue to use the trade secret, in particular where there is little risk that it will enter the public domain. It should also be possible to require guarantees of a level sufficient to cover the costs and the injury caused to the respondent by an unjustified application, particularly where any delay would cause irreparable harm to the legitimate trade secret holder.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_27">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(27)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">For the same reasons, it is also important to provide for definitive measures to prevent unlawful use or disclosure of a trade secret, including where it is used for the provision of services. For such measures to be effective and proportionate, their duration, when circumstances require a limitation in time, should be sufficient to eliminate any commercial advantage which the third party could have derived from the unlawful acquisition, use or disclosure of the trade secret. In any event, no measure of this type should be enforceable if the information originally covered by the trade secret is in the public domain for reasons that cannot be attributed to the respondent.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_28">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(28)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">It is possible that a trade secret could be used unlawfully to design, produce or market goods, or components thereof, which could be spread across the internal market, thus affecting the commercial interests of the trade secret holder and the functioning of the internal market. In such cases, and when the trade secret in question has a significant impact on the quality, value or price of the goods resulting from that unlawful use or on reducing the cost of, facilitating or speeding up their production or marketing processes, it is important to empower judicial authorities to order effective and appropriate measures with a view to ensuring that those goods are not put on the market or are withdrawn from it. Considering the global nature of trade, it is also necessary that such measures include the prohibition of the importation of those goods into the Union or their storage for the purposes of offering or placing them on the market. Having regard to the principle of proportionality, corrective measures should not necessarily entail the destruction of the goods if other viable options are present, such as depriving the good of its infringing quality or the disposal of the goods outside the market, for example, by means of donations to charitable organisations.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_29">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(29)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">A person could have originally acquired a trade secret in good faith, but only become aware at a later stage, including upon notice served by the original trade secret holder, that that person's knowledge of the trade secret in question derived from sources using or disclosing the relevant trade secret in an unlawful manner. In order to avoid, under those circumstances, the corrective measures or injunctions provided for causing disproportionate harm to that person, Member States should provide for the possibility, in appropriate cases, of pecuniary compensation being awarded to the injured party as an alternative measure. Such compensation should not, however, exceed the amount of royalties or fees which would have been due had that person obtained authorisation to use the trade secret in question, for the period of time for which use of the trade secret could have been prevented by the original trade secret holder. Nevertheless, where the unlawful use of the trade secret would constitute an infringement of law other than that provided for in this Directive or would be likely to harm consumers, such unlawful use should not be allowed.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_30">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(30)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">In order to avoid a person who knowingly, or with reasonable grounds for knowing, unlawfully acquires, uses or discloses a trade secret being able to benefit from such conduct, and to ensure that the injured trade secret holder, to the extent possible, is placed in the position in which he, she or it would have been had that conduct not taken place, it is necessary to provide for adequate compensation for the prejudice suffered as a result of that unlawful conduct. The amount of damages awarded to the injured trade secret holder should take account of all appropriate factors, such as loss of earnings incurred by the trade secret holder or unfair profits made by the infringer and, where appropriate, any moral prejudice caused to the trade secret holder. As an alternative, for example where, considering the intangible nature of trade secrets, it would be difficult to determine the amount of the actual prejudice suffered, the amount of the damages might be derived from elements such as the royalties or fees which would have been due had the infringer requested authorisation to use the trade secret in question. The aim of that alternative method is not to introduce an obligation to provide for punitive damages, but to ensure compensation based on an objective criterion while taking account of the expenses incurred by the trade secret holder, such as the costs of identification and research. This Directive should not prevent Member States from providing in their national law that the liability for damages of employees is restricted in cases where they have acted without intent.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_31">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(31)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">As a supplementary deterrent to future infringers and to contribute to the awareness of the public at large, it is useful to publicise decisions, including, where appropriate, through prominent advertising, in cases concerning the unlawful acquisition, use or disclosure of trade secrets, on the condition that such publication does not result in the disclosure of the trade secret or disproportionally affect the privacy and reputation of a natural person.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_32">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(32)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">The effectiveness of the measures, procedures and remedies available to trade secret holders could be undermined in the event of non-compliance with the relevant decisions adopted by the competent judicial authorities. For this reason, it is necessary to ensure that those authorities enjoy the appropriate powers of sanction.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_33">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(33)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">In order to facilitate the uniform application of the measures, procedures and remedies provided for in this Directive, it is appropriate to provide for systems of cooperation and the exchange of information as between Member States on the one hand, and between the Member States and the Commission on the other, in particular by creating a network of correspondents designated by Member States. In addition, in order to review whether those measures fulfil their intended objective, the Commission, assisted, as appropriate, by the European Union Intellectual Property Office, should examine the application of this Directive and the effectiveness of the national measures taken.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_34">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(34)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">This Directive respects the fundamental rights and observes the principles recognised in particular by the Charter, notably the right to respect for private and family life, the right to protection of personal data, the freedom of expression and information, the freedom to choose an occupation and right to engage in work, the freedom to conduct a business, the right to property, the right to good administration, and in particular the access to files, while respecting business secrecy, the right to an effective remedy and to a fair trial and the right of defence.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_35">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(35)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">It is important that the rights to respect for private and family life and to protection of personal data of any person whose personal data may be processed by the trade secret holder when taking steps to protect a trade secret, or of any person involved in legal proceedings concerning the unlawful acquisition, use or disclosure of trade secrets under this Directive, and whose personal data are processed, be respected. Directive 95/46/EC of the European Parliament and of the Council <a id="ntc10-L_2016157EN.01000101-E0010" href="#ntr10-L_2016157EN.01000101-E0010"
+                                         >(<span class="oj-super oj-note-tag">10</span>)</a> governs the processing of personal data carried out in the Member States in the context of this Directive and under the supervision of the Member States' competent authorities, in particular the public independent authorities designated by the Member States. Thus, this Directive should not affect the rights and obligations laid down in Directive 95/46/EC, in particular the rights of the data subject to access his or her personal data being processed and to obtain the rectification, erasure or blocking of the data where it is incomplete or inaccurate and, where appropriate, the obligation to process sensitive data in accordance with Article 8(5) of Directive 95/46/EC.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_36">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(36)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">Since the objective of this Directive, namely to achieve a smooth-functioning internal market by means of the establishment of a sufficient and comparable level of redress across the internal market in the event of the unlawful acquisition, use or disclosure of a trade secret, cannot be sufficiently achieved by Member States but can rather, by reason of its scale and effects, be better achieved at Union level, the Union may adopt measures in accordance with the principle of subsidiarity as set out in Article 5 of the Treaty on European Union. In accordance with the principle of proportionality, as set out in that Article, this Directive does not go beyond what is necessary in order to achieve that objective.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_37">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(37)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">This Directive does not aim to establish harmonised rules for judicial cooperation, jurisdiction, the recognition and enforcement of judgments in civil and commercial matters, or deal with applicable law. Other Union instruments which govern such matters in general terms should, in principle, remain equally applicable to the field covered by this Directive.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_38">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(38)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">This Directive should not affect the application of competition law rules, in particular Articles 101 and 102 of the Treaty on the Functioning of the European Union (‘TFEU’). The measures, procedures and remedies provided for in this Directive should not be used to restrict unduly competition in a manner contrary to the TFEU.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_39">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(39)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">This Directive should not affect the application of any other relevant law in other areas, including intellectual property rights and the law of contract. However, where the scope of application of Directive 2004/48/EC of the European Parliament and of the Council <a id="ntc11-L_2016157EN.01000101-E0011" href="#ntr11-L_2016157EN.01000101-E0011"
+                                         >(<span class="oj-super oj-note-tag">11</span>)</a> and the scope of this Directive overlap, this Directive takes precedence as <span class="oj-italic">lex specialis</span>.</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <div class="eli-subdivision" id="rct_40">
+                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <col width="4%"/>
+                          <col width="96%"/>
+                          <tbody>
+                             <tr>
+                                <td valign="top"  >
+                                   <p class="oj-normal">(40)</p>
+                                </td>
+                                <td valign="top"  >
+                                   <p class="oj-normal">The European Data Protection Supervisor was consulted in accordance with Article 28(2) of Regulation (EC) No 45/2001 of the European Parliament and of the Council <a id="ntc12-L_2016157EN.01000101-E0012" href="#ntr12-L_2016157EN.01000101-E0012"
+                                         >(<span class="oj-super oj-note-tag">12</span>)</a> and delivered an opinion on 12 March 2014,</p>
+                                </td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                    <p class="oj-normal">HAVE ADOPTED THIS DIRECTIVE:</p>
+                 </div>
+                 <div class="eli-subdivision" id="enc_1">
+                    <div id="cpt_I">
+                       <p id="d1e450-1-1" class="oj-ti-section-1">
+                          <span class="oj-italic">CHAPTER I</span>
+                       </p>
+                       <div class="eli-title" id="cpt_I.tit_1">
+                          <p id="L_2016157EN.01000101-d-001" class="oj-ti-section-2">
+                             <span class="oj-bold">
+                                <span class="oj-italic">Subject matter and scope</span>
+                             </span>
+                          </p>
+                       </div>
+                       <div class="eli-subdivision" id="art_1">
+                          <p id="d1e460-1-1" class="oj-ti-art">Article 1</p>
+                          <div class="eli-title" id="art_1.tit_1">
+                             <p class="oj-sti-art">Subject matter and scope</p>
+                          </div>
+                          <div id="001.001">
+                             <p class="oj-normal">1.   This Directive lays down rules on the protection against the unlawful acquisition, use and disclosure of trade secrets.</p>
+                             <p class="oj-normal">Member States may, in compliance with the provisions of the TFEU, provide for more far-reaching protection against the unlawful acquisition, use or disclosure of trade secrets than that required by this Directive, provided that compliance with Articles 3, 5, 6, Article 7(1), Article 8, the second subparagraph of Article 9(1), Article 9(3) and (4), Article 10(2), Articles 11, 13 and Article 15(3) is ensured.</p>
+                          </div>
+                          <div id="001.002">
+                             <p class="oj-normal">2.   This Directive shall not affect:</p>
+                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <col width="4%"/>
+                                <col width="96%"/>
+                                <tbody>
+                                   <tr>
+                                      <td valign="top"  >
+                                         <p class="oj-normal">(a)</p>
+                                      </td>
+                                      <td valign="top"  >
+                                         <p class="oj-normal">the exercise of the right to freedom of expression and information as set out in the Charter, including respect for the freedom and pluralism of the media;</p>
+                                      </td>
+                                   </tr>
+                                </tbody>
+                             </table>
+                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <col width="4%"/>
+                                <col width="96%"/>
+                                <tbody>
+                                   <tr>
+                                      <td valign="top"  >
+                                         <p class="oj-normal">(b)</p>
+                                      </td>
+                                      <td valign="top"  >
+                                         <p class="oj-normal">the application of Union or national rules requiring trade secret holders to disclose, for reasons of public interest, information, including trade secrets, to the public or to administrative or judicial authorities for the performance of the duties of those authorities;</p>
+                                      </td>
+                                   </tr>
+                                </tbody>
+                             </table>
+                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <col width="4%"/>
+                                <col width="96%"/>
+                                <tbody>
+                                   <tr>
+                                      <td valign="top"  >
+                                         <p class="oj-normal">(c)</p>
+                                      </td>
+                                      <td valign="top"  >
+                                         <p class="oj-normal">the application of Union or national rules requiring or allowing Union institutions and bodies or national public authorities to disclose information submitted by businesses which those institutions, bodies or authorities hold pursuant to, and in compliance with, the obligations and prerogatives set out in Union or national law;</p>
+                                      </td>
+                                   </tr>
+                                </tbody>
+                             </table>
+                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <col width="4%"/>
+                                <col width="96%"/>
+                                <tbody>
+                                   <tr>
+                                      <td valign="top"  >
+                                         <p class="oj-normal">(d)</p>
+                                      </td>
+                                      <td valign="top"  >
+                                         <p class="oj-normal">the autonomy of social partners and their right to enter into collective agreements, in accordance with Union law and national laws and practices.</p>
+                                      </td>
+                                   </tr>
+                                </tbody>
+                             </table>
+                          </div>
+                          <div id="001.003">
+                             <p class="oj-normal">3.   Nothing in this Directive shall be understood to offer any ground for restricting the mobility of employees. In particular, in relation to the exercise of such mobility, this Directive shall not offer any ground for:</p>
+                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <col width="4%"/>
+                                <col width="96%"/>
+                                <tbody>
+                                   <tr>
+                                      <td valign="top"  >
+                                         <p class="oj-normal">(a)</p>
+                                      </td>
+                                      <td valign="top"  >
+                                         <p class="oj-normal">limiting employees' use of information that does not constitute a trade secret as defined in point (1) of Article 2;</p>
+                                      </td>
+                                   </tr>
+                                </tbody>
+                             </table>
+                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <col width="4%"/>
+                                <col width="96%"/>
+                                <tbody>
+                                   <tr>
+                                      <td valign="top"  >
+                                         <p class="oj-normal">(b)</p>
+                                      </td>
+                                      <td valign="top"  >
+                                         <p class="oj-normal">limiting employees' use of experience and skills honestly acquired in the normal course of their employment;</p>
+                                      </td>
+                                   </tr>
+                                </tbody>
+                             </table>
+                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <col width="4%"/>
+                                <col width="96%"/>
+                                <tbody>
+                                   <tr>
+                                      <td valign="top"  >
+                                         <p class="oj-normal">(c)</p>
+                                      </td>
+                                      <td valign="top"  >
+                                         <p class="oj-normal">imposing any additional restrictions on employees in their employment contracts other than restrictions imposed in accordance with Union or national law.</p>
+                                      </td>
+                                   </tr>
+                                </tbody>
+                             </table>
+                          </div>
+                       </div>
+                       <div class="eli-subdivision" id="art_2">
+                          <p id="d1e528-1-1" class="oj-ti-art">Article 2</p>
+                          <div class="eli-title" id="art_2.tit_1">
+                             <p class="oj-sti-art">Definitions</p>
+                          </div>
+                          <p class="oj-normal">For the purposes of this Directive, the following definitions apply:</p>
+                          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                             <col width="4%"/>
+                             <col width="96%"/>
+                             <tbody>
+                                <tr>
+                                   <td valign="top"  >
+                                      <p class="oj-normal">(1)</p>
+                                   </td>
+                                   <td valign="top"  >
+                                      <p class="oj-normal">‘trade secret’ means information which meets all of the following requirements:</p>
+                                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                         <col width="4%"/>
+                                         <col width="96%"/>
+                                         <tbody>
+                                            <tr>
+                                               <td valign="top"  >
+                                                  <p class="oj-normal">(a)</p>
+                                               </td>
+                                               <td valign="top"  >
+                                                  <p class="oj-normal">it is secret in the sense that it is not, as a body or in the precise configuration and assembly of its components, generally known among or readily accessible to persons within the circles that normally deal with the kind of information in question;</p>
+                                               </td>
+                                            </tr>
+                                         </tbody>
+                                      </table>
+                                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                         <col width="4%"/>
+                                         <col width="96%"/>
+                                         <tbody>
+                                            <tr>
+                                               <td valign="top"  >
+                                                  <p class="oj-normal">(b)</p>
+                                               </td>
+                                               <td valign="top"  >
+                                                  <p class="oj-normal">it has commercial value because it is secret;</p>
+                                               </td>
+                                            </tr>
+                                         </tbody>
+                                      </table>
+                                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                         <col width="4%"/>
+                                         <col width="96%"/>
+                                         <tbody>
+                                            <tr>
+                                               <td valign="top"  >
+                                                  <p class="oj-normal">(c)</p>
+                                               </td>
+                                               <td valign="top"  >
+                                                  <p class="oj-normal">it has been subject to reasonable steps under the circumstances, by the person lawfully in control of the information, to keep it secret;</p>
+                                               </td>
+                                            </tr>
+                                         </tbody>
+                                      </table>
+                                   </td>
+                                </tr>
+                             </tbody>
+                          </table>
+                          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                             <col width="4%"/>
+                             <col width="96%"/>
+                             <tbody>
+                                <tr>
+                                   <td valign="top"  >
+                                      <p class="oj-normal">(2)</p>
+                                   </td>
+                                   <td valign="top"  >
+                                      <p class="oj-normal">‘trade secret holder’ means any natural or legal person lawfully controlling a trade secret;</p>
+                                   </td>
+                                </tr>
+                             </tbody>
+                          </table>
+                          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                             <col width="4%"/>
+                             <col width="96%"/>
+                             <tbody>
+                                <tr>
+                                   <td valign="top"  >
+                                      <p class="oj-normal">(3)</p>
+                                   </td>
+                                   <td valign="top"  >
+                                      <p class="oj-normal">‘infringer’ means any natural or legal person who has unlawfully acquired, used or disclosed a trade secret;</p>
+                                   </td>
+                                </tr>
+                             </tbody>
+                          </table>
+                          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                             <col width="4%"/>
+                             <col width="96%"/>
+                             <tbody>
+                                <tr>
+                                   <td valign="top"  >
+                                      <p class="oj-normal">(4)</p>
+                                   </td>
+                                   <td valign="top"  >
+                                      <p class="oj-normal">‘infringing goods’ means goods, the design, characteristics, functioning, production process or marketing of which significantly benefits from trade secrets unlawfully acquired, used or disclosed.</p>
+                                   </td>
+                                </tr>
+                             </tbody>
+                          </table>
+                       </div>
+                    </div>
+                    <div id="cpt_II">
+                       <p id="d1e594-1-1" class="oj-ti-section-1">
+                          <span class="oj-italic">CHAPTER II</span>
+                       </p>
+                       <div class="eli-title" id="cpt_II.tit_1">
+                          <p id="L_2016157EN.01000101-d-002" class="oj-ti-section-2">
+                             <span class="oj-bold">
+                                <span class="oj-italic">Acquisition, use and disclosure of trade secrets</span>
+                             </span>
+                          </p>
+                       </div>
+                       <div class="eli-subdivision" id="art_3">
+                          <p id="d1e604-1-1" class="oj-ti-art">Article 3</p>
+                          <div class="eli-title" id="art_3.tit_1">
+                             <p class="oj-sti-art">Lawful acquisition, use and disclosure of trade secrets</p>
+                          </div>
+                          <div id="003.001">
+                             <p class="oj-normal">1.   The acquisition of a trade secret shall be considered lawful when the trade secret is obtained by any of the following means:</p>
+                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <col width="4%"/>
+                                <col width="96%"/>
+                                <tbody>
+                                   <tr>
+                                      <td valign="top"  >
+                                         <p class="oj-normal">(a)</p>
+                                      </td>
+                                      <td valign="top"  >
+                                         <p class="oj-normal">independent discovery or creation;</p>
+                                      </td>
+                                   </tr>
+                                </tbody>
+                             </table>
+                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <col width="4%"/>
+                                <col width="96%"/>
+                                <tbody>
+                                   <tr>
+                                      <td valign="top"  >
+                                         <p class="oj-normal">(b)</p>
+                                      </td>
+                                      <td valign="top"  >
+                                         <p class="oj-normal">observation, study, disassembly or testing of a product or object that has been made available to the public or that is lawfully in the possession of the acquirer of the information who is free from any legally valid duty to limit the acquisition of the trade secret;</p>
+                                      </td>
+                                   </tr>
+                                </tbody>
+                             </table>
+                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <col width="4%"/>
+                                <col width="96%"/>
+                                <tbody>
+                                   <tr>
+                                      <td valign="top"  >
+                                         <p class="oj-normal">(c)</p>
+                                      </td>
+                                      <td valign="top"  >
+                                         <p class="oj-normal">exercise of the right of workers or workers' representatives to information and consultation in accordance with Union law and national laws and practices;</p>
+                                      </td>
+                                   </tr>
+                                </tbody>
+                             </table>
+                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <col width="4%"/>
+                                <col width="96%"/>
+                                <tbody>
+                                   <tr>
+                                      <td valign="top"  >
+                                         <p class="oj-normal">(d)</p>
+                                      </td>
+                                      <td valign="top"  >
+                                         <p class="oj-normal">any other practice which, under the circumstances, is in conformity with honest commercial practices.</p>
+                                      </td>
+                                   </tr>
+                                </tbody>
+                             </table>
+                          </div>
+                          <div id="003.002">
+                             <p class="oj-normal">2.   The acquisition, use or disclosure of a trade secret shall be considered lawful to the extent that such acquisition, use or disclosure is required or allowed by Union or national law.</p>
+                          </div>
+                       </div>
+                       <div class="eli-subdivision" id="art_4">
+                          <p id="d1e645-1-1" class="oj-ti-art">Article 4</p>
+                          <div class="eli-title" id="art_4.tit_1">
+                             <p class="oj-sti-art">Unlawful acquisition, use and disclosure of trade secrets</p>
+                          </div>
+                          <div id="004.001">
+                             <p class="oj-normal">1.   Member States shall ensure that trade secret holders are entitled to apply for the measures, procedures and remedies provided for in this Directive in order to prevent, or obtain redress for, the unlawful acquisition, use or disclosure of their trade secret.</p>
+                          </div>
+                          <div id="004.002">
+                             <p class="oj-normal">2.   The acquisition of a trade secret without the consent of the trade secret holder shall be considered unlawful, whenever carried out by:</p>
+                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <col width="4%"/>
+                                <col width="96%"/>
+                                <tbody>
+                                   <tr>
+                                      <td valign="top"  >
+                                         <p class="oj-normal">(a)</p>
+                                      </td>
+                                      <td valign="top"  >
+                                         <p class="oj-normal">unauthorised access to, appropriation of, or copying of any documents, objects, materials, substances or electronic files, lawfully under the control of the trade secret holder, containing the trade secret or from which the trade secret can be deduced;</p>
+                                      </td>
+                                   </tr>
+                                </tbody>
+                             </table>
+                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <col width="4%"/>
+                                <col width="96%"/>
+                                <tbody>
+                                   <tr>
+                                      <td valign="top"  >
+                                         <p class="oj-normal">(b)</p>
+                                      </td>
+                                      <td valign="top"  >
+                                         <p class="oj-normal">any other conduct which, under the circumstances, is considered contrary to honest commercial practices.</p>
+                                      </td>
+                                   </tr>
+                                </tbody>
+                             </table>
+                          </div>
+                          <div id="004.003">
+                             <p class="oj-normal">3.   The use or disclosure of a trade secret shall be considered unlawful whenever carried out, without the consent of the trade secret holder, by a person who is found to meet any of the following conditions:</p>
+                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <col width="4%"/>
+                                <col width="96%"/>
+                                <tbody>
+                                   <tr>
+                                      <td valign="top"  >
+                                         <p class="oj-normal">(a)</p>
+                                      </td>
+                                      <td valign="top"  >
+                                         <p class="oj-normal">having acquired the trade secret unlawfully;</p>
+                                      </td>
+                                   </tr>
+                                </tbody>
+                             </table>
+                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <col width="4%"/>
+                                <col width="96%"/>
+                                <tbody>
+                                   <tr>
+                                      <td valign="top"  >
+                                         <p class="oj-normal">(b)</p>
+                                      </td>
+                                      <td valign="top"  >
+                                         <p class="oj-normal">being in breach of a confidentiality agreement or any other duty not to disclose the trade secret;</p>
+                                      </td>
+                                   </tr>
+                                </tbody>
+                             </table>
+                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <col width="4%"/>
+                                <col width="96%"/>
+                                <tbody>
+                                   <tr>
+                                      <td valign="top"  >
+                                         <p class="oj-normal">(c)</p>
+                                      </td>
+                                      <td valign="top"  >
+                                         <p class="oj-normal">being in breach of a contractual or any other duty to limit the use of the trade secret.</p>
+                                      </td>
+                                   </tr>
+                                </tbody>
+                             </table>
+                          </div>
+                          <div id="004.004">
+                             <p class="oj-normal">4.   The acquisition, use or disclosure of a trade secret shall also be considered unlawful whenever a person, at the time of the acquisition, use or disclosure, knew or ought, under the circumstances, to have known that the trade secret had been obtained directly or indirectly from another person who was using or disclosing the trade secret unlawfully within the meaning of paragraph 3.</p>
+                          </div>
+                          <div id="004.005">
+                             <p class="oj-normal">5.   The production, offering or placing on the market of infringing goods, or the importation, export or storage of infringing goods for those purposes, shall also be considered an unlawful use of a trade secret where the person carrying out such activities knew, or ought, under the circumstances, to have known that the trade secret was used unlawfully within the meaning of paragraph 3.</p>
+                          </div>
+                       </div>
+                       <div class="eli-subdivision" id="art_5">
+                          <p id="d1e709-1-1" class="oj-ti-art">Article 5</p>
+                          <div class="eli-title" id="art_5.tit_1">
+                             <p class="oj-sti-art">Exceptions</p>
+                          </div>
+                          <p class="oj-normal">Member States shall ensure that an application for the measures, procedures and remedies provided for in this Directive is dismissed where the alleged acquisition, use or disclosure of the trade secret was carried out in any of the following cases:</p>
+                          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                             <col width="4%"/>
+                             <col width="96%"/>
+                             <tbody>
+                                <tr>
+                                   <td valign="top"  >
+                                      <p class="oj-normal">(a)</p>
+                                   </td>
+                                   <td valign="top"  >
+                                      <p class="oj-normal">for exercising the right to freedom of expression and information as set out in the Charter, including respect for the freedom and pluralism of the media;</p>
+                                   </td>
+                                </tr>
+                             </tbody>
+                          </table>
+                          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                             <col width="4%"/>
+                             <col width="96%"/>
+                             <tbody>
+                                <tr>
+                                   <td valign="top"  >
+                                      <p class="oj-normal">(b)</p>
+                                   </td>
+                                   <td valign="top"  >
+                                      <p class="oj-normal">for revealing misconduct, wrongdoing or illegal activity, provided that the respondent acted for the purpose of protecting the general public interest;</p>
+                                   </td>
+                                </tr>
+                             </tbody>
+                          </table>
+                          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                             <col width="4%"/>
+                             <col width="96%"/>
+                             <tbody>
+                                <tr>
+                                   <td valign="top"  >
+                                      <p class="oj-normal">(c)</p>
+                                   </td>
+                                   <td valign="top"  >
+                                      <p class="oj-normal">disclosure by workers to their representatives as part of the legitimate exercise by those representatives of their functions in accordance with Union or national law, provided that such disclosure was necessary for that exercise;</p>
+                                   </td>
+                                </tr>
+                             </tbody>
+                          </table>
+                          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                             <col width="4%"/>
+                             <col width="96%"/>
+                             <tbody>
+                                <tr>
+                                   <td valign="top"  >
+                                      <p class="oj-normal">(d)</p>
+                                   </td>
+                                   <td valign="top"  >
+                                      <p class="oj-normal">for the purpose of protecting a legitimate interest recognised by Union or national law.</p>
+                                   </td>
+                                </tr>
+                             </tbody>
+                          </table>
+                       </div>
+                    </div>
+                    <div id="cpt_III">
+                       <p id="d1e743-1-1" class="oj-ti-section-1">
+                          <span class="oj-italic">CHAPTER III</span>
+                       </p>
+                       <div class="eli-title" id="cpt_III.tit_1">
+                          <p id="L_2016157EN.01000101-d-003" class="oj-ti-section-2">
+                             <span class="oj-bold">
+                                <span class="oj-italic">Measures, procedures and remedies</span>
+                             </span>
+                          </p>
+                       </div>
+                       <div id="cpt_III.sct_1">
+                          <p id="d1e754-1-1" class="oj-ti-section-1">
+                             <span class="oj-expanded">Section 1</span>
+                          </p>
+                          <div class="eli-title" id="cpt_III.sct_1.tit_1">
+                             <p id="L_2016157EN.01000101-d-004" class="oj-ti-section-2">
+                                <span class="oj-bold">
+                                   <span class="oj-expanded">General provisions</span>
+                                </span>
+                             </p>
+                          </div>
+                          <div class="eli-subdivision" id="art_6">
+                             <p id="d1e764-1-1" class="oj-ti-art">Article 6</p>
+                             <div class="eli-title" id="art_6.tit_1">
+                                <p class="oj-sti-art">General obligation</p>
+                             </div>
+                             <div id="006.001">
+                                <p class="oj-normal">1.   Member States shall provide for the measures, procedures and remedies necessary to ensure the availability of civil redress against the unlawful acquisition, use and disclosure of trade secrets.</p>
+                             </div>
+                             <div id="006.002">
+                                <p class="oj-normal">2.   The measures, procedures and remedies referred to in paragraph 1 shall:</p>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(a)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">be fair and equitable;</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(b)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">not be unnecessarily complicated or costly, or entail unreasonable time-limits or unwarranted delays; and</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(c)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">be effective and dissuasive.</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                             </div>
+                          </div>
+                          <div class="eli-subdivision" id="art_7">
+                             <p id="d1e799-1-1" class="oj-ti-art">Article 7</p>
+                             <div class="eli-title" id="art_7.tit_1">
+                                <p class="oj-sti-art">Proportionality and abuse of process</p>
+                             </div>
+                             <div id="007.001">
+                                <p class="oj-normal">1.   The measures, procedures and remedies provided for in this Directive shall be applied in a manner that:</p>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(a)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">is proportionate;</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(b)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">avoids the creation of barriers to legitimate trade in the internal market; and</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(c)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">provides for safeguards against their abuse.</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                             </div>
+                             <div id="007.002">
+                                <p class="oj-normal">2.   Member States shall ensure that competent judicial authorities may, upon the request of the respondent, apply appropriate measures as provided for in national law, where an application concerning the unlawful acquisition, use or disclosure of a trade secret is manifestly unfounded and the applicant is found to have initiated the legal proceedings abusively or in bad faith. Such measures may, as appropriate, include awarding damages to the respondent, imposing sanctions on the applicant or ordering the dissemination of information concerning a decision as referred to in Article 15.</p>
+                                <p class="oj-normal">Member States may provide that measures as referred to in the first subparagraph are dealt with in separate legal proceedings.</p>
+                             </div>
+                          </div>
+                          <div class="eli-subdivision" id="art_8">
+                             <p id="d1e836-1-1" class="oj-ti-art">Article 8</p>
+                             <div class="eli-title" id="art_8.tit_1">
+                                <p class="oj-sti-art">Limitation period</p>
+                             </div>
+                             <div id="008.001">
+                                <p class="oj-normal">1.   Member States shall, in accordance with this Article, lay down rules on the limitation periods applicable to substantive claims and actions for the application of the measures, procedures and remedies provided for in this Directive.</p>
+                                <p class="oj-normal">The rules referred to in the first subparagraph shall determine when the limitation period begins to run, the duration of the limitation period and the circumstances under which the limitation period is interrupted or suspended.</p>
+                             </div>
+                             <div id="008.002">
+                                <p class="oj-normal">2.   The duration of the limitation period shall not exceed 6 years.</p>
+                             </div>
+                          </div>
+                          <div class="eli-subdivision" id="art_9">
+                             <p id="d1e853-1-1" class="oj-ti-art">Article 9</p>
+                             <div class="eli-title" id="art_9.tit_1">
+                                <p class="oj-sti-art">Preservation of confidentiality of trade secrets in the course of legal proceedings</p>
+                             </div>
+                             <div id="009.001">
+                                <p class="oj-normal">1.   Member States shall ensure that the parties, their lawyers or other representatives, court officials, witnesses, experts and any other person participating in legal proceedings relating to the unlawful acquisition, use or disclosure of a trade secret, or who has access to documents which form part of those legal proceedings, are not permitted to use or disclose any trade secret or alleged trade secret which the competent judicial authorities have, in response to a duly reasoned application by an interested party, identified as confidential and of which they have become aware as a result of such participation or access. In that regard, Member States may also allow competent judicial authorities to act on their own initiative.</p>
+                                <p class="oj-normal">The obligation referred to in the first subparagraph shall remain in force after the legal proceedings have ended. However, such obligation shall cease to exist in any of the following circumstances:</p>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(a)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">where the alleged trade secret is found, by a final decision, not to meet the requirements set out in point (1) of Article 2; or</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(b)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">where over time, the information in question becomes generally known among or readily accessible to persons within the circles that normally deal with that kind of information.</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                             </div>
+                             <div id="009.002">
+                                <p class="oj-normal">2.   Member States shall also ensure that the competent judicial authorities may, on a duly reasoned application by a party, take specific measures necessary to preserve the confidentiality of any trade secret or alleged trade secret used or referred to in the course of legal proceedings relating to the unlawful acquisition, use or disclosure of a trade secret. Member States may also allow competent judicial authorities to take such measures on their own initiative.</p>
+                                <p class="oj-normal">The measures referred to in the first subparagraph shall at least include the possibility:</p>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(a)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">of restricting access to any document containing trade secrets or alleged trade secrets submitted by the parties or third parties, in whole or in part, to a limited number of persons;</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(b)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">of restricting access to hearings, when trade secrets or alleged trade secrets may be disclosed, and the corresponding record or transcript of those hearings to a limited number of persons;</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(c)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">of making available to any person other than those comprised in the limited number of persons referred to in points (a) and (b) a non-confidential version of any judicial decision, in which the passages containing trade secrets have been removed or redacted.</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <p class="oj-normal">The number of persons referred to in points (a) and (b) of the second subparagraph shall be no greater than necessary in order to ensure compliance with the right of the parties to the legal proceedings to an effective remedy and to a fair trial, and shall include, at least, one natural person from each party and the respective lawyers or other representatives of those parties to the legal proceedings.</p>
+                             </div>
+                             <div id="009.003">
+                                <p class="oj-normal">3.   When deciding on the measures referred to in paragraph 2 and assessing their proportionality, the competent judicial authorities shall take into account the need to ensure the right to an effective remedy and to a fair trial, the legitimate interests of the parties and, where appropriate, of third parties, and any potential harm for either of the parties, and, where appropriate, for third parties, resulting from the granting or rejection of such measures.</p>
+                             </div>
+                             <div id="009.004">
+                                <p class="oj-normal">4.   Any processing of personal data pursuant to paragraphs 1, 2 or 3 shall be carried out in accordance with Directive 95/46/EC.</p>
+                             </div>
+                          </div>
+                       </div>
+                       <div id="cpt_III.sct_2">
+                          <p id="d1e919-1-1" class="oj-ti-section-1">
+                             <span class="oj-expanded">Section 2</span>
+                          </p>
+                          <div class="eli-title" id="cpt_III.sct_2.tit_1">
+                             <p id="L_2016157EN.01000101-d-005" class="oj-ti-section-2">
+                                <span class="oj-bold">
+                                   <span class="oj-expanded">Provisional and precautionary measures</span>
+                                </span>
+                             </p>
+                          </div>
+                          <div class="eli-subdivision" id="art_10">
+                             <p id="d1e929-1-1" class="oj-ti-art">Article 10</p>
+                             <div class="eli-title" id="art_10.tit_1">
+                                <p class="oj-sti-art">Provisional and precautionary measures</p>
+                             </div>
+                             <div id="010.001">
+                                <p class="oj-normal">1.   Member States shall ensure that the competent judicial authorities may, at the request of the trade secret holder, order any of the following provisional and precautionary measures against the alleged infringer:</p>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(a)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">the cessation of or, as the case may be, the prohibition of the use or disclosure of the trade secret on a provisional basis;</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(b)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">the prohibition of the production, offering, placing on the market or use of infringing goods, or the importation, export or storage of infringing goods for those purposes;</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(c)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">the seizure or delivery up of the suspected infringing goods, including imported goods, so as to prevent their entry into, or circulation on, the market.</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                             </div>
+                             <div id="010.002">
+                                <p class="oj-normal">2.   Member States shall ensure that the judicial authorities may, as an alternative to the measures referred to in paragraph 1, make the continuation of the alleged unlawful use of a trade secret subject to the lodging of guarantees intended to ensure the compensation of the trade secret holder. Disclosure of a trade secret in return for the lodging of guarantees shall not be allowed.</p>
+                             </div>
+                          </div>
+                          <div class="eli-subdivision" id="art_11">
+                             <p id="d1e964-1-1" class="oj-ti-art">Article 11</p>
+                             <div class="eli-title" id="art_11.tit_1">
+                                <p class="oj-sti-art">Conditions of application and safeguards</p>
+                             </div>
+                             <div id="011.001">
+                                <p class="oj-normal">1.   Member States shall ensure that the competent judicial authorities have, in respect of the measures referred to in Article 10, the authority to require the applicant to provide evidence that may reasonably be considered available in order to satisfy themselves with a sufficient degree of certainty that:</p>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(a)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">a trade secret exists;</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(b)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">the applicant is the trade secret holder; and</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(c)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">the trade secret has been acquired unlawfully, is being unlawfully used or disclosed, or unlawful acquisition, use or disclosure of the trade secret is imminent.</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                             </div>
+                             <div id="011.002">
+                                <p class="oj-normal">2.   Member States shall ensure that in deciding on the granting or rejection of the application and assessing its proportionality, the competent judicial authorities shall be required to take into account the specific circumstances of the case, including, where appropriate:</p>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(a)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">the value and other specific features of the trade secret;</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(b)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">the measures taken to protect the trade secret;</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(c)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">the conduct of the respondent in acquiring, using or disclosing the trade secret;</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(d)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">the impact of the unlawful use or disclosure of the trade secret;</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(e)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">the legitimate interests of the parties and the impact which the granting or rejection of the measures could have on the parties;</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(f)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">the legitimate interests of third parties;</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(g)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">the public interest; and</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(h)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">the safeguard of fundamental rights.</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                             </div>
+                             <div id="011.003">
+                                <p class="oj-normal">3.   Member States shall ensure that the measures referred to in Article 10 are revoked or otherwise cease to have effect, upon the request of the respondent, if:</p>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(a)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">the applicant does not institute legal proceedings leading to a decision on the merits of the case before the competent judicial authority, within a reasonable period determined by the judicial authority ordering the measures where the law of a Member State so permits or, in the absence of such determination, within a period not exceeding 20 working days or 31 calendar days, whichever is the longer; or</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(b)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">the information in question no longer meets the requirements of point (1) of Article 2, for reasons that cannot be attributed to the respondent.</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                             </div>
+                             <div id="011.004">
+                                <p class="oj-normal">4.   Member States shall ensure that the competent judicial authorities may make the measures referred to in Article 10 subject to the lodging by the applicant of adequate security or an equivalent assurance intended to ensure compensation for any prejudice suffered by the respondent and, where appropriate, by any other person affected by the measures.</p>
+                             </div>
+                             <div id="011.005">
+                                <p class="oj-normal">5.   Where the measures referred to in Article 10 are revoked on the basis of point (a) of paragraph 3 of this Article, where they lapse due to any act or omission by the applicant, or where it is subsequently found that there has been no unlawful acquisition, use or disclosure of the trade secret or threat of such conduct, the competent judicial authorities shall have the authority to order the applicant, upon the request of the respondent or of an injured third party, to provide the respondent, or the injured third party, appropriate compensation for any injury caused by those measures.</p>
+                                <p class="oj-normal">Member States may provide that the request for compensation referred to in the first subparagraph is dealt with in separate legal proceedings.</p>
+                             </div>
+                          </div>
+                       </div>
+                       <div id="cpt_III.sct_3">
+                          <p id="d1e1081-1-1" class="oj-ti-section-1">
+                             <span class="oj-expanded">Section 3</span>
+                          </p>
+                          <div class="eli-title" id="cpt_III.sct_3.tit_1">
+                             <p id="L_2016157EN.01000101-d-006" class="oj-ti-section-2">
+                                <span class="oj-bold">
+                                   <span class="oj-expanded">Measures resulting from a decision on the merits of the case</span>
+                                </span>
+                             </p>
+                          </div>
+                          <div class="eli-subdivision" id="art_12">
+                             <p id="d1e1091-1-1" class="oj-ti-art">Article 12</p>
+                             <div class="eli-title" id="art_12.tit_1">
+                                <p class="oj-sti-art">Injunctions and corrective measures</p>
+                             </div>
+                             <div id="012.001">
+                                <p class="oj-normal">1.   Member States shall ensure that, where a judicial decision taken on the merits of the case finds that there has been unlawful acquisition, use or disclosure of a trade secret, the competent judicial authorities may, at the request of the applicant, order one or more of the following measures against the infringer:</p>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(a)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">the cessation of or, as the case may be, the prohibition of the use or disclosure of the trade secret;</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(b)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">the prohibition of the production, offering, placing on the market or use of infringing goods, or the importation, export or storage of infringing goods for those purposes;</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(c)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">the adoption of the appropriate corrective measures with regard to the infringing goods;</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(d)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">the destruction of all or part of any document, object, material, substance or electronic file containing or embodying the trade secret or, where appropriate, the delivery up to the applicant of all or part of those documents, objects, materials, substances or electronic files.</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                             </div>
+                             <div id="012.002">
+                                <p class="oj-normal">2.   The corrective measures referred to in point (c) of paragraph 1 shall include:</p>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(a)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">recall of the infringing goods from the market;</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(b)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">depriving the infringing goods of their infringing quality;</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(c)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">destruction of the infringing goods or, where appropriate, their withdrawal from the market, provided that the withdrawal does not undermine the protection of the trade secret in question.</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                             </div>
+                             <div id="012.003">
+                                <p class="oj-normal">3.   Member States may provide that, when ordering the withdrawal of the infringing goods from the market, their competent judicial authorities may order, at the request of the trade secret holder, that the goods be delivered up to the holder or to charitable organisations.</p>
+                             </div>
+                             <div id="012.004">
+                                <p class="oj-normal">4.   The competent judicial authorities shall order that the measures referred to in points (c) and (d) of paragraph 1 be carried out at the expense of the infringer, unless there are particular reasons for not doing so. Those measures shall be without prejudice to any damages that may be due to the trade secret holder by reason of the unlawful acquisition, use or disclosure of the trade secret.</p>
+                             </div>
+                          </div>
+                          <div class="eli-subdivision" id="art_13">
+                             <p id="d1e1162-1-1" class="oj-ti-art">Article 13</p>
+                             <div class="eli-title" id="art_13.tit_1">
+                                <p class="oj-sti-art">Conditions of application, safeguards and alternative measures</p>
+                             </div>
+                             <div id="013.001">
+                                <p class="oj-normal">1.   Member States shall ensure that, in considering an application for the adoption of the injunctions and corrective measures provided for in Article 12 and assessing their proportionality, the competent judicial authorities shall be required to take into account the specific circumstances of the case, including, where appropriate:</p>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(a)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">the value or other specific features of the trade secret;</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(b)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">the measures taken to protect the trade secret;</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(c)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">the conduct of the infringer in acquiring, using or disclosing the trade secret;</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(d)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">the impact of the unlawful use or disclosure of the trade secret;</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(e)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">the legitimate interests of the parties and the impact which the granting or rejection of the measures could have on the parties;</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(f)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">the legitimate interests of third parties;</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(g)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">the public interest; and</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(h)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">the safeguard of fundamental rights.</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <p class="oj-normal">Where the competent judicial authorities limit the duration of the measures referred to in points (a) and (b) of Article 12(1), such duration shall be sufficient to eliminate any commercial or economic advantage that the infringer could have derived from the unlawful acquisition, use or disclosure of the trade secret.</p>
+                             </div>
+                             <div id="013.002">
+                                <p class="oj-normal">2.   Member States shall ensure that the measures referred to in points (a) and (b) of Article 12(1) are revoked or otherwise cease to have effect, upon the request of the respondent, if the information in question no longer meets the requirements of point (1) of Article 2 for reasons that cannot be attributed directly or indirectly to the respondent.</p>
+                             </div>
+                             <div id="013.003">
+                                <p class="oj-normal">3.   Member States shall provide that, at the request of the person liable to be subject to the measures provided for in Article 12, the competent judicial authority may order pecuniary compensation to be paid to the injured party instead of applying those measures if all the following conditions are met:</p>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(a)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">the person concerned at the time of use or disclosure neither knew nor ought, under the circumstances, to have known that the trade secret was obtained from another person who was using or disclosing the trade secret unlawfully;</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(b)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">execution of the measures in question would cause that person disproportionate harm; and</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                   <col width="4%"/>
+                                   <col width="96%"/>
+                                   <tbody>
+                                      <tr>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">(c)</p>
+                                         </td>
+                                         <td valign="top"  >
+                                            <p class="oj-normal">pecuniary compensation to the injured party appears reasonably satisfactory.</p>
+                                         </td>
+                                      </tr>
+                                   </tbody>
+                                </table>
+                                <p class="oj-normal">Where pecuniary compensation is ordered instead of the measures referred to in points (a) and (b) of Article 12(1), it shall not exceed the amount of royalties or fees which would have been due, had that person requested authorisation to use the trade secret in question, for the period of time for which use of the trade secret could have been prohibited.</p>
+                             </div>
+                          </div>
+                          <div class="eli-subdivision" id="art_14">
+                             <p id="d1e1256-1-1" class="oj-ti-art">Article 14</p>
+                             <div class="eli-title" id="art_14.tit_1">
+                                <p class="oj-sti-art">Damages</p>
+                             </div>
+                             <div id="014.001">
+                                <p class="oj-normal">1.   Member States shall ensure that the competent judicial authorities, upon the request of the injured party, order an infringer who knew or ought to have known that he, she or it was engaging in unlawful acquisition, use or disclosure of a trade secret, to pay the trade secret holder damages appropriate to the actual prejudice suffered as a result of the unlawful acquisition, use or disclosure of the trade secret.</p>
+                                <p class="oj-normal">Member States may limit the liability for damages of employees towards their employers for the unlawful acquisition, use or disclosure of a trade secret of the employer where they act without intent.</p>
+                             </div>
+                             <div id="014.002">
+                                <p class="oj-normal">2.   When setting the damages referred to in paragraph 1, the competent judicial authorities shall take into account all appropriate factors, such as the negative economic consequences, including lost profits, which the injured party has suffered, any unfair profits made by the infringer and, in appropriate cases, elements other than economic factors, such as the moral prejudice caused to the trade secret holder by the unlawful acquisition, use or disclosure of the trade secret.</p>
+                                <p class="oj-normal">Alternatively, the competent judicial authorities may, in appropriate cases, set the damages as a lump sum on the basis of elements such as, at a minimum, the amount of royalties or fees which would have been due had the infringer requested authorisation to use the trade secret in question.</p>
+                             </div>
+                          </div>
+                          <div class="eli-subdivision" id="art_15">
+                             <p id="d1e1275-1-1" class="oj-ti-art">Article 15</p>
+                             <div class="eli-title" id="art_15.tit_1">
+                                <p class="oj-sti-art">Publication of judicial decisions</p>
+                             </div>
+                             <div id="015.001">
+                                <p class="oj-normal">1.   Member States shall ensure that, in legal proceedings instituted for the unlawful acquisition, use or disclosure of a trade secret, the competent judicial authorities may order, at the request of the applicant and at the expense of the infringer, appropriate measures for the dissemination of the information concerning the decision, including publishing it in full or in part.</p>
+                             </div>
+                             <div id="015.002">
+                                <p class="oj-normal">2.   Any measure referred to in paragraph 1 of this Article shall preserve the confidentiality of trade secrets as provided for in Article 9.</p>
+                             </div>
+                             <div id="015.003">
+                                <p class="oj-normal">3.   In deciding whether to order a measure referred to in paragraph 1 and when assessing its proportionality, the competent judicial authorities shall take into account, where appropriate, the value of the trade secret, the conduct of the infringer in acquiring, using or disclosing the trade secret, the impact of the unlawful use or disclosure of the trade secret, and the likelihood of further unlawful use or disclosure of the trade secret by the infringer.</p>
+                                <p class="oj-normal">The competent judicial authorities shall also take into account whether the information on the infringer would be such as to allow a natural person to be identified and, if so, whether publication of that information would be justified, in particular in the light of the possible harm that such measure may cause to the privacy and reputation of the infringer.</p>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                    <div id="cpt_IV">
+                       <p id="d1e1298-1-1" class="oj-ti-section-1">
+                          <span class="oj-italic">CHAPTER IV</span>
+                       </p>
+                       <div class="eli-title" id="cpt_IV.tit_1">
+                          <p id="L_2016157EN.01000101-d-007" class="oj-ti-section-2">
+                             <span class="oj-bold">
+                                <span class="oj-italic">Sanctions, reporting and final provisions</span>
+                             </span>
+                          </p>
+                       </div>
+                       <div class="eli-subdivision" id="art_16">
+                          <p id="d1e1308-1-1" class="oj-ti-art">Article 16</p>
+                          <div class="eli-title" id="art_16.tit_1">
+                             <p class="oj-sti-art">Sanctions for non-compliance with this Directive</p>
+                          </div>
+                          <p class="oj-normal">Member States shall ensure that the competent judicial authorities may impose sanctions on any person who fails or refuses to comply with any measure adopted pursuant to Articles 9, 10 and 12.</p>
+                          <p class="oj-normal">The sanctions provided for shall include the possibility of imposing recurring penalty payments in the event of non-compliance with a measure adopted pursuant to Articles 10 and 12.</p>
+                          <p class="oj-normal">The sanctions provided for shall be effective, proportionate and dissuasive.</p>
+                       </div>
+                       <div class="eli-subdivision" id="art_17">
+                          <p id="d1e1319-1-1" class="oj-ti-art">Article 17</p>
+                          <div class="eli-title" id="art_17.tit_1">
+                             <p class="oj-sti-art">Exchange of information and correspondents</p>
+                          </div>
+                          <p class="oj-normal">For the purpose of promoting cooperation, including the exchange of information, among Member States and between Member States and the Commission, each Member State shall designate one or more national correspondents for any question relating to the implementation of the measures provided for by this Directive. It shall communicate the details of the national correspondent or correspondents to the other Member States and the Commission.</p>
+                       </div>
+                       <div class="eli-subdivision" id="art_18">
+                          <p id="d1e1326-1-1" class="oj-ti-art">Article 18</p>
+                          <div class="eli-title" id="art_18.tit_1">
+                             <p class="oj-sti-art">Reports</p>
+                          </div>
+                          <div id="018.001">
+                             <p class="oj-normal">1.   By 9 June 2021, the European Union Intellectual Property Office, in the context of the activities of the European Observatory on Infringements of Intellectual Property Rights, shall prepare an initial report on the litigation trends regarding the unlawful acquisition, use or disclosure of trade secrets pursuant to the application of this Directive.</p>
+                          </div>
+                          <div id="018.002">
+                             <p class="oj-normal">2.   By 9 June 2022, the Commission shall draw up an intermediate report on the application of this Directive, and shall submit it to the European Parliament and to the Council. That report shall take due account of the report referred to in paragraph 1.</p>
+                             <p class="oj-normal">The intermediate report shall examine, in particular, the possible effects of the application of this Directive on research and innovation, the mobility of employees and on the exercise of the right to freedom of expression and information.</p>
+                          </div>
+                          <div id="018.003">
+                             <p class="oj-normal">3.   By 9 June 2026, the Commission shall carry out an evaluation of the impact of this Directive and submit a report to the European Parliament and to the Council.</p>
+                          </div>
+                       </div>
+                       <div class="eli-subdivision" id="art_19">
+                          <p id="d1e1357-1-1" class="oj-ti-art">Article 19</p>
+                          <div class="eli-title" id="art_19.tit_1">
+                             <p class="oj-sti-art">Transposition</p>
+                          </div>
+                          <div id="019.001">
+                             <p class="oj-normal">1.   Member States shall bring into force the laws, regulations and administrative provisions necessary to comply with this Directive by 9 June 2018. They shall immediately communicate the text of those measures to the Commission.</p>
+                             <p class="oj-normal">When Member States adopt those measures, they shall contain a reference to this Directive or be accompanied by such a reference on the occasion of their official publication. Member States shall determine how such reference is to be made.</p>
+                          </div>
+                          <div id="019.002">
+                             <p class="oj-normal">2.   Member States shall communicate to the Commission the text of the main provisions of national law which they adopt in the field covered by this Directive.</p>
+                          </div>
+                       </div>
+                       <div class="eli-subdivision" id="art_20">
+                          <p id="d1e1377-1-1" class="oj-ti-art">Article 20</p>
+                          <div class="eli-title" id="art_20.tit_1">
+                             <p class="oj-sti-art">Entry into force</p>
+                          </div>
+                          <p class="oj-normal">This Directive shall enter into force on the twentieth day following that of its publication in the <span class="oj-italic">Official Journal of the European Union</span>.</p>
+                       </div>
+                       <div class="eli-subdivision" id="art_21">
+                          <p id="d1e1387-1-1" class="oj-ti-art">Article 21</p>
+                          <div class="eli-title" id="art_21.tit_1">
+                             <p class="oj-sti-art">Addressees</p>
+                          </div>
+                          <p class="oj-normal">This Directive is addressed to the Member States.</p>
+                       </div>
+                    </div>
+                 </div>
+                 <div class="eli-subdivision" id="fnp_1">
+                    <div class="oj-final">
+                       <p class="oj-normal">Done at Strasbourg, 8 June 2016.</p>
+                       <div class="oj-signatory">
+                          <p class="oj-signatory">
+                             <span class="oj-italic">For the European Parliament</span>
+                          </p>
+                          <p class="oj-signatory">
+                             <span class="oj-italic">The President</span>
+                          </p>
+                          <p class="oj-signatory">M. SCHULZ
+                    </p>
+                       </div>
+                       <div class="oj-signatory">
+                          <p class="oj-signatory">
+                             <span class="oj-italic">For the Council</span>
+                          </p>
+                          <p class="oj-signatory">
+                             <span class="oj-italic">The President</span>
+                          </p>
+                          <p class="oj-signatory">A.G. KOENDERS
+                    </p>
+                       </div>
+                    </div>
+                 </div>
+                 <hr class="oj-note"/>
+                 <p class="oj-note">
+                    <a id="ntr1-L_2016157EN.01000101-E0001" href="#ntc1-L_2016157EN.01000101-E0001"
+                       >(<span class="oj-super">1</span>)</a>  
+                    <a href="http://publications.europa.eu/resource/oj/JOC_2014_226_R_TOC"
+                       >OJ C 226, 16.7.2014, p. 48</a>.</p>
+                 <p class="oj-note">
+                    <a id="ntr2-L_2016157EN.01000101-E0002" href="#ntc2-L_2016157EN.01000101-E0002"
+                       >(<span class="oj-super">2</span>)</a>  Position of the European Parliament of 14 April 2016 (not yet published in the Official Journal) and decision of the Council of 27 May 2016.</p>
+                 <p class="oj-note">
+                    <a id="ntr3-L_2016157EN.01000101-E0003" href="#ntc3-L_2016157EN.01000101-E0003"
+                       >(<span class="oj-super">3</span>)</a>  Council Decision 94/800/EC of 22 December 1994 concerning the conclusion on behalf of the European Community, as regards matters within its competence, of the agreements reached in the Uruguay Round multilateral negotiations (1986-1994) (<a href="http://publications.europa.eu/resource/oj/JOL_1994_336_R_TOC"
+                       >OJ L 336, 23.12.1994, p. 1</a>).</p>
+                 <p class="oj-note">
+                    <a id="ntr4-L_2016157EN.01000101-E0004" href="#ntc4-L_2016157EN.01000101-E0004"
+                       >(<span class="oj-super">4</span>)</a>  Regulation (EC) No 1049/2001 of the European Parliament and of the Council of 30 May 2001 regarding public access to European Parliament, Council and Commission documents (<a href="http://publications.europa.eu/resource/oj/JOL_2001_145_R_TOC"
+                       >OJ L 145, 31.5.2001, p. 43</a>).</p>
+                 <p class="oj-note">
+                    <a id="ntr5-L_2016157EN.01000101-E0005" href="#ntc5-L_2016157EN.01000101-E0005"
+                       >(<span class="oj-super">5</span>)</a>  Regulation (EC) No 1367/2006 of the European Parliament and of the Council of 6 September 2006 on the application of the provisions of the Aarhus Convention on Access to Information, Public Participation in Decision-making and Access to Justice in Environmental Matters to Community institutions and bodies (<a href="http://publications.europa.eu/resource/oj/JOL_2006_264_R_TOC"
+                       >OJ L 264, 25.9.2006, p. 13</a>).</p>
+                 <p class="oj-note">
+                    <a id="ntr6-L_2016157EN.01000101-E0006" href="#ntc6-L_2016157EN.01000101-E0006"
+                       >(<span class="oj-super">6</span>)</a>  Directive 2003/4/EC of the European Parliament and of the Council of 28 January 2003 on public access to environmental information and repealing Council Directive 90/313/EEC (<a href="http://publications.europa.eu/resource/oj/JOL_2003_041_R_TOC"
+                       >OJ L 41, 14.2.2003, p. 26</a>).</p>
+                 <p class="oj-note">
+                    <a id="ntr7-L_2016157EN.01000101-E0007" href="#ntc7-L_2016157EN.01000101-E0007"
+                       >(<span class="oj-super">7</span>)</a>  Directive 2014/23/EU of the European Parliament and of the Council of 26 February 2014 on the award of concession contracts (<a href="http://publications.europa.eu/resource/oj/JOL_2014_094_R_TOC"
+                       >OJ L 94, 28.3.2014, p. 1</a>).</p>
+                 <p class="oj-note">
+                    <a id="ntr8-L_2016157EN.01000101-E0008" href="#ntc8-L_2016157EN.01000101-E0008"
+                       >(<span class="oj-super">8</span>)</a>  Directive 2014/24/EU of the European Parliament and of the Council of 26 February 2014 on public procurement and repealing Directive 2004/18/EC (<a href="http://publications.europa.eu/resource/oj/JOL_2014_094_R_TOC"
+                       >OJ L 94, 28.3.2014, p. 65</a>).</p>
+                 <p class="oj-note">
+                    <a id="ntr9-L_2016157EN.01000101-E0009" href="#ntc9-L_2016157EN.01000101-E0009"
+                       >(<span class="oj-super">9</span>)</a>  Directive 2014/25/EU of the European Parliament and of the Council of 26 February 2014 on procurement by entities operating in the water, energy, transport and postal services sectors and repealing Directive 2004/17/EC (<a href="http://publications.europa.eu/resource/oj/JOL_2014_094_R_TOC"
+                       >OJ L 94, 28.3.2014, p. 243</a>).</p>
+                 <p class="oj-note">
+                    <a id="ntr10-L_2016157EN.01000101-E0010" href="#ntc10-L_2016157EN.01000101-E0010"
+                       >(<span class="oj-super">10</span>)</a>  Directive 95/46/EC of the European Parliament and of the Council of 24 October 1995 on the protection of individuals with regard to the processing of personal data and on the free movement of such data (<a href="http://publications.europa.eu/resource/oj/JOL_1995_281_R_TOC"
+                       >OJ L 281, 23.11.1995, p. 31</a>).</p>
+                 <p class="oj-note">
+                    <a id="ntr11-L_2016157EN.01000101-E0011" href="#ntc11-L_2016157EN.01000101-E0011"
+                       >(<span class="oj-super">11</span>)</a>  Directive 2004/48/EC of the European Parliament and of the Council of 29 April 2004 on the enforcement of intellectual property rights (<a href="http://publications.europa.eu/resource/oj/JOL_2004_157_R_TOC"
+                       >OJ L 157, 30.4.2004, p. 45</a>).</p>
+                 <p class="oj-note">
+                    <a id="ntr12-L_2016157EN.01000101-E0012" href="#ntc12-L_2016157EN.01000101-E0012"
+                       >(<span class="oj-super">12</span>)</a>  Regulation (EC) No 45/2001 of the European Parliament and of the Council of 18 December 2000 on the protection of individuals with regard to the processing of personal data by the Community institutions and bodies and on the free movement of such data (<a href="http://publications.europa.eu/resource/oj/JOL_2001_008_R_TOC"
+                       >OJ L 8, 12.1.2001, p. 1</a>).</p>
+              </div>
+              <hr class="oj-doc-end"/>
+           </body>
+        </html>
+  recorded_at: 2026-10-26T22:08:53.423Z
+- request:
+    method: POST
+    uri: https://publications.europa.eu/webapi/rdf/sparql
+    headers:
+      accept:
+      - application/sparql-results+json
+      content-type:
+      - application/x-www-form-urlencoded;charset=UTF-8
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: text
+      content: >-
+        query=PREFIX+cdm%3A+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fontology%2Fcdm%23%3E%0ASELECT+%3Ftitle+%3Fdate+%3Fecli+%3Finforce+%3Fconsolidated+%3FconsolidatedDate+WHERE+%7B%0A++%3Fwork+cdm%3Aresource_legal_id_celex+%2232016L0943%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23string%3E+.%0A++OPTIONAL+%7B+%3Fwork+cdm%3Awork_date_document+%3Fdate+%7D%0A++OPTIONAL+%7B+%3Fwork+cdm%3Acase-law_ecli+%3Fecli+%7D%0A++OPTIONAL+%7B+%3Fwork+cdm%3Aresource_legal_in-force+%3Finforce+%7D%0A++OPTIONAL+%7B+%3Fexpr+cdm%3Aexpression_belongs_to_work+%3Fwork+%3B+cdm%3Aexpression_uses_language+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Flanguage%2FENG%3E+%3B+cdm%3Aexpression_title+%3Ftitle+%7D%0A++OPTIONAL+%7B+%3Fc+cdm%3Aact_consolidated_consolidates_resource_legal+%3Fwork+%3B+cdm%3Aresource_legal_id_celex+%3Fconsolidated+.+FILTER%28STRSTARTS%28STR%28%3Fconsolidated%29%2C+%2202016L0943-%22%29%29+OPTIONAL+%7B+%3Fc+cdm%3Aact_consolidated_date+%3FconsolidatedDate+%7D+%7D%0A%7D+ORDER+BY+DESC%28%3Fconsolidated%29+LIMIT+1
+  response:
+    status: 200
+    headers:
+      accept-ranges:
+      - bytes
+      connection:
+      - keep-alive
+      content-disposition:
+      - filename=sparql_2026-10-26_22-08-53Z.json
+      content-type:
+      - application/sparql-results+json
+      date:
+      - Mon, 26 Oct 2026 22:08:53 GMT
+    body:
+      type: json
+      content:
+        head:
+          link: []
+          vars:
+          - title
+          - date
+          - ecli
+          - inforce
+          - consolidated
+          - consolidatedDate
+        results:
+          distinct: false
+          ordered: true
+          bindings:
+          - title:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: >-
+                Directive (EU) 2016/943 of the European Parliament and of the Council of 8 June
+                2016 on the protection of undisclosed know-how and business information (trade
+                secrets) against their unlawful acquisition, use and disclosure (Text with EEA
+                relevance)
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 2016-06-08
+            inforce:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#boolean"
+              value: "1"
+            consolidated:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 02016L0943-20160615
+            consolidatedDate:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 2016-06-15
+  recorded_at: 2026-10-26T22:08:53.192Z
