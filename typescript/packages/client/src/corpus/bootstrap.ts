@@ -36,6 +36,7 @@ export const CORPUS_ENV_PREFIXES = {
   ipos_statutes: "IPOS_STATUTES",
   ipos_manuals: "IPOS_MANUALS",
   inpi_br_statutes: "INPI_BR_STATUTES",
+  inpi_ar_statutes: "INPI_AR_STATUTES",
   legifrance_ip: "LEGIFRANCE_IP",
 } as const;
 export type CorpusId = keyof typeof CORPUS_ENV_PREFIXES;

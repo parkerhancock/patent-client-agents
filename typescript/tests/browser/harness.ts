@@ -10,6 +10,7 @@ import {
   GooglePatentsClient,
   getPatentClaims,
   IlpoStatutesClient,
+  InpiArStatutesClient,
   InpiBrStatutesClient,
   IpoInMpppClient,
   IposManualsClient,
@@ -88,6 +89,14 @@ try {
   results.ilpo_section = (
     await ilpo.getSectionByCitation("Article 13 Commercial Torts Law")
   )?.section_label;
+  const argentina = new InpiArStatutesClient({
+    source: () => bytes("/fixtures/inpi-ar-statutes/inpi_ar_statutes.db"),
+  });
+  results.inpi_ar_hits = (
+    await argentina.search({ query: "informacion secreta" })
+  ).hits
+    .map((hit) => hit.section_label)
+    .join(",");
   const singapore = new IposManualsClient({
     source: () => bytes("/fixtures/ipos/ipos_manuals.db"),
   });
