@@ -13,6 +13,7 @@ import {
   IlpoStatutesClient,
   InpiBrStatutesClient,
   IpoInMpppClient,
+  IpophlStatutesClient,
   IposManualsClient,
   LegifranceIpClient,
   MpepClient,
@@ -101,6 +102,12 @@ try {
   });
   results.cnipa_section = (
     await cnipa.getSectionByCitation("Rule 20 Implementing Regulations")
+  )?.section_label;
+  const ipophl = new IpophlStatutesClient({
+    source: () => bytes("/fixtures/ipophl-statutes/ipophl_statutes.db"),
+  });
+  results.ipophl_section = (
+    await ipophl.getSectionByCitation("Section 3 RA 10372")
   )?.section_label;
   const singapore = new IposManualsClient({
     source: () => bytes("/fixtures/ipos/ipos_manuals.db"),

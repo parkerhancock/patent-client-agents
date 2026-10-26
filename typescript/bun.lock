@@ -17,6 +17,7 @@
         "cassetter": "0.11.0",
         "fflate": "0.8.3",
         "ky": "2.2.0",
+        "linkedom": "0.18.13",
         "pdf-lib": "1.17.1",
         "pdfjs-dist": "4.10.38",
         "playwright": "1.64.0",
