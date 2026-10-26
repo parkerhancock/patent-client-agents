@@ -16,6 +16,7 @@ import {
   IpoInMpppClient,
   IpophlStatutesClient,
   IposManualsClient,
+  KipoStatutesClient,
   LegifranceIpClient,
   MpepClient,
   parseHearingNotice,
@@ -124,6 +125,12 @@ try {
   });
   results.thai_section = (
     await thai.getSectionByCitation("Trademark Act s. 109/1")
+  )?.section_label;
+  const kipo = new KipoStatutesClient({
+    source: () => bytes("/fixtures/kipo-statutes/kipo_statutes.db"),
+  });
+  results.kipo_section = (
+    await kipo.getSectionByCitation("Article 7-2 of the Patent Act")
   )?.section_label;
   const singapore = new IposManualsClient({
     source: () => bytes("/fixtures/ipos/ipos_manuals.db"),

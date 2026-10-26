@@ -187,6 +187,7 @@ try {
     ipophl_section?: string;
     inpi_ar_hits?: string;
     thai_section?: string;
+    kipo_section?: string;
     ipos_manual?: string;
     idb_cache?: string;
     default_cache?: string;
@@ -210,6 +211,7 @@ try {
     checked.ipophl_section !== "Section 3 RA 10372" ||
     checked.inpi_ar_hits !== "Artículo 1° Ley 24.766" ||
     checked.thai_section !== "Section 109/1 Trademark Act" ||
+    checked.kipo_section !== "Article 7-2 Patent Act" ||
     checked.ipos_manual !== "Discoveries" ||
     checked.idb_cache !== "indexeddb:1:1:135.00" ||
     checked.default_cache !== "memory"

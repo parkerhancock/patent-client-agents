@@ -25,6 +25,7 @@ import {
   IpoInStatutesClient,
   IpophlStatutesClient,
   IposStatutesClient,
+  KipoStatutesClient,
   LegifranceIpClient,
   MoppClient,
   MpepClient,
@@ -163,6 +164,15 @@ results.inpi_ar_section = (
   await inpiAr.getSectionByCitation("art. 36 quater ley 11723")
 )?.section_label;
 assert.equal(results.inpi_ar_section, "Artículo 36 quáter Ley 11.723");
+const kipo = new KipoStatutesClient({
+  source: new Uint8Array(
+    zstdCompressSync(await readFile(fixture("kipo-statutes/kipo_statutes.db"))),
+  ),
+});
+results.kipo_section = (
+  await kipo.getSectionByCitation("Patent Act Art. 29(1)")
+)?.title;
+assert.equal(results.kipo_section, "Requirements for Patent Registration");
 const inpiBr = new InpiBrStatutesClient({
   source: new Uint8Array(
     zstdCompressSync(
@@ -402,6 +412,7 @@ for (const client of [
   cnipa,
   ipophl,
   inpiAr,
+  kipo,
   inpiBr,
   legifrance,
   thai,

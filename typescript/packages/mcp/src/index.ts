@@ -37,6 +37,7 @@ import {
   IposStatutesClient,
   JapanIpHighCourtClient,
   JpoClient,
+  KipoStatutesClient,
   KiprisClient,
   LegifranceIpClient,
   MoppClient,
@@ -131,6 +132,10 @@ import {
 } from "./ipos.js";
 import { registerJapanIpHighCourtTools } from "./japan-ip-high-court.js";
 import { registerJpoTools } from "./jpo.js";
+import {
+  type KipoStatutesReader,
+  registerKipoStatutesTools,
+} from "./kipo-statutes.js";
 import { registerKiprisTools } from "./kipris.js";
 import {
   type LegifranceIpReader,
@@ -260,6 +265,8 @@ export interface ServerOptions {
   cnipaStatutes?: CnipaStatutesReader;
   /** IPOPHL Philippines statutes corpus reader; omitted, it uses the default artifact path. */
   ipophlStatutes?: IpophlStatutesReader;
+  /** KIPO Korea statutes corpus reader; omitted, it uses the default artifact path. */
+  kipoStatutes?: KipoStatutesReader;
   /** IPOS Singapore statutes and manuals corpus readers; omitted, they use their default artifact paths. */
   iposStatutes?: IposStatutesReader;
   iposManuals?: IposManualsReader;
@@ -555,6 +562,7 @@ export function createServer(options: ServerOptions = {}): FastMCP {
   const cnipaStatutes = options.cnipaStatutes ?? own(new CnipaStatutesClient());
   const ipophlStatutes =
     options.ipophlStatutes ?? own(new IpophlStatutesClient());
+  const kipoStatutes = options.kipoStatutes ?? own(new KipoStatutesClient());
   const iposStatutes = options.iposStatutes ?? own(new IposStatutesClient());
   const iposManuals = options.iposManuals ?? own(new IposManualsClient());
   const inpiBrStatutes =
@@ -1082,6 +1090,11 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     server,
     ipophlStatutes,
     options.auth ? requireScopes("ipophl:read") : undefined,
+  );
+  registerKipoStatutesTools(
+    server,
+    kipoStatutes,
+    options.auth ? requireScopes("kipo:read") : undefined,
   );
   registerIposTools(
     server,
