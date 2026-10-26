@@ -1,0 +1,85 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://api.prv.se/designs/applications/1970-1175
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com; contact data@prv.se)
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-methods:
+      - GET
+      access-control-allow-origin:
+      - "*"
+      content-type:
+      - application/json
+      date:
+      - Mon, 26 Oct 2026 21:53:36 GMT
+      x-powered-by:
+      - ARR/3.0
+    body:
+      type: json
+      content:
+        dossierId: 2457436
+        applicationNumber: 1970-1175
+        registrationNumber: "10070"
+        statusEn: Expired
+        statusSv: Avförd
+        filingDate: 1970-11-09
+        receptionDate: 1970-11-09
+        designsEn:
+        - designId: 32257
+          designNumber: 1
+          productType: STOL
+          designStatus: Registered
+          locarnos:
+          - 06-01
+          designers:
+          - designerId: "1502990"
+            designerName: Tom Ahlström
+            designerAddress: c/o A & E Design Aktiebolag Rehnsgatan 11 113 57 STOCKHOLM
+            designerCountryCode: SE
+          - designerId: "1502991"
+            designerName: Hans Ehrich
+            designerAddress: c/o A & E Design Aktiebolag Rehnsgatan 11 113 57 STOCKHOLM
+            designerCountryCode: SE
+          isModel: false
+          designViews: []
+        designsSv:
+        - designId: 32257
+          designNumber: 1
+          productType: STOL
+          designStatus: Registrerad
+          locarnos:
+          - 06-01
+          designers:
+          - designerId: "1502990"
+            designerName: Tom Ahlström
+            designerAddress: c/o A & E Design Aktiebolag Rehnsgatan 11 113 57 STOCKHOLM
+            designerCountryCode: SE
+          - designerId: "1502991"
+            designerName: Hans Ehrich
+            designerAddress: c/o A & E Design Aktiebolag Rehnsgatan 11 113 57 STOCKHOLM
+            designerCountryCode: SE
+          isModel: false
+          designViews: []
+        applicantsShortFormat: "Tom Ahlström _;_Hans Ehrich "
+        applicants:
+        - Tom Ahlström, c/o A & E Design Aktiebolag Rehnsgatan 11 113 57 STOCKHOLM, SE
+        - Hans Ehrich, c/o A & E Design Aktiebolag Rehnsgatan 11 113 57 STOCKHOLM, SE
+        representatives:
+        - Sydsvenska Patentbyrån AB, Drottningtorget 1 211 25 Malmö, SE
+        designers:
+        - Tom Ahlström, c/o A & E Design Aktiebolag Rehnsgatan 11 113 57 STOCKHOLM, SE
+        - Hans Ehrich, c/o A & E Design Aktiebolag Rehnsgatan 11 113 57 STOCKHOLM, SE
+        dvDocuments: []
+        dvPublications: []
+        updated: 2026-01-25
+        md5: 5b84669ce7eae907c294c04cfad0240e
+  recorded_at: 2026-10-26T21:53:36.521Z

@@ -9,6 +9,8 @@ export const samples = {
   patentCompact: "26162461",
   epPatent: "EP00108480.5",
   missing: "SE9999999-9",
+  trademark: "2000-00010",
+  design: "1970-1175",
 } as const;
 
 type Run = (client: PrvClient) => Promise<unknown>;
@@ -31,6 +33,9 @@ export const operations: Record<string, Run> = {
   "patent-record-compact": (c) => c.getPatent(samples.patentCompact),
   "patent-record-ep": (c) => c.getPatent(samples.epPatent),
   "patent-missing": (c) => c.getPatent(samples.missing),
+  "trademark-record": (c) => c.getTrademark(samples.trademark),
+  "trademark-missing": (c) => c.getTrademark("1999-99999"),
+  "design-record": (c) => c.getDesign(samples.design),
 };
 /** MCP tool calls, one cassette each. */
 export const toolCalls: Record<string, [string, Record<string, unknown>]> = {
@@ -43,6 +48,11 @@ export const toolCalls: Record<string, [string, Record<string, unknown>]> = {
     "search_prv_spcs",
     { substance_product: "naproxen", page_size: 2 },
   ],
+  "get-trademarks": [
+    "get_prv_trademark",
+    { application_number: [samples.trademark, "1999-99999"] },
+  ],
+  "get-designs": ["get_prv_design", { application_number: samples.design }],
   "search-designs": ["search_prv_designs", { text: "stol", page_size: 2 }],
 };
 

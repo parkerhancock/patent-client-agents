@@ -30,6 +30,82 @@ export function leanPrvPatent(record: PrvRow): PrvRow {
   return { ...record, firstDrawing: metadata };
 }
 
+/** Lean trademark and design records drop the inline base64 image bytes of each document; the image URLs stay. */
+export function leanPrvDossier(record: PrvRow): PrvRow {
+  const documents = record.dvDocuments;
+  if (!Array.isArray(documents)) return record;
+  return {
+    ...record,
+    dvDocuments: documents.map((document) => {
+      if (!document || typeof document !== "object") return document;
+      const { data: _bytes, ...rest } = document as Record<string, unknown>;
+      return rest;
+    }),
+  };
+}
+
+/** Python's fetch_many over PRV records: bounded concurrency, input order; a single unknown number raises, a list collects not_found. */
+async function records(
+  value: string | string[],
+  normalize: (n: string) => string,
+  fetch: (n: string) => Promise<{ data: PrvRow; provenance: Provenance }>,
+  lean: (row: PrvRow) => PrvRow,
+  noun: string,
+  path: string,
+) {
+  const numbers = (typeof value === "string" ? [value] : value)
+    .map((n) => n.trim())
+    .filter(Boolean)
+    .map(normalize);
+  if (!numbers.length)
+    throw new Error("Provide at least one PRV application number.");
+  const single = typeof value === "string";
+  const results: (PrvRow | null)[] = new Array(numbers.length);
+  let first: Provenance | undefined;
+  let next = 0;
+  await Promise.all(
+    Array.from({ length: Math.min(CONCURRENCY, numbers.length) }, async () => {
+      while (next < numbers.length) {
+        const index = next++;
+        try {
+          const record = await fetch(numbers[index] as string);
+          first ??= record.provenance;
+          results[index] = record.data;
+        } catch (error) {
+          if (
+            single ||
+            !(error instanceof PrvError && error.code === "NOT_FOUND")
+          )
+            throw error;
+          results[index] = null;
+        }
+      }
+    }),
+  );
+  const notFound = numbers.filter((_, i) => !results[i]);
+  const items = results.filter((row): row is PrvRow => !!row).map(lean);
+  const base = `${PRV_API_HOST}/${path}/applications/`;
+  const provenance: Provenance = first
+    ? { ...first, source_url: numbers.length === 1 ? first.source_url : base }
+    : {
+        source_url: base,
+        source_name: "Patent- och registreringsverket (PRV, Sweden)",
+        retrieved_at: new Date().toISOString(),
+        cache_hit: false,
+      };
+  return {
+    ...listEnvelope(
+      numbers.length === 1 && items.length
+        ? `PRV ${noun} records — 1 record for ${numbers[0]}.`
+        : `Fetched ${items.length} of ${numbers.length} PRV ${noun} records.${notFound.length ? ` Not found: ${notFound.join(", ")}.` : ""}`,
+      items,
+      provenance,
+    ),
+    more_available: false,
+    not_found: notFound,
+  };
+}
+
 function summary(label: string, page: PrvPage, text: string | null) {
   const total = page.total_hits.toLocaleString("en-US");
   return text
@@ -147,74 +223,71 @@ export function registerPrvTools(
         ),
       }),
     },
-    async ({ application_number, application_type, full }) => {
-      const numbers = (
-        typeof application_number === "string"
-          ? [application_number]
-          : application_number
-      )
-        .map((n) => n.trim())
-        .filter(Boolean)
-        .map((n) =>
-          application_type === "EP" && /^\d/.test(n) ? `EP${n}` : n,
-        );
-      if (!numbers.length)
-        throw new Error("Provide at least one PRV application number.");
-      const single = typeof application_number === "string";
-      const results: (PrvRow | null)[] = new Array(numbers.length);
-      let first: Provenance | undefined;
-      let next = 0;
-      await Promise.all(
-        Array.from(
-          { length: Math.min(CONCURRENCY, numbers.length) },
-          async () => {
-            while (next < numbers.length) {
-              const index = next++;
-              try {
-                const record = await client.getPatent(numbers[index] as string);
-                first ??= record.provenance;
-                results[index] = record.data;
-              } catch (error) {
-                // Python's fetch_many: a single lookup raises; a list collects not_found.
-                if (
-                  single ||
-                  !(error instanceof PrvError && error.code === "NOT_FOUND")
-                )
-                  throw error;
-                results[index] = null;
-              }
-            }
-          },
-        ),
+    async ({ application_number, application_type, full }) =>
+      records(
+        application_number,
+        (n) => (application_type === "EP" && /^\d/.test(n) ? `EP${n}` : n),
+        (n) => client.getPatent(n),
+        full ? (row) => row : leanPrvPatent,
+        "patent",
+        "patents",
+      ),
+  );
+
+  const dvNumber = (example: string) =>
+    z
+      .union([
+        z.string().min(1).max(20),
+        z.array(z.string().max(20)).min(1).max(LIST_CAP),
+      ])
+      .describe(
+        `PRV application number, e.g. '${example}'. Pass a list for portfolio fan-outs.`,
       );
-      const notFound = numbers.filter((_, i) => !results[i]);
-      const items = results
-        .filter((row): row is PrvRow => !!row)
-        .map((row) => (full ? row : leanPrvPatent(row)));
-      const provenance: Provenance = {
-        ...(first ?? {
-          source_name: "Patent- och registreringsverket (PRV, Sweden)",
-          retrieved_at: new Date().toISOString(),
-          cache_hit: false,
-          source_url: "",
-        }),
-        source_url:
-          numbers.length === 1 && first
-            ? first.source_url
-            : `${PRV_API_HOST}/patents/applications/`,
-      };
-      return {
-        ...listEnvelope(
-          numbers.length === 1 && items.length
-            ? `PRV patent records — 1 record for ${numbers[0]}.`
-            : `Fetched ${items.length} of ${numbers.length} PRV patent records.${notFound.length ? ` Not found: ${notFound.join(", ")}.` : ""}`,
-          items,
-          provenance,
+  server.tool(
+    {
+      ...options,
+      name: "get_prv_trademark",
+      description:
+        "Fetch one or more Sweden trademark register records from PRV.\n\nWraps `GET api.prv.se/trademarks/applications/{number}`, the record PRV's own search app shows. Returns status (En/Sv), filing, registration and expiry dates, the opposition period, kind and feature of mark, applicants and representatives, Nice classes with their goods and services terms, Vienna classes, documents with image URLs, and gazette publications. Image bytes are dropped by default. A number PRV does not know is listed in `not_found`.\n\nRelated tools: `search_prv_trademarks` to find application numbers.",
+      input: z.object({
+        application_number: dvNumber("2025-05038"),
+        full: fullField(
+          "When False (default), drops the base64 image bytes of each document; the image URLs stay.",
         ),
-        more_available: false,
-        not_found: notFound,
-      };
+      }),
     },
+    ({ application_number, full }) =>
+      records(
+        application_number,
+        (n) => n,
+        (n) => client.getTrademark(n),
+        full ? (row) => row : leanPrvDossier,
+        "trademark",
+        "trademarks",
+      ),
+  );
+  server.tool(
+    {
+      ...options,
+      name: "get_prv_design",
+      description:
+        "Fetch one or more Sweden design register records from PRV.\n\nWraps `GET api.prv.se/designs/applications/{number}`, the record PRV's own search app shows. Returns status (En/Sv), dates, applicants and designers, each design in the application with its title (En/Sv), documents with each view's image URLs, and gazette publications. Image bytes (often over 1 MB a view) are dropped by default. A number PRV does not know is listed in `not_found`.\n\nRelated tools: `search_prv_designs` to find application numbers.",
+      input: z.object({
+        application_number: dvNumber("2026-0151"),
+        full: fullField(
+          "When False (default), drops the base64 image bytes of each view; the image URLs stay.",
+        ),
+      }),
+    },
+    ({ application_number, full }) =>
+      records(
+        application_number,
+        (n) => n,
+        (n) => client.getDesign(n),
+        full ? (row) => row : leanPrvDossier,
+        "design",
+        "designs",
+      ),
   );
 
   server.tool(

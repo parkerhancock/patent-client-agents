@@ -3,7 +3,7 @@ import { generateKeyPairSync, sign } from "node:crypto";
 import { type PrvClient, PrvError } from "@patent-client-agents/client";
 import { BearerAuth, Client } from "@prefecthq/fastmcp-ts/client";
 import { createServer } from "../packages/mcp/src/index.js";
-import { leanPrvPatent } from "../packages/mcp/src/prv.js";
+import { leanPrvDossier, leanPrvPatent } from "../packages/mcp/src/prv.js";
 import {
   prvCassette,
   replayClient,
@@ -14,6 +14,8 @@ import {
 const PRV_TOOLS = [
   "search_prv_patents",
   "get_prv_patent",
+  "get_prv_trademark",
+  "get_prv_design",
   "search_prv_trademarks",
   "search_prv_designs",
   "search_prv_spcs",
@@ -192,4 +194,23 @@ test("Bun HTTP serves PRV tools only to tokens with prv:read", async () => {
     await server.close();
     await identity.stop(true);
   }
+});
+
+test("trademark and design tools return records without image bytes", async () => {
+  const marks = await replayed("get-trademarks");
+  expect(marks.items.map((item) => item.applicationNumber)).toEqual([
+    samples.trademark,
+  ]);
+  expect(marks.not_found).toEqual(["1999-99999"]);
+  const documents = marks.items[0]?.dvDocuments as Record<string, unknown>[];
+  expect(documents.length).toBeGreaterThan(0);
+  expect(documents.every((document) => !("data" in document))).toBe(true);
+  expect(documents[0]).toHaveProperty("imageEndpointUrl");
+  const designs = await replayed("get-designs");
+  expect(designs.summary).toBe(
+    `PRV design records — 1 record for ${samples.design}.`,
+  );
+  expect(
+    leanPrvDossier({ dvDocuments: [{ data: "AAAA", documentId: 1 }], a: 1 }),
+  ).toEqual({ dvDocuments: [{ documentId: 1 }], a: 1 });
 });

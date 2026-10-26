@@ -88,9 +88,19 @@ the request bodies, number normalization, match-type fallback, paging and
 error handling. [MCP tests](../tests/prv-mcp.test.ts) run the tools through
 a real client and check `prv:read` on the authenticated HTTP listener.
 
+## Trademark and design records
+
+`get_prv_trademark` and `get_prv_design` wrap
+`api.prv.se/trademarks/applications/{number}` and
+`/designs/applications/{number}`. PRV's own app reads these records, but
+Python never wrapped them. They take numbers like `2025-05038` and
+`2026-0151`. An unknown number is HTTP 404 with a message.
+
+Each record lists its documents with image and thumbnail URLs, and with the
+image bytes inline in base64. A design view runs up to 1.2 MB. The lean
+default drops the bytes and keeps the URLs.
+
 ## Not ported
 
-PRV's app also calls trademark and design record endpoints
-(`api.prv.se/trademarks/applications/{id}`, `/designs/applications/{id}`),
-advanced searches, gazette searches and document downloads. Python never
-wrapped them, and this port doesn't either.
+PRV's app also calls advanced searches, gazette searches and document
+downloads. Neither Python nor this port wraps them.

@@ -225,3 +225,33 @@ test("malformed responses and server errors are errors", async () => {
     fake(() => ({}), 500).client.searchPatents(),
   ).rejects.toMatchObject({ code: "UPSTREAM_ERROR", status: 500 });
 });
+
+test("trademark and design records, as PRV's app reads them", async () => {
+  const mark = await prvRecording<{
+    data: PrvRow;
+    provenance: { source_url: string };
+  }>("trademark-record");
+  expect(mark.data).toMatchObject({
+    applicationNumber: samples.trademark,
+    statusEn: expect.any(String),
+    classNumbers: expect.any(Array),
+  });
+  expect(mark.provenance.source_url).toBe(
+    `https://api.prv.se/trademarks/applications/${samples.trademark}`,
+  );
+  const design = await prvRecording<{ data: PrvRow }>("design-record");
+  expect(design.data).toMatchObject({
+    applicationNumber: samples.design,
+    designsEn: expect.any(Array),
+  });
+  const missing = (await prvRecording("trademark-missing").catch(
+    (e) => e,
+  )) as Error;
+  expect(missing).toMatchObject({ code: "NOT_FOUND", status: 404 });
+  expect(missing.message).toBe(
+    "PRV found no record: There is no trademark with number 1999-99999.",
+  );
+  await expect(new PrvClient().getDesign("SE1234")).rejects.toThrow(
+    "look like 2025-05038",
+  );
+});

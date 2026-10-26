@@ -98,9 +98,20 @@ const pageSchema = z.looseObject({
   page: z.number().int().nonnegative(),
 });
 const rowsSchema = z.array(z.looseObject({}));
-const recordSchema = z.looseObject({
-  applicationNumberFormatted: z.string().min(1),
-});
+/** Patent records carry applicationNumberFormatted; trademark and design records applicationNumber. */
+const recordSchema = z.union([
+  z.looseObject({ applicationNumberFormatted: z.string().min(1) }),
+  z.looseObject({ applicationNumber: z.string().min(1) }),
+]);
+/** A trademark or design application number (2025-05038, 2026-0151). */
+function dvNumber(value: string): string {
+  const number = value.trim();
+  if (!/^\d{4}-\d{1,6}$/.test(number))
+    throw new TypeError(
+      `PRV trademark and design numbers look like 2025-05038: ${value}`,
+    );
+  return number;
+}
 
 /**
  * The register's form of a patent application number. The record endpoint
@@ -123,7 +134,8 @@ function translate(error: unknown): unknown {
   if (error instanceof HttpResponseError)
     try {
       const body = JSON.parse(error.bodyText) as { message?: unknown };
-      if (typeof body.message === "string") message = body.message;
+      if (typeof body.message === "string")
+        message = body.message.replace(/\.$/, "");
     } catch {}
   const detail = message ? `: ${message}` : "";
   if (error.status === 404)
@@ -341,18 +353,21 @@ export class PrvClient extends CachedClient {
     );
   }
 
-  /** The patent register record: status, register entries, gazette announcements, publications and first drawing. */
-  async getPatent(
-    applicationNumber: string,
-    options: TransportRequestOptions = {},
+  /** GET one api.prv.se record; PRV answers an unknown number with HTTP 404 and a message. */
+  private async record(
+    path: string,
+    number: string,
+    options: TransportRequestOptions,
   ): Promise<{ data: PrvRow; provenance: Provenance }> {
-    const number = prvApplicationNumber(applicationNumber);
     let result: Awaited<ReturnType<GenericHttpTransport["json"]>>;
     try {
       result = await this.api.json(
         "GET",
-        `/patents/applications/${encodeURIComponent(number)}`,
-        { ...options, readErrorBody: true },
+        `${path}${encodeURIComponent(number)}`,
+        {
+          ...options,
+          readErrorBody: true,
+        },
       );
     } catch (error) {
       throw translate(error);
@@ -365,5 +380,43 @@ export class PrvClient extends CachedClient {
         "INVALID_RESPONSE",
       );
     return { data: parsed.data as PrvRow, provenance: result.provenance };
+  }
+  /** The patent register record: status, register entries, gazette announcements, publications and first drawing. */
+  async getPatent(
+    applicationNumber: string,
+    options: TransportRequestOptions = {},
+  ) {
+    return this.record(
+      "/patents/applications/",
+      prvApplicationNumber(applicationNumber),
+      options,
+    );
+  }
+  /**
+   * The trademark record (PRV's app reads it; Python never wrapped it):
+   * status, dates, opposition period, applicants and representatives, Nice
+   * classes with their terms, Vienna classes, documents with image URLs and
+   * inline image bytes, and gazette publications.
+   */
+  async getTrademark(
+    applicationNumber: string,
+    options: TransportRequestOptions = {},
+  ) {
+    return this.record(
+      "/trademarks/applications/",
+      dvNumber(applicationNumber),
+      options,
+    );
+  }
+  /** The design record: status, dates, applicants, designers, each design's title and views, documents and publications. */
+  async getDesign(
+    applicationNumber: string,
+    options: TransportRequestOptions = {},
+  ) {
+    return this.record(
+      "/designs/applications/",
+      dvNumber(applicationNumber),
+      options,
+    );
   }
 }

@@ -8,8 +8,12 @@ import { operations, prvCassette, toolCalls } from "../tests/prv-recordings.js";
 /** Record the PRV cassettes. Prints outcomes, never bodies. */
 const pause = () => Bun.sleep(800);
 const client = new PrvClient({ retryLimit: 0 });
+/** Cassette names to record, e.g. `bun run record:prv trademark-record mcp-get-designs`; all when none. */
+const only = process.argv.slice(2);
+const wanted = (name: string) => !only.length || only.includes(name);
 
 for (const [name, run] of Object.entries(operations)) {
+  if (!wanted(name)) continue;
   const outcome = await prvCassette(
     name,
     () =>
@@ -28,6 +32,7 @@ for (const [name, run] of Object.entries(operations)) {
   await pause();
 }
 for (const [name, [tool, args]] of Object.entries(toolCalls)) {
+  if (!wanted(`mcp-${name}`)) continue;
   const server = createServer({ clients: { prv: client } });
   const mcp = await Client.connect(server, {
     versionNegotiation: { mode: "legacy" },

@@ -1,0 +1,26 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://api.prv.se/trademarks/applications/1999-99999
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com; contact data@prv.se)
+    body:
+      type: none
+  response:
+    status: 404
+    headers:
+      content-type:
+      - application/json
+      date:
+      - Mon, 26 Oct 2026 21:53:32 GMT
+      x-powered-by:
+      - ARR/3.0
+    body:
+      type: json
+      content:
+        message: There is no trademark with number 1999-99999.
+  recorded_at: 2026-10-26T21:53:32.436Z
