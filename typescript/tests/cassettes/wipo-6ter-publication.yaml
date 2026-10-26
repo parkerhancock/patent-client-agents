@@ -1,0 +1,60 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://6ter.wipo.int/api/v1/publication
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-credentials:
+      - "true"
+      access-control-allow-headers:
+      - "*"
+      access-control-allow-methods:
+      - DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Mon, 26 Oct 2026 21:58:42 GMT
+      via:
+      - 1.1 f0ddd258f2befca309faaacbbff6459e.cloudfront.net (CloudFront)
+      x-amz-apigw-id:
+      - F3z68F7_FiAEGKw=
+      x-amz-cf-id:
+      - ynEmaAhaz9UcfvktLgP4StcN7YTDSU8bqszu3C6zB_yi0sp5IApG6A==
+      x-amz-cf-pop:
+      - DFW56-P11
+      x-amzn-requestid:
+      - 9a06c92c-1e6b-4c96-88bf-88da8cfafbc4
+      x-amzn-trace-id:
+      - >-
+        Root=1-6adfcd12-6074ee751940920460bb19fd;Parent=5282eab499cadfad;Sampled=0;Lineage=1:05a11079:0
+      x-cache:
+      - Miss from cloudfront
+      x-requested-with:
+      - "*"
+    body:
+      type: json
+      content:
+        zip:
+          url: https://6ter.wipo.int/files/6ter.zip
+          available: true
+          lastModified: 2026-09-30T06:16:47Z
+          size: 271870831
+        md5:
+          url: https://6ter.wipo.int/files/6ter.md5
+          available: true
+          lastModified: 2026-09-30T06:16:50Z
+          size: 43
+  recorded_at: 2026-10-26T21:58:42.590Z

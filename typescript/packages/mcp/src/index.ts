@@ -53,6 +53,7 @@ import {
   TsdrClient,
   TwTradeSecretsClient,
   UpcStatutesClient,
+  Wipo6terClient,
   WipoLexClient,
 } from "@patent-client-agents/client";
 import {
@@ -141,6 +142,7 @@ import {
   type UpcStatutesReader,
 } from "./upc-statutes.js";
 import { registerUsitcTools, usitcTokenFromEnv } from "./usitc.js";
+import { registerWipo6terTools } from "./wipo-6ter.js";
 import { registerWipoLexTools } from "./wipo-lex.js";
 
 export type {
@@ -174,6 +176,7 @@ export interface UsptoClients {
   canadaFederalCourt: CanadaFederalCourtClient;
   chinaSpcIpCourt: ChinaSpcIpCourtClient;
   copyright: CopyrightClient;
+  wipo6ter: Wipo6terClient;
   wipoLex: WipoLexClient;
   /** USITC EDIS; served only when a client is provided or USITC_EDIS_TOKEN(_FILE) is set. */
   edis: EdisClient;
@@ -705,6 +708,7 @@ export function createServer(options: ServerOptions = {}): FastMCP {
       provided.canadaFederalCourt ?? new CanadaFederalCourtClient(),
     chinaSpcIpCourt: provided.chinaSpcIpCourt ?? new ChinaSpcIpCourtClient(),
     copyright: provided.copyright ?? new CopyrightClient(),
+    wipo6ter: provided.wipo6ter ?? new Wipo6terClient(),
     wipoLex: provided.wipoLex ?? new WipoLexClient(),
     epoLegal,
     upcStatutes,
@@ -949,6 +953,11 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     server,
     clients.copyright,
     options.auth ? requireScopes("copyright:read") : undefined,
+  );
+  registerWipo6terTools(
+    server,
+    clients.wipo6ter,
+    options.auth ? requireScopes("wipo:read") : undefined,
   );
   registerWipoLexTools(
     server,

@@ -95,4 +95,5 @@ export * from "./unified.js";
 export * from "./upc-statutes.js";
 export * from "./usitc.js";
 export * from "./uspto-resources.js";
+export * from "./wipo-6ter.js";
 export * from "./wipo-lex.js";

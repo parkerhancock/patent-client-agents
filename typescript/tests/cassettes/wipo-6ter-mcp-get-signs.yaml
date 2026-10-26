@@ -1,0 +1,247 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://6ter.wipo.int/api/v1/signs/MT0013
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-credentials:
+      - "true"
+      access-control-allow-headers:
+      - "*"
+      access-control-allow-methods:
+      - DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Mon, 26 Oct 2026 21:58:44 GMT
+      via:
+      - 1.1 0d3d9f00d3db83aee81d1436f630be78.cloudfront.net (CloudFront)
+      x-amz-apigw-id:
+      - F3z7VGWCliAEKgA=
+      x-amz-cf-id:
+      - 5314pJD-q5apJifFw-xDLpO3HSH04X6DUjmspcggqurzQDteL-N0cQ==
+      x-amz-cf-pop:
+      - DFW56-P11
+      x-amzn-requestid:
+      - f421006b-e014-4205-b9eb-ded1c6739023
+      x-amzn-trace-id:
+      - >-
+        Root=1-6adfcd14-34b602f0066034bb379aece6;Parent=4caf3541c26f58e1;Sampled=0;Lineage=1:7e0f53df:0
+      x-cache:
+      - Miss from cloudfront
+      x-requested-with:
+      - "*"
+    body:
+      type: json
+      content:
+        responseTimeMs: 1
+        details:
+          indexedAt: 2026-09-30T06:08:59.650120Z
+          stateOrg: MT
+          metadata:
+            hash: 3d5db56854a7c6ed96e0e47c0cc44e4974d5388837f909d2c254496c9f09bd10
+          fileName: mt0013.xml
+          protectedSign:
+            image: mt13.jpg
+            thumbnailImageUrl: https://6ter.wipo.int/images/THUMB/mt13-th.jpg
+            imageUrl: https://6ter.wipo.int/images/mt13.jpg
+            languageCode: ""
+            thumbnailImage: mt13-th.jpg
+          nature:
+            code: FLAG
+            type:
+              en: Flag
+              fr: Drapeau
+              es: Bandera
+          number: "13"
+          numberAlias: MT0013
+          details:
+          - code: EN
+            name:
+              en: English
+              fr: Anglais
+              es: Inglés
+            text: THE PRESIDENT'S PERSONAL FLAG
+          vienna:
+            viennaClassifications:
+            - 24.1.5
+            - 24.1.13
+            - 24.1.17
+            - 24.1.18
+            - 24.1.20
+            - 24.7.1
+            - 24.13.4
+            - 24.13.24
+            - 29.1.1
+            - 29.1.2
+            - 29.1.3
+            - 29.1.4
+            - 29.1.6
+            - 29.1.14
+            viennaEdition: VCL (2-1988)
+          publicationDate: "19890508"
+          communicatingParty:
+            code: MT
+            countryName:
+              en: Malta
+              fr: Malte
+              es: Malta
+            type: STATE
+          circulars:
+          - date: "19890508"
+            number: "4995"
+          responseTimeMs: 1
+  recorded_at: 2026-10-26T21:58:45.007Z
+- request:
+    method: GET
+    uri: https://6ter.wipo.int/api/v1/signs/QO0088
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-credentials:
+      - "true"
+      access-control-allow-headers:
+      - "*"
+      access-control-allow-methods:
+      - DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Mon, 26 Oct 2026 21:58:44 GMT
+      via:
+      - 1.1 f0ddd258f2befca309faaacbbff6459e.cloudfront.net (CloudFront)
+      x-amz-apigw-id:
+      - F3z7SEubFiAEYxQ=
+      x-amz-cf-id:
+      - Bp2fUg5LzNzyHXzQji0mc3HegJFaE5nu27_n2s-uoxk8JLLs-WtzlQ==
+      x-amz-cf-pop:
+      - DFW56-P11
+      x-amzn-requestid:
+      - 759c3562-cd7e-436f-b4b1-b3d90576c4b1
+      x-amzn-trace-id:
+      - >-
+        Root=1-6adfcd14-774a46e01859031d46a4023e;Parent=245e72038a2d2b73;Sampled=0;Lineage=1:7e0f53df:0
+      x-cache:
+      - Miss from cloudfront
+      x-requested-with:
+      - "*"
+    body:
+      type: json
+      content:
+        responseTimeMs: 0
+        details:
+          number: "88"
+          indexedAt: 2026-09-30T06:08:57.860475Z
+          stateOrg: QO
+          metadata:
+            hash: 6768968ebc0ac5696210ab44fa0f243f19b195dedf5b5c3e1c908105c15ae2ed
+          fileName: qo0088.xml
+          protectedSign:
+            text: UNESCO
+            languageCode: EN
+          nature:
+            code: ABBREVIATION
+            type:
+              en: Abbreviation
+              fr: Sigle
+              es: Sigla
+          numberAlias: QO0088
+          language:
+            code: EN
+            name:
+              en: English
+              fr: Anglais
+              es: Inglés
+          publicationDate: "19650202"
+          communicatingParty:
+            code: QO
+            address:
+              address: 7, place de Fontenoy
+              city: Paris
+              countryCode: FR
+              postCode: "75352"
+              countryName: France
+            name:
+              en: UNITED NATIONS EDUCATIONAL, SCIENTIFIC AND CULTURAL ORGANIZATION
+              fr: ORGANISATION DES NATIONS UNIES POUR L'EDUCATION, LA SCIENCE ET LA CULTURE
+            countryName:
+              en: Organization without ST.3 code
+              fr: Organisation n'ayant pas de code ST.3
+              es: Organización sin código ST.3
+            type: ORG
+          circulars:
+          - date: "19661205"
+            number: "0645"
+          responseTimeMs: 0
+  recorded_at: 2026-10-26T21:58:44.721Z
+- request:
+    method: GET
+    uri: https://6ter.wipo.int/api/v1/signs/XX9999
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: none
+  response:
+    status: 204
+    headers:
+      access-control-allow-credentials:
+      - "true"
+      access-control-allow-headers:
+      - "*"
+      access-control-allow-methods:
+      - DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Mon, 26 Oct 2026 21:58:44 GMT
+      via:
+      - 1.1 24e2d0fc2f568ecd2e0682b099c33c16.cloudfront.net (CloudFront)
+      x-amz-apigw-id:
+      - F3z7UH5pFiAENNw=
+      x-amz-cf-id:
+      - Cq4TrVHMe-qRYuDR_RLnTFyQi1VP5JQ3dBzcUZyWTWC0WqG-GPNZIg==
+      x-amz-cf-pop:
+      - DFW56-P11
+      x-amzn-requestid:
+      - e15903bd-0e74-40e4-9598-0c28b9e56080
+      x-amzn-trace-id:
+      - >-
+        Root=1-6adfcd14-0b55ebad178e34bd6467b823;Parent=44570cb0bdbd70d0;Sampled=0;Lineage=1:7e0f53df:0
+      x-cache:
+      - Miss from cloudfront
+      x-requested-with:
+      - "*"
+    body:
+      type: none
+  recorded_at: 2026-10-26T21:58:44.907Z

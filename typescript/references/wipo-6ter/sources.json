@@ -1,0 +1,10 @@
+[
+  {
+    "kind": "OpenAPI 3.0 specification",
+    "file": "Article6ter_API_v1_OpenAPI.yaml",
+    "title": "WIPO Article Sixter API, version 1.2.0",
+    "url": "https://6ter.wipo.int/assets/Article6ter_API_v1_OpenAPI.yaml",
+    "retrieved": "2026-10-27",
+    "sha256": "f446f7f221c92b2b8a15a4d3c4ececdbe77587df935ce1007d7a03ae6905ce06"
+  }
+]

@@ -1,0 +1,193 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://6ter.wipo.int/api/v1/signs?keywords=world+health&searchType=ALL&sortBy=KEY&limit=3&offset=0
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-credentials:
+      - "true"
+      access-control-allow-headers:
+      - "*"
+      access-control-allow-methods:
+      - DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Mon, 26 Oct 2026 21:58:43 GMT
+      via:
+      - 1.1 f0ddd258f2befca309faaacbbff6459e.cloudfront.net (CloudFront)
+      x-amz-apigw-id:
+      - F3z7IE2sliAES0A=
+      x-amz-cf-id:
+      - MQkHaQZZOia7gX53C6khV3LmhDeq0kF04MQIuHd27J56GVlRaEFljg==
+      x-amz-cf-pop:
+      - DFW56-P11
+      x-amzn-requestid:
+      - 517022f3-a9dc-49b8-bbef-cd13b9222386
+      x-amzn-trace-id:
+      - >-
+        Root=1-6adfcd13-624abdd34d54b7cf341770fb;Parent=28181eba162d98fc;Sampled=0;Lineage=1:5408b530:0
+      x-cache:
+      - Miss from cloudfront
+      x-requested-with:
+      - "*"
+    body:
+      type: json
+      content:
+        responseTimeMs: 8
+        count: 13
+        limit: "3"
+        offset: "0"
+        records:
+        - number: "19"
+          indexedAt: 2026-09-30T06:09:01.976309Z
+          stateOrg: QO
+          metadata:
+            hash: 0925efff743415ffc9113050b6d4541136f96b6b53258a83342c617467fce17f
+          fileName: qo0019.xml
+          protectedSign:
+            text: OMS
+            languageCode: FR
+          nature:
+            code: ABBREVIATION
+            type:
+              en: Abbreviation
+              fr: Sigle
+              es: Sigla
+          numberAlias: QO0019
+          language:
+            code: FR
+            name:
+              en: French
+              fr: Français
+              es: Francés
+          publicationDate: "19620824"
+          communicatingParty:
+            code: QO
+            address:
+              address: Avenue Appia 20
+              city: Geneva 27
+              countryCode: CH
+              postCode: "1211"
+              countryName: Switzerland
+            name:
+              en: WORLD HEALTH ORGANIZATION
+              fr: ORGANISATION MONDIALE DE LA SANTÉ
+            countryName:
+              en: Organization without ST.3 code
+              fr: Organisation n'ayant pas de code ST.3
+              es: Organización sin código ST.3
+            type: ORG
+          circulars:
+          - date: "19661205"
+            number: "0645"
+        - number: "20"
+          indexedAt: 2026-09-30T06:09:03.064436Z
+          stateOrg: QO
+          metadata:
+            hash: e0f34d2ff1d0c278b26e6eb3b501f1ad033d521058f7596ea9d55415c94cc120
+          fileName: qo0020.xml
+          protectedSign:
+            text: WHO
+            languageCode: EN
+          nature:
+            code: ABBREVIATION
+            type:
+              en: Abbreviation
+              fr: Sigle
+              es: Sigla
+          numberAlias: QO0020
+          language:
+            code: EN
+            name:
+              en: English
+              fr: Anglais
+              es: Inglés
+          publicationDate: "19620824"
+          communicatingParty:
+            code: QO
+            address:
+              address: Avenue Appia 20
+              city: Geneva 27
+              countryCode: CH
+              postCode: "1211"
+              countryName: Switzerland
+            name:
+              en: WORLD HEALTH ORGANIZATION
+              fr: ORGANISATION MONDIALE DE LA SANTÉ
+            countryName:
+              en: Organization without ST.3 code
+              fr: Organisation n'ayant pas de code ST.3
+              es: Organización sin código ST.3
+            type: ORG
+          circulars:
+          - date: "19661205"
+            number: "0645"
+        - number: "21"
+          indexedAt: 2026-09-30T06:08:53.763435Z
+          stateOrg: QO
+          metadata:
+            hash: 0c57cb34a7bb809913319bf858a47ae3fbb0241a905bb1ccbb751912fc65d42b
+          fileName: qo0021.xml
+          protectedSign:
+            image: qo21.jpg
+            thumbnailImageUrl: https://6ter.wipo.int/images/THUMB/qo21-th.jpg
+            imageUrl: https://6ter.wipo.int/images/qo21.jpg
+            languageCode: ""
+            thumbnailImage: qo21-th.jpg
+          nature:
+            code: FLAG
+            type:
+              en: Flag
+              fr: Drapeau
+              es: Bandera
+          numberAlias: QO0021
+          vienna:
+            viennaClassifications:
+            - 1.5.1
+            - 1.5.8
+            - 1.5.9
+            - 1.5.12
+            - 3.11.3
+            - 5.13.3
+            - 24.7.1
+            - 29.1.2
+            - 29.1.4
+            - 29.1.6
+            - 29.1.13
+            viennaEdition: VCL (1-1973)
+          publicationDate: "19620824"
+          communicatingParty:
+            code: QO
+            address:
+              address: Avenue Appia 20
+              city: Geneva 27
+              countryCode: CH
+              postCode: "1211"
+              countryName: Switzerland
+            name:
+              en: WORLD HEALTH ORGANIZATION
+              fr: ORGANISATION MONDIALE DE LA SANTÉ
+            countryName:
+              en: Organization without ST.3 code
+              fr: Organisation n'ayant pas de code ST.3
+              es: Organización sin código ST.3
+            type: ORG
+          circulars:
+          - date: "19661205"
+            number: "0645"
+  recorded_at: 2026-10-26T21:58:43.686Z
