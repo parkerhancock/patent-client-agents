@@ -1,0 +1,132 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://cloud.tipo.gov.tw/S220/opdataapi/api/TmarkAppl?format=json&top=2&skip=0&goodclasscode=017&applbdate=2026%2F07%2F01&appledate=2026%2F07%2F03&tk=[FILTERED]
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cf-cache-status:
+      - DYNAMIC
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=UTF-8
+      date:
+      - Mon, 26 Oct 2026 19:47:11 GMT
+      server:
+      - cloudflare
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      transfer-encoding:
+      - chunked
+    body:
+      type: json
+      content:
+        version: "1.0"
+        status: ok
+        message: ""
+        top: 2
+        skip: 0
+        order-by: appl-no
+        total-count: 6
+        tmarkappl:
+          -page-count: 2
+          -create-date: 2026/10/27
+          tmarkcontent:
+          - -sequence: 1
+            appl-no: "115045460"
+            appl-date: 2026/07/01
+            tmark-name: UltraRoll
+            tmark-class: "1"
+            tmark-class-desc: 商標
+            tmark-image-url:
+            - image-data-1: >-
+                https://cloud.tipo.gov.tw/S282/S282WV1/pic/20260702/115/045/460/pic_115045460_20260701_1.jpg
+              image-data-2: null
+              image-data-3: null
+              image-data-4: null
+              image-data-5: null
+              image-data-6: null
+              audio-filename: null
+            tmark-type: "3"
+            tmark-type-desc: 平面
+            tmark-color: "1"
+            tmark-color-desc: 墨色
+            tmark-draft-c: null
+            tmark-draft-e: ULTRAROLL
+            tmark-draft-j: null
+            tmark-sign: null
+            word-description: null
+            out-off-draft: null
+            tmark-desc: null
+            receive-date: 2026/07/01
+            goodsclasses:
+            - -sequence: 1
+              goodsclass-code: "017"
+              goods-name: >-
+                防刮保護膜；防爆隔熱膜；非包裝用塑膠膜；玻璃隔熱膜；隔熱用玻璃纖維；非包裝用防水塑膠膜；非包裝用黏膠薄片；包裝用橡膠袋；隔熱紙；塑膠製填塞材料；絕緣膜；橡膠；機械零件保護用橡膠套；非金屬製軟管；填縫劑；防水填料；絕緣布；絕緣材料；包裝填隙用棉絮；橡膠製門擋。
+              goods-group: >-
+                010105、0110、0111、0206、0602、0603、0624、1704、1705、1706、1708、1710、1712、1713、1715、1716、1717、1718、1723、1726、190101、190102、190103、190104、190105、2026
+            parties:
+              applicants:
+              - -sequence: 1
+                chinese-name: 許秉義
+                english-name: null
+                japanese-name: null
+                address: 臺中市西屯區福雅路461號
+                country-code: TW
+                chinese-country-name: 中華民國
+              agents:
+              - -sequence: 1
+                chinese-name: 王鈞平
+                address: 臺中市西屯區西屯路2段256巷6號12樓之5
+          - -sequence: 2
+            appl-no: "115045540"
+            appl-date: 2026/07/01
+            tmark-name: 旭生塑膠及圖
+            tmark-class: "1"
+            tmark-class-desc: 商標
+            tmark-image-url:
+            - image-data-1: >-
+                https://cloud.tipo.gov.tw/S282/S282WV1/pic/20260702/115/045/540/pic_115045540_20260701_1.jpg
+              image-data-2: null
+              image-data-3: null
+              image-data-4: null
+              image-data-5: null
+              image-data-6: null
+              audio-filename: null
+            tmark-type: "3"
+            tmark-type-desc: 平面
+            tmark-color: "2"
+            tmark-color-desc: 彩色
+            tmark-draft-c: 旭生塑膠
+            tmark-draft-e: XUSHENGSUJIAO
+            tmark-draft-j: null
+            tmark-sign: null
+            word-description: null
+            out-off-draft: null
+            tmark-desc: 　
+            receive-date: 2026/07/01
+            goodsclasses:
+            - -sequence: 1
+              goodsclass-code: "017"
+              goods-name: 塑膠粉；塑膠粒；再生塑膠；聚乙烯塑膠；聚丙烯塑膠；半加工塑膠；生產時使用之射出成型塑膠。
+              goods-group: 0110、0206、1710
+            parties:
+              applicants:
+              - -sequence: 1
+                chinese-name: 童寶民
+                english-name: null
+                japanese-name: null
+                address: 臺中市沙鹿區中山路76巷60號
+                country-code: TW
+                chinese-country-name: 中華民國
+              agents: []
+  recorded_at: 2026-10-26T19:47:11.576Z

@@ -243,7 +243,7 @@ export class GenericHttpTransport {
     const sourceUrl = new URL(url);
     for (const key of [...sourceUrl.searchParams.keys()]) {
       if (
-        /^(?:api[-_]?key|key|token|access_token|authorization|signature|expires|key-pair-id|x-amz-.+)$/i.test(
+        /^(?:api[-_]?key|key|tk|token|access_token|authorization|signature|expires|key-pair-id|x-amz-.+)$/i.test(
           key,
         )
       )

@@ -41,6 +41,7 @@ import {
   PtabTrialsClient,
   PublicationsClient,
   SearchOptionsSchema,
+  TipoClient,
   TmepClient,
   TrademarkAssignmentClient,
   TrademarkSearchClient,
@@ -120,6 +121,7 @@ import {
 } from "./relay.js";
 import { registerUsptoResources } from "./resources.js";
 import { registerPortalSearchTools } from "./search-portals.js";
+import { registerTipoTools } from "./tipo.js";
 import { registerTmepTools } from "./tmep.js";
 import {
   registerTwTradeSecretsTools,
@@ -174,6 +176,8 @@ export interface UsptoClients {
   japanIpHighCourt: JapanIpHighCourtClient;
   /** JPO Patent Information Retrieval API; served only when a client is provided or JPO_API_USERNAME and JPO_API_PASSWORD are set. */
   jpo: JpoClient;
+  /** TIPO OpenData; served only when a client is provided or TIPO_API_KEY is set. */
+  tipo: TipoClient;
 }
 /** Instantiate a connector only when a tool invokes it, keeping optional credentials local to that family. */
 function lazyClient<T extends object>(factory: () => T): T {
@@ -646,6 +650,9 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     (process.env.JPO_API_USERNAME && process.env.JPO_API_PASSWORD
       ? lazyClient(() => new JpoClient())
       : undefined);
+  const tipoClient =
+    provided.tipo ??
+    (process.env.TIPO_API_KEY ? lazyClient(() => new TipoClient()) : undefined);
   const kiprisClient =
     provided.kipris ??
     (process.env.KIPO_KIPRIS_API_KEY &&
@@ -703,6 +710,7 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     kipris: kiprisClient,
     japanIpHighCourt: provided.japanIpHighCourt ?? new JapanIpHighCourtClient(),
     jpo: jpoClient,
+    tipo: tipoClient,
   };
   if ((options.toolset ?? toolsetFromEnv(process.env)) === "curated") {
     registerFacadeTools(
@@ -1006,6 +1014,12 @@ export function createServer(options: ServerOptions = {}): FastMCP {
       server,
       jpoClient,
       options.auth ? requireScopes("jpo:read") : undefined,
+    );
+  if (tipoClient)
+    registerTipoTools(
+      server,
+      tipoClient,
+      options.auth ? requireScopes("tipo:read") : undefined,
     );
   registerJapanIpHighCourtTools(
     server,

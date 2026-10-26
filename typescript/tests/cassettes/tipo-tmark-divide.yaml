@@ -1,0 +1,96 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://cloud.tipo.gov.tw/S220/opdataapi/api/TmarkDivide?format=json&top=100&skip=0&originexamno=01443210&tk=[FILTERED]
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cf-cache-status:
+      - DYNAMIC
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=UTF-8
+      date:
+      - Mon, 26 Oct 2026 19:46:58 GMT
+      server:
+      - cloudflare
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      transfer-encoding:
+      - chunked
+    body:
+      type: json
+      content:
+        version: "1.0"
+        status: ok
+        message: ""
+        top: 100
+        skip: 0
+        order-by: exam-no
+        total-count: 3
+        tmarkdivide:
+          -page-count: 3
+          -create-date: 2026/10/27
+          tmarkcontent:
+          - -sequence: 1
+            tmark-class: "1"
+            tmark-class-desc: 商標
+            exam-no: "01463677"
+            tmark-name: Valentino Coupeau
+            goodsclass:
+            - -sequence: 1
+              goodsclass-code: "021"
+              goods-name: >-
+                電動牙刷，洗臉刷，洗澡刷，牙縫清潔刷，假牙清潔刷，毛刷，棕刷，銅刷，鋼刷，鐵刷，衣刷，瓶刷，鞋刷，塑膠刷，海棉刷，馬桶刷，洗衣刷，洗杯刷，洗車刷，鋼球刷，鋼絲輪刷，鋼絲絨刷，碳纖維製刷，玻璃清潔刷，靜電消除刷，不銹鋼刷，百葉窗清潔刷，唱片清潔布刷，洗刷用鋼絲絨，高爾夫球具清潔刷，自動水式塗墨毛刷，動物刷，油漆刷，油漆用滾筒刷，電動刷，豬鬃，髮梳，髮刷，電髮刷，附鏡子之梳子，各種型態之梳子，鞋撐，鞋拔，撐鞋器，燙衣板，燙衣桌，金鼎，香爐，燭台，裝飾燭台，點香器，環香台，木魚，筊杯，護身符，捕鼠器，蟑螂捕殺器，蒼蠅拍，洗衣網，玻璃珠，啖盂，拖把，掃帚，水瓢，襪架，尿壺，畚斗，畚箕，雞毛撣，垃圾箱，紙屑簍，洗衣板，肥皂盒，晒衣架，菜瓜布，蹲便器，通廁器，肥皂吸盤，衛生紙盒，衛生紙架，擠牙膏器，乳皂擠壓器，雨傘置放套，洗澡用麻帶，堵塞管清通器，附有音樂之幼兒便尿器，肥皂粉自給器，集聚頭髮滴下之藥水或其他溶液用滴盤，臉盆，浴盆，毛巾環，毛巾架，牙膏架，牙刷架，浴巾環，浴室化粧鏡箱，滾筒式衛生紙架，水桶，海棉，滴漏計時器，鳥籠，飼料槽，飲水槽，給水器，飼養槽，洒水器，噴水頭，隔熱手套，工作用手套（不包括橡膠手套、塑膠手套），眉刷，頰刷，眼影刷，睫毛刷，眉毛夾，睫毛夾，粉盒，唇筆，粉撲。
+              goods-group: >-
+                030101、0309、0510、0803、0959、1604、1902、2023、2030、2102、2103、2104、2105、2107、2108、2109、2110、2111、2115、2118、2119、211902、211903、211904、2122、2125、2126、2211、2408
+            divide-date: 2012/04/03
+            origin-exam-no:
+              origin-exam-no: "01443210"
+              -tmark-right-url: ftps://ftp.tipo.gov.tw/ftp/TmarkRights/014/TmarkRights_1_01443210.xml
+            origin-tmark-class: "1"
+            origin-tmark-class-desc: 商標
+            divide-count: 2
+          - -sequence: 2
+            tmark-class: "1"
+            tmark-class-desc: 商標
+            exam-no: "01463678"
+            tmark-name: Valentino Coupeau
+            goodsclass:
+            - -sequence: 1
+              goodsclass-code: "021"
+              goods-name: 牙刷。
+              goods-group: "2102"
+            divide-date: null
+            origin-exam-no:
+              origin-exam-no: "01443210"
+              -tmark-right-url: ftps://ftp.tipo.gov.tw/ftp/TmarkRights/014/TmarkRights_1_01443210.xml
+            origin-tmark-class: "1"
+            origin-tmark-class-desc: 商標
+            divide-count: 0
+          - -sequence: 3
+            tmark-class: "1"
+            tmark-class-desc: 商標
+            exam-no: "01463679"
+            tmark-name: Valentino Coupeau
+            goodsclass:
+            - -sequence: 1
+              goodsclass-code: "021"
+              goods-name: 抹布。
+              goods-group: 160202、2119、211901、2406
+            divide-date: null
+            origin-exam-no:
+              origin-exam-no: "01443210"
+              -tmark-right-url: ftps://ftp.tipo.gov.tw/ftp/TmarkRights/014/TmarkRights_1_01443210.xml
+            origin-tmark-class: "1"
+            origin-tmark-class-desc: 商標
+            divide-count: 0
+  recorded_at: 2026-10-26T19:46:58.617Z

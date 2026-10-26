@@ -1,0 +1,32 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://cloud.tipo.gov.tw/S220/opdataapi/api/TmarkAppl?format=json&top=1&skip=0&applbdate=2026%2F13%2F45&tk=[FILTERED]
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 400
+    headers:
+      cf-cache-status:
+      - DYNAMIC
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Mon, 26 Oct 2026 19:46:59 GMT
+      server:
+      - cloudflare
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+    body:
+      type: json
+      content:
+        status: error
+        message: 參數 日期格式 錯誤，請參考API說明文件
+  recorded_at: 2026-10-26T19:46:59.620Z

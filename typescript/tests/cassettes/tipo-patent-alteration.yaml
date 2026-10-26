@@ -1,0 +1,53 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://cloud.tipo.gov.tw/S220/opdataapi/api/PatentAlteration?format=json&top=100&skip=0&applno=086300596&tk=[FILTERED]
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cf-cache-status:
+      - DYNAMIC
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=UTF-8
+      date:
+      - Mon, 26 Oct 2026 19:46:47 GMT
+      server:
+      - cloudflare
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      transfer-encoding:
+      - chunked
+    body:
+      type: json
+      content:
+        version: "1.0"
+        status: ok
+        message: ""
+        top: 100
+        skip: 0
+        order-by: appl-no
+        total-count: 1
+        tw-patent-alteration:
+          -page-count: 1
+          -create-date: 2026/10/27
+          patentcontent:
+          - -sequence: 1
+            appl-no: "086300596"
+            alteration:
+            - -sequence: 1
+              alteration-id1s:
+              - -sequence: 1
+                alteration-name1: 蘇嘉興
+              alteration-id2s:
+              - -sequence: 1
+                alteration-name2: 勝樺有限公司
+  recorded_at: 2026-10-26T19:46:47.870Z

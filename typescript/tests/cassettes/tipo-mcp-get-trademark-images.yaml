@@ -1,0 +1,53 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://cloud.tipo.gov.tw/S220/opdataapi/api/TmarkPics?format=json&top=100&skip=0&applno=112000113&tk=[FILTERED]
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cf-cache-status:
+      - DYNAMIC
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=UTF-8
+      date:
+      - Mon, 26 Oct 2026 19:47:14 GMT
+      server:
+      - cloudflare
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      transfer-encoding:
+      - chunked
+    body:
+      type: json
+      content:
+        version: "1.0"
+        status: ok
+        message: ""
+        top: 100
+        skip: 0
+        order-by: appl-no
+        total-count: 1
+        tmarkpics:
+          -page-count: 1
+          -create-date: 2026/10/27
+          tmarkcontent:
+          - -sequence: 1
+            appl-no: "112000113"
+            tmark-image-url:
+              image-data-1: >-
+                https://cloud.tipo.gov.tw/S220/opdata/api/TmarkPics/pic/20231215/112/000/113/pic_112000113_20230103_1.jpg
+              image-data-2: null
+              image-data-3: null
+              image-data-4: null
+              image-data-5: null
+              image-data-6: null
+  recorded_at: 2026-10-26T19:47:14.790Z

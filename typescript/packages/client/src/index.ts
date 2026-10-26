@@ -68,6 +68,7 @@ export {
   type XlsWorkbook,
   xlsSerialDate,
 } from "./runtime/xls.js";
+export * from "./tipo.js";
 export * from "./tmep.js";
 export * from "./trademark-assignments.js";
 export * from "./trademark-search.js";

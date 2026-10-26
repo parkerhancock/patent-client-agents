@@ -1,0 +1,103 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://cloud.tipo.gov.tw/S220/opdataapi/api/TmarkAppl?format=json&top=100&skip=0&applno=112000113&tk=[FILTERED]
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cf-cache-status:
+      - DYNAMIC
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=UTF-8
+      date:
+      - Mon, 26 Oct 2026 19:47:12 GMT
+      server:
+      - cloudflare
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      transfer-encoding:
+      - chunked
+    body:
+      type: json
+      content:
+        version: "1.0"
+        status: ok
+        message: ""
+        top: 100
+        skip: 0
+        order-by: appl-no
+        total-count: 1
+        tmarkappl:
+          -page-count: 1
+          -create-date: 2026/10/27
+          tmarkcontent:
+          - -sequence: 1
+            appl-no: "112000113"
+            appl-date: 2023/01/03
+            tmark-name: LION HEAD (device mark)
+            tmark-class: "1"
+            tmark-class-desc: 商標
+            tmark-image-url:
+            - image-data-1: >-
+                https://cloud.tipo.gov.tw/S282/S282WV1/pic/20231215/112/000/113/pic_112000113_20230103_1.jpg
+              image-data-2: null
+              image-data-3: null
+              image-data-4: null
+              image-data-5: null
+              image-data-6: null
+              audio-filename: null
+            tmark-type: "3"
+            tmark-type-desc: 平面
+            tmark-color: "1"
+            tmark-color-desc: 墨色
+            tmark-draft-c: null
+            tmark-draft-e: null
+            tmark-draft-j: null
+            tmark-sign: null
+            word-description: null
+            out-off-draft: null
+            tmark-desc: null
+            receive-date: 2023/01/03
+            goodsclasses:
+            - -sequence: 1
+              goodsclass-code: "009"
+              goods-name: >-
+                可下載的虛擬商品，即用於線上虛擬世界以含酒精飲料、不含酒精的飲料、服裝、靴鞋、袋子、托盤、可攜式飲料用保冷箱、行動酒吧、冰桶、杯、玻璃杯、飲用容器、開瓶器為主的電腦程式；虛擬實境遊戲及虛擬世界用可下載之軟體、行動應用軟體及雲端解決方案軟體工具及應用程式；虛擬實境耳機；虛擬實境眼鏡；電子裝置，即與線上虛擬世界連結專用之磁性編碼身分識別手環；與活動、流行文化、運動、藝術、文化、娛樂、夜生活、音樂及人物有關之含有插圖、文字、聲音、音樂及（或）影像之可下載多媒體檔案；與活動、流行文化、運動、藝術、文化、娛樂、夜生活、音樂及人物有關之含有插圖、文字、聲音、音樂及（或）影像之以非同質化代幣（ＮＦＴ）認證的可下載多媒體檔案；用於教育、學習及娛樂目的之可下載虛擬及擴增實境軟體；提供虛擬市集用可下載之軟體、行動應用軟體及雲端解決方案軟體工具及應用程式；用於產生接收和使用加密資產的加密金鑰之可下載軟體、行動應用軟體及雲端解決方案軟體工具及應用程式；使用區塊鏈技術管理加密貨幣交易之可下載電腦軟體；使用區塊鏈軟體技術以創建及交易數位收藏品之電腦程式；數位資產之認證、所有權、可用性及交易用軟體；加密收藏品、非同質化代幣（ＮＦＴ）及其他應用程式代幣相關交易處理用可下載之軟體、行動應用軟體及雲端解決方案軟體工具及應用程式；電子交易、儲存、傳送、接收、接受及傳輸加密收藏品、非同質化代幣（ＮＦＴ）及其他應用程式代幣用可下載之軟體、行動應用軟體及雲端解決方案軟體工具及應用程式；有利於數位商品權利買賣用可下載之電腦軟體、行動應用軟體及雲端解決方案軟體工具及應用程式；管理數位收藏品用可下載之電腦軟體、行動應用軟體及雲端解決方案軟體工具及應用程式；檢視有關飲料、運動、遊戲、音樂及服裝之影像、視頻及內容用可下載之電腦軟體、行動應用軟體及雲端解決方案軟體工具及應用程式；可下載之熟客卡、獎酬卡、獎勵卡應用程式。
+              goods-group: 0208、0917、091701、091703、0920、092002、0938、0939、0952、0957、0962、2807、351935、4210
+            - -sequence: 2
+              goodsclass-code: "035"
+              goods-name: >-
+                虛擬商品之零售商店服務及線上零售商店服務，即用於線上虛擬世界之含酒精飲料、不含酒精的飲料、服裝、靴鞋、袋子、托盤、可攜式飲料用保冷箱、行動酒吧、冰桶、杯、玻璃杯、飲用容器、開瓶器之可下載虛擬商品影像檔案之零售及線上零售服務；非同質化代幣（ＮＦＴ）之零售服務及零售商店服務，即含酒精飲料、不含酒精的飲料、服裝、靴鞋、袋子、托盤、可攜式飲料用保冷箱、行動酒吧、冰桶、杯、玻璃杯、飲用容器、開瓶器之經非同質化代幣（ＮＦＴ）驗證之可下載數位影像檔案之零售服務及零售商店服務；籌備及舉行互動娛樂、虛擬實境、運動及視頻遊戲娛樂行業之商業目的活動、展示會、博覽會；藉由非同質化代幣（ＮＦＴ）驗證技術為消費者提供消費者忠誠度方案的管理服務；有關飲料、食品、運動用具、遊戲器具、藝術品、文教用品、育樂用品及服裝之虛擬商品軟體及影像檔案、經非同質化代幣（ＮＦＴ）驗證之可下載數位檔案、經非同質化代幣（ＮＦＴ）驗證之可下載圖形、經非同質化代幣（ＮＦＴ）驗證之可下載數位聲音檔案、數位資料載體、數位影音載體、可下載數位檔案之零售商店服務及線上零售商店服務；為商品及服務之買方和賣方提供線上市集；為由非同質化代幣驗證之商品與服務之買方和賣方提供線上市集；為可下載之數位藝術影像、音樂及視頻之買方和賣方提供線上市集。
+              goods-group: >-
+                0208、0917、091703、0933、0939、0962、160704、3501、3512、3514、3519、351935、351957、4101、4106、4210
+            - -sequence: 3
+              goodsclass-code: "041"
+              goods-name: >-
+                提供用於虛擬環境之不可下載線上電子出版品、線上影片、線上影像、線上音樂；安排及舉行線上音樂會；舉辦有關線上虛擬實境音樂會；舉辦有關線上虛擬娛樂活動；娛樂服務，即提供以經營虛擬食品及飲料之虛擬酒吧或餐廳為主題之線上虛擬實境遊戲；安排調酒及酒精飲料領域之實體及虛擬研討會、教育演示會及教學課程；提供由非同質化代幣驗證之虛擬世界用線上不可下載之虛擬數位影像；娛樂服務，即提供有關飲料、食品、袋子、飲料用器具、保冷箱、服裝、冠帽、靴鞋、傘、毛巾、運動器材、玩具、視頻遊戲設備及組件、遊戲之線上不可下載數位影像；製作、發行、展示及儲存數位收藏品之娛樂服務，即提供建構於虛擬實境或元宇宙的數位收藏品相關模擬遊戲及虛擬實境遊戲場服務；娛樂服務，即提供基於娛樂目的之線上虛擬實境遊戲場；籌備及舉行教育及文化目的之虛擬活動、虛擬展示會、虛擬博覽會及虛擬會議。
+              goods-group: 091701、091703、0933、160702、160704、4101、4103、4106、4108
+            parties:
+              applicants:
+              - -sequence: 1
+                chinese-name: 芝華士（知識產權）控股有限公司
+                english-name: CHIVAS HOLDINGS (IP) LIMITED
+                japanese-name: null
+                address: 英國
+                country-code: GB
+                chinese-country-name: 英國
+              agents:
+              - -sequence: 1
+                chinese-name: 陳長文
+                address: 臺北市信義區忠孝東路4段555號8樓
+              - -sequence: 2
+                chinese-name: 蔡瑞森
+                address: 臺北市信義區忠孝東路4段555號8樓
+  recorded_at: 2026-10-26T19:47:12.737Z
