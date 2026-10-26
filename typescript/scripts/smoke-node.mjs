@@ -27,6 +27,7 @@ import {
   MpepClient,
   parseHearingNotice,
   parseJapanIpHighCourtWorkbook,
+  ThaiDipStatutesClient,
   TmepClient,
   TwTradeSecretsClient,
   UpcStatutesClient,
@@ -124,6 +125,17 @@ results.legifrance_section = (
   await legifrance.getSection("L. 151-1 Code de commerce")
 ).statute;
 assert.equal(results.legifrance_section, "Code de commerce");
+const thai = new ThaiDipStatutesClient({
+  source: new Uint8Array(
+    zstdCompressSync(
+      await readFile(fixture("thai-dip-statutes/thai_dip_statutes.db")),
+    ),
+  ),
+});
+results.thai_section = (
+  await thai.getSectionByCitation("Section 36 bis Patent Act")
+)?.section_label;
+assert.equal(results.thai_section, "Section 36bis Patent Act");
 const tmep = new TmepClient({
   source: new Uint8Array(await readFile(fixture("tmep/tmep.db"))),
 });
@@ -332,6 +344,7 @@ for (const client of [
   ilpo,
   inpiBr,
   legifrance,
+  thai,
   tw,
 ])
   client.close();

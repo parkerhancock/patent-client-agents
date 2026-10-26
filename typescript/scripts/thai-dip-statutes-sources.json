@@ -1,0 +1,82 @@
+{
+  "source": "WIPO Lex (https://www.wipo.int/wipolex/) English translations, one PDF per act",
+  "user_agent": "patent-client-agents (+https://github.com/parkerhancock/patent-client-agents)",
+  "retrieved_at": "2026-10-26T22:41:18Z",
+  "not_used": [
+    {
+      "source": "Office of the Council of State, English translations",
+      "url": "https://www.ocs.go.th/searchlaw-law-eng",
+      "reason": "Reachable with plain requests, but its English list (146 acts on 2026-10-26) has no Patent, Trademark, Copyright or Trade Secrets Act translation."
+    }
+  ],
+  "statutes": [
+    {
+      "statute": "patent",
+      "short_name": "Patent Act",
+      "title": "Patent Act B.E. 2522 (1979)",
+      "wipolex_id": "3807",
+      "details_url": "https://www.wipo.int/wipolex/en/legislation/details/3807",
+      "wipo_title": "Patent Act B.E. 2522 (1979) (as amended up to Patent Act (No. 3) B.E. 2542 (1999))",
+      "wipo_summary": "Thailand - Year of Version: 1999 -   Enacted: March 11, 1979 - Main IP Laws -   Industrial Designs",
+      "version_note": "As amended by the Patent Act (No. 2) B.E. 2535 (1992) and the Patent Act (No. 3) B.E. 2542 (1999); English consolidation prepared for WIPO Lex (TH007EN), which names no translator",
+      "pdf_url": "https://wipolex-res.wipo.int/edocs/lexdocs/laws/en/th/th007en_1.pdf",
+      "pdf_last_modified": "2022-10-03T13:59:49Z",
+      "retrieved_at": "2026-10-26T22:41:18Z",
+      "pdf_sha256": "ff92e23fc02d080c9202b251927ecf0e652dc4e03196862ab1f74cc1433f2106",
+      "pdf_bytes": 260201,
+      "pages": 27,
+      "section_count": 111
+    },
+    {
+      "statute": "trademark",
+      "short_name": "Trademark Act",
+      "title": "Trademark Act B.E. 2534 (1991)",
+      "wipolex_id": "17164",
+      "details_url": "https://www.wipo.int/wipolex/en/legislation/details/17164",
+      "wipo_title": "Trademark Act B.E. 2534 (1991) (as amended up to Trademark Act (No. 3) B.E. 2559 (2016))",
+      "wipo_summary": "Thailand - Year of Version: 2016 -   Enacted: February 13, 1992 - Main IP Laws - Trademarks",
+      "version_note": "As amended by the Trademark Act (No. 2) B.E. 2543 (2000) and the Trademark Act (No. 3) B.E. 2559 (2016); unofficial translation by the Department of Intellectual Property",
+      "pdf_url": "https://wipolex-res.wipo.int/edocs/lexdocs/laws/en/th/th040en_1.pdf",
+      "pdf_last_modified": "2023-01-05T08:46:24Z",
+      "retrieved_at": "2026-10-26T22:41:19Z",
+      "pdf_sha256": "c4d104b56288f389c7b309d5b1168ff8661065bf2318a8f4cefe9c994266179d",
+      "pdf_bytes": 334807,
+      "pages": 38,
+      "section_count": 148
+    },
+    {
+      "statute": "copyright",
+      "short_name": "Copyright Act",
+      "title": "Copyright Act B.E. 2537 (1994)",
+      "wipolex_id": "23909",
+      "details_url": "https://www.wipo.int/wipolex/en/legislation/details/23909",
+      "wipo_title": "Copyright Act B.E. 2537 (1994)",
+      "wipo_summary": "Thailand - Year of Version: 2022 -   Enacted: December 9, 1994 - Main IP Laws - Copyright and Related Rights (Neighboring Rights)",
+      "version_note": "As amended by the Copyright Act (No. 2) B.E. 2558 (2015), (No. 3) B.E. 2558 (2015), (No. 4) B.E. 2561 (2018) and (No. 5) B.E. 2565 (2022); unofficial translation by the Department of Intellectual Property",
+      "pdf_url": "https://wipolex-res.wipo.int/edocs/lexdocs/laws/en/th/th052en_0.pdf",
+      "pdf_last_modified": "2026-07-20T14:21:11Z",
+      "retrieved_at": "2026-10-26T22:41:20Z",
+      "pdf_sha256": "91c00c7d001b08382df810d430fe5cd3e0775fc250770678a027a394ee9b29a4",
+      "pdf_bytes": 948014,
+      "pages": 26,
+      "section_count": 103
+    },
+    {
+      "statute": "trade_secrets",
+      "short_name": "Trade Secrets Act",
+      "title": "Trade Secrets Act B.E. 2545 (2002)",
+      "wipolex_id": "17163",
+      "details_url": "https://www.wipo.int/wipolex/en/legislation/details/17163",
+      "wipo_title": "Trade Secrets Act B.E. 2545 (2002) (as amended by Trade Secrets Act (No. 2) B.E. 2558 (2015))",
+      "wipo_summary": "Thailand - Year of Version: 2015 -  Enacted: April 12, 2002 - Main IP Laws - Undisclosed Information (Trade Secrets)",
+      "version_note": "As amended by the Trade Secrets Act (No. 2) B.E. 2558 (2015); unofficial translation by the Department of Intellectual Property",
+      "pdf_url": "https://wipolex-res.wipo.int/edocs/lexdocs/laws/en/th/th039en.pdf",
+      "pdf_last_modified": "2020-06-05T09:53:10Z",
+      "retrieved_at": "2026-10-26T22:41:21Z",
+      "pdf_sha256": "48c5cb04ed2905e6899dc38eb990d6123b261de1a0ff25edf28ceeda3f85f584",
+      "pdf_bytes": 380976,
+      "pages": 10,
+      "section_count": 39
+    }
+  ]
+}

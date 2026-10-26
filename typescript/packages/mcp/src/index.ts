@@ -48,6 +48,7 @@ import {
   PtabTrialsClient,
   PublicationsClient,
   SearchOptionsSchema,
+  ThaiDipStatutesClient,
   TipoClient,
   TmepClient,
   TrademarkAssignmentClient,
@@ -134,6 +135,10 @@ import {
 } from "./relay.js";
 import { registerUsptoResources } from "./resources.js";
 import { registerPortalSearchTools } from "./search-portals.js";
+import {
+  registerThaiDipStatutesTools,
+  type ThaiDipStatutesReader,
+} from "./thai-dip-statutes.js";
 import { registerTipoTools } from "./tipo.js";
 import { registerTmepTools } from "./tmep.js";
 import {
@@ -238,6 +243,8 @@ export interface ServerOptions {
   inpiBrStatutes?: InpiBrStatutesReader;
   /** Légifrance IP corpus reader; omitted, it uses the default artifact path. */
   legifranceIp?: LegifranceIpReader;
+  /** Thailand IP statutes corpus reader; omitted, it uses the default artifact path. */
+  thaiDipStatutes?: ThaiDipStatutesReader;
   /** Download URLs; pass `blobStore` (for example a GcsBlobStore) for URLs that outlive the process. */
   downloads?: DownloadOptions;
   /** Defaults to MCP identity settings; audience must intentionally cover document REST access. */
@@ -522,6 +529,8 @@ export function createServer(options: ServerOptions = {}): FastMCP {
   const inpiBrStatutes =
     options.inpiBrStatutes ?? own(new InpiBrStatutesClient());
   const legifranceIp = options.legifranceIp ?? own(new LegifranceIpClient());
+  const thaiDipStatutes =
+    options.thaiDipStatutes ?? own(new ThaiDipStatutesClient());
   const applications =
     provided.applications ?? lazyClient(() => new ApplicationsClient());
   const client = options.client ?? applications;
@@ -1043,6 +1052,11 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     server,
     legifranceIp,
     options.auth ? requireScopes("legifrance:read") : undefined,
+  );
+  registerThaiDipStatutesTools(
+    server,
+    thaiDipStatutes,
+    options.auth ? requireScopes("thai_dip:read") : undefined,
   );
   registerUsitcTools(
     server,
