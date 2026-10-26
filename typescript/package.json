@@ -53,6 +53,7 @@
     "record:wipo-6ter": "bun scripts/record-wipo-6ter.ts",
     "record:wipo-lex": "bun scripts/record-wipo-lex.ts",
     "record:eurlex": "bun scripts/record-eurlex.ts",
+    "record:euipo-guidelines": "bun scripts/record-euipo-guidelines.ts",
     "record:fees": "bun scripts/record-fees.ts",
     "record:google-patents": "bun scripts/record-google-patents.ts",
     "verify:facade-live": "bun scripts/live-facade.ts",

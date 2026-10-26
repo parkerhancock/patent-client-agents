@@ -1,0 +1,771 @@
+version: 1
+interactions:
+  - request:
+      method: GET
+      uri: https://guidelines.euipo.europa.eu/api/publications
+      headers:
+        accept:
+          - application/json
+        user-agent:
+          - patent-client-agents/0 (+https://patentclient.com)
+      body:
+        type: none
+    response:
+      status: 200
+      headers:
+        connection:
+          - keep-alive
+        content-type:
+          - application/json
+        date:
+          - "Mon, 26 Oct 2026 22:23:22 GMT"
+      body:
+        type: json
+        content:
+          - Id: "1778489"
+            Title: Richtlinien zu Geschmacksmuster
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2018
+            VersionRef: "1778435"
+            Language: de
+            CreatedOn: 2020-01-24T08:32:18
+            Version: "2"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2018-10-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2018
+          - Id: "1778493"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2018
+            VersionRef: "1778435"
+            Language: en
+            CreatedOn: 2020-01-24T08:32:18
+            Version: "2"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2018-10-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2018
+          - Id: "1778678"
+            Title: Richtlinien zu Marken
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition Legislative Reform II (2017)
+            VersionRef: "1778624"
+            Language: de
+            CreatedOn: 2020-01-24T09:09:22
+            Version: "2"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2017-10-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.1"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2017
+          - Id: "1778682"
+            Title: Trade mark guidelines
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition Legislative Reform II (2017)
+            VersionRef: "1778624"
+            Language: en
+            CreatedOn: 2020-01-24T09:09:22
+            Version: "2"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2017-10-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.1"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2017
+          - Id: "1803368"
+            Title: Richtlinien zu Geschmacksmuster Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2020
+            VersionRef: "1803314"
+            Language: de
+            CreatedOn: 2020-01-24T18:52:02
+            Version: "3"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2020-02-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.2"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2020
+          - Id: "1803372"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2020
+            VersionRef: "1803314"
+            Language: en
+            CreatedOn: 2020-01-24T18:52:02
+            Version: "3"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2020-02-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.2"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2020
+          - Id: "1803464"
+            Title: Richtlinien zu Marken
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2020
+            VersionRef: "1803410"
+            Language: de
+            CreatedOn: 2020-01-24T19:28:40
+            Version: "3"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2020-02-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2020
+          - Id: "1803468"
+            Title: Trade mark guidelines
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2020
+            VersionRef: "1803410"
+            Language: en
+            CreatedOn: 2020-01-24T19:28:40
+            Version: "3"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2020-02-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2020
+          - Id: "1922893"
+            Title: Richtlinien zu Marken
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2021
+            VersionRef: "1922891"
+            Language: de
+            CreatedOn: 2020-11-06T13:57:29
+            Version: "4"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2021-03-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2021
+          - Id: "1922895"
+            Title: Trade mark guidelines
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2021
+            VersionRef: "1922891"
+            Language: en
+            CreatedOn: 2020-11-06T13:57:29
+            Version: "4"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2021-03-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2021
+          - Id: "1934974"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2022
+            VersionRef: "1934972"
+            Language: de
+            CreatedOn: 2021-01-30T12:08:49
+            Version: "5"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2022-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2022
+          - Id: "1934976"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2022
+            VersionRef: "1934972"
+            Language: en
+            CreatedOn: 2021-01-30T12:08:49
+            Version: "5"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2022-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2022
+          - Id: "1935301"
+            Title: Richtlinien zu Marken
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2022
+            VersionRef: "1935299"
+            Language: de
+            CreatedOn: 2021-01-30T12:59:43
+            Version: "5"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2022-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2022
+          - Id: "1935303"
+            Title: Trade mark guidelines
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2022
+            VersionRef: "1935299"
+            Language: en
+            CreatedOn: 2021-01-30T12:59:43
+            Version: "5"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2022-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2022
+          - Id: "1937332"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2021
+            VersionRef: "1922517"
+            Language: de
+            CreatedOn: 2020-11-06T09:27:12
+            Version: "4"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2021-03-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2021
+          - Id: "1937338"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2021
+            VersionRef: "1922517"
+            Language: en
+            CreatedOn: 2020-11-06T09:27:12
+            Version: "4"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2021-03-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2021
+          - Id: "2231430"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition Legislative Reform I (2025)
+            VersionRef: "2231426"
+            Language: en
+            CreatedOn: 2024-01-09T11:43:09
+            Version: "8"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2025-05-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITIONLEGISLATIVEREFORMIFAAA2024FEAA
+          - Id: "2231428"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition Legislative Reform I (2025)
+            VersionRef: "2231426"
+            Language: de
+            CreatedOn: 2024-01-09T11:43:09
+            Version: "8"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2025-05-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITIONLEGISLATIVEREFORMIFAAA2024FEAA
+          - Id: "2302857"
+            Title: Trade mark guidelines
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2025
+            VersionRef: "2302853"
+            Language: en
+            CreatedOn: 2025-01-21T10:27:43
+            Version: "8"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2025-05-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.3"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2025
+          - Id: "2302855"
+            Title: Richtlinien zu Marken
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2025
+            VersionRef: "2302853"
+            Language: de
+            CreatedOn: 2025-01-21T10:27:43
+            Version: "8"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2025-05-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.3"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2025
+          - Id: "2058841"
+            Title: Richtlinien zu Marken
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2023
+            VersionRef: "2058839"
+            Language: de
+            CreatedOn: 2022-01-25T14:12:49
+            Version: "6"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2023-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2023
+          - Id: "2058843"
+            Title: Trade mark guidelines
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2023
+            VersionRef: "2058839"
+            Language: en
+            CreatedOn: 2022-01-25T14:12:49
+            Version: "6"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2023-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2023
+          - Id: "2058422"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2023
+            VersionRef: "2058420"
+            Language: de
+            CreatedOn: 2022-01-25T13:32:57
+            Version: "6"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2023-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2023
+          - Id: "2058424"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2023
+            VersionRef: "2058420"
+            Language: en
+            CreatedOn: 2022-01-25T13:32:57
+            Version: "6"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2023-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2023
+          - Id: "2213906"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2024
+            VersionRef: "2213904"
+            Language: de
+            CreatedOn: 2023-04-18T13:03:10
+            Version: "7"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2024-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.1"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2024
+          - Id: "2213908"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2024
+            VersionRef: "2213904"
+            Language: en
+            CreatedOn: 2023-04-18T13:03:10
+            Version: "7"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2024-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.1"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2024
+          - Id: "2330038"
+            Title: Guidelines for the examination of geographical indications for craft and industrial products
+            ProductFamily:
+              - Craft GI Guidelines
+            ProductReleaseVersion:
+              - Edition 2026
+            VersionRef: "2329513"
+            Language: en
+            CreatedOn: 2025-07-24T07:56:24
+            Version: "1"
+            LogicalId: GUID-4642237D-7EC5-4165-AC65-C1F60DFFA68F
+            CustomMetas: null
+            EntryIntoForce: 2026-05-21T00:00:00
+            AllowCompare: false
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMECRAFTGIGUIDELINES
+            IsPubObsolete: null
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2026
+          - Id: "2330040"
+            Title: Richtlinien für die Prüfung geografischer Angaben für handwerkliche und industrielle Erzeugnisse
+            ProductFamily:
+              - Craft GI Guidelines
+            ProductReleaseVersion:
+              - Edition 2026
+            VersionRef: "2329513"
+            Language: de
+            CreatedOn: 2025-07-24T07:56:24
+            Version: "1"
+            LogicalId: GUID-4642237D-7EC5-4165-AC65-C1F60DFFA68F
+            CustomMetas: null
+            EntryIntoForce: 2026-05-21T00:00:00
+            AllowCompare: false
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMECRAFTGIGUIDELINES
+            IsPubObsolete: null
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2026
+          - Id: "2214309"
+            Title: Richtlinien zu Marken
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2024
+            VersionRef: "2214307"
+            Language: de
+            CreatedOn: 2023-04-18T14:25:46
+            Version: "7"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2024-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.4"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2024
+          - Id: "2214311"
+            Title: Trade mark guidelines
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2024
+            VersionRef: "2214307"
+            Language: en
+            CreatedOn: 2023-04-18T14:25:46
+            Version: "7"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2024-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.4"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2024
+          - Id: "2318651"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2026
+            VersionRef: "2318647"
+            Language: en
+            CreatedOn: 2025-05-06T11:07:38
+            Version: "9"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2026-07-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: null
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2026
+          - Id: "2319054"
+            Title: Trade mark guidelines
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2026
+            VersionRef: "2319050"
+            Language: en
+            CreatedOn: 2025-05-06T12:19:08
+            Version: "9"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2026-07-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.1"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: null
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2026
+          - Id: "2319052"
+            Title: Richtlinien zu Marken
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2026
+            VersionRef: "2319050"
+            Language: de
+            CreatedOn: 2025-05-06T12:19:08
+            Version: "9"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2026-07-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.1"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: null
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2026
+          - Id: "2318649"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2026
+            VersionRef: "2318647"
+            Language: de
+            CreatedOn: 2025-05-06T11:07:38
+            Version: "9"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2026-07-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: null
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2026
+    recorded_at: 2026-10-26T22:23:22.175Z
+  - request:
+      method: POST
+      uri: https://guidelines.euipo.europa.eu/api/search
+      headers:
+        accept:
+          - application/json
+        content-type:
+          - application/json
+        user-agent:
+          - patent-client-agents/0 (+https://patentclient.com)
+      body:
+        type: json
+        content:
+          PublicationId: 2319052
+          Language: de
+          SearchQuery: Unterscheidungskraft
+          SearchScopeObjects: []
+          StartIndex: 0
+          Count: 2
+    response:
+      status: 200
+      headers:
+        connection:
+          - keep-alive
+        content-type:
+          - application/json; charset=utf-8
+        date:
+          - "Mon, 26 Oct 2026 22:23:22 GMT"
+        transfer-encoding:
+          - chunked
+      body:
+        type: json
+        content:
+          Hits: 181
+          Count: 2
+          StartIndex: 0
+          QueryResults:
+            - Id: ish_2319052-2056462-16
+              Content: "4.5.4 Kombinierte Beurteilung                   4.5.4 Kombinierte Beurteilung                                    Der erforderliche Grad der Ähnlichkeit zwischen den Marken und zwischen den einander gegenüberstehenden Waren oder Dienstleistungen            lässt sich nicht im Voraus bestimmen, da andernfalls der Anwendungsbereich von Artikel\_8 Absatz\_3 UMV nicht flexibel genug wäre, um alle Möglichkeiten des Versuchs einer missbräuchlichen Verwendung der Marke des ursprünglichen            Inhabers durch einen Agenten zu umfassen. Die Beurteilung hängt von einer tatsächlichen Würdigung der jeweiligen Umstände            des Einzelfalls ab.                                    Es kann sein, dass (i)\_die Marken nicht identisch, aber die einander gegenüberstehenden Waren oder Dienstleistungen identisch            sind, (ii)\_die einander gegenüberstehenden Waren oder Dienstleistungen nicht identisch, die Marken jedoch identisch sind,            oder (iii)\_weder die Marken noch die einander gegenüberstehenden Waren und Dienstleistungen identisch sind.                                    Aus dem Begriff der „Unterscheidungskraft“ folgt, dass die Beurteilung der Auswirkungen von Abweichungen auf die ursprüngliche            Unterscheidungskraft der älteren Marke zwangsläufig mit einer Beurteilung in Bezug auf die Waren und Dienstleistungen einhergeht. Daher kann der Vergleich der Marken im Sinne von Artikel\_8 Absatz\_3 UMV nicht unabhängig von den Waren und Dienstleistungen erfolgen.                                    Da es im Wesentlichen darum geht, ob die angefochtene Marke dem ursprünglichen Inhaber zugeordnet werden kann, kann die Beurteilung            der Auswirkungen der Abweichungen auf die ursprüngliche Unterscheidungskraft der älteren Marke je nach den betreffenden Waren und Dienstleistungen der angefochtenen            Marke unterschiedlich ausfallen. Wenn beispielsweise alle angefochtenen Waren denen der älteren Marke in gleichem Maße ähnlich            wären, könnte es immer noch sein, dass die angefochtene Marke nur in Bezug auf einige von ihnen dem ursprünglichen Inhaber            zugeordnet würde, nicht aber in Bezug auf andere, weil sich die Änderungen auf die ursprüngliche Unterscheidungskraft der            älteren Marke in Bezug auf diese anderen angefochtenen Waren unterschiedlich auswirken.                                                                                             Übergeordnetes Thema: 4.5 Beziehung zwischen den Marken und zwischen den Waren und Dienstleistungen                                             "
+              Language: de
+              ProductFamilyTitle: null
+              ProductReleaseVersionTitle: null
+              PublicationId: 2319052
+              PublicationTitle: Richtlinien zu Marken
+              PageId: null
+              PageTitle: null
+              LastModifiedDate: 02/25/2022 16:30:44
+              ItemType: Page
+              Meta:
+                FTITLE.logical.value: 4.5.4 Combined assessment
+                rawlanguagetitle.generated.value: 4.5.4 Kombinierte Beurteilung
+                part.scope.generated.value: PARTC
+                section.scope.generated.value: SECTION3
+                chapter.scope.generated.value: ""
+              Highlighted:
+                content.german:
+                  - "Aus dem Begriff der „<em>Unterscheidungskraft</em>“ folgt, dass die Beurteilung der Auswirkungen von Abweichungen"
+                  - auf die ursprüngliche            <em>Unterscheidungskraft</em> der älteren Marke zwangsläufig mit einer Beurteilung
+                  - "werden kann, kann die Beurteilung            der Auswirkungen der Abweichungen auf die ursprüngliche <em>Unterscheidungskraft</em>"
+                  - "zugeordnet würde, nicht aber in Bezug auf andere, weil sich die Änderungen auf die ursprüngliche <em>Unterscheidungskraft</em>"
+                rawcontent:
+                  - "</p>                           <p class=\"p\">Aus dem Begriff der „<em>Unterscheidungskraft</em>“ folgt, dass die"
+                  - Beurteilung der Auswirkungen von Abweichungen auf die ursprüngliche            <em>Unterscheidungskraft</em>
+                  - "Beurteilung            der <strong class=\"ph b\">Auswirkungen der Abweichungen</strong> auf die ursprüngliche <em>Unterscheidungskraft</em>"
+                  - "zugeordnet würde, nicht aber in Bezug auf andere, weil sich die Änderungen auf die ursprüngliche <em>Unterscheidungskraft</em>"
+                dynamicText.FISHDITADLVRREMOTESTATUS.lng.element:
+                  - "<em>VDITADLVRREMOTESTATUSONLINE</em>"
+              TocNavEntries: null
+            - Id: ish_2319052-2228478-16
+              Content: "4.2 Beispiele                   4.2 Beispiele                                    Beispielsweise ist es in technischen Bereichen wie denjenigen, die Rechner, Maschinen, Motoren und Werkzeuge betreffen, wahrscheinlicher,            dass einzelne Buchstaben\_als technische, Modell- oder Katalogreferenzen, statt als Herkunftshinweis wahrgenommen werden; die            Tatsache, dass dies der Fall ist, sollte jedoch aus einer faktenbasierten Beurteilung abgeleitet werden.                                    Je nach Ergebnis der vorhergehenden Prüfung könnte eine Marke, die aus einem als Standardzeichen dargestellten Einzelbuchstaben            besteht, gemäß Artikel\_7 Absatz\_1 Buchstabe\_b\_UMV aus dem Grund zu beanstanden sein, dass ihr die immanente Unterscheidungskraft für die betreffenden Waren bzw. Dienstleistungen            oder Teilen von diesen fehlt.                                    Dies wäre beispielsweise der Fall bei einer Marke, die aus dem Einzelbuchstaben „C“ für „Fruchtsäfte“ besteht, da dieser Buchstabe            allgemein benutzt wird, um auf Vitamin C hinzuweisen. Die maßgeblichen Verkehrskreise würden den Buchstaben\_nicht als ein            Zeichen wahrnehmen, welches auf den betrieblichen Ursprung dieser Waren hinweisen würde.                                    Ein weiteres Beispiel für fehlende Unterscheidungskraft wäre eine aus Einzelbuchstaben bestehende Marke, die in Bezug auf            die Art von Spielzeugwürfeln angemeldet wird, die häufig verwendet wird, um Kindern beizubringen, wie Wörter gebildet werden.            In diesem Beispiel werden die einzelnen Buchstaben nicht als Zeichen verwendet, durch die auf die betriebliche Herkunft der            betroffenen Waren hingewiesen würde.                                    Obwohl es in diesem Fall keine direkte beschreibende Beziehung zwischen den Buchstaben und den Waren gibt, würde einer aus            einem Einzelbuchstaben bestehenden Marke die Unterscheidungskraft fehlen, da die Verbraucher – wenn es um Spielzeugwürfel            geht – eher daran gewöhnt sind, einzelne Buchstaben\_eher so sehen, dass sie entweder funktionelle oder praktische Konnotationen            besitzen, aber nicht als Angabe zur betrieblichen Herkunft.                                    Wenn jedoch nicht festgestellt werden kann, dass ein bestimmter einzelner Buchstabe frei von jeder Unterscheidungskraft in            Bezug auf die betreffenden Waren bzw. Dienstleistungen ist, dann sollte er akzeptiert werden, selbst wenn er in Standardzeichen            oder in einer recht elementaren Weise dargestellt ist.                                    So wurde beispielsweise der Buchstabe  für Transportwesen; Verpackung und Lagerung von Waren; Organisation von Reisen in Klasse\_39 und Dienstleistungen zur Verpflegung und zur vorübergehenden Beherbergung von Gästen in Klasse\_43 akzeptiert (30/09/2010, R\_1008/2010-2, W (Bildmarke), §\_12-21).                                    Weitere Beispiele siehe Richtlinien, Teil\_B, Prüfung, Abschnitt\_4, Absolute Eintragungshindernisse, Kapitel\_4, Beschreibende Marken (Artikel\_7 Absatz\_1 Buchstabe\_c\_UMV).                                                                                             Übergeordnetes Thema: 4 Einzelbuchstaben\_1                                                1           Dieser Abschnitt befasst sich mit Einzelbuchstaben im Verhältnis zu Artikel\_7 Absatz\_1 Buchstabe\_b\_UMV. Einzelbuchstaben im Verhältnis zu Artikel\_7 Absatz\_1 Buchstabe\_c\_UMV werden in den Richtlinien, Teil\_B, Prüfung, Abschnitt\_4, Absolute Eintragungshindernisse, Kapitel\_4, Beschreibende Marken (Artikel\_7 Absatz\_1               Buchstabe\_c\_UMV), Abschnitt\_2.8, behandelt.                           "
+              Language: de
+              ProductFamilyTitle: null
+              ProductReleaseVersionTitle: null
+              PublicationId: 2319052
+              PublicationTitle: Richtlinien zu Marken
+              PageId: null
+              PageTitle: null
+              LastModifiedDate: 02/23/2024 11:11:44
+              ItemType: Page
+              Meta:
+                FTITLE.logical.value: 4.2 Examples
+                rawlanguagetitle.generated.value: 4.2 Beispiele
+                part.scope.generated.value: PARTB
+                section.scope.generated.value: SECTION4
+                chapter.scope.generated.value: CHAPTER3
+              Highlighted:
+                content.german:
+                  - "gemäß Artikel\_7 Absatz\_1 Buchstabe\_b\_UMV aus dem Grund zu beanstanden sein, dass ihr die immanente <em>Unterscheidungskraft</em>"
+                  - Ein weiteres Beispiel für fehlende <em>Unterscheidungskraft</em> wäre eine aus Einzelbuchstaben bestehende Marke
+                  - "Buchstaben und den Waren gibt, würde einer aus            einem Einzelbuchstaben bestehenden Marke die <em>Unterscheidungskraft</em>"
+                  - "Wenn jedoch nicht festgestellt werden kann, dass ein bestimmter einzelner Buchstabe frei von jeder <em>Unterscheidungskraft</em>"
+                rawcontent:
+                  - "blank\">Artikel\_7 Absatz\_1 Buchstabe\_b\_UMV</a> aus dem Grund zu beanstanden sein, dass ihr die immanente <em>Unterscheidungskraft</em>"
+                  - "855E-596E39847BCB__P_GUID-3685E3BE-F2FE-4785-855E-596E39847BCB__4\">Ein weiteres Beispiel für fehlende <em>Unterscheidungskraft</em>"
+                  - "Buchstaben und den Waren gibt, würde einer aus            einem Einzelbuchstaben bestehenden Marke die <em>Unterscheidungskraft</em>"
+                  - ">Wenn jedoch nicht festgestellt werden kann, dass ein bestimmter einzelner Buchstabe frei von jeder <em>Unterscheidungskraft</em>"
+                dynamicText.FISHDITADLVRREMOTESTATUS.lng.element:
+                  - "<em>VDITADLVRREMOTESTATUSONLINE</em>"
+              TocNavEntries: null
+    recorded_at: 2026-10-26T22:23:22.394Z

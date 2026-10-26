@@ -1,0 +1,763 @@
+version: 1
+interactions:
+  - request:
+      method: GET
+      uri: https://guidelines.euipo.europa.eu/api/publications
+      headers:
+        accept:
+          - application/json
+        user-agent:
+          - patent-client-agents/0 (+https://patentclient.com)
+      body:
+        type: none
+    response:
+      status: 200
+      headers:
+        connection:
+          - keep-alive
+        content-type:
+          - application/json
+        date:
+          - "Mon, 26 Oct 2026 22:23:19 GMT"
+      body:
+        type: json
+        content:
+          - Id: "1778489"
+            Title: Richtlinien zu Geschmacksmuster
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2018
+            VersionRef: "1778435"
+            Language: de
+            CreatedOn: 2020-01-24T08:32:18
+            Version: "2"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2018-10-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2018
+          - Id: "1778493"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2018
+            VersionRef: "1778435"
+            Language: en
+            CreatedOn: 2020-01-24T08:32:18
+            Version: "2"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2018-10-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2018
+          - Id: "1778678"
+            Title: Richtlinien zu Marken
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition Legislative Reform II (2017)
+            VersionRef: "1778624"
+            Language: de
+            CreatedOn: 2020-01-24T09:09:22
+            Version: "2"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2017-10-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.1"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2017
+          - Id: "1778682"
+            Title: Trade mark guidelines
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition Legislative Reform II (2017)
+            VersionRef: "1778624"
+            Language: en
+            CreatedOn: 2020-01-24T09:09:22
+            Version: "2"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2017-10-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.1"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2017
+          - Id: "1803368"
+            Title: Richtlinien zu Geschmacksmuster Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2020
+            VersionRef: "1803314"
+            Language: de
+            CreatedOn: 2020-01-24T18:52:02
+            Version: "3"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2020-02-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.2"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2020
+          - Id: "1803372"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2020
+            VersionRef: "1803314"
+            Language: en
+            CreatedOn: 2020-01-24T18:52:02
+            Version: "3"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2020-02-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.2"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2020
+          - Id: "1803464"
+            Title: Richtlinien zu Marken
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2020
+            VersionRef: "1803410"
+            Language: de
+            CreatedOn: 2020-01-24T19:28:40
+            Version: "3"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2020-02-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2020
+          - Id: "1803468"
+            Title: Trade mark guidelines
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2020
+            VersionRef: "1803410"
+            Language: en
+            CreatedOn: 2020-01-24T19:28:40
+            Version: "3"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2020-02-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2020
+          - Id: "1922893"
+            Title: Richtlinien zu Marken
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2021
+            VersionRef: "1922891"
+            Language: de
+            CreatedOn: 2020-11-06T13:57:29
+            Version: "4"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2021-03-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2021
+          - Id: "1922895"
+            Title: Trade mark guidelines
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2021
+            VersionRef: "1922891"
+            Language: en
+            CreatedOn: 2020-11-06T13:57:29
+            Version: "4"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2021-03-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2021
+          - Id: "1934974"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2022
+            VersionRef: "1934972"
+            Language: de
+            CreatedOn: 2021-01-30T12:08:49
+            Version: "5"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2022-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2022
+          - Id: "1934976"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2022
+            VersionRef: "1934972"
+            Language: en
+            CreatedOn: 2021-01-30T12:08:49
+            Version: "5"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2022-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2022
+          - Id: "1935301"
+            Title: Richtlinien zu Marken
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2022
+            VersionRef: "1935299"
+            Language: de
+            CreatedOn: 2021-01-30T12:59:43
+            Version: "5"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2022-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2022
+          - Id: "1935303"
+            Title: Trade mark guidelines
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2022
+            VersionRef: "1935299"
+            Language: en
+            CreatedOn: 2021-01-30T12:59:43
+            Version: "5"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2022-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2022
+          - Id: "1937332"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2021
+            VersionRef: "1922517"
+            Language: de
+            CreatedOn: 2020-11-06T09:27:12
+            Version: "4"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2021-03-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2021
+          - Id: "1937338"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2021
+            VersionRef: "1922517"
+            Language: en
+            CreatedOn: 2020-11-06T09:27:12
+            Version: "4"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2021-03-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2021
+          - Id: "2231430"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition Legislative Reform I (2025)
+            VersionRef: "2231426"
+            Language: en
+            CreatedOn: 2024-01-09T11:43:09
+            Version: "8"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2025-05-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITIONLEGISLATIVEREFORMIFAAA2024FEAA
+          - Id: "2231428"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition Legislative Reform I (2025)
+            VersionRef: "2231426"
+            Language: de
+            CreatedOn: 2024-01-09T11:43:09
+            Version: "8"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2025-05-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITIONLEGISLATIVEREFORMIFAAA2024FEAA
+          - Id: "2302857"
+            Title: Trade mark guidelines
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2025
+            VersionRef: "2302853"
+            Language: en
+            CreatedOn: 2025-01-21T10:27:43
+            Version: "8"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2025-05-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.3"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2025
+          - Id: "2302855"
+            Title: Richtlinien zu Marken
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2025
+            VersionRef: "2302853"
+            Language: de
+            CreatedOn: 2025-01-21T10:27:43
+            Version: "8"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2025-05-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.3"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2025
+          - Id: "2058841"
+            Title: Richtlinien zu Marken
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2023
+            VersionRef: "2058839"
+            Language: de
+            CreatedOn: 2022-01-25T14:12:49
+            Version: "6"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2023-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2023
+          - Id: "2058843"
+            Title: Trade mark guidelines
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2023
+            VersionRef: "2058839"
+            Language: en
+            CreatedOn: 2022-01-25T14:12:49
+            Version: "6"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2023-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2023
+          - Id: "2058422"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2023
+            VersionRef: "2058420"
+            Language: de
+            CreatedOn: 2022-01-25T13:32:57
+            Version: "6"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2023-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2023
+          - Id: "2058424"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2023
+            VersionRef: "2058420"
+            Language: en
+            CreatedOn: 2022-01-25T13:32:57
+            Version: "6"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2023-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2023
+          - Id: "2213906"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2024
+            VersionRef: "2213904"
+            Language: de
+            CreatedOn: 2023-04-18T13:03:10
+            Version: "7"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2024-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.1"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2024
+          - Id: "2213908"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2024
+            VersionRef: "2213904"
+            Language: en
+            CreatedOn: 2023-04-18T13:03:10
+            Version: "7"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2024-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.1"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2024
+          - Id: "2330038"
+            Title: Guidelines for the examination of geographical indications for craft and industrial products
+            ProductFamily:
+              - Craft GI Guidelines
+            ProductReleaseVersion:
+              - Edition 2026
+            VersionRef: "2329513"
+            Language: en
+            CreatedOn: 2025-07-24T07:56:24
+            Version: "1"
+            LogicalId: GUID-4642237D-7EC5-4165-AC65-C1F60DFFA68F
+            CustomMetas: null
+            EntryIntoForce: 2026-05-21T00:00:00
+            AllowCompare: false
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMECRAFTGIGUIDELINES
+            IsPubObsolete: null
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2026
+          - Id: "2330040"
+            Title: Richtlinien für die Prüfung geografischer Angaben für handwerkliche und industrielle Erzeugnisse
+            ProductFamily:
+              - Craft GI Guidelines
+            ProductReleaseVersion:
+              - Edition 2026
+            VersionRef: "2329513"
+            Language: de
+            CreatedOn: 2025-07-24T07:56:24
+            Version: "1"
+            LogicalId: GUID-4642237D-7EC5-4165-AC65-C1F60DFFA68F
+            CustomMetas: null
+            EntryIntoForce: 2026-05-21T00:00:00
+            AllowCompare: false
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMECRAFTGIGUIDELINES
+            IsPubObsolete: null
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2026
+          - Id: "2214309"
+            Title: Richtlinien zu Marken
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2024
+            VersionRef: "2214307"
+            Language: de
+            CreatedOn: 2023-04-18T14:25:46
+            Version: "7"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2024-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.4"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2024
+          - Id: "2214311"
+            Title: Trade mark guidelines
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2024
+            VersionRef: "2214307"
+            Language: en
+            CreatedOn: 2023-04-18T14:25:46
+            Version: "7"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2024-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.4"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2024
+          - Id: "2318651"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2026
+            VersionRef: "2318647"
+            Language: en
+            CreatedOn: 2025-05-06T11:07:38
+            Version: "9"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2026-07-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: null
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2026
+          - Id: "2319054"
+            Title: Trade mark guidelines
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2026
+            VersionRef: "2319050"
+            Language: en
+            CreatedOn: 2025-05-06T12:19:08
+            Version: "9"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2026-07-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.1"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: null
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2026
+          - Id: "2319052"
+            Title: Richtlinien zu Marken
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2026
+            VersionRef: "2319050"
+            Language: de
+            CreatedOn: 2025-05-06T12:19:08
+            Version: "9"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2026-07-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.1"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: null
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2026
+          - Id: "2318649"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2026
+            VersionRef: "2318647"
+            Language: de
+            CreatedOn: 2025-05-06T11:07:38
+            Version: "9"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2026-07-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: null
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2026
+    recorded_at: 2026-10-26T22:23:19.700Z
+  - request:
+      method: POST
+      uri: https://guidelines.euipo.europa.eu/api/search
+      headers:
+        accept:
+          - application/json
+        content-type:
+          - application/json
+        user-agent:
+          - patent-client-agents/0 (+https://patentclient.com)
+      body:
+        type: json
+        content:
+          PublicationId: 2319054
+          Language: en
+          SearchQuery: acquired distinctiveness
+          SearchScopeObjects:
+            - searchScopeField: part.scope.generated.value
+              searchScopeValue: PARTC
+          StartIndex: 0
+          Count: 5
+    response:
+      status: 200
+      headers:
+        connection:
+          - keep-alive
+        content-type:
+          - application/json; charset=utf-8
+        date:
+          - "Mon, 26 Oct 2026 22:23:19 GMT"
+        transfer-encoding:
+          - chunked
+      body:
+        type: json
+        content:
+          Hits: 2
+          Count: 5
+          StartIndex: 0
+          QueryResults:
+            - Id: ish_2319054-2066608-16
+              Content: "4.2.3.6 Verification of the evidence                   4.2.3.6 Verification of the evidence                                    The Office verifies that the trade mark particulars claimed in the notice of opposition are reflected in the evidence submitted, as an official document originating from the competent registration authority, or in the evidence accessible online            from a source recognised by the Office if the opponent relied on that.                                    The following details of the evidence will be checked\_(1):                                                            the issuing authority;                                    the filing [210] and/or registration numbers [111] (in certain countries these are, or were, different);                                    the territorial extent for international registrations (i.e. in which countries the mark is protected and for what goods and               services);                                                the filing [220], priority [300] and registration dates [151] (in certain countries, e.g. France, the filing and registration               dates found on the certificate are the same);                                                the representation of the sign [531, 540, 541, 546, 554, 556, 557, 571, 591].                                                            If the earlier mark is in colour, the opponent must submit evidence originating from an official source that contains a reproduction            of the mark in colour.                                    If the opponent has indicated in the notice of opposition that the earlier mark is in colour, but submits evidence showing            a black and white representation of the mark, the opposition based on that earlier right will be rejected as not substantiated            (25/10/2018, T‑359/17, ALDI / ALDO (fig.), EU:T:2018:720, §\_45; 04/06/2019, C‑822/18\_P, ALDI / ALDO (fig.), EU:C:2019:466, appeal dismissed; 27/03/2019, T‑265/18, Formata (fig.) / Formata (fig.) et al., EU:T:2019:197, §\_48-53).                                    The only exception is where a colour representation of the mark is not available in official publications of the competent registration authority            because, at the relevant point in time, that authority was not yet publishing marks in colour. This is typically the case            where the official online evidence contains a black and white representation of the mark accompanied by a colour claim indicating            the colours in words. In such a case, notwithstanding the black and white representation of the mark, it will be accepted            as proof of a mark in colour as long as the colour indications (available in or translated into the language of proceedings)            correspond to the colours of the mark indicated in the notice of opposition. In the rare situation where the official online            evidence contains a black and white representation of the mark accompanied by a colour claim in general terms (e.g. ‘colours            claimed’) but no indication of the colours in words, this will also be accepted (so long as this claim is available in or            translated into the language of proceedings).                                    The above exception does not cover the situation where what is available in official publications of the relevant registration            authority is not a colour representation as such, but a representation that includes the colours in words and their distribution within the mark (e.g. by using arrows that clearly indicate to which element of the mark the specific colour applies). Such a representation,            even if technically black and white, will be considered a ‘colour representation’, and the opponent is required to provide            a translation of the colour indications into the language of proceedings. The indication of generally recognised colour codes            (e.g. Pantone, Hex, RAL, RGB or CMYK) is considered equivalent to the indication of the colours in words in the language of            the proceedings. Indications within the representation regarding the colours and their distribution will not be considered            to be part of the representation as such, but as elements that affect the scope of protection of the mark.                                    If the opponent has provided no indication in the notice of opposition that the earlier mark is in colour, but submits evidence            showing a mark in colour, the opposition based on that earlier right will be rejected as not substantiated.                                                            The goods and services covered [511].                                    The expiry date of the registration (if given).                                    The owner [731, 732].                                    Other entries in the register affecting the legal or procedural status or the scope of protection of the mark (e.g. restrictions,               renewals, transfers, pending actions, the fact that the mark was registered due to acquired distinctiveness through use, etc.).                                                                                                                                 Parent topic: 4.2.3 Trade mark registrations or applications that are not EUTMs                                                1           The numbers in square brackets stand for standard INID codes (see in paragraph\_4.3.1).                           "
+              Language: en
+              ProductFamilyTitle: null
+              ProductReleaseVersionTitle: null
+              PublicationId: 2319054
+              PublicationTitle: Trade mark guidelines
+              PageId: null
+              PageTitle: null
+              LastModifiedDate: 03/30/2023 17:19:43
+              ItemType: Page
+              Meta:
+                FTITLE.logical.value: 4.2.3.6 Verification of the evidence
+                rawlanguagetitle.generated.value: 4.2.3.6 Verification of the evidence
+                part.scope.generated.value: PARTC
+                section.scope.generated.value: SECTION1
+                chapter.scope.generated.value: ""
+              Highlighted:
+                content.english:
+                  - "restrictions,               renewals, transfers, pending actions, the fact that the mark was registered due to <em>acquired</em>"
+                  - "<em>distinctiveness</em> through use, etc.)."
+                dynamicText.FISHDITADLVRREMOTESTATUS.lng.element:
+                  - "<em>VDITADLVRREMOTESTATUSONLINE</em>"
+                dynamicText.part.scope.generated.value:
+                  - "<em>PARTC</em>"
+              TocNavEntries: null
+            - Id: ish_2319054-2215187-16
+              Content: "5.3.2.3 Affidavits                   5.3.2.3 Affidavits                                    Although the means of evidence listed, such as packages, labels, price lists, catalogues, invoices, photographs and newspaper            advertisements, do not present any particular problems, it is necessary to consider in some detail declarations as referred            to in Article\_97(1)(f) EUTMR. For general information, see the Guidelines, Part\_A, Section\_10, Evidence, 4.2\_Affidavits.                                                Distinction between admissibility and relevance (probative value)                                                The importance of declarations has been much debated. In this regard, there must be a clear differentiation between the admissibility            and the probative value of such evidence.                                    As far as admissibility is concerned, Article\_10(4) EUTMDR expressly mentions written statements referred to in Article\_97(1)(f) EUTMR as admissible means of proof of use. Article\_97(1) EUTMR cites means of giving evidence, among which are sworn or affirmed written statements or other statements with a similar effect            according to the law of the State in which they have been drawn up. Therefore, it has to be evaluated whether the statement            submitted constitutes a statement within the sense of Article\_97(1)(f) EUTMR.                                                Article\_97(1)(f) EUTMR does not specify by whom these statements should be signed, so there is no reason to consider that statements signed by the            parties to the proceedings themselves are not covered by this provision (16/12/2008, T‑86/07, Deitech, EU:T:2008:577, §\_46).                                    As far as the probative value of this kind of evidence is concerned, the Office, following the established case-law, makes a distinction between statements            coming from the sphere of the opponent themselves or their employees and statements drawn up by an independent source (09/12/2014,            T‑278/12, PROFLEX, EU:T:2014:1045, §\_51; 06/11/2014, T‑463/12, MB, EU:T:2014:935, §\_54).                                                Declarations by the proprietor or its employees                                                Statements coming from the sphere of the owner of the earlier mark (drawn up by the interested parties themselves or their            employees)are generally given less weight than independent evidence. This is because the perception of the party involved in the dispute            may be more or less affected by personal interests in the matter.                                    Generalisation should be avoided, since the exact value of such statements always depends on their concrete form and content,            and the final outcome depends on the overall assessment of the evidence in each individual case.                                    A change of ownership after the filing or priority date of the EUTM application may render declarations made by the new owners            void as the latter generally do not have any direct knowledge to form a basis for making declarations concerning use of the            mark by the previous owner (17/06/2004, R\_16/2004‑1, REPORTER / REPORTER, §\_23-24).                                    Nevertheless, in the case of a transfer or other succession in title, any new owner may rely on use by their predecessors            within the grace period concerned. Use made by a predecessor may be evidenced by the predecessor and by all other reliable            means, for instance, information from business records if the predecessor is not available.                                                Declarations by third parties                                                Statements (e.g. surveys) drawn up by an independent source are given more probative weight (19/01/2011, R\_1595/2008‑2, FINCONSUM ESTABLECIMIENTO FINANCIERO DE CREDITO / FINCONSUMO (FIG. MARK), §\_31).                                    This practice is in line with the case-law of the Court of Justice in the Chiemsee judgment (04/05/1999, C‑108/97 & C-109/97, Chiemsee, EU:C:1999:230), where the Court gave some indications of appropriate evidence for proving the acquired distinctiveness            of a mark in the market place. Although acquisition of distinctiveness is not per sethe same as genuine use, the former does comprise elements of evidence of use of a sign on the market. Consequently, case-law            relating to these can be used by analogy.                                                                                             Parent topic: 5.3.2 Means of evidence                                             "
+              Language: en
+              ProductFamilyTitle: null
+              ProductReleaseVersionTitle: null
+              PublicationId: 2319054
+              PublicationTitle: Trade mark guidelines
+              PageId: null
+              PageTitle: null
+              LastModifiedDate: 03/28/2024 10:29:03
+              ItemType: Page
+              Meta:
+                FTITLE.logical.value: 5.3.2.3 Declarations
+                rawlanguagetitle.generated.value: 5.3.2.3 Affidavits
+                part.scope.generated.value: PARTC
+                section.scope.generated.value: SECTION1
+                chapter.scope.generated.value: ""
+              Highlighted:
+                content.english:
+                  - "Chiemsee, EU:C:1999:230), where the Court gave some indications of appropriate evidence for proving the <em>acquired</em>"
+                  - "<em>distinctiveness</em>            of a mark in the market place."
+                dynamicText.FISHDITADLVRREMOTESTATUS.lng.element:
+                  - "<em>VDITADLVRREMOTESTATUSONLINE</em>"
+                dynamicText.part.scope.generated.value:
+                  - "<em>PARTC</em>"
+              TocNavEntries: null
+    recorded_at: 2026-10-26T22:23:19.922Z

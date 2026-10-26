@@ -1,0 +1,771 @@
+version: 1
+interactions:
+  - request:
+      method: GET
+      uri: https://guidelines.euipo.europa.eu/api/publications
+      headers:
+        accept:
+          - application/json
+        user-agent:
+          - patent-client-agents/0 (+https://patentclient.com)
+      body:
+        type: none
+    response:
+      status: 200
+      headers:
+        connection:
+          - keep-alive
+        content-type:
+          - application/json
+        date:
+          - "Mon, 26 Oct 2026 22:23:20 GMT"
+      body:
+        type: json
+        content:
+          - Id: "1778489"
+            Title: Richtlinien zu Geschmacksmuster
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2018
+            VersionRef: "1778435"
+            Language: de
+            CreatedOn: 2020-01-24T08:32:18
+            Version: "2"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2018-10-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2018
+          - Id: "1778493"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2018
+            VersionRef: "1778435"
+            Language: en
+            CreatedOn: 2020-01-24T08:32:18
+            Version: "2"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2018-10-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2018
+          - Id: "1778678"
+            Title: Richtlinien zu Marken
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition Legislative Reform II (2017)
+            VersionRef: "1778624"
+            Language: de
+            CreatedOn: 2020-01-24T09:09:22
+            Version: "2"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2017-10-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.1"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2017
+          - Id: "1778682"
+            Title: Trade mark guidelines
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition Legislative Reform II (2017)
+            VersionRef: "1778624"
+            Language: en
+            CreatedOn: 2020-01-24T09:09:22
+            Version: "2"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2017-10-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.1"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2017
+          - Id: "1803368"
+            Title: Richtlinien zu Geschmacksmuster Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2020
+            VersionRef: "1803314"
+            Language: de
+            CreatedOn: 2020-01-24T18:52:02
+            Version: "3"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2020-02-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.2"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2020
+          - Id: "1803372"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2020
+            VersionRef: "1803314"
+            Language: en
+            CreatedOn: 2020-01-24T18:52:02
+            Version: "3"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2020-02-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.2"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2020
+          - Id: "1803464"
+            Title: Richtlinien zu Marken
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2020
+            VersionRef: "1803410"
+            Language: de
+            CreatedOn: 2020-01-24T19:28:40
+            Version: "3"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2020-02-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2020
+          - Id: "1803468"
+            Title: Trade mark guidelines
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2020
+            VersionRef: "1803410"
+            Language: en
+            CreatedOn: 2020-01-24T19:28:40
+            Version: "3"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2020-02-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2020
+          - Id: "1922893"
+            Title: Richtlinien zu Marken
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2021
+            VersionRef: "1922891"
+            Language: de
+            CreatedOn: 2020-11-06T13:57:29
+            Version: "4"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2021-03-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2021
+          - Id: "1922895"
+            Title: Trade mark guidelines
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2021
+            VersionRef: "1922891"
+            Language: en
+            CreatedOn: 2020-11-06T13:57:29
+            Version: "4"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2021-03-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2021
+          - Id: "1934974"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2022
+            VersionRef: "1934972"
+            Language: de
+            CreatedOn: 2021-01-30T12:08:49
+            Version: "5"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2022-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2022
+          - Id: "1934976"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2022
+            VersionRef: "1934972"
+            Language: en
+            CreatedOn: 2021-01-30T12:08:49
+            Version: "5"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2022-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2022
+          - Id: "1935301"
+            Title: Richtlinien zu Marken
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2022
+            VersionRef: "1935299"
+            Language: de
+            CreatedOn: 2021-01-30T12:59:43
+            Version: "5"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2022-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2022
+          - Id: "1935303"
+            Title: Trade mark guidelines
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2022
+            VersionRef: "1935299"
+            Language: en
+            CreatedOn: 2021-01-30T12:59:43
+            Version: "5"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2022-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2022
+          - Id: "1937332"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2021
+            VersionRef: "1922517"
+            Language: de
+            CreatedOn: 2020-11-06T09:27:12
+            Version: "4"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2021-03-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2021
+          - Id: "1937338"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2021
+            VersionRef: "1922517"
+            Language: en
+            CreatedOn: 2020-11-06T09:27:12
+            Version: "4"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2021-03-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2021
+          - Id: "2231430"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition Legislative Reform I (2025)
+            VersionRef: "2231426"
+            Language: en
+            CreatedOn: 2024-01-09T11:43:09
+            Version: "8"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2025-05-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITIONLEGISLATIVEREFORMIFAAA2024FEAA
+          - Id: "2231428"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition Legislative Reform I (2025)
+            VersionRef: "2231426"
+            Language: de
+            CreatedOn: 2024-01-09T11:43:09
+            Version: "8"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2025-05-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITIONLEGISLATIVEREFORMIFAAA2024FEAA
+          - Id: "2302857"
+            Title: Trade mark guidelines
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2025
+            VersionRef: "2302853"
+            Language: en
+            CreatedOn: 2025-01-21T10:27:43
+            Version: "8"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2025-05-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.3"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2025
+          - Id: "2302855"
+            Title: Richtlinien zu Marken
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2025
+            VersionRef: "2302853"
+            Language: de
+            CreatedOn: 2025-01-21T10:27:43
+            Version: "8"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2025-05-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.3"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2025
+          - Id: "2058841"
+            Title: Richtlinien zu Marken
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2023
+            VersionRef: "2058839"
+            Language: de
+            CreatedOn: 2022-01-25T14:12:49
+            Version: "6"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2023-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2023
+          - Id: "2058843"
+            Title: Trade mark guidelines
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2023
+            VersionRef: "2058839"
+            Language: en
+            CreatedOn: 2022-01-25T14:12:49
+            Version: "6"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2023-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2023
+          - Id: "2058422"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2023
+            VersionRef: "2058420"
+            Language: de
+            CreatedOn: 2022-01-25T13:32:57
+            Version: "6"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2023-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2023
+          - Id: "2058424"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2023
+            VersionRef: "2058420"
+            Language: en
+            CreatedOn: 2022-01-25T13:32:57
+            Version: "6"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2023-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2023
+          - Id: "2213906"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2024
+            VersionRef: "2213904"
+            Language: de
+            CreatedOn: 2023-04-18T13:03:10
+            Version: "7"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2024-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.1"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2024
+          - Id: "2213908"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2024
+            VersionRef: "2213904"
+            Language: en
+            CreatedOn: 2023-04-18T13:03:10
+            Version: "7"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2024-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.1"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2024
+          - Id: "2330038"
+            Title: Guidelines for the examination of geographical indications for craft and industrial products
+            ProductFamily:
+              - Craft GI Guidelines
+            ProductReleaseVersion:
+              - Edition 2026
+            VersionRef: "2329513"
+            Language: en
+            CreatedOn: 2025-07-24T07:56:24
+            Version: "1"
+            LogicalId: GUID-4642237D-7EC5-4165-AC65-C1F60DFFA68F
+            CustomMetas: null
+            EntryIntoForce: 2026-05-21T00:00:00
+            AllowCompare: false
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMECRAFTGIGUIDELINES
+            IsPubObsolete: null
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2026
+          - Id: "2330040"
+            Title: Richtlinien für die Prüfung geografischer Angaben für handwerkliche und industrielle Erzeugnisse
+            ProductFamily:
+              - Craft GI Guidelines
+            ProductReleaseVersion:
+              - Edition 2026
+            VersionRef: "2329513"
+            Language: de
+            CreatedOn: 2025-07-24T07:56:24
+            Version: "1"
+            LogicalId: GUID-4642237D-7EC5-4165-AC65-C1F60DFFA68F
+            CustomMetas: null
+            EntryIntoForce: 2026-05-21T00:00:00
+            AllowCompare: false
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMECRAFTGIGUIDELINES
+            IsPubObsolete: null
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2026
+          - Id: "2214309"
+            Title: Richtlinien zu Marken
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2024
+            VersionRef: "2214307"
+            Language: de
+            CreatedOn: 2023-04-18T14:25:46
+            Version: "7"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2024-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.4"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2024
+          - Id: "2214311"
+            Title: Trade mark guidelines
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2024
+            VersionRef: "2214307"
+            Language: en
+            CreatedOn: 2023-04-18T14:25:46
+            Version: "7"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2024-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.4"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2024
+          - Id: "2318651"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2026
+            VersionRef: "2318647"
+            Language: en
+            CreatedOn: 2025-05-06T11:07:38
+            Version: "9"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2026-07-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: null
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2026
+          - Id: "2319054"
+            Title: Trade mark guidelines
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2026
+            VersionRef: "2319050"
+            Language: en
+            CreatedOn: 2025-05-06T12:19:08
+            Version: "9"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2026-07-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.1"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: null
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2026
+          - Id: "2319052"
+            Title: Richtlinien zu Marken
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2026
+            VersionRef: "2319050"
+            Language: de
+            CreatedOn: 2025-05-06T12:19:08
+            Version: "9"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2026-07-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.1"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: null
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2026
+          - Id: "2318649"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2026
+            VersionRef: "2318647"
+            Language: de
+            CreatedOn: 2025-05-06T11:07:38
+            Version: "9"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2026-07-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: null
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2026
+    recorded_at: 2026-10-26T22:23:20.918Z
+  - request:
+      method: POST
+      uri: https://guidelines.euipo.europa.eu/api/search
+      headers:
+        accept:
+          - application/json
+        content-type:
+          - application/json
+        user-agent:
+          - patent-client-agents/0 (+https://patentclient.com)
+      body:
+        type: json
+        content:
+          PublicationId: 2318651
+          Language: en
+          SearchQuery: visibility
+          SearchScopeObjects:
+            - searchScopeField: part.scope.generated.value
+              searchScopeValue: PARTINV RCD
+          StartIndex: 0
+          Count: 10
+    response:
+      status: 200
+      headers:
+        connection:
+          - keep-alive
+        content-type:
+          - application/json; charset=utf-8
+        date:
+          - "Mon, 26 Oct 2026 22:23:21 GMT"
+        transfer-encoding:
+          - chunked
+      body:
+        type: json
+        content:
+          Hits: 2
+          Count: 10
+          StartIndex: 0
+          QueryResults:
+            - Id: ish_2318651-2396012-16
+              Content: "5.4 Invisible component Component parts of complex products not visible during normal use                    5.4 Invisible component Component parts of complex products not visible during normal use                                                 Features of a European Union design applied to, or incorporated in, a ‘component part of a complex product’, will be disregarded               if they are invisible during normal use of the complex product in question (Article\_4(2) EUDR and Recital\_13 Amending Regulation).                                                            Features of a European Union design applied to, or incorporated in, a ‘component part of a complex product’ will be disregarded               if they are not visible during normal use of the complex product in question (Article\_5(2) EUDR and Recital\_11 EUDR).                                                            ‘                           Complex product                           ’ means a product that is composed of multiple components that can be replaced, permitting disassembly and reassembly of the               product (Article\_4(3) EUDR).                                                            ‘Complex product’ means             The saddle of a product that bicycle or motorcycle, for example, is composed of multiple components that can be replaced, permitting disassembly and reassembly of the product (Article 3(3) EUDR).               For instance, the visibility requirement does not apply to a European Union design representing the appearance of a dustbin as a whole because though dustbins may be complex products,               they are not component parts of complex products (23/06/2008, ICD No 4 919). component part of a complex product within the meaning of Article\_4(3)EUDR. The bicycle or motorcycle itself qualifies as a complex product;               the saddle can be replaced through disassembly and reassembly, and without it, the complex product could not be subject to               normal use (16/02/2023, C‑472/21, Monz Handelsgesellschaft Internation, EU:C:2023:105, §\_34).                                       Likewise, the requirement under Article 4(2) EUDR does not apply to             By contrast, an electrode designed to be inserted into a welding torch given, inter alia, its consumable nature, the absence of disassembly and reassembly of the torch when the electrode is replaced,               and the fact that the torch is regarded cannot qualify as complete without the electrode (22/03/2023, a component part according to Article\_5(2) EUDR. This is due to its consumable nature, the fact that replacing it does not require disassembling               and reassembling the torch, because the torch is regarded as complete even without the electrode and the interchangeability               of the electrode (22/03/2023, T‑617/21, Welding torches (part of -), EU:T:2023:152, §\_55-69).                                                                                                         Table 1.                         REUD                         EUD No 1292122‑0001 (5 of 7 views)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         An assessment in abstracto of the visibility of the component part incorporated into a complex product, unconnected to any practical situation of use            of the product, is not sufficient to allow a component part to benefit from protection as a design. Visibility of a component            part of a complex product should be assessed from the perspective of the end user of that product, but also from the perspective            of an external observer (16/02/2023, C‑472/21C‑472/21, Monz Handelsgesellschaft International, EU:C:2023:105, §\_45-46).                                                ‘Normal use’ means use by the end user, excluding maintenance, servicing or repair work (Article\_4(3) EUDR). ‘Normal use’               is the use made in accordance with the purpose for which the complex product is intended.                                                            ‘Normal use’ covers acts performed during the principal use of a complex product as well as acts which must customarily be               carried out by the end user in connection with such use (which, depending of the product, may include its storage and transportation)               (16/02/2023,                            C‑472/21                           , Monz Handelsgesellschaft International, EU:C:2023:105, §\_55-56).                                                            ‘                           Normal use                           ’ means use by the end user, excluding maintenance, servicing or repair work (Article\_5(3) EUDR). ‘Normal use’ is the use               made in accordance with the purpose for which the complex product is intended. It covers acts performed during the principal               use of a complex product as well as acts that must customarily be carried out by the end user in connection with such use               (which, depending of the product, may include its storage and transportation) (16/02/2023,                            C‑472/21                           , Monz Handelsgesellschaft International, EU:C:2023:105, §\_55-56).                                                            For instance, for safety reasons, an electrical connector is a component part that is normally incorporated in a casing in               order to be shielded from any contact with potential users when a complex product, such as a train or an electric vehicle,               is in operation. The fact that this component part of a complex product can theoretically be made visible when inserted in               a transparent casing or cover constitutes a purely hypothetical and random criterion that must be disregarded (03/08/2009,                                          Visibility                            during normal use must be a real possibility and not be based on unlikely scenarios. For example, for safety reasons, an               electrical connector is normally enclosed by a casing to prevent contact with potential users during the operation of a complex               product, such as a train or an electric vehicle, meaning that it is not normally visible. The argument that such a component               could theoretically become visible if inserted in a transparent casing or cover is a purely hypothetical and random criterion               that must be disregarded (03/08/2009,             R\_1052/2008‑3, Contacteurs électriques, Electrical contactors, § 42-53).                                     Where none of the features of a European Union design applied to a component part (e.g. a heat exchanger insert) is visible            during normal use of the complex product (e.g. a heat exchanger), the European Union design will be invalidated as a whole            (20/01/2015, T‑616/13, Heat Exchanger Inserts, HEAT EXCHANGER INSERTS, EU:T:2015:30, § 14-16).                                     However, Article 4(2) 5(2) EUDR does not require a component part to be clearly visible in its entirety at every moment of use of the complex product. It is sufficient if enough for the whole of the component can to be seen some of the time in such a way that all its essential features can be apprehended (16/02/2023, C‑472/21C‑472/21, Monz Handelsgesellschaft International, EU:C:2023:105, §\_45).                                                                                                                        Parent topic: 5 The Different Grounds for Invalidity                                             "
+              Language: en
+              ProductFamilyTitle: null
+              ProductReleaseVersionTitle: null
+              PublicationId: 2318651
+              PublicationTitle: Designs guidelines
+              PageId: null
+              PageTitle: null
+              LastModifiedDate: 06/17/2026 11:46:04
+              ItemType: Page
+              Meta:
+                FTITLE.logical.value: 5.4 Component parts of complex products not visible during normal use
+                rawlanguagetitle.generated.value: "5.4 <tcdl:If type=\"ish:Condition\" condition=\"(DELETED=Y)\" xmlns:tcdl=\"http://www.sdl.com/web/DXA/Format\"><span class=\"keyword deleted\">Invisible component </span></tcdl:If><span class=\"keyword inserted\">Component </span>parts of complex products <span class=\"keyword inserted\">not visible during normal use </span>"
+                part.scope.generated.value: PARTINV RCD
+                section.scope.generated.value: ""
+                chapter.scope.generated.value: ""
+              Highlighted:
+                content.english:
+                  - "For instance, the <em>visibility</em> requirement does not apply to a European Union design representing the appearance"
+                  - An assessment in abstracto of the <em>visibility</em>
+                  - "<em>Visibility</em> of a component            part of a complex product should be assessed from the perspective"
+                  - "and random criterion that must be disregarded (03/08/2009,                                          <em>Visibility</em>"
+                rawcontent:
+                  - "For instance, the <em>visibility</em> requirement does not apply to </span></tcdl:If>a <tcdl:If type=\"ish:Condition"
+                  - "div>                           <p class=\"p\">An assessment <em class=\"ph i\">in abstracto</em> of the <em>visibility</em>"
+                  - "<em>Visibility</em> of a component            part of a complex product should be assessed from the perspective"
+                  - "span></tcdl:If>            <strong class=\"ph b inserted\">               <span class=\"keyword inserted\"><em>Visibility</em>"
+                dynamicText.FISHDITADLVRREMOTESTATUS.lng.element:
+                  - "<em>VDITADLVRREMOTESTATUSONLINE</em>"
+                dynamicText.part.scope.generated.value:
+                  - "<em>PARTINV</em> <em>RCD</em>"
+              TocNavEntries: null
+            - Id: ish_2318651-2396031-16
+              Content: "5.7.2.2 Individual character                   5.7.2.2 Individual character                                    A design will be considered to have individual character if the overall impression it produces on the informed user differs            from the overall impression produced on such a user by any design that has been made available to the public before the filing            date of the application for registration or, if a priority is claimed, the date of priority (Article 6(1) 7(1) EUDR).                                     In assessing individual character, the designerʼs degree of freedom in developing the design will be considered (Article 6(2) 7(2) EUDR). It is apparent from these provisions that the assessment of the individual character of a registered European Union            design is the result, in essence, of a four-stage examination. This examination consists of firstly deciding on the sector that the products in which the design is intended to be incorporated or to which it is intended to            be applied belong; secondly, the informed user of those products in accordance with their purpose and, with reference to that informed user, the degree            of awareness of the prior art and the level of attention in the comparison (direct if possible) of the designs; thirdly, the designer’s degree of freedom in developing their design; and fourthly, the outcome of the comparison of the designs at issue, considering the sector in question, the designer’s degree of freedom            and the overall impressions produced on the informed user by the contested design and by any earlier design that has been            made available to the public (10/09/2015, T‑525/13, Sacs à main, EU:T:2015:617, §\_32; 13/06/2019, T‑74/18, Informationstafeln für Fahrzeuge, EU:T:2019:417, §\_66).                                    The determination of the sector concerned, the informed user and the designer’s degree of freedom, must be carried out only            in relation to the contested design (10/11/2021, T‑193/20, Panels, EU:T:2021:782, §\_24).                                                The products at issue                                                When defining the product category concerned by the contested design, the relevant product indication in the registration            of that design is considered as well as, where necessary, the representation of the contested design itself, insofar as it clarifies the nature of the product, its intended purpose or its function (18/03/2010,            T‑9/07, Metal rappers, EU:T:2010:96, §\_56).                                                Therefore, the definition of the relevant product category is primarily based on the product indication (see Examination of               applications for registered European Union designs,                            paragraph\_6.1.4                           ), but it may sometimes need to be better defined by referring to the design itself. It may be the case that the contested               design is incorporated in a product that forms a self-contained category of homogenous products within the more general indication               of products (15/10/2020,                            T‑818/19                           , Support pillows, EU:T:2020:486, §\_31; 10/11/2021,                            T                                 ‑                                 193/20                           , Panels, EU:T:2021:782, §\_37-40).                                                            The claim that the relevant products or the 'sector concerned' is limited to a narrow segment of product for the use of particularly               attentive users is unfounded when unsupported by the representation of the contested design (10/11/2021,                            T                                 ‑                                 193/20                           , Panels, EU:T:2021:782, §\_43).                                                            In the majority of the cases, the product indication matches the representation of the design.                                                            However, there are situations where the product category must be better defined by considering the design itself. For instance,               the contested design may be incorporated in a product that forms a self-contained category of homogeneous products within               the more general indication of products (15/10/2020,                            T‑818/19                           , Support pillows, EU:T:2020:486, §\_31; 10/11/2021,                            T                                 ‑                                 193/20                           , Panels, EU:T:2021:782, §\_37-40). In other cases, the product indication may be broader than the product shown in the representation               (18/05/2022,                            T-256/21                           , Armchairs, EU:T:2022:297).                                                            The claim that the relevant products or the ‘sector concerned’             Any time there is limited to a narrow segment of products for discrepancy between the product indication and the use of particularly attentive users is unfounded when unsupported by representation, the representation of the contested design itself (10/11/2021, prevails (08/03/2017, T‑193/20, Panels, EU:T:2021:782, §\_43).R 2113/2015-3, Spülungen für W.C. (Wasser-), § 14).                           The products actually marketed in which the designs at issue are incorporated can be considered only for illustrative purposes            to determine the visual aspects of those designs. However, this consideration is only permitted on condition that the products            actually marketed correspond to the contested design as registered. Therefore, a product that is actually marketed cannot            be considered if the design incorporated in that product differs from the design as registered, or if it displays features            that are not clearly apparent from the graphic representation of that design, as registered (10/11/2021, T‑193/20, Panels, EU:T:2021:782, §\_33).                                                The informed user                                                The informed user is to be defined in relation to the relevant product in which the contested design is incorporated or to            which it is applied (10/11/2021, T‑193/20, Panels, EU:T:2021:782, §\_24).                                    The concept of ‘informed user’ refers to a fictitious person who routinely uses the categories of products in which the contested            design is incorporated (21/09/2017, C‑361/15\_P & C‑405/15\_P, Shower drains, EU:C:2017:720, §\_125-126).                                    However, according to recital 14 12 EUDR and the case-law, the informed user is aware of the existing design corpus, that is, any relevant design forming the            state of the art. Therefore, their knowledge is not limited to the sector related to the contested design. Furthermore, no            actual knowledge of prior designs pertaining to products from different sectors has to be proved (21/09/2017, C‑361/15\_P & C‑405/15\_P, Shower drains, EU:C:2017:720, §\_121-134).                                    The status of ‘user’ implies that the person concerned uses the product in which the design is incorporated, in accordance            with the purpose for which that product is intended (22/06/2010, T‑153/08, Communications equipment, EU:T:2010:248, §\_46; 09/09/2011, T‑10/08, Internal combustion engine, EU:T:2011:446, §\_24; 06/06/2013, T‑68/11, Watch-dials, EU:T:2013:298, §\_58).                                    The ‘informed user’ concept lies somewhere between that of the average consumer applicable in trade mark matters, who may            not have any specific knowledge, and the sectorial expert, who has detailed technical expertise. Without being a designer            or a technical expert (and therefore without necessarily knowing which aspects of the product concerned are dictated by technical            function, as found in 22/06/2010, T‑153/08, Communications equipment, EU:T:2010:248, §\_48), the informed user is aware of the various designs that exist in the sector            concerned and possesses a certain degree of knowledge of the features that those designs normally include (20/10/2011, C‑281/10\_P, Metal rappers, EU:C:2011:679, §\_53, 59; 22/06/2010, T‑153/08, Communications equipment, EU:T:2010:248, §\_47; 06/06/2013, T‑68/11, Watch-dials, EU:T:2013:298, §\_59).                                    Therefore, the informed user is neither a designer nor a technical expert. However, despite not necessarily knowing which            aspects of a product are dictated by a technical function, they do have some awareness of the existing designs in the sector            concerned.                                    The informed user is neither a manufacturer nor a seller of the products in which the designs at issue are intended to be            incorporated (09/09/2011, T‑10/08, Internal combustion engine, EU:T:2011:446, §\_25-27).                                    However, depending on the nature of the product in which the registered European Union design is incorporated (e.g. promotional            items), the ‘informed userʼ user’ concept may include a professional who acquires such products to distribute them to the final users, or the final users themselves            (20/10/2011, C‑281/10\_P, Metal rappers, EU:C:2011:679, §\_54). The fact that one of these two types of informed user perceives the designs at issue            as producing the same overall impression is sufficient for a finding that the contested design lacks individual character            (14/06/2011, T‑68/10, Watches, EU:T:2011:269, §\_56).                                    As a result of their interest in the products concerned, the informed user, as a rule, shows a relatively high degree of attention            when using them (24/10/2019, T‑559/18, Medizinische Pflaster, EU:T:2019:758 §\_50). Unlike the average consumer in the field of trade marks for whom the fact of            being faced, for instance, with a fashion accessory may affect their level of attention, this fact is irrelevant when determining            the level of attention of the informed user (21/05/2015, T‑22/13 & T‑23/13, UMBRELLAS, EU:T:2015:310, §\_50). Likewise, the mere fact of being frequently faced with a particular design does not make            the informed user more or less attentive, as the user’s level of attention is already, by its very nature, high (29/04/2020,            T‑73/19, Wood splitting tools, EU:T:2020:157, §\_75).                                    When the nature of the product in which the compared designs are incorporated makes it possible, the overall impression made            by these designs will be assessed on the assumption that the informed user can make a direct comparison between them (18/10/2012,            C‑101/11\_P & C‑102/11\_P, Ornamentación, EU:C:2012:641, §\_54-55).                                                The degree of freedom of the designer                                                The designer’s degree of freedom depends on the nature and intended purpose of the product in which the contested design will            be incorporated, as well as on the industrial sector to which the product belongs (see above).                                    The designer’s degree of freedom in developing the design is established, inter alia, by the constraints of the features imposed            by the technical function of the product or an element thereof, or by statutory requirements applicable to the product. These            constraints result in a standardisation of certain features, which will thus be common to the designs applied to the product            concerned (13/11/2012, T‑83/11 & T‑84/11, Radiatori per riscaldamento, EU:T:2012:592, §\_44).                                    In contrast, the designer’s degree of freedom was not considered to be restricted in a number of cases (13/06/2019, T‑74/18, Informationstafeln für Fahrzeuge, EU:T:2019:417, §\_79), in particular when the shape of the product into which the design            is incorporated may vary considerably (21/11/2013, T‑337/12, Sacacorchos, EU:T:2013:601, §\_36-39) and for instance come in any combination of colours, patterns, shapes and materials            (05/07/2017, T‑306/16, Door handles, EU:T:2017:466, §\_45-47). This may also be the case where the constraints of a functional nature concerning            the presence of certain essential features are not liable to affect to a significant extent the form or overall appearance            of the product, since they may take various forms and be arranged in various ways (13/06/2019, T‑74/18, Informationstafeln für Fahrzeuge, EU:T:2019:417, §\_79; 04/07/2017, T‑90/16, Measuring instruments, apparatus and devices, EU:T:2017:464, §\_61).                                    Furthermore, the designer’s degree of freedom is not affected by the fact that similar designs coexist on the market and form            a ‘general trend’ or coexist on the registers of industrial property offices (22/06/2010, T‑153/08, Communications equipment, EU:T:2010:248, §\_58; 01/06/2012, R\_89/2011‑3, Sacacorchos, §\_27; 06/06/2019, T‑209/18, Kraftfahrzeuge / Kraftfahrzeuge, EU:T:2019:377, §\_59).                                                As a way of example, the General Court found that the designer's degree of freedom in developing dolls' heads is wide and               that freedom is restricted only in so far as those heads must follow the basic charateristics of a human being. However, this               freedom is not restricted by market preferences as regards the appearance of 'fashion dolls' (01/12/2021,                            T-84/21                           , Doll's heads, EU:T:2021:844, § 39-41).                                                                                                                                                                                                                                                                                                                                                      Contested EUD                                                                                                                                                                                                                  Prior design                                                                                                                                                                                                                                                                                                                           Figure 1.                                                                                                    .                                                                                                                                                                                                                                                                                                                                                                                                                                                                   Figure 2.                                                                                                    .                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              The greater the designer’s freedom in developing the challenged design, the less likely it is that minor differences between            the designs at issue will be sufficient to make a different overall impression on an informed user. Conversely, the more the            designer’s freedom in developing the registered European Union design is restricted, the more likely it is that minor differences            between the designs at issue will be sufficient to make a different overall impression on the informed user (18/03/2010, T‑9/07, Metal rappers, EU:T:2010:96, §\_67, 72). Therefore, if the designer enjoys a high degree of freedom in developing a design,            this reinforces the conclusion that the designs that do not have significant differences make the same overall impression            on an informed user (09/09/2011, T‑10/08, Internal combustion engine, EU:T:2011:446, §\_33).                                    The degree of the designer’s freedom is a mitigating factor which makes it possible to reinforce or, a contrario, moderate the conclusion as regards the overall impression produced by each design at issue (06/06/2019, T‑209/18, Kraftfahrzeuge / Kraftfahrzeuge, EU:T:2019:377, §\_48).                                    Furthermore, the designer’s degree of freedom may vary as regards the different features of a design, and this must be taken            into account when assessing to what extent individual features contribute to the design’s overall impression.                                                               Saturation of the state of the art                                                                           Saturation of the state of the art, while not to be considered as limiting the freedom of the designer, may be such as to               render the user more sensitive to differences in detail of the conflicting designs. Therefore, a design, because of a saturation               of the state of the art, may have individual character because of features which, in the absence of such saturation, would               not be likely to create a difference in overall impression on the informed user (15/06/2022,                            T-380/20                           , Radiatori per riscaldamento, EU:T:2022:259, § 67).                                                            Saturation of the state of the art cannot be assumed but must be demonstrated by the holder with sufficient evidence, such               as catalogues and documentary evidence of goods offered by a large number of competing undertakings, statements from sector               experts, statements from producers and consumer associations, catalogues and price lists of larger distributors operating               in the relevant sector and, finally, in surveys and sector studies carried out by third parties (10/10/2024,                            R 1272/2013-3                           , RADIATORI PER RISCALDAMENTO, § 47).                                                            As an example, the GC found that the coexistence of a dozen of models of radiators produced by companies is not sufficient               to demonstrate saturation of the state of the art (15/06/2022,                            T-380/20                           , Radiatori per riscaldamento, EU:T:2022:259, § 105).                                                            The overall impression                                                Under Article 6(1)(b) 7(1)(b) EUDR, a registered European Union design is to be considered to have individual character if the overall impression it produces            on the informed user differs from the overall impression produced on such a user by any earlier design. In assessing individual            character, the degree of freedom of the designer in developing the design is to be considered (Article 6(2) 7(2) EUDR).                                     Unless the designs compared include functional, invisible functional or disclaimed features, or features that are not visible during normal use (see paragraph\_5.7.2), both designs must be compared globally. That does not mean, however, that the same weight should be given to all the features            of the designs compared.                                    Firstly, the informed user uses the product in which the design is incorporated, in accordance with the purpose for which            that product is intended. The relative weight to give to the features of the designs compared may therefore depend on how            that product is used. In particular, the role played by some features may be less important depending on their reduced visibility            when the product is in use (22/06/2010, T‑153/08, Communications equipment, EU:T:2010:248, §\_64-66, 72; 21/11/2013, T‑337/12, Sacacorchos, EU:T:2013:601, §\_45-46; 21/05/2015, T‑22/13 & T‑23/13, UMBRELLAS, EU:T:2015:310, §\_97).                                    Secondly, when appraising the overall impression conveyed by two designs, the informed user will only give minor importance            to features that are totally banal and common to the type of product in question and will concentrate on features that are            arbitrary or different from the norm (18/03/2010, T‑9/07, Metal rappers, EU:T:2010:96, §\_77; 28/11/2006, R\_1310/2005‑3, galletas, §\_13; 30/07/2009, R\_1734/2008‑3, FORCHETTE, §\_26 et seq.).                                    Thirdly, similarities relating to common features that are present in the design for functional or standardising purposes            will have only minor importance in the overall impression produced by those designs on the informed user. Additionally, the            more the designerʼs freedom in developing the contested design is restricted, the more likely minor differences between the            designs at issue will be sufficient to produce a different overall impression on the informed user (18/03/2010, T‑9/07, Metal rappers, EU:T:2010:96, §\_72).                                    Fourthly, the assessment of individual character (Article 6 7 EUDR) follows a different logic that is different from that underlying the exclusion of protection based on account of functionality or interconnection (Article 8 EUDR). ( under Article 9 EUDR):                                                                   The fact that the                                  earlier design is partly or entirely dictated by technical function or composed of interconnecting features                                  is not decisive because Article\_7 EUDR does not require the comparison to be made with an earlier valid design.                                                                                                   The fact the earlier design is partly or wholly dictated by technical or interconnecting considerations is not decisive because               Article\_6 EUDR does not require a comparison with an earlier valid design.                                                            Where the contested design differs from or coincides with a prior design in                            individual features                           , which are solely dictated by technical or interconnecting considerations, a different or similar overall impression may               be bestowed on the contested design by other arbitrary features or by the placement of those functional features or the features               of interconnections.                                                            Where the                            contested design                            differs from or coincides with a prior design in                            individual features                           , that are                            solely dictated by technical function or composed of interconnecting features                           , the overall impression may still differ depending on the presence of other arbitrary features or the arrangement of those               functional features or interconnecting elements.                                                            The fact that             When the contested design differs from or coincides with a prior design in includes one or a number of more features which, that are, to some extent, are technical or have serve interconnecting purposes, will impact this impacts the comparison in two respects. respects:                                                                                  Greater importance will in principle be given to other features whereby the designer made use of their freedom when developing                  the design, provided such features are apt likely to catch the informed user’s attention on account of, for example, their size or position.                                                                                                                            The shape, configuration and placement of the functional or interconnecting features may also be considered (04/07/2017, T‑90/16, Measuring instruments, apparatus and devices, EU:T:2017:464, § 61) to the extent that the designer has some freedom in combining                  these elements. This degree of freedom can be evidenced demonstrated for example by the existence of alternative shapes fulfilling the same function (09/09/2011, T‑10/08, Internal combustion engine, EU:T:2011:446, §\_36).                                                                                                                                 Examples:                                                                           Same overall impression (Contested design declared invalid)                                                                           Finally, when familiar with a saturation of the prior art due to the density of the existing design corpus, the informed user               may be more sensitive to even minor differences between the designs that may thus produce a different overall impression (13/11/2012,                                          T‑83/11                            &amp;                            T‑84/11                           , Radiatori per riscaldamento, EU:T:2012:592, §\_81; 12/03/2014,                            T‑315/12                           , Radiatori per riscaldamento, EU:T:2014:115, §\_87). To prove the actual impact of this saturation on the informed user’s               perception, the holder of the contested registered European Union design must present sufficient evidence of the existing               design corpus and its density at the date of filing of the contested design or its priority date (10/10/2014,                            R\_1272/2013‑3                           , RADIATORI PER RISCALDAMENTO, §\_36, 47; 09/12/2014,                            R\_1643/2014‑3                           , Radiatori per riscaldamento, §\_51).                                                            According to the GC, the differences between the contested design and the prior design, such as the presence of an additional               central stripe of dark filling, minor variations in the length, proportion or colour intensity, are not significant enough               to create a different overall impression. The degree of freedom of the designer in the relevant sector is considered average,               meaning that only clear and notable differences would affect the overall impression. The informed user, who is familiar with               the range of snack products on the market and aware that such items often vary in size, shape, and filling, would not focus               on the marginal differences but rather on the general appearance and structure of the product. The rectangular shape, the               combination of two dark outer layers and a white filling and the overall configuration of the designs lead to a strong impression               of similarity. The central dark stripe in the contested design would likely be perceived not as a significant difference but               simply as a flavour variation, especially since it does not alter the external form of the product (10/05/2019,                            T-517/18                           , Backwaren, EU:T:2019:323, § 42-50).                                                                                                                                                                                                                                                                                                                                                      Contested design                                                                                                                                                                                                                  Prior design                                                                                                                                                                                                                                                                                                                           Figure 3.                                                                                                    .                                                                                                                                                                                                                                                                                                                                                                                                                                                                   Figure 4.                                                                                                    .                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          To illustrate, it was held that REUD No\_1\_512\_633‑0001 created a different overall impression from that produced by the earlier               design (REUD No\_52\_113‑0001). In an area in which the designer’s degree of freedom in developing their design is not limited               by any technical or legal restraints, the General Court (GC) upheld the decision of the Board of Appeal, which had found that               the differentiating features of the two designs below prevailed over their common points. In particular, the fact that the               armchair of the earlier design has a rectangular rather than a square shape, that its seat is placed lower and the arms are               broader, was considered decisive to support the conclusion that the contested design had individual character (04/02/2014,                                          T‑339/12                           , Armchairs, EU:T:2014:54, §\_23-37).                           Different overall impression                                                               According to the GC, account must be taken of there are several significant differences between the difference between contested design and the designs at issue prior invoked designs, such as regards the angle shape and size of the backrest roof and door, the seat presence of the armchair represented a canopy and ventilation openings, differences in wall coverings and colours, as well as differing pictograms. These differences alter the contested design, bearing in mind that appearance of the overall impression produced on the informed user public toilet units and are not dictated by regulatory requirements. In fact, while public toilets must necessarily be determined in light of comply with certain technical, health and safety standards, these requirements primarily concern the manner in interior, which is not protected by the particular product is used. Since an inclined backrest and seat will give rise to contested EU design. The designer has a different level relatively high degree of comfort from that freedom regarding external features, such as the side panels, roof shape, and depiction of a straight back and seat (albeit toilet symbols. Furthermore, the contested design includes some elements that comfort does are not constitute visible in the earlier designs, such as a large city map panel or a feature bumper at the bottom of appearance), the structure. Taken together, the use that will be made of that armchair by differences between the circumspect user is thereby liable two designs are sufficiently pronounced to confer individual character to be affected (04/02/2014, the contested design (26/03/2025, T‑339/12, Armchairs, EU:T:2014:54, §\_30).T-608/23, Public toilets; Outdoor toilet, EU:T:2025:333, § 76, 81).                                                                                                                                                                                                                                                                                                                                                                                                                                                                        Contested REUD No\_1\_512\_633‑0001                                                                                                                                                                                                                                                                                                                                                                     Earlier REUD No\_52\_113‑0001                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            By contrast, the GC found that REUD No\_1\_512\_633‑0003 lacked individual character in respect of the same earlier design. It               was held that the differentiating features between the designs, including the presence in the contested design of three cushions,               were outweighed by their common characteristics (the rectangular shape, the flat back and seat, the seats positioned below               the mid-section of the armchairs’ structure, etc.) (04/02/2014,                            T‑339/12                           , Armchairs, EU:T:2014:54, §\_44-60).                                                                                                                                                                                                                                                                                                      Contested design                                                                                                                                                                                                                  Prior design*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            *Only one of the prior designs has been provided for illustrative purposes.                                                                                                                                                                                                                                                                                                                        The GC confirmed the view taken by the Board of Appeal (27/04/2012,                            R\_969/2011‑3                           , ARMCHAIRS) that the cushions are less important than the armchairsʼ structure when assessing the overall impression caused               by the designs. This is because cushions are not a fixed element that can be easily separated from the main product and are               often sold and purchased separately, at a relatively low cost compared to that of the structure of an armchair. The informed               user perceives the cushions as a mere optional accessory. They can hardly be considered as ‘a significant part of the design’.               Consequently, the overall impression produced by the designs at issue is dominated by the structure of the armchairs itself               and not by the cushions, which could be regarded as secondary elements (04/02/2014,                            T‑339/12                           , Armchairs, EU:T:2014:54, §\_37-38).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             Contested REUD No\_1\_512\_633‑0003                                                                                                                                                                                                                                                                                                                                                                     Earlier REUD No\_52\_113‑0001                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         Parent topic: 5.7.2 Assessment of novelty and individual character                                             "
+              Language: en
+              ProductFamilyTitle: null
+              ProductReleaseVersionTitle: null
+              PublicationId: 2318651
+              PublicationTitle: Designs guidelines
+              PageId: null
+              PageTitle: null
+              LastModifiedDate: 06/17/2026 11:48:07
+              ItemType: Page
+              Meta:
+                FTITLE.logical.value: 5.7.2.2 Individual character
+                rawlanguagetitle.generated.value: 5.7.2.2 Individual character
+                part.scope.generated.value: PARTINV RCD
+                section.scope.generated.value: ""
+                chapter.scope.generated.value: ""
+              Highlighted:
+                content.english:
+                  - "In particular, the role played by some features may be less important depending on their reduced <em>visibility</em>"
+                rawcontent:
+                  - "In particular, the role played by some features may be less important depending on their reduced <em>visibility</em>"
+                dynamicText.FISHDITADLVRREMOTESTATUS.lng.element:
+                  - "<em>VDITADLVRREMOTESTATUSONLINE</em>"
+                dynamicText.part.scope.generated.value:
+                  - "<em>PARTINV</em> <em>RCD</em>"
+              TocNavEntries: null
+    recorded_at: 2026-10-26T22:23:21.154Z
