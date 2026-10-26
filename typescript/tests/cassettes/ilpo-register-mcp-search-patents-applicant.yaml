@@ -1,0 +1,272 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://data.gov.il/api/3/action/datastore_search?resource_id=adca9a88-bf91-462a-8a49-62381af9b588&limit=1000&offset=0&filters=%7B%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%91%D7%A7%D7%A9%D7%94%22%3A%5B327372%2C327370%2C325534%5D%7D
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - public, max-age=0, must-revalidate
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=utf-8
+      date:
+      - Mon, 26 Oct 2026 21:19:01 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding
+      via:
+      - 1.1 d09facc1a33a23ae0ece49f16f368ae6.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - qchcHdSVfNUaymF_4rZSQvTAlJRjC69ChAe2Zxkf6mwnfpyiZaOUgw==
+      x-amz-cf-pop:
+      - DFW57-P4
+      x-cache:
+      - Miss from cloudfront
+    body:
+      type: json
+      content:
+        help: https://data.gov.il/api/3/action/help_show?name=datastore_search
+        success: true
+        result:
+          filters:
+            מספר בקשה:
+            - 327372
+            - 327370
+            - 325534
+          include_total: true
+          limit: 1000
+          offset: 0
+          records_format: objects
+          resource_id: adca9a88-bf91-462a-8a49-62381af9b588
+          total_estimation_threshold: null
+          records:
+          - _id: 280269
+            מספר בקשה: 325534
+            תאריך הבקשה: 19/09/2019
+            תאריך הגשה: 22/12/2025
+            שם האמצאה בעברית: מנגנון מזרק אוטומטי
+            שם האמצאה באנגלית: AUTO INJECTOR APPARATUS
+            מספר בקשה בינלאומי: IB/2019/001050
+            מספר פרסום בינלאומי: /2020/058764
+            תאריך פרסום ראשון: 01/02/2026
+            תאריך פרסום שני: 01/02/2026
+            תאריך מתן פטנט: ""
+            סטטוס בקשה/פטנט: בקשה חדשה
+          - _id: 282301
+            מספר בקשה: 327370
+            תאריך הבקשה: 26/09/2024
+            תאריך הגשה: 25/03/2026
+            שם האמצאה בעברית: שיטות ומערכות לגילוי התקדמות הפרעת תנועה
+            שם האמצאה באנגלית: METHODS AND SYSTEMS FOR DETECTING THE PROGRESSION OF A MOVEMENT DISORDER
+            מספר בקשה בינלאומי: IL/2024/050950
+            מספר פרסום בינלאומי: /2025/069021
+            תאריך פרסום ראשון: 01/04/2026
+            תאריך פרסום שני: 01/05/2026
+            תאריך מתן פטנט: ""
+            סטטוס בקשה/פטנט: בקשה חדשה
+          - _id: 282303
+            מספר בקשה: 327372
+            תאריך הבקשה: 26/09/2024
+            תאריך הגשה: 25/03/2026
+            שם האמצאה בעברית: אמרוסולמין לשימוש בטיפול בניוון מערכות מרובות
+            שם האמצאה באנגלית: EMRUSOLMIN FOR USE IN TREATING MULTIPLE SYSTEM ATROPHY
+            מספר בקשה בינלאומי: IB/2024/059428
+            מספר פרסום בינלאומי: /2025/068949
+            תאריך פרסום ראשון: 01/04/2026
+            תאריך פרסום שני: 01/05/2026
+            תאריך מתן פטנט: ""
+            סטטוס בקשה/פטנט: בקשה חדשה
+          fields:
+          - id: _id
+            type: int
+          - id: מספר בקשה
+            type: numeric
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: תאריך הבקשה
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: תאריך הגשה
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: שם האמצאה בעברית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: שם האמצאה באנגלית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: מספר בקשה בינלאומי
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: מספר פרסום בינלאומי
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: תאריך פרסום ראשון
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: תאריך פרסום שני
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: תאריך מתן פטנט
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: סטטוס בקשה/פטנט
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          _links:
+            start: >-
+              /api/3/action/datastore_search?resource_id=adca9a88-bf91-462a-8a49-62381af9b588&limit=1000&filters=%7B%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%91%D7%A7%D7%A9%D7%94%22%3A%5B327372%2C327370%2C325534%5D%7D
+            next: >-
+              /api/3/action/datastore_search?resource_id=adca9a88-bf91-462a-8a49-62381af9b588&limit=1000&offset=1000&filters=%7B%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%91%D7%A7%D7%A9%D7%94%22%3A%5B327372%2C327370%2C325534%5D%7D
+          total: 3
+          total_was_estimated: false
+  recorded_at: 2026-10-26T21:19:01.468Z
+- request:
+    method: GET
+    uri: >-
+      https://data.gov.il/api/3/action/datastore_search?resource_id=b2b87f6c-832c-410d-a753-c52ec15cd793&limit=3&offset=0&q=%7B%22%D7%A9%D7%9D+%D7%9E%D7%91%D7%A7%D7%A9+%D7%91%D7%90%D7%A0%D7%92%D7%9C%D7%99%D7%AA%22%3A%22Teva%3A*%22%7D&plain=false&sort=%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%91%D7%A7%D7%A9%D7%94%22+desc
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - public, max-age=0, must-revalidate
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=utf-8
+      date:
+      - Mon, 26 Oct 2026 21:19:00 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding
+      via:
+      - 1.1 d09facc1a33a23ae0ece49f16f368ae6.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - 1MT_Wtgd1xEoJzMbhBGRzo0SRIFszak2lw3PeMb1y_Nf--f1fyBlFg==
+      x-amz-cf-pop:
+      - DFW57-P4
+      x-cache:
+      - Miss from cloudfront
+    body:
+      type: json
+      content:
+        help: https://data.gov.il/api/3/action/help_show?name=datastore_search
+        success: true
+        result:
+          include_total: true
+          limit: 3
+          offset: 0
+          plain: false
+          q:
+            שם מבקש באנגלית: Teva:*
+          records_format: objects
+          resource_id: b2b87f6c-832c-410d-a753-c52ec15cd793
+          sort: "\"מספר בקשה\" desc"
+          total_estimation_threshold: null
+          records:
+          - _id: 268825
+            מספר בקשה: 327372
+            שם האמצאה בעברית: אמרוסולמין לשימוש בטיפול בניוון מערכות מרובות
+            שם האמצאה באנגלית: EMRUSOLMIN FOR USE IN TREATING MULTIPLE SYSTEM ATROPHY
+            שם מבקש בעברית: טבע תעשיות פרמצבטיות בע~מ
+            כתובת מבקש בעברית: רחוב דבורה הנביאה 124, 6944020, תל אביב - יפו
+            שם מבקש באנגלית: TEVA PHARMACEUTICAL INDUSTRIES LTD.
+            כתובת מבקש באנגלית: 124 Dvora HaNevi'a Street , TEL AVIV - YAFO, Israel
+            rank שם מבקש באנגלית: 0.057308756
+          - _id: 268824
+            מספר בקשה: 327370
+            שם האמצאה בעברית: שיטות ומערכות לגילוי התקדמות הפרעת תנועה
+            שם האמצאה באנגלית: METHODS AND SYSTEMS FOR DETECTING THE PROGRESSION OF A MOVEMENT DISORDER
+            שם מבקש בעברית: טבע תעשיות פרמצבטיות בע~מ
+            כתובת מבקש בעברית: רחוב דבורה הנביאה 124, 6944020, תל אביב - יפו
+            שם מבקש באנגלית: TEVA PHARMACEUTICAL INDUSTRIES LTD.
+            כתובת מבקש באנגלית: 124 Dvora HaNevi'a Street , TEL AVIV - YAFO, Israel
+            rank שם מבקש באנגלית: 0.057308756
+          - _id: 254383
+            מספר בקשה: 325534
+            שם האמצאה בעברית: מנגנון מזרק אוטומטי
+            שם האמצאה באנגלית: AUTO INJECTOR APPARATUS
+            שם מבקש בעברית: ""
+            כתובת מבקש בעברית: ""
+            שם מבקש באנגלית: TEVA PHARMACEUTICALS INTERNATIONAL GMBH
+            כתובת מבקש באנגלית: Schlusselstrasse 12 8645 Jona Switzerland, Jona, Switzerland
+            rank שם מבקש באנגלית: 0.057308756
+          fields:
+          - id: _id
+            type: int
+          - id: מספר בקשה
+            type: numeric
+          - id: שם האמצאה בעברית
+            type: text
+          - id: שם האמצאה באנגלית
+            type: text
+          - id: שם מבקש בעברית
+            type: text
+          - id: כתובת מבקש בעברית
+            type: text
+          - id: שם מבקש באנגלית
+            type: text
+          - id: כתובת מבקש באנגלית
+            type: text
+          - id: rank שם מבקש באנגלית
+            type: float
+          _links:
+            start: >-
+              /api/3/action/datastore_search?resource_id=b2b87f6c-832c-410d-a753-c52ec15cd793&limit=3&q=%7B%22%D7%A9%D7%9D+%D7%9E%D7%91%D7%A7%D7%A9+%D7%91%D7%90%D7%A0%D7%92%D7%9C%D7%99%D7%AA%22%3A%22Teva%3A%2A%22%7D&plain=false&sort=%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%91%D7%A7%D7%A9%D7%94%22+desc
+            next: >-
+              /api/3/action/datastore_search?resource_id=b2b87f6c-832c-410d-a753-c52ec15cd793&limit=3&offset=3&q=%7B%22%D7%A9%D7%9D+%D7%9E%D7%91%D7%A7%D7%A9+%D7%91%D7%90%D7%A0%D7%92%D7%9C%D7%99%D7%AA%22%3A%22Teva%3A%2A%22%7D&plain=false&sort=%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%91%D7%A7%D7%A9%D7%94%22+desc
+          total: 771
+          total_was_estimated: false
+  recorded_at: 2026-10-26T21:19:01.061Z

@@ -1,0 +1,89 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://data.gov.il/api/3/action/datastore_search?resource_id=3343e150-79b5-4927-adad-50ebe14925b5&limit=1000&offset=0&filters=%7B%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%91%D7%A7%D7%A9%D7%94%22%3A%5B250000%5D%7D
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - public, max-age=0, must-revalidate
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=utf-8
+      date:
+      - Mon, 26 Oct 2026 21:18:44 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding
+      via:
+      - 1.1 d09facc1a33a23ae0ece49f16f368ae6.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - srsAG85UJZ6PprK09j_T8vvBJrjnTjD3iL05kW-mwX4SYTPRj4Mtkw==
+      x-amz-cf-pop:
+      - DFW57-P4
+      x-cache:
+      - Miss from cloudfront
+    body:
+      type: json
+      content:
+        help: https://data.gov.il/api/3/action/help_show?name=datastore_search
+        success: true
+        result:
+          filters:
+            מספר בקשה:
+            - 250000
+          include_total: true
+          limit: 1000
+          offset: 0
+          records_format: objects
+          resource_id: 3343e150-79b5-4927-adad-50ebe14925b5
+          total_estimation_threshold: null
+          records:
+          - _id: 254584
+            מספר בקשה: 250000
+            שם האמצאה בעברית: שיטות לבידוד מיקרו–בועיות והפקת חומצות גרעיניות מדגמים ביולוגיים
+            שם האמצאה באנגלית: >-
+              METHODS FOR ISOLATING MICROVESICLES AND EXTRACTING NUCLEIC ACIDS FROM
+              BIOLOGICAL SAMPLES
+            IPC סיווג: C12Q 1/6806
+            ראשי: ""
+          - _id: 395496
+            מספר בקשה: 250000
+            שם האמצאה בעברית: שיטות לבידוד מיקרו–בועיות והפקת חומצות גרעיניות מדגמים ביולוגיים
+            שם האמצאה באנגלית: >-
+              METHODS FOR ISOLATING MICROVESICLES AND EXTRACTING NUCLEIC ACIDS FROM
+              BIOLOGICAL SAMPLES
+            IPC סיווג: C12N 15/10
+            ראשי: ראשי
+          fields:
+          - id: _id
+            type: int
+          - id: מספר בקשה
+            type: numeric
+          - id: שם האמצאה בעברית
+            type: text
+          - id: שם האמצאה באנגלית
+            type: text
+          - id: IPC סיווג
+            type: text
+          - id: ראשי
+            type: text
+          _links:
+            start: >-
+              /api/3/action/datastore_search?resource_id=3343e150-79b5-4927-adad-50ebe14925b5&limit=1000&filters=%7B%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%91%D7%A7%D7%A9%D7%94%22%3A%5B250000%5D%7D
+            next: >-
+              /api/3/action/datastore_search?resource_id=3343e150-79b5-4927-adad-50ebe14925b5&limit=1000&offset=1000&filters=%7B%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%91%D7%A7%D7%A9%D7%94%22%3A%5B250000%5D%7D
+          total: 2
+          total_was_estimated: false
+  recorded_at: 2026-10-26T21:18:44.203Z

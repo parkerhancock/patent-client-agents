@@ -33,24 +33,11 @@ the bytes. The ILPO register CSV is about 390 MB, and IPRAPID.zip is about
   data.gov.il answers with HTTP 404, and data.gov.au with a 302 that has no
   Location. The client treats both as `NOT_FOUND`.
 
-## Not built: searching the Israeli registers directly
+## Searching the Israeli registers directly
 
-Every CSV resource on data.gov.il is in CKAN's datastore, and
-`datastore_search` answers queries against it without downloading anything:
-
-| Register | Dataset | Rows (October 27) |
-| --- | --- | --- |
-| trade marks | `simaneymisahr` | 363,800 |
-| patent applications | `bakashot_patents` | 286,234 |
-
-Applicants, inventors and IPC classes for patent applications, designs, and
-proceedings before the Patent Office tribunals are separate datasets.
-Free-text `q` worked live: "COCA-COLA" matched 329 marks. Fields are in
-Hebrew, such as מספר הסימן (mark number).
-
-The research notes rate the Israeli register "no API" for the
-anti-automation front end, which this route doesn't use. A search connector
-over the datastore would be new work beyond Python's catalog tools.
+Every CSV resource on data.gov.il is also in CKAN's datastore, which answers
+queries without a download. The [Israeli register connector](ilpo-register.md)
+searches the trade-mark and patent tables there.
 
 ## Evidence
 

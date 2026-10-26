@@ -1,0 +1,421 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://data.gov.il/api/3/action/datastore_search?resource_id=3343e150-79b5-4927-adad-50ebe14925b5&limit=1000&offset=0&filters=%7B%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%91%D7%A7%D7%A9%D7%94%22%3A%5B232667%2C250000%5D%7D
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - public, max-age=0, must-revalidate
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=utf-8
+      date:
+      - Mon, 26 Oct 2026 21:19:09 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding
+      via:
+      - 1.1 16ec6c5f25e9999a56901960aee65f54.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - N-_UaAI_8dkqBasAyq61HaCeJEnO1HelRIIDLHROLM8alG4aZDJoXg==
+      x-amz-cf-pop:
+      - DFW57-P4
+      x-cache:
+      - Miss from cloudfront
+    body:
+      type: json
+      content:
+        help: https://data.gov.il/api/3/action/help_show?name=datastore_search
+        success: true
+        result:
+          filters:
+            מספר בקשה:
+            - 232667
+            - 250000
+          include_total: true
+          limit: 1000
+          offset: 0
+          records_format: objects
+          resource_id: 3343e150-79b5-4927-adad-50ebe14925b5
+          total_estimation_threshold: null
+          records:
+          - _id: 254584
+            מספר בקשה: 250000
+            שם האמצאה בעברית: שיטות לבידוד מיקרו–בועיות והפקת חומצות גרעיניות מדגמים ביולוגיים
+            שם האמצאה באנגלית: >-
+              METHODS FOR ISOLATING MICROVESICLES AND EXTRACTING NUCLEIC ACIDS FROM
+              BIOLOGICAL SAMPLES
+            IPC סיווג: C12Q 1/6806
+            ראשי: ""
+          - _id: 395496
+            מספר בקשה: 250000
+            שם האמצאה בעברית: שיטות לבידוד מיקרו–בועיות והפקת חומצות גרעיניות מדגמים ביולוגיים
+            שם האמצאה באנגלית: >-
+              METHODS FOR ISOLATING MICROVESICLES AND EXTRACTING NUCLEIC ACIDS FROM
+              BIOLOGICAL SAMPLES
+            IPC סיווג: C12N 15/10
+            ראשי: ראשי
+          - _id: 536751
+            מספר בקשה: 232667
+            שם האמצאה בעברית: חומרים היברידים ננו צינורות של גרפן–פחמן והשימוש בהם כאלקטרודות
+            שם האמצאה באנגלית: GRAPHENE-CARBON NANOTUBE HYBRID MATERIALS AND USE AS ELECTRODES
+            IPC סיווג: B05D 5/12
+            ראשי: ראשי
+          fields:
+          - id: _id
+            type: int
+          - id: מספר בקשה
+            type: numeric
+          - id: שם האמצאה בעברית
+            type: text
+          - id: שם האמצאה באנגלית
+            type: text
+          - id: IPC סיווג
+            type: text
+          - id: ראשי
+            type: text
+          _links:
+            start: >-
+              /api/3/action/datastore_search?resource_id=3343e150-79b5-4927-adad-50ebe14925b5&limit=1000&filters=%7B%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%91%D7%A7%D7%A9%D7%94%22%3A%5B232667%2C250000%5D%7D
+            next: >-
+              /api/3/action/datastore_search?resource_id=3343e150-79b5-4927-adad-50ebe14925b5&limit=1000&offset=1000&filters=%7B%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%91%D7%A7%D7%A9%D7%94%22%3A%5B232667%2C250000%5D%7D
+          total: 3
+          total_was_estimated: false
+  recorded_at: 2026-10-26T21:19:09.166Z
+- request:
+    method: GET
+    uri: >-
+      https://data.gov.il/api/3/action/datastore_search?resource_id=abd0e8c3-0b0d-4581-9166-923a3b21bdda&limit=1000&offset=0&filters=%7B%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%91%D7%A7%D7%A9%D7%94%22%3A%5B232667%2C250000%5D%7D
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - public, max-age=0, must-revalidate
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=utf-8
+      date:
+      - Mon, 26 Oct 2026 21:19:09 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding
+      via:
+      - 1.1 564dee14331a6abb0870db28f9b54cb2.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - FKBiXJ3KJiuz3qtnTcnGcdcUmbz6Ov37HS_s9yI9vf1bAT7s6I5swA==
+      x-amz-cf-pop:
+      - DFW57-P4
+      x-cache:
+      - Miss from cloudfront
+    body:
+      type: json
+      content:
+        help: https://data.gov.il/api/3/action/help_show?name=datastore_search
+        success: true
+        result:
+          filters:
+            מספר בקשה:
+            - 232667
+            - 250000
+          include_total: true
+          limit: 1000
+          offset: 0
+          records_format: objects
+          resource_id: abd0e8c3-0b0d-4581-9166-923a3b21bdda
+          total_estimation_threshold: null
+          records: []
+          fields:
+          - id: _id
+            type: int
+          - id: מספר בקשה
+            type: numeric
+          - id: שם האמצאה בעברית
+            type: text
+          - id: שם האמצאה באנגלית
+            type: text
+          - id: שם ממציא בעברית
+            type: text
+          - id: שם ממציא באנגלית
+            type: text
+          - id: כתובת ממציא באנגלית
+            type: text
+          - id: כתובת ממציא בעברית
+            type: text
+          _links:
+            start: >-
+              /api/3/action/datastore_search?resource_id=abd0e8c3-0b0d-4581-9166-923a3b21bdda&limit=1000&filters=%7B%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%91%D7%A7%D7%A9%D7%94%22%3A%5B232667%2C250000%5D%7D
+            next: >-
+              /api/3/action/datastore_search?resource_id=abd0e8c3-0b0d-4581-9166-923a3b21bdda&limit=1000&offset=1000&filters=%7B%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%91%D7%A7%D7%A9%D7%94%22%3A%5B232667%2C250000%5D%7D
+          total: 0
+          total_was_estimated: false
+  recorded_at: 2026-10-26T21:19:09.599Z
+- request:
+    method: GET
+    uri: >-
+      https://data.gov.il/api/3/action/datastore_search?resource_id=adca9a88-bf91-462a-8a49-62381af9b588&limit=3&offset=0&filters=%7B%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%91%D7%A7%D7%A9%D7%94%22%3A%5B232667%2C250000%2C9999999%5D%7D
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - public, max-age=0, must-revalidate
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=utf-8
+      date:
+      - Mon, 26 Oct 2026 21:19:08 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding
+      via:
+      - 1.1 d09facc1a33a23ae0ece49f16f368ae6.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - qnHfL8szalhO4fmyavBxNNNiE9mMxAtimUqFYTiynDYH8IvgtNOhOA==
+      x-amz-cf-pop:
+      - DFW57-P4
+      x-cache:
+      - Miss from cloudfront
+    body:
+      type: json
+      content:
+        help: https://data.gov.il/api/3/action/help_show?name=datastore_search
+        success: true
+        result:
+          filters:
+            מספר בקשה:
+            - 232667
+            - 250000
+            - 9999999
+          include_total: true
+          limit: 3
+          offset: 0
+          records_format: objects
+          resource_id: adca9a88-bf91-462a-8a49-62381af9b588
+          total_estimation_threshold: null
+          records:
+          - _id: 170284
+            מספר בקשה: 232667
+            תאריך הבקשה: 19/11/2012
+            תאריך הגשה: 18/05/2014
+            שם האמצאה בעברית: חומרים היברידים ננו צינורות של גרפן–פחמן והשימוש בהם כאלקטרודות
+            שם האמצאה באנגלית: GRAPHENE-CARBON NANOTUBE HYBRID MATERIALS AND USE AS ELECTRODES
+            מספר בקשה בינלאומי: US/2012/065894
+            מספר פרסום בינלאומי: /2013/119295
+            תאריך פרסום ראשון: 31/07/2014
+            תאריך פרסום שני: 30/06/2014
+            תאריך מתן פטנט: 29/05/2019
+            סטטוס בקשה/פטנט: פטנט
+          - _id: 187745
+            מספר בקשה: 250000
+            תאריך הבקשה: 09/07/2015
+            תאריך הגשה: 09/01/2017
+            שם האמצאה בעברית: שיטות לבידוד מיקרו–בועיות והפקת חומצות גרעיניות מדגמים ביולוגיים
+            שם האמצאה באנגלית: >-
+              METHODS FOR ISOLATING MICROVESICLES AND EXTRACTING NUCLEIC ACIDS FROM
+              BIOLOGICAL SAMPLES
+            מספר בקשה בינלאומי: US/2015/039760
+            מספר פרסום בינלאומי: /2016/007755
+            תאריך פרסום ראשון: 30/03/2017
+            תאריך פרסום שני: 28/02/2017
+            תאריך מתן פטנט: 02/06/2021
+            סטטוס בקשה/פטנט: פטנט
+          fields:
+          - id: _id
+            type: int
+          - id: מספר בקשה
+            type: numeric
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: תאריך הבקשה
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: תאריך הגשה
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: שם האמצאה בעברית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: שם האמצאה באנגלית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: מספר בקשה בינלאומי
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: מספר פרסום בינלאומי
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: תאריך פרסום ראשון
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: תאריך פרסום שני
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: תאריך מתן פטנט
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: סטטוס בקשה/פטנט
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          _links:
+            start: >-
+              /api/3/action/datastore_search?resource_id=adca9a88-bf91-462a-8a49-62381af9b588&limit=3&filters=%7B%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%91%D7%A7%D7%A9%D7%94%22%3A%5B232667%2C250000%2C9999999%5D%7D
+            next: >-
+              /api/3/action/datastore_search?resource_id=adca9a88-bf91-462a-8a49-62381af9b588&limit=3&offset=3&filters=%7B%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%91%D7%A7%D7%A9%D7%94%22%3A%5B232667%2C250000%2C9999999%5D%7D
+          total: 2
+          total_was_estimated: false
+  recorded_at: 2026-10-26T21:19:08.290Z
+- request:
+    method: GET
+    uri: >-
+      https://data.gov.il/api/3/action/datastore_search?resource_id=b2b87f6c-832c-410d-a753-c52ec15cd793&limit=1000&offset=0&filters=%7B%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%91%D7%A7%D7%A9%D7%94%22%3A%5B232667%2C250000%5D%7D
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - public, max-age=0, must-revalidate
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=utf-8
+      date:
+      - Mon, 26 Oct 2026 21:19:09 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding
+      via:
+      - 1.1 d09facc1a33a23ae0ece49f16f368ae6.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - ViQoqdqhEotH0gQoI6-EEg8cqoa_bMdupY3bH8Jx_RpwWiRjkmN-ow==
+      x-amz-cf-pop:
+      - DFW57-P4
+      x-cache:
+      - Miss from cloudfront
+    body:
+      type: json
+      content:
+        help: https://data.gov.il/api/3/action/help_show?name=datastore_search
+        success: true
+        result:
+          filters:
+            מספר בקשה:
+            - 232667
+            - 250000
+          include_total: true
+          limit: 1000
+          offset: 0
+          records_format: objects
+          resource_id: b2b87f6c-832c-410d-a753-c52ec15cd793
+          total_estimation_threshold: null
+          records:
+          - _id: 199965
+            מספר בקשה: 232667
+            שם האמצאה בעברית: חומרים היברידים ננו צינורות של גרפן–פחמן והשימוש בהם כאלקטרודות
+            שם האמצאה באנגלית: GRAPHENE-CARBON NANOTUBE HYBRID MATERIALS AND USE AS ELECTRODES
+            שם מבקש בעברית: ""
+            כתובת מבקש בעברית: ""
+            שם מבקש באנגלית: WILLIAM MARSH RICE UNIVERSITY
+            כתובת מבקש באנגלית: 6100 MAIN STREET HOUSTON, TEXAS 77005-1892, U.S.A.
+          - _id: 223721
+            מספר בקשה: 250000
+            שם האמצאה בעברית: שיטות לבידוד מיקרו–בועיות והפקת חומצות גרעיניות מדגמים ביולוגיים
+            שם האמצאה באנגלית: >-
+              METHODS FOR ISOLATING MICROVESICLES AND EXTRACTING NUCLEIC ACIDS FROM
+              BIOLOGICAL SAMPLES
+            שם מבקש בעברית: ""
+            כתובת מבקש בעברית: ""
+            שם מבקש באנגלית: EXOSOME DIAGNOSTICS, INC.
+            כתובת מבקש באנגלית: 840 Memorial Drive Cambridge, Massachusetts 02139, U.S.A.
+          fields:
+          - id: _id
+            type: int
+          - id: מספר בקשה
+            type: numeric
+          - id: שם האמצאה בעברית
+            type: text
+          - id: שם האמצאה באנגלית
+            type: text
+          - id: שם מבקש בעברית
+            type: text
+          - id: כתובת מבקש בעברית
+            type: text
+          - id: שם מבקש באנגלית
+            type: text
+          - id: כתובת מבקש באנגלית
+            type: text
+          _links:
+            start: >-
+              /api/3/action/datastore_search?resource_id=b2b87f6c-832c-410d-a753-c52ec15cd793&limit=1000&filters=%7B%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%91%D7%A7%D7%A9%D7%94%22%3A%5B232667%2C250000%5D%7D
+            next: >-
+              /api/3/action/datastore_search?resource_id=b2b87f6c-832c-410d-a753-c52ec15cd793&limit=1000&offset=1000&filters=%7B%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%91%D7%A7%D7%A9%D7%94%22%3A%5B232667%2C250000%5D%7D
+          total: 2
+          total_was_estimated: false
+  recorded_at: 2026-10-26T21:19:09.459Z

@@ -1,0 +1,165 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://data.gov.il/api/3/action/datastore_search?resource_id=adca9a88-bf91-462a-8a49-62381af9b588&limit=2&offset=0&q=%7B%22%D7%A9%D7%9D+%D7%94%D7%90%D7%9E%D7%A6%D7%90%D7%94+%D7%91%D7%90%D7%A0%D7%92%D7%9C%D7%99%D7%AA%22%3A%22battery%3A*%22%7D&plain=false
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - public, max-age=0, must-revalidate
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=utf-8
+      date:
+      - Mon, 26 Oct 2026 21:18:42 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding
+      via:
+      - 1.1 d09facc1a33a23ae0ece49f16f368ae6.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - iH5rSXru-DM29no7OLgaHKxKX3u2i538Tf4jJ3mOYO8hKbECKvTewg==
+      x-amz-cf-pop:
+      - DFW57-P4
+      x-cache:
+      - Miss from cloudfront
+    body:
+      type: json
+      content:
+        help: https://data.gov.il/api/3/action/help_show?name=datastore_search
+        success: true
+        result:
+          include_total: true
+          limit: 2
+          offset: 0
+          plain: false
+          q:
+            שם האמצאה באנגלית: battery:*
+          records_format: objects
+          resource_id: adca9a88-bf91-462a-8a49-62381af9b588
+          total_estimation_threshold: null
+          records:
+          - _id: 237612
+            מספר בקשה: 293295
+            תאריך הבקשה: 23/12/2020
+            תאריך הגשה: 24/05/2022
+            שם האמצאה בעברית: >-
+              שיטה לייצור סוללות ליתיום–יון, בפרט סוללות בעלות הספק גבוה, וסוללה שהושגו בשיטה
+              זו
+            שם האמצאה באנגלית: >-
+              METHOD FOR MANUFACTURING LITHIUM-ION BATTERIES, IN PARTICULAR HIGH-POWER
+              BATTERIES, AND BATTERY OBTAINED BY THIS METHOD
+            מספר בקשה בינלאומי: IB/2020/062399
+            מספר פרסום בינלאומי: /2021/130697
+            תאריך פרסום ראשון: 01/07/2022
+            תאריך פרסום שני: 01/07/2022
+            תאריך מתן פטנט: 04/08/2025
+            סטטוס בקשה/פטנט: פטנט
+            rank שם האמצאה באנגלית: 0.07642204
+          - _id: 247441
+            מספר בקשה: 299802
+            תאריך הבקשה: 12/07/2021
+            תאריך הגשה: 10/01/2023
+            שם האמצאה בעברית: >-
+              התקן לפריקת סוללות נטענות לפריקת סוללות נטענות ושיטה לפרוק מספר רב של סוללות
+              נטענות
+            שם האמצאה באנגלית: >-
+              RECHARGEABLE BATTERY DISCHARGE DEVICE FOR DISCHARGING RECHARGEABLE BATTERIES,
+              AND METHOD FOR DISCHARGING A PLURALITY OF RECHARGEABLE BATTERIES
+            מספר בקשה בינלאומי: EP/2021/069373
+            מספר פרסום בינלאומי: /2022/013170
+            תאריך פרסום ראשון: 01/03/2023
+            תאריך פרסום שני: 01/03/2023
+            תאריך מתן פטנט: 02/06/2026
+            סטטוס בקשה/פטנט: בקשה חדשה
+            rank שם האמצאה באנגלית: 0.07642204
+          fields:
+          - id: _id
+            type: int
+          - id: מספר בקשה
+            type: numeric
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: תאריך הבקשה
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: תאריך הגשה
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: שם האמצאה בעברית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: שם האמצאה באנגלית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: מספר בקשה בינלאומי
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: מספר פרסום בינלאומי
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: תאריך פרסום ראשון
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: תאריך פרסום שני
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: תאריך מתן פטנט
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: סטטוס בקשה/פטנט
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: rank שם האמצאה באנגלית
+            type: float
+          _links:
+            start: >-
+              /api/3/action/datastore_search?resource_id=adca9a88-bf91-462a-8a49-62381af9b588&limit=2&q=%7B%22%D7%A9%D7%9D+%D7%94%D7%90%D7%9E%D7%A6%D7%90%D7%94+%D7%91%D7%90%D7%A0%D7%92%D7%9C%D7%99%D7%AA%22%3A%22battery%3A%2A%22%7D&plain=false
+            next: >-
+              /api/3/action/datastore_search?resource_id=adca9a88-bf91-462a-8a49-62381af9b588&limit=2&offset=2&q=%7B%22%D7%A9%D7%9D+%D7%94%D7%90%D7%9E%D7%A6%D7%90%D7%94+%D7%91%D7%90%D7%A0%D7%92%D7%9C%D7%99%D7%AA%22%3A%22battery%3A%2A%22%7D&plain=false
+          total: 728
+          total_was_estimated: false
+  recorded_at: 2026-10-26T21:18:42.929Z

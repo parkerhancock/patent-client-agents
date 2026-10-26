@@ -21,6 +21,7 @@ import {
   GooglePatentsClient,
   HtsClient,
   IdsClient,
+  IlpoRegisterClient,
   IlpoStatutesClient,
   IlpoTmClient,
   InpiBrStatutesClient,
@@ -87,6 +88,7 @@ import { type EpoLegalClients, registerEpoLegalTools } from "./epo-legal.js";
 import { registerFacadeTools } from "./facade/index.js";
 import { registerFeeTools } from "./fees.js";
 import { registerGooglePatentsTools } from "./google-patents.js";
+import { registerIlpoRegisterTools } from "./ilpo-register.js";
 import {
   type IlpoStatutesReader,
   registerIlpoStatutesTools,
@@ -184,6 +186,7 @@ export interface UsptoClients {
   jpo: JpoClient;
   /** TIPO OpenData; served only when a client is provided or TIPO_API_KEY is set. */
   tipo: TipoClient;
+  ilpoRegister: IlpoRegisterClient;
   ilpoTm: IlpoTmClient;
   ipaBulk: IpAustraliaBulkClient;
   prh: PrhClient;
@@ -721,6 +724,7 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     japanIpHighCourt: provided.japanIpHighCourt ?? new JapanIpHighCourtClient(),
     jpo: jpoClient,
     tipo: tipoClient,
+    ilpoRegister: provided.ilpoRegister ?? new IlpoRegisterClient(),
     ilpoTm: provided.ilpoTm ?? new IlpoTmClient(),
     ipaBulk: provided.ipaBulk ?? new IpAustraliaBulkClient(),
     prh: provided.prh ?? new PrhClient(),
@@ -1029,6 +1033,11 @@ export function createServer(options: ServerOptions = {}): FastMCP {
       jpoClient,
       options.auth ? requireScopes("jpo:read") : undefined,
     );
+  registerIlpoRegisterTools(
+    server,
+    clients.ilpoRegister,
+    options.auth ? requireScopes("ilpo:read") : undefined,
+  );
   registerIlpoTmTools(
     server,
     clients.ilpoTm,

@@ -1,0 +1,378 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://data.gov.il/api/3/action/datastore_search?resource_id=6284d4a9-fdd4-45c9-a1d6-58143c7d8127&limit=3&offset=0&q=%7B%22%D7%A9%D7%9D+%D7%91%D7%A2%D7%9C+%D7%94%D7%A1%D7%99%D7%9E%D7%9F+%D7%91%D7%A2%D7%91%D7%A8%D7%99%D7%AA%22%3A%22%D7%A9%D7%98%D7%A8%D7%90%D7%95%D7%A1%3A*%22%2C%22%D7%A1%D7%95%D7%92%D7%99+%D7%A0%D7%99%D7%A6%D7%94+%D7%9C%D7%91%D7%A7%D7%A9%D7%94%22%3A%2230%22%7D&plain=false&sort=%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%94%D7%A1%D7%99%D7%9E%D7%9F%22+desc
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - public, max-age=0, must-revalidate
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=utf-8
+      date:
+      - Mon, 26 Oct 2026 21:18:48 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding
+      via:
+      - 1.1 d09facc1a33a23ae0ece49f16f368ae6.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - uSN2QWoQRU8edO4PLXraISZuUHwAbYqPqSrwLD81ODZ9YWqR6UdudA==
+      x-amz-cf-pop:
+      - DFW57-P4
+      x-cache:
+      - Miss from cloudfront
+    body:
+      type: json
+      content:
+        help: https://data.gov.il/api/3/action/help_show?name=datastore_search
+        success: true
+        result:
+          include_total: true
+          limit: 3
+          offset: 0
+          plain: false
+          q:
+            שם בעל הסימן בעברית: שטראוס:*
+            סוגי ניצה לבקשה: "30"
+          records_format: objects
+          resource_id: 6284d4a9-fdd4-45c9-a1d6-58143c7d8127
+          sort: "\"מספר הסימן\" desc"
+          total_estimation_threshold: null
+          records:
+          - _id: 352712
+            מספור רץ: 352712
+            מספר הסימן: 387004
+            דמות: כן
+            קישור לנסח: https://trademarks.justice.gov
+            מצב: קובל
+            לאומי/בינלאומי: לאומי
+            מספר הסימן הבינלאומי: ""
+            תיאור סימן עברית: ""
+            תיאור סימן אנגלית: COW FREE
+            תאריך בקשה: 17/09/2025
+            תאריך רישום: ""
+            סוג רישום: סימן מסחר/שירות
+            סוגי ניצה לבקשה: 29; 30
+            סוגי וינה לבקשה: 1.15; 27.5
+            רשימת סחורות בעברית: >-
+              חלב~ מוצרי חלב ותחליפי חלב; מוצרי חלב קפואים למחצה; קינוחים שהם מוצרי חלב;
+              יוגורט ומשקאות יוגורט; משקאות המורכבים בעיקרם מחלב או מוצרי חלב; משקאות חלביים
+              העשויים בעיקר מחלב; כל הטובין לעיל אינם מיוצרים מהחי; הנכללים כולם בסוג 29.; עוגיות;
+              דברי מתיקה; עוגות; דברי מאפה וממתקים; שוקולד ומוצרי שוקולד; חטיפים מצופים בשוקולד
+              או בתחליפי- שוקולד; שלגונים; גלידות; רפרפות על בסיס גלידות; כל הטובין לעיל אינם
+              מיוצרים מהחי; הנכללים כולם בסוג 30.
+            רשימת סחורות באנגלית: >-
+              Milk~ dairy products and dairy substitutes; frozen and half frozen dairy
+              products; deserts being milk products; yogurt and yogurt drinks; beverages composed
+              mainly of milk or milk products; milky beverages mainly made of milk; all of the
+              above goods are not made from animals; all included in class 29. ; Cookies;
+              confectionary; cakes; pastries and confectionery; chocolate and chocolate products;
+              snacks coated with chocolate or chocolate substances; edible ices; ice cream; ice
+              cream based desserts; all of the above goods are not made from animals; all included
+              in class 30.
+            דין קדימה: לא
+            תאריך תום תוקף: ""
+            שם מיופה כח: שטראוס גרופ בע~מ
+            שם מיופה כח אנגלית: Strauss Group Ltd.
+            שם בעל הסימן בעברית: שטראוס גרופ בעמ"
+            שם בעל הסימן באנגלית: STRAUSS GROUP LTD.
+            שם בעל הרשות בעברית: ""
+            שם בעל הרשות באנגלית: ""
+            שם מייצג לעניין אכיפת מכס: ""
+            מען למכס תאריך התחלה: ""
+            כתובת אימייל מייצג מכס: ""
+            טלפון מייצג מכס: ""
+            רישום חיצוני: לא
+            תאריך עדכון אחרון: 06/10/2026
+            rank שם בעל הסימן בעברית: 0.057308756
+            rank סוגי ניצה לבקשה: 0.057308756
+          - _id: 352711
+            מספור רץ: 352711
+            מספר הסימן: 387003
+            דמות: כן
+            קישור לנסח: https://trademarks.justice.gov
+            מצב: קובל
+            לאומי/בינלאומי: לאומי
+            מספר הסימן הבינלאומי: ""
+            תיאור סימן עברית: ""
+            תיאור סימן אנגלית: COW FREE
+            תאריך בקשה: 17/09/2025
+            תאריך רישום: ""
+            סוג רישום: סימן מסחר/שירות
+            סוגי ניצה לבקשה: 30; 29
+            סוגי וינה לבקשה: 1.15; 27.5
+            רשימת סחורות בעברית: >-
+              חלב~ מוצרי חלב ותחליפי חלב; מוצרי חלב קפואים למחצה; קינוחים שהם מוצרי חלב;
+              יוגורט ומשקאות יוגורט; משקאות המורכבים בעיקרם מחלב או מוצרי חלב; משקאות חלביים
+              העשויים בעיקר מחלב; כל הטובין לעיל אינם מיוצרים מהחי; הנכללים כולם בסוג 29.; עוגיות;
+              דברי מתיקה; עוגות; דברי מאפה וממתקים; שוקולד ומוצרי שוקולד; חטיפים מצופים בשוקולד
+              או בתחליפי- שוקולד; שלגונים; גלידות; רפרפות על בסיס גלידות; כל הטובין לעיל אינם
+              מיוצרים מהחי; הנכללים כולם בסוג 30.
+            רשימת סחורות באנגלית: >-
+              Milk~ dairy products and dairy substitutes; frozen and half frozen dairy
+              products; deserts being milk products; yogurt and yogurt drinks; beverages composed
+              mainly of milk or milk products; milky beverages mainly made of milk; all of the
+              above goods are not made from animals; all included in class 29.; Cookies;
+              confectionary; cakes; pastries and confectionery; chocolate and chocolate products; snacks
+              coated with chocolate or chocolate substances; edible ices; ice cream; ice cream
+              based desserts; all of the above goods are not made from animals; all included
+              in class 30.
+            דין קדימה: לא
+            תאריך תום תוקף: ""
+            שם מיופה כח: שטראוס גרופ בע~מ
+            שם מיופה כח אנגלית: Strauss Group Ltd.
+            שם בעל הסימן בעברית: שטראוס גרופ בעמ"
+            שם בעל הסימן באנגלית: STRAUSS GROUP LTD.
+            שם בעל הרשות בעברית: ""
+            שם בעל הרשות באנגלית: ""
+            שם מייצג לעניין אכיפת מכס: ""
+            מען למכס תאריך התחלה: ""
+            כתובת אימייל מייצג מכס: ""
+            טלפון מייצג מכס: ""
+            רישום חיצוני: לא
+            תאריך עדכון אחרון: 06/10/2026
+            rank שם בעל הסימן בעברית: 0.057308756
+            rank סוגי ניצה לבקשה: 0.057308756
+          - _id: 347763
+            מספור רץ: 347763
+            מספר הסימן: 382053
+            דמות: כן
+            קישור לנסח: https://trademarks.justice.gov
+            מצב: רשום
+            לאומי/בינלאומי: לאומי
+            מספר הסימן הבינלאומי: ""
+            תיאור סימן עברית: טורקי
+            תיאור סימן אנגלית: ""
+            תאריך בקשה: 17/03/2025
+            תאריך רישום: 16/10/2025
+            סוג רישום: סימן מסחר/שירות
+            סוגי ניצה לבקשה: "30"
+            סוגי וינה לבקשה: 5.7; 19.3; 28.9
+            רשימת סחורות בעברית: קפה; קפה קלוי; קפה קלוי וטחון; תחליפי קפה; הנכללים בסוג 30.
+            רשימת סחורות באנגלית: >-
+              Coffee; roasted coffee; roasted and ground coffee; coffee substitutes; all
+              included in class 30.
+            דין קדימה: לא
+            תאריך תום תוקף: 17/03/2035
+            שם מיופה כח: שטראוס גרופ בע~מ
+            שם מיופה כח אנגלית: Strauss Group Ltd.
+            שם בעל הסימן בעברית: שטראוס גרופ בעמ"
+            שם בעל הסימן באנגלית: STRAUSS GROUP LTD.
+            שם בעל הרשות בעברית: ""
+            שם בעל הרשות באנגלית: ""
+            שם מייצג לעניין אכיפת מכס: ""
+            מען למכס תאריך התחלה: ""
+            כתובת אימייל מייצג מכס: ""
+            טלפון מייצג מכס: ""
+            רישום חיצוני: לא
+            תאריך עדכון אחרון: 16/10/2025
+            rank שם בעל הסימן בעברית: 0.057308756
+            rank סוגי ניצה לבקשה: 0.057308756
+          fields:
+          - id: _id
+            type: int
+          - id: מספור רץ
+            type: numeric
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: מספר הסימן
+            type: numeric
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: דמות
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: קישור לנסח
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: מצב
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: לאומי/בינלאומי
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: מספר הסימן הבינלאומי
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: תיאור סימן עברית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: תיאור סימן אנגלית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: תאריך בקשה
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: תאריך רישום
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: סוג רישום
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: סוגי ניצה לבקשה
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: סוגי וינה לבקשה
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: רשימת סחורות בעברית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: רשימת סחורות באנגלית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: דין קדימה
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: תאריך תום תוקף
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: שם מיופה כח
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: שם מיופה כח אנגלית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: שם בעל הסימן בעברית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: שם בעל הסימן באנגלית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: שם בעל הרשות בעברית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: שם בעל הרשות באנגלית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: שם מייצג לעניין אכיפת מכס
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: מען למכס תאריך התחלה
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: כתובת אימייל מייצג מכס
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: טלפון מייצג מכס
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: רישום חיצוני
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: תאריך עדכון אחרון
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: rank שם בעל הסימן בעברית
+            type: float
+          - id: rank סוגי ניצה לבקשה
+            type: float
+          _links:
+            start: >-
+              /api/3/action/datastore_search?resource_id=6284d4a9-fdd4-45c9-a1d6-58143c7d8127&limit=3&q=%7B%22%D7%A9%D7%9D+%D7%91%D7%A2%D7%9C+%D7%94%D7%A1%D7%99%D7%9E%D7%9F+%D7%91%D7%A2%D7%91%D7%A8%D7%99%D7%AA%22%3A%22%D7%A9%D7%98%D7%A8%D7%90%D7%95%D7%A1%3A%2A%22%2C%22%D7%A1%D7%95%D7%92%D7%99+%D7%A0%D7%99%D7%A6%D7%94+%D7%9C%D7%91%D7%A7%D7%A9%D7%94%22%3A%2230%22%7D&plain=false&sort=%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%94%D7%A1%D7%99%D7%9E%D7%9F%22+desc
+            next: >-
+              /api/3/action/datastore_search?resource_id=6284d4a9-fdd4-45c9-a1d6-58143c7d8127&limit=3&offset=3&q=%7B%22%D7%A9%D7%9D+%D7%91%D7%A2%D7%9C+%D7%94%D7%A1%D7%99%D7%9E%D7%9F+%D7%91%D7%A2%D7%91%D7%A8%D7%99%D7%AA%22%3A%22%D7%A9%D7%98%D7%A8%D7%90%D7%95%D7%A1%3A%2A%22%2C%22%D7%A1%D7%95%D7%92%D7%99+%D7%A0%D7%99%D7%A6%D7%94+%D7%9C%D7%91%D7%A7%D7%A9%D7%94%22%3A%2230%22%7D&plain=false&sort=%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%94%D7%A1%D7%99%D7%9E%D7%9F%22+desc
+          total: 356
+          total_was_estimated: false
+  recorded_at: 2026-10-26T21:18:48.805Z

@@ -37,6 +37,7 @@ export * from "./epo-ops.js";
 export * from "./epo-ops-resources.js";
 export * from "./fees/index.js";
 export * from "./google-patents/index.js";
+export * from "./ilpo-register.js";
 export * from "./ilpo-statutes.js";
 export * from "./inpi-br-statutes.js";
 export * from "./ipo-in.js";
