@@ -61,6 +61,7 @@ reference only. Corpus ids and the reader variables they set:
 | `ipo_in_mppp` | `IPO_IN_MPPP` |
 | `ilpo_statutes` | `ILPO_STATUTES` |
 | `rospatent_statutes` | `ROSPATENT_STATUTES` |
+| `cnipa_statutes` | `CNIPA_STATUTES` |
 
 Each prefix yields `<PREFIX>_CORPUS_PATH`, `<PREFIX>_CORPUS_SHA256` (decoded
 SQLite) and `<PREFIX>_CORPUS_FILE_SHA256` (distributed file). The mapping is

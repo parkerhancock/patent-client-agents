@@ -10,6 +10,7 @@ import { gunzipSync, zstdCompressSync } from "node:zlib";
 import {
   ApiError,
   CachedClient,
+  CnipaStatutesClient,
   DpmaStatutesClient,
   downloadPatentPdfClean,
   EpcClient,
@@ -120,6 +121,20 @@ results.rospatent_article = (
 assert.equal(
   results.rospatent_article,
   "The Conditions for Patentability of an Invention",
+);
+const cnipa = new CnipaStatutesClient({
+  source: new Uint8Array(
+    zstdCompressSync(
+      await readFile(fixture("cnipa-statutes/cnipa_statutes.db")),
+    ),
+  ),
+});
+results.cnipa_section = (
+  await cnipa.getSectionByCitation("Patent Law Art. 22(3)")
+)?.title;
+assert.equal(
+  results.cnipa_section,
+  "Chapter II Requirements for Granting Patent Rights",
 );
 const inpiBr = new InpiBrStatutesClient({
   source: new Uint8Array(
@@ -346,6 +361,7 @@ for (const client of [
   dpma,
   ilpo,
   rospatent,
+  cnipa,
   inpiBr,
   legifrance,
   tw,
