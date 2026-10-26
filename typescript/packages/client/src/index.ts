@@ -29,6 +29,7 @@ export {
 export * from "./cafc.js";
 export * from "./canada-federal-court.js";
 export * from "./china-spc-ip-court.js";
+export * from "./ckan.js";
 export * from "./copyright.js";
 export * from "./dpma-statutes.js";
 export * from "./epo-legal.js";

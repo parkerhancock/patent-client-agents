@@ -46,6 +46,7 @@
     "record:prh": "bun scripts/record-prh.ts",
     "record:prv": "bun scripts/record-prv.ts",
     "record:tipo": "bun scripts/record-tipo.ts",
+    "record:ckan": "bun scripts/record-ckan.ts",
     "record:copyright": "bun scripts/record-copyright.ts",
     "record:usitc": "bun scripts/record-usitc.ts",
     "record:wipo-lex": "bun scripts/record-wipo-lex.ts",

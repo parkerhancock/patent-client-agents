@@ -22,7 +22,9 @@ import {
   HtsClient,
   IdsClient,
   IlpoStatutesClient,
+  IlpoTmClient,
   InpiBrStatutesClient,
+  IpAustraliaBulkClient,
   IpoInMpppClient,
   IpoInStatutesClient,
   IposManualsClient,
@@ -69,6 +71,7 @@ import { registerApplicationExtraTools } from "./applications-extra.js";
 import { registerCafcTools } from "./cafc.js";
 import { registerCanadaFederalCourtTools } from "./canada-federal-court.js";
 import { registerChinaSpcIpCourtTools } from "./china-spc-ip-court.js";
+import { registerIlpoTmTools, registerIpaBulkTools } from "./ckan-catalogs.js";
 import { registerCopyrightTools } from "./copyright.js";
 import {
   type DownloadOptions,
@@ -92,7 +95,6 @@ import {
   type InpiBrStatutesReader,
   registerInpiBrStatutesTools,
 } from "./inpi-br-statutes.js";
-
 import {
   type IpoInMpppReader,
   type IpoInStatutesReader,
@@ -182,6 +184,8 @@ export interface UsptoClients {
   jpo: JpoClient;
   /** TIPO OpenData; served only when a client is provided or TIPO_API_KEY is set. */
   tipo: TipoClient;
+  ilpoTm: IlpoTmClient;
+  ipaBulk: IpAustraliaBulkClient;
   prh: PrhClient;
   prv: PrvClient;
 }
@@ -717,6 +721,8 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     japanIpHighCourt: provided.japanIpHighCourt ?? new JapanIpHighCourtClient(),
     jpo: jpoClient,
     tipo: tipoClient,
+    ilpoTm: provided.ilpoTm ?? new IlpoTmClient(),
+    ipaBulk: provided.ipaBulk ?? new IpAustraliaBulkClient(),
     prh: provided.prh ?? new PrhClient(),
     prv: provided.prv ?? new PrvClient(),
   };
@@ -1023,6 +1029,16 @@ export function createServer(options: ServerOptions = {}): FastMCP {
       jpoClient,
       options.auth ? requireScopes("jpo:read") : undefined,
     );
+  registerIlpoTmTools(
+    server,
+    clients.ilpoTm,
+    options.auth ? requireScopes("ilpo:read") : undefined,
+  );
+  registerIpaBulkTools(
+    server,
+    clients.ipaBulk,
+    options.auth ? requireScopes("ipaustralia:read") : undefined,
+  );
   registerPrhTools(
     server,
     clients.prh,

@@ -1,0 +1,203 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://data.gov.il/api/3/action/package_show?id=trademarks_nice
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - public, max-age=0, must-revalidate
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=utf-8
+      date:
+      - Mon, 26 Oct 2026 20:47:09 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding
+      via:
+      - 1.1 309e1be5b92f507902da9a176b6b4a6a.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - Zmi1Pg_O_-HifoYe_8TgTsEw7qH71TU3NjXllNpoXvby8ObOqLOytg==
+      x-amz-cf-pop:
+      - DFW57-P4
+      x-cache:
+      - Miss from cloudfront
+    body:
+      type: json
+      content:
+        help: https://data.gov.il/api/3/action/help_show?name=package_show
+        success: true
+        result:
+          author: null
+          author_email: datagov_support@justice.gov.il
+          author_notification: "True"
+          creator_user_id: 264875d1-3e9c-4884-9e19-126525529f33
+          id: 556634fd-fcec-4bbd-8bd5-ba1390bc1c14
+          isopen: true
+          license_id: other-open
+          license_title: אחר (פתוח)
+          mail_box: datagov_support@justice.gov.il
+          maintainer: null
+          maintainer_email: null
+          metadata_created: 2020-01-21T09:39:40.498614
+          metadata_modified: 2026-10-26T18:13:09.366342
+          name: trademarks_nice
+          notes: המאגר מכיל סיווגים של סימני מסחר
+          num_resources: 3
+          num_tags: 0
+          organization:
+            id: a7c807e8-223a-4ee4-afbd-e0c3632d82fc
+            name: ministry_of_justice
+            title: משרד המשפטים
+            type: organization
+            description: ""
+            image_url: 2021-08-17-145140.609912ministryofenergy.png
+            created: 2015-12-07T11:48:05.153350
+            is_organization: true
+            approval_status: approved
+            state: active
+          owner_org: a7c807e8-223a-4ee4-afbd-e0c3632d82fc
+          private: false
+          remark: ""
+          state: active
+          title: סימני מסחר - סיווגים
+          title_link: ""
+          type: dataset
+          url: ""
+          url_link: ""
+          version: null
+          extras:
+          - key: Frequency
+            value: Day
+          - key: Update
+            value: Automat
+          resources:
+          - Frequency: Week
+            cache_last_updated: null
+            cache_url: null
+            category: information
+            ckan_url: https://e.data.gov.il
+            created: 2020-01-21T09:40:24.539875
+            datastore_active: true
+            datastore_contains_all_records_of_source_file: true
+            description: null
+            format: CSV
+            hash: cbff5b357c358d3b13afd63805438e2d
+            how_update: Automat
+            id: bc9b55dc-a0c6-4b52-a925-5dabc7ef7979
+            ignore_hash: false
+            last_modified: 2026-10-26T18:13:09.339808
+            metadata_modified: 2026-10-26T18:13:09.376082
+            mimetype: text/csv
+            mimetype_inner: null
+            name: סיווגי ניצה
+            notes: סיווגי ניצה
+            original_url: >-
+              https://e.data.gov.il/dataset/556634fd-fcec-4bbd-8bd5-ba1390bc1c14/resource/bc9b55dc-a0c6-4b52-a925-5dabc7ef7979/download/bc9b55dc-a0c6-4b52-a925-5dabc7ef7979.csv
+            package_id: 556634fd-fcec-4bbd-8bd5-ba1390bc1c14
+            position: 0
+            resource_coordinates: ""
+            resource_desc_spatial_cover: ""
+            resource_geodetic_ref_sys: ""
+            resource_id: bc9b55dc-a0c6-4b52-a925-5dabc7ef7979
+            resource_ref_number: ""
+            resource_type: null
+            response_mail: null
+            score:
+              updated: 100
+              metadata: 100
+              asci_titles: 0
+              final_score: 4.166666666666666
+              unique_rows: 100
+              score_updated: 2025-04-02 17:16:48
+              api_retrievable: 100
+              cells_completeness: 100
+            set_url_type: false
+            size: 3014
+            state: active
+            task_created: 2026-08-18 17:14:41.565581
+            url: >-
+              https://e.data.gov.il/dataset/556634fd-fcec-4bbd-8bd5-ba1390bc1c14/resource/bc9b55dc-a0c6-4b52-a925-5dabc7ef7979/download/bc9b55dc-a0c6-4b52-a925-5dabc7ef7979.csv
+            url_type: upload
+          - Frequency: Week
+            cache_last_updated: null
+            cache_url: null
+            category: information
+            ckan_url: https://e.data.gov.il
+            created: 2021-05-19T07:22:12.602450
+            datastore_active: true
+            datastore_contains_all_records_of_source_file: true
+            description: null
+            format: CSV
+            hash: 41dfa5e250d6147fe016c5d7758a56c1
+            how_update: Automat
+            id: 820e988c-2740-46ca-8df4-2ed04ec7bf01
+            ignore_hash: false
+            last_modified: 2026-10-26T02:12:36.168007
+            metadata_modified: 2026-10-26T02:12:36.203474
+            mimetype: text/csv
+            mimetype_inner: null
+            name: סיווגי וינה
+            notes: סיווגי וינה
+            original_url: >-
+              https://e.data.gov.il/dataset/556634fd-fcec-4bbd-8bd5-ba1390bc1c14/resource/820e988c-2740-46ca-8df4-2ed04ec7bf01/download/820e988c-2740-46ca-8df4-2ed04ec7bf01.csv
+            package_id: 556634fd-fcec-4bbd-8bd5-ba1390bc1c14
+            position: 1
+            resource_coordinates: ""
+            resource_desc_spatial_cover: ""
+            resource_geodetic_ref_sys: ""
+            resource_id: 820e988c-2740-46ca-8df4-2ed04ec7bf01
+            resource_ref_number: ""
+            resource_type: null
+            response_mail: null
+            set_url_type: false
+            size: 15592
+            state: active
+            task_created: 2026-08-19 01:14:06.267773
+            url: >-
+              https://e.data.gov.il/dataset/556634fd-fcec-4bbd-8bd5-ba1390bc1c14/resource/820e988c-2740-46ca-8df4-2ed04ec7bf01/download/820e988c-2740-46ca-8df4-2ed04ec7bf01.csv
+            url_type: upload
+          - Frequency: Week
+            cache_last_updated: null
+            cache_url: null
+            category: description
+            created: 2021-06-08T11:18:36.170978
+            datastore_active: false
+            datastore_contains_all_records_of_source_file: false
+            description: null
+            format: PDF
+            hash: ""
+            how_update: Automat
+            id: 4f8315d5-2f96-4aaa-8405-0d428040dccd
+            last_modified: 2021-06-08T11:18:36.144267
+            metadata_modified: 2026-10-25T18:17:09.622867
+            mimetype: application/pdf
+            mimetype_inner: null
+            name: הוראות לפתיחת קובץ מאגר באמצעות תוכנת excel
+            notes: הוראות לפתיחת קובץ מאגר באמצעות תוכנת excel
+            package_id: 556634fd-fcec-4bbd-8bd5-ba1390bc1c14
+            position: 2
+            resource_coordinates: ""
+            resource_ref_number: ""
+            resource_type: null
+            size: 968126
+            state: active
+            url: >-
+              https://e.data.gov.il/dataset/556634fd-fcec-4bbd-8bd5-ba1390bc1c14/resource/4f8315d5-2f96-4aaa-8405-0d428040dccd/download/open-file-excel.pdf
+            url_type: upload
+          tags: []
+          groups: []
+          relationships_as_subject: []
+          relationships_as_object: []
+  recorded_at: 2026-10-26T20:47:09.757Z

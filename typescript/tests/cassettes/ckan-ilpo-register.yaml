@@ -1,0 +1,344 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://data.gov.il/api/3/action/package_show?id=simaneymisahr
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - public, max-age=0, must-revalidate
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=utf-8
+      date:
+      - Mon, 26 Oct 2026 20:47:07 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding
+      via:
+      - 1.1 309e1be5b92f507902da9a176b6b4a6a.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - e6wSM_ToB1YELdr-qNFex48KT--gC2yH6Yc1EEmbCwx3csGTkcmT6A==
+      x-amz-cf-pop:
+      - DFW57-P4
+      x-cache:
+      - Miss from cloudfront
+    body:
+      type: json
+      content:
+        help: https://data.gov.il/api/3/action/help_show?name=package_show
+        success: true
+        result:
+          author: null
+          author_email: datagov_support@justice.gov.il
+          author_notification: "True"
+          creator_user_id: 264875d1-3e9c-4884-9e19-126525529f33
+          id: 656f6e4c-ec04-40a5-b3bc-c556b2b127e0
+          isopen: true
+          license_id: other-open
+          license_title: Other (Open)
+          mail_box: datagov_support@justice.gov.il
+          maintainer: null
+          maintainer_email: null
+          metadata_created: 2019-11-13T11:07:59.277920
+          metadata_modified: 2026-10-26T15:19:03.015164
+          name: simaneymisahr
+          notes: בקשות שהוגשו להגנה ישראלית על סימני מסחר
+          num_resources: 7
+          num_tags: 1
+          organization:
+            id: a7c807e8-223a-4ee4-afbd-e0c3632d82fc
+            name: ministry_of_justice
+            title: משרד המשפטים
+            type: organization
+            description: ""
+            image_url: 2021-08-17-145140.609912ministryofenergy.png
+            created: 2015-12-07T11:48:05.153350
+            is_organization: true
+            approval_status: approved
+            state: active
+          owner_org: a7c807e8-223a-4ee4-afbd-e0c3632d82fc
+          private: false
+          remark: ""
+          state: active
+          title: סימני מסחר
+          title_link: ""
+          type: dataset
+          url: ""
+          url_link: ""
+          version: null
+          extras:
+          - key: Frequency
+            value: Day
+          - key: Update
+            value: Automat
+          resources:
+          - Frequency: Day
+            cache_last_updated: null
+            cache_url: null
+            category: information
+            ckan_url: https://e.data.gov.il
+            created: 2019-11-13T11:08:56.075772
+            datastore_active: true
+            datastore_contains_all_records_of_source_file: true
+            description: null
+            format: CSV
+            hash: 67c0af970fa058761b42fdd63b4eece5
+            how_update: Automat
+            id: 6284d4a9-fdd4-45c9-a1d6-58143c7d8127
+            ignore_hash: false
+            last_modified: 2026-10-26T11:14:58.433795
+            metadata_modified: 2026-10-26T11:21:38.704836
+            mimetype: text/csv
+            mimetype_inner: null
+            name: סימני מסחר    Trademark Database
+            notes: >-
+              בקשות שהוגשו להגנה ישראלית על סימני מסחר. קיימים מאגרים נפרדים לצורך הרחבת
+              המידע (כגון לקוחות, דיני קדימה, יומן הסימן וכדומה)
+            original_url: >-
+              https://e.data.gov.il/dataset/656f6e4c-ec04-40a5-b3bc-c556b2b127e0/resource/6284d4a9-fdd4-45c9-a1d6-58143c7d8127/download/6284d4a9-fdd4-45c9-a1d6-58143c7d8127.csv
+            package_id: 656f6e4c-ec04-40a5-b3bc-c556b2b127e0
+            position: 0
+            resource_coordinates: ""
+            resource_desc_spatial_cover: ""
+            resource_geodetic_ref_sys: ""
+            resource_id: 6284d4a9-fdd4-45c9-a1d6-58143c7d8127
+            resource_ref_number: ""
+            resource_type: null
+            response_mail: null
+            score:
+              updated: 100
+              metadata: 100
+              asci_titles: 0
+              final_score: 4.166666666666666
+              unique_rows: 100
+              score_updated: 2025-06-08 10:12:03
+              api_retrievable: 100
+              cells_completeness: 100
+            set_url_type: false
+            size: 391020744
+            state: active
+            task_created: 2026-10-26 11:14:59.891610
+            url: >-
+              https://e.data.gov.il/dataset/656f6e4c-ec04-40a5-b3bc-c556b2b127e0/resource/6284d4a9-fdd4-45c9-a1d6-58143c7d8127/download/6284d4a9-fdd4-45c9-a1d6-58143c7d8127.csv
+            url_type: upload
+          - Frequency: Day
+            cache_last_updated: null
+            cache_url: null
+            category: description
+            created: 2021-06-08T12:05:11.100694
+            datastore_active: false
+            datastore_contains_all_records_of_source_file: false
+            description: null
+            format: PDF
+            hash: ""
+            how_update: Automat
+            id: 9084399c-f842-4684-8fa7-e5cb3d6d4ff7
+            last_modified: 2021-06-08T12:05:11.071938
+            metadata_modified: 2026-10-25T11:23:01.839134
+            mimetype: application/pdf
+            mimetype_inner: null
+            name: הוראות לפתיחת קובץ מאגר באמצעות תוכנת excel
+            notes: הוראות לפתיחת קובץ מאגר באמצעות תוכנת excel
+            package_id: 656f6e4c-ec04-40a5-b3bc-c556b2b127e0
+            position: 1
+            resource_coordinates: ""
+            resource_ref_number: ""
+            resource_type: null
+            size: 968126
+            state: active
+            url: >-
+              https://e.data.gov.il/dataset/656f6e4c-ec04-40a5-b3bc-c556b2b127e0/resource/9084399c-f842-4684-8fa7-e5cb3d6d4ff7/download/open-file-excel.pdf
+            url_type: upload
+          - Frequency: NotConstant
+            cache_last_updated: null
+            cache_url: null
+            category: information
+            ckan_url: https://e.data.gov.il
+            created: 2026-01-26T17:51:45.104762
+            datastore_active: true
+            datastore_contains_all_records_of_source_file: true
+            description: null
+            format: CSV
+            hash: a55aca2aec0ae4e28756051364c16b20
+            how_update: Manual
+            id: 9ad7f669-ff09-4d43-8d72-7d33b5cba0c9
+            ignore_hash: false
+            last_modified: 2026-10-26T15:14:20.281131
+            metadata_modified: 2026-10-26T15:14:20.547273
+            mimetype: text/csv
+            mimetype_inner: null
+            name: דיני קדימה לסימן מסחר       Trademark Priority claim
+            notes: דיני הקדימה שתאריכן נתבע בבקשות ובסימני מסחר רשומים.
+            original_url: >-
+              https://e.data.gov.il/dataset/656f6e4c-ec04-40a5-b3bc-c556b2b127e0/resource/9ad7f669-ff09-4d43-8d72-7d33b5cba0c9/download/9ad7f669-ff09-4d43-8d72-7d33b5cba0c9.csv
+            package_id: 656f6e4c-ec04-40a5-b3bc-c556b2b127e0
+            position: 2
+            resource_id: 9ad7f669-ff09-4d43-8d72-7d33b5cba0c9
+            resource_type: null
+            response_mail: null
+            set_url_type: false
+            size: 149067503
+            state: active
+            task_created: 2026-10-26 13:24:08.504644
+            url: >-
+              https://e.data.gov.il/dataset/656f6e4c-ec04-40a5-b3bc-c556b2b127e0/resource/9ad7f669-ff09-4d43-8d72-7d33b5cba0c9/download/9ad7f669-ff09-4d43-8d72-7d33b5cba0c9.csv
+            url_type: upload
+          - Frequency: NotConstant
+            cache_last_updated: null
+            cache_url: null
+            category: information
+            ckan_url: https://e.data.gov.il
+            created: 2026-01-26T17:55:05.163203
+            datastore_active: true
+            datastore_contains_all_records_of_source_file: true
+            description: null
+            format: CSV
+            hash: 368a6fd1b7bf58e326d1d8af50056c5f
+            how_update: Manual
+            id: 118b06b5-3504-4007-b43f-c197fdc5e466
+            ignore_hash: false
+            last_modified: 2026-10-26T15:14:02.050988
+            metadata_modified: 2026-10-26T15:19:03.027552
+            mimetype: text/csv
+            mimetype_inner: null
+            name: יומן השינויים של סימן המסחר      Trademark list of changes
+            notes: >-
+              רשימת השינויים שבוצעו בכל סימן (כגון העברת בעלות, שינוי שם, שינוי כתובת למסירת
+              הודעות, רישום בעל רשות וכדומה)
+            original_url: >-
+              https://e.data.gov.il/dataset/656f6e4c-ec04-40a5-b3bc-c556b2b127e0/resource/118b06b5-3504-4007-b43f-c197fdc5e466/download/118b06b5-3504-4007-b43f-c197fdc5e466.csv
+            package_id: 656f6e4c-ec04-40a5-b3bc-c556b2b127e0
+            position: 3
+            resource_id: 118b06b5-3504-4007-b43f-c197fdc5e466
+            resource_type: null
+            response_mail: null
+            set_url_type: false
+            size: 115068382
+            state: active
+            task_created: 2026-10-26 15:14:02.875443
+            url: >-
+              https://e.data.gov.il/dataset/656f6e4c-ec04-40a5-b3bc-c556b2b127e0/resource/118b06b5-3504-4007-b43f-c197fdc5e466/download/118b06b5-3504-4007-b43f-c197fdc5e466.csv
+            url_type: upload
+          - Frequency: NotConstant
+            cache_last_updated: null
+            cache_url: null
+            category: information
+            ckan_url: https://e.data.gov.il
+            created: 2026-01-26T17:57:28.811264
+            datastore_active: true
+            datastore_contains_all_records_of_source_file: true
+            description: null
+            format: CSV
+            hash: 64d66e90497ad3a507efcb5a640007c1
+            how_update: Manual
+            id: d4a365c7-357a-4172-8815-1a6650e848e2
+            ignore_hash: false
+            last_modified: 2026-10-26T15:14:29.132782
+            metadata_modified: 2026-10-26T15:16:18.255177
+            mimetype: text/csv
+            mimetype_inner: null
+            name: לקוחות ובעלי רשות לסימן מסחר     Trademark Holders and Licensees
+            notes: " רשימת הלקוחות שבבעלותם סימני מסחר רשומים או בקשות ורשימת לקוחות הרשומים כבעלי רשות לשימוש בסימנים"
+            original_url: >-
+              https://e.data.gov.il/dataset/656f6e4c-ec04-40a5-b3bc-c556b2b127e0/resource/d4a365c7-357a-4172-8815-1a6650e848e2/download/d4a365c7-357a-4172-8815-1a6650e848e2.csv
+            package_id: 656f6e4c-ec04-40a5-b3bc-c556b2b127e0
+            position: 4
+            resource_id: d4a365c7-357a-4172-8815-1a6650e848e2
+            resource_type: null
+            response_mail: null
+            set_url_type: false
+            size: 48654224
+            state: active
+            task_created: 2026-10-26 15:14:29.748593
+            url: >-
+              https://e.data.gov.il/dataset/656f6e4c-ec04-40a5-b3bc-c556b2b127e0/resource/d4a365c7-357a-4172-8815-1a6650e848e2/download/d4a365c7-357a-4172-8815-1a6650e848e2.csv
+            url_type: upload
+          - Frequency: NotConstant
+            cache_last_updated: null
+            cache_url: null
+            category: information
+            ckan_url: https://e.data.gov.il
+            created: 2026-01-26T17:58:39.174403
+            datastore_active: true
+            datastore_contains_all_records_of_source_file: true
+            description: null
+            format: CSV
+            hash: 35639ee4387d3203ecaa766997c4126b
+            how_update: Manual
+            id: d45b945c-7031-42fa-b7f2-a60b96db8c0e
+            ignore_hash: false
+            last_modified: 2026-10-26T15:14:32.590209
+            metadata_modified: 2026-10-26T15:14:32.640087
+            mimetype: text/csv
+            mimetype_inner: null
+            name: התבססות על רישום חיצוני בסימני מסחר    Trademarks based on foreign registrations
+            notes: " רישומים בחו\"ל שעל בסיסם נרשמו סימני מסחר"
+            original_url: >-
+              https://e.data.gov.il/dataset/656f6e4c-ec04-40a5-b3bc-c556b2b127e0/resource/d45b945c-7031-42fa-b7f2-a60b96db8c0e/download/d45b945c-7031-42fa-b7f2-a60b96db8c0e.csv
+            package_id: 656f6e4c-ec04-40a5-b3bc-c556b2b127e0
+            position: 5
+            resource_id: d45b945c-7031-42fa-b7f2-a60b96db8c0e
+            resource_type: null
+            response_mail: null
+            set_url_type: false
+            size: 792020
+            state: active
+            task_created: 2026-10-26 13:24:15.819857
+            url: >-
+              https://e.data.gov.il/dataset/656f6e4c-ec04-40a5-b3bc-c556b2b127e0/resource/d45b945c-7031-42fa-b7f2-a60b96db8c0e/download/d45b945c-7031-42fa-b7f2-a60b96db8c0e.csv
+            url_type: upload
+          - Frequency: NotConstant
+            cache_last_updated: null
+            cache_url: null
+            category: information
+            ckan_url: https://e.data.gov.il
+            created: 2026-01-26T18:00:54.931652
+            datastore_active: true
+            datastore_contains_all_records_of_source_file: true
+            description: null
+            format: CSV
+            hash: e392872b226e8d3d5bdb3cb6b7279e5c
+            how_update: Manual
+            id: ed88a79f-0b17-4cc6-aae4-36047370a69d
+            ignore_hash: false
+            last_modified: 2026-10-26T15:13:47.740119
+            metadata_modified: 2026-10-26T15:13:47.790731
+            mimetype: text/csv
+            mimetype_inner: null
+            name: תנאים/הודעות לסימני מסחר     Trademark conditions or disclaimers
+            notes: " תנאים / הודעות  שנרשמו בסימני מסחר רשומים או בקשות"
+            original_url: >-
+              https://e.data.gov.il/dataset/656f6e4c-ec04-40a5-b3bc-c556b2b127e0/resource/ed88a79f-0b17-4cc6-aae4-36047370a69d/download/ed88a79f-0b17-4cc6-aae4-36047370a69d.csv
+            package_id: 656f6e4c-ec04-40a5-b3bc-c556b2b127e0
+            position: 6
+            resource_id: ed88a79f-0b17-4cc6-aae4-36047370a69d
+            resource_type: null
+            response_mail: null
+            set_url_type: false
+            size: 38858576
+            state: active
+            task_created: 2026-10-26 13:23:32.303666
+            url: >-
+              https://e.data.gov.il/dataset/656f6e4c-ec04-40a5-b3bc-c556b2b127e0/resource/ed88a79f-0b17-4cc6-aae4-36047370a69d/download/ed88a79f-0b17-4cc6-aae4-36047370a69d.csv
+            url_type: upload
+          tags:
+          - display_name: מסחר
+            id: c011665a-2f4d-49fe-84a4-7d5311c211b6
+            name: מסחר
+            state: active
+            vocabulary_id: null
+          groups: []
+          relationships_as_subject: []
+          relationships_as_object: []
+  recorded_at: 2026-10-26T20:47:07.377Z
