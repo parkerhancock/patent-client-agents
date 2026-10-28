@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Added
+
+- `patent_client_agents.facade` ships the curated MCP tool surface:
+  `facade_mcp` serves 30 consolidated tools (`search_uspto`, `get_uspto`,
+  `search_patents`, `search_litigation`, and so on) as thin dispatchers over
+  the per-source tools, for servers that mount it in place of the full
+  `ip_mcp`. It replaces the separate `patent-client-facade` package and
+  combines that package's `main` with the PTAB and CAFC continuation,
+  fee-refresh, and file-history changes from its law-tools branch. Key-gated
+  USPTO download URLs are rewritten to a signed proxy when
+  `USPTO_ODP_PROXY_URL` is set and stripped otherwise.
+
 ## [0.31.0] — 2026-10-21
 
 ### Changed
