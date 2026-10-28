@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.32.0] — 2026-10-27
+
 ### Added
 
 - `patent_client_agents.facade` ships the curated MCP tool surface:
@@ -18,6 +20,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   fee-refresh, and file-history changes from its law-tools branch. Key-gated
   USPTO download URLs are rewritten to a signed proxy when
   `USPTO_ODP_PROXY_URL` is set and stripped otherwise.
+
+### Changed
+
+- `pypdf` is required at 6.21.0 or later instead of capped below 6.15, picking
+  up its 2026 security fixes. The ILPO fee parser accepts the RTL-mirrored
+  `)(` that newer pypdf emits before Hebrew sub-item letters (#153).
 
 ## [0.31.0] — 2026-10-21
 
@@ -2116,7 +2124,8 @@ release so existing internal callers don't break.
   bool` field on the result so callers can distinguish authoritative
   vs estimated values.
 
-[Unreleased]: https://github.com/parkerhancock/patent-client-agents/compare/v0.31.0...HEAD
+[Unreleased]: https://github.com/parkerhancock/patent-client-agents/compare/v0.32.0...HEAD
+[0.32.0]: https://github.com/parkerhancock/patent-client-agents/compare/v0.31.0...v0.32.0
 [0.31.0]: https://github.com/parkerhancock/patent-client-agents/compare/v0.30.0...v0.31.0
 [0.30.0]: https://github.com/parkerhancock/patent-client-agents/compare/v0.29.0...v0.30.0
 [0.29.0]: https://github.com/parkerhancock/patent-client-agents/compare/v0.28.0...v0.29.0
