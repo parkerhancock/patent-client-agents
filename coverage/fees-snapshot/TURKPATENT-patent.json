@@ -11,7 +11,7 @@
       "code": "tr-pat-01.01.01",
       "condition": null,
       "currency": "TRY",
-      "label": "Patent Ba\u015fvuru \u00dccreti",
+      "label": "Patent Ba\u015fvuru \u00dccreti (01.01.67 say\u0131l\u0131 sat\u0131r haricindeki ba\u015fvurular i\u00e7in)",
       "notes": "base TRY 81.42; VAT TRY 16.28; stamp TRY 522.3",
       "rights": [
         "patent"
@@ -671,7 +671,7 @@
       "code": "tr-pat-01.01.49",
       "condition": null,
       "currency": "TRY",
-      "label": "Ara\u015ft\u0131rma Raporu D\u00fczenlenmesi \u00dccreti (1.01.48 Say\u0131l\u0131 Sat\u0131r Haricindeki Ba\u015fvurular \u0130\u00e7in)",
+      "label": "Ara\u015ft\u0131rma Raporu D\u00fczenlenmesi \u00dccreti (01.01.48 ve 01.01.68 say\u0131l\u0131 sat\u0131rlar haricindeki ba\u015fvurular i\u00e7in)",
       "notes": "base TRY 4316.67; VAT TRY 863.33",
       "rights": [
         "patent"
@@ -701,7 +701,7 @@
       "code": "tr-pat-01.01.51",
       "condition": null,
       "currency": "TRY",
-      "label": "\u0130nceleme Raporu D\u00fczenlenmesi \u00dccreti (1.01.50 Say\u0131l\u0131 Sat\u0131r Haricindeki Ba\u015fvurular \u0130\u00e7in)",
+      "label": "\u0130nceleme Raporu D\u00fczenlenmesi \u00dccreti (01.01.50 ve 01.01.69 say\u0131l\u0131 sat\u0131rlar haricindeki ba\u015fvurular i\u00e7in)",
       "notes": "base TRY 4316.67; VAT TRY 863.33",
       "rights": [
         "patent"
@@ -806,7 +806,7 @@
       "code": "tr-pat-01.01.64",
       "condition": null,
       "currency": "TRY",
-      "label": "Acil Ara\u015ft\u0131rma Raporu D\u00fczenleme \u00dccreti (01.01.65 say\u0131l\u0131 sat\u0131r haricindeki ba\u015fvurular i\u00e7in)",
+      "label": "Acil Ara\u015ft\u0131rma Raporu D\u00fczenleme \u00dccreti (01.01.65 ve 01.01.66 say\u0131l\u0131 sat\u0131rlar haricindeki ba\u015fvurular i\u00e7in)",
       "notes": "base TRY 8666.67; VAT TRY 1733.33",
       "rights": [
         "patent"
@@ -829,6 +829,66 @@
       "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
       "tier": "none",
       "year": null
+    },
+    {
+      "amount": "5200",
+      "category": "search",
+      "code": "tr-pat-01.01.66",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Acil Ara\u015ft\u0131rma Raporu D\u00fczenleme \u00dccreti (Yapay Zeka alan\u0131ndaki G06N IPC s\u0131n\u0131f\u0131nda yer alan ba\u015fvurular i\u00e7in)",
+      "notes": "base TRY 4333.34; VAT TRY 866.67",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "547",
+      "category": "filing",
+      "code": "tr-pat-01.01.67",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Patent Ba\u015fvuru \u00dccreti (KOB\u0130 \u0130\u015fletme s\u0131n\u0131f\u0131 ve KOB\u0130 Vasf\u0131 Belgesine sahip t\u00fczel ki\u015filerin ilk ba\u015fvurular\u0131)",
+      "notes": "base TRY 20.36; VAT TRY 4.07; stamp TRY 522.3",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1295",
+      "category": "search",
+      "code": "tr-pat-01.01.68",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Ara\u015ft\u0131rma Raporu D\u00fczenlenmesi \u00dccreti (KOB\u0130 \u0130\u015fletme s\u0131n\u0131f\u0131 ve KOB\u0130 Vasf\u0131 Belgesine sahip t\u00fczel ki\u015filerin ilk ba\u015fvurular\u0131)",
+      "notes": "base TRY 1079.17; VAT TRY 215.83",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1295",
+      "category": "other",
+      "code": "tr-pat-01.01.69",
+      "condition": null,
+      "currency": "TRY",
+      "label": "\u0130nceleme Raporu D\u00fczenlenmesi \u00dccreti (KOB\u0130 \u0130\u015fletme s\u0131n\u0131f\u0131 ve KOB\u0130 Vasf\u0131 Belgesine sahip t\u00fczel ki\u015filerin ilk ba\u015fvurular\u0131)",
+      "notes": "base TRY 1079.17; VAT TRY 215.83",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
     }
   ],
   "issuing_body": "T\u00fcrk Patent ve Marka Kurumu (T\u00dcRKPATENT)",
@@ -845,7 +905,7 @@
   "refresh_attempted_at": null,
   "refresh_error": null,
   "refresh_outcome": "not_requested",
-  "retrieved_at": "2026-10-14",
+  "retrieved_at": "2026-10-31",
   "right": "patent",
   "schedule_status": "unknown",
   "source_checked_at": null,
