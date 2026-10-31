@@ -16,7 +16,7 @@
         "trigger": "classes_over"
       },
       "currency": "BRL",
-      "label": "INPI BR code 389: Application for registration of trademark (with pre- approved specification) \u2013 amount per class",
+      "label": "INPI BR code 389: Application for registration of trademark (with pre-approved specification) \u2013 amount per class",
       "notes": "INPI BR TM fee code 389. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
       "rights": [
         "trademark"
@@ -36,7 +36,7 @@
         "trigger": "classes_over"
       },
       "currency": "BRL",
-      "label": "INPI BR code 389: Application for registration of trademark (with pre- approved specification) \u2013 amount per class",
+      "label": "INPI BR code 389: Application for registration of trademark (with pre-approved specification) \u2013 amount per class",
       "notes": "INPI BR TM fee code 389. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
       "rights": [
         "trademark"
@@ -351,7 +351,7 @@
       "code": "inpi-br-tm-333-l",
       "condition": null,
       "currency": "BRL",
-      "label": "INPI BR code 333: Appeal for trademarks (except against rejection of an application for registration of trademark",
+      "label": "INPI BR code 333: Appeal for trademarks (except against rejection of anapplication for registration of trademark",
       "notes": "INPI BR TM fee code 333. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
       "rights": [
         "trademark"
@@ -366,7 +366,7 @@
       "code": "inpi-br-tm-333-s",
       "condition": null,
       "currency": "BRL",
-      "label": "INPI BR code 333: Appeal for trademarks (except against rejection of an application for registration of trademark",
+      "label": "INPI BR code 333: Appeal for trademarks (except against rejection of anapplication for registration of trademark",
       "notes": "INPI BR TM fee code 333. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
       "rights": [
         "trademark"
@@ -386,7 +386,7 @@
         "trigger": "classes_over"
       },
       "currency": "BRL",
-      "label": "INPI BR code 336: Administrative invalidation of a trademark registration \u2013 amount per class",
+      "label": "INPI BR code 336: Administrative invalidation of a trademark registration \u2013amount per class",
       "notes": "INPI BR TM fee code 336. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
       "rights": [
         "trademark"
@@ -406,7 +406,7 @@
         "trigger": "classes_over"
       },
       "currency": "BRL",
-      "label": "INPI BR code 336: Administrative invalidation of a trademark registration \u2013 amount per class",
+      "label": "INPI BR code 336: Administrative invalidation of a trademark registration \u2013amount per class",
       "notes": "INPI BR TM fee code 336. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
       "rights": [
         "trademark"
@@ -620,7 +620,7 @@
   "refresh_attempted_at": null,
   "refresh_error": null,
   "refresh_outcome": "not_requested",
-  "retrieved_at": "2026-10-14",
+  "retrieved_at": "2026-10-31",
   "right": "trademark",
   "schedule_status": "unknown",
   "source_checked_at": null,

@@ -386,7 +386,7 @@
       "code": "impi-26-bis",
       "condition": null,
       "currency": "MXN",
-      "label": "Suscripci\u00f3n anual de la Colecci\u00f3n de Discos Compactos ESPACE-MEXICO",
+      "label": "Suscripci\u00f3n anual de la Colecci\u00f3n de Discos Compactos ESPACE - MEXICO",
       "notes": "Article 26 BIS.",
       "rights": [
         "trademark"
@@ -590,7 +590,7 @@
   "refresh_attempted_at": null,
   "refresh_error": null,
   "refresh_outcome": "not_requested",
-  "retrieved_at": "2026-10-14",
+  "retrieved_at": "2026-10-31",
   "right": "trademark",
   "schedule_status": "unknown",
   "source_checked_at": null,
