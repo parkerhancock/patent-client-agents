@@ -8,6 +8,7 @@ import datetime as dt
 import logging
 import os
 import re
+import time
 from io import BytesIO
 from pathlib import Path
 from typing import Any
@@ -65,6 +66,16 @@ from .parsing import (
     parse_register_procedural_steps,
     parse_search_response,
     parse_unitary_patent_package,
+)
+from .pdf_pages import (
+    DEFAULT_BLOCK_SECONDS,
+    PageStore,
+    PdfDownloadIncomplete,
+    _BudgetExhausted,
+    default_page_store,
+    images_pacer,
+    page_key,
+    parse_throttle,
 )
 
 logger = logging.getLogger(__name__)
@@ -224,6 +235,7 @@ class EpoOpsClient(ConnectorClient):
             "User-Agent": "patent-client-agents-epo-ops/0.2",
         }
         self.base_url = self.DEFAULT_BASE_URL.rstrip("/")
+        self._page_cache_dir = cache_dir / "pdf_pages"
         self._owns_client = True
         self._max_retries = 4
         self._timeout = timeout
@@ -635,10 +647,28 @@ class EpoOpsClient(ConnectorClient):
         number: str,
         doc_type: str = "publication",
         fmt: str = "docdb",
+        time_budget: float | None = None,
+        page_store: PageStore | None = None,
     ) -> PdfDownloadResponse:
+        """Assemble a publication's full-document PDF from OPS page images.
+
+        OPS serves one page per request under a per-minute limit, so each
+        request waits its turn on the shared :data:`images_pacer`, and a
+        throttle 403 waits out the block and retries rather than failing.
+        Every page is saved to ``page_store`` as it arrives (the deployment's
+        blob store when one is injected, otherwise local disk).
+
+        With ``time_budget`` (seconds), the call stops fetching once the
+        budget is spent and raises :class:`PdfDownloadIncomplete`; calling
+        again picks up from the saved pages. Without it, the call runs until
+        the document is complete.
+        """
         normalized = self._normalize_number(number)
+        deadline = time.monotonic() + time_budget if time_budget else None
+        store = page_store or default_page_store(self._page_cache_dir)
         path = f"/rest-services/published-data/{doc_type}/{fmt}/{normalized}/images"
         response = await self._request("GET", path)
+        images_pacer.observe(response.headers.get("X-Throttling-Control"))
         root = etree.fromstring(response.content)
         full_document = root.xpath('.//ops:document-instance[@desc="FullDocument"]', namespaces=NS)
         if not full_document:
@@ -651,17 +681,29 @@ class EpoOpsClient(ConnectorClient):
         num_pages = int(num_pages_str)
         from pypdf import PdfReader, PdfWriter  # only the PDF download path needs pypdf
 
-        pdf_writer = PdfWriter()
+        page_url = self._build_url(f"/rest-services/{link}.pdf")
+        page_bytes: list[bytes] = []
         for page in range(1, num_pages + 1):
-            page_url = self._build_url(f"/rest-services/{link}.pdf")
-            page_response = await self._client.request(
-                "GET",
-                page_url,
-                params={"Range": page},
-                extensions={"force_cache": True},
-            )
-            self._raise_for_status(page_response)
-            reader = PdfReader(BytesIO(page_response.content))
+            key = page_key(normalized, page)
+            content = await store.get(key)
+            if content is None:
+                try:
+                    content = await self._fetch_image_page(page_url, page, deadline)
+                except _BudgetExhausted:
+                    content = None
+                if content is None:
+                    raise PdfDownloadIncomplete(
+                        normalized,
+                        pages_fetched=page - 1,
+                        total_pages=num_pages,
+                        seconds_per_page=images_pacer.interval,
+                    )
+                await store.put(key, content)
+            page_bytes.append(content)
+
+        pdf_writer = PdfWriter()
+        for content in page_bytes:
+            reader = PdfReader(BytesIO(content))
             page_obj = reader.pages[0]
             rotation = page_obj.get("/Rotate")
             if rotation == 90:
@@ -676,6 +718,66 @@ class EpoOpsClient(ConnectorClient):
             pdf_base64=base64.b64encode(pdf_bytes).decode("ascii"),
         )
 
+    async def _fetch_image_page(self, url: str, page: int, deadline: float | None) -> bytes | None:
+        """Fetch one page, pacing to OPS's rate and riding out throttle blocks.
+
+        Returns ``None`` when the deadline arrives before the request can go
+        out. Raises :class:`_BudgetExhausted` when a throttle block would
+        outlast the deadline, and :class:`OpsForbiddenError` for a 403 that
+        isn't a per-minute throttle (an hourly or weekly quota).
+        """
+        response: httpx2.Response | None = None
+        for _ in range(_MAX_THROTTLE_RETRIES):
+            if deadline is not None:
+                if time.monotonic() + images_pacer.seconds_until_ready() >= deadline:
+                    return None
+            await images_pacer.wait()
+            response = await self._client.request(
+                "GET", url, params={"Range": page}, extensions={"force_cache": True}
+            )
+            throttling = response.headers.get("X-Throttling-Control")
+            if response.status_code == 403 and self._is_throttle_block(response):
+                # Retry-After (or the one-minute default) decides the wait;
+                # observe() would apply its own block for the black color.
+                images_pacer.block(self._retry_after_seconds(response))
+                logger.info(
+                    "OPS throttled images on page %d (%s); waiting %.0fs",
+                    page,
+                    throttling,
+                    images_pacer.seconds_until_ready(),
+                )
+                if deadline is not None:
+                    if time.monotonic() + images_pacer.seconds_until_ready() >= deadline:
+                        raise _BudgetExhausted
+                continue
+            images_pacer.observe(throttling)
+            self._raise_for_status(response)
+            return response.content
+        assert response is not None
+        raise self._build_forbidden_error(response)
+
+    @staticmethod
+    def _is_throttle_block(response: httpx2.Response) -> bool:
+        """A per-minute throttle (recoverable), not an hourly or weekly quota."""
+        reason = response.headers.get("X-Rejection-Reason") or ""
+        if "Throttling" in reason:
+            return True
+        parsed = parse_throttle(response.headers.get("X-Throttling-Control"))
+        return parsed is not None and parsed[0] == "black" and not reason
+
+    @staticmethod
+    def _retry_after_seconds(response: httpx2.Response) -> float:
+        value = response.headers.get("Retry-After")
+        if value:
+            try:
+                return max(1.0, float(value))
+            except ValueError:
+                pass
+        return DEFAULT_BLOCK_SECONDS
+
+
+#: Throttle blocks to wait out on one page before giving up on it.
+_MAX_THROTTLE_RETRIES = 5
 
 _shared_auth: OpsAuth | None = None
 

@@ -22,6 +22,7 @@ from mcp_data_core.mcp.downloads import (
     register_source,
 )
 from patent_client_agents import unified
+from patent_client_agents.epo_ops.pdf_pages import PdfDownloadIncomplete
 from patent_client_agents.google_patents import GooglePatentsClient
 from patent_client_agents.shared.envelope import dump
 from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
@@ -461,6 +462,24 @@ async def get_patent_figures_clean(patent_number: str) -> dict:
     }
 
 
+def _pdf_in_progress(exc: PdfDownloadIncomplete) -> dict[str, Any]:
+    """Progress report for an EPO PDF that needs another call to finish."""
+    return {
+        "status": "in_progress",
+        "patent_number": exc.publication_number,
+        "source": "epo",
+        "pages_fetched": exc.pages_fetched,
+        "total_pages": exc.total_pages,
+        "estimated_seconds_remaining": exc.estimated_seconds_remaining,
+        "message": (
+            f"EPO OPS serves this {exc.total_pages}-page document one page at a time "
+            f"under a per-minute limit. {exc.pages_fetched} pages are saved. Call this "
+            "tool again with the same number to continue; it resumes where this call "
+            "stopped and returns the download URL once every page is in."
+        ),
+    }
+
+
 @patents_mcp.tool(annotations=READ_ONLY)
 async def download_patent_pdf(
     patent_number: Annotated[
@@ -483,9 +502,18 @@ async def download_patent_pdf(
     transient HTTP failures) surface immediately rather than being masked
     by silent fallback.
 
+    EPO OPS serves one page per request under a per-minute limit, so a long
+    document (a large PCT pamphlet runs to hundreds of pages) can take
+    several calls. When a call runs out of time it returns
+    ``status='in_progress'`` with page counts instead of a URL; fetched
+    pages are kept, so call again with the same number to continue.
+
     Related tools: search_patents_global, get_patent, get_patent_publication.
     """
-    pdf = await unified.download_patent_pdf(patent_number)
+    try:
+        pdf = await unified.download_patent_pdf(patent_number)
+    except PdfDownloadIncomplete as exc:
+        return _pdf_in_progress(exc)
     signed_path_prefix = {
         "google_patents": "patents",
         "ppubs": "publications",
@@ -516,7 +544,10 @@ async def download_patent_pdf_clean(patent_number: str):
     reusable helper for deployments (e.g. the hosted public connector) that
     must drop the Google hop.
     """
-    pdf = await unified.download_patent_pdf_clean(patent_number)
+    try:
+        pdf = await unified.download_patent_pdf_clean(patent_number)
+    except PdfDownloadIncomplete as exc:
+        return _pdf_in_progress(exc)
     signed_path_prefix = {
         "ppubs": "publications",
         "epo": "epo/patents",
