@@ -78,7 +78,8 @@ if EDIS_ENABLED:
     ]
     _SOURCE_DESC = (
         "Which document repository to download from. 'patent_pdf' = a patent/"
-        "publication PDF (USPTO PPUBS → EPO OPS cascade). 'cafc' = a "
+        "publication PDF (USPTO PPUBS → EPO OPS cascade; a long EPO document "
+        "may return status='in_progress', so call again to continue). 'cafc' = a "
         "Federal Circuit opinion PDF. 'ptab_appeal'/'ptab_interference' = "
         "PTAB ex parte appeal / pre-AIA interference decisions. 'ptab_trial' = "
         "AIA trial board decisions; 'ptab_trial_docs' = AIA trial party "
@@ -107,7 +108,8 @@ else:
     ]
     _SOURCE_DESC = (
         "Which document repository to download from. 'patent_pdf' = a patent/"
-        "publication PDF (USPTO PPUBS → EPO OPS cascade). 'cafc' = a "
+        "publication PDF (USPTO PPUBS → EPO OPS cascade; a long EPO document "
+        "may return status='in_progress', so call again to continue). 'cafc' = a "
         "Federal Circuit opinion PDF. 'ptab_appeal'/'ptab_interference' = "
         "PTAB ex parte appeal / pre-AIA interference decisions. 'ptab_trial' = "
         "AIA trial board decisions; 'ptab_trial_docs' = AIA trial party "

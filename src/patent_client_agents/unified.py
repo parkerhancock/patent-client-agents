@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import base64
 import logging
+import os
 import re
 from dataclasses import dataclass
 from typing import Any
@@ -414,6 +415,25 @@ class PatentPdf:
     patent_title: str | None = None
 
 
+#: Seconds one call may spend fetching EPO OPS pages before it returns progress.
+#: OPS allows 50-100 page requests a minute, so a long PCT pamphlet takes
+#: several calls; this keeps each call under typical MCP client timeouts.
+DEFAULT_EPO_PDF_TIME_BUDGET = 240.0
+
+
+def _epo_pdf_time_budget() -> float | None:
+    """Per-call EPO page-fetch budget; ``EPO_OPS_PDF_TIME_BUDGET=0`` disables it."""
+    raw = os.getenv("EPO_OPS_PDF_TIME_BUDGET")
+    if raw is None or not raw.strip():
+        return DEFAULT_EPO_PDF_TIME_BUDGET
+    try:
+        value = float(raw)
+    except ValueError:
+        logger.warning("Ignoring invalid EPO_OPS_PDF_TIME_BUDGET=%r", raw)
+        return DEFAULT_EPO_PDF_TIME_BUDGET
+    return value if value > 0 else None
+
+
 async def download_patent_pdf(patent_number: str) -> PatentPdf:
     """Download a patent PDF, cascading Google → PPUBS → EPO.
 
@@ -487,7 +507,9 @@ async def download_patent_pdf(patent_number: str) -> PatentPdf:
         from patent_client_agents.epo_ops.client import client_from_env
 
         async with client_from_env() as client:
-            result = await client.download_pdf(number=patent_number)
+            result = await client.download_pdf(
+                number=patent_number, time_budget=_epo_pdf_time_budget()
+            )
         pdf_bytes = base64.b64decode(result.pdf_base64)
         return PatentPdf(
             pdf_bytes=pdf_bytes,
@@ -550,7 +572,9 @@ async def download_patent_pdf_clean(patent_number: str) -> PatentPdf:
         from patent_client_agents.epo_ops.client import client_from_env
 
         async with client_from_env() as client:
-            result = await client.download_pdf(number=patent_number)
+            result = await client.download_pdf(
+                number=patent_number, time_budget=_epo_pdf_time_budget()
+            )
         pdf_bytes = base64.b64decode(result.pdf_base64)
         return PatentPdf(
             pdf_bytes=pdf_bytes,
