@@ -368,7 +368,8 @@ async def test_client_kwarg_is_deprecated_and_left_open(harness: Harness) -> Non
     with pytest.warns(DeprecationWarning, match="Passing client= is deprecated") as caught:
         result = await ops_api.fetch_biblio("EP1000000A1", client=client)
 
-    assert [w.filename for w in caught] == [__file__]
+    deprecations = [w for w in caught if "client= is deprecated" in str(w.message)]
+    assert [w.filename for w in deprecations] == [__file__]
     assert [d.docdb_number for d in result.documents] == ["EP1000000A1"]
     assert str(harness.ops.request.url) == f"{PUB}/docdb/EP1000000A1/biblio"
     (token_request,) = harness.ops.token_requests

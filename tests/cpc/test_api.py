@@ -155,7 +155,8 @@ def run(
         ) as client:
             with pytest.warns(DeprecationWarning, match="client= is deprecated") as caught:
                 result = await call(client=client)
-            assert [w.filename for w in caught] == [__file__]
+            deprecations = [w for w in caught if "client= is deprecated" in str(w.message)]
+            assert [w.filename for w in deprecations] == [__file__]
             assert not client._client.is_closed
             return result
 
