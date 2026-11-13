@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Fixed
+
+- `search_legal_reference` no longer forces `syntax="adj"` on every corpus.
+  When `syntax` is omitted, each corpus uses its own default, so DPMA, India
+  statutes, India MPPP, and Taiwan search all terms again. For the manuals and
+  EPO corpora, a multi-word phrase search with no hits on the first page is
+  retried with `syntax="and"`, and the summary says so: "abstract idea
+  software" in the MPEP now returns § 2106.04(a) instead of nothing.
+
 ## [0.32.0] — 2026-10-27
 
 ### Added
