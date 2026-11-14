@@ -1,5 +1,14 @@
 {
-  "failures": [],
+  "failures": [
+    {
+      "office_code": "DPMA",
+      "right": "patent"
+    },
+    {
+      "office_code": "IPAU",
+      "right": "patent"
+    }
+  ],
   "offices_covered": [
     "CIPO",
     "CNIPA",
@@ -43,7 +52,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "patent",
       "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule"
     },
@@ -61,7 +70,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "trademark",
       "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule"
     },
@@ -79,14 +88,14 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "design",
       "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule"
     },
     {
       "currency": "EUR",
       "days_since_retrieval": 0,
-      "effective_date": "2026-10-14",
+      "effective_date": null,
       "fee_count": 153,
       "issuing_body": "European Patent Office",
       "jurisdiction": "EP",
@@ -97,7 +106,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "patent",
       "source_url": "https://www.epo.org/en/applying/fees"
     },
@@ -115,14 +124,14 @@
         "notes": null,
         "status": "complete"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "patent",
       "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html"
     },
     {
       "currency": "EUR",
       "days_since_retrieval": 0,
-      "effective_date": "2026-10-14",
+      "effective_date": null,
       "fee_count": 45,
       "issuing_body": "European Union Intellectual Property Office",
       "jurisdiction": "EP",
@@ -133,7 +142,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "trademark",
       "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo"
     },
@@ -151,14 +160,14 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "design",
       "source_url": "https://www.euipo.europa.eu/en/designs/before-applying/fees-payable-direct-to-the-euipo"
     },
     {
       "currency": "CNY",
       "days_since_retrieval": 0,
-      "effective_date": "2026-10-14",
+      "effective_date": null,
       "fee_count": 48,
       "issuing_body": "China National Intellectual Property Administration",
       "jurisdiction": "CN",
@@ -169,7 +178,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "patent",
       "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html"
     },
@@ -187,13 +196,13 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "patent",
       "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html"
     },
     {
       "currency": "EUR",
-      "days_since_retrieval": 0,
+      "days_since_retrieval": 31,
       "effective_date": "2026-10-14",
       "fee_count": 93,
       "issuing_body": "Deutsches Patent- und Markenamt (DPMA)",
@@ -223,7 +232,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "patent",
       "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01"
     },
@@ -241,7 +250,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "trademark",
       "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01"
     },
@@ -259,13 +268,13 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "design",
       "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01"
     },
     {
       "currency": "AUD",
-      "days_since_retrieval": 0,
+      "days_since_retrieval": 31,
       "effective_date": "2024-10-01",
       "fee_count": 40,
       "issuing_body": "IP Australia",
@@ -301,7 +310,7 @@
         "notes": "Complete ordinary patent renewal ladder for years 5-20. Licence-of-right reductions, late fees, late grants, and the 2026 payment-date transition require additional right facts.",
         "status": "complete"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "patent",
       "source_url": "https://www.gov.uk/government/publications/patent-forms-and-fees"
     },
@@ -319,7 +328,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "trademark",
       "source_url": "https://www.gov.uk/government/publications/trade-mark-forms-and-fees/trade-mark-forms-and-fees"
     },
@@ -337,7 +346,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "patent",
       "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html"
     },
@@ -355,7 +364,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "trademark",
       "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html"
     },
@@ -373,7 +382,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "design",
       "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html"
     },
@@ -391,7 +400,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "patent",
       "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf"
     },
@@ -409,7 +418,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "patent",
       "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html"
     },
@@ -427,7 +436,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "trademark",
       "source_url": "https://www.tipo.gov.tw/en/tipo2/342.html"
     },
@@ -445,7 +454,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "patent",
       "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-patents.pdf"
     },
@@ -463,7 +472,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "trademark",
       "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf"
     },
@@ -481,7 +490,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "patent",
       "source_url": "https://www.inpi.fr/ressources/propriete-intellectuelle/tarifs-procedures-et-prestations-de-linpi"
     },
@@ -499,7 +508,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "trademark",
       "source_url": "https://www.inpi.fr/ressources/propriete-intellectuelle/tarifs-procedures-et-prestations-de-linpi"
     },
@@ -517,7 +526,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "design",
       "source_url": "https://www.inpi.fr/ressources/propriete-intellectuelle/tarifs-procedures-et-prestations-de-linpi"
     },
@@ -535,7 +544,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "patent",
       "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf"
     },
@@ -553,7 +562,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "trademark",
       "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf"
     },
@@ -571,7 +580,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "design",
       "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf"
     },
@@ -589,7 +598,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "patent",
       "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html"
     },
@@ -607,7 +616,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "trademark",
       "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html"
     },
@@ -625,7 +634,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "design",
       "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html"
     },
@@ -643,7 +652,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "patent",
       "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf"
     },
@@ -661,7 +670,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "trademark",
       "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf"
     },
@@ -679,7 +688,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "design",
       "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf"
     },
@@ -697,7 +706,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "patent",
       "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf"
     },
@@ -715,7 +724,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "trademark",
       "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf"
     },
@@ -733,7 +742,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "design",
       "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf"
     },
@@ -751,7 +760,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "patent",
       "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/"
     },
@@ -769,7 +778,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "trademark",
       "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/"
     },
@@ -787,7 +796,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "design",
       "source_url": "https://www.ipos.gov.sg/about-ip/designs/forms-and-fees/"
     },
@@ -795,7 +804,7 @@
       "currency": "TRY",
       "days_since_retrieval": 0,
       "effective_date": "2026-01-01",
-      "fee_count": 55,
+      "fee_count": 59,
       "issuing_body": "T\u00fcrk Patent ve Marka Kurumu (T\u00dcRKPATENT)",
       "jurisdiction": "TR",
       "office_code": "TURKPATENT",
@@ -805,7 +814,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "patent",
       "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri"
     },
@@ -823,7 +832,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "trademark",
       "source_url": "https://www.turkpatent.gov.tr/marka-islem-ucretleri"
     },
@@ -841,7 +850,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "design",
       "source_url": "https://www.turkpatent.gov.tr/tasarim-islem-ucretleri"
     },
@@ -859,7 +868,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "patent",
       "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html"
     },
@@ -877,7 +886,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "trademark",
       "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html"
     },
@@ -895,7 +904,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "design",
       "source_url": "https://www.prh.fi/en/price-lists/hinnasto_2.html"
     },
@@ -913,7 +922,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "patent",
       "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/"
     },
@@ -931,7 +940,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "trademark",
       "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/"
     },
@@ -949,7 +958,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "design",
       "source_url": "https://www.prv.se/en/designs/prepare-for-the-design-application/fees-for-designs/"
     },
@@ -967,7 +976,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "patent",
       "source_url": "https://www.wipo.int/en/web/pct-system/texts/rules/rtax"
     },
@@ -985,7 +994,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "trademark",
       "source_url": "https://www.wipo.int/en/web/madrid-system/fees/sched"
     },
@@ -1003,7 +1012,7 @@
         "notes": "Recurring-fee coverage has not been audited for completeness.",
         "status": "partial"
       },
-      "retrieved_at": "2026-10-14",
+      "retrieved_at": "2026-11-14",
       "right": "design",
       "source_url": "https://www.wipo.int/hague/en/fees/sched.html"
     }
