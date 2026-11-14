@@ -83,7 +83,7 @@ async def test_search_routes_statute_corpus_with_filter(corpus, target):
         out = await search_legal_reference(corpus=corpus, query="q", limit=10, statute="PatG")
     assert out == "HITS"
     m.assert_awaited_once_with(
-        query="q", statute="PatG", limit=10, offset=0, syntax="adj", sort="relevance", full=False
+        query="q", statute="PatG", limit=10, offset=0, sort="relevance", full=False
     )
 
 
@@ -205,3 +205,71 @@ async def test_mpep_version_forwarding():
     mocked.assert_awaited_once_with("2106", version="retained")
     with pytest.raises(ValueError, match="only for uspto_mpep"):
         await get_legal_reference(corpus="uspto_tmep", identifier="1", version="old")
+
+
+# ──────────────────────────────────────────────────────────────────────
+# Syntax default: omitted → corpus default; empty phrase search widens to "and"
+# ──────────────────────────────────────────────────────────────────────
+
+
+def _envelope(*items):
+    from mcp_data_core.envelope import ListEnvelope, make_provenance
+
+    return ListEnvelope(
+        summary=f"{len(items)} hits.",
+        items=list(items),
+        provenance=make_provenance("https://example.test", "Example"),
+    )
+
+
+@pytest.mark.asyncio
+async def test_omitted_syntax_uses_corpus_default():
+    with patch(f"{_MOD}.search_ipo_in_mppp", new=AsyncMock(return_value=_envelope())) as m:
+        await search_legal_reference(corpus="india_mppp", query="inventive step")
+    # The corpus's own default ("and" here) applies; the facade sends none,
+    # and all-terms corpora are never retried.
+    m.assert_awaited_once_with(
+        query="inventive step", limit=25, offset=0, sort="relevance", full=False
+    )
+
+
+@pytest.mark.asyncio
+async def test_empty_phrase_search_is_retried_with_all_terms():
+    hit = {"section_number": "2106.04(a)", "title": "Abstract Ideas"}
+    mock = AsyncMock(side_effect=[_envelope(), _envelope(hit)])
+    with patch(f"{_MOD}.search_mpep", new=mock):
+        out = await search_legal_reference(corpus="uspto_mpep", query="abstract idea software")
+
+    assert out.items == [hit]
+    assert out.summary.startswith("No exact-phrase match for 'abstract idea software'")
+    assert out.summary.endswith("1 hits.")
+    first, second = mock.await_args_list
+    assert "syntax" not in first.kwargs
+    assert second.kwargs["syntax"] == "and"
+    assert second.kwargs["version"] == "current"
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    "kwargs",
+    [
+        {"query": "abstract idea software", "syntax": "adj"},  # caller chose phrase
+        {"query": "eligibility"},  # one word: nothing to widen
+        {"query": "abstract idea software", "offset": 25},  # later page
+    ],
+)
+async def test_phrase_search_is_not_retried(kwargs):
+    with patch(f"{_MOD}.search_mpep", new=AsyncMock(return_value=_envelope())) as m:
+        out = await search_legal_reference(corpus="uspto_mpep", **kwargs)
+    assert out.items == []
+    m.assert_awaited_once()
+
+
+@pytest.mark.asyncio
+async def test_retry_without_hits_returns_original_result():
+    empty = _envelope()
+    mock = AsyncMock(side_effect=[empty, _envelope()])
+    with patch(f"{_MOD}.search_tmep", new=mock):
+        out = await search_legal_reference(corpus="uspto_tmep", query="no such phrase")
+    assert out is empty
+    assert mock.await_count == 2

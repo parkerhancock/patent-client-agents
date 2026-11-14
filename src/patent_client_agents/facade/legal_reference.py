@@ -141,6 +141,21 @@ def _resolve(fn):
 # Corpora whose search side accepts the optional ``statute`` Act-filter.
 _STATUTE_FILTER_CORPORA = {"dpma", "india_statutes"}
 
+# Corpora whose own search defaults to an adjacent-word phrase match. A
+# multi-word phrase search that finds nothing is retried as all-terms ("and").
+# The other corpora (dpma, india_statutes, india_mppp, tw_trade_secrets)
+# already default to "and".
+_PHRASE_DEFAULT_CORPORA = {
+    "uspto_mpep",
+    "uspto_tmep",
+    "epo_guidelines",
+    "epo_pct_guidelines",
+    "epo_up_guidelines",
+    "epo_case_law",
+    "epc",
+    "ukipo_mopp",
+}
+
 
 @legal_reference_facade_mcp.tool(annotations=READ_ONLY)
 async def search_legal_reference(
@@ -164,10 +179,11 @@ async def search_legal_reference(
     limit: Annotated[int, "Maximum hits to return (1-100)."] = 25,
     offset: Annotated[int, "Result offset for pagination."] = 0,
     syntax: Annotated[
-        str,
+        str | None,
         "Query syntax: 'adj' (phrase), 'and' (all terms), 'or' (any term), "
-        "'exact'. Per-corpus default differs (manuals='adj', statutes='and').",
-    ] = "adj",
+        "'exact'. Omit for the corpus default (manuals='adj', statutes='and'); "
+        "an omitted-syntax phrase search with no hits is retried as 'and'.",
+    ] = None,
     sort: Annotated[
         str,
         "'relevance' (BM25, default) or 'outline' (section/citation order).",
@@ -199,36 +215,29 @@ async def search_legal_reference(
     Related tools: get_legal_reference, search_upc_statutes, search_wipo_lex_legislation.
     """
     search_fn = _resolve(_ROUTES[corpus][0])
+    kwargs: dict = {"query": query, "limit": limit, "offset": offset, "sort": sort, "full": full}
+    if syntax is not None:
+        kwargs["syntax"] = syntax
     if corpus == "uspto_mpep":
-        return await search_fn(
-            query=query,
-            limit=limit,
-            offset=offset,
-            syntax=syntax,
-            sort=sort,
-            full=full,
-            version=version,
-        )
-    if version != "current":
+        kwargs["version"] = version
+    elif version != "current":
         raise ValueError("Explicit version selection is supported only for uspto_mpep")
     if corpus in _STATUTE_FILTER_CORPORA:
-        return await search_fn(
-            query=query,
-            statute=statute,
-            limit=limit,
-            offset=offset,
-            syntax=syntax,
-            sort=sort,
-            full=full,
-        )
-    return await search_fn(
-        query=query,
-        limit=limit,
-        offset=offset,
-        syntax=syntax,
-        sort=sort,
-        full=full,
-    )
+        kwargs["statute"] = statute
+    result = await search_fn(**kwargs)
+    if (
+        syntax is None
+        and corpus in _PHRASE_DEFAULT_CORPORA
+        and offset == 0
+        and len(query.split()) > 1
+        and isinstance(result, ListEnvelope)
+        and not result.items
+    ):
+        widened = await search_fn(**kwargs, syntax="and")
+        if isinstance(widened, ListEnvelope) and widened.items:
+            note = f"No exact-phrase match for {query!r}; these hits contain all of its words. "
+            return widened.model_copy(update={"summary": note + widened.summary})
+    return result
 
 
 @legal_reference_facade_mcp.tool(annotations=READ_ONLY)
