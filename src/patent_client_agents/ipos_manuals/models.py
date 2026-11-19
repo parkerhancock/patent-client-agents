@@ -12,12 +12,14 @@ class IposManual(BaseModel):
         description=(
             "Stable lowercase key — one of 'peg' (Patent Examination "
             "Guidelines), 'tm' (Trade Marks Work Manual), 'designs' "
-            "(Industrial Designs Work Manual)."
+            "(registered designs guidelines and information notes)."
         )
     )
     short_name: str = Field(description="Citation-ready short name, e.g. 'PEG', 'TM Work Manual'.")
     title: str = Field(description="Full official title.")
-    source_url: str = Field(description="IPOS URL for the manual PDF.")
+    source_url: str = Field(
+        description="IPOS URL for the manual PDF (its first PDF, for a multi-PDF manual)."
+    )
     source_version: str | None = Field(default=None)
 
 

@@ -3,8 +3,8 @@
 The corpus stores one row per **section** of three manuals:
 
 - IPOS Patent Examination Guidelines (``peg``)
-- IPOS Trade Marks Work Manual (``tm``)
-- IPOS Industrial Designs Work Manual (``designs``)
+- IPOS Trade Marks Work Manual (``tm``), one PDF per chapter
+- IPOS registered designs guidelines and information notes (``designs``)
 
 A *section* is the smallest cite-bearing subdivision in the manual
 (e.g. ``IPOS PEG 1.5.3``). When upstream PDFs don't expose stable

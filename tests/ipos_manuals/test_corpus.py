@@ -156,6 +156,17 @@ def test_parse_citation_prefix_forms():
     assert parse_citation("Designs Work Manual 2.1") == ("designs", "2.1")
 
 
+def test_parse_citation_chapter_and_document_forms():
+    assert parse_citation("TM Work Manual 7:5.2.1") == ("tm", "7:5.2.1")
+    assert parse_citation("IPOS TM Work Manual Chapter 7, 5.2.1") == ("tm", "7:5.2.1")
+    assert parse_citation("tm ch. 18 para 6.5.3") == ("tm", "18:6.5.3")
+    assert parse_citation("7:5.2.5.2.1 Trade Marks Work Manual") == ("tm", "7:5.2.5.2.1")
+    assert parse_citation("Designs Guidelines guidelines-non-physical-products:1.1") == (
+        "designs",
+        "guidelines-non-physical-products:1.1",
+    )
+
+
 def test_parse_citation_label_first():
     assert parse_citation("1.5.3 PEG") == ("peg", "1.5.3")
     assert parse_citation("3.4 TM Work Manual") == ("tm", "3.4")
