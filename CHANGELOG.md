@@ -16,7 +16,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   administrative orders). `ApplicationsClient` gains `get_section` for the
   seven per-section file-wrapper endpoints, `download`, and
   `search_status_codes`; `BulkDataClient` gains `download_file`. All are also
-  on `UsptoOdpClient`. No MCP tools are added.
+  on `UsptoOdpClient`.
+- MCP tools for the new ODP data: `search_office_action_full_text`,
+  `search_trademark_decisions`, `get_trademark_decision`,
+  `download_trademark_decision`, and `search_application_status_codes`.
+  `get_application` takes a `section` argument, and `get_office_action`
+  accepts identifiers from either office-action search and returns the
+  complete text. The default surface grows from 136 to 141 tools.
+- The curated facade serves the same data without new tools:
+  `search_uspto` adds the `office_actions`, `trademark_decisions`, and
+  `status_codes` datasets; `get_uspto` adds `trademark_decision` and a
+  `section` argument for applications; `download_document` adds the
+  `trademark_decision` source.
 
 ### Fixed
 

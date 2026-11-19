@@ -63,8 +63,31 @@ async def test_search_uspto_routes_petitions():
     m.assert_awaited_once_with(query="q", limit=7, offset=1, full=False)
 
 
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    ("dataset", "target"),
+    [
+        ("office_actions", "search_office_action_full_text"),
+        ("trademark_decisions", "search_trademark_decisions"),
+    ],
+)
+async def test_search_uspto_routes_odp_5_datasets(dataset, target):
+    with patch(f"{_MOD}.{target}", new=AsyncMock(return_value="HITS")) as m:
+        out = await search_uspto(dataset=dataset, query="q", limit=7, offset=1, full=True)
+    assert out == "HITS"
+    m.assert_awaited_once_with(query="q", limit=7, offset=1, full=True)
+
+
+@pytest.mark.asyncio
+async def test_search_uspto_routes_status_codes_without_full():
+    with patch(f"{_MOD}.search_application_status_codes", new=AsyncMock(return_value="SC")) as m:
+        out = await search_uspto(dataset="status_codes", query="Patented", limit=3, full=True)
+    assert out == "SC"
+    m.assert_awaited_once_with(query="Patented", limit=3, offset=0)
+
+
 # ──────────────────────────────────────────────────────────────────────
-# get_uspto — uniform identifier-in, ListEnvelope-out across all five
+# get_uspto — uniform identifier-in, ListEnvelope-out across all six
 # ──────────────────────────────────────────────────────────────────────
 
 
@@ -81,6 +104,7 @@ async def test_search_uspto_routes_petitions():
         ("petition", "get_petition", {"args": ("16123456",), "kwargs": {}}),
         ("office_action", "get_office_action", {"args": ("16123456",), "kwargs": {}}),
         ("assignment", "get_patent_assignment", {"args": ("16123456",), "kwargs": {}}),
+        ("trademark_decision", "get_trademark_decision", {"args": ("16123456",), "kwargs": {}}),
     ],
 )
 async def test_get_uspto_routes_each_dataset(dataset, target, expected_call):
@@ -88,6 +112,20 @@ async def test_get_uspto_routes_each_dataset(dataset, target, expected_call):
         out = await get_uspto(dataset=dataset, identifier="16123456")
     assert out == "REC"
     m.assert_awaited_once_with(*expected_call["args"], **expected_call["kwargs"])
+
+
+@pytest.mark.asyncio
+async def test_get_uspto_forwards_application_section():
+    with patch(f"{_MOD}.get_application", new=AsyncMock(return_value="PTA")) as m:
+        out = await get_uspto(dataset="application", identifier="16123456", section="adjustment")
+    assert out == "PTA"
+    m.assert_awaited_once_with("16123456", section="adjustment")
+
+
+@pytest.mark.asyncio
+async def test_get_uspto_rejects_section_for_other_datasets():
+    with pytest.raises(ValidationError, match="only to dataset='application'"):
+        await get_uspto(dataset="petition", identifier="abc", section="transactions")
 
 
 @pytest.mark.asyncio

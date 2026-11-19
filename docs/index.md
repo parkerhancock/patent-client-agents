@@ -20,7 +20,7 @@ typed tools without hiding where a record came from.
 | Use | Best for | What you control |
 | --- | --- | --- |
 | [Hosted MCP](hosted-demo.md) | A first query with no local setup | Google sign-in and a deliberately curated public surface |
-| [Agent plugin](install/agent-plugins.md) | Private research in Claude Code, OpenAI Codex CLI, or Google Antigravity CLI | The same Satchel-generated package in each client; 136 tools by default, up to 234 when every gated family is configured |
+| [Agent plugin](install/agent-plugins.md) | Private research in Claude Code, OpenAI Codex CLI, or Google Antigravity CLI | The same Satchel-generated package in each client; 141 tools by default, up to 239 when every gated family is configured |
 | [Stdio MCP server](mcp-stdio.md) | Other MCP clients or a hand-managed local configuration | The server command, environment, and client configuration |
 | [Python library](install/python.md) | Application code and source-specific integrations | The exact clients, credentials, caching, and runtime your application needs |
 

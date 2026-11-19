@@ -7,16 +7,17 @@ that already returns its canonical result (a §5.9 envelope for bulk-data
     search, or structured signed-URL records for downloads), so the
 §5.15 per-module helpers and the canonical templates stay untouched.
 
-Design note — ``download_document`` folds nine sources behind one ``source``
-enum. The nine downloaders do NOT share a homogeneous signature (patent_pdf
+Design note — ``download_document`` folds ten sources behind one ``source``
+enum. The ten downloaders do NOT share a homogeneous signature (patent_pdf
 takes a patent number; cafc an appeal number; the four PTAB downloaders a
 proceeding/application number plus item/date filters; usitc_attachment a
 document_id+attachment_id pair; usitc_investigation an investigation number
-plus type/date filters; ipa_bulk a CKAN release_id). Forcing them into one
+plus type/date filters; ipa_bulk a CKAN release_id; trademark_decision a
+document identifier). Forcing them into one
 fat positional signature would reintroduce the argument-shape ambiguity this
 consolidation exists to remove. Instead we keep a single tool with one
 mandatory ``source`` enum plus a small bag of clearly-scoped optional params,
-    documented per-source. All nine return the same downstream contract
+    documented per-source. All ten return the same downstream contract
     (structured signed URLs and download metadata), so ``-> Any`` is honest and one
 tool is defensible (the doc's ⚠️ secondary-eval flag).
 """
@@ -49,6 +50,7 @@ from patent_client_agents.mcp.tools.uspto import (
     download_ptab_interference_decisions,
     download_ptab_trial_decisions,
     download_ptab_trial_documents,
+    download_trademark_decision,
     search_bulk_datasets,
 )
 from patent_client_agents.usitc.utils import get_env_token
@@ -75,6 +77,7 @@ if EDIS_ENABLED:
         "usitc_attachment",
         "usitc_investigation",
         "ipa_bulk",
+        "trademark_decision",
     ]
     _SOURCE_DESC = (
         "Which document repository to download from. 'patent_pdf' = a patent/"
@@ -85,7 +88,8 @@ if EDIS_ENABLED:
         "AIA trial board decisions; 'ptab_trial_docs' = AIA trial party "
         "filings. 'usitc_attachment' = one EDIS attachment; "
         "'usitc_investigation' = all attachments for a 337 investigation. "
-        "'ipa_bulk' = resolve an IP Australia IP RAPID release to its URL."
+        "'ipa_bulk' = resolve an IP Australia IP RAPID release to its URL. "
+        "'trademark_decision' = a USPTO trademark administrative order PDF."
     )
     _IDENTIFIER_DESC = (
         "Primary key for the source. patent_pdf → patent/publication number "
@@ -93,7 +97,9 @@ if EDIS_ENABLED:
         "ptab_trial_docs → AIA trial number ('IPR2024-00001'); ptab_appeal → "
         "application number ('16123456'); ptab_interference → interference "
         "number; usitc_investigation → investigation number ('337-TA-1234'); "
-        "ipa_bulk → CKAN release id (from search_bulk_data mode='ipa_releases'). "
+        "ipa_bulk → CKAN release id (from search_bulk_data mode='ipa_releases'); "
+        "trademark_decision → document_identifier of a record with "
+        "pdf_available=true (from search_uspto dataset='trademark_decisions'). "
         "Not used for usitc_attachment (uses document_id/attachment_id)."
     )
 else:
@@ -105,6 +111,7 @@ else:
         "ptab_trial",
         "ptab_trial_docs",
         "ipa_bulk",
+        "trademark_decision",
     ]
     _SOURCE_DESC = (
         "Which document repository to download from. 'patent_pdf' = a patent/"
@@ -114,7 +121,8 @@ else:
         "PTAB ex parte appeal / pre-AIA interference decisions. 'ptab_trial' = "
         "AIA trial board decisions; 'ptab_trial_docs' = AIA trial party "
         "filings. 'ipa_bulk' = resolve an IP Australia IP RAPID release to "
-        "its URL."
+        "its URL. 'trademark_decision' = a USPTO trademark administrative "
+        "order PDF."
     )
     _IDENTIFIER_DESC = (
         "Primary key for the source. patent_pdf → patent/publication number "
@@ -122,7 +130,9 @@ else:
         "ptab_trial_docs → AIA trial number ('IPR2024-00001'); ptab_appeal → "
         "application number ('16123456'); ptab_interference → interference "
         "number; ipa_bulk → CKAN release id (from search_bulk_data "
-        "mode='ipa_releases')."
+        "mode='ipa_releases'); trademark_decision → document_identifier of a "
+        "record with pdf_available=true (from search_uspto "
+        "dataset='trademark_decisions')."
     )
 
 
@@ -227,7 +237,7 @@ async def download_document(
         "ptab_* and usitc_investigation: only docs on/before this date (YYYY-MM-DD).",
     ] = None,
 ) -> Any:
-    """Download a patent, court, PTAB, USITC, or bulk-register document by source.
+    """Download a patent, court, PTAB, USITC, trademark-order, or bulk-register document by source.
 
     Routes by ``source`` to the matching downloader. Return shape is uniform
     across sources: single-file sources return one structured signed-URL
@@ -238,6 +248,12 @@ async def download_document(
     Related tools: search_bulk_data, search_ptab, search_cafc_opinions,
     get_patent.
     """
+    if source == "trademark_decision":
+        if not identifier:
+            raise ValidationError(
+                "download_document(source='trademark_decision') requires identifier."
+            )
+        return await download_trademark_decision(identifier)
     if source == "patent_pdf":
         if not identifier:
             raise ValidationError("download_document(source='patent_pdf') requires identifier.")

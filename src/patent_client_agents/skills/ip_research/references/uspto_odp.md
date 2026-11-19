@@ -235,6 +235,8 @@ per year, so don't re-download.
 Full-text search over office actions. Record fields: `officeActionRecordIdentifier`,
 `applicationNumberText`, `patentNumber`, `documentCode` (CTNF, CTFR, NOA, ...),
 `submissionDate`, `groupArtUnitNumber`, `rejectionTypeBag`, `officeActionText`.
+On a record, `officeActionText` is the first 500 characters; `get_text` returns
+the whole action.
 
 ```python
 async with OfficeActionSearchClient() as client:
@@ -254,7 +256,8 @@ async with OfficeActionSearchClient() as client:
 
 Filter on `decisionProceedingCategory`: `ExpungReexam`, `PetitionsToDirector`, or
 `Administrative`. Only `Administrative` records carry a `fileDownloadURI`; the
-others link to TSDR through `documentURI`.
+others link to TSDR through `documentURI`. `ocrSearchText` is a 500-character
+excerpt (empty for some records), and there is no endpoint for the whole text.
 
 ```python
 async with TrademarkDecisionsClient() as client:

@@ -2,8 +2,8 @@
 
 Claude Code, OpenAI Codex CLI, and Google Antigravity CLI are equal
 deployment targets. Each native plugin launches the same pinned PyPI
-release. Add 136 patent + trademark + adjacent-IP MCP tools to any of
-the three clients by default. Private/local deployments expose up to 234
+release. Add 141 patent + trademark + adjacent-IP MCP tools to any of
+the three clients by default. Private/local deployments expose up to 239
 tools when the corresponding credentials are in the environment.
 
 The package metadata is maintained once in `satchel.yaml` and generated
@@ -168,8 +168,8 @@ Codex CLI:   /mcp
 Antigravity: /mcp
 ```
 
-Expect `patent-client-agents` with 136 tools by default. Local/private
-servers expose up to 234 tools when all env-gated families are configured
+Expect `patent-client-agents` with 141 tools by default. Local/private
+servers expose up to 239 tools when all env-gated families are configured
 with their corresponding credentials. Then complete
 [your first research task](../first-research-task.md), a live patent lookup
 that works without an API key or local corpus.

@@ -273,6 +273,8 @@ class TrademarkDecision(_BaseModel):
 
     Which fields are present depends on ``decisionProceedingCategory``
     (``ExpungReexam``, ``PetitionsToDirector``, or ``Administrative``).
+    ``ocrSearchText`` is a 500-character excerpt and is empty for some
+    records; ODP has no endpoint for the whole text.
     """
 
     model_config = {"extra": "allow", "coerce_numbers_to_str": True}

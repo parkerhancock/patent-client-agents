@@ -44,8 +44,9 @@ class OfficeActionSearchClient(UsptoOdpBaseClient):
             range_filters: Range filter objects or dicts, e.g. on
                 ``submissionDate``.
             sort: Sort objects or dicts.
-            fields: Fields to return. Omit for the full record, which includes
-                ``officeActionText``.
+            fields: Fields to return. Omit for the full record. Its
+                ``officeActionText`` is the first 500 characters; use
+                :meth:`get_text` for the whole action.
             facets: Fields to aggregate (``documentCode``, ``rejectionTypeBag``).
             limit: Maximum results to return.
             offset: Number of results to skip.
@@ -106,7 +107,11 @@ class OfficeActionSearchClient(UsptoOdpBaseClient):
         )
 
     async def get(self, office_action_record_identifier: str) -> OfficeActionResponse:
-        """Get one office action by its record identifier."""
+        """Get one office action by its record identifier.
+
+        ``officeActionText`` is the first 500 characters; use :meth:`get_text`
+        for the whole action.
+        """
         identifier = _require(office_action_record_identifier)
         data = await self._request_json(
             "GET",
@@ -117,7 +122,7 @@ class OfficeActionSearchClient(UsptoOdpBaseClient):
         return OfficeActionResponse.model_validate(data)
 
     async def get_text(self, office_action_record_identifier: str) -> str:
-        """Get the plain text of one office action."""
+        """Get the complete plain text of one office action."""
         identifier = _require(office_action_record_identifier)
         response = await self._request(
             "GET",
