@@ -6,7 +6,7 @@ jurisdictions:
 institution: U.S. Patent and Trademark Office
 source_type: legal_corpus
 official_url: https://tmep.uspto.gov/
-last_verified: 2026-05-15
+last_verified: 2026-11-19
 source_status: active
 category: substantive_law
 rights:
@@ -42,8 +42,8 @@ coverage:
   transport: mcp_local
   update_strategy: scheduled_recrawl
   update_cadence: quarterly
-  last_synced: 2026-05-15
-  corpus_version: unknown — needs verification
+  last_synced: 2026-11-19
+  corpus_version: snapshot-2026-11-19
 ---
 
 # Trademark Manual of Examining Procedure (TMEP)

@@ -563,13 +563,13 @@ sources:
   status: active
   connector:
     module: patent_client_agents.mpep
-  last_verified: 2026-05-15
+  last_verified: 2026-11-19
   category: substantive_law
   transport: mcp_local
   update_strategy: scheduled_recrawl
   update_cadence: quarterly
-  last_synced: 2026-05-15
-  corpus_version: unknown — needs verification
+  last_synced: 2026-11-19
+  corpus_version: E9_R-01.2024, snapshot-2026-11-19
 - id: US/USPTO/TMEP
   name: Trademark Manual of Examining Procedure (TMEP)
   jurisdiction: US
@@ -583,13 +583,13 @@ sources:
   status: active
   connector:
     module: patent_client_agents.tmep
-  last_verified: 2026-05-15
+  last_verified: 2026-11-19
   category: substantive_law
   transport: mcp_local
   update_strategy: scheduled_recrawl
   update_cadence: quarterly
-  last_synced: 2026-05-15
-  corpus_version: unknown — needs verification
+  last_synced: 2026-11-19
+  corpus_version: snapshot-2026-11-19
 - id: EP/EPC/Statute
   name: European Patent Convention (EPC)
   jurisdiction: EP
