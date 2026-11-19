@@ -29,8 +29,11 @@ MANUAL_ALIASES: dict[str, str] = {
     "trade marks work manual": "tm",
     "trademarks work manual": "tm",
     "tmwm": "tm",
-    # Industrial Designs Work Manual
+    # Registered designs guidelines and information notes. IPOS withdrew the
+    # single Designs Work Manual; its names stay as aliases.
     "designs": "designs",
+    "designs guidelines": "designs",
+    "registered designs guidelines": "designs",
     "designs work manual": "designs",
     "industrial designs work manual": "designs",
     "dwm": "designs",
@@ -47,26 +50,23 @@ def _resolve_manual(name: str | None) -> str | None:
 # Citation forms accepted by parse_citation:
 #   "IPOS PEG 1.5.3"
 #   "PEG 1.5.3"
-#   "IPOS TM Work Manual 3.4"
-#   "TM Work Manual 3.4"
-#   "Designs Work Manual 2.1"
+#   "TM Work Manual 7:5.2.1"           (chapter 7, section 5.2.1)
+#   "TM Work Manual Chapter 7, 5.2.1"  (the same section)
+#   "Designs Guidelines guidelines-non-physical-products:1.1"
+_MANUAL = (
+    r"(?P<manual>peg|tm(?:\s+work\s+manual)?|designs(?:\s+(?:work\s+manual|guidelines))?|"
+    r"patent\s+examination\s+guidelines|trade\s+marks\s+work\s+manual|"
+    r"trademarks\s+work\s+manual|industrial\s+designs\s+work\s+manual)"
+)
+# A section label, optionally prefixed with the document it belongs to:
+# a chapter number or a designs document key.
+_LABEL = r"(?P<label>(?:[\w-]+:)?(?:\d+(?:\.\d+){0,5}|\d+\.[A-Z](?:\.\d+)?))"
+_CHAPTER = r"ch(?:apter|\.)?\s*(?P<chapter>\d+)[\s,]+(?:(?:para(?:graph)?\.?|section|§)\s*)?"
 _CITATION_FORMS = [
-    # "[IPOS ]<manual> <label>"
-    re.compile(
-        r"^\s*(?:ipos\s+)?(?P<manual>peg|tm(?:\s+work\s+manual)?|designs(?:\s+work\s+manual)?|"
-        r"patent\s+examination\s+guidelines|trade\s+marks\s+work\s+manual|"
-        r"trademarks\s+work\s+manual|industrial\s+designs\s+work\s+manual)"
-        r"\s+(?P<label>\d+(?:\.\d+){0,3}|\d+\.[A-Z](?:\.\d+)?)\s*$",
-        re.IGNORECASE,
-    ),
+    # "[IPOS ]<manual> [Chapter N, ]<label>"
+    re.compile(rf"^\s*(?:ipos\s+)?{_MANUAL}\s+(?:{_CHAPTER})?{_LABEL}\s*$", re.IGNORECASE),
     # "<label> <manual>"
-    re.compile(
-        r"^\s*(?P<label>\d+(?:\.\d+){0,3}|\d+\.[A-Z](?:\.\d+)?)"
-        r"\s+(?:ipos\s+)?(?P<manual>peg|tm(?:\s+work\s+manual)?|designs(?:\s+work\s+manual)?|"
-        r"patent\s+examination\s+guidelines|trade\s+marks\s+work\s+manual|"
-        r"trademarks\s+work\s+manual|industrial\s+designs\s+work\s+manual)\s*$",
-        re.IGNORECASE,
-    ),
+    re.compile(rf"^\s*{_LABEL}\s+(?:ipos\s+)?{_MANUAL}\s*$", re.IGNORECASE),
 ]
 
 
@@ -80,6 +80,9 @@ def parse_citation(citation: str) -> tuple[str, str] | None:
         label = match.group("label")
         if manual is None or label is None:
             continue
+        chapter = match.groupdict().get("chapter")
+        if chapter and ":" not in label:
+            label = f"{chapter}:{label}"
         return manual, label
     return None
 

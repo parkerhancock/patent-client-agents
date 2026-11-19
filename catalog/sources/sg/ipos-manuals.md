@@ -6,7 +6,7 @@ jurisdictions:
 institution: Intellectual Property Office of Singapore
 source_type: legal_corpus
 official_url: https://www.ipos.gov.sg/about-ip/patents/managing-patent
-last_verified: 2026-05-16
+last_verified: 2026-11-19
 source_status: active
 category: substantive_law
 rights:
@@ -44,8 +44,8 @@ coverage:
   transport: mcp_local
   update_strategy: scheduled_recrawl
   update_cadence: quarterly
-  last_synced: 2026-05-16
-  corpus_version: unknown — needs verification
+  last_synced: 2026-11-19
+  corpus_version: snapshot-2026-11-19
 ---
 
 # IPOS Singapore — examination & work manuals (PEG / TM / Designs)
