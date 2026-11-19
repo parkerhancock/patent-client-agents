@@ -17,11 +17,11 @@ Provides access to USPTO patent application data, prosecution documents, patent 
 
 | Field | Value |
 |---|---|
-| ODP release tracked | **3.6** (2026-04-10) |
-| Last verified against release notes | 2026-04-14 |
+| ODP release tracked | **5.1** (2026-11-13) |
+| Last verified against release notes | 2026-11-19 |
 | Release notes | https://data.uspto.gov/support/release |
 
-When checking for updates: compare the current USPTO release number against the **tracked** version above. Changes most likely to affect us: field renames on `applicationMetaData`/`assignmentBag`/`correspondenceAddressBag`, new required request fields, base URL or auth changes, and PTAB/OA endpoint path changes.
+When checking for updates: compare the current USPTO release number against the **tracked** version above. Changes most likely to affect us: field renames on `applicationMetaData`/`assignmentBag`/`correspondenceAddressBag`, new required request fields, base URL or auth changes, and PTAB/OA endpoint path changes. The notes understate response changes (5.0 renamed the petition outcome field and changed a code's JSON type without mention), so also call the live endpoints.
 
 ## Authentication
 

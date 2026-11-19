@@ -171,12 +171,27 @@ class PetitionDecisionDocument(_BaseModel):
 
 
 class PetitionDecision(_BaseModel):
+    """A petition decision record.
+
+    ODP release 5.0 (2026-10-02) moved the outcome from ``decisionTypeCode``
+    to ``decidedPetitionTypeCode`` / ``decidedPetitionTypeCodeDescriptionText``
+    and started returning the two numeric codes as either JSON numbers or
+    strings depending on the endpoint, so both are accepted here.
+    """
+
+    model_config = {"extra": "allow", "coerce_numbers_to_str": True}
+
     petitionDecisionRecordIdentifier: str | None = None
     applicationNumberText: str | None = None
+    applicationStatusDate: str | None = None
+    applicationStatusDescriptionText: str | None = None
     businessEntityStatusCategory: str | None = None
     customerNumber: int | None = None
+    decidedPetitionTypeCode: str | None = None
+    decidedPetitionTypeCodeDescriptionText: str | None = None
     decisionDate: str | None = None
-    decisionPetitionTypeCode: int | None = None
+    decisionMailDate: str | None = None
+    decisionPetitionTypeCode: int | str | None = Field(default=None, union_mode="left_to_right")
     decisionTypeCode: str | None = None
     decisionPetitionTypeCodeDescriptionText: str | None = None
     finalDecidingOfficeName: str | None = None
@@ -188,7 +203,10 @@ class PetitionDecision(_BaseModel):
     inventorBag: list[str] | None = None
     actionTakenByCourtName: str | None = None
     courtActionIndicator: bool | None = None
+    finalPetitionDecisionIndicator: bool | None = None
     lastIngestionDateTime: str | None = None
+    lastModifiedDateTime: str | None = None
+    ocrSearchText: str | None = None
     patentNumber: str | None = None
     petitionIssueConsideredTextBag: list[Any] | None = None
     petitionMailDate: str | None = None
@@ -211,6 +229,100 @@ class PetitionDecisionResponse(_BaseModel):
 class PetitionDecisionIdentifierResponse(_BaseModel):
     count: int = 0
     petitionDecisionDataBag: list[PetitionDecisionWithDocuments] = Field(default_factory=list)
+
+
+# =============================================================================
+# Office Action Search Models (ODP v5.0)
+# =============================================================================
+
+
+class OfficeAction(_BaseModel):
+    """An office action from the ODP Office Action Search API."""
+
+    model_config = {"extra": "allow", "coerce_numbers_to_str": True}
+
+    officeActionRecordIdentifier: str | None = None
+    obsoleteDocumentIdentifier: str | None = None
+    applicationNumberText: str | None = None
+    patentNumber: str | None = None
+    inventionTitle: str | None = None
+    documentCode: str | None = None
+    documentCodeDescriptionText: str | None = None
+    filingDate: str | None = None
+    submissionDate: str | None = None
+    groupArtUnitNumber: str | None = None
+    rejectionTypeBag: list[str] | None = None
+    officeActionText: str | None = None
+    publicStatusIndicator: bool | None = None
+    lastModifiedDateTime: str | None = None
+
+
+class OfficeActionResponse(_BaseModel):
+    count: int = 0
+    officeActionDataBag: list[OfficeAction] = Field(default_factory=list)
+    facets: dict[str, Any] | None = None
+
+
+# =============================================================================
+# Trademark Decisions and Proceedings Models (ODP v5.1)
+# =============================================================================
+
+
+class TrademarkDecision(_BaseModel):
+    """A trademark decision or proceeding document.
+
+    Which fields are present depends on ``decisionProceedingCategory``
+    (``ExpungReexam``, ``PetitionsToDirector``, or ``Administrative``).
+    """
+
+    model_config = {"extra": "allow", "coerce_numbers_to_str": True}
+
+    documentIdentifier: str | None = None
+    decisionProceedingCategory: str | None = None
+    proceedingTypeCategory: str | None = None
+    documentTypeDescriptionText: str | None = None
+    decisionActionDate: str | None = None
+    serialNumber: str | None = None
+    registrationNumber: str | None = None
+    proceedingNumber: str | None = None
+    petitionNumber: str | None = None
+    investigationNumber: str | None = None
+    markLiteralText: str | None = None
+    filingBasis: str | None = None
+    partyName: str | None = None
+    petitionerName: str | None = None
+    registrantName: str | None = None
+    registrantCitizenshipCountryName: str | None = None
+    initiatedByDirectorIndicator: bool | None = None
+    precedentialIndicator: bool | None = None
+    fileName: str | None = None
+    fileSize: int | None = None
+    fileDownloadURI: str | None = None
+    documentURI: str | None = None
+    markImageURI: str | None = None
+    ocrSearchText: str | None = None
+    lastModifiedDateTime: str | None = None
+
+
+class TrademarkDecisionResponse(_BaseModel):
+    count: int = 0
+    trademarkDecisionsDataBag: list[TrademarkDecision] = Field(default_factory=list)
+    facets: dict[str, Any] | None = None
+
+
+# =============================================================================
+# Patent Application Status Codes
+# =============================================================================
+
+
+class StatusCode(_BaseModel):
+    applicationStatusCode: int | None = None
+    applicationStatusDescriptionText: str | None = None
+
+
+class StatusCodeResponse(_BaseModel):
+    count: int = 0
+    statusCodeBag: list[StatusCode] = Field(default_factory=list)
 
 
 # =============================================================================
@@ -572,6 +684,15 @@ __all__ = [
     "PetitionDecisionWithDocuments",
     "PetitionDecisionResponse",
     "PetitionDecisionIdentifierResponse",
+    # Office Action Search
+    "OfficeAction",
+    "OfficeActionResponse",
+    # Trademark Decisions and Proceedings
+    "TrademarkDecision",
+    "TrademarkDecisionResponse",
+    # Status codes
+    "StatusCode",
+    "StatusCodeResponse",
     # PTAB Trials
     "PtabTrialMetaData",
     "PtabPatentOwnerData",

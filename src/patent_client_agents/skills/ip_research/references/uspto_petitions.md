@@ -19,13 +19,16 @@ Low-level access is also available via
 
 ```python
 result = await search_petitions(
-    q="petitionDecision:granted",
-    fields=["petitionIdentifier", "petitionDecisionDate", "petitionType"],
+    q="decidedPetitionTypeCodeDescriptionText:GRANTED",
     limit=25,
 )
-for record in result.petitionBag:
-    print(record.petitionIdentifier, record.petitionDecisionDate)
+for record in result.petitionDecisionDataBag:
+    print(record.petitionDecisionRecordIdentifier, record.decisionDate)
 ```
+
+The outcome (GRANTED, DENIED, DISMISSED, ...) is in
+`decidedPetitionTypeCodeDescriptionText`. `decisionTypeCode` has come back
+null since ODP release 5.0.
 
 ## get_petition(petition_identifier)
 

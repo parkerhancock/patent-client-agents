@@ -14,6 +14,8 @@ Comprehensive USPTO data via the Open Data Portal API.
 | `PtabTrialsClient` | `from patent_client_agents.uspto_odp import PtabTrialsClient` | IPR/PGR/CBM/DER trials |
 | `PtabAppealsClient` | `from patent_client_agents.uspto_odp import PtabAppealsClient` | Ex parte appeals |
 | `PtabInterferencesClient` | `from patent_client_agents.uspto_odp import PtabInterferencesClient` | Interferences |
+| `OfficeActionSearchClient` | `from patent_client_agents.uspto_odp import OfficeActionSearchClient` | Office action full-text search (applications filed 2001 or later) |
+| `TrademarkDecisionsClient` | `from patent_client_agents.uspto_odp import TrademarkDecisionsClient` | Trademark expungement/reexamination, petitions to the Director, administrative orders |
 
 ## ApplicationsClient
 
@@ -208,3 +210,60 @@ filingDate:[2020-01-01 TO 2023-12-31]
 | `assigneeNameArrayText` | Assignee/applicant names |
 | `applicationStatusDescriptionText` | Current status |
 | `cpcInventiveClassificationSymbolArrayText` | CPC codes |
+
+## Application sections, downloads, and status codes
+
+```python
+async with ApplicationsClient() as client:
+    # One part of the file wrapper: meta-data, adjustment, attorney, continuity,
+    # foreign-priority, transactions, or associated-documents
+    pta = await client.get_section("16123456", "adjustment")
+    events = await client.get_section("16123456", "transactions")
+
+    # Search results as a download (no total count; reduced record)
+    rows = await client.download(query="applicationMetaData.groupArtUnitNumber:2641", limit=500)
+
+    codes = await client.search_status_codes(query="applicationStatusDescriptionText:Patented")
+```
+
+`BulkDataClient.download_file(product_identifier, file_name, output_path)` streams
+one bulk product file to disk. ODP allows 20 downloads of the same file per key
+per year, so don't re-download.
+
+## OfficeActionSearchClient
+
+Full-text search over office actions. Record fields: `officeActionRecordIdentifier`,
+`applicationNumberText`, `patentNumber`, `documentCode` (CTNF, CTFR, NOA, ...),
+`submissionDate`, `groupArtUnitNumber`, `rejectionTypeBag`, `officeActionText`.
+
+```python
+async with OfficeActionSearchClient() as client:
+    hits = await client.search(
+        q="obviousness",
+        filters=[{"name": "documentCode", "value": ["CTFR"]}],
+        facets=["rejectionTypeBag"],
+        limit=10,
+    )
+    action = hits.officeActionDataBag[0]
+    text = await client.get_text(action.officeActionRecordIdentifier)
+    one = await client.get(action.officeActionRecordIdentifier)
+    rows = await client.download(q="applicationNumberText:16123456")
+```
+
+## TrademarkDecisionsClient
+
+Filter on `decisionProceedingCategory`: `ExpungReexam`, `PetitionsToDirector`, or
+`Administrative`. Only `Administrative` records carry a `fileDownloadURI`; the
+others link to TSDR through `documentURI`.
+
+```python
+async with TrademarkDecisionsClient() as client:
+    hits = await client.search(
+        q="expungement",
+        filters=[{"name": "decisionProceedingCategory", "value": ["ExpungReexam"]}],
+        facets=["proceedingTypeCategory"],
+    )
+    decision = hits.trademarkDecisionsDataBag[0]   # serialNumber, registrationNumber, markLiteralText, ocrSearchText
+    one = await client.get(decision.documentIdentifier)
+    pdf = await client.download_document_pdf(file_download_uri, output_path="order.pdf")
+```

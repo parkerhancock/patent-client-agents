@@ -5,7 +5,7 @@ from __future__ import annotations
 import logging
 from collections.abc import Sequence
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 from urllib.parse import urlparse
 
 from ..models import (
@@ -20,8 +20,16 @@ from ..models import (
     OdpRangeFilter,
     OdpSort,
     SearchResponse,
+    StatusCodeResponse,
 )
-from .base import UsptoOdpBaseClient, _prune, _serialize_model_list, _serialize_range_filters
+from .base import (
+    UsptoOdpBaseClient,
+    _build_search_payload,
+    _normalize_download_bag,
+    _prune,
+    _serialize_model_list,
+    _serialize_range_filters,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -138,6 +146,17 @@ def _placeholder_node(application_number: str, *, source: str = "unknown") -> Fa
     return FamilyNode(applicationNumber=application_number, dataSource=source)
 
 
+ApplicationSection = Literal[
+    "meta-data",
+    "adjustment",
+    "attorney",
+    "continuity",
+    "foreign-priority",
+    "transactions",
+    "associated-documents",
+]
+
+
 class ApplicationsClient(UsptoOdpBaseClient):
     """Client for USPTO ODP patent applications API.
 
@@ -240,6 +259,91 @@ class ApplicationsClient(UsptoOdpBaseClient):
             context=f"get application {application_number}",
         )
         return ApplicationResponse.model_validate(_normalize_patent_response(data))
+
+    async def get_section(
+        self, application_number: str, section: ApplicationSection
+    ) -> ApplicationResponse:
+        """Get one section of an application's file wrapper.
+
+        Each section is also part of the full record from :meth:`get`; these
+        endpoints return just that part.
+
+        Args:
+            application_number: The application number (e.g., "16123456").
+            section: ``meta-data`` (bibliographic data), ``adjustment``
+                (patent term adjustment), ``attorney`` (address and
+                attorney/agent data), ``continuity``, ``foreign-priority``,
+                ``transactions`` (event history), or ``associated-documents``
+                (PGPub and grant XML file metadata).
+
+        Returns:
+            ApplicationResponse whose single record holds the section.
+        """
+        appl = self._normalize_application_number(application_number)
+        data = await self._request_json(
+            "GET",
+            f"/api/v1/patent/applications/{appl}/{section}",
+            context=f"get {section} for application {application_number}",
+        )
+        return ApplicationResponse.model_validate(_normalize_patent_response(data))
+
+    async def download(
+        self,
+        *,
+        query: str | None = None,
+        fields: list[str] | None = None,
+        filters: Sequence[OdpFilter | dict[str, Any]] | None = None,
+        range_filters: Sequence[OdpRangeFilter | dict[str, Any]] | None = None,
+        sort: Sequence[OdpSort | dict[str, Any]] | None = None,
+        limit: int | None = None,
+        offset: int | None = None,
+        normalize: bool = True,
+    ) -> SearchResponse:
+        """Download application search results as JSON.
+
+        Takes the same query arguments as :meth:`search`. The download
+        endpoint returns no total; ``count`` is the number of records returned.
+        """
+        payload = _build_search_payload(
+            q=query, filters=filters, sort=sort, fields=fields, limit=limit, offset=offset
+        )
+        if (ranges_value := _serialize_range_filters(range_filters)) is not None:
+            payload["rangeFilters"] = ranges_value
+        payload["format"] = "json"
+        data = await self._search_with_payload(
+            "/api/v1/patent/applications/search/download",
+            payload,
+            empty_bag_key="patentFileWrapperDataBag",
+            context="download applications",
+        )
+        data = _normalize_download_bag(data, "patentFileWrapperDataBag", records_key="patentdata")
+        return SearchResponse.model_validate(
+            _normalize_patent_response(data, flatten_metadata=normalize)
+        )
+
+    async def search_status_codes(
+        self,
+        *,
+        query: str | None = None,
+        limit: int | None = 25,
+        offset: int | None = 0,
+    ) -> StatusCodeResponse:
+        """Search application status codes and their descriptions.
+
+        Args:
+            query: Search query, e.g. ``applicationStatusCode:150`` or
+                ``applicationStatusDescriptionText:Patented``.
+            limit: Maximum results to return.
+            offset: Number of results to skip.
+        """
+        data = await self._search_with_payload(
+            "/api/v1/patent/status-codes",
+            _build_search_payload(q=query, limit=limit, offset=offset),
+            empty_bag_key="statusCodeBag",
+            context="search status codes",
+        )
+        data.setdefault("statusCodeBag", [])
+        return StatusCodeResponse.model_validate(data)
 
     async def get_documents(
         self,

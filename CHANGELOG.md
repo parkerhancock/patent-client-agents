@@ -7,7 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Added
+
+- USPTO ODP coverage now matches release 5.1. New `OfficeActionSearchClient`
+  (search, get, download, and plain text of office actions) and
+  `TrademarkDecisionsClient` (search, get, download, and PDF of trademark
+  expungement and reexamination proceedings, petitions to the Director, and
+  administrative orders). `ApplicationsClient` gains `get_section` for the
+  seven per-section file-wrapper endpoints, `download`, and
+  `search_status_codes`; `BulkDataClient` gains `download_file`. All are also
+  on `UsptoOdpClient`. No MCP tools are added.
+
 ### Fixed
+
+- Petition searches no longer fail validation when ODP returns
+  `prosecutionStatusCode` as a number, which it has done since release 5.0.
+- Petition outcomes are read from `decidedPetitionTypeCodeDescriptionText`,
+  where release 5.0 moved them. `search_petitions` stubs and `get_petition`
+  summaries showed no decision.
+- `download_petitions` returned no records because the download endpoint
+  sends them under `petitionDecisionData`.
 
 - `search_legal_reference` no longer forces `syntax="adj"` on every corpus.
   When `syntax` is omitted, each corpus uses its own default, so DPMA, India

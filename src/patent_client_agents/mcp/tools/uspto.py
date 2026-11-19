@@ -1700,6 +1700,18 @@ def _ptab_decision_filename(
 # ---------------------------------------------------------------------------
 
 
+def _petition_outcome(record: dict) -> str | None:
+    """Outcome of a petition (GRANTED, DENIED, DISMISSED, ...).
+
+    ODP 5.0 moved it off ``decisionTypeCode``, which now comes back null.
+    """
+    return (
+        record.get("decidedPetitionTypeCodeDescriptionText")
+        or record.get("decidedPetitionTypeCode")
+        or record.get("decisionTypeCode")
+    )
+
+
 def _stub_petition(record: dict) -> dict:
     """Lean projection (§5.5) of a USPTO petition decision record."""
     return {
@@ -1707,7 +1719,7 @@ def _stub_petition(record: dict) -> dict:
         "application_number": record.get("applicationNumberText"),
         "patent_number": record.get("patentNumber"),
         "decision_date": record.get("decisionDate"),
-        "decision_type_code": record.get("decisionTypeCode"),
+        "decision_type_code": _petition_outcome(record),
         "petition_type": record.get("decisionPetitionTypeCodeDescriptionText"),
         "deciding_office": record.get("finalDecidingOfficeName"),
         "applicant": record.get("firstApplicantName"),
@@ -1721,7 +1733,7 @@ def _summarize_petition(record: dict) -> str:
     pid = record.get("petitionDecisionRecordIdentifier") or "(no id)"
     appl = record.get("applicationNumberText") or "(no appl#)"
     pt = record.get("decisionPetitionTypeCodeDescriptionText") or "(no type)"
-    dt = record.get("decisionTypeCode") or "(no decision)"
+    dt = _petition_outcome(record) or "(no decision)"
     decided = record.get("decisionDate") or "?"
     office = record.get("finalDecidingOfficeName") or ""
     head = f"**USPTO petition {pid}** — {pt}"
