@@ -29,6 +29,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   `section` argument for applications; `download_document` adds the
   `trademark_decision` source.
 
+### Changed
+
+- The IPOS Singapore manuals corpus is built from IPOS's rebuilt website.
+  The builder now finds each manual's PDFs on the IPOS guides pages
+  instead of fixed addresses, all of which had started returning 404. The
+  Trade Marks Work Manual is indexed chapter by chapter, so its section
+  labels are `<chapter>:<section>` (`TM Work Manual 7:5.2.1`, also
+  citable as `TM Work Manual Chapter 7, 5.2.1`). IPOS no longer publishes
+  a Designs Work Manual; the `designs` key now holds its registered
+  designs guidelines and information notes, with labels
+  `<document>:<section>`.
+- `patent-client-agents-build-ipos-manuals-corpus` fails when a manual's
+  PDFs can't be found or downloaded. It used to skip them and write a
+  corpus without them.
+
 ### Fixed
 
 - Petition searches no longer fail validation when ODP returns

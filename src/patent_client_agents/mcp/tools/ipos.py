@@ -229,7 +229,8 @@ async def search_ipos_manuals(
         str | None,
         (
             "Optional manual key — 'peg' (Patent Examination Guidelines), "
-            "'tm' (TM Work Manual), or 'designs' (Designs Work Manual). "
+            "'tm' (Trade Marks Work Manual, 21 chapters), or 'designs' "
+            "(registered designs guidelines and information notes). "
             "Aliases like 'Patent Examination Guidelines' or 'TM Work "
             "Manual' are accepted. Omit to search across all three."
         ),
@@ -237,12 +238,14 @@ async def search_ipos_manuals(
     per_page: Annotated[int, "Hits per page, 1..100."] = 10,
     page: Annotated[int, "1-indexed page number."] = 1,
 ) -> ListEnvelope[dict]:
-    """Search the IPOS examination and work manuals (PEG, Trade Marks, Industrial Designs).
+    """Search the IPOS examination and work manuals (PEG, Trade Marks, registered designs).
 
     Returns ranked snippets with ``<mark>...</mark>`` highlights around
     matched terms. Use for prosecution-argument lookups like
     ``"inventive step"`` or ``"distinctiveness"``. Once a section is
-    located, call ``get_ipos_manual_section`` for the full text.
+    located, call ``get_ipos_manual_section`` for the full text, citing
+    the hit's ``short_name`` and ``section_label`` (for example
+    ``"TM Work Manual 7:5.2.1"``, where 7 is the chapter).
 
     Related tools: get_ipos_manual_section, search_ipos_statutes.
     """
@@ -274,9 +277,12 @@ async def get_ipos_manual_section(
         str | list[str],
         (
             "Free-form citation to one IPOS manual section, or a list "
-            "for portfolio reads. Accepted forms include 'IPOS PEG "
-            "1.5.3', 'PEG 1.5.3', 'IPOS TM Work Manual 3.4', "
-            "'Designs Work Manual 2.1'. The 'IPOS ' prefix is optional."
+            "for portfolio reads. Give the manual and a section_label "
+            "from search_ipos_manuals: 'PEG 1.5.3'; 'TM Work Manual "
+            "7:5.2.1' or 'TM Work Manual Chapter 7, 5.2.1' (each Trade "
+            "Marks chapter numbers its own sections); 'Designs Guidelines "
+            "guidelines-non-physical-products:1.1'. The 'IPOS ' prefix is "
+            "optional."
         ),
     ],
 ) -> FetchedList[dict]:

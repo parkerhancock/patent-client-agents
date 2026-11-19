@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-25T16:23:03+00:00",
+  "generated_at": "2026-11-19T17:19:59+00:00",
   "schema_version": 1,
   "summary": {
     "total": 114,
@@ -1746,13 +1746,13 @@
       "connector": {
         "module": "patent_client_agents.mpep"
       },
-      "last_verified": "2026-05-15",
+      "last_verified": "2026-11-19",
       "category": "substantive_law",
       "transport": "mcp_local",
       "update_strategy": "scheduled_recrawl",
       "update_cadence": "quarterly",
-      "last_synced": "2026-05-15",
-      "corpus_version": "unknown \u2014 needs verification"
+      "last_synced": "2026-11-19",
+      "corpus_version": "E9_R-01.2024, snapshot-2026-11-19"
     },
     {
       "id": "US/USPTO/TMEP",
@@ -1774,13 +1774,13 @@
       "connector": {
         "module": "patent_client_agents.tmep"
       },
-      "last_verified": "2026-05-15",
+      "last_verified": "2026-11-19",
       "category": "substantive_law",
       "transport": "mcp_local",
       "update_strategy": "scheduled_recrawl",
       "update_cadence": "quarterly",
-      "last_synced": "2026-05-15",
-      "corpus_version": "unknown \u2014 needs verification"
+      "last_synced": "2026-11-19",
+      "corpus_version": "snapshot-2026-11-19"
     },
     {
       "id": "EP/EPC/Statute",
@@ -2066,13 +2066,13 @@
       "connector": {
         "module": "patent_client_agents.ipos_manuals"
       },
-      "last_verified": "2026-05-16",
+      "last_verified": "2026-11-19",
       "category": "substantive_law",
       "transport": "mcp_local",
       "update_strategy": "scheduled_recrawl",
       "update_cadence": "quarterly",
-      "last_synced": "2026-05-16",
-      "corpus_version": "unknown \u2014 needs verification"
+      "last_synced": "2026-11-19",
+      "corpus_version": "snapshot-2026-11-19"
     },
     {
       "id": "IL/ILPO/Statutes",
