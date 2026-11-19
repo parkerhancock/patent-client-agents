@@ -49,6 +49,8 @@ async with OfficeActionClient() as client:
 | Tool | Description |
 |------|-------------|
 | `search_office_actions(criteria, result_type, start, rows)` | Unified search across office-action data. `result_type` selects the shape: `rejections` (per-claim with 101/102/103/112/DP + Alice/Bilski/Mayo/Myriad indicators), `citations` (cited references with examiner/applicant flags), `text` (full body text), or `enriched_citations` (citations with inventor names, country/kind codes, passage locations). Valid Lucene fields differ per `result_type` — see tool description. |
+| `search_office_action_full_text(query, limit, offset, full)` | Full-text search of office action bodies through the ODP Office Action Search API (applications filed 2001 or later). Fields: `officeActionText`, `applicationNumberText`, `documentCode`, `rejectionTypeBag`, `groupArtUnitNumber`, `submissionDate`. |
+| `get_office_action(document_identifier)` | One or more office actions with complete body text. Accepts identifiers from either search. |
 | `check_citation_hits(patent_numbers, since)` | Stateless portfolio monitor for new examiner citations of watched patents in third-party office actions, with an application-level §102 screening flag. |
 
 ## Common Query Patterns

@@ -12,7 +12,12 @@ from ..models import (
     PetitionDecisionResponse,
     PetitionDecisionSort,
 )
-from .base import UsptoOdpBaseClient, _prune, _serialize_model_list
+from .base import (
+    UsptoOdpBaseClient,
+    _normalize_download_bag,
+    _prune,
+    _serialize_model_list,
+)
 
 
 class PetitionsClient(UsptoOdpBaseClient):
@@ -132,8 +137,11 @@ class PetitionsClient(UsptoOdpBaseClient):
             empty_bag_key="petitionDecisionDataBag",
             context="download petitions",
         )
-        data.setdefault("petitionDecisionDataBag", [])
-        return PetitionDecisionResponse.model_validate(data)
+        return PetitionDecisionResponse.model_validate(
+            _normalize_download_bag(
+                data, "petitionDecisionDataBag", records_key="petitionDecisionData"
+            )
+        )
 
     async def get(
         self,

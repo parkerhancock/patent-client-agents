@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 from datetime import date
+from pathlib import Path
 from typing import Any
 
 from ..models import BulkDataProductResponse, BulkDataSearchResponse
@@ -123,6 +124,47 @@ class BulkDataClient(UsptoOdpBaseClient):
         )
         data.setdefault("bulkDataProductBag", [])
         return BulkDataProductResponse.model_validate(data)
+
+    async def download_file(
+        self,
+        product_identifier: str,
+        file_name: str,
+        output_path: str | Path,
+    ) -> Path:
+        """Download one bulk data product file to disk.
+
+        The file is streamed, since product files run to tens of gigabytes.
+        ODP limits each key to 20 downloads of the same file per year (XML
+        files have a higher limit), so avoid re-downloading.
+
+        Args:
+            product_identifier: The product identifier (e.g., "PTFWPRE").
+            file_name: A ``fileName`` from the product's ``fileDataBag``
+                (see :meth:`get_product` with ``include_files=True``).
+            output_path: Where to write the file. Parent directories are
+                created if needed.
+
+        Returns:
+            The path written.
+        """
+        from mcp_data_core.exceptions import ValidationError
+
+        product = product_identifier.strip()
+        name = file_name.strip()
+        if not product or not name:
+            raise ValidationError("product_identifier and file_name are required")
+
+        output = Path(output_path)
+        output.parent.mkdir(parents=True, exist_ok=True)
+        url = self._build_url(f"/api/v1/datasets/products/files/{product}/{name}")
+        async with self._client.stream("GET", url, follow_redirects=True) as response:
+            if not response.is_success:
+                await response.aread()
+                self._raise_for_status(response, f"download bulk file {product}/{name}")
+            with output.open("wb") as handle:
+                async for chunk in response.aiter_bytes():
+                    handle.write(chunk)
+        return output
 
 
 __all__ = ["BulkDataClient"]

@@ -457,8 +457,8 @@ async def main():
 asyncio.run(main())
 ```
 
-Expect **136 tools** by default. Local/private servers expose up to
-**234 tools** when every env-gated family is configured. The expected title is
+Expect **141 tools** by default. Local/private servers expose up to
+**239 tools** when every env-gated family is configured. The expected title is
 `Coherent LADAR using intra-pixel quadrature detection`. Agent users can run
 the equivalent [first research task](../first-research-task.md) as a prompt.
 

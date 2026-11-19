@@ -40,6 +40,7 @@ LEGACY_PROVENANCE_EXCEPTIONS = {
     "download_ptab_interference_decisions",
     "download_ptab_trial_decisions",
     "download_ptab_trial_documents",
+    "download_trademark_decision",
     "download_usitc_attachment",
     "download_usitc_investigation_documents",
     "get_bulk_dataset",

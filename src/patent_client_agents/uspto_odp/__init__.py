@@ -4,6 +4,7 @@ This module provides async access to USPTO's Open Data Portal API for:
 - Patent applications (search, metadata, documents, family graphs)
 - Bulk data downloads
 - Petition decisions
+- Office action search and trademark decisions and proceedings
 - PTAB trials, appeals, and interferences
 """
 
@@ -11,10 +12,12 @@ from .client import UsptoOdpClient
 from .clients import (
     ApplicationsClient,
     BulkDataClient,
+    OfficeActionSearchClient,
     PetitionsClient,
     PtabAppealsClient,
     PtabInterferencesClient,
     PtabTrialsClient,
+    TrademarkDecisionsClient,
 )
 from .models import (
     # Core application models
@@ -23,6 +26,7 @@ from .models import (
     BulkDataSearchResponse,
     DocumentRecord,
     DocumentsResponse,
+    OfficeActionResponse,
     PetitionDecisionIdentifierResponse,
     PetitionDecisionResponse,
     PtabAppeal,
@@ -55,6 +59,8 @@ from .models import (
     PtabTrialProceeding,
     PtabTrialProceedingResponse,
     SearchResponse,
+    StatusCodeResponse,
+    TrademarkDecisionResponse,
 )
 
 __all__ = [
@@ -63,10 +69,12 @@ __all__ = [
     # Domain clients
     "ApplicationsClient",
     "BulkDataClient",
+    "OfficeActionSearchClient",
     "PetitionsClient",
     "PtabAppealsClient",
     "PtabInterferencesClient",
     "PtabTrialsClient",
+    "TrademarkDecisionsClient",
     # Application models
     "ApplicationResponse",
     "SearchResponse",
@@ -78,6 +86,10 @@ __all__ = [
     # Petition models
     "PetitionDecisionResponse",
     "PetitionDecisionIdentifierResponse",
+    # Office action, trademark decision, and status code models
+    "OfficeActionResponse",
+    "TrademarkDecisionResponse",
+    "StatusCodeResponse",
     # PTAB Appeal models
     "PtabAppeal",
     "PtabAppealResponse",

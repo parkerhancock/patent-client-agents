@@ -17,11 +17,11 @@ Provides access to USPTO patent application data, prosecution documents, patent 
 
 | Field | Value |
 |---|---|
-| ODP release tracked | **3.6** (2026-04-10) |
-| Last verified against release notes | 2026-04-14 |
+| ODP release tracked | **5.1** (2026-11-13) |
+| Last verified against release notes | 2026-11-19 |
 | Release notes | https://data.uspto.gov/support/release |
 
-When checking for updates: compare the current USPTO release number against the **tracked** version above. Changes most likely to affect us: field renames on `applicationMetaData`/`assignmentBag`/`correspondenceAddressBag`, new required request fields, base URL or auth changes, and PTAB/OA endpoint path changes.
+When checking for updates: compare the current USPTO release number against the **tracked** version above. Changes most likely to affect us: field renames on `applicationMetaData`/`assignmentBag`/`correspondenceAddressBag`, new required request fields, base URL or auth changes, and PTAB/OA endpoint path changes. The notes understate response changes (5.0 renamed the petition outcome field and changed a code's JSON type without mention), so also call the live endpoints.
 
 ## Authentication
 
@@ -72,6 +72,13 @@ async with UsptoOdpClient() as client:
 | `get_interference_decisions_by_number(interference_number)` | Get all decisions for a PTAB interference |
 | `search_petitions(q, filters, ...)` | Search petition decisions |
 | `get_petition(petition_decision_record_identifier)` | Get a specific petition decision |
+| `get_application_section(application_number, section)` | One section of an application's file wrapper |
+| `download_applications(query, ...)` | Application search results as a JSON download |
+| `search_status_codes(query, ...)` | Application status codes and descriptions |
+| `search_office_actions(q, ...)` / `get_office_action(id)` / `get_office_action_text(id)` / `download_office_actions(q, ...)` | Office Action Search API: full-text search, one record, complete text, search download |
+| `search_trademark_decisions(q, ...)` / `get_trademark_decision(id)` / `download_trademark_decisions(q, ...)` / `download_trademark_decision_pdf(uri)` | Trademark Decisions and Proceedings API |
+| `download_petitions(q, ...)` | Petition search results as a JSON download |
+| `download_bulk_dataset_file(product_identifier, file_name, output_path)` | Stream one bulk product file to disk |
 | `search_bulk_datasets(query, ...)` | Search bulk data products |
 | `get_bulk_dataset_product(product_identifier)` | Get a specific bulk data product with file listing |
 
@@ -80,7 +87,7 @@ async with UsptoOdpClient() as client:
 | Tool | Description |
 |------|-------------|
 | `search_applications` | Search USPTO patent applications by keyword or application number |
-| `get_application` | Get full metadata for a patent application |
+| `get_application(application_number, section)` | Get full metadata for a patent application, or one `section` of the file wrapper: `meta-data`, `adjustment`, `attorney`, `continuity`, `foreign-priority`, `transactions`, or `associated-documents` |
 | `list_file_history` | List prosecution file-history documents with available formats per document |
 | `get_file_history_item` | Download one file-history item as `pdf` (default), `xml`, or `docx`, without OCR or text extraction. |
 | `download_file_history` | Bulk-download file-history PDFs for one application as a zip (n=1 → raw PDF). Cap: 50. Filters: `item_ids`, `document_codes`, `after`, `before`. |
@@ -96,5 +103,9 @@ async with UsptoOdpClient() as client:
 | `download_ptab_interference_decisions` | Bulk-download pre-AIA interference decisions as a zip. Cap: 50. |
 | `search_petitions` | Search USPTO petition decisions |
 | `get_petition` | Get details for a specific petition decision |
+| `search_application_status_codes` | Look up what a numeric application status code means |
+| `search_trademark_decisions(query, limit, offset, full)` | Search trademark expungement/reexamination proceedings, petitions to the Director, and administrative sanctions orders |
+| `get_trademark_decision` | Get trademark decision records by document identifier (500-character text excerpt, TSDR link, `pdf_available`) |
+| `download_trademark_decision` | Download the PDF of a trademark administrative order (the only category USPTO serves a PDF for) |
 | `search_bulk_datasets` | Search available USPTO bulk data products |
 | `get_bulk_dataset` | Get details and file listing for a bulk data product |

@@ -1,12 +1,12 @@
 {
   "$schema": "https://docs.claude.com/schemas/claude-plugin-marketplace-v1.json",
   "name": "patent-client-agents",
-  "description": "Intellectual property research toolkit with 136 default MCP tools for patent, trademark, litigation, fee, and substantive-law research.",
+  "description": "Intellectual property research toolkit with 141 default MCP tools for patent, trademark, litigation, fee, and substantive-law research.",
   "plugins": [
     {
       "name": "patent-client-agents",
       "source": "./plugins/patent-client-agents",
-      "description": "Intellectual property research toolkit with 136 default MCP tools for patent, trademark, litigation, fee, and substantive-law research.",
+      "description": "Intellectual property research toolkit with 141 default MCP tools for patent, trademark, litigation, fee, and substantive-law research.",
       "version": "0.32.0",
       "displayName": "Patent Client Agents",
       "author": {

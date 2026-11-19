@@ -79,8 +79,11 @@ async def search_trademarks(
     Returns lean stubs by default. Use ``get_trademark`` for a full record or
     current status by serial/registration number. For assignment recordations
     (reel/frame, assignor/assignee chains) use ``search_trademark_assignments``.
+    For expungement or reexamination proceedings against a registration,
+    petitions to the Director, and sanctions orders use
+    ``search_uspto(dataset='trademark_decisions')``.
 
-    Related tools: get_trademark, search_trademark_assignments.
+    Related tools: get_trademark, search_trademark_assignments, search_uspto.
     """
     return await _search_trademarks(
         query=query,

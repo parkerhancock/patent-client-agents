@@ -9,6 +9,8 @@ compatibility. For new code, prefer the domain-specific clients:
 - PtabTrialsClient: PTAB trial proceedings, decisions, documents
 - PtabAppealsClient: PTAB ex parte appeals
 - PtabInterferencesClient: PTAB interferences
+- OfficeActionSearchClient: Office action search and text
+- TrademarkDecisionsClient: Trademark decisions and proceedings
 """
 
 from __future__ import annotations
@@ -23,12 +25,15 @@ import httpx2
 from .clients import (
     ApplicationsClient,
     BulkDataClient,
+    OfficeActionSearchClient,
     PetitionsClient,
     PtabAppealsClient,
     PtabInterferencesClient,
     PtabTrialsClient,
+    TrademarkDecisionsClient,
 )
 from .clients.applications import (  # noqa: F401
+    ApplicationSection,
     _merge_application_metadata,
     _normalize_patent_response,
 )
@@ -48,6 +53,7 @@ from .models import (
     OdpFilter,
     OdpRangeFilter,
     OdpSort,
+    OfficeActionResponse,
     PetitionDecisionFilter,
     PetitionDecisionIdentifierResponse,
     PetitionDecisionRange,
@@ -59,6 +65,8 @@ from .models import (
     PtabTrialDocumentResponse,
     PtabTrialProceedingResponse,
     SearchResponse,
+    StatusCodeResponse,
+    TrademarkDecisionResponse,
 )
 
 
@@ -118,6 +126,8 @@ class UsptoOdpClient:
         self._ptab_trials = PtabTrialsClient(api_key=api_key, **kwargs)
         self._ptab_appeals = PtabAppealsClient(api_key=api_key, **kwargs)
         self._ptab_interferences = PtabInterferencesClient(api_key=api_key, **kwargs)
+        self._office_actions = OfficeActionSearchClient(api_key=api_key, **kwargs)
+        self._trademark_decisions = TrademarkDecisionsClient(api_key=api_key, **kwargs)
 
         # Expose api_key for compatibility
         self.api_key = self._applications.api_key
@@ -131,6 +141,8 @@ class UsptoOdpClient:
         await self._ptab_trials.close()
         await self._ptab_appeals.close()
         await self._ptab_interferences.close()
+        await self._office_actions.close()
+        await self._trademark_decisions.close()
 
     async def __aenter__(self) -> Self:
         return self
@@ -671,6 +683,176 @@ class UsptoOdpClient:
             limit=limit,
             offset=offset,
             file_format=file_format,
+        )
+
+    # =========================================================================
+    # Application sections, downloads, and status codes
+    # =========================================================================
+
+    async def get_application_section(
+        self, application_number: str, section: ApplicationSection
+    ) -> ApplicationResponse:
+        """Get one section of an application's file wrapper."""
+        return await self._applications.get_section(application_number, section)
+
+    async def download_applications(
+        self,
+        *,
+        query: str | None = None,
+        fields: list[str] | None = None,
+        filters: Sequence[OdpFilter | dict[str, Any]] | None = None,
+        range_filters: Sequence[OdpRangeFilter | dict[str, Any]] | None = None,
+        sort: Sequence[OdpSort | dict[str, Any]] | None = None,
+        limit: int | None = None,
+        offset: int | None = None,
+        normalize: bool = True,
+    ) -> SearchResponse:
+        """Download application search results as JSON."""
+        return await self._applications.download(
+            query=query,
+            fields=fields,
+            filters=filters,
+            range_filters=range_filters,
+            sort=sort,
+            limit=limit,
+            offset=offset,
+            normalize=normalize,
+        )
+
+    async def search_status_codes(
+        self,
+        *,
+        query: str | None = None,
+        limit: int | None = 25,
+        offset: int | None = 0,
+    ) -> StatusCodeResponse:
+        """Search application status codes and their descriptions."""
+        return await self._applications.search_status_codes(query=query, limit=limit, offset=offset)
+
+    async def download_bulk_dataset_file(
+        self, product_identifier: str, file_name: str, output_path: str | Path
+    ) -> Path:
+        """Download one bulk data product file to disk."""
+        return await self._bulkdata.download_file(product_identifier, file_name, output_path)
+
+    # =========================================================================
+    # Office Action Search (ODP 5.0)
+    # =========================================================================
+
+    async def search_office_actions(
+        self,
+        *,
+        q: str | None = None,
+        filters: Sequence[OdpFilter | dict[str, Any]] | None = None,
+        range_filters: Sequence[OdpRangeFilter | dict[str, Any]] | None = None,
+        sort: Sequence[OdpSort | dict[str, Any]] | None = None,
+        fields: Sequence[str] | None = None,
+        facets: Sequence[str] | None = None,
+        limit: int | None = 25,
+        offset: int | None = 0,
+    ) -> OfficeActionResponse:
+        """Search office actions."""
+        return await self._office_actions.search(
+            q=q,
+            filters=filters,
+            range_filters=range_filters,
+            sort=sort,
+            fields=fields,
+            facets=facets,
+            limit=limit,
+            offset=offset,
+        )
+
+    async def download_office_actions(
+        self,
+        *,
+        q: str | None = None,
+        filters: Sequence[OdpFilter | dict[str, Any]] | None = None,
+        range_filters: Sequence[OdpRangeFilter | dict[str, Any]] | None = None,
+        sort: Sequence[OdpSort | dict[str, Any]] | None = None,
+        fields: Sequence[str] | None = None,
+        limit: int | None = None,
+        offset: int | None = None,
+    ) -> OfficeActionResponse:
+        """Download office action search results as JSON."""
+        return await self._office_actions.download(
+            q=q,
+            filters=filters,
+            range_filters=range_filters,
+            sort=sort,
+            fields=fields,
+            limit=limit,
+            offset=offset,
+        )
+
+    async def get_office_action(self, office_action_record_identifier: str) -> OfficeActionResponse:
+        """Get one office action by its record identifier."""
+        return await self._office_actions.get(office_action_record_identifier)
+
+    async def get_office_action_text(self, office_action_record_identifier: str) -> str:
+        """Get the plain text of one office action."""
+        return await self._office_actions.get_text(office_action_record_identifier)
+
+    # =========================================================================
+    # Trademark Decisions and Proceedings (ODP 5.1)
+    # =========================================================================
+
+    async def search_trademark_decisions(
+        self,
+        *,
+        q: str | None = None,
+        filters: Sequence[OdpFilter | dict[str, Any]] | None = None,
+        range_filters: Sequence[OdpRangeFilter | dict[str, Any]] | None = None,
+        sort: Sequence[OdpSort | dict[str, Any]] | None = None,
+        fields: Sequence[str] | None = None,
+        facets: Sequence[str] | None = None,
+        limit: int | None = 25,
+        offset: int | None = 0,
+    ) -> TrademarkDecisionResponse:
+        """Search trademark decisions and proceedings."""
+        return await self._trademark_decisions.search(
+            q=q,
+            filters=filters,
+            range_filters=range_filters,
+            sort=sort,
+            fields=fields,
+            facets=facets,
+            limit=limit,
+            offset=offset,
+        )
+
+    async def download_trademark_decisions(
+        self,
+        *,
+        q: str | None = None,
+        filters: Sequence[OdpFilter | dict[str, Any]] | None = None,
+        range_filters: Sequence[OdpRangeFilter | dict[str, Any]] | None = None,
+        sort: Sequence[OdpSort | dict[str, Any]] | None = None,
+        fields: Sequence[str] | None = None,
+        limit: int | None = None,
+        offset: int | None = None,
+    ) -> TrademarkDecisionResponse:
+        """Download trademark decision search results as JSON."""
+        return await self._trademark_decisions.download(
+            q=q,
+            filters=filters,
+            range_filters=range_filters,
+            sort=sort,
+            fields=fields,
+            limit=limit,
+            offset=offset,
+        )
+
+    async def get_trademark_decision(self, document_identifier: str) -> TrademarkDecisionResponse:
+        """Get one trademark decision document by its document identifier."""
+        return await self._trademark_decisions.get(document_identifier)
+
+    async def download_trademark_decision_pdf(
+        self, file_download_uri: str, *, output_path: str | Path | None = None
+    ) -> bytes:
+        """Download a trademark decision PDF from its ``fileDownloadURI``."""
+        return await self._trademark_decisions.download_document_pdf(
+            file_download_uri, output_path=output_path
         )
 
 

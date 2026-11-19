@@ -2,7 +2,7 @@
   "name": "patent-client-agents",
   "displayName": "Patent Client Agents",
   "version": "0.32.0",
-  "description": "Intellectual property research toolkit with 136 default MCP tools for patent, trademark, litigation, fee, and substantive-law research.",
+  "description": "Intellectual property research toolkit with 141 default MCP tools for patent, trademark, litigation, fee, and substantive-law research.",
   "author": {
     "name": "Parker Hancock",
     "url": "https://github.com/parkerhancock"

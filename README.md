@@ -54,7 +54,7 @@ Replit Agent (remote URL) can connect directly through MCP.
 ### Path A — Native agent plugin
 
 Each plugin launches the same pinned PyPI release through `uvx` and exposes
-136 tools by default, or up to 234 when private credentials are configured.
+141 tools by default, or up to 239 when private credentials are configured.
 The three host packages are generated from `satchel.yaml`; that manifest is
 the source of truth for their shared identity, version, and MCP component.
 
@@ -256,7 +256,7 @@ Ask your agent to research patents and trademarks in natural language:
 
 > "Find [Company]'s recent battery patents and summarize the key innovations"
 
-> "What's the prosecution history for US Patent 11,234,567?"
+> "What's the prosecution history for US Patent 11,239,567?"
 
 > "Compare [Company A] and [Company B]'s patent portfolios in mobile display technology"
 
@@ -332,9 +332,9 @@ and retry logic via `mcp-data-core`.
 
 ## API keys
 
-136 patent + IP MCP tools are exposed by default. Credentialed
+141 patent + IP MCP tools are exposed by default. Credentialed
 families register when their environment variables are present, bringing
-the local/private surface up to 234 tools when every env-gated family is
+the local/private surface up to 239 tools when every env-gated family is
 configured.
 
 | Variable | Source | Required | How to get |

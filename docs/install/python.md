@@ -65,7 +65,7 @@ of the base dependencies.
 
 Two new console scripts on your PATH:
 
-- `patent-client-agents-mcp`: launches the stdio MCP server (136 patent + trademark + adjacent-IP tools by default; up to 234 when every env-gated family is configured)
+- `patent-client-agents-mcp`: launches the stdio MCP server (141 patent + trademark + adjacent-IP tools by default; up to 239 when every env-gated family is configured)
 - `patent-client-agents-skill-install`: symlinks the `ip_research` skill into `~/.claude/skills/` (see [Add the Claude Code library skill](#add-the-claude-code-library-skill))
 
 Plus the Python-importable MCP surface:
@@ -136,7 +136,7 @@ replaces with the symlink.
 
 |  | [Agent plugin](agent-plugins.md) | Standalone library skill |
 |---|---|---|
-| What it installs | MCP server only (136 default tools; up to 234 with all env-gated families configured) | Skill markdown for Python library usage |
+| What it installs | MCP server only (141 default tools; up to 239 with all env-gated families configured) | Skill markdown for Python library usage |
 | Command | `/plugin install patent-client-agents@patent-client-agents` | `patent-client-agents-skill-install` |
 | Source | Cloned marketplace repo | pip-installed package (symlinked) |
 | Updates | `/plugin marketplace update` + `/reload-plugins` | Reinstall `patent-client-agents` to pick up new skill content |

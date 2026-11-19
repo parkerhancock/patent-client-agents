@@ -264,11 +264,17 @@ async def test_get_office_action_list_reports_missing_identifier():
             return _FakeSearchResponse(num_found=0, results=[])
         return _FakeSearchResponse(num_found=1, results=[_text_doc(doc_id=doc_id, appl="16000")])
 
-    with patch(
-        "patent_client_agents.mcp.tools.office_actions.OfficeActionClient"
-    ) as mock_client_cls:
+    with (
+        patch(
+            "patent_client_agents.mcp.tools.office_actions.OfficeActionClient"
+        ) as mock_client_cls,
+        # A legacy miss is retried against the Office Action Search API.
+        patch("patent_client_agents.mcp.tools.office_actions.UsptoOdpClient") as mock_odp_cls,
+    ):
         mock_client = mock_client_cls.return_value.__aenter__.return_value
         mock_client.search_office_action_text = AsyncMock(side_effect=_search)
+        mock_odp = mock_odp_cls.return_value.__aenter__.return_value
+        mock_odp.get_office_action = AsyncMock(side_effect=NotFoundError("no such office action"))
 
         result = await get_office_action(document_identifier=["oa_A", "oa_missing", "oa_C"])
         assert [item["id"] for item in result.items] == ["oa_A", "oa_C"]

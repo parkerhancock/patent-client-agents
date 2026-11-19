@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Added
+
+- USPTO ODP coverage now matches release 5.1. New `OfficeActionSearchClient`
+  (search, get, download, and plain text of office actions) and
+  `TrademarkDecisionsClient` (search, get, download, and PDF of trademark
+  expungement and reexamination proceedings, petitions to the Director, and
+  administrative orders). `ApplicationsClient` gains `get_section` for the
+  seven per-section file-wrapper endpoints, `download`, and
+  `search_status_codes`; `BulkDataClient` gains `download_file`. All are also
+  on `UsptoOdpClient`.
+- MCP tools for the new ODP data: `search_office_action_full_text`,
+  `search_trademark_decisions`, `get_trademark_decision`,
+  `download_trademark_decision`, and `search_application_status_codes`.
+  `get_application` takes a `section` argument, and `get_office_action`
+  accepts identifiers from either office-action search and returns the
+  complete text. The default surface grows from 136 to 141 tools.
+- The curated facade serves the same data without new tools:
+  `search_uspto` adds the `office_actions`, `trademark_decisions`, and
+  `status_codes` datasets; `get_uspto` adds `trademark_decision` and a
+  `section` argument for applications; `download_document` adds the
+  `trademark_decision` source.
+
 ### Changed
 
 - The IPOS Singapore manuals corpus is built from IPOS's rebuilt website.
@@ -23,6 +45,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   corpus without them.
 
 ### Fixed
+
+- Petition searches no longer fail validation when ODP returns
+  `prosecutionStatusCode` as a number, which it has done since release 5.0.
+- Petition outcomes are read from `decidedPetitionTypeCodeDescriptionText`,
+  where release 5.0 moved them. `search_petitions` stubs and `get_petition`
+  summaries showed no decision.
+- `download_petitions` returned no records because the download endpoint
+  sends them under `petitionDecisionData`.
 
 - `search_legal_reference` no longer forces `syntax="adj"` on every corpus.
   When `syntax` is omitted, each corpus uses its own default, so DPMA, India

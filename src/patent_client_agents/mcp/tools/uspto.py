@@ -20,6 +20,7 @@ from patent_client_agents.shared.envelope import dump
 from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 from patent_client_agents.shared.provenance import provenance_for
 from patent_client_agents.uspto_odp import PtabTrialsClient, UsptoOdpClient
+from patent_client_agents.uspto_odp.clients.applications import ApplicationSection
 
 uspto_mcp = FastMCP("USPTO")
 
@@ -142,7 +143,29 @@ async def _fetch_ptab_document(path: str) -> tuple[bytes, str]:
         return pdf_bytes, f"ptab_{doc_id}.pdf"
 
 
+async def _fetch_trademark_decision_document(path: str) -> tuple[bytes, str]:
+    """Fetch a trademark decision PDF. Path: ``{document_identifier}``."""
+    doc_id = path.strip("/")
+    async with UsptoOdpClient() as client:
+        response = await client.get_trademark_decision(doc_id)
+        record = (
+            response.trademarkDecisionsDataBag[0] if response.trademarkDecisionsDataBag else None
+        )
+        if record is None:
+            raise NotFoundError(f"Trademark decision {doc_id!r} not found.")
+        if not record.fileDownloadURI:
+            where = f" Read it on TSDR: {record.documentURI}" if record.documentURI else ""
+            raise NotFoundError(
+                f"USPTO serves no PDF for trademark decision {doc_id!r} "
+                f"(category {record.decisionProceedingCategory}); only "
+                f"'Administrative' records have one.{where}"
+            )
+        pdf_bytes = await client.download_trademark_decision_pdf(record.fileDownloadURI)
+        return pdf_bytes, record.fileName or f"trademark_decision_{doc_id}.pdf"
+
+
 register_source("uspto/applications", _fetch_application_document, "application/pdf")
+register_source("uspto/trademark-decisions", _fetch_trademark_decision_document, "application/pdf")
 register_source("ptab/documents", _fetch_ptab_document, "application/pdf")
 
 
@@ -248,8 +271,22 @@ async def get_application(
         "(like 'US20230012345A1'). If you have a patent number, use "
         "get_patent_family to find the application number first.",
     ],
+    section: Annotated[
+        ApplicationSection | None,
+        "Return only one part of the file wrapper instead of the full record "
+        "(which is large). 'meta-data' = bibliographic data; 'adjustment' = "
+        "patent term adjustment with its day-count history; 'attorney' = "
+        "correspondence address and attorneys/agents of record; 'continuity' "
+        "= parent and child applications; 'foreign-priority' = foreign "
+        "priority claims; 'transactions' = dated prosecution event history; "
+        "'associated-documents' = PGPub and grant XML file metadata. "
+        "None (default) = the full record.",
+    ] = None,
 ) -> FetchedList[dict]:
     """Get application metadata: status, filing/grant dates, examiner, CPC, and title.
+
+    Pass ``section`` when you need only one part, such as the transaction
+    history or patent term adjustment.
 
     Accepts either a single application number or a list (per §5.4); the
     response is always a ListEnvelope so the shape is stable. Bounded
@@ -267,18 +304,26 @@ async def get_application(
     async with UsptoOdpClient() as client:
 
         async def _fetch_one(appl: str) -> dict:
+            if section:
+                return _dump(await client.get_application_section(appl, section))
             return _dump(await client.get_application(appl))
 
         results, not_found = await fetch_many(
             numbers, _fetch_one, single=isinstance(application_number, str)
         )
 
-    if len(numbers) == 1 and results:
+    if section:
+        summary = fetched_summary(
+            len(results), len(numbers), f"USPTO application {section} sections", not_found
+        )
+    elif len(numbers) == 1 and results:
         summary = _summarize_application(_extract_first_record(results[0]))
     else:
         summary = fetched_summary(len(results), len(numbers), "USPTO applications", not_found)
 
     path = "/api/v1/patent/applications" + ("/" + numbers[0] if len(numbers) == 1 else "")
+    if section and len(numbers) == 1:
+        path += f"/{section}"
     return FetchedList[dict](
         summary=summary,
         items=results,
@@ -1700,6 +1745,18 @@ def _ptab_decision_filename(
 # ---------------------------------------------------------------------------
 
 
+def _petition_outcome(record: dict) -> str | None:
+    """Outcome of a petition (GRANTED, DENIED, DISMISSED, ...).
+
+    ODP 5.0 moved it off ``decisionTypeCode``, which now comes back null.
+    """
+    return (
+        record.get("decidedPetitionTypeCodeDescriptionText")
+        or record.get("decidedPetitionTypeCode")
+        or record.get("decisionTypeCode")
+    )
+
+
 def _stub_petition(record: dict) -> dict:
     """Lean projection (§5.5) of a USPTO petition decision record."""
     return {
@@ -1707,7 +1764,7 @@ def _stub_petition(record: dict) -> dict:
         "application_number": record.get("applicationNumberText"),
         "patent_number": record.get("patentNumber"),
         "decision_date": record.get("decisionDate"),
-        "decision_type_code": record.get("decisionTypeCode"),
+        "decision_type_code": _petition_outcome(record),
         "petition_type": record.get("decisionPetitionTypeCodeDescriptionText"),
         "deciding_office": record.get("finalDecidingOfficeName"),
         "applicant": record.get("firstApplicantName"),
@@ -1721,7 +1778,7 @@ def _summarize_petition(record: dict) -> str:
     pid = record.get("petitionDecisionRecordIdentifier") or "(no id)"
     appl = record.get("applicationNumberText") or "(no appl#)"
     pt = record.get("decisionPetitionTypeCodeDescriptionText") or "(no type)"
-    dt = record.get("decisionTypeCode") or "(no decision)"
+    dt = _petition_outcome(record) or "(no decision)"
     decided = record.get("decisionDate") or "?"
     office = record.get("finalDecidingOfficeName") or ""
     head = f"**USPTO petition {pid}** — {pt}"
@@ -1855,3 +1912,219 @@ async def get_bulk_dataset(
     async with UsptoOdpClient() as client:
         result = await client.get_bulk_dataset_product(product_id)
         return _dump(result)  # type: ignore[return-value]
+
+
+# ---------------------------------------------------------------------------
+# Application status codes
+# ---------------------------------------------------------------------------
+
+
+@uspto_mcp.tool(annotations=READ_ONLY)
+async def search_application_status_codes(
+    query: Annotated[
+        str,
+        "A status code or words from its description. Examples: "
+        "'applicationStatusCode:150', 'Patented', "
+        "'applicationStatusDescriptionText:abandoned'.",
+    ],
+    limit: Annotated[int, "Maximum number of results"] = 25,
+    offset: Annotated[int, "Result offset for pagination"] = 0,
+) -> ListEnvelope[dict]:
+    """Look up USPTO patent application status codes and what they mean.
+
+    Application records carry a numeric ``applicationStatusCode`` (e.g. 150 =
+    "Patented Case"). Use this to decode one, or to find the codes for a
+    status so you can filter ``search_applications`` on them.
+
+    Related tools: search_applications, get_application.
+    """
+    async with UsptoOdpClient() as client:
+        result = await client.search_status_codes(query=query, limit=limit, offset=offset)
+
+    items = [
+        {"status_code": c.applicationStatusCode, "description": c.applicationStatusDescriptionText}
+        for c in result.statusCodeBag
+    ]
+    return ListEnvelope[dict](
+        summary=f"USPTO application status codes — `{query}`: {len(items)} of {result.count} hits.",
+        items=items,
+        more_available=len(items) + offset < result.count,
+        next_cursor=None,
+        provenance=_odp_provenance("/api/v1/patent/status-codes"),
+    )
+
+
+# ---------------------------------------------------------------------------
+# Trademark Decisions and Proceedings (ODP 5.1)
+# ---------------------------------------------------------------------------
+
+
+def _prepare_trademark_decision(record: dict) -> dict:
+    """Note whether a PDF exists, then drop the key-gated URL that says so."""
+    record["pdf_available"] = bool(record.get("fileDownloadURI"))
+    _strip_auth_urls(record)
+    return record
+
+
+def _stub_trademark_decision(record: dict) -> dict:
+    """Lean projection (§5.5) of a trademark decision or proceeding document."""
+    return {
+        "document_identifier": record.get("documentIdentifier"),
+        "category": record.get("decisionProceedingCategory"),
+        "proceeding_type": record.get("proceedingTypeCategory"),
+        "document_type": record.get("documentTypeDescriptionText"),
+        "decision_date": record.get("decisionActionDate"),
+        "mark": record.get("markLiteralText"),
+        "serial_number": record.get("serialNumber"),
+        "registration_number": record.get("registrationNumber"),
+        "party": record.get("partyName") or record.get("registrantName"),
+        "petitioner": record.get("petitionerName"),
+        "petition_number": record.get("petitionNumber"),
+        "proceeding_number": record.get("proceedingNumber"),
+        "precedential": record.get("precedentialIndicator"),
+        "tsdr_url": record.get("documentURI"),
+        "pdf_available": record.get("pdf_available"),
+    }
+
+
+def _summarize_trademark_decision(record: dict) -> str:
+    """One-line Markdown summary of a single trademark decision record."""
+    doc_type = record.get("documentTypeDescriptionText") or "(no document type)"
+    subject = record.get("markLiteralText") or record.get("partyName") or "(no mark or party)"
+    decided = record.get("decisionActionDate") or "?"
+    category = record.get("decisionProceedingCategory") or "?"
+    head = f"**USPTO trademark decision** — {doc_type}"
+    return f"{head}\n{subject}. Category {category}; dated {decided}."
+
+
+@uspto_mcp.tool(annotations=READ_ONLY)
+async def search_trademark_decisions(
+    query: Annotated[
+        str,
+        "Search query. Free text is matched against the document text. "
+        "Fielded terms narrow it: decisionProceedingCategory "
+        "(ExpungReexam | PetitionsToDirector | Administrative), "
+        "proceedingTypeCategory (EXPUNGEMENT | REEXAMINATION), serialNumber, "
+        "registrationNumber, markLiteralText, registrantName, petitionerName, "
+        "partyName, documentTypeDescriptionText, decisionActionDate, "
+        "precedentialIndicator. Examples: 'registrationNumber:6458316', "
+        "'decisionProceedingCategory:Administrative AND sanctions', "
+        "'decisionProceedingCategory:PetitionsToDirector AND precedentialIndicator:true'.",
+    ],
+    limit: Annotated[int, "Maximum number of results"] = 25,
+    offset: Annotated[int, "Result offset for pagination"] = 0,
+    full: Annotated[
+        bool,
+        "When False (the default), each hit is a lean stub: document "
+        "identifier, category, proceeding and document type, date, mark, "
+        "serial and registration numbers, parties, TSDR link. When True, "
+        "every hit is the full record, including ocrSearchText: the first "
+        "500 characters of the document's text, with query matches marked "
+        "in HTML, and empty for some records.",
+    ] = False,
+) -> ListEnvelope[dict]:
+    """Search USPTO trademark decisions and proceedings, newest first.
+
+    Three kinds of record, told apart by ``decisionProceedingCategory``:
+    expungement and reexamination proceedings against a registration
+    (``ExpungReexam``), decisions on petitions to the Director
+    (``PetitionsToDirector``), and administrative orders such as sanctions
+    and show-cause orders (``Administrative``). These are not TTAB
+    opposition or cancellation decisions.
+
+    USPTO publishes only a 500-character excerpt of each document's text
+    here. For the whole document, follow a record's ``tsdr_url`` or, when
+    ``pdf_available`` is true, call ``download_trademark_decision``. Use
+    ``get_trademark`` for the mark's register record and status.
+
+    Related tools: get_trademark_decision, download_trademark_decision,
+    search_trademarks, get_trademark.
+    """
+    async with UsptoOdpClient() as client:
+        result = await client.search_trademark_decisions(q=query, limit=limit, offset=offset)
+
+    records = [_prepare_trademark_decision(r) for r in dump(result)["trademarkDecisionsDataBag"]]
+    items = records if full else [_stub_trademark_decision(r) for r in records]
+    return ListEnvelope[dict](
+        summary=(f"USPTO trademark decisions — `{query}`: {len(items)} of {result.count} hits."),
+        items=items,
+        more_available=len(items) + offset < result.count,
+        next_cursor=None,
+        provenance=_odp_provenance("/api/v1/trademark/decision-proceeding/search"),
+    )
+
+
+@uspto_mcp.tool(annotations=READ_ONLY)
+async def get_trademark_decision(
+    document_identifier: Annotated[
+        str | list[str],
+        "Trademark decision document identifier (from "
+        "search_trademark_decisions), or a list of them. The response shape "
+        "stays a ListEnvelope whether you pass one or many.",
+    ],
+) -> FetchedList[dict]:
+    """Get one or more USPTO trademark decision records by document identifier.
+
+    Each record carries ``ocrSearchText``, the first 500 characters of the
+    document's text (empty for some records), and ``pdf_available``, which
+    says whether ``download_trademark_decision`` can fetch the PDF. Only
+    administrative orders have one; read the rest on TSDR through
+    ``documentURI``.
+
+    Related tools: search_trademark_decisions, download_trademark_decision,
+    get_trademark.
+    """
+    ids = as_id_list(document_identifier, noun="trademark decision document identifier")
+
+    async with UsptoOdpClient() as client:
+
+        async def _fetch_one(doc_id: str) -> dict | None:
+            bag = dump(await client.get_trademark_decision(doc_id))["trademarkDecisionsDataBag"]
+            return _prepare_trademark_decision(bag[0]) if bag else None
+
+        results, not_found = await fetch_many(
+            ids, _fetch_one, single=isinstance(document_identifier, str)
+        )
+
+    if len(ids) == 1 and results:
+        summary = _summarize_trademark_decision(results[0])
+    else:
+        summary = fetched_summary(len(results), len(ids), "USPTO trademark decisions", not_found)
+
+    path = "/api/v1/trademark/decision-proceeding/search" + ("/" + ids[0] if len(ids) == 1 else "")
+    return FetchedList[dict](
+        summary=summary,
+        items=results,
+        not_found=not_found,
+        provenance=_odp_provenance(path),
+    )
+
+
+@uspto_mcp.tool(annotations=READ_ONLY)
+async def download_trademark_decision(
+    document_identifier: Annotated[
+        str,
+        "Trademark decision document identifier from search_trademark_decisions "
+        "whose record has pdf_available=true.",
+    ],
+) -> ToolResult:
+    """Download the PDF of a USPTO trademark administrative order.
+
+    USPTO serves a PDF only for ``Administrative`` records (sanctions and
+    show-cause orders). For expungement, reexamination, and petition records
+    follow the record's TSDR link.
+
+    Related tools: search_trademark_decisions, get_trademark_decision.
+    """
+    doc_id = document_identifier.strip()
+    if not doc_id:
+        raise ValidationError("document_identifier is required.")
+    content, filename = await _fetch_trademark_decision_document(doc_id)
+    return await download_tool_result(
+        f"uspto/trademark-decisions/{doc_id}",
+        content,
+        filename=filename,
+        content_type="application/pdf",
+        description="USPTO trademark administrative order PDF.",
+        document_identifier=doc_id,
+    )

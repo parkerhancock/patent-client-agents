@@ -121,6 +121,22 @@ async def test_download_patent_pdf_returns_structured_url_without_resource(tmp_p
 
 
 @pytest.mark.asyncio
+async def test_download_trademark_decision_routes_positional():
+    with patch(f"{_MOD}.download_trademark_decision", new=AsyncMock(return_value="TM")) as m:
+        out = await download_document(source="trademark_decision", identifier="66371dda")
+    assert out == "TM"
+    m.assert_awaited_once_with("66371dda")
+
+
+@pytest.mark.asyncio
+async def test_download_trademark_decision_requires_identifier():
+    from mcp_data_core.exceptions import ValidationError
+
+    with pytest.raises(ValidationError, match="requires identifier"):
+        await download_document(source="trademark_decision")
+
+
+@pytest.mark.asyncio
 async def test_download_cafc_routes_positional():
     with patch(f"{_MOD}.download_cafc_pdf", new=AsyncMock(return_value="CAFC")) as m:
         out = await download_document(source="cafc", identifier="2023-1234")

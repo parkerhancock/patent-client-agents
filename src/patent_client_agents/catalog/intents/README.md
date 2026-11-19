@@ -23,10 +23,13 @@ Find records matching a query.
 | `search_applications` | US application metadata (ODP) | Lucene (ODP fields) |
 | `search_epo` | EPO OPS. `group_by="publication"\|"family"`; optional CN, DE, or KR jurisdiction recipe. | CQL; see `get_epo_cql_help` |
 | `search_office_actions` | ODP office actions. `result_type` = `rejections` / `citations` / `text` / `enriched_citations`. | Lucene (type-specific fields) — see [office-actions.md](office-actions.md) |
+| `search_office_action_full_text` | Full text of office actions (ODP Office Action Search, filed 2001+) | Free text + Lucene fields (`officeActionText`, `documentCode`, `rejectionTypeBag`, `groupArtUnitNumber`) |
 | `check_citation_hits` | New examiner citations of watched patents in third-party office actions since a date. | Normalized patent/publication identifiers + date |
 | `search_patent_assignments` | Assignment Center. `query` + `by` (assignee, assignor, correspondent, patent/application/publication number, reel/frame, etc.), with optional `executed_after/before` and `conveyance` filters. | See [assignments.md](assignments.md) |
 | `search_ptab` | ODP PTAB. `type` = `proceeding` / `trial_decision` / `trial_document` / `appeal_decision` / `interference_decision`. | See [ptab.md](ptab.md) |
 | `search_petitions` | ODP petitions | Query string |
+| `search_trademark_decisions` | ODP trademark expungement/reexamination proceedings, petitions to the Director, administrative orders | Free text + Lucene fields (`decisionProceedingCategory`, `registrationNumber`, `serialNumber`) |
+| `search_application_status_codes` | ODP application status codes | Code or description words |
 | `search_bulk_datasets` | ODP bulk products | Query string |
 | `search_mpep` | MPEP | Keyword |
 | `search_tmep` | TMEP | Keyword |

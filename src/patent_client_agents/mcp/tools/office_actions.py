@@ -20,6 +20,7 @@ from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.shared.envelope import dump
 from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 from patent_client_agents.shared.provenance import provenance_for
+from patent_client_agents.uspto_odp import UsptoOdpClient
 from patent_client_agents.uspto_office_actions import OfficeActionClient
 
 office_actions_mcp = FastMCP("Office Actions")
@@ -137,14 +138,51 @@ _STUBS = {
 }
 
 
+# Fields requested for a lean full-text hit: everything but the body text.
+_FULL_TEXT_STUB_FIELDS = [
+    "officeActionRecordIdentifier",
+    "applicationNumberText",
+    "patentNumber",
+    "inventionTitle",
+    "documentCode",
+    "documentCodeDescriptionText",
+    "submissionDate",
+    "groupArtUnitNumber",
+    "rejectionTypeBag",
+]
+
+
+def _stub_full_text(rec: dict) -> dict:
+    """Lean projection (§5.5) for an Office Action Search record."""
+    return {
+        "document_identifier": rec.get("officeActionRecordIdentifier"),
+        "application_number": rec.get("applicationNumberText"),
+        "patent_number": rec.get("patentNumber"),
+        "mail_date": rec.get("submissionDate"),
+        "document_code": rec.get("documentCode"),
+        "document_description": rec.get("documentCodeDescriptionText"),
+        "rejection_types": rec.get("rejectionTypeBag"),
+        "invention_title": rec.get("inventionTitle"),
+        "art_unit": rec.get("groupArtUnitNumber"),
+    }
+
+
 def _summarize_office_action(record: dict) -> str:
-    """One-line Markdown summary for a single office-action text record."""
-    doc_id = record.get("id") or "(no id)"
-    appl = record.get("patent_application_number") or "(no appl#)"
-    code = record.get("legacy_document_code_identifier") or "?"
-    mailed = record.get("submission_date") or "?"
-    title = record.get("invention_title") or "(no title)"
-    art_unit = record.get("group_art_unit_number") or "?"
+    """One-line Markdown summary for a single office-action record.
+
+    Reads either record shape: the legacy ``oa_actions`` dataset or the
+    Office Action Search API.
+    """
+    doc_id = record.get("id") or record.get("officeActionRecordIdentifier") or "(no id)"
+    appl = (
+        record.get("patent_application_number")
+        or record.get("applicationNumberText")
+        or "(no appl#)"
+    )
+    code = record.get("legacy_document_code_identifier") or record.get("documentCode") or "?"
+    mailed = record.get("submission_date") or record.get("submissionDate") or "?"
+    title = record.get("invention_title") or record.get("inventionTitle") or "(no title)"
+    art_unit = record.get("group_art_unit_number") or record.get("groupArtUnitNumber") or "?"
     head = f"**Office action {doc_id}** — application {appl}, type {code}"
     line = f"Mailed {mailed}; art unit {art_unit}; title: {title}."
     return f"{head}\n{line}"
@@ -277,6 +315,67 @@ async def search_office_actions(
 
 
 @office_actions_mcp.tool(annotations=READ_ONLY)
+async def search_office_action_full_text(
+    query: Annotated[
+        str,
+        "Search query. Free text is matched against the office action body. "
+        "Fielded terms narrow it: applicationNumberText, patentNumber, "
+        "documentCode (CTNF non-final, CTFR final, NOA allowance, CTRS "
+        "restriction, CTAV advisory, ...), rejectionTypeBag (101 | 102 | 103 "
+        "| 112 | DoublePatent | Other), groupArtUnitNumber, submissionDate, "
+        "inventionTitle, officeActionText. Examples: "
+        "'applicationNumberText:16123456', "
+        '\'officeActionText:"abstract idea" AND documentCode:CTFR AND '
+        "groupArtUnitNumber:3689', 'rejectionTypeBag:101 AND "
+        "submissionDate:[2026-01-01 TO 2026-06-30]'.",
+    ],
+    limit: Annotated[int, "Maximum number of results"] = 25,
+    offset: Annotated[int, "Result offset for pagination"] = 0,
+    full: Annotated[
+        bool,
+        "When False (the default), each hit is a lean stub: document "
+        "identifier, application and patent numbers, mail date, document "
+        "code, rejection types, title, art unit. When True, every hit is "
+        "the full record, whose officeActionText is only the first 500 "
+        "characters; get_office_action returns the complete text.",
+    ] = False,
+) -> ListEnvelope[dict]:
+    """Full-text search of USPTO office actions (applications filed 2001 or later).
+
+    Searches what examiners wrote: non-final and final rejections, notices of
+    allowance, restriction requirements, and advisory actions. Use it to find
+    how an art unit applies a rejection, or to list every office action in an
+    application with its rejection types. Pass a hit's ``document_identifier``
+    to ``get_office_action`` for the complete body text.
+
+    For structured per-claim rejection flags (Alice/Mayo indicators) or the
+    prior art cited in an action, use ``search_office_actions`` instead.
+
+    Related tools: get_office_action, search_office_actions,
+    list_file_history, get_application.
+    """
+    async with UsptoOdpClient() as client:
+        result = await client.search_office_actions(
+            q=query,
+            fields=None if full else _FULL_TEXT_STUB_FIELDS,
+            limit=limit,
+            offset=offset,
+        )
+
+    records = dump(result)["officeActionDataBag"]
+    items = records if full else [_stub_full_text(r) for r in records]
+    return ListEnvelope[dict](
+        summary=(
+            f"USPTO office actions (full text) — `{query}`: {len(items)} of {result.count} hits."
+        ),
+        items=items,
+        more_available=len(items) + offset < result.count,
+        next_cursor=None,
+        provenance=_office_actions_provenance("/api/v1/patent/office-action/search"),
+    )
+
+
+@office_actions_mcp.tool(annotations=READ_ONLY)
 async def check_citation_hits(
     patent_numbers: Annotated[
         list[str],
@@ -344,17 +443,19 @@ async def check_citation_hits(
 async def get_office_action(
     document_identifier: Annotated[
         str | list[str],
-        "Office-action document identifier (the Solr ``id`` field returned "
-        "from ``search_office_actions``; e.g. 'oa001'). Pass a list for "
-        "portfolio workflows; the response shape stays a ListEnvelope.",
+        "Office-action document identifier: a ``document_identifier`` from "
+        "``search_office_action_full_text`` or from ``search_office_actions``. "
+        "Pass a list for portfolio workflows; the response shape stays a "
+        "ListEnvelope.",
     ],
 ) -> FetchedList[dict]:
-    """Get one or more USPTO office actions in full — body text, sections, and metadata.
+    """Get one or more USPTO office actions in full — body text and metadata.
 
-    Resolves each ``document_identifier`` against the ``oa_actions``
-    Solr endpoint (the only office-action dataset that carries the full
-    body text and structured sections). Use ``search_office_actions``
-    with ``result_type='text'`` to discover document identifiers.
+    Accepts identifiers from either office-action search. An identifier from
+    ``search_office_actions`` resolves against the legacy ``oa_actions``
+    dataset (body text plus structured sections); one from
+    ``search_office_action_full_text`` resolves against the Office Action
+    Search API (complete body text in ``officeActionText``).
 
     Accepts either a single string or a list (§5.4); the response is
     always a ListEnvelope so the shape is stable. Bounded concurrent
@@ -373,14 +474,28 @@ async def get_office_action(
             response = await client.search_office_action_text(query, start=0, rows=1)
             dumped = dump(response)
             results = list(dumped.get("results") or [])
-            return results[0] if results else None
+            if results:
+                return results[0]
+            # The two APIs issue unrelated identifiers; try the newer one.
+            try:
+                async with UsptoOdpClient() as odp:
+                    bag = dump(await odp.get_office_action(doc_id))["officeActionDataBag"]
+                    if not bag:
+                        return None
+                    # The record carries a 500-character excerpt; the text
+                    # endpoint has the whole action.
+                    bag[0]["officeActionText"] = await odp.get_office_action_text(doc_id)
+            except NotFoundError:
+                return None
+            return bag[0]
 
         items, not_found = await fetch_many(ids, _fetch_one, single=single)
 
     if single and not items:
         raise NotFoundError(
-            f"Office action {ids[0]!r} not found. Use search_office_actions "
-            f"with result_type='text' to discover valid document identifiers."
+            f"Office action {ids[0]!r} not found. Use search_office_action_full_text "
+            f"or search_office_actions (result_type='text') to discover valid "
+            f"document identifiers."
         )
     if len(ids) == 1 and items:
         summary = _summarize_office_action(items[0])

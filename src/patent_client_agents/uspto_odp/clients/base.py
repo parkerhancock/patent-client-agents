@@ -19,9 +19,12 @@ BASE_URL = "https://api.uspto.gov"
 # Checking tip: compare to the current release number on that page; every
 # minor bump has typically been additive, but 3.6 (2026-04-10) removed
 # `countryOrStateCode` from the Assignment API and standardized PCT
-# numbers — so review each bump before advancing this constant.
-ODP_TRACKED_RELEASE = "3.6"
-ODP_LAST_REVIEWED = "2026-04-14"
+# numbers, and 5.0 (2026-10-02) moved the petition outcome to
+# `decidedPetitionTypeCode` and changed `prosecutionStatusCode` to a number
+# without saying so in the notes — so review each bump, and call the live
+# endpoints, before advancing this constant.
+ODP_TRACKED_RELEASE = "5.1"
+ODP_LAST_REVIEWED = "2026-11-19"
 
 
 def _prune(value: Any) -> Any:
@@ -93,6 +96,37 @@ def _serialize_model_list(items: Sequence[Any] | None) -> list[dict[str, Any]] |
     return serialized
 
 
+def _build_search_payload(
+    *,
+    q: str | None = None,
+    filters: Sequence[Any] | None = None,
+    range_filters: Sequence[Any] | None = None,
+    sort: Sequence[Any] | None = None,
+    fields: Sequence[str] | None = None,
+    facets: Sequence[str] | None = None,
+    limit: int | None = None,
+    offset: int | None = None,
+) -> dict[str, Any]:
+    """Build the JSON body shared by the ODP ``/search`` POST endpoints."""
+    payload: dict[str, Any] = {}
+    if q:
+        payload["q"] = q
+    if (filters_value := _serialize_model_list(filters)) is not None:
+        payload["filters"] = filters_value
+    if (ranges_value := _serialize_model_list(range_filters)) is not None:
+        payload["rangeFilters"] = ranges_value
+    if (sort_value := _serialize_model_list(sort)) is not None:
+        payload["sort"] = sort_value
+    if fields:
+        payload["fields"] = list(fields)
+    if facets:
+        payload["facets"] = list(facets)
+    pagination = {k: v for k, v in (("offset", offset), ("limit", limit)) if v is not None}
+    if pagination:
+        payload["pagination"] = pagination
+    return payload
+
+
 def _normalize_download_bag(
     data: dict[str, Any], bag_key: str, records_key: str = "patentTrialData"
 ) -> dict[str, Any]:
@@ -100,8 +134,10 @@ def _normalize_download_bag(
 
     The download endpoints return records under a flat key and omit ``count``
     (confirmed live 2026-07-20: trials and appeals use ``patentTrialData``,
-    interferences uses ``interferenceData``), unlike the search endpoints'
-    per-API ``*DataBag`` envelopes the response models expect.
+    interferences uses ``interferenceData``; confirmed live 2026-11-19:
+    petitions use ``petitionDecisionData``, office actions
+    ``officeActionsData``, applications ``patentdata``), unlike the search
+    endpoints' per-API ``*DataBag`` envelopes the response models expect.
     """
     records = data.pop(records_key, None)
     if records is not None and bag_key not in data:
@@ -265,6 +301,7 @@ __all__ = [
     "_format_csv",
     "_format_bool",
     "_format_date",
+    "_build_search_payload",
     "_normalize_download_bag",
     "_serialize_model_list",
     "_serialize_range_filters",

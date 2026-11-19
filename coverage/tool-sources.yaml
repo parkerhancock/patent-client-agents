@@ -158,5 +158,12 @@ groups:
     tools: [search_petitions, get_petition]
     connector_modules: [patent_client_agents.uspto_petitions]
   - server: uspto_mcp
+    tools:
+      - search_application_status_codes
+      - search_trademark_decisions
+      - get_trademark_decision
+      - download_trademark_decision
+    connector_modules: [patent_client_agents.uspto_odp]
+  - server: uspto_mcp
     tools: [search_bulk_datasets, get_bulk_dataset]
     connector_modules: [patent_client_agents.uspto_bulkdata]
