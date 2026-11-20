@@ -1,0 +1,160 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://data.gov.au/data/api/3/action/package_show?id=iprapid
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - public, max-age=900, must-revalidate
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=utf-8
+      date:
+      - Mon, 26 Oct 2026 20:47:12 GMT
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      server:
+      - nginx
+      strict-transport-security:
+      - max-age=31536000
+      transfer-encoding:
+      - chunked
+      vary:
+      - Cookie,Origin,Accept-Encoding, Origin
+      via:
+      - 1.1 ddc99690db2a90a14fd13c2d616aafd6.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - 72T0waczBD2uyqhJ57QHKJatQFf8Ljhgv2jaGhzT2Vs2JPIN1mA8PA==
+      x-amz-cf-pop:
+      - DFW57-P9
+      x-cache:
+      - Miss from cloudfront
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      type: json
+      content:
+        help: https://data.gov.au/data/api/3/action/help_show?name=package_show
+        success: true
+        result:
+          archived: false
+          author: IP Australia
+          author_email: null
+          contact_point: data@ipaustralia.gov.au
+          creator_user_id: 9369f4d6-4659-49b7-8ac5-a59f3c1289a5
+          duplicate_score: 1
+          geospatial_topic: []
+          id: 423000b8-5735-4447-bcb9-792644bcd7ea
+          isopen: false
+          language: ""
+          license_id: cc-by-4.0
+          license_title: Creative Commons Attribution 4.0 International
+          license_url: http://creativecommons.org/licenses/by/4.0
+          maintainer: null
+          maintainer_email: null
+          metadata_created: 2023-08-01T00:43:57.373172
+          metadata_modified: 2026-10-26T00:34:29.305133
+          name: iprapid
+          notes: >-
+            IP RAPID is a weekly updated version of IP Australia's open data product,
+            previously released under the name IPGOD.
+          num_resources: 2
+          num_tags: 1
+          organization:
+            id: 04e0bede-450c-49c8-944f-da7f8bee9677
+            name: ip-australia
+            title: IP Australia
+            type: organization
+            description: "We are the Australian Government agency that administers intellectual property (IP) rights and legislation relating to patents, trade marks, designs and plant breeder's rights.\r\n\r\nOur vision is to have a world leading IP system that builds prosperity for Australia."
+            image_url: 20140227-035950.108140ip-australia-logog-stackedblack.jpg
+            created: 2014-02-19T04:34:42.458748
+            is_organization: true
+            approval_status: approved
+            state: active
+          original_harvest_source:
+            site_url: https://data.gov.au/data/dataset/
+            href: https://data.gov.au/data/dataset/iprapid
+            title: data.gov.au
+          owner_org: 04e0bede-450c-49c8-944f-da7f8bee9677
+          private: false
+          promotion_level: "0"
+          spatial: "{\"type\": \"Point\",\"coordinates\": [137.13828,-28.61389]}"
+          spatial_coverage: "SA0003560: Australia"
+          state: active
+          temporal_coverage_from: 1901-01-01 00:00:00
+          title: IP RAPID
+          type: dataset
+          unpublished: false
+          url: null
+          version: null
+          resources:
+          - cache_last_updated: null
+            cache_url: null
+            created: 2023-08-02T03:41:58.185029
+            datastore_active: false
+            datastore_contains_all_records_of_source_file: false
+            description: IP RAPID Data Dictionary
+            format: .pdf
+            hash: ""
+            id: f4750acd-decc-4b7b-99c9-4ed1c3c43441
+            last_modified: 2023-08-02T00:00:00
+            metadata_modified: 2024-11-26T00:42:33.085055
+            mimetype: application/pdf
+            mimetype_inner: null
+            name: IP RAPID Data Dictionary
+            package_id: 423000b8-5735-4447-bcb9-792644bcd7ea
+            position: 0
+            resource_type: null
+            size: 939148
+            state: active
+            url: >-
+              https://data.gov.au/data/dataset/423000b8-5735-4447-bcb9-792644bcd7ea/resource/f4750acd-decc-4b7b-99c9-4ed1c3c43441/download/ip-rapid-data-dictionary.pdf
+            url_type: upload
+            zip_extract: false
+          - cache_last_updated: null
+            cache_url: null
+            created: 2025-03-05T02:21:04.504986
+            datastore_active: false
+            datastore_contains_all_records_of_source_file: false
+            description: IPRAPID.zip
+            format: ZIP
+            hash: ""
+            id: c79b3af6-3720-44ac-9e39-6a68f5635924
+            last_modified: 2026-10-26T00:34:12.399743
+            metadata_modified: 2026-10-26T00:34:29.315822
+            mimetype: application/zip
+            mimetype_inner: null
+            name: IPRAPID.zip
+            package_id: 423000b8-5735-4447-bcb9-792644bcd7ea
+            position: 1
+            resource_type: null
+            size: 1351826681
+            state: active
+            url: >-
+              https://data.gov.au/data/dataset/423000b8-5735-4447-bcb9-792644bcd7ea/resource/c79b3af6-3720-44ac-9e39-6a68f5635924/download/iprapid.zip
+            url_type: upload
+            zip_extract: false
+          tags:
+          - display_name: intellectual property
+            id: 10fa8721-e853-4e4e-9f4a-2f01046580be
+            name: intellectual property
+            state: active
+            vocabulary_id: null
+          groups: []
+          relationships_as_subject: []
+          relationships_as_object: []
+  recorded_at: 2026-10-26T20:47:12.933Z

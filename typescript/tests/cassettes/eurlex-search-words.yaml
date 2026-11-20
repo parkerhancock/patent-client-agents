@@ -1,0 +1,119 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://publications.europa.eu/webapi/rdf/sparql
+    headers:
+      accept:
+      - application/sparql-results+json
+      content-type:
+      - application/x-www-form-urlencoded;charset=UTF-8
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: text
+      content: >-
+        query=PREFIX+cdm%3A+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fontology%2Fcdm%23%3E%0ASELECT+%28COUNT%28DISTINCT+%3Fcelex%29+AS+%3Fn%29+WHERE+%7B%0A++VALUES+%3Fsubject+%7B+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Fcase-law-subject-matter%2FMARQ%3E+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Fcase-law-subject-matter%2FDEMO%3E+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Fcase-law-subject-matter%2FDADV%3E+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Fcase-law-subject-matter%2FBREV%3E+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Fcase-law-subject-matter%2FPIIC%3E+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Fcase-law-subject-matter%2FOBVE%3E+%7D%0A++%3Fwork+cdm%3Acase-law_is-about_case-law-subject-matter+%3Fsubject+%3B%0A++++++++cdm%3Aresource_legal_id_celex+%3Fcelex+%3B%0A++++++++cdm%3Awork_date_document+%3Fdate+.%0A++OPTIONAL+%7B+%3Fwork+cdm%3Acase-law_ecli+%3Fecli+%7D%0A++%3Fexpr+cdm%3Aexpression_belongs_to_work+%3Fwork+%3B+cdm%3Aexpression_uses_language+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Flanguage%2FENG%3E+%3B+cdm%3Aexpression_title+%3Ftitle+.%0A++FILTER%28CONTAINS%28LCASE%28STR%28%3Ftitle%29%29%2C+%22supplementary%22%29%29%0A++FILTER%28CONTAINS%28LCASE%28STR%28%3Ftitle%29%29%2C+%22protection%22%29%29%0A++FILTER%28CONTAINS%28LCASE%28STR%28%3Ftitle%29%29%2C+%22certificate%22%29%29%0A%7D
+  response:
+    status: 200
+    headers:
+      accept-ranges:
+      - bytes
+      connection:
+      - keep-alive
+      content-disposition:
+      - filename=sparql_2026-10-26_22-08-41Z.json
+      content-type:
+      - application/sparql-results+json
+      date:
+      - Mon, 26 Oct 2026 22:08:41 GMT
+    body:
+      type: json
+      content:
+        head:
+          link: []
+          vars:
+          - "n"
+        results:
+          distinct: false
+          ordered: true
+          bindings:
+          - "n":
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#integer"
+              value: "66"
+  recorded_at: 2026-10-26T22:08:41.742Z
+- request:
+    method: POST
+    uri: https://publications.europa.eu/webapi/rdf/sparql
+    headers:
+      accept:
+      - application/sparql-results+json
+      content-type:
+      - application/x-www-form-urlencoded;charset=UTF-8
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: text
+      content: >-
+        query=PREFIX+cdm%3A+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fontology%2Fcdm%23%3E%0ASELECT+DISTINCT+%3Fcelex+%3Fecli+%3Fdate+%3Ftitle+WHERE+%7B%0A++VALUES+%3Fsubject+%7B+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Fcase-law-subject-matter%2FMARQ%3E+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Fcase-law-subject-matter%2FDEMO%3E+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Fcase-law-subject-matter%2FDADV%3E+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Fcase-law-subject-matter%2FBREV%3E+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Fcase-law-subject-matter%2FPIIC%3E+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Fcase-law-subject-matter%2FOBVE%3E+%7D%0A++%3Fwork+cdm%3Acase-law_is-about_case-law-subject-matter+%3Fsubject+%3B%0A++++++++cdm%3Aresource_legal_id_celex+%3Fcelex+%3B%0A++++++++cdm%3Awork_date_document+%3Fdate+.%0A++OPTIONAL+%7B+%3Fwork+cdm%3Acase-law_ecli+%3Fecli+%7D%0A++%3Fexpr+cdm%3Aexpression_belongs_to_work+%3Fwork+%3B+cdm%3Aexpression_uses_language+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Flanguage%2FENG%3E+%3B+cdm%3Aexpression_title+%3Ftitle+.%0A++FILTER%28CONTAINS%28LCASE%28STR%28%3Ftitle%29%29%2C+%22supplementary%22%29%29%0A++FILTER%28CONTAINS%28LCASE%28STR%28%3Ftitle%29%29%2C+%22protection%22%29%29%0A++FILTER%28CONTAINS%28LCASE%28STR%28%3Ftitle%29%29%2C+%22certificate%22%29%29%0A%7D+ORDER+BY+DESC%28%3Fdate%29+%3Fcelex+LIMIT+2+OFFSET+0
+  response:
+    status: 200
+    headers:
+      accept-ranges:
+      - bytes
+      connection:
+      - keep-alive
+      content-disposition:
+      - filename=sparql_2026-10-26_22-08-41Z.json
+      content-type:
+      - application/sparql-results+json
+      date:
+      - Mon, 26 Oct 2026 22:08:41 GMT
+    body:
+      type: json
+      content:
+        head:
+          link: []
+          vars:
+          - celex
+          - ecli
+          - date
+          - title
+        results:
+          distinct: false
+          ordered: true
+          bindings:
+          - celex:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 62022CJ0473
+            ecli:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: ECLI:EU:C:2024:8
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 2024-01-11
+            title:
+              type: literal
+              "xml:lang": en
+              value: "Judgment of the Court (Third Chamber) of 11 January 2024.#Mylan AB v Gilead Sciences Finland Oy and Others.#Request for a preliminary ruling from the Markkinaoikeus.#Reference for a preliminary ruling – Intellectual and industrial property – Medicinal product for human use – Supplementary protection certificate (SPC) – Directive 2004/48/EC – Article 9(7) – Placing on the market of products infringing SPC rights – Provisional measures ordered on the basis of an SPC – Subsequent invalidity of the SPC and revocation of the measures – Consequences – Right to appropriate compensation for losses caused by the provisional measures – Liability of the applicant for those measures for losses caused by them – National legislation providing for strict liability.#Case C-473/22."
+          - celex:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 62022CC0473
+            ecli:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: ECLI:EU:C:2023:699
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 2023-09-21
+            title:
+              type: literal
+              "xml:lang": en
+              value: "Opinion of Advocate General Szpunar delivered on 21 September 2023.#Mylan AB v Gilead Sciences Finland Oy and Others.#Request for a preliminary ruling from the Markkinaoikeus.#Reference for a preliminary ruling – Intellectual and industrial property – Medicinal product for human use – Supplementary protection certificate (SPC) – Directive 2004/48/EC – Article 9(7) – Placing on the market of products infringing SPC rights – Provisional measures ordered on the basis of an SPC – Subsequent invalidity of the SPC and revocation of the measures – Consequences – Right to appropriate compensation for losses caused by the provisional measures – Liability of the applicant for those measures for losses caused by them – National legislation providing for strict liability.#Case C-473/22."
+  recorded_at: 2026-10-26T22:08:41.824Z

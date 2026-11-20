@@ -1,0 +1,1965 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://tavaramerkkitietopalvelu.prh.fi/nis-api-gateway/trademark
+    headers:
+      accept:
+      - application/json
+      content-type:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com; contact avoindata@prh.fi)
+    body:
+      type: json
+      content:
+        trademarkWord: SISU
+        applicationNumber: ""
+        registrationNumber: ""
+        dossierStatus: ""
+        trademarkKind: ""
+        applicantName: ""
+        representativeName: ""
+        businessID: ""
+        applicationStartDate: ""
+        applicationEndDate: ""
+        oppositionPeriodStartStartDate: ""
+        oppositionPeriodStartEndDate: ""
+        registrationStartDate: ""
+        registrationEndDate: ""
+        expirationStartDate: ""
+        expirationEndDate: ""
+        goodsAndServicesTerm: ""
+        goodsAndServicesClassNumber: ""
+        viennaClass: ""
+        filingNumber: ""
+        basicSearch: ""
+  response:
+    status: 200
+    headers:
+      access-control-allow-methods:
+      - GET, HEAD, POST
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - close
+      content-security-policy:
+      - "default-src 'self'; img-src 'self' data: ; media-src 'self' ; child-src 'none'; manifest-src 'self'; object-src 'none'; worker-src 'none'; connect-src 'self' https://asiointi.prh.fi;"
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Mon, 26 Oct 2026 20:35:03 GMT
+      strict-transport-security:
+      - max-age=63072000; includeSubdomains;
+      x-content-type-options:
+      - nosniff
+      x-dns-prefetch-control:
+      - "off"
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - SAMEORIGIN
+      x-permitted-cross-domain-policies:
+      - none
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      type: json
+      content:
+        totalResults: 68
+        results:
+        - dossierId: 101390
+          applicationNumber: T196300976
+          registrationNumber: "43707"
+          dossierStatus: Expired
+          dossierSubType: Figurative
+          applicationDate: 1963-03-30
+          registrationDate: 1964-12-21
+          expirationDate: 2014-12-21
+          applicants:
+          - name: LEAF SUOMI OY
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: Sisu, Gifu RINTATABLETTEJA BRÖSTTABLETTER
+          trademarkHasImage: true
+          goodsAndServices:
+          - classNumber: 5
+            ordinal: 1
+          - classNumber: 30
+            ordinal: 2
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: /opendata/trademark/image/T196300976/43707
+          thumbnailUrl: /opendata/trademark/thumbnail/T196300976/43707
+          largeThumbnailUrl: /opendata/trademark/thumbnail/large/T196300976/43707
+          ordinal: 1
+        - dossierId: 114008
+          applicationNumber: T196502864
+          registrationNumber: "49568"
+          dossierStatus: Registered
+          dossierSubType: Figurative-word
+          applicationDate: 1965-08-23
+          registrationDate: 1967-02-20
+          expirationDate: 2027-02-20
+          applicants:
+          - name: Oy Sinebrychoff Ab
+            ordinal: 1
+          representatives:
+          - name: Kolster Oy Ab
+            ordinal: 1
+          priorities: []
+          trademarkWord: brea without SISU I OY SINEBRYCHOFF AB
+          trademarkHasImage: true
+          goodsAndServices:
+          - classNumber: 32
+            ordinal: 1
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: /opendata/trademark/image/T196502864/49568
+          thumbnailUrl: /opendata/trademark/thumbnail/T196502864/49568
+          largeThumbnailUrl: /opendata/trademark/thumbnail/large/T196502864/49568
+          ordinal: 2
+        - dossierId: 87933
+          applicationNumber: T196901745
+          registrationNumber: "58944"
+          dossierStatus: Expired
+          dossierSubType: Figurative-word
+          applicationDate: 1969-04-14
+          registrationDate: 1971-11-15
+          expirationDate: 2011-11-15
+          applicants:
+          - name: SAMTEKNO OY
+            ordinal: 1
+          representatives:
+          - name: Oy Jalo Ant-Wuorinen Ab (2)
+            ordinal: 1
+          priorities: []
+          trademarkWord: SISU
+          trademarkHasImage: true
+          goodsAndServices:
+          - classNumber: 9
+            ordinal: 1
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: /opendata/trademark/image/T196901745/58944
+          thumbnailUrl: /opendata/trademark/thumbnail/T196901745/58944
+          largeThumbnailUrl: /opendata/trademark/thumbnail/large/T196901745/58944
+          ordinal: 3
+        - dossierId: 91065
+          applicationNumber: T197104535
+          registrationNumber: "65188"
+          dossierStatus: Expired
+          dossierSubType: Word
+          applicationDate: 1971-09-06
+          registrationDate: 1976-05-05
+          expirationDate: 1996-05-05
+          applicants:
+          - name: ORION-YHTYMÄ OY (ORION CORPORATION)
+            ordinal: 1
+          representatives:
+          - name: Berggren Oy Ab
+            ordinal: 1
+          priorities: []
+          trademarkWord: SISU
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 8
+            ordinal: 1
+          - classNumber: 11
+            ordinal: 2
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 4
+        - dossierId: 91527
+          applicationNumber: T197203560
+          registrationNumber: "67289"
+          dossierStatus: Registered
+          dossierSubType: Figurative-word
+          applicationDate: 1972-07-07
+          registrationDate: 1978-04-20
+          expirationDate: 2028-04-20
+          applicants:
+          - name: Suomen Erikoisajoneuvot Oy
+            ordinal: 1
+          representatives:
+          - name: Kolster Oy Ab
+            ordinal: 1
+          priorities: []
+          trademarkWord: SISU
+          trademarkHasImage: true
+          goodsAndServices:
+          - classNumber: 12
+            ordinal: 1
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: /opendata/trademark/image/T197203560/67289
+          thumbnailUrl: /opendata/trademark/thumbnail/T197203560/67289
+          largeThumbnailUrl: /opendata/trademark/thumbnail/large/T197203560/67289
+          ordinal: 5
+        - dossierId: 95645
+          applicationNumber: T197504220
+          registrationNumber: "73246"
+          dossierStatus: Expired
+          dossierSubType: Word
+          applicationDate: 1975-10-16
+          registrationDate: 1980-05-20
+          expirationDate: 2000-05-20
+          applicants:
+          - name: OY RETTIG AB
+            ordinal: 1
+          representatives:
+          - name: O/Y Kolster A/B
+            ordinal: 1
+          priorities: []
+          trademarkWord: SISU
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 34
+            ordinal: 1
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 6
+        - dossierId: 95713
+          applicationNumber: T197900306
+          registrationNumber: "73370"
+          dossierStatus: Expired
+          dossierSubType: Word
+          applicationDate: 1979-01-15
+          registrationDate: 1980-05-20
+          expirationDate: 2020-05-20
+          applicants:
+          - name: LAPIN HELMI KY
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: SISU
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 28
+            ordinal: 1
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 7
+        - dossierId: 64202
+          applicationNumber: T198202546
+          registrationNumber: "89784"
+          dossierStatus: Registered
+          dossierSubType: Word
+          applicationDate: 1982-04-23
+          registrationDate: 1984-08-20
+          expirationDate: 2034-08-20
+          applicants:
+          - name: Cloetta Suomi Oy
+            ordinal: 1
+          representatives:
+          - name: Asianajotoimisto Krogerus Oy
+            ordinal: 1
+          priorities: []
+          trademarkWord: SISU
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 5
+            ordinal: 1
+          - classNumber: 30
+            ordinal: 2
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 8
+        - dossierId: 4568
+          applicationNumber: T198902222
+          registrationNumber: "123901"
+          dossierStatus: Expired
+          dossierSubType: Word
+          applicationDate: 1989-04-28
+          registrationDate: 1993-01-05
+          expirationDate: 2013-01-05
+          applicants:
+          - name: Kidde Finland Oy
+            ordinal: 1
+          representatives:
+          - name: Oy Jalo Ant-Wuorinen Ab (2)
+            ordinal: 1
+          priorities: []
+          trademarkWord: SISU
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 1
+            ordinal: 1
+          - classNumber: 6
+            ordinal: 2
+          - classNumber: 9
+            ordinal: 3
+          - classNumber: 17
+            ordinal: 4
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 9
+        - dossierId: 3428
+          applicationNumber: T199304873
+          registrationNumber: "203441"
+          dossierStatus: Registered
+          dossierSubType: Word
+          applicationDate: 1993-10-28
+          registrationDate: 1996-12-13
+          expirationDate: 2026-12-13
+          applicants:
+          - name: Cloetta Suomi Oy
+            ordinal: 1
+          representatives:
+          - name: Asianajotoimisto Krogerus Oy
+            ordinal: 1
+          priorities: []
+          trademarkWord: SISU HOCKEY CARDS
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 16
+            ordinal: 1
+          - classNumber: 30
+            ordinal: 2
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 10
+        - dossierId: 204637
+          applicationNumber: T199404318
+          registrationNumber: "142145"
+          dossierStatus: Registered
+          dossierSubType: Figurative-word
+          applicationDate: 1994-08-29
+          registrationDate: 1996-01-22
+          expirationDate: 2036-01-22
+          applicants:
+          - name: Suomen Erikoisajoneuvot Oy
+            ordinal: 1
+          representatives:
+          - name: Kolster Oy Ab
+            ordinal: 1
+          priorities: []
+          trademarkWord: SISU
+          trademarkHasImage: true
+          goodsAndServices:
+          - classNumber: 7
+            ordinal: 1
+          - classNumber: 12
+            ordinal: 2
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: /opendata/trademark/image/T199404318/142145
+          thumbnailUrl: /opendata/trademark/thumbnail/T199404318/142145
+          largeThumbnailUrl: /opendata/trademark/thumbnail/large/T199404318/142145
+          ordinal: 11
+        - dossierId: 204845
+          applicationNumber: T199404527
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierSubType: Word
+          applicationDate: 1994-09-13
+          registrationDate: null
+          expirationDate: null
+          applicants:
+          - name: EL-INTER OY
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: Sisu
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 11
+            ordinal: 1
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 12
+        - dossierId: 216325
+          applicationNumber: T199507206
+          registrationNumber: "203527"
+          dossierStatus: Registered
+          dossierSubType: Figurative-word
+          applicationDate: 1995-12-14
+          registrationDate: 1996-12-13
+          expirationDate: 2026-12-13
+          applicants:
+          - name: Cloetta Suomi Oy
+            ordinal: 1
+          representatives:
+          - name: Asianajotoimisto Krogerus Oy
+            ordinal: 1
+          priorities: []
+          trademarkWord: Sisu, Gifu PASTILLEJA PASTILLER
+          trademarkHasImage: true
+          goodsAndServices:
+          - classNumber: 30
+            ordinal: 1
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: /opendata/trademark/image/T199507206/203527
+          thumbnailUrl: /opendata/trademark/thumbnail/T199507206/203527
+          largeThumbnailUrl: /opendata/trademark/thumbnail/large/T199507206/203527
+          ordinal: 13
+        - dossierId: 223969
+          applicationNumber: T199700844
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierSubType: Figurative-word
+          applicationDate: 1997-02-28
+          registrationDate: null
+          expirationDate: null
+          applicants:
+          - name: OY ENERGY'N POWER DRINKS COMPANY
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: SISU VOIMA JUOMA POWER DRINK
+          trademarkHasImage: true
+          goodsAndServices:
+          - classNumber: 32
+            ordinal: 1
+          - classNumber: 33
+            ordinal: 2
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: /opendata/trademark/image/T199700844
+          thumbnailUrl: /opendata/trademark/thumbnail/T199700844
+          largeThumbnailUrl: /opendata/trademark/thumbnail/large/T199700844
+          ordinal: 14
+        - dossierId: 232902
+          applicationNumber: T199801245
+          registrationNumber: "215589"
+          dossierStatus: Registered
+          dossierSubType: Word
+          applicationDate: 1998-04-02
+          registrationDate: 1999-09-30
+          expirationDate: 2029-09-30
+          applicants:
+          - name: Sisu Akselit Oy
+            ordinal: 1
+          representatives:
+          - name: Berggren Oy
+            ordinal: 1
+          priorities: []
+          trademarkWord: SISU AXLE SYSTEMS
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 12
+            ordinal: 1
+          - classNumber: 42
+            ordinal: 2
+          - classNumber: 43
+            ordinal: 3
+          - classNumber: 44
+            ordinal: 4
+          - classNumber: 45
+            ordinal: 5
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 15
+        - dossierId: 234588
+          applicationNumber: T199802142
+          registrationNumber: "214389"
+          dossierStatus: Registered
+          dossierSubType: Word
+          applicationDate: 1998-06-18
+          registrationDate: 1999-06-15
+          expirationDate: 2029-06-15
+          applicants:
+          - name: Sisu Akselit Oy
+            ordinal: 1
+          representatives:
+          - name: Berggren Oy
+            ordinal: 1
+          priorities: []
+          trademarkWord: ORIGINAL SISU AXLE PARTS
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 12
+            ordinal: 1
+          - classNumber: 42
+            ordinal: 2
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 16
+        - dossierId: 254341
+          applicationNumber: T200001788
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierSubType: Word
+          applicationDate: 2000-05-24
+          registrationDate: null
+          expirationDate: null
+          applicants:
+          - name: OY TIMBER-ROAD LTD
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: SISU FOREST
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 12
+            ordinal: 1
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 17
+        - dossierId: 289499
+          applicationNumber: T200400126
+          registrationNumber: "241919"
+          dossierStatus: Expired
+          dossierSubType: Word
+          applicationDate: 2004-01-21
+          registrationDate: 2008-05-15
+          expirationDate: 2018-05-15
+          applicants:
+          - name: ELINTARVIKE- JA VIRVOITUSJUOMATEHDAS ILTAPALA KY
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: Sisu
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 3
+            ordinal: 1
+          - classNumber: 32
+            ordinal: 2
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 18
+        - dossierId: 295142
+          applicationNumber: T200402549
+          registrationNumber: "233984"
+          dossierStatus: Expired
+          dossierSubType: Figurative-word
+          applicationDate: 2004-10-13
+          registrationDate: 2005-08-31
+          expirationDate: 2015-08-31
+          applicants:
+          - name: EVENT CONSULTING TURKU OY
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: Atletico Sisu LIIKKUVIEN IHMISTEN LIIKE
+          trademarkHasImage: true
+          goodsAndServices:
+          - classNumber: 41
+            ordinal: 1
+          - classNumber: 42
+            ordinal: 2
+          - classNumber: 45
+            ordinal: 3
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: /opendata/trademark/image/T200402549/233984
+          thumbnailUrl: /opendata/trademark/thumbnail/T200402549/233984
+          largeThumbnailUrl: /opendata/trademark/thumbnail/large/T200402549/233984
+          ordinal: 19
+        - dossierId: 297319
+          applicationNumber: T200500122
+          registrationNumber: "234713"
+          dossierStatus: Registered
+          dossierSubType: Word
+          applicationDate: 2005-01-19
+          registrationDate: 2005-11-30
+          expirationDate: 2035-11-30
+          applicants:
+          - name: Suomen Erikoisajoneuvot Oy
+            ordinal: 1
+          representatives:
+          - name: Kolster Oy Ab
+            ordinal: 1
+          priorities: []
+          trademarkWord: SISU DEFENCE
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 12
+            ordinal: 1
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 20
+        - dossierId: 302500
+          applicationNumber: T200502457
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierSubType: Figurative-word
+          applicationDate: 2005-09-23
+          registrationDate: null
+          expirationDate: null
+          applicants:
+          - name: LAPIN HELMI KY
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: State of Mind Sisu Red Triangle Premium Vodka Imported
+          trademarkHasImage: true
+          goodsAndServices:
+          - classNumber: 30
+            ordinal: 1
+          - classNumber: 32
+            ordinal: 2
+          - classNumber: 33
+            ordinal: 3
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: /opendata/trademark/image/T200502457
+          thumbnailUrl: /opendata/trademark/thumbnail/T200502457
+          largeThumbnailUrl: /opendata/trademark/thumbnail/large/T200502457
+          ordinal: 21
+        - dossierId: 302499
+          applicationNumber: T200502456
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierSubType: Figurative-word
+          applicationDate: 2005-09-23
+          registrationDate: null
+          expirationDate: null
+          applicants:
+          - name: LAPIN HELMI KY
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: Sisu Red Triangle Vodka
+          trademarkHasImage: true
+          goodsAndServices:
+          - classNumber: 30
+            ordinal: 1
+          - classNumber: 32
+            ordinal: 2
+          - classNumber: 33
+            ordinal: 3
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: /opendata/trademark/image/T200502456
+          thumbnailUrl: /opendata/trademark/thumbnail/T200502456
+          largeThumbnailUrl: /opendata/trademark/thumbnail/large/T200502456
+          ordinal: 22
+        - dossierId: 306796
+          applicationNumber: T200601107
+          registrationNumber: "239854"
+          dossierStatus: Expired
+          dossierSubType: Word
+          applicationDate: 2006-04-07
+          registrationDate: 2007-07-31
+          expirationDate: 2017-07-31
+          applicants:
+          - name: Tervakoski Oy
+            ordinal: 1
+          representatives:
+          - name: Berggren Oy
+            ordinal: 1
+          priorities: []
+          trademarkWord: TERREUS SISU
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 16
+            ordinal: 1
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 23
+        - dossierId: 307297
+          applicationNumber: T200601358
+          registrationNumber: "237325"
+          dossierStatus: Expired
+          dossierSubType: Word
+          applicationDate: 2006-05-03
+          registrationDate: 2006-10-31
+          expirationDate: 2016-10-31
+          applicants:
+          - name: MESAMO OY
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: Sisu-kiuas
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 11
+            ordinal: 1
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 24
+        - dossierId: 308589
+          applicationNumber: T200602042
+          registrationNumber: "252241"
+          dossierStatus: Expired
+          dossierSubType: Word
+          applicationDate: 2006-07-11
+          registrationDate: 2011-06-30
+          expirationDate: 2021-06-30
+          applicants:
+          - name: LAPIN HELMI KY
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: SISU
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 25
+            ordinal: 1
+          - classNumber: 31
+            ordinal: 2
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 25
+        - dossierId: 310233
+          applicationNumber: T200602907
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierSubType: Word
+          applicationDate: 2006-10-04
+          registrationDate: null
+          expirationDate: null
+          applicants:
+          - name: KUNTTU, KEIJO
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: Sisu-Finland
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 7
+            ordinal: 1
+          - classNumber: 12
+            ordinal: 2
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 26
+        - dossierId: 312980
+          applicationNumber: T200700292
+          registrationNumber: "241311"
+          dossierStatus: Expired
+          dossierSubType: Figurative-word
+          applicationDate: 2007-01-30
+          registrationDate: 2008-02-15
+          expirationDate: 2018-02-15
+          applicants:
+          - name: OY SISU AUTO AB
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: SISU DEFENCE
+          trademarkHasImage: true
+          goodsAndServices:
+          - classNumber: 12
+            ordinal: 1
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: /opendata/trademark/image/T200700292/241311
+          thumbnailUrl: /opendata/trademark/thumbnail/T200700292/241311
+          largeThumbnailUrl: /opendata/trademark/thumbnail/large/T200700292/241311
+          ordinal: 27
+        - dossierId: 313431
+          applicationNumber: T200700580
+          registrationNumber: "240564"
+          dossierStatus: Registered
+          dossierSubType: Word
+          applicationDate: 2007-02-21
+          registrationDate: 2007-10-31
+          expirationDate: 2027-10-31
+          applicants:
+          - name: Ratia Brand Co Oy
+            ordinal: 1
+          representatives:
+          - name: Asianajotoimisto Heinonen & Co Oy
+            ordinal: 1
+          priorities: []
+          trademarkWord: SISU
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 14
+            ordinal: 1
+          - classNumber: 21
+            ordinal: 2
+          - classNumber: 24
+            ordinal: 3
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 28
+        - dossierId: 314941
+          applicationNumber: T200701508
+          registrationNumber: "242477"
+          dossierStatus: Registered
+          dossierSubType: Figurative-word
+          applicationDate: 2007-05-08
+          registrationDate: 2008-06-30
+          expirationDate: 2028-06-30
+          applicants:
+          - name: Oy Sisu Auto Ab
+            ordinal: 1
+          representatives:
+          - name: Kolster Oy Ab
+            ordinal: 1
+          priorities: []
+          trademarkWord: SISU CONSTRUCTION
+          trademarkHasImage: true
+          goodsAndServices:
+          - classNumber: 12
+            ordinal: 1
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: /opendata/trademark/image/T200701508/242477
+          thumbnailUrl: /opendata/trademark/thumbnail/T200701508/242477
+          largeThumbnailUrl: /opendata/trademark/thumbnail/large/T200701508/242477
+          ordinal: 29
+        - dossierId: 314940
+          applicationNumber: T200701507
+          registrationNumber: "242312"
+          dossierStatus: Registered
+          dossierSubType: Figurative-word
+          applicationDate: 2007-05-08
+          registrationDate: 2008-06-13
+          expirationDate: 2028-06-13
+          applicants:
+          - name: Suomen Erikoisajoneuvot Oy
+            ordinal: 1
+          representatives:
+          - name: Kolster Oy Ab
+            ordinal: 1
+          priorities: []
+          trademarkWord: Sisu
+          trademarkHasImage: true
+          goodsAndServices:
+          - classNumber: 12
+            ordinal: 1
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: /opendata/trademark/image/T200701507/242312
+          thumbnailUrl: /opendata/trademark/thumbnail/T200701507/242312
+          largeThumbnailUrl: /opendata/trademark/thumbnail/large/T200701507/242312
+          ordinal: 30
+        - dossierId: 314942
+          applicationNumber: T200701509
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierSubType: Figurative-word
+          applicationDate: 2007-05-08
+          registrationDate: null
+          expirationDate: null
+          applicants:
+          - name: OY SISU AUTO AB
+            ordinal: 1
+          representatives:
+          - name: Hannu Kuosmanen
+            ordinal: 1
+          priorities: []
+          trademarkWord: SISU
+          trademarkHasImage: true
+          goodsAndServices:
+          - classNumber: 12
+            ordinal: 1
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: /opendata/trademark/image/T200701509
+          thumbnailUrl: /opendata/trademark/thumbnail/T200701509
+          largeThumbnailUrl: /opendata/trademark/thumbnail/large/T200701509
+          ordinal: 31
+        - dossierId: 315598
+          applicationNumber: T200701852
+          registrationNumber: "254104"
+          dossierStatus: Registered
+          dossierSubType: Figurative-word
+          applicationDate: 2007-06-06
+          registrationDate: 2012-01-13
+          expirationDate: 2032-01-13
+          applicants:
+          - name: Cloetta Suomi Oy
+            ordinal: 1
+          representatives:
+          - name: Asianajotoimisto Krogerus Oy
+            ordinal: 1
+          priorities: []
+          trademarkWord: Sisu, Gifu
+          trademarkHasImage: true
+          goodsAndServices:
+          - classNumber: 30
+            ordinal: 1
+          - classNumber: 31
+            ordinal: 2
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: /opendata/trademark/image/T200701852/254104
+          thumbnailUrl: /opendata/trademark/thumbnail/T200701852/254104
+          largeThumbnailUrl: /opendata/trademark/thumbnail/large/T200701852/254104
+          ordinal: 32
+        - dossierId: 316004
+          applicationNumber: T200702077
+          registrationNumber: "241485"
+          dossierStatus: Expired
+          dossierSubType: Figurative-word
+          applicationDate: 2007-06-27
+          registrationDate: 2008-03-14
+          expirationDate: 2018-03-14
+          applicants:
+          - name: LAPIN HELMI KY
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: Sisu
+          trademarkHasImage: true
+          goodsAndServices:
+          - classNumber: 25
+            ordinal: 1
+          - classNumber: 28
+            ordinal: 2
+          - classNumber: 29
+            ordinal: 3
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: /opendata/trademark/image/T200702077/241485
+          thumbnailUrl: /opendata/trademark/thumbnail/T200702077/241485
+          largeThumbnailUrl: /opendata/trademark/thumbnail/large/T200702077/241485
+          ordinal: 33
+        - dossierId: 326360
+          applicationNumber: T200803921
+          registrationNumber: "245435"
+          dossierStatus: Registered
+          dossierSubType: Word
+          applicationDate: 2008-11-13
+          registrationDate: 2009-04-15
+          expirationDate: 2029-04-15
+          applicants:
+          - name: Adiabatix Oy
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: Adi-SiSu
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 37
+            ordinal: 1
+          - classNumber: 42
+            ordinal: 2
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 34
+        - dossierId: 341186
+          applicationNumber: T201101886
+          registrationNumber: "253417"
+          dossierStatus: Expired
+          dossierSubType: Word
+          applicationDate: 2011-06-14
+          registrationDate: 2011-11-15
+          expirationDate: 2021-11-15
+          applicants:
+          - name: SUOMEN TIMPURI OY
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: Sisu-Rauta
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 37
+            ordinal: 1
+          - classNumber: 40
+            ordinal: 2
+          - classNumber: 45
+            ordinal: 3
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 35
+        - dossierId: 341554
+          applicationNumber: T201102146
+          registrationNumber: "254351"
+          dossierStatus: Registered
+          dossierSubType: Word
+          applicationDate: 2011-07-04
+          registrationDate: 2012-01-31
+          expirationDate: 2032-01-31
+          applicants:
+          - name: Funidata Oy
+            ordinal: 1
+          representatives:
+          - name: Boco IP Oy Ab
+            ordinal: 1
+          priorities: []
+          trademarkWord: SISU
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 9
+            ordinal: 1
+          - classNumber: 19
+            ordinal: 2
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 36
+        - dossierId: 353399
+          applicationNumber: T201302077
+          registrationNumber: "260491"
+          dossierStatus: Expired
+          dossierSubType: Figurative-word
+          applicationDate: 2013-09-19
+          registrationDate: 2014-02-14
+          expirationDate: 2024-02-14
+          applicants:
+          - name: FYSIOLINE FRESSI OY
+            ordinal: 1
+          representatives:
+          - name: Berggren Oy
+            ordinal: 1
+          priorities: []
+          trademarkWord: SISU CROSS BY FRESSI
+          trademarkHasImage: true
+          goodsAndServices:
+          - classNumber: 35
+            ordinal: 1
+          - classNumber: 45
+            ordinal: 2
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: /opendata/trademark/image/T201302077/260491
+          thumbnailUrl: /opendata/trademark/thumbnail/T201302077/260491
+          largeThumbnailUrl: /opendata/trademark/thumbnail/large/T201302077/260491
+          ordinal: 37
+        - dossierId: 353398
+          applicationNumber: T201302076
+          registrationNumber: "260490"
+          dossierStatus: Expired
+          dossierSubType: Word
+          applicationDate: 2013-09-19
+          registrationDate: 2014-02-14
+          expirationDate: 2024-02-14
+          applicants:
+          - name: FYSIOLINE FRESSI OY
+            ordinal: 1
+          representatives:
+          - name: Berggren Oy
+            ordinal: 1
+          priorities: []
+          trademarkWord: SISU CROSS
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 35
+            ordinal: 1
+          - classNumber: 45
+            ordinal: 2
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 38
+        - dossierId: 353914
+          applicationNumber: T201302240
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierSubType: Figurative-word
+          applicationDate: 2013-10-23
+          registrationDate: null
+          expirationDate: null
+          applicants:
+          - name: Teemu Jerri Johannes Leppälä
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: JÄÄNMURTAJA SISU
+          trademarkHasImage: true
+          goodsAndServices:
+          - classNumber: 16
+            ordinal: 1
+          - classNumber: 21
+            ordinal: 2
+          - classNumber: 25
+            ordinal: 3
+          - classNumber: 28
+            ordinal: 4
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: /opendata/trademark/image/T201302240
+          thumbnailUrl: /opendata/trademark/thumbnail/T201302240
+          largeThumbnailUrl: /opendata/trademark/thumbnail/large/T201302240
+          ordinal: 39
+        - dossierId: 354332
+          applicationNumber: T201350945
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierSubType: Word
+          applicationDate: 2013-11-19
+          registrationDate: null
+          expirationDate: null
+          applicants:
+          - name: EKO MANAGEMENT OY
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: SISU
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 25
+            ordinal: 1
+          - classNumber: 28
+            ordinal: 2
+          - classNumber: 29
+            ordinal: 3
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 40
+        - dossierId: 819950
+          applicationNumber: T201652428
+          registrationNumber: "276030"
+          dossierStatus: Registered
+          dossierSubType: Word
+          applicationDate: 2016-10-03
+          registrationDate: 2019-10-28
+          expirationDate: 2029-10-28
+          applicants:
+          - name: Funidata Oy
+            ordinal: 1
+          representatives:
+          - name: Boco IP Oy Ab
+            ordinal: 1
+          priorities: []
+          trademarkWord: SISU
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 9
+            ordinal: 1
+          - classNumber: 35
+            ordinal: 2
+          - classNumber: 41
+            ordinal: 3
+          - classNumber: 42
+            ordinal: 4
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 41
+        - dossierId: 820279
+          applicationNumber: T201652543
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierSubType: Figurative-word
+          applicationDate: 2016-10-14
+          registrationDate: null
+          expirationDate: null
+          applicants:
+          - name: Suomen Erikoisajoneuvot Oy
+            ordinal: 1
+          representatives:
+          - name: Kolster Oy Ab
+            ordinal: 1
+          priorities: []
+          trademarkWord: SISU
+          trademarkHasImage: true
+          goodsAndServices:
+          - classNumber: 25
+            ordinal: 1
+          - classNumber: 28
+            ordinal: 2
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: /opendata/trademark/image/T201652543
+          thumbnailUrl: /opendata/trademark/thumbnail/T201652543
+          largeThumbnailUrl: /opendata/trademark/thumbnail/large/T201652543
+          ordinal: 42
+        - dossierId: 841411
+          applicationNumber: T201900095
+          registrationNumber: null
+          dossierStatus: Application_withdrawn
+          dossierSubType: Word
+          applicationDate: 2019-04-15
+          registrationDate: null
+          expirationDate: null
+          applicants:
+          - name: Jyväskylän yliopisto
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: Sisu Security
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 9
+            ordinal: 1
+          - classNumber: 38
+            ordinal: 2
+          - classNumber: 42
+            ordinal: 3
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 43
+        - dossierId: 844335
+          applicationNumber: T201900130
+          registrationNumber: "276862"
+          dossierStatus: Registered
+          dossierSubType: Figurative-word
+          applicationDate: 2019-08-23
+          registrationDate: 2020-02-12
+          expirationDate: 2029-08-23
+          applicants:
+          - name: Bella Nilsson
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: SUOMI SISU PUSSI
+          trademarkHasImage: true
+          goodsAndServices:
+          - classNumber: 16
+            ordinal: 1
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: /opendata/trademark/image/T201900130/276862
+          thumbnailUrl: /opendata/trademark/thumbnail/T201900130/276862
+          largeThumbnailUrl: /opendata/trademark/thumbnail/large/T201900130/276862
+          ordinal: 44
+        - dossierId: 844332
+          applicationNumber: T201900128
+          registrationNumber: null
+          dossierStatus: Application_rejected
+          dossierSubType: Figurative-word
+          applicationDate: 2019-08-23
+          registrationDate: null
+          expirationDate: null
+          applicants:
+          - name: Bella Nilsson
+            ordinal: 1
+          representatives: []
+          priorities:
+          - priorityDate: 2019-08-22
+            ordinal: 1
+          trademarkWord: SUOMI SISU SÄKKI
+          trademarkHasImage: true
+          goodsAndServices:
+          - classNumber: 22
+            ordinal: 1
+          - classNumber: 39
+            ordinal: 2
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: /opendata/trademark/image/T201900128
+          thumbnailUrl: /opendata/trademark/thumbnail/T201900128
+          largeThumbnailUrl: /opendata/trademark/thumbnail/large/T201900128
+          ordinal: 45
+        - dossierId: 844331
+          applicationNumber: T201900127
+          registrationNumber: "276122"
+          dossierStatus: Registered
+          dossierSubType: Word
+          applicationDate: 2019-08-23
+          registrationDate: 2019-11-11
+          expirationDate: 2029-08-23
+          applicants:
+          - name: Bella Nilsson
+            ordinal: 1
+          representatives: []
+          priorities:
+          - priorityDate: 2019-08-22
+            ordinal: 1
+          trademarkWord: SUOMI SISU SÄKKI
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 22
+            ordinal: 1
+          - classNumber: 39
+            ordinal: 2
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 46
+        - dossierId: 844334
+          applicationNumber: T201900129
+          registrationNumber: "276861"
+          dossierStatus: Registered
+          dossierSubType: Word
+          applicationDate: 2019-08-23
+          registrationDate: 2020-02-12
+          expirationDate: 2029-08-23
+          applicants:
+          - name: Bella Nilsson
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: SUOMI SISU PUSSI
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 16
+            ordinal: 1
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 47
+        - dossierId: 846677
+          applicationNumber: T201952767
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierSubType: Figurative-word
+          applicationDate: 2019-11-26
+          registrationDate: null
+          expirationDate: null
+          applicants:
+          - name: Oy Scandic Trading House Ltd
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: Sisu
+          trademarkHasImage: true
+          goodsAndServices:
+          - classNumber: 11
+            ordinal: 1
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: /opendata/trademark/image/T201952767
+          thumbnailUrl: /opendata/trademark/thumbnail/T201952767
+          largeThumbnailUrl: /opendata/trademark/thumbnail/large/T201952767
+          ordinal: 48
+        - dossierId: 854316
+          applicationNumber: T202052642
+          registrationNumber: "280359"
+          dossierStatus: Registered
+          dossierSubType: Word
+          applicationDate: 2020-09-28
+          registrationDate: 2021-05-03
+          expirationDate: 2030-09-28
+          applicants:
+          - name: Retail Stores Finland Oy
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: SISU
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 28
+            ordinal: 1
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 49
+        - dossierId: 862264
+          applicationNumber: T202151942
+          registrationNumber: "281269"
+          dossierStatus: Registered
+          dossierSubType: Word
+          applicationDate: 2021-07-20
+          registrationDate: 2021-09-08
+          expirationDate: 2031-07-20
+          applicants:
+          - name: Sisu Kitchen Oy
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: Korean Sisu Kitchen
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 29
+            ordinal: 1
+          - classNumber: 30
+            ordinal: 2
+          - classNumber: 32
+            ordinal: 3
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 50
+        - dossierId: 862296
+          applicationNumber: T202151951
+          registrationNumber: "281285"
+          dossierStatus: Registered
+          dossierSubType: Word
+          applicationDate: 2021-07-22
+          registrationDate: 2021-09-09
+          expirationDate: 2031-07-22
+          applicants:
+          - name: Philip Morris Products S.A.
+            ordinal: 1
+          representatives:
+          - name: Kolster Oy Ab
+            ordinal: 1
+          priorities: []
+          trademarkWord: SISU
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 34
+            ordinal: 1
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 51
+        - dossierId: 870931
+          applicationNumber: T202251287
+          registrationNumber: null
+          dossierStatus: Application_withdrawn
+          dossierSubType: Word
+          applicationDate: 2022-06-21
+          registrationDate: null
+          expirationDate: null
+          applicants:
+          - name: Freezing Point Oy
+            ordinal: 1
+          representatives:
+          - name: Asianajotoimisto Susiluoto Oy
+            ordinal: 1
+          priorities: []
+          trademarkWord: SISU
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 9
+            ordinal: 1
+          - classNumber: 41
+            ordinal: 2
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 52
+        - dossierId: 878808
+          applicationNumber: T202351147
+          registrationNumber: "285345"
+          dossierStatus: Registered
+          dossierSubType: Figurative-word
+          applicationDate: 2023-05-30
+          registrationDate: 2023-07-12
+          expirationDate: 2033-05-30
+          applicants:
+          - name: Lehtimäki, Toni Kristian, toiminimen Sisu Unleashed by Toni Lehtimäki haltijana
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: TL SISU UNLEASHED
+          trademarkHasImage: true
+          goodsAndServices:
+          - classNumber: 41
+            ordinal: 1
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: /opendata/trademark/image/T202351147/285345
+          thumbnailUrl: /opendata/trademark/thumbnail/T202351147/285345
+          largeThumbnailUrl: /opendata/trademark/thumbnail/large/T202351147/285345
+          ordinal: 53
+        - dossierId: 882864
+          applicationNumber: T202352455
+          registrationNumber: "286870"
+          dossierStatus: Registered
+          dossierSubType: Figurative-word
+          applicationDate: 2023-12-13
+          registrationDate: 2024-05-13
+          expirationDate: 2033-12-13
+          applicants:
+          - name: Cloetta Suomi Oy
+            ordinal: 1
+          representatives:
+          - name: Asianajotoimisto Krogerus Oy
+            ordinal: 1
+          priorities: []
+          trademarkWord: Gifu, Sisu
+          trademarkHasImage: true
+          goodsAndServices:
+          - classNumber: 9
+            ordinal: 1
+          - classNumber: 21
+            ordinal: 2
+          - classNumber: 24
+            ordinal: 3
+          - classNumber: 25
+            ordinal: 4
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: /opendata/trademark/image/T202352455/286870
+          thumbnailUrl: /opendata/trademark/thumbnail/T202352455/286870
+          largeThumbnailUrl: /opendata/trademark/thumbnail/large/T202352455/286870
+          ordinal: 54
+        - dossierId: 882866
+          applicationNumber: T202352457
+          registrationNumber: "286868"
+          dossierStatus: Registered
+          dossierSubType: Figurative-word
+          applicationDate: 2023-12-13
+          registrationDate: 2024-05-13
+          expirationDate: 2033-12-13
+          applicants:
+          - name: Cloetta Suomi Oy
+            ordinal: 1
+          representatives:
+          - name: Asianajotoimisto Krogerus Oy
+            ordinal: 1
+          priorities: []
+          trademarkWord: Gifu, Sisu
+          trademarkHasImage: true
+          goodsAndServices:
+          - classNumber: 9
+            ordinal: 1
+          - classNumber: 21
+            ordinal: 2
+          - classNumber: 24
+            ordinal: 3
+          - classNumber: 25
+            ordinal: 4
+          - classNumber: 30
+            ordinal: 5
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: /opendata/trademark/image/T202352457/286868
+          thumbnailUrl: /opendata/trademark/thumbnail/T202352457/286868
+          largeThumbnailUrl: /opendata/trademark/thumbnail/large/T202352457/286868
+          ordinal: 55
+        - dossierId: 882865
+          applicationNumber: T202352456
+          registrationNumber: "286869"
+          dossierStatus: Registered
+          dossierSubType: Figurative-word
+          applicationDate: 2023-12-13
+          registrationDate: 2024-05-13
+          expirationDate: 2033-12-13
+          applicants:
+          - name: Cloetta Suomi Oy
+            ordinal: 1
+          representatives:
+          - name: Asianajotoimisto Krogerus Oy
+            ordinal: 1
+          priorities: []
+          trademarkWord: Gifu, Sisu
+          trademarkHasImage: true
+          goodsAndServices:
+          - classNumber: 9
+            ordinal: 1
+          - classNumber: 21
+            ordinal: 2
+          - classNumber: 24
+            ordinal: 3
+          - classNumber: 25
+            ordinal: 4
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: /opendata/trademark/image/T202352456/286869
+          thumbnailUrl: /opendata/trademark/thumbnail/T202352456/286869
+          largeThumbnailUrl: /opendata/trademark/thumbnail/large/T202352456/286869
+          ordinal: 56
+        - dossierId: 887434
+          applicationNumber: T202451312
+          registrationNumber: null
+          dossierStatus: Application_rejected
+          dossierSubType: Word
+          applicationDate: 2024-07-19
+          registrationDate: null
+          expirationDate: null
+          applicants:
+          - name: Siivous Suomi Oy
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: SISU
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 3
+            ordinal: 1
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 57
+        - dossierId: 887544
+          applicationNumber: T202451344
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierSubType: Word
+          applicationDate: 2024-07-29
+          registrationDate: null
+          expirationDate: null
+          applicants:
+          - name: Sisu Taxi Oy
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: Sisu Taxi
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 39
+            ordinal: 1
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 58
+        - dossierId: 889958
+          applicationNumber: T202452118
+          registrationNumber: "287960"
+          dossierStatus: Registered
+          dossierSubType: Figurative-word
+          applicationDate: 2024-11-26
+          registrationDate: 2024-12-18
+          expirationDate: 2034-11-26
+          applicants:
+          - name: Lehtimäki, Toni Kristian, toiminimen Sisu Unleashed by Toni Lehtimäki haltijana
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: SJ SuperJohtajuus SISU UNLEASHED
+          trademarkHasImage: true
+          goodsAndServices:
+          - classNumber: 41
+            ordinal: 1
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: /opendata/trademark/image/T202452118/287960
+          thumbnailUrl: /opendata/trademark/thumbnail/T202452118/287960
+          largeThumbnailUrl: /opendata/trademark/thumbnail/large/T202452118/287960
+          ordinal: 59
+        - dossierId: 895236
+          applicationNumber: T202551523
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierSubType: Figurative-word
+          applicationDate: 2025-07-20
+          registrationDate: null
+          expirationDate: null
+          applicants:
+          - name: Jami Kasperi Kuisma
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: SISU FRAGRANCES
+          trademarkHasImage: true
+          goodsAndServices:
+          - classNumber: 3
+            ordinal: 1
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: /opendata/trademark/image/T202551523
+          thumbnailUrl: /opendata/trademark/thumbnail/T202551523
+          largeThumbnailUrl: /opendata/trademark/thumbnail/large/T202551523
+          ordinal: 60
+        - dossierId: 896586
+          applicationNumber: T202551992
+          registrationNumber: "290544"
+          dossierStatus: Registered
+          dossierSubType: Word
+          applicationDate: 2025-09-29
+          registrationDate: 2026-03-17
+          expirationDate: 2035-09-29
+          applicants:
+          - name: PTL Marketing Oy
+            ordinal: 1
+          representatives:
+          - name: Oy Elite Money Manager Ab
+            ordinal: 1
+          priorities: []
+          trademarkWord: Sisu Logistiikka
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 39
+            ordinal: 1
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 61
+        - dossierId: 896824
+          applicationNumber: T202552087
+          registrationNumber: null
+          dossierStatus: Application_rejected
+          dossierSubType: Word
+          applicationDate: 2025-10-10
+          registrationDate: null
+          expirationDate: null
+          applicants:
+          - name: Sisu Behavior Oy
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: Sisu Reaction
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 41
+            ordinal: 1
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 62
+        - dossierId: 897228
+          applicationNumber: T202552253
+          registrationNumber: "289909"
+          dossierStatus: Registered
+          dossierSubType: Word
+          applicationDate: 2025-10-30
+          registrationDate: 2025-12-01
+          expirationDate: 2035-10-30
+          applicants:
+          - name: Laine Media Oy
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: Finnish sisu
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 25
+            ordinal: 1
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 63
+        - dossierId: 897478
+          applicationNumber: T202552347
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierSubType: Word
+          applicationDate: 2025-11-10
+          registrationDate: null
+          expirationDate: null
+          applicants:
+          - name: VIPstore Oy
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: Sisu
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 31
+            ordinal: 1
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 64
+        - dossierId: 900731
+          applicationNumber: T202650776
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierSubType: Word
+          applicationDate: 2026-04-07
+          registrationDate: null
+          expirationDate: null
+          applicants:
+          - name: Pitkänen, Bror Jaakko Juhani, toiminimen K 3 FITNESS haltijana
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: SISU-valmennus
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 41
+            ordinal: 1
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 65
+        - dossierId: 900790
+          applicationNumber: T202650790
+          registrationNumber: "290835"
+          dossierStatus: Registered
+          dossierSubType: Word
+          applicationDate: 2026-04-08
+          registrationDate: 2026-05-12
+          expirationDate: 2036-04-08
+          applicants:
+          - name: Tampereen korkeakoulusäätiö sr
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: Science Meets Sisu
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 35
+            ordinal: 1
+          - classNumber: 38
+            ordinal: 2
+          - classNumber: 41
+            ordinal: 3
+          - classNumber: 42
+            ordinal: 4
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 66
+        - dossierId: 900916
+          applicationNumber: T202650848
+          registrationNumber: null
+          dossierStatus: Application_filed
+          dossierSubType: Figurative-word
+          applicationDate: 2026-04-15
+          registrationDate: null
+          expirationDate: null
+          applicants:
+          - name: Battlecat Gaming Ltd
+            ordinal: 1
+          representatives:
+          - name: Asianajotoimisto Legal Gaming Oy
+            ordinal: 1
+          priorities: []
+          trademarkWord: SISU KASINO
+          trademarkHasImage: true
+          goodsAndServices:
+          - classNumber: 41
+            ordinal: 1
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: /opendata/trademark/image/T202650848
+          thumbnailUrl: /opendata/trademark/thumbnail/T202650848
+          largeThumbnailUrl: /opendata/trademark/thumbnail/large/T202650848
+          ordinal: 67
+        - dossierId: 901318
+          applicationNumber: T202651019
+          registrationNumber: null
+          dossierStatus: Application_filed
+          dossierSubType: Word
+          applicationDate: 2026-05-07
+          registrationDate: null
+          expirationDate: null
+          applicants:
+          - name: Harri Tapio Ruotsalainen
+            ordinal: 1
+          representatives: []
+          priorities: []
+          trademarkWord: Sisu Framework
+          trademarkHasImage: false
+          goodsAndServices:
+          - classNumber: 16
+            ordinal: 1
+          - classNumber: 42
+            ordinal: 2
+          targetGroup: null
+          locarnos: []
+          designs: []
+          imageUrl: null
+          thumbnailUrl: null
+          largeThumbnailUrl: null
+          ordinal: 68
+  recorded_at: 2026-10-26T20:35:03.758Z

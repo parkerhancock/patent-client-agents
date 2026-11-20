@@ -1,0 +1,232 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://cloud.tipo.gov.tw/S220/opdataapi/api/PatentRights?format=json&top=2&skip=0&applclass=1&applnamee=CKD&tk=[FILTERED]
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cf-cache-status:
+      - DYNAMIC
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=UTF-8
+      date:
+      - Mon, 26 Oct 2026 19:46:43 GMT
+      server:
+      - cloudflare
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      transfer-encoding:
+      - chunked
+    body:
+      type: json
+      content:
+        version: "1.0"
+        status: ok
+        message: ""
+        top: 2
+        skip: 0
+        order-by: appl-no
+        total-count: 261
+        tw-patent-rightsI:
+          -page-count: 2
+          -create-date: 2026/10/27
+          patentcontent:
+          - -sequence: 1
+            publication-reference:
+              notice-no: 0
+              notice-volno: 0
+              notice-isuno: 0
+              notice-date: null
+              publish-no: "176209"
+              publish-volno: 19
+              publish-isuno: 1
+              publish-date: 1992/01/01
+            application-reference:
+              appl-no: "080100388"
+              appl-date: 1991/01/17
+              first-date: 1991/01/17
+              foreign-language: null
+              foreign-language-desc: null
+              appl-class: "1"
+              appl-class-desc: 發明
+              material-appl-date: null
+              material-flag: "0"
+              faplexm-date: 1991/11/20
+              reappl-date: null
+              raplexam-date: null
+              agree-flag: null
+              twins-flag: null
+            patent-title:
+              patent-name-chinese: 管接頭
+              patent-name-english: null
+            patent-right:
+              licence-date: 1992/04/27
+              relicence-date: null
+              patent-no: "053691"
+              patent-bdate: 1992/01/01
+              patent-edate: 2006/12/31
+              charge-expir-date: 1998/12/31
+              charge-expir-year: "7"
+              rent-status: 0
+              mortgage-status: 0
+              transfer-status: 0
+              inherit-status: 0
+              trust-status: 0
+              opposition-status: 0
+              nullity-status: 0
+              continue-status: 0
+              expand-status: 0
+              cancel-date: 1999/01/01
+              cancel-result: "48105"
+              revoke-date: null
+              revoke-code: null
+              dep-patent-class: null
+              dep-appl-no: null
+            parties:
+              applicants:
+              - -sequence: 1
+                chinese-name: ＣＫＤ股份有限公司
+                english-name: CKD CORPORATION
+                address: 日本
+                english-country: JP
+                chinese-country: 日本
+                english-address: 250, OUJI 2-CHOME, KOMAKI-SHI, AICHI, 4858551, JAPAN
+              inventors:
+              - -sequence: 1
+                chinese-name: 高木史夫
+                english-name: null
+                english-country: JP
+                chinese-country: 日本
+              agents:
+              - -sequence: 1
+                chinese-name: 何金塗
+                english-name: null
+                address: null
+                english-country: TW
+                chinese-country: 中華民國
+            classification-ipc:
+            - -sequence: 1
+              ipc-full: F16L37/04
+              ipc-section: F
+              ipc-class: "16"
+              ipc-subclass: L
+              ipc-main-group: "37"
+              ipc-group: "04"
+              ipc-version: "06"
+            link:
+              patentisuregspecxmla-url: null
+              patentpubmtiff-url: null
+              patentpubxml-url: null
+              patentisuregspecmtiff-url: null
+          - -sequence: 2
+            publication-reference:
+              notice-no: 0
+              notice-volno: 0
+              notice-isuno: 0
+              notice-date: null
+              publish-no: "305013"
+              publish-volno: 24
+              publish-isuno: 14
+              publish-date: 1997/05/11
+            application-reference:
+              appl-no: "085109258"
+              appl-date: 1996/07/30
+              first-date: 1996/07/30
+              foreign-language: null
+              foreign-language-desc: null
+              appl-class: "1"
+              appl-class-desc: 發明
+              material-appl-date: null
+              material-flag: "0"
+              faplexm-date: 1997/02/26
+              reappl-date: null
+              raplexam-date: null
+              agree-flag: null
+              twins-flag: null
+            patent-title:
+              patent-name-chinese: 磁性螺紋裝置、磁性螺紋裝置之製造方法及磁性螺紋搬送裝置
+              patent-name-english: null
+            patent-right:
+              licence-date: 1997/09/12
+              relicence-date: null
+              patent-no: "086642"
+              patent-bdate: 1997/05/11
+              patent-edate: 2016/07/29
+              charge-expir-date: 2009/05/10
+              charge-expir-year: "12"
+              rent-status: 0
+              mortgage-status: 0
+              transfer-status: 0
+              inherit-status: 0
+              trust-status: 0
+              opposition-status: 0
+              nullity-status: 0
+              continue-status: 0
+              expand-status: 0
+              cancel-date: 2009/05/11
+              cancel-result: "48105"
+              revoke-date: null
+              revoke-code: null
+              dep-patent-class: null
+              dep-appl-no: null
+            parties:
+              applicants:
+              - -sequence: 1
+                chinese-name: ＣＫＤ股份有限公司
+                english-name: CKD CORPORATION
+                address: 日本
+                english-country: JP
+                chinese-country: 日本
+                english-address: 250, OUJI 2-CHOME, KOMAKI-SHI, AICHI, 4858551, JAPAN
+              inventors:
+              - -sequence: 1
+                chinese-name: 田村晃
+                english-name: null
+                english-country: JP
+                chinese-country: 日本
+              - -sequence: 2
+                chinese-name: 遠藤方志
+                english-name: null
+                english-country: JP
+                chinese-country: 日本
+              - -sequence: 3
+                chinese-name: 上松鍈司
+                english-name: null
+                english-country: JP
+                chinese-country: 日本
+              - -sequence: 4
+                chinese-name: 惠村大助
+                english-name: null
+                english-country: JP
+                chinese-country: 日本
+              agents:
+              - -sequence: 1
+                chinese-name: 洪澄文
+                english-name: null
+                address: 臺北市南港區園區街3之2號3樓之2
+                english-country: TW
+                chinese-country: 中華民國
+            classification-ipc:
+            - -sequence: 1
+              ipc-full: F15B15/14
+              ipc-section: F
+              ipc-class: "15"
+              ipc-subclass: B
+              ipc-main-group: "15"
+              ipc-group: "14"
+              ipc-version: "06"
+            link:
+              patentisuregspecxmla-url: null
+              patentpubmtiff-url: null
+              patentpubxml-url: null
+              patentisuregspecmtiff-url: null
+  recorded_at: 2026-10-26T19:46:43.554Z

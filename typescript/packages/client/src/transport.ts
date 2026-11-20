@@ -70,6 +70,8 @@ export interface TransportRequestOptions {
   timeoutMs?: number;
   /** Exact HTTPS hostnames approved by the connector for public downloads. */
   allowedHosts?: string[];
+  /** Follow an http:// redirect as https:// when it stays on an allowed host (CELLAR redirects to http). */
+  upgradeRedirects?: boolean;
   /** Expose up to 64 KiB of Ky's bounded error body as an HttpResponseError for connector inspection. */
   readErrorBody?: boolean;
   /** False skips the response cache for this request. */
@@ -243,7 +245,7 @@ export class GenericHttpTransport {
     const sourceUrl = new URL(url);
     for (const key of [...sourceUrl.searchParams.keys()]) {
       if (
-        /^(?:api[-_]?key|key|token|access_token|authorization|signature|expires|key-pair-id|x-amz-.+)$/i.test(
+        /^(?:api[-_]?key|key|tk|token|access_token|authorization|signature|expires|key-pair-id|x-amz-.+)$/i.test(
           key,
         )
       )
@@ -337,6 +339,10 @@ export class GenericHttpTransport {
               "NETWORK_ERROR",
             );
           const next = new URL(location, url);
+          if (options.upgradeRedirects && next.protocol === "http:") {
+            next.protocol = "https:";
+            if (next.port === "80") next.port = "";
+          }
           secureUrl(next);
           if (!allowed(next))
             throw this.error(

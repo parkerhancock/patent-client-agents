@@ -1,0 +1,173 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://data.gov.il/api/3/action/datastore_search?resource_id=adca9a88-bf91-462a-8a49-62381af9b588&limit=3&offset=0&filters=%7B%22%D7%A1%D7%98%D7%98%D7%95%D7%A1+%D7%91%D7%A7%D7%A9%D7%94%2F%D7%A4%D7%98%D7%A0%D7%98%22%3A%22%D7%A4%D7%98%D7%A0%D7%98%22%7D&q=%7B%22%D7%A9%D7%9D+%D7%94%D7%90%D7%9E%D7%A6%D7%90%D7%94+%D7%91%D7%90%D7%A0%D7%92%D7%9C%D7%99%D7%AA%22%3A%22graphene%3A*%22%7D&plain=false&sort=%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%91%D7%A7%D7%A9%D7%94%22+desc
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - public, max-age=0, must-revalidate
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=utf-8
+      date:
+      - Mon, 26 Oct 2026 21:18:56 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding
+      via:
+      - 1.1 d09facc1a33a23ae0ece49f16f368ae6.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - jHhGSPuSL5hF7Mq02l8hD35QiUhK-ufsE0kSYAtL38v0Y-EbxuzTSg==
+      x-amz-cf-pop:
+      - DFW57-P4
+      x-cache:
+      - Miss from cloudfront
+    body:
+      type: json
+      content:
+        help: https://data.gov.il/api/3/action/help_show?name=datastore_search
+        success: true
+        result:
+          filters:
+            סטטוס בקשה/פטנט: פטנט
+          include_total: true
+          limit: 3
+          offset: 0
+          plain: false
+          q:
+            שם האמצאה באנגלית: graphene:*
+          records_format: objects
+          resource_id: adca9a88-bf91-462a-8a49-62381af9b588
+          sort: "\"מספר בקשה\" desc"
+          total_estimation_threshold: null
+          records:
+          - _id: 266248
+            מספר בקשה: 313776
+            תאריך הבקשה: 30/09/2016
+            תאריך הגשה: 20/06/2024
+            שם האמצאה בעברית: גראפין וייצור של גראפין
+            שם האמצאה באנגלית: GRAPHENE AND THE PRODUCTION OF GRAPHENE
+            מספר בקשה בינלאומי: EP/2016/073451
+            מספר פרסום בינלאומי: /2017/137103
+            תאריך פרסום ראשון: 01/07/2024
+            תאריך פרסום שני: 01/08/2024
+            תאריך מתן פטנט: 02/07/2025
+            סטטוס בקשה/פטנט: פטנט
+            rank שם האמצאה באנגלית: 0.0706241
+          - _id: 258533
+            מספר בקשה: 308113
+            תאריך הבקשה: 30/09/2016
+            תאריך הגשה: 29/10/2023
+            שם האמצאה בעברית: גראפין וייצור של גראפין
+            שם האמצאה באנגלית: GRAPHENE AND THE PRODUCTION OF GRAPHENE
+            מספר בקשה בינלאומי: EP/2016/073451
+            מספר פרסום בינלאומי: /2017/137103
+            תאריך פרסום ראשון: 01/12/2023
+            תאריך פרסום שני: 01/12/2023
+            תאריך מתן פטנט: 02/10/2024
+            סטטוס בקשה/פטנט: פטנט
+            rank שם האמצאה באנגלית: 0.0706241
+          - _id: 244689
+            מספר בקשה: 297995
+            תאריך הבקשה: 09/02/2021
+            תאריך הגשה: 06/11/2022
+            שם האמצאה בעברית: גרפן מסומם בחנקן והשימוש בו
+            שם האמצאה באנגלית: NITROGEN DOPED GRAPHENE AND USE THEREOF
+            מספר בקשה בינלאומי: CZ/2021/050016
+            מספר פרסום בינלאומי: /2021/223783
+            תאריך פרסום ראשון: 01/12/2022
+            תאריך פרסום שני: 01/01/2023
+            תאריך מתן פטנט: 02/03/2026
+            סטטוס בקשה/פטנט: פטנט
+            rank שם האמצאה באנגלית: 0.057308756
+          fields:
+          - id: _id
+            type: int
+          - id: מספר בקשה
+            type: numeric
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: תאריך הבקשה
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: תאריך הגשה
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: שם האמצאה בעברית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: שם האמצאה באנגלית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: מספר בקשה בינלאומי
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: מספר פרסום בינלאומי
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: תאריך פרסום ראשון
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: תאריך פרסום שני
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: תאריך מתן פטנט
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: סטטוס בקשה/פטנט
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: rank שם האמצאה באנגלית
+            type: float
+          _links:
+            start: >-
+              /api/3/action/datastore_search?resource_id=adca9a88-bf91-462a-8a49-62381af9b588&limit=3&filters=%7B%22%D7%A1%D7%98%D7%98%D7%95%D7%A1+%D7%91%D7%A7%D7%A9%D7%94%2F%D7%A4%D7%98%D7%A0%D7%98%22%3A%22%D7%A4%D7%98%D7%A0%D7%98%22%7D&q=%7B%22%D7%A9%D7%9D+%D7%94%D7%90%D7%9E%D7%A6%D7%90%D7%94+%D7%91%D7%90%D7%A0%D7%92%D7%9C%D7%99%D7%AA%22%3A%22graphene%3A%2A%22%7D&plain=false&sort=%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%91%D7%A7%D7%A9%D7%94%22+desc
+            next: >-
+              /api/3/action/datastore_search?resource_id=adca9a88-bf91-462a-8a49-62381af9b588&limit=3&offset=3&filters=%7B%22%D7%A1%D7%98%D7%98%D7%95%D7%A1+%D7%91%D7%A7%D7%A9%D7%94%2F%D7%A4%D7%98%D7%A0%D7%98%22%3A%22%D7%A4%D7%98%D7%A0%D7%98%22%7D&q=%7B%22%D7%A9%D7%9D+%D7%94%D7%90%D7%9E%D7%A6%D7%90%D7%94+%D7%91%D7%90%D7%A0%D7%92%D7%9C%D7%99%D7%AA%22%3A%22graphene%3A%2A%22%7D&plain=false&sort=%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%91%D7%A7%D7%A9%D7%94%22+desc
+          total: 34
+          total_was_estimated: false
+  recorded_at: 2026-10-26T21:18:57.157Z

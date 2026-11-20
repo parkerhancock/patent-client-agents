@@ -1,0 +1,47 @@
+version: 1
+interactions:
+  - request:
+      method: GET
+      uri: https://data.gov.il/api/3/action/package_show?id=trade-marks
+      headers:
+        accept:
+          - application/json
+        user-agent:
+          - patent-client-agents/0 (+https://patentclient.com)
+      body:
+        type: none
+    response:
+      status: 404
+      headers:
+        age:
+          - "77120"
+        connection:
+          - keep-alive
+        content-type:
+          - text/html
+        date:
+          - "Sun, 25 Oct 2026 23:21:52 GMT"
+        etag:
+          - "W/\"c12244887df7032cb7079a3b8e46dcde\""
+        last-modified:
+          - "Thu, 04 Apr 2024 13:53:01 GMT"
+        server:
+          - AmazonS3
+        transfer-encoding:
+          - chunked
+        vary:
+          - Accept-Encoding
+        via:
+          - 1.1 309e1be5b92f507902da9a176b6b4a6a.cloudfront.net (CloudFront)
+        x-amz-cf-id:
+          - 9TOMUe9FVCKA-F8dxUIRMPP7B0jGHxBkzaB4qskjoSD7brcm-skpjg==
+        x-amz-cf-pop:
+          - DFW57-P4
+        x-amz-server-side-encryption:
+          - AES256
+        x-cache:
+          - Error from cloudfront
+      body:
+        type: text
+        content: "<!-- HTML page omitted from the recording -->"
+    recorded_at: 2026-10-26T20:47:11.264Z

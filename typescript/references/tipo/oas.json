@@ -1,0 +1,5968 @@
+{
+  "swagger": "2.0",
+  "host": "cloud.tipo.gov.tw",
+  "basePath": "/S220/opdataapi/api",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/xml",
+    "application/json"
+  ],
+  "paths": {
+    "/TmarkPriority": {
+      "get": {
+        "description": "商標案優先權資料",
+        "operationId": "GET /TmarkPriority",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "回傳格式",
+            "required": true,
+            "in": "query",
+            "name": "format",
+            "type": "string"
+          },
+          {
+            "description": "取前幾筆",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "top",
+            "type": "integer"
+          },
+          {
+            "description": "跳過筆數",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "skip",
+            "type": "integer"
+          },
+          {
+            "description": "排序欄位",
+            "required": false,
+            "in": "query",
+            "name": "orderby",
+            "type": "string"
+          },
+          {
+            "description": "向經濟部智慧財產局申請核發，存取使用之唯一驗證碼",
+            "required": true,
+            "in": "query",
+            "name": "tk",
+            "type": "string"
+          },
+          {
+            "description": "申請案號",
+            "required": false,
+            "in": "query",
+            "name": "applno",
+            "type": "string"
+          },
+          {
+            "description": "申請日期起",
+            "required": false,
+            "in": "query",
+            "name": "applbdate",
+            "type": "string"
+          },
+          {
+            "description": "申請日期迄",
+            "required": false,
+            "in": "query",
+            "name": "appledate",
+            "type": "string"
+          },
+          {
+            "description": "商標名稱",
+            "required": false,
+            "in": "query",
+            "name": "tmarkname",
+            "type": "string"
+          },
+          {
+            "description": "商標種類代碼",
+            "required": false,
+            "in": "query",
+            "name": "tmarkclass",
+            "type": "string"
+          },
+          {
+            "description": "商標樣態代碼",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "tmarktype",
+            "type": "integer"
+          },
+          {
+            "description": "圖樣顏色代碼",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "tmarkcolor",
+            "type": "integer"
+          },
+          {
+            "description": "商品或服務類別 代碼",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "goodclasscode",
+            "type": "integer"
+          },
+          {
+            "description": "申請人中文名稱",
+            "required": false,
+            "in": "query",
+            "name": "applnamec",
+            "type": "string"
+          },
+          {
+            "description": "申請人英文名稱",
+            "required": false,
+            "in": "query",
+            "name": "applnamee",
+            "type": "string"
+          },
+          {
+            "description": "第 1 申請人國別代碼",
+            "required": false,
+            "in": "query",
+            "name": "applcountry",
+            "type": "string"
+          },
+          {
+            "description": "代理人名稱",
+            "required": false,
+            "in": "query",
+            "name": "agentname",
+            "type": "string"
+          },
+          {
+            "description": "註冊號",
+            "required": false,
+            "in": "query",
+            "name": "examno",
+            "type": "string"
+          },
+          {
+            "description": "註冊公告日期起",
+            "required": false,
+            "in": "query",
+            "name": "regnoticebdate",
+            "type": "string"
+          },
+          {
+            "description": "註冊公告日期迄",
+            "required": false,
+            "in": "query",
+            "name": "regnoticeedate",
+            "type": "string"
+          },
+          {
+            "description": "優先權類別",
+            "required": false,
+            "in": "query",
+            "name": "prioritytype",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TmarkPriority"
+            }
+          }
+        }
+      }
+    },
+    "/TmarkAppl": {
+      "get": {
+        "description": "商標註冊申請案",
+        "operationId": "GET /TmarkAppl",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "回傳格式",
+            "required": true,
+            "in": "query",
+            "name": "format",
+            "type": "string"
+          },
+          {
+            "description": "取前幾筆",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "top",
+            "type": "integer"
+          },
+          {
+            "description": "跳過筆數",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "skip",
+            "type": "integer"
+          },
+          {
+            "description": "排序欄位",
+            "required": false,
+            "in": "query",
+            "name": "orderby",
+            "type": "string"
+          },
+          {
+            "description": "向經濟部智慧財產局申請核發，存取使用之唯一驗證碼",
+            "required": true,
+            "in": "query",
+            "name": "tk",
+            "type": "string"
+          },
+          {
+            "description": "申請案號",
+            "required": false,
+            "in": "query",
+            "name": "applno",
+            "type": "string"
+          },
+          {
+            "description": "申請日期起",
+            "required": false,
+            "in": "query",
+            "name": "applbdate",
+            "type": "string"
+          },
+          {
+            "description": "申請日期迄",
+            "required": false,
+            "in": "query",
+            "name": "appledate",
+            "type": "string"
+          },
+          {
+            "description": "商標名稱",
+            "required": false,
+            "in": "query",
+            "name": "tmarkname",
+            "type": "string"
+          },
+          {
+            "description": "商標種類代碼",
+            "required": false,
+            "in": "query",
+            "name": "tmarkclass",
+            "type": "string"
+          },
+          {
+            "description": "商標樣態代碼",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "tmarktype",
+            "type": "integer"
+          },
+          {
+            "description": "圖樣顏色代碼",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "tmarkcolor",
+            "type": "integer"
+          },
+          {
+            "description": "商品或服務類別 代碼",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "goodclasscode",
+            "type": "integer"
+          },
+          {
+            "description": "申請人中文名稱",
+            "required": false,
+            "in": "query",
+            "name": "applnamec",
+            "type": "string"
+          },
+          {
+            "description": "申請人英文名稱",
+            "required": false,
+            "in": "query",
+            "name": "applnamee",
+            "type": "string"
+          },
+          {
+            "description": "第 1 申請人國別代碼",
+            "required": false,
+            "in": "query",
+            "name": "applcountry",
+            "type": "string"
+          },
+          {
+            "description": "代理人名稱",
+            "required": false,
+            "in": "query",
+            "name": "agentname",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TmarkAppl"
+            }
+          }
+        }
+      }
+    },
+    "/TmarkPics": {
+      "get": {
+        "description": "商標申請案圖庫資料",
+        "operationId": "GET /TmarkPics",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "回傳格式",
+            "required": true,
+            "in": "query",
+            "name": "format",
+            "type": "string"
+          },
+          {
+            "description": "取前幾筆",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "top",
+            "type": "integer"
+          },
+          {
+            "description": "跳過筆數",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "skip",
+            "type": "integer"
+          },
+          {
+            "description": "排序欄位",
+            "required": false,
+            "in": "query",
+            "name": "orderby",
+            "type": "string"
+          },
+          {
+            "description": "向經濟部智慧財產局申請核發，存取使用之唯一驗證碼",
+            "required": true,
+            "in": "query",
+            "name": "tk",
+            "type": "string"
+          },
+          {
+            "description": "申請案號",
+            "required": false,
+            "in": "query",
+            "name": "applno",
+            "type": "string"
+          },
+          {
+            "description": "商標圖詮釋資料更新日期起",
+            "required": false,
+            "in": "query",
+            "name": "picsbmoddate",
+            "type": "string"
+          },
+          {
+            "description": "商標圖詮釋資料更新日期迄",
+            "required": false,
+            "in": "query",
+            "name": "picsemoddate",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TmarkPics"
+            }
+          }
+        }
+      }
+    },
+    "/PatentPub": {
+      "get": {
+        "description": "發明公開案",
+        "operationId": "GET /PatentPub",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "回傳格式",
+            "required": true,
+            "in": "query",
+            "name": "format",
+            "type": "string"
+          },
+          {
+            "description": "取前幾筆",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "top",
+            "type": "integer"
+          },
+          {
+            "description": "跳過筆數",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "skip",
+            "type": "integer"
+          },
+          {
+            "description": "排序欄位",
+            "required": false,
+            "in": "query",
+            "name": "orderby",
+            "type": "string"
+          },
+          {
+            "description": "向經濟部智慧財產局申請核發，存取使用之唯一驗證碼",
+            "required": true,
+            "in": "query",
+            "name": "tk",
+            "type": "string"
+          },
+          {
+            "description": "公開號註",
+            "required": false,
+            "in": "query",
+            "name": "noticeno",
+            "type": "string"
+          },
+          {
+            "description": "公開日期起",
+            "required": false,
+            "in": "query",
+            "name": "noticebdate",
+            "type": "string"
+          },
+          {
+            "description": "公開日期迄",
+            "required": false,
+            "in": "query",
+            "name": "noticeedate",
+            "type": "string"
+          },
+          {
+            "description": "公開卷期區間起",
+            "required": false,
+            "in": "query",
+            "name": "noticebvolisu",
+            "type": "string"
+          },
+          {
+            "description": "公開卷期區間迄",
+            "required": false,
+            "in": "query",
+            "name": "noticeevolisu",
+            "type": "string"
+          },
+          {
+            "description": "申請案號註",
+            "required": false,
+            "in": "query",
+            "name": "applno",
+            "type": "string"
+          },
+          {
+            "description": "申請日期起",
+            "required": false,
+            "in": "query",
+            "name": "applbdate",
+            "type": "string"
+          },
+          {
+            "description": "申請日期迄",
+            "required": false,
+            "in": "query",
+            "name": "appledate",
+            "type": "string"
+          },
+          {
+            "description": "專利中英文名稱",
+            "required": false,
+            "in": "query",
+            "name": "patentname",
+            "type": "string"
+          },
+          {
+            "description": "完整IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcfull",
+            "type": "string"
+          },
+          {
+            "description": "IPC 主部",
+            "required": false,
+            "in": "query",
+            "name": "ipcsection",
+            "type": "string"
+          },
+          {
+            "description": "IPC 主類",
+            "required": false,
+            "in": "query",
+            "name": "ipcclass",
+            "type": "string"
+          },
+          {
+            "description": "IPC 次類",
+            "required": false,
+            "in": "query",
+            "name": "ipcsubclass",
+            "type": "string"
+          },
+          {
+            "description": "IPC 主目",
+            "required": false,
+            "in": "query",
+            "name": "ipcmaingroup",
+            "type": "string"
+          },
+          {
+            "description": "IPC 次目",
+            "required": false,
+            "in": "query",
+            "name": "ipcgroup",
+            "type": "string"
+          },
+          {
+            "description": "申請人中文名稱",
+            "required": false,
+            "in": "query",
+            "name": "applnamec",
+            "type": "string"
+          },
+          {
+            "description": "申請人英文名稱",
+            "required": false,
+            "in": "query",
+            "name": "applnamee",
+            "type": "string"
+          },
+          {
+            "description": "發明人中文名稱",
+            "required": false,
+            "in": "query",
+            "name": "inventornamec",
+            "type": "string"
+          },
+          {
+            "description": "發明人英文名稱",
+            "required": false,
+            "in": "query",
+            "name": "inventornamee",
+            "type": "string"
+          },
+          {
+            "description": "代理人中文名稱",
+            "required": false,
+            "in": "query",
+            "name": "agentnamec",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PatentPub"
+            }
+          }
+        }
+      }
+    },
+    "/TmarkRights": {
+      "get": {
+        "description": "商標權狀態異動資料",
+        "operationId": "GET /TmarkRights",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "回傳格式",
+            "required": true,
+            "in": "query",
+            "name": "format",
+            "type": "string"
+          },
+          {
+            "description": "取前幾筆",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "top",
+            "type": "integer"
+          },
+          {
+            "description": "跳過筆數",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "skip",
+            "type": "integer"
+          },
+          {
+            "description": "排序欄位",
+            "required": false,
+            "in": "query",
+            "name": "orderby",
+            "type": "string"
+          },
+          {
+            "description": "向經濟部智慧財產局申請核發，存取使用之唯一驗證碼",
+            "required": true,
+            "in": "query",
+            "name": "tk",
+            "type": "string"
+          },
+          {
+            "description": "申請案號",
+            "required": false,
+            "in": "query",
+            "name": "applno",
+            "type": "string"
+          },
+          {
+            "description": "申請日期起",
+            "required": false,
+            "in": "query",
+            "name": "applbdate",
+            "type": "string"
+          },
+          {
+            "description": "申請日期迄",
+            "required": false,
+            "in": "query",
+            "name": "appledate",
+            "type": "string"
+          },
+          {
+            "description": "商標名稱",
+            "required": false,
+            "in": "query",
+            "name": "tmarkname",
+            "type": "string"
+          },
+          {
+            "description": "商標種類代碼",
+            "required": false,
+            "in": "query",
+            "name": "tmarkclass",
+            "type": "string"
+          },
+          {
+            "description": "商標樣態代碼",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "tmarktype",
+            "type": "integer"
+          },
+          {
+            "description": "圖樣顏色代碼",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "tmarkcolor",
+            "type": "integer"
+          },
+          {
+            "description": "商品或服務類別 代碼",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "goodclasscode",
+            "type": "integer"
+          },
+          {
+            "description": "申請人中文名稱",
+            "required": false,
+            "in": "query",
+            "name": "applnamec",
+            "type": "string"
+          },
+          {
+            "description": "申請人英文名稱",
+            "required": false,
+            "in": "query",
+            "name": "applnamee",
+            "type": "string"
+          },
+          {
+            "description": "第 1 申請人國別代碼",
+            "required": false,
+            "in": "query",
+            "name": "applcountry",
+            "type": "string"
+          },
+          {
+            "description": "代理人名稱",
+            "required": false,
+            "in": "query",
+            "name": "agentname",
+            "type": "string"
+          },
+          {
+            "description": "註冊號",
+            "required": false,
+            "in": "query",
+            "name": "examno",
+            "type": "string"
+          },
+          {
+            "description": "註冊公告日期起",
+            "required": false,
+            "in": "query",
+            "name": "regnoticebdate",
+            "type": "string"
+          },
+          {
+            "description": "註冊公告日期迄",
+            "required": false,
+            "in": "query",
+            "name": "regnoticeedate",
+            "type": "string"
+          },
+          {
+            "description": "專用期限起",
+            "required": false,
+            "in": "query",
+            "name": "deadlinebdate",
+            "type": "string"
+          },
+          {
+            "description": "專用期限迄",
+            "required": false,
+            "in": "query",
+            "name": "deadlineedate",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TmarkRights"
+            }
+          }
+        }
+      }
+    },
+    "/PatentDivide": {
+      "get": {
+        "description": "專利分割案",
+        "operationId": "GET /PatentDivide",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "回傳格式",
+            "required": true,
+            "in": "query",
+            "name": "format",
+            "type": "string"
+          },
+          {
+            "description": "取前幾筆",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "top",
+            "type": "integer"
+          },
+          {
+            "description": "跳過筆數",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "skip",
+            "type": "integer"
+          },
+          {
+            "description": "排序欄位",
+            "required": false,
+            "in": "query",
+            "name": "orderby",
+            "type": "string"
+          },
+          {
+            "description": "向經濟部智慧財產局申請核發，存取使用之唯一驗證碼",
+            "required": true,
+            "in": "query",
+            "name": "tk",
+            "type": "string"
+          },
+          {
+            "description": "查詢模式 (1 原申請案 2 分割後申請案 )",
+            "format": "int32",
+            "required": true,
+            "in": "query",
+            "name": "querytype",
+            "type": "integer"
+          },
+          {
+            "description": "專利類別條件參數(1 發明 2 新型 3 設計)",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "applclass",
+            "type": "integer"
+          },
+          {
+            "description": "證書號",
+            "required": false,
+            "in": "query",
+            "name": "patentno",
+            "type": "string"
+          },
+          {
+            "description": "公開號註",
+            "required": false,
+            "in": "query",
+            "name": "noticeno",
+            "type": "string"
+          },
+          {
+            "description": "公開日期起",
+            "required": false,
+            "in": "query",
+            "name": "noticebdate",
+            "type": "string"
+          },
+          {
+            "description": "公開日期迄",
+            "required": false,
+            "in": "query",
+            "name": "noticeedate",
+            "type": "string"
+          },
+          {
+            "description": "公開卷期區間起",
+            "required": false,
+            "in": "query",
+            "name": "noticebvolisu",
+            "type": "string"
+          },
+          {
+            "description": "公開卷期區間迄",
+            "required": false,
+            "in": "query",
+            "name": "noticeevolisu",
+            "type": "string"
+          },
+          {
+            "description": "公告號註",
+            "required": false,
+            "in": "query",
+            "name": "publishno",
+            "type": "string"
+          },
+          {
+            "description": "公告日期起日",
+            "required": false,
+            "in": "query",
+            "name": "publishbdate",
+            "type": "string"
+          },
+          {
+            "description": "公告日期迄",
+            "required": false,
+            "in": "query",
+            "name": "publishedate",
+            "type": "string"
+          },
+          {
+            "description": "公告卷期區間起",
+            "required": false,
+            "in": "query",
+            "name": "publishbvolisu",
+            "type": "string"
+          },
+          {
+            "description": "公告卷期區間迄",
+            "required": false,
+            "in": "query",
+            "name": "publishevolisu",
+            "type": "string"
+          },
+          {
+            "description": "申請案號註",
+            "required": false,
+            "in": "query",
+            "name": "applno",
+            "type": "string"
+          },
+          {
+            "description": "申請日期起",
+            "required": false,
+            "in": "query",
+            "name": "applbdate",
+            "type": "string"
+          },
+          {
+            "description": "申請日期迄",
+            "required": false,
+            "in": "query",
+            "name": "appledate",
+            "type": "string"
+          },
+          {
+            "description": "專利中英文名稱",
+            "required": false,
+            "in": "query",
+            "name": "patentname",
+            "type": "string"
+          },
+          {
+            "description": "完整IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcfull",
+            "type": "string"
+          },
+          {
+            "description": "第一階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcsection",
+            "type": "string"
+          },
+          {
+            "description": "第二階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcclass",
+            "type": "string"
+          },
+          {
+            "description": "第三階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcsubclass",
+            "type": "string"
+          },
+          {
+            "description": "第四階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcmaingroup",
+            "type": "string"
+          },
+          {
+            "description": "第五階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcgroup",
+            "type": "string"
+          },
+          {
+            "description": "完整LOC",
+            "required": false,
+            "in": "query",
+            "name": "locfull",
+            "type": "string"
+          },
+          {
+            "description": "第一階LOC",
+            "required": false,
+            "in": "query",
+            "name": "loclevel1",
+            "type": "string"
+          },
+          {
+            "description": "第二階LOC",
+            "required": false,
+            "in": "query",
+            "name": "loclevel2",
+            "type": "string"
+          },
+          {
+            "description": "申請人中文名稱",
+            "required": false,
+            "in": "query",
+            "name": "applnamec",
+            "type": "string"
+          },
+          {
+            "description": "申請人英文名稱",
+            "required": false,
+            "in": "query",
+            "name": "applnamee",
+            "type": "string"
+          },
+          {
+            "description": "第一申請人國別",
+            "required": false,
+            "in": "query",
+            "name": "applcountry",
+            "type": "string"
+          },
+          {
+            "description": "發明人中文名稱",
+            "required": false,
+            "in": "query",
+            "name": "inventornamec",
+            "type": "string"
+          },
+          {
+            "description": "發明人英文名稱",
+            "required": false,
+            "in": "query",
+            "name": "inventornamee",
+            "type": "string"
+          },
+          {
+            "description": "發明人國別代碼",
+            "required": false,
+            "in": "query",
+            "name": "inventorcountry",
+            "type": "string"
+          },
+          {
+            "description": "代理人中文名稱",
+            "required": false,
+            "in": "query",
+            "name": "agentnamec",
+            "type": "string"
+          },
+          {
+            "description": "年費有效日期起",
+            "required": false,
+            "in": "query",
+            "name": "chargeexpirbdate",
+            "type": "string"
+          },
+          {
+            "description": "年費有效日期迄",
+            "required": false,
+            "in": "query",
+            "name": "chargeexpiredate",
+            "type": "string"
+          },
+          {
+            "description": "分割後申請案號",
+            "required": false,
+            "in": "query",
+            "name": "newapplno",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PatentDivide"
+            }
+          }
+        }
+      }
+    },
+    "/PatentTwins": {
+      "get": {
+        "description": "專利一案兩請關聯案件",
+        "operationId": "GET /PatentTwins",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "回傳格式",
+            "required": true,
+            "in": "query",
+            "name": "format",
+            "type": "string"
+          },
+          {
+            "description": "取前幾筆",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "top",
+            "type": "integer"
+          },
+          {
+            "description": "跳過筆數",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "skip",
+            "type": "integer"
+          },
+          {
+            "description": "排序欄位",
+            "required": false,
+            "in": "query",
+            "name": "orderby",
+            "type": "string"
+          },
+          {
+            "description": "向經濟部智慧財產局申請核發，存取使用之唯一驗證碼",
+            "required": true,
+            "in": "query",
+            "name": "tk",
+            "type": "string"
+          },
+          {
+            "description": "申請案號註",
+            "required": false,
+            "in": "query",
+            "name": "applno",
+            "type": "string"
+          },
+          {
+            "description": "專利類別條件參數(1 發明 2 新型 3 設計)",
+            "format": "int32",
+            "required": true,
+            "in": "query",
+            "name": "applclass",
+            "type": "integer"
+          },
+          {
+            "description": "發明專利申請案號",
+            "required": false,
+            "in": "query",
+            "name": "twinsapplno",
+            "type": "string"
+          },
+          {
+            "description": "證書號",
+            "required": false,
+            "in": "query",
+            "name": "patentno",
+            "type": "string"
+          },
+          {
+            "description": "公開號註",
+            "required": false,
+            "in": "query",
+            "name": "noticeno",
+            "type": "string"
+          },
+          {
+            "description": "公開日期起",
+            "required": false,
+            "in": "query",
+            "name": "noticebdate",
+            "type": "string"
+          },
+          {
+            "description": "公開日期迄",
+            "required": false,
+            "in": "query",
+            "name": "noticeedate",
+            "type": "string"
+          },
+          {
+            "description": "公開卷期區間起",
+            "required": false,
+            "in": "query",
+            "name": "noticebvolisu",
+            "type": "string"
+          },
+          {
+            "description": "公開卷期區間迄",
+            "required": false,
+            "in": "query",
+            "name": "noticeevolisu",
+            "type": "string"
+          },
+          {
+            "description": "公告號註",
+            "required": false,
+            "in": "query",
+            "name": "publishno",
+            "type": "string"
+          },
+          {
+            "description": "公告日期起日",
+            "required": false,
+            "in": "query",
+            "name": "publishbdate",
+            "type": "string"
+          },
+          {
+            "description": "公告日期迄",
+            "required": false,
+            "in": "query",
+            "name": "publishedate",
+            "type": "string"
+          },
+          {
+            "description": "公告卷期區間起",
+            "required": false,
+            "in": "query",
+            "name": "publishbvolisu",
+            "type": "string"
+          },
+          {
+            "description": "公告卷期區間迄",
+            "required": false,
+            "in": "query",
+            "name": "publishevolisu",
+            "type": "string"
+          },
+          {
+            "description": "申請日期起",
+            "required": false,
+            "in": "query",
+            "name": "applbdate",
+            "type": "string"
+          },
+          {
+            "description": "申請日期迄",
+            "required": false,
+            "in": "query",
+            "name": "appledate",
+            "type": "string"
+          },
+          {
+            "description": "專利中英文名稱",
+            "required": false,
+            "in": "query",
+            "name": "patentname",
+            "type": "string"
+          },
+          {
+            "description": "完整IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcfull",
+            "type": "string"
+          },
+          {
+            "description": "第一階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcsection",
+            "type": "string"
+          },
+          {
+            "description": "第二階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcclass",
+            "type": "string"
+          },
+          {
+            "description": "第三階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcsubclass",
+            "type": "string"
+          },
+          {
+            "description": "第四階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcmaingroup",
+            "type": "string"
+          },
+          {
+            "description": "第五階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcgroup",
+            "type": "string"
+          },
+          {
+            "description": "申請人中文名稱",
+            "required": false,
+            "in": "query",
+            "name": "applnamec",
+            "type": "string"
+          },
+          {
+            "description": "申請人英文名稱",
+            "required": false,
+            "in": "query",
+            "name": "applnamee",
+            "type": "string"
+          },
+          {
+            "description": "第一申請人國別",
+            "required": false,
+            "in": "query",
+            "name": "applcountry",
+            "type": "string"
+          },
+          {
+            "description": "發明人中文名稱",
+            "required": false,
+            "in": "query",
+            "name": "inventornamec",
+            "type": "string"
+          },
+          {
+            "description": "發明人英文名稱",
+            "required": false,
+            "in": "query",
+            "name": "inventornamee",
+            "type": "string"
+          },
+          {
+            "description": "發明人國別代碼",
+            "required": false,
+            "in": "query",
+            "name": "inventorcountry",
+            "type": "string"
+          },
+          {
+            "description": "代理人中文名稱",
+            "required": false,
+            "in": "query",
+            "name": "agentnamec",
+            "type": "string"
+          },
+          {
+            "description": "年費有效日期起",
+            "required": false,
+            "in": "query",
+            "name": "chargeexpirbdate",
+            "type": "string"
+          },
+          {
+            "description": "年費有效日期迄",
+            "required": false,
+            "in": "query",
+            "name": "chargeexpiredate",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PatentTwins"
+            }
+          }
+        }
+      }
+    },
+    "/TmarkDivide": {
+      "get": {
+        "description": "商標註冊案分割紀錄",
+        "operationId": "GET /TmarkDivide",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "回傳格式",
+            "required": true,
+            "in": "query",
+            "name": "format",
+            "type": "string"
+          },
+          {
+            "description": "取前幾筆",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "top",
+            "type": "integer"
+          },
+          {
+            "description": "跳過筆數",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "skip",
+            "type": "integer"
+          },
+          {
+            "description": "排序欄位",
+            "required": false,
+            "in": "query",
+            "name": "orderby",
+            "type": "string"
+          },
+          {
+            "description": "向經濟部智慧財產局申請核發，存取使用之唯一驗證碼",
+            "required": true,
+            "in": "query",
+            "name": "tk",
+            "type": "string"
+          },
+          {
+            "description": "商標名稱",
+            "required": false,
+            "in": "query",
+            "name": "tmarkname",
+            "type": "string"
+          },
+          {
+            "description": "註冊號",
+            "required": false,
+            "in": "query",
+            "name": "examno",
+            "type": "string"
+          },
+          {
+            "description": "原案商標種類",
+            "required": false,
+            "in": "query",
+            "name": "origntmarkclass",
+            "type": "string"
+          },
+          {
+            "description": "原註冊號",
+            "required": false,
+            "in": "query",
+            "name": "originexamno",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TmarkDivide"
+            }
+          }
+        }
+      }
+    },
+    "/PatentAnnuity": {
+      "get": {
+        "description": "專利案件年費繳納紀錄",
+        "operationId": "GET /PatentAnnuity",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "回傳格式",
+            "required": true,
+            "in": "query",
+            "name": "format",
+            "type": "string"
+          },
+          {
+            "description": "取前幾筆",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "top",
+            "type": "integer"
+          },
+          {
+            "description": "跳過筆數",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "skip",
+            "type": "integer"
+          },
+          {
+            "description": "排序欄位",
+            "required": false,
+            "in": "query",
+            "name": "orderby",
+            "type": "string"
+          },
+          {
+            "description": "向經濟部智慧財產局申請核發，存取使用之唯一驗證碼",
+            "required": true,
+            "in": "query",
+            "name": "tk",
+            "type": "string"
+          },
+          {
+            "description": "專利類別條件參數(1 發明 2 新型 3 設計)",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "applclass",
+            "type": "integer"
+          },
+          {
+            "description": "公告日期起日",
+            "required": false,
+            "in": "query",
+            "name": "publishbdate",
+            "type": "string"
+          },
+          {
+            "description": "申請人中文名稱",
+            "required": false,
+            "in": "query",
+            "name": "applnamec",
+            "type": "string"
+          },
+          {
+            "description": "證書號",
+            "required": false,
+            "in": "query",
+            "name": "patentno",
+            "type": "string"
+          },
+          {
+            "description": "公開號註",
+            "required": false,
+            "in": "query",
+            "name": "noticeno",
+            "type": "string"
+          },
+          {
+            "description": "公開日期起",
+            "required": false,
+            "in": "query",
+            "name": "noticebdate",
+            "type": "string"
+          },
+          {
+            "description": "公開日期迄",
+            "required": false,
+            "in": "query",
+            "name": "noticeedate",
+            "type": "string"
+          },
+          {
+            "description": "公開卷期區間起",
+            "required": false,
+            "in": "query",
+            "name": "noticebvolisu",
+            "type": "string"
+          },
+          {
+            "description": "公開卷期區間迄",
+            "required": false,
+            "in": "query",
+            "name": "noticeevolisu",
+            "type": "string"
+          },
+          {
+            "description": "公告號註",
+            "required": false,
+            "in": "query",
+            "name": "publishno",
+            "type": "string"
+          },
+          {
+            "description": "公告日期迄",
+            "required": false,
+            "in": "query",
+            "name": "publishedate",
+            "type": "string"
+          },
+          {
+            "description": "公告卷期區間起",
+            "required": false,
+            "in": "query",
+            "name": "publishbvolisu",
+            "type": "string"
+          },
+          {
+            "description": "公告卷期區間迄",
+            "required": false,
+            "in": "query",
+            "name": "publishevolisu",
+            "type": "string"
+          },
+          {
+            "description": "申請案號註",
+            "required": false,
+            "in": "query",
+            "name": "applno",
+            "type": "string"
+          },
+          {
+            "description": "申請日期起",
+            "required": false,
+            "in": "query",
+            "name": "applbdate",
+            "type": "string"
+          },
+          {
+            "description": "申請日期迄",
+            "required": false,
+            "in": "query",
+            "name": "appledate",
+            "type": "string"
+          },
+          {
+            "description": "專利中英文名稱",
+            "required": false,
+            "in": "query",
+            "name": "patentname",
+            "type": "string"
+          },
+          {
+            "description": "完整IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcfull",
+            "type": "string"
+          },
+          {
+            "description": "第一階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcsection",
+            "type": "string"
+          },
+          {
+            "description": "第二階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcclass",
+            "type": "string"
+          },
+          {
+            "description": "第三階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcsubclass",
+            "type": "string"
+          },
+          {
+            "description": "第四階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcmaingroup",
+            "type": "string"
+          },
+          {
+            "description": "第五階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcgroup",
+            "type": "string"
+          },
+          {
+            "description": "完整LOC",
+            "required": false,
+            "in": "query",
+            "name": "locfull",
+            "type": "string"
+          },
+          {
+            "description": "第一階LOC",
+            "required": false,
+            "in": "query",
+            "name": "loclevel1",
+            "type": "string"
+          },
+          {
+            "description": "第二階LOC",
+            "required": false,
+            "in": "query",
+            "name": "loclevel2",
+            "type": "string"
+          },
+          {
+            "description": "申請人英文名稱",
+            "required": false,
+            "in": "query",
+            "name": "applnamee",
+            "type": "string"
+          },
+          {
+            "description": "第一申請人國別",
+            "required": false,
+            "in": "query",
+            "name": "applcountry",
+            "type": "string"
+          },
+          {
+            "description": "發明人中文名稱",
+            "required": false,
+            "in": "query",
+            "name": "inventornamec",
+            "type": "string"
+          },
+          {
+            "description": "發明人英文名稱",
+            "required": false,
+            "in": "query",
+            "name": "inventornamee",
+            "type": "string"
+          },
+          {
+            "description": "發明人國別代碼",
+            "required": false,
+            "in": "query",
+            "name": "inventorcountry",
+            "type": "string"
+          },
+          {
+            "description": "代理人中文名稱",
+            "required": false,
+            "in": "query",
+            "name": "agentnamec",
+            "type": "string"
+          },
+          {
+            "description": "年費有效日期起",
+            "required": false,
+            "in": "query",
+            "name": "chargeexpirbdate",
+            "type": "string"
+          },
+          {
+            "description": "年費有效日期迄",
+            "required": false,
+            "in": "query",
+            "name": "chargeexpiredate",
+            "type": "string"
+          },
+          {
+            "description": "年費有效年次",
+            "required": false,
+            "in": "query",
+            "name": "chargeexpiryear",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PatentAnnuity"
+            }
+          }
+        }
+      }
+    },
+    "/PatentAppl": {
+      "get": {
+        "description": "專利申請案IPC/LOC及第1申請人國籍資訊",
+        "operationId": "GET /PatentAppl",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "回傳格式",
+            "required": true,
+            "in": "query",
+            "name": "format",
+            "type": "string"
+          },
+          {
+            "description": "取前幾筆",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "top",
+            "type": "integer"
+          },
+          {
+            "description": "跳過筆數",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "skip",
+            "type": "integer"
+          },
+          {
+            "description": "排序欄位",
+            "required": false,
+            "in": "query",
+            "name": "orderby",
+            "type": "string"
+          },
+          {
+            "description": "向經濟部智慧財產局申請核發，存取使用之唯一驗證碼",
+            "required": true,
+            "in": "query",
+            "name": "tk",
+            "type": "string"
+          },
+          {
+            "description": "專利類別條件參數(1 發明 2 新型 3 設計)",
+            "format": "int32",
+            "required": true,
+            "in": "query",
+            "name": "applclass",
+            "type": "integer"
+          },
+          {
+            "description": "申請案號註",
+            "required": false,
+            "in": "query",
+            "name": "applno",
+            "type": "string"
+          },
+          {
+            "description": "申請日期起",
+            "required": false,
+            "in": "query",
+            "name": "applbdate",
+            "type": "string"
+          },
+          {
+            "description": "申請日期迄",
+            "required": false,
+            "in": "query",
+            "name": "appledate",
+            "type": "string"
+          },
+          {
+            "description": "完整IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcfull",
+            "type": "string"
+          },
+          {
+            "description": "第一階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcsection",
+            "type": "string"
+          },
+          {
+            "description": "第二階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcclass",
+            "type": "string"
+          },
+          {
+            "description": "第三階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcsubclass",
+            "type": "string"
+          },
+          {
+            "description": "第四階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcmaingroup",
+            "type": "string"
+          },
+          {
+            "description": "第五階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcgroup",
+            "type": "string"
+          },
+          {
+            "description": "完整LOC",
+            "required": false,
+            "in": "query",
+            "name": "locfull",
+            "type": "string"
+          },
+          {
+            "description": "第一階LOC",
+            "required": false,
+            "in": "query",
+            "name": "loclevel1",
+            "type": "string"
+          },
+          {
+            "description": "第二階LOC",
+            "required": false,
+            "in": "query",
+            "name": "loclevel2",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PatentAppl"
+            }
+          }
+        }
+      }
+    },
+    "/PatentAlteration": {
+      "get": {
+        "description": "專利案件讓與紀錄",
+        "operationId": "GET /PatentAlteration",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "回傳格式",
+            "required": true,
+            "in": "query",
+            "name": "format",
+            "type": "string"
+          },
+          {
+            "description": "取前幾筆",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "top",
+            "type": "integer"
+          },
+          {
+            "description": "跳過筆數",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "skip",
+            "type": "integer"
+          },
+          {
+            "description": "排序欄位",
+            "required": false,
+            "in": "query",
+            "name": "orderby",
+            "type": "string"
+          },
+          {
+            "description": "向經濟部智慧財產局申請核發，存取使用之唯一驗證碼",
+            "required": true,
+            "in": "query",
+            "name": "tk",
+            "type": "string"
+          },
+          {
+            "description": "專利類別條件參數(1 發明 2 新型 3 設計)",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "applclass",
+            "type": "integer"
+          },
+          {
+            "description": "公告日期起日",
+            "required": false,
+            "in": "query",
+            "name": "publishbdate",
+            "type": "string"
+          },
+          {
+            "description": "申請人中文名稱",
+            "required": false,
+            "in": "query",
+            "name": "applnamec",
+            "type": "string"
+          },
+          {
+            "description": "證書號",
+            "required": false,
+            "in": "query",
+            "name": "patentno",
+            "type": "string"
+          },
+          {
+            "description": "公開號註",
+            "required": false,
+            "in": "query",
+            "name": "noticeno",
+            "type": "string"
+          },
+          {
+            "description": "公開日期起",
+            "required": false,
+            "in": "query",
+            "name": "noticebdate",
+            "type": "string"
+          },
+          {
+            "description": "公開日期迄",
+            "required": false,
+            "in": "query",
+            "name": "noticeedate",
+            "type": "string"
+          },
+          {
+            "description": "公開卷期區間起",
+            "required": false,
+            "in": "query",
+            "name": "noticebvolisu",
+            "type": "string"
+          },
+          {
+            "description": "公開卷期區間迄",
+            "required": false,
+            "in": "query",
+            "name": "noticeevolisu",
+            "type": "string"
+          },
+          {
+            "description": "公告號註",
+            "required": false,
+            "in": "query",
+            "name": "publishno",
+            "type": "string"
+          },
+          {
+            "description": "公告日期迄",
+            "required": false,
+            "in": "query",
+            "name": "publishedate",
+            "type": "string"
+          },
+          {
+            "description": "公告卷期區間起",
+            "required": false,
+            "in": "query",
+            "name": "publishbvolisu",
+            "type": "string"
+          },
+          {
+            "description": "公告卷期區間迄",
+            "required": false,
+            "in": "query",
+            "name": "publishevolisu",
+            "type": "string"
+          },
+          {
+            "description": "申請案號註",
+            "required": false,
+            "in": "query",
+            "name": "applno",
+            "type": "string"
+          },
+          {
+            "description": "申請日期起",
+            "required": false,
+            "in": "query",
+            "name": "applbdate",
+            "type": "string"
+          },
+          {
+            "description": "申請日期迄",
+            "required": false,
+            "in": "query",
+            "name": "appledate",
+            "type": "string"
+          },
+          {
+            "description": "專利中英文名稱",
+            "required": false,
+            "in": "query",
+            "name": "patentname",
+            "type": "string"
+          },
+          {
+            "description": "完整IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcfull",
+            "type": "string"
+          },
+          {
+            "description": "第一階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcsection",
+            "type": "string"
+          },
+          {
+            "description": "第二階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcclass",
+            "type": "string"
+          },
+          {
+            "description": "第三階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcsubclass",
+            "type": "string"
+          },
+          {
+            "description": "第四階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcmaingroup",
+            "type": "string"
+          },
+          {
+            "description": "第五階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcgroup",
+            "type": "string"
+          },
+          {
+            "description": "完整LOC",
+            "required": false,
+            "in": "query",
+            "name": "locfull",
+            "type": "string"
+          },
+          {
+            "description": "第一階LOC",
+            "required": false,
+            "in": "query",
+            "name": "loclevel1",
+            "type": "string"
+          },
+          {
+            "description": "第二階LOC",
+            "required": false,
+            "in": "query",
+            "name": "loclevel2",
+            "type": "string"
+          },
+          {
+            "description": "申請人英文名稱",
+            "required": false,
+            "in": "query",
+            "name": "applnamee",
+            "type": "string"
+          },
+          {
+            "description": "第一申請人國別",
+            "required": false,
+            "in": "query",
+            "name": "applcountry",
+            "type": "string"
+          },
+          {
+            "description": "發明人中文名稱",
+            "required": false,
+            "in": "query",
+            "name": "inventornamec",
+            "type": "string"
+          },
+          {
+            "description": "發明人英文名稱",
+            "required": false,
+            "in": "query",
+            "name": "inventornamee",
+            "type": "string"
+          },
+          {
+            "description": "發明人國別代碼",
+            "required": false,
+            "in": "query",
+            "name": "inventorcountry",
+            "type": "string"
+          },
+          {
+            "description": "代理人中文名稱",
+            "required": false,
+            "in": "query",
+            "name": "agentnamec",
+            "type": "string"
+          },
+          {
+            "description": "年費有效日期起",
+            "required": false,
+            "in": "query",
+            "name": "chargeexpirbdate",
+            "type": "string"
+          },
+          {
+            "description": "年費有效日期迄",
+            "required": false,
+            "in": "query",
+            "name": "chargeexpiredate",
+            "type": "string"
+          },
+          {
+            "description": "讓與人中文名稱",
+            "required": false,
+            "in": "query",
+            "name": "transferer",
+            "type": "string"
+          },
+          {
+            "description": "讓與人英文名稱",
+            "required": false,
+            "in": "query",
+            "name": "transferere",
+            "type": "string"
+          },
+          {
+            "description": "受讓人中文名稱",
+            "required": false,
+            "in": "query",
+            "name": "transferee",
+            "type": "string"
+          },
+          {
+            "description": "受讓人英文名稱",
+            "required": false,
+            "in": "query",
+            "name": "transfereee",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PatentAlteration"
+            }
+          }
+        }
+      }
+    },
+    "/PatentPriority": {
+      "get": {
+        "description": "專利優先權案",
+        "operationId": "GET /PatentPriority",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "回傳格式",
+            "required": true,
+            "in": "query",
+            "name": "format",
+            "type": "string"
+          },
+          {
+            "description": "取前幾筆",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "top",
+            "type": "integer"
+          },
+          {
+            "description": "跳過筆數",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "skip",
+            "type": "integer"
+          },
+          {
+            "description": "排序欄位",
+            "required": false,
+            "in": "query",
+            "name": "orderby",
+            "type": "string"
+          },
+          {
+            "description": "向經濟部智慧財產局申請核發，存取使用之唯一驗證碼",
+            "required": true,
+            "in": "query",
+            "name": "tk",
+            "type": "string"
+          },
+          {
+            "description": "專利類別條件參數(1 發明 2 新型 3 設計)",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "applclass",
+            "type": "integer"
+          },
+          {
+            "description": "公告日期起日",
+            "required": false,
+            "in": "query",
+            "name": "publishbdate",
+            "type": "string"
+          },
+          {
+            "description": "申請人中文名稱",
+            "required": false,
+            "in": "query",
+            "name": "applnamec",
+            "type": "string"
+          },
+          {
+            "description": "證書號",
+            "required": false,
+            "in": "query",
+            "name": "patentno",
+            "type": "string"
+          },
+          {
+            "description": "公開號註",
+            "required": false,
+            "in": "query",
+            "name": "noticeno",
+            "type": "string"
+          },
+          {
+            "description": "公開日期起",
+            "required": false,
+            "in": "query",
+            "name": "noticebdate",
+            "type": "string"
+          },
+          {
+            "description": "公開日期迄",
+            "required": false,
+            "in": "query",
+            "name": "noticeedate",
+            "type": "string"
+          },
+          {
+            "description": "公開卷期區間起",
+            "required": false,
+            "in": "query",
+            "name": "noticebvolisu",
+            "type": "string"
+          },
+          {
+            "description": "公開卷期區間迄",
+            "required": false,
+            "in": "query",
+            "name": "noticeevolisu",
+            "type": "string"
+          },
+          {
+            "description": "公告號註",
+            "required": false,
+            "in": "query",
+            "name": "publishno",
+            "type": "string"
+          },
+          {
+            "description": "公告日期迄",
+            "required": false,
+            "in": "query",
+            "name": "publishedate",
+            "type": "string"
+          },
+          {
+            "description": "公告卷期區間起",
+            "required": false,
+            "in": "query",
+            "name": "publishbvolisu",
+            "type": "string"
+          },
+          {
+            "description": "公告卷期區間迄",
+            "required": false,
+            "in": "query",
+            "name": "publishevolisu",
+            "type": "string"
+          },
+          {
+            "description": "申請案號註",
+            "required": false,
+            "in": "query",
+            "name": "applno",
+            "type": "string"
+          },
+          {
+            "description": "申請日期起",
+            "required": false,
+            "in": "query",
+            "name": "applbdate",
+            "type": "string"
+          },
+          {
+            "description": "申請日期迄",
+            "required": false,
+            "in": "query",
+            "name": "appledate",
+            "type": "string"
+          },
+          {
+            "description": "專利中英文名稱",
+            "required": false,
+            "in": "query",
+            "name": "patentname",
+            "type": "string"
+          },
+          {
+            "description": "完整IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcfull",
+            "type": "string"
+          },
+          {
+            "description": "第一階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcsection",
+            "type": "string"
+          },
+          {
+            "description": "第二階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcclass",
+            "type": "string"
+          },
+          {
+            "description": "第三階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcsubclass",
+            "type": "string"
+          },
+          {
+            "description": "第四階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcmaingroup",
+            "type": "string"
+          },
+          {
+            "description": "第五階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcgroup",
+            "type": "string"
+          },
+          {
+            "description": "完整LOC",
+            "required": false,
+            "in": "query",
+            "name": "locfull",
+            "type": "string"
+          },
+          {
+            "description": "第一階LOC",
+            "required": false,
+            "in": "query",
+            "name": "loclevel1",
+            "type": "string"
+          },
+          {
+            "description": "第二階LOC",
+            "required": false,
+            "in": "query",
+            "name": "loclevel2",
+            "type": "string"
+          },
+          {
+            "description": "申請人英文名稱",
+            "required": false,
+            "in": "query",
+            "name": "applnamee",
+            "type": "string"
+          },
+          {
+            "description": "第一申請人國別",
+            "required": false,
+            "in": "query",
+            "name": "applcountry",
+            "type": "string"
+          },
+          {
+            "description": "發明人中文名稱",
+            "required": false,
+            "in": "query",
+            "name": "inventornamec",
+            "type": "string"
+          },
+          {
+            "description": "發明人英文名稱",
+            "required": false,
+            "in": "query",
+            "name": "inventornamee",
+            "type": "string"
+          },
+          {
+            "description": "發明人國別代碼",
+            "required": false,
+            "in": "query",
+            "name": "inventorcountry",
+            "type": "string"
+          },
+          {
+            "description": "代理人中文名稱",
+            "required": false,
+            "in": "query",
+            "name": "agentnamec",
+            "type": "string"
+          },
+          {
+            "description": "年費有效日期起",
+            "required": false,
+            "in": "query",
+            "name": "chargeexpirbdate",
+            "type": "string"
+          },
+          {
+            "description": "年費有效日期迄",
+            "required": false,
+            "in": "query",
+            "name": "chargeexpiredate",
+            "type": "string"
+          },
+          {
+            "description": "優先權國家代碼",
+            "required": false,
+            "in": "query",
+            "name": "prioritycountry",
+            "type": "string"
+          },
+          {
+            "description": "優先權案號",
+            "required": false,
+            "in": "query",
+            "name": "priorityapplno",
+            "type": "string"
+          },
+          {
+            "description": "優先權日期起",
+            "required": false,
+            "in": "query",
+            "name": "prioritybdate",
+            "type": "string"
+          },
+          {
+            "description": "優先權日期迄",
+            "required": false,
+            "in": "query",
+            "name": "priorityedate",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PatentPriority"
+            }
+          }
+        }
+      }
+    },
+    "/PatentRights": {
+      "get": {
+        "description": "專利權狀態異動資料",
+        "operationId": "GET /PatentRights",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "回傳格式",
+            "required": true,
+            "in": "query",
+            "name": "format",
+            "type": "string"
+          },
+          {
+            "description": "取前幾筆",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "top",
+            "type": "integer"
+          },
+          {
+            "description": "跳過筆數",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "skip",
+            "type": "integer"
+          },
+          {
+            "description": "排序欄位",
+            "required": false,
+            "in": "query",
+            "name": "orderby",
+            "type": "string"
+          },
+          {
+            "description": "向經濟部智慧財產局申請核發，存取使用之唯一驗證碼",
+            "required": true,
+            "in": "query",
+            "name": "tk",
+            "type": "string"
+          },
+          {
+            "description": "專利類別條件參數(1 發明 2 新型 3 設計)",
+            "format": "int32",
+            "required": true,
+            "in": "query",
+            "name": "applclass",
+            "type": "integer"
+          },
+          {
+            "description": "公告日期起日",
+            "required": false,
+            "in": "query",
+            "name": "publishbdate",
+            "type": "string"
+          },
+          {
+            "description": "申請人中文名稱",
+            "required": false,
+            "in": "query",
+            "name": "applnamec",
+            "type": "string"
+          },
+          {
+            "description": "證書號",
+            "required": false,
+            "in": "query",
+            "name": "patentno",
+            "type": "string"
+          },
+          {
+            "description": "公開號註",
+            "required": false,
+            "in": "query",
+            "name": "noticeno",
+            "type": "string"
+          },
+          {
+            "description": "公開日期起",
+            "required": false,
+            "in": "query",
+            "name": "noticebdate",
+            "type": "string"
+          },
+          {
+            "description": "公開日期迄",
+            "required": false,
+            "in": "query",
+            "name": "noticeedate",
+            "type": "string"
+          },
+          {
+            "description": "公開卷期區間起",
+            "required": false,
+            "in": "query",
+            "name": "noticebvolisu",
+            "type": "string"
+          },
+          {
+            "description": "公開卷期區間迄",
+            "required": false,
+            "in": "query",
+            "name": "noticeevolisu",
+            "type": "string"
+          },
+          {
+            "description": "公告號註",
+            "required": false,
+            "in": "query",
+            "name": "publishno",
+            "type": "string"
+          },
+          {
+            "description": "公告日期迄",
+            "required": false,
+            "in": "query",
+            "name": "publishedate",
+            "type": "string"
+          },
+          {
+            "description": "公告卷期區間起",
+            "required": false,
+            "in": "query",
+            "name": "publishbvolisu",
+            "type": "string"
+          },
+          {
+            "description": "公告卷期區間迄",
+            "required": false,
+            "in": "query",
+            "name": "publishevolisu",
+            "type": "string"
+          },
+          {
+            "description": "申請案號註",
+            "required": false,
+            "in": "query",
+            "name": "applno",
+            "type": "string"
+          },
+          {
+            "description": "申請日期起",
+            "required": false,
+            "in": "query",
+            "name": "applbdate",
+            "type": "string"
+          },
+          {
+            "description": "申請日期迄",
+            "required": false,
+            "in": "query",
+            "name": "appledate",
+            "type": "string"
+          },
+          {
+            "description": "專利中英文名稱",
+            "required": false,
+            "in": "query",
+            "name": "patentname",
+            "type": "string"
+          },
+          {
+            "description": "完整IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcfull",
+            "type": "string"
+          },
+          {
+            "description": "第一階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcsection",
+            "type": "string"
+          },
+          {
+            "description": "第二階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcclass",
+            "type": "string"
+          },
+          {
+            "description": "第三階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcsubclass",
+            "type": "string"
+          },
+          {
+            "description": "第四階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcmaingroup",
+            "type": "string"
+          },
+          {
+            "description": "第五階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcgroup",
+            "type": "string"
+          },
+          {
+            "description": "完整LOC",
+            "required": false,
+            "in": "query",
+            "name": "locfull",
+            "type": "string"
+          },
+          {
+            "description": "第一階LOC",
+            "required": false,
+            "in": "query",
+            "name": "loclevel1",
+            "type": "string"
+          },
+          {
+            "description": "第二階LOC",
+            "required": false,
+            "in": "query",
+            "name": "loclevel2",
+            "type": "string"
+          },
+          {
+            "description": "申請人英文名稱",
+            "required": false,
+            "in": "query",
+            "name": "applnamee",
+            "type": "string"
+          },
+          {
+            "description": "第一申請人國別",
+            "required": false,
+            "in": "query",
+            "name": "applcountry",
+            "type": "string"
+          },
+          {
+            "description": "發明人中文名稱",
+            "required": false,
+            "in": "query",
+            "name": "inventornamec",
+            "type": "string"
+          },
+          {
+            "description": "發明人英文名稱",
+            "required": false,
+            "in": "query",
+            "name": "inventornamee",
+            "type": "string"
+          },
+          {
+            "description": "發明人國別代碼",
+            "required": false,
+            "in": "query",
+            "name": "inventorcountry",
+            "type": "string"
+          },
+          {
+            "description": "代理人中文名稱",
+            "required": false,
+            "in": "query",
+            "name": "agentnamec",
+            "type": "string"
+          },
+          {
+            "description": "年費有效日期起",
+            "required": false,
+            "in": "query",
+            "name": "chargeexpirbdate",
+            "type": "string"
+          },
+          {
+            "description": "年費有效日期迄",
+            "required": false,
+            "in": "query",
+            "name": "chargeexpiredate",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PatentRights"
+            }
+          }
+        }
+      }
+    },
+    "/TmarkChange": {
+      "get": {
+        "description": "商標註冊案移轉紀錄",
+        "operationId": "GET /TmarkChange",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "回傳格式",
+            "required": true,
+            "in": "query",
+            "name": "format",
+            "type": "string"
+          },
+          {
+            "description": "取前幾筆",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "top",
+            "type": "integer"
+          },
+          {
+            "description": "跳過筆數",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "skip",
+            "type": "integer"
+          },
+          {
+            "description": "排序欄位",
+            "required": false,
+            "in": "query",
+            "name": "orderby",
+            "type": "string"
+          },
+          {
+            "description": "向經濟部智慧財產局申請核發，存取使用之唯一驗證碼",
+            "required": true,
+            "in": "query",
+            "name": "tk",
+            "type": "string"
+          },
+          {
+            "description": "申請案號",
+            "required": false,
+            "in": "query",
+            "name": "applno",
+            "type": "string"
+          },
+          {
+            "description": "申請日期起",
+            "required": false,
+            "in": "query",
+            "name": "applbdate",
+            "type": "string"
+          },
+          {
+            "description": "申請日期迄",
+            "required": false,
+            "in": "query",
+            "name": "appledate",
+            "type": "string"
+          },
+          {
+            "description": "商標名稱",
+            "required": false,
+            "in": "query",
+            "name": "tmarkname",
+            "type": "string"
+          },
+          {
+            "description": "商標種類代碼",
+            "required": false,
+            "in": "query",
+            "name": "tmarkclass",
+            "type": "string"
+          },
+          {
+            "description": "商標樣態代碼",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "tmarktype",
+            "type": "integer"
+          },
+          {
+            "description": "圖樣顏色代碼",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "tmarkcolor",
+            "type": "integer"
+          },
+          {
+            "description": "商品或服務類別 代碼",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "goodclasscode",
+            "type": "integer"
+          },
+          {
+            "description": "申請人中文名稱",
+            "required": false,
+            "in": "query",
+            "name": "applnamec",
+            "type": "string"
+          },
+          {
+            "description": "申請人英文名稱",
+            "required": false,
+            "in": "query",
+            "name": "applnamee",
+            "type": "string"
+          },
+          {
+            "description": "第 1 申請人國別代碼",
+            "required": false,
+            "in": "query",
+            "name": "applcountry",
+            "type": "string"
+          },
+          {
+            "description": "代理人名稱",
+            "required": false,
+            "in": "query",
+            "name": "agentname",
+            "type": "string"
+          },
+          {
+            "description": "註冊號",
+            "required": false,
+            "in": "query",
+            "name": "examno",
+            "type": "string"
+          },
+          {
+            "description": "註冊公告日期起",
+            "required": false,
+            "in": "query",
+            "name": "regnoticebdate",
+            "type": "string"
+          },
+          {
+            "description": "註冊公告日期迄",
+            "required": false,
+            "in": "query",
+            "name": "regnoticeedate",
+            "type": "string"
+          },
+          {
+            "description": "註冊公告卷期",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "volno",
+            "type": "integer"
+          },
+          {
+            "description": "專用期限起",
+            "required": false,
+            "in": "query",
+            "name": "deadlinebdate",
+            "type": "string"
+          },
+          {
+            "description": "專用期限迄",
+            "required": false,
+            "in": "query",
+            "name": "deadlineedate",
+            "type": "string"
+          },
+          {
+            "description": "受讓人中文名稱",
+            "required": false,
+            "in": "query",
+            "name": "transfereenamec",
+            "type": "string"
+          },
+          {
+            "description": "受讓人英文名稱",
+            "required": false,
+            "in": "query",
+            "name": "transfereenamee",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TmarkChange"
+            }
+          }
+        }
+      }
+    },
+    "/PatentChange": {
+      "get": {
+        "description": "專利改請案",
+        "operationId": "GET /PatentChange",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "回傳格式",
+            "required": true,
+            "in": "query",
+            "name": "format",
+            "type": "string"
+          },
+          {
+            "description": "取前幾筆",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "top",
+            "type": "integer"
+          },
+          {
+            "description": "跳過筆數",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "skip",
+            "type": "integer"
+          },
+          {
+            "description": "排序欄位",
+            "required": false,
+            "in": "query",
+            "name": "orderby",
+            "type": "string"
+          },
+          {
+            "description": "向經濟部智慧財產局申請核發，存取使用之唯一驗證碼",
+            "required": true,
+            "in": "query",
+            "name": "tk",
+            "type": "string"
+          },
+          {
+            "description": "專利類別條件參數(1 發明 2 新型 3 設計)",
+            "format": "int32",
+            "required": false,
+            "in": "query",
+            "name": "applclass",
+            "type": "integer"
+          },
+          {
+            "description": "公告日期起日",
+            "required": false,
+            "in": "query",
+            "name": "publishbdate",
+            "type": "string"
+          },
+          {
+            "description": "申請人中文名稱",
+            "required": false,
+            "in": "query",
+            "name": "applnamec",
+            "type": "string"
+          },
+          {
+            "description": "證書號",
+            "required": false,
+            "in": "query",
+            "name": "patentno",
+            "type": "string"
+          },
+          {
+            "description": "公開號註",
+            "required": false,
+            "in": "query",
+            "name": "noticeno",
+            "type": "string"
+          },
+          {
+            "description": "公開日期起",
+            "required": false,
+            "in": "query",
+            "name": "noticebdate",
+            "type": "string"
+          },
+          {
+            "description": "公開日期迄",
+            "required": false,
+            "in": "query",
+            "name": "noticeedate",
+            "type": "string"
+          },
+          {
+            "description": "公開卷期區間起",
+            "required": false,
+            "in": "query",
+            "name": "noticebvolisu",
+            "type": "string"
+          },
+          {
+            "description": "公開卷期區間迄",
+            "required": false,
+            "in": "query",
+            "name": "noticeevolisu",
+            "type": "string"
+          },
+          {
+            "description": "公告號註",
+            "required": false,
+            "in": "query",
+            "name": "publishno",
+            "type": "string"
+          },
+          {
+            "description": "公告日期迄",
+            "required": false,
+            "in": "query",
+            "name": "publishedate",
+            "type": "string"
+          },
+          {
+            "description": "公告卷期區間起",
+            "required": false,
+            "in": "query",
+            "name": "publishbvolisu",
+            "type": "string"
+          },
+          {
+            "description": "公告卷期區間迄",
+            "required": false,
+            "in": "query",
+            "name": "publishevolisu",
+            "type": "string"
+          },
+          {
+            "description": "申請案號註",
+            "required": false,
+            "in": "query",
+            "name": "applno",
+            "type": "string"
+          },
+          {
+            "description": "申請日期起",
+            "required": false,
+            "in": "query",
+            "name": "applbdate",
+            "type": "string"
+          },
+          {
+            "description": "申請日期迄",
+            "required": false,
+            "in": "query",
+            "name": "appledate",
+            "type": "string"
+          },
+          {
+            "description": "專利中英文名稱",
+            "required": false,
+            "in": "query",
+            "name": "patentname",
+            "type": "string"
+          },
+          {
+            "description": "完整IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcfull",
+            "type": "string"
+          },
+          {
+            "description": "第一階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcsection",
+            "type": "string"
+          },
+          {
+            "description": "第二階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcclass",
+            "type": "string"
+          },
+          {
+            "description": "第三階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcsubclass",
+            "type": "string"
+          },
+          {
+            "description": "第四階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcmaingroup",
+            "type": "string"
+          },
+          {
+            "description": "第五階IPC",
+            "required": false,
+            "in": "query",
+            "name": "ipcgroup",
+            "type": "string"
+          },
+          {
+            "description": "完整LOC",
+            "required": false,
+            "in": "query",
+            "name": "locfull",
+            "type": "string"
+          },
+          {
+            "description": "第一階LOC",
+            "required": false,
+            "in": "query",
+            "name": "loclevel1",
+            "type": "string"
+          },
+          {
+            "description": "第二階LOC",
+            "required": false,
+            "in": "query",
+            "name": "loclevel2",
+            "type": "string"
+          },
+          {
+            "description": "申請人英文名稱",
+            "required": false,
+            "in": "query",
+            "name": "applnamee",
+            "type": "string"
+          },
+          {
+            "description": "第一申請人國別",
+            "required": false,
+            "in": "query",
+            "name": "applcountry",
+            "type": "string"
+          },
+          {
+            "description": "發明人中文名稱",
+            "required": false,
+            "in": "query",
+            "name": "inventornamec",
+            "type": "string"
+          },
+          {
+            "description": "發明人英文名稱",
+            "required": false,
+            "in": "query",
+            "name": "inventornamee",
+            "type": "string"
+          },
+          {
+            "description": "發明人國別代碼",
+            "required": false,
+            "in": "query",
+            "name": "inventorcountry",
+            "type": "string"
+          },
+          {
+            "description": "代理人中文名稱",
+            "required": false,
+            "in": "query",
+            "name": "agentnamec",
+            "type": "string"
+          },
+          {
+            "description": "年費有效日期起",
+            "required": false,
+            "in": "query",
+            "name": "chargeexpirbdate",
+            "type": "string"
+          },
+          {
+            "description": "年費有效日期迄",
+            "required": false,
+            "in": "query",
+            "name": "chargeexpiredate",
+            "type": "string"
+          },
+          {
+            "description": "改請後申請案號",
+            "required": false,
+            "in": "query",
+            "name": "newapplno",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PatentChange"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PatentAppl": {
+      "required": [
+        "version",
+        "status",
+        "message",
+        "top",
+        "skip",
+        "order-by",
+        "total-count",
+        "tw-patent-aplI"
+      ],
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "top": {
+          "type": "number"
+        },
+        "skip": {
+          "type": "number"
+        },
+        "order-by": {
+          "type": "string"
+        },
+        "total-count": {
+          "type": "number"
+        },
+        "tw-patent-applI": {
+          "required": [
+            "-page-count",
+            "-create-date",
+            "patentcontent"
+          ],
+          "properties": {
+            "page-count": {
+              "type": "number",
+              "xml": {
+                "attribute": true
+              }
+            },
+            "create-date": {
+              "type": "string",
+              "xml": {
+                "attribute": true
+              }
+            },
+            "patentcontent": {
+              "items": {
+                "properties": {
+                  "sequence": {
+                    "type": "number",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "appl-no": {
+                    "type": "string"
+                  },
+                  "appl-date": {
+                    "type": "string"
+                  },
+                  "appl-countrycode": {
+                    "type": "string"
+                  },
+                  "appl-country": {
+                    "type": "string"
+                  },
+                  "publish-flag": {
+                    "type": "string"
+                  },
+                  "classification-ipc": {
+                    "items": {
+                      "properties": {
+                        "ipc": {
+                          "items": {
+                            "properties": {
+                              "sequence": {
+                                "type": "number",
+                                "xml": {
+                                  "attribute": true
+                                }
+                              },
+                              "ipc-full": {
+                                "type": "string"
+                              },
+                              "ipc-section": {
+                                "type": "string"
+                              },
+                              "ipc-class": {
+                                "type": "string"
+                              },
+                              "ipc-subclass": {
+                                "type": "string"
+                              },
+                              "ipc-main-group": {
+                                "type": "string"
+                              },
+                              "ipc-group": {
+                                "type": "string"
+                              },
+                              "ipc-version": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "classification-loc": {
+                    "items": {
+                      "properties": {
+                        "loc": {
+                          "items": {
+                            "properties": {
+                              "sequence": {
+                                "type": "number",
+                                "xml": {
+                                  "attribute": true
+                                }
+                              },
+                              "loc-full": {
+                                "type": "string"
+                              },
+                              "loc-level1": {
+                                "type": "string"
+                              },
+                              "loc-level2": {
+                                "type": "string"
+                              },
+                              "loc-version": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      }
+    },
+    "PatentAnnuity": {
+      "required": [
+        "version",
+        "status",
+        "message",
+        "top",
+        "skip",
+        "order-by",
+        "total-count",
+        "tw-patent-annuity"
+      ],
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "top": {
+          "type": "number"
+        },
+        "skip": {
+          "type": "number"
+        },
+        "order-by": {
+          "type": "string"
+        },
+        "total-count": {
+          "type": "number"
+        },
+        "tw-patent-annuity": {
+          "required": [
+            "-page-count",
+            "-create-date",
+            "patentcontent"
+          ],
+          "properties": {
+            "page-count": {
+              "type": "number",
+              "xml": {
+                "attribute": true
+              }
+            },
+            "create-date": {
+              "type": "string",
+              "xml": {
+                "attribute": true
+              }
+            },
+            "patentcontent": {
+              "items": {
+                "properties": {
+                  "sequence": {
+                    "type": "number",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "appl-no": {
+                    "type": "string"
+                  },
+                  "licence-date": {
+                    "type": "string"
+                  },
+                  "relicence-date": {
+                    "type": "string"
+                  },
+                  "patent-no": {
+                    "type": "string"
+                  },
+                  "publish-no": {
+                    "type": "string"
+                  },
+                  "charge-expir-date": {
+                    "type": "string"
+                  },
+                  "charge-expir-year": {
+                    "type": "string"
+                  },
+                  "charges": {
+                    "items": {
+                      "properties": {
+                        "sequence": {
+                          "type": "number",
+                          "xml": {
+                            "attribute": true
+                          }
+                        },
+                        "annuity-date": {
+                          "type": "string"
+                        },
+                        "annuity-beg": {
+                          "type": "number"
+                        },
+                        "annuity-end": {
+                          "type": "number"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      }
+    },
+    "TmarkChange": {
+      "required": [
+        "version",
+        "status",
+        "message",
+        "top",
+        "skip",
+        "order-by",
+        "total-count",
+        "tmarkchange"
+      ],
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "top": {
+          "type": "number"
+        },
+        "skip": {
+          "type": "number"
+        },
+        "order-by": {
+          "type": "string"
+        },
+        "total-count": {
+          "type": "number"
+        },
+        "tmarkchange": {
+          "required": [
+            "-page-count",
+            "-create-date",
+            "tmarkcontent"
+          ],
+          "properties": {
+            "page-count": {
+              "type": "number",
+              "xml": {
+                "attribute": true
+              }
+            },
+            "create-date": {
+              "type": "string",
+              "xml": {
+                "attribute": true
+              }
+            },
+            "tmarkcontent": {
+              "items": {
+                "properties": {
+                  "sequence": {
+                    "type": "number",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "tmark-class": {
+                    "type": "string"
+                  },
+                  "tmark-class-desc": {
+                    "type": "string"
+                  },
+                  "exam-no": {
+                    "type": "string"
+                  },
+                  "tmark-name": {
+                    "type": "string"
+                  },
+                  "alteration": {
+                    "items": {
+                      "properties": {
+                        "sequence": {
+                          "type": "number",
+                          "xml": {
+                            "attribute": true
+                          }
+                        },
+                        "notice-date": {
+                          "type": "string"
+                        },
+                        "vol-no1": {
+                          "type": "string"
+                        },
+                        "vol-no2": {
+                          "type": "string"
+                        },
+                        "parties": {
+                          "items": {
+                            "properties": {
+                              "sequence": {
+                                "type": "number",
+                                "xml": {
+                                  "attribute": true
+                                }
+                              },
+                              "transferee": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      }
+    },
+    "PatentPriority": {
+      "required": [
+        "version",
+        "status",
+        "message",
+        "top",
+        "skip",
+        "order-by",
+        "total-count",
+        "tw-patent-priority"
+      ],
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "top": {
+          "type": "number"
+        },
+        "skip": {
+          "type": "number"
+        },
+        "order-by": {
+          "type": "string"
+        },
+        "total-count": {
+          "type": "number"
+        },
+        "tw-patent-priority": {
+          "required": [
+            "-page-count",
+            "-create-date",
+            "patentcontent"
+          ],
+          "properties": {
+            "page-count": {
+              "type": "number",
+              "xml": {
+                "attribute": true
+              }
+            },
+            "create-date": {
+              "type": "string",
+              "xml": {
+                "attribute": true
+              }
+            },
+            "patentcontent": {
+              "items": {
+                "properties": {
+                  "sequence": {
+                    "type": "number",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "appl-no": {
+                    "type": "string"
+                  },
+                  "prioritys": {
+                    "items": {
+                      "properties": {
+                        "priority": {
+                          "items": {
+                            "properties": {
+                              "sequence": {
+                                "type": "number",
+                                "xml": {
+                                  "attribute": true
+                                }
+                              },
+                              "priority-country-code": {
+                                "type": "string"
+                              },
+                              "priority-country": {
+                                "type": "string"
+                              },
+                              "priority-appl-no": {
+                                "type": "string"
+                              },
+                              "priority-date": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      }
+    },
+    "PatentDivide": {
+      "required": [
+        "version",
+        "status",
+        "message",
+        "top",
+        "skip",
+        "order-by",
+        "total-count",
+        "tw-patent-divide"
+      ],
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "top": {
+          "type": "number"
+        },
+        "skip": {
+          "type": "number"
+        },
+        "order-by": {
+          "type": "string"
+        },
+        "total-count": {
+          "type": "number"
+        },
+        "tw-patent-divide": {
+          "required": [
+            "-page-count",
+            "-create-date",
+            "patentcontent"
+          ],
+          "properties": {
+            "page-count": {
+              "type": "number",
+              "xml": {
+                "attribute": true
+              }
+            },
+            "create-date": {
+              "type": "string",
+              "xml": {
+                "attribute": true
+              }
+            },
+            "patentcontent": {
+              "items": {
+                "properties": {
+                  "sequence": {
+                    "type": "number",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "appl-no": {
+                    "type": "string"
+                  },
+                  "new-appl-no": {
+                    "properties": {
+                      "patent-right-url": {
+                        "type": "string",
+                        "xml": {
+                          "attribute": true
+                        }
+                      }
+                    },
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      }
+    },
+    "PatentAlteration": {
+      "required": [
+        "version",
+        "status",
+        "message",
+        "top",
+        "skip",
+        "order-by",
+        "total-count",
+        "tw-patent-alteration"
+      ],
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "top": {
+          "type": "number"
+        },
+        "skip": {
+          "type": "number"
+        },
+        "order-by": {
+          "type": "string"
+        },
+        "total-count": {
+          "type": "number"
+        },
+        "tw-patent-alteration": {
+          "required": [
+            "-page-count",
+            "-create-date",
+            "patentcontent"
+          ],
+          "properties": {
+            "page-count": {
+              "type": "number",
+              "xml": {
+                "attribute": true
+              }
+            },
+            "create-date": {
+              "type": "string",
+              "xml": {
+                "attribute": true
+              }
+            },
+            "patentcontent": {
+              "items": {
+                "properties": {
+                  "sequence": {
+                    "type": "number",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "appl-no": {
+                    "type": "string"
+                  },
+                  "alteration": {
+                    "items": {
+                      "properties": {
+                        "sequence": {
+                          "type": "number",
+                          "xml": {
+                            "attribute": true
+                          }
+                        },
+                        "alteration-id1s": {
+                          "items": {
+                            "properties": {
+                              "sequence": {
+                                "type": "number",
+                                "xml": {
+                                  "attribute": true
+                                }
+                              },
+                              "alteration-name1": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        },
+                        "alteration-id2s": {
+                          "items": {
+                            "properties": {
+                              "sequence": {
+                                "type": "number",
+                                "xml": {
+                                  "attribute": true
+                                }
+                              },
+                              "alteration-name2": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      }
+    },
+    "PatentPub": {
+      "required": [
+        "version",
+        "status",
+        "message",
+        "top",
+        "skip",
+        "order-by",
+        "total-count",
+        "tw-patent-pub"
+      ],
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "top": {
+          "type": "number"
+        },
+        "skip": {
+          "type": "number"
+        },
+        "order-by": {
+          "type": "string"
+        },
+        "total-count": {
+          "type": "number"
+        },
+        "tw-patent-pub": {
+          "required": [
+            "-page-count",
+            "-create-date",
+            "patentcontent"
+          ],
+          "properties": {
+            "page-count": {
+              "type": "number",
+              "xml": {
+                "attribute": true
+              }
+            },
+            "create-date": {
+              "type": "string",
+              "xml": {
+                "attribute": true
+              }
+            },
+            "patentcontent": {
+              "items": {
+                "properties": {
+                  "sequence": {
+                    "type": "number",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "publication-reference": {
+                    "required": [
+                      "notice-no",
+                      "notice-volno",
+                      "notice-isuno",
+                      "notice-date"
+                    ],
+                    "properties": {
+                      "notice-no": {
+                        "type": "number"
+                      },
+                      "notice-volno": {
+                        "type": "number"
+                      },
+                      "notice-isuno": {
+                        "type": "number"
+                      },
+                      "notice-date": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "application-reference": {
+                    "required": [
+                      "appl-no",
+                      "appl-date",
+                      "first-date",
+                      "foreign-language",
+                      "foreign-language-desc"
+                    ],
+                    "properties": {
+                      "appl-no": {
+                        "type": "string"
+                      },
+                      "appl-date": {
+                        "type": "string"
+                      },
+                      "first-date": {
+                        "type": "string"
+                      },
+                      "foreign-language": {
+                        "type": "string"
+                      },
+                      "foreign-language-desc": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "patent-title": {
+                    "required": [
+                      "patent-name-chinese",
+                      "patent-name-english"
+                    ],
+                    "properties": {
+                      "patent-name-chinese": {
+                        "type": "string"
+                      },
+                      "patent-name-english": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "parties": {
+                    "required": [
+                      "applicants",
+                      "inventors",
+                      "agents",
+                      "publication-reference",
+                      "application-reference",
+                      "patent-title",
+                      "parties",
+                      "link"
+                    ],
+                    "properties": {
+                      "applicants": {
+                        "items": {
+                          "properties": {
+                            "applicant": {
+                              "type": "object",
+                              "properties": {
+                                "sequence": {
+                                  "type": "number",
+                                  "xml": {
+                                    "attribute": true
+                                  }
+                                },
+                                "chinese-name": {
+                                  "type": "string"
+                                },
+                                "english-name": {
+                                  "type": "string"
+                                },
+                                "address": {
+                                  "type": "string"
+                                },
+                                "english-country": {
+                                  "type": "string"
+                                },
+                                "chinese-country": {
+                                  "type": "string"
+                                },
+                                "english-address": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "type": "array"
+                      },
+                      "inventors": {
+                        "items": {
+                          "properties": {
+                            "inventor": {
+                              "type": "object",
+                              "properties": {
+                                "sequence": {
+                                  "type": "number",
+                                  "xml": {
+                                    "attribute": true
+                                  }
+                                },
+                                "chinese-name": {
+                                  "type": "string"
+                                },
+                                "english-name": {
+                                  "type": "string"
+                                },
+                                "english-country": {
+                                  "type": "string"
+                                },
+                                "chinese-country": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "type": "array"
+                      },
+                      "agents": {
+                        "items": {
+                          "properties": {
+                            "agent": {
+                              "type": "object",
+                              "properties": {
+                                "sequence": {
+                                  "type": "number",
+                                  "xml": {
+                                    "attribute": true
+                                  }
+                                },
+                                "chinese-name": {
+                                  "type": "string"
+                                },
+                                "english-name": {
+                                  "type": "string"
+                                },
+                                "address": {
+                                  "type": "string"
+                                },
+                                "english-country": {
+                                  "type": "string"
+                                },
+                                "chinese-country": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "classification-ipc": {
+                    "items": {
+                      "properties": {
+                        "ipc": {
+                          "items": {
+                            "properties": {
+                              "sequence": {
+                                "type": "number",
+                                "xml": {
+                                  "attribute": true
+                                }
+                              },
+                              "ipc-full": {
+                                "type": "string"
+                              },
+                              "ipc-section": {
+                                "type": "string"
+                              },
+                              "ipc-class": {
+                                "type": "string"
+                              },
+                              "ipc-subclass": {
+                                "type": "string"
+                              },
+                              "ipc-main-group": {
+                                "type": "string"
+                              },
+                              "ipc-group": {
+                                "type": "string"
+                              },
+                              "ipc-version": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "link": {
+                    "required": [
+                      "patentpubregxmla-url",
+                      "patentpubmtiff-url",
+                      "inventionpubxml-url",
+                      "patentpubregmtiff-url"
+                    ],
+                    "properties": {
+                      "patentpubregxmla-url": {
+                        "type": "string"
+                      },
+                      "patentpubmtiff-url": {
+                        "type": "string"
+                      },
+                      "inventionpubxml-url": {
+                        "type": "string"
+                      },
+                      "patentpubregmtiff-url": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      }
+    },
+    "TmarkAppl": {
+      "required": [
+        "version",
+        "status",
+        "message",
+        "top",
+        "skip",
+        "order-by",
+        "total-count",
+        "tmarkappl"
+      ],
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "top": {
+          "type": "number"
+        },
+        "skip": {
+          "type": "number"
+        },
+        "order-by": {
+          "type": "string"
+        },
+        "total-count": {
+          "type": "number"
+        },
+        "tmarkappl": {
+          "required": [
+            "-page-count",
+            "-create-date",
+            "tmarkcontent"
+          ],
+          "properties": {
+            "page-count": {
+              "type": "number",
+              "xml": {
+                "attribute": true
+              }
+            },
+            "create-date": {
+              "type": "string",
+              "xml": {
+                "attribute": true
+              }
+            },
+            "tmarkcontent": {
+              "items": {
+                "properties": {
+                  "sequence": {
+                    "type": "number",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "appl-no": {
+                    "type": "string"
+                  },
+                  "appl-date": {
+                    "type": "string"
+                  },
+                  "tmark-name": {
+                    "type": "string"
+                  },
+                  "tmark-class": {
+                    "type": "string"
+                  },
+                  "tmark-class-desc": {
+                    "type": "string"
+                  },
+                  "tmark-image-url": {
+                    "items": {
+                      "properties": {
+                        "image-data-1": {
+                          "type": "string"
+                        },
+                        "image-data-2": {
+                          "type": "string"
+                        },
+                        "image-data-3": {
+                          "type": "string"
+                        },
+                        "image-data-4": {
+                          "type": "string"
+                        },
+                        "image-data-5": {
+                          "type": "string"
+                        },
+                        "image-data-6": {
+                          "type": "string"
+                        },
+                        "audio-filename": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "tmark-type": {
+                    "type": "string"
+                  },
+                  "tmark-type-desc": {
+                    "type": "string"
+                  },
+                  "tmark-color": {
+                    "type": "string"
+                  },
+                  "tmark-color-desc": {
+                    "type": "string"
+                  },
+                  "tmark-draft-c": {
+                    "type": "string"
+                  },
+                  "tmark-draft-e": {
+                    "type": "string"
+                  },
+                  "tmark-draft-j": {
+                    "type": "string"
+                  },
+                  "tmark-sign": {
+                    "type": "string"
+                  },
+                  "word-description": {
+                    "type": "string"
+                  },
+                  "goodsclass": {
+                    "items": {
+                      "properties": {
+                        "sequence": {
+                          "type": "number",
+                          "xml": {
+                            "attribute": true
+                          }
+                        },
+                        "goodsclass-code": {
+                          "type": "string"
+                        },
+                        "goods-name": {
+                          "type": "string"
+                        },
+                        "goods-group": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "receive-date": {
+                    "type": "string"
+                  },
+                  "parties": {
+                    "required": [
+                      "applicants",
+                      "agents"
+                    ],
+                    "properties": {
+                      "applicants": {
+                        "items": {
+                          "properties": {
+                            "applicant": {
+                              "items": {
+                                "properties": {
+                                  "sequence": {
+                                    "type": "number",
+                                    "xml": {
+                                      "attribute": true
+                                    }
+                                  },
+                                  "chinese-name": {
+                                    "type": "string"
+                                  },
+                                  "english-name": {
+                                    "type": "string"
+                                  },
+                                  "japanese-name": {
+                                    "type": "string"
+                                  },
+                                  "address": {
+                                    "type": "string"
+                                  },
+                                  "country-code": {
+                                    "type": "string"
+                                  },
+                                  "chinese-country-name": {
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      },
+                      "agents": {
+                        "items": {
+                          "properties": {
+                            "agent": {
+                              "type": "object",
+                              "properties": {
+                                "squence": {
+                                  "type": "number",
+                                  "xml": {
+                                    "attribute": true
+                                  }
+                                },
+                                "chinese-name": {
+                                  "type": "string"
+                                },
+                                "address": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      }
+    },
+    "TmarkPics": {
+      "required": [
+        "version",
+        "status",
+        "message",
+        "top",
+        "skip",
+        "order-by",
+        "total-count",
+        "tmarkpics"
+      ],
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "top": {
+          "type": "number"
+        },
+        "skip": {
+          "type": "number"
+        },
+        "order-by": {
+          "type": "string"
+        },
+        "total-count": {
+          "type": "number"
+        },
+        "tmarkpics": {
+          "required": [
+            "-page-count",
+            "-create-date",
+            "tmarkcontent"
+          ],
+          "properties": {
+            "page-count": {
+              "type": "number",
+              "xml": {
+                "attribute": true
+              }
+            },
+            "create-date": {
+              "type": "string",
+              "xml": {
+                "attribute": true
+              }
+            },
+            "tmarkcontent": {
+              "items": {
+                "properties": {
+                  "sequence": {
+                    "type": "number",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "appl-no": {
+                    "type": "string"
+                  },
+                  "tmark-image-url": {
+                    "items": {
+                      "properties": {
+                        "image-data-1": {
+                          "type": "string"
+                        },
+                        "image-data-2": {
+                          "type": "string"
+                        },
+                        "image-data-3": {
+                          "type": "string"
+                        },
+                        "image-data-4": {
+                          "type": "string"
+                        },
+                        "image-data-5": {
+                          "type": "string"
+                        },
+                        "image-data-6": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      }
+    },
+    "PatentRights": {
+      "required": [
+        "tw-patent-rightsI"
+      ],
+      "properties": {
+        "tw-patent-rightsI": {
+          "required": [
+            "@page-count",
+            "@create-date",
+            "patentcontent"
+          ],
+          "properties": {
+            "page-count": {
+              "type": "number",
+              "xml": {
+                "attribute": true
+              }
+            },
+            "create-date": {
+              "type": "string",
+              "xml": {
+                "attribute": true
+              }
+            },
+            "patentcontent": {
+              "items": {
+                "properties": {
+                  "sequence": {
+                    "type": "number",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "publication-reference": {
+                    "required": [
+                      "notice-no",
+                      "notice-volno",
+                      "notice-isuno",
+                      "notice-date",
+                      "publish-no",
+                      "publish-volno",
+                      "publish-isuno",
+                      "publish-date"
+                    ],
+                    "properties": {
+                      "notice-no": {
+                        "type": "number"
+                      },
+                      "notice-volno": {
+                        "type": "number"
+                      },
+                      "notice-isuno": {
+                        "type": "number"
+                      },
+                      "notice-date": {
+                        "type": "string"
+                      },
+                      "publish-no": {
+                        "type": "string"
+                      },
+                      "publish-volno": {
+                        "type": "number"
+                      },
+                      "publish-isuno": {
+                        "type": "number"
+                      },
+                      "publish-date": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "application-reference": {
+                    "required": [
+                      "appl-no",
+                      "appl-date",
+                      "first-date",
+                      "foreign-language",
+                      "foreign-language-desc",
+                      "desing-type",
+                      "desing-type-desc",
+                      "appl-class",
+                      "appl-class-desc",
+                      "material-appl-date",
+                      "material-flag",
+                      "faplexm-date",
+                      "reappl-date",
+                      "raplexam-date",
+                      "agree-flag",
+                      "twins-flag"
+                    ],
+                    "properties": {
+                      "appl-no": {
+                        "type": "string"
+                      },
+                      "appl-date": {
+                        "type": "string"
+                      },
+                      "first-date": {
+                        "type": "string"
+                      },
+                      "foreign-language": {
+                        "type": "string"
+                      },
+                      "foreign-language-desc": {
+                        "type": "string"
+                      },
+                      "desing-type": {
+                        "type": "string"
+                      },
+                      "desing-type-desc": {
+                        "type": "string"
+                      },
+                      "appl-class": {
+                        "type": "string"
+                      },
+                      "appl-class-desc": {
+                        "type": "string"
+                      },
+                      "material-appl-date": {
+                        "type": "string"
+                      },
+                      "material-flag": {
+                        "type": "string"
+                      },
+                      "faplexm-date": {
+                        "type": "string"
+                      },
+                      "reappl-date": {
+                        "type": "string"
+                      },
+                      "raplexam-date": {
+                        "type": "string"
+                      },
+                      "agree-flag": {
+                        "type": "string"
+                      },
+                      "twins-flag": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "patent-title": {
+                    "required": [
+                      "patent-name-chinese",
+                      "patent-name-english"
+                    ],
+                    "properties": {
+                      "patent-name-chinese": {
+                        "type": "string"
+                      },
+                      "patent-name-english": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "patent-right": {
+                    "required": [
+                      "licence-date",
+                      "relicence-date",
+                      "patent-no",
+                      "patent-bdate",
+                      "patent-edate",
+                      "charge-expir-date",
+                      "charge-expir-year",
+                      "rent-status",
+                      "mortgage-status",
+                      "transfer-status",
+                      "inherit-status",
+                      "trust-status",
+                      "opposition-status",
+                      "nullity-status",
+                      "continue-status",
+                      "expand-status",
+                      "cancel-date",
+                      "cancel-result",
+                      "revoke-date",
+                      "revoke-code",
+                      "dep-patent-class",
+                      "dep-appl-no"
+                    ],
+                    "properties": {
+                      "licence-date": {
+                        "type": "string"
+                      },
+                      "relicence-date": {
+                        "type": "string"
+                      },
+                      "patent-no": {
+                        "type": "string"
+                      },
+                      "patent-bdate": {
+                        "type": "string"
+                      },
+                      "patent-edate": {
+                        "type": "string"
+                      },
+                      "charge-expir-date": {
+                        "type": "string"
+                      },
+                      "charge-expir-year": {
+                        "type": "string"
+                      },
+                      "rent-status": {
+                        "type": "number"
+                      },
+                      "mortgage-status": {
+                        "type": "number"
+                      },
+                      "transfer-status": {
+                        "type": "number"
+                      },
+                      "inherit-status": {
+                        "type": "number"
+                      },
+                      "trust-status": {
+                        "type": "number"
+                      },
+                      "opposition-status": {
+                        "type": "number"
+                      },
+                      "nullity-status": {
+                        "type": "number"
+                      },
+                      "continue-status": {
+                        "type": "number"
+                      },
+                      "expand-status": {
+                        "type": "number"
+                      },
+                      "cancel-date": {
+                        "type": "string"
+                      },
+                      "cancel-result": {
+                        "type": "string"
+                      },
+                      "revoke-date": {
+                        "type": "string"
+                      },
+                      "revoke-code": {
+                        "type": "string"
+                      },
+                      "dep-patent-class": {
+                        "type": "string"
+                      },
+                      "dep-appl-no": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "parties": {
+                    "required": [
+                      "applicants",
+                      "inventors",
+                      "agents"
+                    ],
+                    "properties": {
+                      "applicants": {
+                        "items": {
+                          "properties": {
+                            "sequence": {
+                              "type": "number",
+                              "xml": {
+                                "attribute": true
+                              }
+                            },
+                            "applicant": {
+                              "required": [
+                                "chinese-name",
+                                "english-name",
+                                "address",
+                                "english-country",
+                                "chinese-country",
+                                "english-address"
+                              ],
+                              "properties": {
+                                "chinese-name": {
+                                  "type": "string"
+                                },
+                                "english-name": {
+                                  "type": "string"
+                                },
+                                "address": {
+                                  "type": "string"
+                                },
+                                "english-country": {
+                                  "type": "string"
+                                },
+                                "chinese-country": {
+                                  "type": "string"
+                                },
+                                "english-address": {
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      },
+                      "inventors": {
+                        "items": {
+                          "properties": {
+                            "sequence": {
+                              "type": "number",
+                              "xml": {
+                                "attribute": true
+                              }
+                            },
+                            "inventor": {
+                              "required": [
+                                "chinese-name",
+                                "english-name",
+                                "english-country",
+                                "chinese-country"
+                              ],
+                              "properties": {
+                                "chinese-name": {
+                                  "type": "string"
+                                },
+                                "english-name": {
+                                  "type": "string"
+                                },
+                                "english-country": {
+                                  "type": "string"
+                                },
+                                "chinese-country": {
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      },
+                      "agents": {
+                        "items": {
+                          "properties": {
+                            "sequence": {
+                              "type": "number",
+                              "xml": {
+                                "attribute": true
+                              }
+                            },
+                            "agent": {
+                              "required": [
+                                "chinese-name",
+                                "english-name",
+                                "address",
+                                "english-country",
+                                "chinese-country"
+                              ],
+                              "properties": {
+                                "chinese-name": {
+                                  "type": "string"
+                                },
+                                "english-name": {
+                                  "type": "string"
+                                },
+                                "address": {
+                                  "type": "string"
+                                },
+                                "english-country": {
+                                  "type": "string"
+                                },
+                                "chinese-country": {
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "classification-ipc": {
+                    "items": {
+                      "properties": {
+                        "ipc": {
+                          "items": {
+                            "properties": {
+                              "sequence": {
+                                "type": "number",
+                                "xml": {
+                                  "attribute": true
+                                }
+                              },
+                              "ipc-full": {
+                                "type": "string"
+                              },
+                              "ipc-section": {
+                                "type": "string"
+                              },
+                              "ipc-class": {
+                                "type": "string"
+                              },
+                              "ipc-subclass": {
+                                "type": "string"
+                              },
+                              "ipc-main-group": {
+                                "type": "string"
+                              },
+                              "ipc-group": {
+                                "type": "string"
+                              },
+                              "ipc-version": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "classification-loc": {
+                    "items": {
+                      "properties": {
+                        "loc": {
+                          "items": {
+                            "properties": {
+                              "sequence": {
+                                "type": "number",
+                                "xml": {
+                                  "attribute": true
+                                }
+                              },
+                              "loc-full": {
+                                "type": "string"
+                              },
+                              "loc-level1": {
+                                "type": "string"
+                              },
+                              "loc-level2": {
+                                "type": "string"
+                              },
+                              "loc-version": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "link": {
+                    "required": [
+                      "patentisuregspecxmla-url",
+                      "patentpubmtiff-url",
+                      "patentpubxml-url",
+                      "patentisuregspecmtiff-url"
+                    ],
+                    "properties": {
+                      "patentisuregspecxmla-url": {
+                        "type": "string"
+                      },
+                      "patentpubmtiff-url": {
+                        "type": "string"
+                      },
+                      "patentpubxml-url": {
+                        "type": "string"
+                      },
+                      "patentisuregspecmtiff-url": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      }
+    },
+    "PatentTwins": {
+      "required": [
+        "version",
+        "status",
+        "message",
+        "top",
+        "skip",
+        "order-by",
+        "total-count",
+        "tw-patent-twins"
+      ],
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "top": {
+          "type": "number"
+        },
+        "skip": {
+          "type": "number"
+        },
+        "order-by": {
+          "type": "string"
+        },
+        "total-count": {
+          "type": "number"
+        },
+        "tw-patent-twins": {
+          "required": [
+            "-page-count",
+            "-create-date",
+            "twins-announced",
+            "twins-approved"
+          ],
+          "properties": {
+            "page-count": {
+              "type": "number",
+              "xml": {
+                "attribute": true
+              }
+            },
+            "create-date": {
+              "type": "string",
+              "xml": {
+                "attribute": true
+              }
+            },
+            "twins-announced": {
+              "items": {
+                "properties": {
+                  "appl-no": {
+                    "type": "string"
+                  },
+                  "sequence": {
+                    "type": "number",
+                    "xml": {
+                      "attribute": true
+                    }
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "twins-approved": {
+              "items": {
+                "properties": {
+                  "sequence": {
+                    "type": "number",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "appl-no": {
+                    "type": "string"
+                  },
+                  "twins-appl-no": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      }
+    },
+    "PatentChange": {
+      "required": [
+        "version",
+        "status",
+        "message",
+        "top",
+        "skip",
+        "order-by",
+        "total-count",
+        "tw-patent-change"
+      ],
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "top": {
+          "type": "number"
+        },
+        "skip": {
+          "type": "number"
+        },
+        "order-by": {
+          "type": "string"
+        },
+        "total-count": {
+          "type": "number"
+        },
+        "tw-patent-change": {
+          "required": [
+            "-page-count",
+            "-create-date",
+            "patentcontent"
+          ],
+          "properties": {
+            "page-count": {
+              "type": "number",
+              "xml": {
+                "attribute": true
+              }
+            },
+            "create-date": {
+              "type": "string",
+              "xml": {
+                "attribute": true
+              }
+            },
+            "patentcontent": {
+              "items": {
+                "properties": {
+                  "appl-no": {
+                    "type": "string"
+                  },
+                  "appl-class": {
+                    "type": "string"
+                  },
+                  "new-appl-no": {
+                    "type": "string"
+                  },
+                  "new-appl-class": {
+                    "type": "string"
+                  },
+                  "sequence": {
+                    "type": "number",
+                    "xml": {
+                      "attribute": true
+                    }
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      }
+    },
+    "TmarkRights": {
+      "required": [
+        "version",
+        "status",
+        "message",
+        "top",
+        "skip",
+        "order-by",
+        "total-count",
+        "tmarkrights"
+      ],
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "top": {
+          "type": "number"
+        },
+        "skip": {
+          "type": "number"
+        },
+        "order-by": {
+          "type": "string"
+        },
+        "total-count": {
+          "type": "number"
+        },
+        "tmarkrights": {
+          "required": [
+            "-page-count",
+            "-create-date",
+            "tmarkcontent"
+          ],
+          "properties": {
+            "page-count": {
+              "type": "number",
+              "xml": {
+                "attribute": true
+              }
+            },
+            "create-date": {
+              "type": "string",
+              "xml": {
+                "attribute": true
+              }
+            },
+            "tmarkcontent": {
+              "items": {
+                "properties": {
+                  "sequence": {
+                    "type": "number",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "exam-no": {
+                    "type": "string"
+                  },
+                  "appl-no": {
+                    "type": "string"
+                  },
+                  "tmark-name": {
+                    "type": "string"
+                  },
+                  "tmark-class": {
+                    "type": "string"
+                  },
+                  "tmark-class-desc": {
+                    "type": "string"
+                  },
+                  "tmark-image-url": {
+                    "items": {
+                      "properties": {
+                        "image-data-1": {
+                          "type": "string"
+                        },
+                        "image-data-2": {
+                          "type": "string"
+                        },
+                        "image-data-3": {
+                          "type": "string"
+                        },
+                        "image-data-4": {
+                          "type": "string"
+                        },
+                        "image-data-5": {
+                          "type": "string"
+                        },
+                        "image-data-6": {
+                          "type": "string"
+                        },
+                        "audio-filename": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "tmark-type": {
+                    "type": "string"
+                  },
+                  "tmark-type-desc": {
+                    "type": "string"
+                  },
+                  "tmark-color": {
+                    "type": "string"
+                  },
+                  "tmark-color-desc": {
+                    "type": "string"
+                  },
+                  "tmark-draft-c": {
+                    "type": "string"
+                  },
+                  "tmark-draft-e": {
+                    "type": "string"
+                  },
+                  "tmark-draft-j": {
+                    "type": "string"
+                  },
+                  "tmark-sign": {
+                    "type": "string"
+                  },
+                  "word-description": {
+                    "type": "string"
+                  },
+                  "goodsclass": {
+                    "items": {
+                      "properties": {
+                        "sequence": {
+                          "type": "number",
+                          "xml": {
+                            "attribute": true
+                          }
+                        },
+                        "goodsclass-code": {
+                          "type": "string"
+                        },
+                        "goods-name": {
+                          "type": "string"
+                        },
+                        "goods-group": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "deadline": {
+                    "type": "string"
+                  },
+                  "receive-date": {
+                    "type": "string"
+                  },
+                  "appl-date": {
+                    "type": "string"
+                  },
+                  "reg-date": {
+                    "type": "string"
+                  },
+                  "reg-notice-date": {
+                    "type": "string"
+                  },
+                  "exam-notice-date": {
+                    "type": "string"
+                  },
+                  "del-reason": {
+                    "type": "string"
+                  },
+                  "vol-no1": {
+                    "type": "string"
+                  },
+                  "vol-no2": {
+                    "type": "string"
+                  },
+                  "processor-name": {
+                    "type": "string"
+                  },
+                  "opposition-status": {
+                    "type": "number"
+                  },
+                  "exam-status": {
+                    "type": "number"
+                  },
+                  "nullity-act-status": {
+                    "type": "number"
+                  },
+                  "appl-del-status": {
+                    "type": "number"
+                  },
+                  "aut-status": {
+                    "type": "number"
+                  },
+                  "aga-aut-status": {
+                    "type": "number"
+                  },
+                  "extended-status": {
+                    "type": "number"
+                  },
+                  "amedment-status": {
+                    "type": "number"
+                  },
+                  "transfer-status": {
+                    "type": "number"
+                  },
+                  "issue-opp-status": {
+                    "type": "number"
+                  },
+                  "issue-del-status": {
+                    "type": "number"
+                  },
+                  "quota-status": {
+                    "type": "number"
+                  },
+                  "unable-use-status": {
+                    "type": "number"
+                  },
+                  "parties": {
+                    "required": [
+                      "applicants",
+                      "agents"
+                    ],
+                    "properties": {
+                      "applicants": {
+                        "items": {
+                          "properties": {
+                            "applicant": {
+                              "items": {
+                                "properties": {
+                                  "sequence": {
+                                    "type": "number",
+                                    "xml": {
+                                      "attribute": true
+                                    }
+                                  },
+                                  "chinese-name": {
+                                    "type": "string"
+                                  },
+                                  "english-name": {
+                                    "type": "string"
+                                  },
+                                  "japanese-name": {
+                                    "type": "string"
+                                  },
+                                  "address": {
+                                    "type": "string"
+                                  },
+                                  "country-code": {
+                                    "type": "string"
+                                  },
+                                  "chinese-country-name": {
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      },
+                      "agents": {
+                        "items": {
+                          "properties": {
+                            "agent": {
+                              "items": {
+                                "properties": {
+                                  "sequence": {
+                                    "type": "number",
+                                    "xml": {
+                                      "attribute": true
+                                    }
+                                  },
+                                  "chinese-name": {
+                                    "type": "string"
+                                  },
+                                  "address": {
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      }
+    },
+    "TmarkDivide": {
+      "required": [
+        "version",
+        "status",
+        "message",
+        "top",
+        "skip",
+        "order-by",
+        "total-count",
+        "tmarkdivide"
+      ],
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "top": {
+          "type": "number"
+        },
+        "skip": {
+          "type": "number"
+        },
+        "order-by": {
+          "type": "string"
+        },
+        "total-count": {
+          "type": "number"
+        },
+        "tmarkdivide": {
+          "required": [
+            "-page-count",
+            "-create-date",
+            "tmarkcontent"
+          ],
+          "properties": {
+            "page-count": {
+              "type": "number",
+              "xml": {
+                "attribute": true
+              }
+            },
+            "create-date": {
+              "type": "string",
+              "xml": {
+                "attribute": true
+              }
+            },
+            "tmarkcontent": {
+              "items": {
+                "properties": {
+                  "sequence": {
+                    "type": "number",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "tmark-class": {
+                    "type": "string"
+                  },
+                  "tmark-class-desc": {
+                    "type": "string"
+                  },
+                  "exam-no": {
+                    "type": "string"
+                  },
+                  "tmark-name": {
+                    "type": "string"
+                  },
+                  "goodsclass": {
+                    "items": {
+                      "properties": {
+                        "sequence": {
+                          "type": "number",
+                          "xml": {
+                            "attribute": true
+                          }
+                        },
+                        "goodsclass-code": {
+                          "type": "string"
+                        },
+                        "goods-name": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "divide-date": {
+                    "type": "string"
+                  },
+                  "origin-exam-no": {
+                    "required": [
+                      "origin-exam-no",
+                      "-tmark-right-url"
+                    ],
+                    "properties": {},
+                    "type": "object"
+                  },
+                  "origin-tmark-class": {
+                    "type": "string"
+                  },
+                  "origin-tmark-class-desc": {
+                    "type": "string"
+                  },
+                  "divide-count": {
+                    "type": "number"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      }
+    },
+    "TmarkPriority": {
+      "required": [
+        "version",
+        "status",
+        "message",
+        "top",
+        "skip",
+        "order-by",
+        "total-count",
+        "tmarkpriority"
+      ],
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "top": {
+          "type": "number"
+        },
+        "skip": {
+          "type": "number"
+        },
+        "order-by": {
+          "type": "string"
+        },
+        "total-count": {
+          "type": "number"
+        },
+        "tmarkpriority": {
+          "required": [
+            "-page-count",
+            "-create-date",
+            "tmarkrightscontents"
+          ],
+          "properties": {
+            "page-count": {
+              "type": "number",
+              "xml": {
+                "attribute": true
+              }
+            },
+            "create-date": {
+              "type": "string",
+              "xml": {
+                "attribute": true
+              }
+            },
+            "tmarkrightscontents": {
+              "items": {
+                "properties": {
+                  "sequence": {
+                    "type": "number",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "tmark-right-url": {
+                    "type": "string",
+                    "xml": {
+                      "attribute": true
+                    }
+                  },
+                  "tmarkcontent": {
+                    "items": {
+                      "properties": {
+                        "sequence": {
+                          "type": "number",
+                          "xml": {
+                            "attribute": true
+                          }
+                        },
+                        "appl-no": {
+                          "type": "string"
+                        },
+                        "tmark-class": {
+                          "type": "string"
+                        },
+                        "tmark-class-desc": {
+                          "type": "string"
+                        },
+                        "exam-no": {
+                          "type": "string"
+                        },
+                        "tmark-name": {
+                          "type": "string"
+                        },
+                        "priorities": {
+                          "required": [
+                            "priority-date",
+                            "priority-type",
+                            "priority-country-code",
+                            "priority-country",
+                            "priority-remark"
+                          ],
+                          "properties": {
+                            "priority-date": {
+                              "type": "string"
+                            },
+                            "priority-type": {
+                              "type": "string"
+                            },
+                            "priority-country-code": {
+                              "type": "string"
+                            },
+                            "priority-country": {
+                              "type": "string"
+                            },
+                            "priority-remark": {
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      }
+    }
+  },
+  "info": {
+    "title": "OpenData - Patent & TMark",
+    "description": "本文件係經濟部智慧財產局製作，描述專利權/商標權及關聯案件等開放資料之 API 服務，就商標權 及關聯案件共 5 項 API 服務所涵蓋之參數及結果進行說明，以利外界易於使用開放資料。",
+    "version": "1.0"
+  },
+  "x-axway": {
+    "corsEnabled": true,
+    "basePaths": [
+      ""
+    ],
+    "serviceType": "rest",
+    "deprecated": false,
+    "tags": {}
+  }
+}

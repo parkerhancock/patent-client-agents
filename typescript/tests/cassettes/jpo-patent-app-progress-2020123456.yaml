@@ -1,0 +1,95 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://ip-data.jpo.go.jp/auth/token
+    headers:
+      accept:
+      - application/json
+    body:
+      type: text
+      content: grant_type=password&username=[FILTERED]&password=[FILTERED]
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - no-store
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Thu, 07 May 2026 14:20:20 GMT
+      referrer-policy:
+      - no-referrer
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      via:
+      - 1.1 aca99b28083d8a34e20c40dbd89ecfce.cloudfront.net (CloudFront)
+      x-cache:
+      - Miss from cloudfront
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      type: text
+      content: '{"access_token": "[FILTERED]", "expires_in": 3600, "refresh_expires_in": 28800, "refresh_token":
+        "[FILTERED]", "token_type": "Bearer", "id_token": "[FILTERED]", "not-before-policy": 0, "session_state":
+        "[FILTERED]", "scope": "openid profile"}'
+  recorded_at: '2026-05-07T14:20:20.000Z'
+- request:
+    method: GET
+    uri: https://ip-data.jpo.go.jp/api/patent/v1/app_progress/2020123456
+    headers:
+      accept:
+      - application/json, application/zip
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      allow:
+      - GET, HEAD, OPTIONS
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      cross-origin-opener-policy:
+      - same-origin
+      date:
+      - Thu, 07 May 2026 14:20:23 GMT
+      referrer-policy:
+      - same-origin
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      vary:
+      - Cookie
+      via:
+      - 1.1 0560e3493bcd525e6e3e19cd7c9abdc0.cloudfront.net (CloudFront)
+      x-cache:
+      - Miss from cloudfront
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - DENY
+      x-xss-protection:
+      - 1; mode=block
+      x-amzn-remapped-connection:
+      - keep-alive
+      x-amzn-remapped-content-length:
+      - '5286'
+      x-amzn-remapped-date:
+      - Thu, 07 May 2026 14:20:23 GMT
+      x-amzn-remapped-server:
+      - gunicorn
+    body:
+      type: text
+      content: '{"result":{"statusCode":"100","errorMessage":"","remainAccessCount":"785","data":{"applicationNumber":"2020123456","inventionTitle":"立体配線構造体の製造方法","applicantAttorney":[{"applicantAttorneyCd":"000114400","repeatNumber":"1","name":"メイショウ株式会社","applicantAttorneyClass":"1"},{"applicantAttorneyCd":"100076598","repeatNumber":"2","name":"渡辺　一豊","applicantAttorneyClass":"2"},{"applicantAttorneyCd":"100165607","repeatNumber":"3","name":"渡辺　一成","applicantAttorneyClass":"2"},{"applicantAttorneyCd":"100196690","repeatNumber":"4","name":"森合　透","applicantAttorneyClass":"2"}],"filingDate":"20200720","publicationNumber":"503090037","ADPublicationNumber":"2021090037","nationalPublicationNumber":"","ADNationalPublicationNumber":"","publicationDate":"20210610","registrationNumber":"7533889","registrationDate":"20240805","internationalApplicationNumber":"","internationalPublicationNumber":"","internationalPublicationDate":"","erasureIdentifier":"00","expireDate":"20400720","disappearanceDate":"","priorityRightInformation":[{"parisPriorityApplicationNumber":"","parisPriorityDate":"","parisPriorityCountryCd":"","nationalPriorityLawCd":"1","nationalPriorityApplicationNumber":"2019210418","nationalPriorityInternationalApplicationNumber":"","nationalPriorityDate":"20191121"}],"parentApplicationInformation":{},"divisionalApplicationInformation":[],"bibliographyInformation":[{"numberType":"01","number":"2020123456","documentList":[{"legalDate":"20200720","irirFlg":"0","availabilityFlag":"1","documentCode":"A63","documentDescription":"要約書","documentNumber":"52001475960","versionNumber":"0001","documentSeparator":"Y","numberOfPages":"0","sizeOfDocument":"1208"},{"legalDate":"20200720","irirFlg":"0","availabilityFlag":"1","documentCode":"A63","documentDescription":"特許願","documentNumber":"52001475960","versionNumber":"0001","documentSeparator":"S","numberOfPages":"0","sizeOfDocument":"1427"},{"legalDate":"20200720","irirFlg":"0","availabilityFlag":"1","documentCode":"A63","documentDescription":"請求の範囲","documentNumber":"52001475960","versionNumber":"0001","documentSeparator":"L","numberOfPages":"0","sizeOfDocument":"2578"},{"legalDate":"20200720","irirFlg":"0","availabilityFlag":"1","documentCode":"A63","documentDescription":"明細書","documentNumber":"52001475960","versionNumber":"0001","documentSeparator":"M","numberOfPages":"0","sizeOfDocument":"10011"},{"legalDate":"20200720","irirFlg":"0","availabilityFlag":"1","documentCode":"A63","documentDescription":"図面","documentNumber":"52001475960","versionNumber":"0001","documentSeparator":"Z","numberOfPages":"0","sizeOfDocument":"3497183"},{"legalDate":"20230419","irirFlg":"0","availabilityFlag":"1","documentCode":"A621","documentDescription":"出願審査請求書","documentNumber":"52300838571","versionNumber":"0001","documentSeparator":"S","numberOfPages":"0","sizeOfDocument":"1267"},{"legalDate":"20240117","irirFlg":"0","availabilityFlag":"1","documentCode":"A971007","documentDescription":"検索報告書","documentNumber":"96824003767","versionNumber":"0001","documentSeparator":"C","numberOfPages":"0","sizeOfDocument":"10955"},{"legalDate":"20240227","irirFlg":"0","availabilityFlag":"1","documentCode":"A131","documentDescription":"拒絶理由通知書","documentNumber":"06124084096","versionNumber":"0001","documentSeparator":"K","numberOfPages":"0","sizeOfDocument":"5006"},{"legalDate":"20240424","irirFlg":"0","availabilityFlag":"1","documentCode":"A53","documentDescription":"意見書","documentNumber":"52400900476","versionNumber":"0001","documentSeparator":"S","numberOfPages":"0","sizeOfDocument":"4223"},{"legalDate":"20240424","irirFlg":"0","availabilityFlag":"1","documentCode":"A523","documentDescription":"手続補正書（自発・内容）","documentNumber":"52400900473","versionNumber":"0001","documentSeparator":"S","numberOfPages":"0","sizeOfDocument":"3151"},{"legalDate":"20240709","irirFlg":"0","availabilityFlag":"1","documentCode":"A01","documentDescription":"特許査定","documentNumber":"06124327784","versionNumber":"0001","documentSeparator":"K","numberOfPages":"0","sizeOfDocument":"1542"},{"legalDate":"20240724","irirFlg":"0","availabilityFlag":"0","documentCode":"A61","documentDescription":"登録料納付","documentNumber":"BBBBBBBBBBB","versionNumber":"0000","documentSeparator":"
+        ","numberOfPages":"0","sizeOfDocument":"0"}]},{"numberType":"02","number":"503090037","documentList":[]},{"numberType":"06","number":"7533889","documentList":[{"legalDate":"20240709","irirFlg":"0","availabilityFlag":"0","documentCode":"A01","documentDescription":"特許査定","documentNumber":"99999999999","versionNumber":"0000","documentSeparator":"
+        ","numberOfPages":"0","sizeOfDocument":"0"},{"legalDate":"20240724","irirFlg":"0","availabilityFlag":"0","documentCode":"R100","documentDescription":"特許料納付書","documentNumber":"99999999999","versionNumber":"0000","documentSeparator":"
+        ","numberOfPages":"0","sizeOfDocument":"0"},{"legalDate":"20240820","irirFlg":"0","availabilityFlag":"0","documentCode":"R150","documentDescription":"特許証","documentNumber":"99999999999","versionNumber":"0000","documentSeparator":"
+        ","numberOfPages":"0","sizeOfDocument":"0"}]}]}}}'
+  recorded_at: '2026-05-07T14:20:23.000Z'

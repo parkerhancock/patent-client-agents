@@ -1,0 +1,135 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://publications.europa.eu/webapi/rdf/sparql
+    headers:
+      accept:
+      - application/sparql-results+json
+      content-type:
+      - application/x-www-form-urlencoded;charset=UTF-8
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: text
+      content: >-
+        query=PREFIX+cdm%3A+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fontology%2Fcdm%23%3E%0ASELECT+%28COUNT%28DISTINCT+%3Fcelex%29+AS+%3Fn%29+WHERE+%7B%0A++VALUES+%3Fsubject+%7B+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Fcase-law-subject-matter%2FBREV%3E+%7D%0A++%3Fwork+cdm%3Acase-law_is-about_case-law-subject-matter+%3Fsubject+%3B%0A++++++++cdm%3Aresource_legal_id_celex+%3Fcelex+%3B%0A++++++++cdm%3Awork_date_document+%3Fdate+.%0A++OPTIONAL+%7B+%3Fwork+cdm%3Acase-law_ecli+%3Fecli+%7D%0A++OPTIONAL+%7B+%3Fexpr+cdm%3Aexpression_belongs_to_work+%3Fwork+%3B+cdm%3Aexpression_uses_language+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Flanguage%2FENG%3E+%3B+cdm%3Aexpression_title+%3Ftitle+.+%7D%0A++FILTER%28SUBSTR%28STR%28%3Fcelex%29%2C+6%2C+1%29+%3D+%22C%22%29%0A++FILTER%28SUBSTR%28STR%28%3Fcelex%29%2C+7%2C+1%29+%3D+%22J%22%29%0A%7D
+  response:
+    status: 200
+    headers:
+      accept-ranges:
+      - bytes
+      connection:
+      - keep-alive
+      content-disposition:
+      - filename=sparql_2026-10-26_22-08-40Z.json
+      content-type:
+      - application/sparql-results+json
+      date:
+      - Mon, 26 Oct 2026 22:08:40 GMT
+    body:
+      type: json
+      content:
+        head:
+          link: []
+          vars:
+          - "n"
+        results:
+          distinct: false
+          ordered: true
+          bindings:
+          - "n":
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#integer"
+              value: "59"
+  recorded_at: 2026-10-26T22:08:40.312Z
+- request:
+    method: POST
+    uri: https://publications.europa.eu/webapi/rdf/sparql
+    headers:
+      accept:
+      - application/sparql-results+json
+      content-type:
+      - application/x-www-form-urlencoded;charset=UTF-8
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: text
+      content: >-
+        query=PREFIX+cdm%3A+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fontology%2Fcdm%23%3E%0ASELECT+DISTINCT+%3Fcelex+%3Fecli+%3Fdate+%3Ftitle+WHERE+%7B%0A++VALUES+%3Fsubject+%7B+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Fcase-law-subject-matter%2FBREV%3E+%7D%0A++%3Fwork+cdm%3Acase-law_is-about_case-law-subject-matter+%3Fsubject+%3B%0A++++++++cdm%3Aresource_legal_id_celex+%3Fcelex+%3B%0A++++++++cdm%3Awork_date_document+%3Fdate+.%0A++OPTIONAL+%7B+%3Fwork+cdm%3Acase-law_ecli+%3Fecli+%7D%0A++OPTIONAL+%7B+%3Fexpr+cdm%3Aexpression_belongs_to_work+%3Fwork+%3B+cdm%3Aexpression_uses_language+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Flanguage%2FENG%3E+%3B+cdm%3Aexpression_title+%3Ftitle+.+%7D%0A++FILTER%28SUBSTR%28STR%28%3Fcelex%29%2C+6%2C+1%29+%3D+%22C%22%29%0A++FILTER%28SUBSTR%28STR%28%3Fcelex%29%2C+7%2C+1%29+%3D+%22J%22%29%0A%7D+ORDER+BY+DESC%28%3Fdate%29+%3Fcelex+LIMIT+3+OFFSET+0
+  response:
+    status: 200
+    headers:
+      accept-ranges:
+      - bytes
+      connection:
+      - keep-alive
+      content-disposition:
+      - filename=sparql_2026-10-26_22-08-40Z.json
+      content-type:
+      - application/sparql-results+json
+      date:
+      - Mon, 26 Oct 2026 22:08:40 GMT
+    body:
+      type: json
+      content:
+        head:
+          link: []
+          vars:
+          - celex
+          - ecli
+          - date
+          - title
+        results:
+          distinct: false
+          ordered: true
+          bindings:
+          - celex:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 62017CJ0650
+            ecli:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: ECLI:EU:C:2020:327
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 2020-04-30
+            title:
+              type: literal
+              "xml:lang": en
+              value: "Judgment of the Court (Fourth Chamber) of 30 April 2020.#Royalty Pharma Collection Trust v Deutsches Patent- und Markenamt.#Request for a preliminary ruling from the Bundespatentgericht.#Reference for a preliminary ruling — Intellectual and industrial property — Regulation (EC) No 469/2009 — Supplementary protection certificate for medicinal products — Conditions for obtaining such a certificate — Article 3(a) — Concept of a ‘product protected by a basic patent in force’ — Assessment criteria.#Case C-650/17."
+          - celex:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 62017CJ0688
+            ecli:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: ECLI:EU:C:2019:722
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 2019-09-12
+            title:
+              type: literal
+              "xml:lang": en
+              value: "Judgment of the Court (Third Chamber) of 12 September 2019.#Bayer Pharma AG v Richter Gedeon Vegyészeti Gyár Nyrt. and Exeltis Magyarország Gyógyszerkereskedelmi Kft.#Request for a preliminary ruling from the Fővárosi Törvényszék.#Reference for a preliminary ruling — Intellectual property — Patents — Directive 2004/48/EC — Article 9(7) — Placing on the market of products infringing a patent right — Provisional measures — Patent subsequently declared invalid — Consequences — Right to appropriate compensation for losses caused by the provisional measures.#Case C-688/17."
+          - celex:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 62016CJ0681
+            ecli:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: ECLI:EU:C:2018:484
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 2018-06-21
+            title:
+              type: literal
+              "xml:lang": en
+              value: "Judgment of the Court (Second Chamber) of 21 June 2018.#Pfizer Ireland Pharmaceuticals, Operations Support Group v Orifarm GmbH.#Request for a preliminary ruling from the Landgericht Düsseldorf.#Reference for a preliminary ruling — Intellectual and industrial property — Patent law — Acts of Accession to the European Union of 2003, 2005 and 2012 — Specific Mechanism — Whether applicable to parallel imports — Regulation (EC) No 469/2009 — Product protected by a supplementary protection certificate in a Member State and marketed by the holder of the basic patent in another Member State — Exhaustion of intellectual and industrial property rights — No basic patent in the new Member States — Regulation (EC) No 1901/2006 — Extension of the protection period.#Case C-681/16."
+  recorded_at: 2026-10-26T22:08:40.325Z

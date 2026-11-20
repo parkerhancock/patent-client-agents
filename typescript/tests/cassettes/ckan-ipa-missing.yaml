@@ -1,0 +1,69 @@
+version: 1
+interactions:
+  - request:
+      method: GET
+      uri: https://data.gov.au/data/api/3/action/package_show?id=no-such-dataset-zz
+      headers:
+        accept:
+          - application/json
+        user-agent:
+          - patent-client-agents/0 (+https://patentclient.com)
+      body:
+        type: none
+    response:
+      status: 302
+      headers:
+        cache-control:
+          - "max-age=86400, public"
+        connection:
+          - keep-alive
+        content-language:
+          - en
+        content-type:
+          - text/html; charset=utf-8
+        date:
+          - "Mon, 26 Oct 2026 20:47:13 GMT"
+        etag:
+          - "W/\"1793037670\""
+        expires:
+          - "Sun, 19 Nov 1978 05:00:00 GMT"
+        last-modified:
+          - "Mon, 26 Oct 2026 18:01:10 GMT"
+        referrer-policy:
+          - strict-origin-when-cross-origin
+        server:
+          - nginx
+        strict-transport-security:
+          - max-age=31536000
+        transfer-encoding:
+          - chunked
+        vary:
+          - "Accept-Encoding,Cookie, Origin"
+        via:
+          - 1.1 ddc99690db2a90a14fd13c2d616aafd6.cloudfront.net (CloudFront)
+        x-amz-cf-id:
+          - C75fOkKdaoGd5DXSMK3ZRORZjrD3GPHBJoQQnWuj9UNdkpuHVta8ag==
+        x-amz-cf-pop:
+          - DFW57-P9
+        x-cache:
+          - Miss from cloudfront
+        x-content-type-options:
+          - nosniff
+        x-drupal-cache:
+          - HIT
+        x-drupal-dynamic-cache:
+          - MISS
+        x-frame-options:
+          - "SAMEORIGIN, SAMEORIGIN"
+        x-generator:
+          - Drupal 11 (https://www.drupal.org)
+        x-powered-by:
+          - PHP/8.4.27
+        x-robots-tag:
+          - "noindex, nofollow, nosnippet, noarchive"
+        x-xss-protection:
+          - 1; mode=block
+      body:
+        type: text
+        content: "<!-- HTML page omitted from the recording -->"
+    recorded_at: 2026-10-26T20:47:14.006Z

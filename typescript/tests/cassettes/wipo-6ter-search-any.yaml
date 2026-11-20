@@ -1,0 +1,249 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://6ter.wipo.int/api/v1/signs?keywords=UNESCO&searchType=ANY&sortBy=KEY&limit=3&offset=0
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-credentials:
+      - "true"
+      access-control-allow-headers:
+      - "*"
+      access-control-allow-methods:
+      - DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Mon, 26 Oct 2026 21:58:36 GMT
+      via:
+      - 1.1 f0ddd258f2befca309faaacbbff6459e.cloudfront.net (CloudFront)
+      x-amz-apigw-id:
+      - F3z58Hz8liAEecg=
+      x-amz-cf-id:
+      - SE3Rsdfgd9jHc9Lj9FBv9kkII4yX3haXXeTMTbTzTdRmS8ZIwFfmXQ==
+      x-amz-cf-pop:
+      - DFW56-P11
+      x-amzn-requestid:
+      - ef54789d-0be3-4af6-9ab1-57d485cefc61
+      x-amzn-trace-id:
+      - >-
+        Root=1-6adfcd0b-4db9cfb77962da78450a991c;Parent=5225095e93b24e19;Sampled=0;Lineage=1:5408b530:0
+      x-cache:
+      - Miss from cloudfront
+      x-requested-with:
+      - "*"
+    body:
+      type: json
+      content:
+        responseTimeMs: 3
+        count: 6
+        limit: "3"
+        offset: "0"
+        records:
+        - indexedAt: 2026-09-30T06:08:55.395510Z
+          stateOrg: QO
+          metadata:
+            hash: cbf304118d0d55f5f651e42f3f46492e28f48634581aee00931909914aa7d725
+          fileName: qo0085.xml
+          protectedSign:
+            image: qo85.jpg
+            thumbnailImageUrl: https://6ter.wipo.int/images/THUMB/qo85-th.jpg
+            imageUrl: https://6ter.wipo.int/images/qo85.jpg
+            languageCode: EN
+            thumbnailImage: qo85-th.jpg
+          nature:
+            code: EMBLEM
+            type:
+              en: Emblem
+              fr: Emblème
+              es: Emblema
+          language:
+            code: EN
+            name:
+              en: English
+              fr: Anglais
+              es: Inglés
+          number: "85"
+          numberAlias: QO0085
+          details:
+          - code: EN
+            name:
+              en: English
+              fr: Anglais
+              es: Inglés
+            text: UNESCO
+          vienna:
+            viennaClassifications:
+            - 7.5.5
+            - 7.5.6
+            - 24.3.1
+            - 24.3.9
+            - 24.3.15
+            - 24.3.18
+            - 24.11.25
+            - 27.3.1
+            - 27.3.15
+            viennaEdition: VCL (2-1988)
+          publicationDate: "19650202"
+          communicatingParty:
+            code: QO
+            address:
+              address: 7, place de Fontenoy
+              city: Paris
+              countryCode: FR
+              postCode: "75352"
+              countryName: France
+            name:
+              en: UNITED NATIONS EDUCATIONAL, SCIENTIFIC AND CULTURAL ORGANIZATION
+              fr: ORGANISATION DES NATIONS UNIES POUR L'EDUCATION, LA SCIENCE ET LA CULTURE
+            countryName:
+              en: Organization without ST.3 code
+              fr: Organisation n'ayant pas de code ST.3
+              es: Organización sin código ST.3
+            type: ORG
+          circulars:
+          - date: "19661205"
+            number: "0645"
+        - number: "88"
+          indexedAt: 2026-09-30T06:08:57.860475Z
+          stateOrg: QO
+          metadata:
+            hash: 6768968ebc0ac5696210ab44fa0f243f19b195dedf5b5c3e1c908105c15ae2ed
+          fileName: qo0088.xml
+          protectedSign:
+            text: UNESCO
+            languageCode: EN
+          nature:
+            code: ABBREVIATION
+            type:
+              en: Abbreviation
+              fr: Sigle
+              es: Sigla
+          numberAlias: QO0088
+          language:
+            code: EN
+            name:
+              en: English
+              fr: Anglais
+              es: Inglés
+          publicationDate: "19650202"
+          communicatingParty:
+            code: QO
+            address:
+              address: 7, place de Fontenoy
+              city: Paris
+              countryCode: FR
+              postCode: "75352"
+              countryName: France
+            name:
+              en: UNITED NATIONS EDUCATIONAL, SCIENTIFIC AND CULTURAL ORGANIZATION
+              fr: ORGANISATION DES NATIONS UNIES POUR L'EDUCATION, LA SCIENCE ET LA CULTURE
+            countryName:
+              en: Organization without ST.3 code
+              fr: Organisation n'ayant pas de code ST.3
+              es: Organización sin código ST.3
+            type: ORG
+          circulars:
+          - date: "19661205"
+            number: "0645"
+        - indexedAt: 2026-09-30T06:08:58.261075Z
+          stateOrg: QO
+          metadata:
+            hash: 7c1ebd58f8ecefc1ac2da746afee5e46cc45033b3f8b3ef02c04ce4748a1da68
+          fileName: qo0471.xml
+          protectedSign:
+            image: qo471.jpg
+            thumbnailImageUrl: https://6ter.wipo.int/images/THUMB/qo471-th.jpg
+            imageUrl: https://6ter.wipo.int/images/qo471.jpg
+            languageCode: EN
+            thumbnailImage: qo471-th.jpg
+          nature:
+            code: EMBLEM
+            type:
+              en: Emblem
+              fr: Emblème
+              es: Emblema
+          language:
+            code: EN
+            name:
+              en: English
+              fr: Anglais
+              es: Inglés
+          number: "471"
+          numberAlias: QO0471
+          details:
+          - code: EN
+            name:
+              en: English
+              fr: Anglais
+              es: Inglés
+            text: UNDP
+          - code: EN
+            name:
+              en: English
+              fr: Anglais
+              es: Inglés
+            text: UNESCO
+          - code: EN
+            name:
+              en: English
+              fr: Anglais
+              es: Inglés
+            text: UNFPA
+          - code: EN
+            name:
+              en: English
+              fr: Anglais
+              es: Inglés
+            text: UNICEF
+          - code: EN
+            name:
+              en: English
+              fr: Anglais
+              es: Inglés
+            text: WHO
+          - code: EN
+            name:
+              en: English
+              fr: Anglais
+              es: Inglés
+            text: WORLD BANK
+          vienna:
+            viennaClassifications:
+            - 27.5.1
+            viennaEdition: VCL (3-1993)
+          publicationDate: "19970528"
+          communicatingParty:
+            code: QO
+            address:
+              address: 20 AVENUE APPIA
+              city: GENEVA
+              countryCode: CH
+              postCode: "1211"
+              countryName: Switzerland
+            name:
+              en: JOINT UNITED NATIONS PROGRAMME ON HIV/AIDS
+              fr: PROGRAMME COMMUN DES NATIONS UNIES SUR LE VIH/SIDA
+              es: PROGRAMA CONJUNTO DE LAS NACIONES UNIDAS SOBRE EL VIH/SIDA
+            countryName:
+              en: Organization without ST.3 code
+              fr: Organisation n'ayant pas de code ST.3
+              es: Organización sin código ST.3
+            type: ORG
+          circulars:
+          - date: "19970528"
+            number: "5904"
+  recorded_at: 2026-10-26T21:58:36.077Z

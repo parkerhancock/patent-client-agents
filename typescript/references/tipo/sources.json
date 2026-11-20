@@ -1,0 +1,10 @@
+[
+  {
+    "kind": "Swagger 2.0 specification",
+    "file": "oas.json",
+    "title": "OpenData - Patent & TMark (TIPO, version 1.0)",
+    "url": "https://cloud.tipo.gov.tw/S220/opdata/api/file/oas",
+    "retrieved": "2026-10-27",
+    "sha256": "9611c9e954a02eb12c2305f3e615701e3c14cd3cf8369ff6984b6605d0e7f4c9"
+  }
+]

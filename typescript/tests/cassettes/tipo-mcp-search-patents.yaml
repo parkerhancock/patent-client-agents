@@ -1,0 +1,229 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://cloud.tipo.gov.tw/S220/opdataapi/api/PatentRights?format=json&top=2&skip=0&patentname=%E5%8A%A0%E7%86%B1%E5%99%A8&applclass=1&tk=[FILTERED]
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cf-cache-status:
+      - DYNAMIC
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=UTF-8
+      date:
+      - Mon, 26 Oct 2026 19:47:02 GMT
+      server:
+      - cloudflare
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      transfer-encoding:
+      - chunked
+    body:
+      type: json
+      content:
+        version: "1.0"
+        status: ok
+        message: ""
+        top: 2
+        skip: 0
+        order-by: appl-no
+        total-count: 737
+        tw-patent-rightsI:
+          -page-count: 2
+          -create-date: 2026/10/27
+          patentcontent:
+          - -sequence: 1
+            publication-reference:
+              notice-no: 0
+              notice-volno: 0
+              notice-isuno: 0
+              notice-date: null
+              publish-no: "016677"
+              publish-volno: 1
+              publish-isuno: 8
+              publish-date: 1974/08/01
+            application-reference:
+              appl-no: "06210776"
+              appl-date: 1973/05/26
+              first-date: 1973/05/26
+              foreign-language: null
+              foreign-language-desc: null
+              appl-class: "1"
+              appl-class-desc: 發明
+              material-appl-date: null
+              material-flag: "0"
+              faplexm-date: 1973/05/26
+              reappl-date: null
+              raplexam-date: null
+              agree-flag: null
+              twins-flag: null
+            patent-title:
+              patent-name-chinese: 感應加熱器
+              patent-name-english: null
+            patent-right:
+              licence-date: null
+              relicence-date: null
+              patent-no: "007833"
+              patent-bdate: 1973/05/26
+              patent-edate: 1988/05/25
+              charge-expir-date: 1982/05/25
+              charge-expir-year: "9"
+              rent-status: 0
+              mortgage-status: 0
+              transfer-status: 0
+              inherit-status: 0
+              trust-status: 0
+              opposition-status: 0
+              nullity-status: 0
+              continue-status: 0
+              expand-status: 0
+              cancel-date: 1982/05/26
+              cancel-result: "48105"
+              revoke-date: null
+              revoke-code: null
+              dep-patent-class: null
+              dep-appl-no: null
+            parties:
+              applicants:
+              - -sequence: 1
+                chinese-name: 安天德公司
+                english-name: 8501 WEST HIGGINS ROAD CHICAGO,ILLINOIS 60631,USA
+                address: null
+                english-country: US
+                chinese-country: 美國
+                english-address: null
+              inventors:
+              - -sequence: 1
+                chinese-name: EUGENE MITTELMANN
+                english-name: null
+                english-country: AU
+                chinese-country: 澳大利亞
+              agents:
+              - -sequence: 1
+                chinese-name: 蔡中曾
+                english-name: null
+                address: 臺北市大安區敦化南路1段245號8樓
+                english-country: TW
+                chinese-country: 中華民國
+            classification-ipc:
+            - -sequence: 1
+              ipc-full: H05K6/02
+              ipc-section: H
+              ipc-class: "05"
+              ipc-subclass: K
+              ipc-main-group: "6"
+              ipc-group: "02"
+              ipc-version: "06"
+            link:
+              patentisuregspecxmla-url: null
+              patentpubmtiff-url: null
+              patentpubxml-url: null
+              patentisuregspecmtiff-url: null
+          - -sequence: 2
+            publication-reference:
+              notice-no: 0
+              notice-volno: 0
+              notice-isuno: 0
+              notice-date: null
+              publish-no: "017643"
+              publish-volno: 1
+              publish-isuno: 12
+              publish-date: 1974/12/01
+            application-reference:
+              appl-no: "06310540"
+              appl-date: 1974/03/21
+              first-date: 1974/03/21
+              foreign-language: null
+              foreign-language-desc: null
+              appl-class: "1"
+              appl-class-desc: 發明
+              material-appl-date: null
+              material-flag: "0"
+              faplexm-date: 1974/03/21
+              reappl-date: null
+              raplexam-date: null
+              agree-flag: null
+              twins-flag: null
+            patent-title:
+              patent-name-chinese: 液體加熱器之控制方法
+              patent-name-english: null
+            patent-right:
+              licence-date: null
+              relicence-date: null
+              patent-no: "007956"
+              patent-bdate: 1974/03/21
+              patent-edate: 1989/03/20
+              charge-expir-date: 1976/03/20
+              charge-expir-year: "2"
+              rent-status: 0
+              mortgage-status: 0
+              transfer-status: 0
+              inherit-status: 0
+              trust-status: 0
+              opposition-status: 0
+              nullity-status: 0
+              continue-status: 0
+              expand-status: 0
+              cancel-date: 1976/03/21
+              cancel-result: "48105"
+              revoke-date: null
+              revoke-code: null
+              dep-patent-class: null
+              dep-appl-no: null
+            parties:
+              applicants:
+              - -sequence: 1
+                chinese-name: ALBIN TROTTER
+                english-name: null
+                address: 智利
+                english-country: CL
+                chinese-country: 智利
+                english-address: null
+              - -sequence: 2
+                chinese-name: URSUS TROTTER
+                english-name: null
+                address: 智利
+                english-country: CL
+                chinese-country: 智利
+                english-address: null
+              inventors:
+              - -sequence: 1
+                chinese-name: ALBIN TROTTER
+                english-name: null
+                english-country: CL
+                chinese-country: 智利
+              - -sequence: 2
+                chinese-name: URSUS TROTTER
+                english-name: null
+                english-country: CL
+                chinese-country: 智利
+              agents:
+              - -sequence: 1
+                chinese-name: 陳世雄
+                english-name: null
+                address: 臺北市大安區敦化南路695號8樓
+                english-country: TW
+                chinese-country: 中華民國
+            classification-ipc:
+            - -sequence: 1
+              ipc-full: F24H9/20
+              ipc-section: F
+              ipc-class: "24"
+              ipc-subclass: H
+              ipc-main-group: "9"
+              ipc-group: "20"
+              ipc-version: "06"
+            link:
+              patentisuregspecxmla-url: null
+              patentpubmtiff-url: null
+              patentpubxml-url: null
+              patentisuregspecmtiff-url: null
+  recorded_at: 2026-10-26T19:47:02.481Z

@@ -1,0 +1,344 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://patenttitietopalvelu.prh.fi/nis-api-gateway-pat/patent/20245203
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com; contact avoindata@prh.fi)
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-methods:
+      - GET, HEAD, POST
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - close
+      content-security-policy:
+      - "default-src 'self'; img-src 'self' data: ; media-src 'self' ; child-src 'none'; manifest-src 'self'; object-src 'none'; worker-src 'none'; connect-src 'self' https://asiointi.prh.fi;"
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Mon, 26 Oct 2026 20:35:00 GMT
+      strict-transport-security:
+      - max-age=63072000; includeSubdomains;
+      x-content-type-options:
+      - nosniff
+      x-dns-prefetch-control:
+      - "off"
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - SAMEORIGIN
+      x-permitted-cross-domain-policies:
+      - none
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      type: json
+      content:
+        applicationType: PATENT_FOR_INVENTION
+        applicationNumber: "20245203"
+        registrationNumber: "131976"
+        applicationDate: 2024-02-19
+        filingDate: 2024-02-19
+        grantDate: 2026-03-20
+        publicationDate: 2025-08-20
+        patentTitle:
+        - title:
+          - MERKINANTOMENETELMÄT OCC-AKTIVOIDULLE PUSCHILLE
+          language: FI
+          ordinal: 1
+        - title:
+          - |
+            SIGNALERINGSMETOD FÖR OCC-AKTIVERAD PUSCH
+          language: SV
+          ordinal: 2
+        - title:
+          - SIGNALING METHODS FOR OCC-ENABLED PUSCH
+          language: EN
+          ordinal: 3
+        events:
+        - eventDate: 2024-11-28
+          current: true
+          event: CHANGE_OF_REPRESENTATIVE.change_of_representative
+          ordinal: "1"
+        - eventDate: 2026-03-20
+          current: false
+          event: ACTIONS_ON_RECORD.patent_granted
+          ordinal: "2"
+        abstracts:
+        - content: >-
+            Laitteisto (110-1, 110-2), sisältäen välineet vastaanottaa ortogonaalisen
+            peitekoodin toiminnan konfiguraatio (301-1, 301-2); välineet fyysisen nousevan
+            siirtotien jaetun kanavan lähetykseen käytettävän ortogonaalisen peitekoodin
+            määrittämiseksi konfiguraation perusteella; välineet fyysisen nousevan siirtotien jaetun
+            kanavan lähetyksen suorittamiseksi käyttäen määritettyä ortogonaalista peitekoodia
+            (321, 322, 331, 332).
+          language: FI
+          ordinal: 1
+        - content: >-
+            An apparatus (110-1, 110-2), including means for receiving a configuration of
+            orthogonal cover code operation (301-1, 301-2); means for determining an
+            orthogonal cover code to use for a physical uplink shared channel transmission, based on
+            the configuration; and means for performing the physical uplink shared channel
+            transmission using the determined orthogonal cover code (321, 322, 331, 332).
+          language: EN
+          ordinal: 2
+        priorityClaims: []
+        imageUrl: /opendata/patent/document/2024/20245203/Tiivistelmakuva.png
+        documents:
+          document:
+          - documentKind: Incoming
+            documentSubKind: Incoming.VAATI
+            documentDate: 2025-01-07
+            name: FI20245203_SPEC.pdf
+            url: /opendata/patent/document/2024/20245203/FI20245203_SPEC.pdf
+            languageCode: en
+            ordinal: 1
+          - documentKind: Incoming
+            documentSubKind: Incoming.TIIVI
+            documentDate: 2025-01-07
+            name: FI20245203_SPEC-1.pdf
+            url: /opendata/patent/document/2024/20245203/FI20245203_SPEC-1.pdf
+            languageCode: en
+            ordinal: 2
+          - documentKind: Publication
+            documentSubKind: Publication.COVER
+            documentDate: 2026-03-20
+            name: FI131976-B1-COVER.pdf
+            url: /opendata/patent/document/2024/20245203/FI131976-B1-COVER.pdf
+            languageCode: en
+            ordinal: 3
+          - documentKind: Incoming
+            documentSubKind: Incoming.SELIT
+            documentDate: 2024-02-19
+            name: FI20245203_SELITE.pdf
+            url: /opendata/patent/document/2024/20245203/FI20245203_SELITE.pdf
+            languageCode: en
+            ordinal: 4
+          - documentKind: Incoming
+            documentSubKind: Incoming.VPVAST
+            documentDate: 2025-01-07
+            name: FI20245203_KIRJE-1(1).pdf
+            url: /opendata/patent/document/2024/20245203/FI20245203_KIRJE-1(1).pdf
+            languageCode: en
+            ordinal: 5
+          - documentKind: Publication
+            documentSubKind: Publication.A1-JULK
+            documentDate: 2025-08-20
+            name: FI20245203-A1-JULK.pdf
+            url: /opendata/patent/document/2024/20245203/FI20245203-A1-JULK.pdf
+            languageCode: en
+            ordinal: 6
+          - documentKind: Incoming
+            documentSubKind: Incoming.TIIVI
+            documentDate: 2024-02-19
+            name: FI20245203_TIIVIE.pdf
+            url: /opendata/patent/document/2024/20245203/FI20245203_TIIVIE.pdf
+            languageCode: en
+            ordinal: 7
+          - documentKind: Incoming
+            documentSubKind: Incoming.PIIRUS
+            documentDate: 2026-01-19
+            name: PIIRUS.pdf
+            url: /opendata/patent/document/2024/20245203/PIIRUS.pdf
+            languageCode: en
+            ordinal: 8
+          - documentKind: Incoming
+            documentSubKind: Incoming.VAATI
+            documentDate: 2024-02-19
+            name: FI20245203_VAATIE.pdf
+            url: /opendata/patent/document/2024/20245203/FI20245203_VAATIE.pdf
+            languageCode: en
+            ordinal: 9
+          - documentKind: Outgoing
+            documentSubKind: Outgoing.HYVVP29
+            documentDate: 2025-10-27
+            name: 20245203_L147.pdf
+            url: /opendata/patent/document/2024/20245203/20245203_L147.pdf
+            languageCode: en
+            ordinal: 10
+          - documentKind: Incoming
+            documentSubKind: Incoming.VAATI
+            documentDate: 2026-01-19
+            name: VAATIE.pdf
+            url: /opendata/patent/document/2024/20245203/VAATIE.pdf
+            languageCode: en
+            ordinal: 11
+          - documentKind: Incoming
+            documentSubKind: Incoming.VAATI
+            documentDate: 2026-01-19
+            name: VAATIS.pdf
+            url: /opendata/patent/document/2024/20245203/VAATIS.pdf
+            languageCode: fi
+            ordinal: 12
+          - documentKind: Outgoing
+            documentSubKind: Outgoing.TUTKRAP
+            documentDate: 2024-09-10
+            name: 20245203_tutrap-en.pdf
+            url: /opendata/patent/document/2024/20245203/20245203_tutrap-en.pdf
+            languageCode: en
+            ordinal: 13
+          - documentKind: Incoming
+            documentSubKind: Incoming.SELIT
+            documentDate: 2026-01-19
+            name: SELITE.pdf
+            url: /opendata/patent/document/2024/20245203/SELITE.pdf
+            languageCode: en
+            ordinal: 14
+          - documentKind: Incoming
+            documentSubKind: Incoming.TIIVI
+            documentDate: 2025-01-07
+            name: FI20245203_MUU-3(1).pdf
+            url: /opendata/patent/document/2024/20245203/FI20245203_MUU-3(1).pdf
+            languageCode: fi
+            ordinal: 15
+          - documentKind: Incoming
+            documentSubKind: Incoming.VPVAST
+            documentDate: 2024-04-15
+            name: FI20245203_KIRJE-1.pdf
+            url: /opendata/patent/document/2024/20245203/FI20245203_KIRJE-1.pdf
+            languageCode: en
+            ordinal: 16
+          - documentKind: Publication
+            documentSubKind: Publication.B1-JULK
+            documentDate: 2026-03-20
+            name: FI131976-B1-JULK.pdf
+            url: /opendata/patent/document/2024/20245203/FI131976-B1-JULK.pdf
+            languageCode: en
+            ordinal: 17
+          - documentKind: Outgoing
+            documentSubKind: Outgoing.VPYL
+            documentDate: 2024-02-22
+            name: 20245203_L005.pdf
+            url: /opendata/patent/document/2024/20245203/20245203_L005.pdf
+            languageCode: en
+            ordinal: 18
+          - documentKind: Outgoing
+            documentSubKind: Outgoing.19ILM
+            documentDate: 2026-03-05
+            name: 20245203_L037.pdf
+            url: /opendata/patent/document/2024/20245203/20245203_L037.pdf
+            languageCode: en
+            ordinal: 19
+          - documentKind: Outgoing
+            documentSubKind: Outgoing.HAKHYV
+            documentDate: 2026-03-20
+            name: 20245203_L505.pdf
+            url: /opendata/patent/document/2024/20245203/20245203_L505.pdf
+            languageCode: en
+            ordinal: 20
+          - documentKind: Incoming
+            documentSubKind: Incoming.PIIRUS
+            documentDate: 2024-02-19
+            name: FI20245203_PIIRUS.pdf
+            url: /opendata/patent/document/2024/20245203/FI20245203_PIIRUS.pdf
+            languageCode: en
+            ordinal: 21
+          - documentKind: Outgoing
+            documentSubKind: Outgoing.VPTEKN
+            documentDate: 2024-09-10
+            name: 20245203_L001.pdf
+            url: /opendata/patent/document/2024/20245203/20245203_L001.pdf
+            languageCode: en
+            ordinal: 22
+          - documentKind: Incoming
+            documentSubKind: Incoming.VPVAST
+            documentDate: 2026-01-19
+            name: LETT.pdf
+            url: /opendata/patent/document/2024/20245203/LETT.pdf
+            languageCode: en
+            ordinal: 23
+        dossierStatus: Valid
+        dossierStatusDate: 2026-03-20
+        applicants:
+        - companyName: Nokia Technologies Oy
+          country: FI
+          ordinal: 1
+        representatives:
+        - companyName: Kolster Oy Ab
+          country: FI
+          ordinal: 1
+        inventors:
+        - fullName: AZARI Mahdi
+          firstName: Mahdi
+          lastName: AZARI
+          country: FR
+          ordinal: 1
+        - fullName: MARCONE Alessio
+          firstName: Alessio
+          lastName: MARCONE
+          country: DE
+          ordinal: 2
+        - fullName: FREDERIKSEN Frank
+          firstName: Frank
+          lastName: FREDERIKSEN
+          country: DK
+          ordinal: 3
+        - fullName: VANHAMÄKI Ilari
+          firstName: Ilari
+          lastName: VANHAMÄKI
+          country: FI
+          ordinal: 4
+        owners:
+        - companyName: Nokia Technologies Oy
+          country: FI
+          ordinal: 1
+        examiner:
+          fullName: Jorma Ristola
+        ipcClassifications:
+        - H04J 13/18
+        - H04L 5/00
+        - H04W 72/04
+        cpcClassifications:
+        - H04J 13/004
+        - H04J 13/18
+        - H04L 5/0005
+        - H04W 72/04
+        basePatentNumber: null
+        paymentDetails:
+          payable:
+          - identifier: M004
+            dueDate: 2027-02-28
+            limitDate: 2027-08-31
+            lateFeePaymentDueDate: 2027-08-31
+            feePayableAmount: 170
+            feePaidAmount: null
+            comment: null
+            creditorReference: RF26202452030196
+            ordinal: 1
+          paid:
+          - identifier: M002
+            dueDate: 2026-02-28
+            limitDate: 2026-08-31
+            paymentDate: 2026-02-13
+            lateFeePaymentDueDate: 2026-08-31
+            ref: 20245203_M002_1770940800_4444460
+            feePaidAmount: 80
+            comment: null
+            creditorReference: RF26202452030196
+            ordinal: 1
+          - identifier: M003
+            dueDate: 2026-02-28
+            limitDate: 2026-08-31
+            paymentDate: 2026-02-13
+            lateFeePaymentDueDate: 2026-08-31
+            ref: 20245203_M003_1770940800_3797872
+            feePaidAmount: 140
+            comment: null
+            creditorReference: RF26202452030196
+            ordinal: 2
+        relatedDossiers:
+        - type: related_dossier_type_patentchangeofrepresentative
+          applicationNumber: PR20240747
+          ordinal: 1
+        spcAuthorizations: []
+        t3PublicationDate: null
+        filingLanguage: EN
+  recorded_at: 2026-10-26T20:35:00.614Z

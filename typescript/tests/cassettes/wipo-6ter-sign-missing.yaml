@@ -1,0 +1,49 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://6ter.wipo.int/api/v1/signs/XX9999
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: none
+  response:
+    status: 204
+    headers:
+      access-control-allow-credentials:
+      - "true"
+      access-control-allow-headers:
+      - "*"
+      access-control-allow-methods:
+      - DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Mon, 26 Oct 2026 21:58:40 GMT
+      via:
+      - 1.1 f0ddd258f2befca309faaacbbff6459e.cloudfront.net (CloudFront)
+      x-amz-apigw-id:
+      - F3z6oFXkFiAEBvA=
+      x-amz-cf-id:
+      - 8jUdUVMxOY_MvHDEm7BAo6MqoMWkredtIfNK3eH8wDfJPEVAL5OE6Q==
+      x-amz-cf-pop:
+      - DFW56-P11
+      x-amzn-requestid:
+      - ab0d0dbb-80c0-4232-9464-af8479f3b799
+      x-amzn-trace-id:
+      - >-
+        Root=1-6adfcd10-69b8b2125578f7715c8f33c3;Parent=170057b7eefdb291;Sampled=0;Lineage=1:7e0f53df:0
+      x-cache:
+      - Miss from cloudfront
+      x-requested-with:
+      - "*"
+    body:
+      type: none
+  recorded_at: 2026-10-26T21:58:40.491Z

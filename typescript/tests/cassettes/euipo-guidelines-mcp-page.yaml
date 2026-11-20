@@ -1,0 +1,772 @@
+version: 1
+interactions:
+  - request:
+      method: GET
+      uri: https://guidelines.euipo.europa.eu/api/page/2319054/2068232
+      headers:
+        accept:
+          - application/json
+        user-agent:
+          - patent-client-agents/0 (+https://patentclient.com)
+      body:
+        type: none
+    response:
+      status: 200
+      headers:
+        connection:
+          - keep-alive
+        content-type:
+          - application/json
+        date:
+          - "Mon, 26 Oct 2026 22:23:35 GMT"
+      body:
+        type: json
+        content:
+          Regions:
+            - Name: Main
+              SchemaId: null
+              Entities:
+                - topicBody:
+                    Fragments:
+                      - Html: "<h1 class=\"title topictitle1\" id=\"GUID-5C34FFF8-F29A-460E-AC9A-27E160FA28D2__TITLE__TOC21623972\">1.3.3 Factual monopoly</h1>\n      \n      \n      <div class=\"body conbody\" id=\"CONBODY_GUID-5C34FFF8-F29A-460E-AC9A-27E160FA28D2__1\">\n         \n         <p class=\"p\" id=\"GUID-5C34FFF8-F29A-460E-AC9A-27E160FA28D2__P_GUID-5C34FFF8-F29A-460E-AC9A-27E160FA28D2__1\">The fact that the applicant is the only person offering the goods and services for which the mark is descriptive is not relevant\n            for <a class=\"xref\" href=\"https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32017R1001&amp;from=EN#d1e622-1-1\" target=\"_blank\">Article\_7(1)(c) EUTMR</a>. However, in this case the applicant will be more likely to succeed on acquired distinctiveness.\n         </p>\n         \n         \n      </div>\n      \n      \n      <div class=\"related-links\">\n         \n         <div class=\"familylinks\">\n            \n            <div class=\"parentlink\"><strong>Parent topic:</strong> <a href=\"/2319054/2068220/trade-mark-guidelines/1-3-common-misunderstandings\" class=\"link\">1.3 Common misunderstandings</a></div>\n            \n         </div>\n         \n      </div>"
+                  topicTitle: 1.3.3 Factual monopoly
+                  Id: "2068232-2068232"
+                  IsEmbedded: false
+                  XpmPropertyMetadata: null
+                  MvcData:
+                    ControllerName: Entity
+                    ControllerAreaName: DynamicDocumentation
+                    ActionName: Entity
+                    ViewName: Topic
+                    AreaName: DynamicDocumentation
+                    RegionName: Main
+                    RegionAreaName: null
+                    RouteValues: null
+                  HtmlClasses: null
+                  XpmMetadata: null
+                  ExtensionData:
+                    pageContextId: "2068232"
+              Regions: []
+              MvcData:
+                ControllerName: Region
+                ControllerAreaName: DynamicDocumentation
+                ActionName: Region
+                ViewName: Main
+                AreaName: DynamicDocumentation
+                RegionName: null
+                RegionAreaName: null
+                RouteValues: null
+              HtmlClasses: null
+              XpmMetadata: null
+              ExtensionData:
+                pageContextId: "2068232"
+          Url: 2319054/2068232/trade-mark-guidelines/1-3-3-factual-monopoly
+          Meta:
+            twitter:card: summary
+            og:type: article
+            og:title: 2319054-2068232-16.html
+            description: 2319054-2068232-16.html
+            chapter.scope.generated.value: CHAPTER4
+            FEUIPOCONTENTTYPE.version.element: VEUIPOCONTENTTYPETRADEMARK
+            FEUIPOENTRYINTOFORCE.version.value: 01/07/2026
+            FEUIPOOLDENTRYINTOFORCE.generated.value: 01/05/2025
+            FISHREVCOUNTER.lng.value: "2"
+            FSTATUS.lng.value: Released
+            ishlogicalref.object.id: "1651836"
+            part.scope.generated.value: PARTB
+            pdf.reference.generated.value: "2000150000"
+            section.scope.generated.value: SECTION4
+            tocnaventries.generated.value: ish:2319054-613-1024
+            VERSION.version.value: "6"
+            ShowModification: "True"
+            PUBAPPROVALSTATUS.generated.value: FINAL
+            PUBEDITIONVERSION.generated.value: "1.1"
+            FEUIPOOBSOLETEFLAG.version.value: "false"
+            PUBPRODUCTFAMILY.generated.value: Trade mark Guidelines
+            PUBPRODUCTFAMILY.generated.element: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            PUBPRODUCTRELEASENAME.generated.element: VPRODUCTRELEASENAMEEDITION2026
+            PUBENTRYINTOFORCE.generated.value: 01/07/2026
+          Id: "2068232"
+          Title: 2319054-2068232-16.html
+          MvcData:
+            ControllerName: Page
+            ControllerAreaName: DynamicDocumentation
+            ActionName: Page
+            ViewName: GeneralPage
+            AreaName: DynamicDocumentation
+            RegionName: null
+            RegionAreaName: null
+            RouteValues: null
+          HtmlClasses: null
+          XpmMetadata: null
+          ExtensionData: null
+    recorded_at: 2026-10-26T22:23:35.300Z
+  - request:
+      method: GET
+      uri: https://guidelines.euipo.europa.eu/api/publications
+      headers:
+        accept:
+          - application/json
+        user-agent:
+          - patent-client-agents/0 (+https://patentclient.com)
+      body:
+        type: none
+    response:
+      status: 200
+      headers:
+        connection:
+          - keep-alive
+        content-type:
+          - application/json
+        date:
+          - "Mon, 26 Oct 2026 22:23:35 GMT"
+      body:
+        type: json
+        content:
+          - Id: "1778489"
+            Title: Richtlinien zu Geschmacksmuster
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2018
+            VersionRef: "1778435"
+            Language: de
+            CreatedOn: 2020-01-24T08:32:18
+            Version: "2"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2018-10-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2018
+          - Id: "1778493"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2018
+            VersionRef: "1778435"
+            Language: en
+            CreatedOn: 2020-01-24T08:32:18
+            Version: "2"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2018-10-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2018
+          - Id: "1778678"
+            Title: Richtlinien zu Marken
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition Legislative Reform II (2017)
+            VersionRef: "1778624"
+            Language: de
+            CreatedOn: 2020-01-24T09:09:22
+            Version: "2"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2017-10-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.1"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2017
+          - Id: "1778682"
+            Title: Trade mark guidelines
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition Legislative Reform II (2017)
+            VersionRef: "1778624"
+            Language: en
+            CreatedOn: 2020-01-24T09:09:22
+            Version: "2"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2017-10-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.1"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2017
+          - Id: "1803368"
+            Title: Richtlinien zu Geschmacksmuster Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2020
+            VersionRef: "1803314"
+            Language: de
+            CreatedOn: 2020-01-24T18:52:02
+            Version: "3"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2020-02-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.2"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2020
+          - Id: "1803372"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2020
+            VersionRef: "1803314"
+            Language: en
+            CreatedOn: 2020-01-24T18:52:02
+            Version: "3"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2020-02-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.2"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2020
+          - Id: "1803464"
+            Title: Richtlinien zu Marken
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2020
+            VersionRef: "1803410"
+            Language: de
+            CreatedOn: 2020-01-24T19:28:40
+            Version: "3"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2020-02-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2020
+          - Id: "1803468"
+            Title: Trade mark guidelines
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2020
+            VersionRef: "1803410"
+            Language: en
+            CreatedOn: 2020-01-24T19:28:40
+            Version: "3"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2020-02-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2020
+          - Id: "1922893"
+            Title: Richtlinien zu Marken
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2021
+            VersionRef: "1922891"
+            Language: de
+            CreatedOn: 2020-11-06T13:57:29
+            Version: "4"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2021-03-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2021
+          - Id: "1922895"
+            Title: Trade mark guidelines
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2021
+            VersionRef: "1922891"
+            Language: en
+            CreatedOn: 2020-11-06T13:57:29
+            Version: "4"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2021-03-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2021
+          - Id: "1934974"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2022
+            VersionRef: "1934972"
+            Language: de
+            CreatedOn: 2021-01-30T12:08:49
+            Version: "5"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2022-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2022
+          - Id: "1934976"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2022
+            VersionRef: "1934972"
+            Language: en
+            CreatedOn: 2021-01-30T12:08:49
+            Version: "5"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2022-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2022
+          - Id: "1935301"
+            Title: Richtlinien zu Marken
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2022
+            VersionRef: "1935299"
+            Language: de
+            CreatedOn: 2021-01-30T12:59:43
+            Version: "5"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2022-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2022
+          - Id: "1935303"
+            Title: Trade mark guidelines
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2022
+            VersionRef: "1935299"
+            Language: en
+            CreatedOn: 2021-01-30T12:59:43
+            Version: "5"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2022-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2022
+          - Id: "1937332"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2021
+            VersionRef: "1922517"
+            Language: de
+            CreatedOn: 2020-11-06T09:27:12
+            Version: "4"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2021-03-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2021
+          - Id: "1937338"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2021
+            VersionRef: "1922517"
+            Language: en
+            CreatedOn: 2020-11-06T09:27:12
+            Version: "4"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2021-03-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2021
+          - Id: "2231430"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition Legislative Reform I (2025)
+            VersionRef: "2231426"
+            Language: en
+            CreatedOn: 2024-01-09T11:43:09
+            Version: "8"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2025-05-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITIONLEGISLATIVEREFORMIFAAA2024FEAA
+          - Id: "2231428"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition Legislative Reform I (2025)
+            VersionRef: "2231426"
+            Language: de
+            CreatedOn: 2024-01-09T11:43:09
+            Version: "8"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2025-05-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITIONLEGISLATIVEREFORMIFAAA2024FEAA
+          - Id: "2302857"
+            Title: Trade mark guidelines
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2025
+            VersionRef: "2302853"
+            Language: en
+            CreatedOn: 2025-01-21T10:27:43
+            Version: "8"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2025-05-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.3"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2025
+          - Id: "2302855"
+            Title: Richtlinien zu Marken
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2025
+            VersionRef: "2302853"
+            Language: de
+            CreatedOn: 2025-01-21T10:27:43
+            Version: "8"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2025-05-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.3"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2025
+          - Id: "2058841"
+            Title: Richtlinien zu Marken
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2023
+            VersionRef: "2058839"
+            Language: de
+            CreatedOn: 2022-01-25T14:12:49
+            Version: "6"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2023-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2023
+          - Id: "2058843"
+            Title: Trade mark guidelines
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2023
+            VersionRef: "2058839"
+            Language: en
+            CreatedOn: 2022-01-25T14:12:49
+            Version: "6"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2023-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2023
+          - Id: "2058422"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2023
+            VersionRef: "2058420"
+            Language: de
+            CreatedOn: 2022-01-25T13:32:57
+            Version: "6"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2023-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2023
+          - Id: "2058424"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2023
+            VersionRef: "2058420"
+            Language: en
+            CreatedOn: 2022-01-25T13:32:57
+            Version: "6"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2023-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2023
+          - Id: "2213906"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2024
+            VersionRef: "2213904"
+            Language: de
+            CreatedOn: 2023-04-18T13:03:10
+            Version: "7"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2024-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.1"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2024
+          - Id: "2213908"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2024
+            VersionRef: "2213904"
+            Language: en
+            CreatedOn: 2023-04-18T13:03:10
+            Version: "7"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2024-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.1"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2024
+          - Id: "2330038"
+            Title: Guidelines for the examination of geographical indications for craft and industrial products
+            ProductFamily:
+              - Craft GI Guidelines
+            ProductReleaseVersion:
+              - Edition 2026
+            VersionRef: "2329513"
+            Language: en
+            CreatedOn: 2025-07-24T07:56:24
+            Version: "1"
+            LogicalId: GUID-4642237D-7EC5-4165-AC65-C1F60DFFA68F
+            CustomMetas: null
+            EntryIntoForce: 2026-05-21T00:00:00
+            AllowCompare: false
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMECRAFTGIGUIDELINES
+            IsPubObsolete: null
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2026
+          - Id: "2330040"
+            Title: Richtlinien für die Prüfung geografischer Angaben für handwerkliche und industrielle Erzeugnisse
+            ProductFamily:
+              - Craft GI Guidelines
+            ProductReleaseVersion:
+              - Edition 2026
+            VersionRef: "2329513"
+            Language: de
+            CreatedOn: 2025-07-24T07:56:24
+            Version: "1"
+            LogicalId: GUID-4642237D-7EC5-4165-AC65-C1F60DFFA68F
+            CustomMetas: null
+            EntryIntoForce: 2026-05-21T00:00:00
+            AllowCompare: false
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMECRAFTGIGUIDELINES
+            IsPubObsolete: null
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2026
+          - Id: "2214309"
+            Title: Richtlinien zu Marken
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2024
+            VersionRef: "2214307"
+            Language: de
+            CreatedOn: 2023-04-18T14:25:46
+            Version: "7"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2024-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.4"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2024
+          - Id: "2214311"
+            Title: Trade mark guidelines
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2024
+            VersionRef: "2214307"
+            Language: en
+            CreatedOn: 2023-04-18T14:25:46
+            Version: "7"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2024-03-31T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.4"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: "Yes"
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2024
+          - Id: "2318651"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2026
+            VersionRef: "2318647"
+            Language: en
+            CreatedOn: 2025-05-06T11:07:38
+            Version: "9"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2026-07-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: null
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2026
+          - Id: "2319054"
+            Title: Trade mark guidelines
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2026
+            VersionRef: "2319050"
+            Language: en
+            CreatedOn: 2025-05-06T12:19:08
+            Version: "9"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2026-07-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.1"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: null
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2026
+          - Id: "2319052"
+            Title: Richtlinien zu Marken
+            ProductFamily:
+              - Trade mark Guidelines
+            ProductReleaseVersion:
+              - Edition 2026
+            VersionRef: "2319050"
+            Language: de
+            CreatedOn: 2025-05-06T12:19:08
+            Version: "9"
+            LogicalId: GUID-CFBAAABD-0DEF-4D06-86DE-CE7F8A3662E3
+            CustomMetas: null
+            EntryIntoForce: 2026-07-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.1"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMETRADEMARKGUIDELINES
+            IsPubObsolete: null
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2026
+          - Id: "2318649"
+            Title: Designs guidelines
+            ProductFamily:
+              - Design Guidelines
+            ProductReleaseVersion:
+              - Edition 2026
+            VersionRef: "2318647"
+            Language: de
+            CreatedOn: 2025-05-06T11:07:38
+            Version: "9"
+            LogicalId: GUID-EFB7419A-99AC-4E1C-8A77-9C063423E191
+            CustomMetas: null
+            EntryIntoForce: 2026-07-01T00:00:00
+            AllowCompare: true
+            EditionVersion: "1.0"
+            AprpovalStatus: FINAL
+            ProductFamilyElement: VPRODUCTFAMILYNAMEDESIGNGUIDELINES
+            IsPubObsolete: null
+            ProductReleaseElement: VPRODUCTRELEASENAMEEDITION2026
+    recorded_at: 2026-10-26T22:23:35.117Z

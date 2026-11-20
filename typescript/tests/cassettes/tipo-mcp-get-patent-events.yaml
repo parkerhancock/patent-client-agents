@@ -1,0 +1,427 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://cloud.tipo.gov.tw/S220/opdataapi/api/PatentAlteration?format=json&top=100&skip=0&applno=082101400&tk=[FILTERED]
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cf-cache-status:
+      - DYNAMIC
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=UTF-8
+      date:
+      - Mon, 26 Oct 2026 19:47:08 GMT
+      server:
+      - cloudflare
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      transfer-encoding:
+      - chunked
+    body:
+      type: json
+      content:
+        version: "1.0"
+        status: ok
+        message: 輸入條件查無資料
+        top: 100
+        skip: 0
+        order-by: appl-no
+        total-count: 0
+        tw-patent-alteration:
+          -page-count: 0
+          -create-date: 2026/10/27
+          patentcontent: []
+  recorded_at: 2026-10-26T19:47:08.655Z
+- request:
+    method: GET
+    uri: >-
+      https://cloud.tipo.gov.tw/S220/opdataapi/api/PatentAlteration?format=json&top=100&skip=0&applno=086300596&tk=[FILTERED]
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cf-cache-status:
+      - DYNAMIC
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=UTF-8
+      date:
+      - Mon, 26 Oct 2026 19:47:09 GMT
+      server:
+      - cloudflare
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      transfer-encoding:
+      - chunked
+    body:
+      type: json
+      content:
+        version: "1.0"
+        status: ok
+        message: ""
+        top: 100
+        skip: 0
+        order-by: appl-no
+        total-count: 1
+        tw-patent-alteration:
+          -page-count: 1
+          -create-date: 2026/10/27
+          patentcontent:
+          - -sequence: 1
+            appl-no: "086300596"
+            alteration:
+            - -sequence: 1
+              alteration-id1s:
+              - -sequence: 1
+                alteration-name1: 蘇嘉興
+              alteration-id2s:
+              - -sequence: 1
+                alteration-name2: 勝樺有限公司
+  recorded_at: 2026-10-26T19:47:09.157Z
+- request:
+    method: GET
+    uri: >-
+      https://cloud.tipo.gov.tw/S220/opdataapi/api/PatentChange?format=json&top=100&skip=0&applno=082101400&tk=[FILTERED]
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cf-cache-status:
+      - DYNAMIC
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=UTF-8
+      date:
+      - Mon, 26 Oct 2026 19:47:08 GMT
+      server:
+      - cloudflare
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      transfer-encoding:
+      - chunked
+    body:
+      type: json
+      content:
+        version: "1.0"
+        status: ok
+        message: 輸入條件查無資料
+        top: 100
+        skip: 0
+        order-by: appl-no
+        total-count: 0
+        tw-patent-change:
+          -page-count: 0
+          -create-date: 2026/10/27
+          patentcontent: []
+  recorded_at: 2026-10-26T19:47:08.597Z
+- request:
+    method: GET
+    uri: >-
+      https://cloud.tipo.gov.tw/S220/opdataapi/api/PatentChange?format=json&top=100&skip=0&applno=086300596&tk=[FILTERED]
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cf-cache-status:
+      - DYNAMIC
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=UTF-8
+      date:
+      - Mon, 26 Oct 2026 19:47:09 GMT
+      server:
+      - cloudflare
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      transfer-encoding:
+      - chunked
+    body:
+      type: json
+      content:
+        version: "1.0"
+        status: ok
+        message: 輸入條件查無資料
+        top: 100
+        skip: 0
+        order-by: appl-no
+        total-count: 0
+        tw-patent-change:
+          -page-count: 0
+          -create-date: 2026/10/27
+          patentcontent: []
+  recorded_at: 2026-10-26T19:47:09.171Z
+- request:
+    method: GET
+    uri: >-
+      https://cloud.tipo.gov.tw/S220/opdataapi/api/PatentChange?format=json&top=100&skip=0&newapplno=082101400&tk=[FILTERED]
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cf-cache-status:
+      - DYNAMIC
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=UTF-8
+      date:
+      - Mon, 26 Oct 2026 19:47:09 GMT
+      server:
+      - cloudflare
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      transfer-encoding:
+      - chunked
+    body:
+      type: json
+      content:
+        version: "1.0"
+        status: ok
+        message: 輸入條件查無資料
+        top: 100
+        skip: 0
+        order-by: appl-no
+        total-count: 0
+        tw-patent-change:
+          -page-count: 0
+          -create-date: 2026/10/27
+          patentcontent: []
+  recorded_at: 2026-10-26T19:47:09.189Z
+- request:
+    method: GET
+    uri: >-
+      https://cloud.tipo.gov.tw/S220/opdataapi/api/PatentChange?format=json&top=100&skip=0&newapplno=086300596&tk=[FILTERED]
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cf-cache-status:
+      - DYNAMIC
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=UTF-8
+      date:
+      - Mon, 26 Oct 2026 19:47:09 GMT
+      server:
+      - cloudflare
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      transfer-encoding:
+      - chunked
+    body:
+      type: json
+      content:
+        version: "1.0"
+        status: ok
+        message: 輸入條件查無資料
+        top: 100
+        skip: 0
+        order-by: appl-no
+        total-count: 0
+        tw-patent-change:
+          -page-count: 0
+          -create-date: 2026/10/27
+          patentcontent: []
+  recorded_at: 2026-10-26T19:47:09.197Z
+- request:
+    method: GET
+    uri: >-
+      https://cloud.tipo.gov.tw/S220/opdataapi/api/PatentDivide?format=json&top=100&skip=0&querytype=1&applno=082101400&tk=[FILTERED]
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cf-cache-status:
+      - DYNAMIC
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=UTF-8
+      date:
+      - Mon, 26 Oct 2026 19:47:08 GMT
+      server:
+      - cloudflare
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      transfer-encoding:
+      - chunked
+    body:
+      type: json
+      content:
+        version: "1.0"
+        status: ok
+        message: ""
+        top: 100
+        skip: 0
+        order-by: appl-no
+        total-count: 1
+        tw-patent-divide:
+          -page-count: 1
+          -create-date: 2026/10/27
+          patentcontent:
+          - -sequence: 1
+            appl-no: "082101400"
+            new-appl-no:
+            - new-appl-no: "088121343"
+              -patent-right-url: ftps://ftp.tipo.gov.tw/ftp/PatentRightsI/088/PatentRightsI_088121343.xml
+  recorded_at: 2026-10-26T19:47:08.682Z
+- request:
+    method: GET
+    uri: >-
+      https://cloud.tipo.gov.tw/S220/opdataapi/api/PatentDivide?format=json&top=100&skip=0&querytype=1&applno=086300596&tk=[FILTERED]
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cf-cache-status:
+      - DYNAMIC
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=UTF-8
+      date:
+      - Mon, 26 Oct 2026 19:47:09 GMT
+      server:
+      - cloudflare
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      transfer-encoding:
+      - chunked
+    body:
+      type: json
+      content:
+        version: "1.0"
+        status: ok
+        message: 輸入條件查無資料
+        top: 100
+        skip: 0
+        order-by: appl-no
+        total-count: 0
+        tw-patent-divide:
+          -page-count: 0
+          -create-date: 2026/10/27
+          patentcontent: []
+  recorded_at: 2026-10-26T19:47:09.456Z
+- request:
+    method: GET
+    uri: >-
+      https://cloud.tipo.gov.tw/S220/opdataapi/api/PatentDivide?format=json&top=100&skip=0&querytype=1&newapplno=082101400&tk=[FILTERED]
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cf-cache-status:
+      - DYNAMIC
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=UTF-8
+      date:
+      - Mon, 26 Oct 2026 19:47:09 GMT
+      server:
+      - cloudflare
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      transfer-encoding:
+      - chunked
+    body:
+      type: json
+      content:
+        version: "1.0"
+        status: ok
+        message: 輸入條件查無資料
+        top: 100
+        skip: 0
+        order-by: appl-no
+        total-count: 0
+        tw-patent-divide:
+          -page-count: 0
+          -create-date: 2026/10/27
+          patentcontent: []
+  recorded_at: 2026-10-26T19:47:09.183Z
+- request:
+    method: GET
+    uri: >-
+      https://cloud.tipo.gov.tw/S220/opdataapi/api/PatentDivide?format=json&top=100&skip=0&querytype=1&newapplno=086300596&tk=[FILTERED]
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cf-cache-status:
+      - DYNAMIC
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=UTF-8
+      date:
+      - Mon, 26 Oct 2026 19:47:09 GMT
+      server:
+      - cloudflare
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      transfer-encoding:
+      - chunked
+    body:
+      type: json
+      content:
+        version: "1.0"
+        status: ok
+        message: 輸入條件查無資料
+        top: 100
+        skip: 0
+        order-by: appl-no
+        total-count: 0
+        tw-patent-divide:
+          -page-count: 0
+          -create-date: 2026/10/27
+          patentcontent: []
+  recorded_at: 2026-10-26T19:47:09.192Z

@@ -1,0 +1,73 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://publications.europa.eu/resource/celex/32099R9999
+    headers:
+      accept:
+      - application/xhtml+xml, text/html;q=0.9
+      accept-language:
+      - eng
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: none
+  response:
+    status: 404
+    headers:
+      connection:
+      - keep-alive
+      content-security-policy:
+      - script-src 'self';
+      date:
+      - Mon, 26 Oct 2026 22:10:10 GMT
+      transfer-encoding:
+      - chunked
+    body:
+      type: text
+      content: Resource [system 'celex' - id '32099R9999'] not found.
+  recorded_at: 2026-10-26T22:10:10.877Z
+- request:
+    method: POST
+    uri: https://publications.europa.eu/webapi/rdf/sparql
+    headers:
+      accept:
+      - application/sparql-results+json
+      content-type:
+      - application/x-www-form-urlencoded;charset=UTF-8
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: text
+      content: >-
+        query=PREFIX+cdm%3A+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fontology%2Fcdm%23%3E%0ASELECT+%3Ftitle+%3Fdate+%3Fecli+%3Finforce+%3Fconsolidated+%3FconsolidatedDate+WHERE+%7B%0A++%3Fwork+cdm%3Aresource_legal_id_celex+%2232099R9999%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23string%3E+.%0A++OPTIONAL+%7B+%3Fwork+cdm%3Awork_date_document+%3Fdate+%7D%0A++OPTIONAL+%7B+%3Fwork+cdm%3Acase-law_ecli+%3Fecli+%7D%0A++OPTIONAL+%7B+%3Fwork+cdm%3Aresource_legal_in-force+%3Finforce+%7D%0A++OPTIONAL+%7B+%3Fexpr+cdm%3Aexpression_belongs_to_work+%3Fwork+%3B+cdm%3Aexpression_uses_language+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Flanguage%2FENG%3E+%3B+cdm%3Aexpression_title+%3Ftitle+%7D%0A++OPTIONAL+%7B+%3Fc+cdm%3Aact_consolidated_consolidates_resource_legal+%3Fwork+%3B+cdm%3Aresource_legal_id_celex+%3Fconsolidated+.+FILTER%28STRSTARTS%28STR%28%3Fconsolidated%29%2C+%2202099R9999-%22%29%29+OPTIONAL+%7B+%3Fc+cdm%3Aact_consolidated_date+%3FconsolidatedDate+%7D+%7D%0A%7D+ORDER+BY+DESC%28%3Fconsolidated%29+LIMIT+1
+  response:
+    status: 200
+    headers:
+      accept-ranges:
+      - bytes
+      connection:
+      - keep-alive
+      content-disposition:
+      - filename=sparql_2026-10-26_22-10-10Z.json
+      content-type:
+      - application/sparql-results+json
+      date:
+      - Mon, 26 Oct 2026 22:10:10 GMT
+    body:
+      type: json
+      content:
+        head:
+          link: []
+          vars:
+          - title
+          - date
+          - ecli
+          - inforce
+          - consolidated
+          - consolidatedDate
+        results:
+          distinct: false
+          ordered: true
+          bindings: []
+  recorded_at: 2026-10-26T22:10:10.898Z

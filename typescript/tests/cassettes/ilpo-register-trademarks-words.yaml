@@ -1,0 +1,357 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://data.gov.il/api/3/action/datastore_search?resource_id=6284d4a9-fdd4-45c9-a1d6-58143c7d8127&limit=3&offset=0&q=%7B%22%D7%AA%D7%99%D7%90%D7%95%D7%A8+%D7%A1%D7%99%D7%9E%D7%9F+%D7%90%D7%A0%D7%92%D7%9C%D7%99%D7%AA%22%3A%22coca%3A*+%26+cola%3A*%22%7D&plain=false&sort=%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%94%D7%A1%D7%99%D7%9E%D7%9F%22+desc
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - public, max-age=0, must-revalidate
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=utf-8
+      date:
+      - Mon, 26 Oct 2026 21:18:32 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding
+      via:
+      - 1.1 d09facc1a33a23ae0ece49f16f368ae6.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - b3c-3arhNzkzODhLFKpZFnfS3M4SOWZf1ihfa0GZ8qAtBb9TU3Zw2Q==
+      x-amz-cf-pop:
+      - DFW57-P4
+      x-cache:
+      - Miss from cloudfront
+    body:
+      type: json
+      content:
+        help: https://data.gov.il/api/3/action/help_show?name=datastore_search
+        success: true
+        result:
+          include_total: true
+          limit: 3
+          offset: 0
+          plain: false
+          q:
+            תיאור סימן אנגלית: coca:* & cola:*
+          records_format: objects
+          resource_id: 6284d4a9-fdd4-45c9-a1d6-58143c7d8127
+          sort: "\"מספר הסימן\" desc"
+          total_estimation_threshold: null
+          records:
+          - _id: 307049
+            מספור רץ: 307049
+            מספר הסימן: 341339
+            דמות: כן
+            קישור לנסח: https://trademarks.justice.gov
+            מצב: רשום
+            לאומי/בינלאומי: לאומי
+            מספר הסימן הבינלאומי: ""
+            תיאור סימן עברית: ""
+            תיאור סימן אנגלית: Coca-Cola CREATIONS
+            תאריך בקשה: 09/07/2021
+            תאריך רישום: 02/03/2022
+            סוג רישום: סימן מסחר/שירות
+            סוגי ניצה לבקשה: "32"
+            סוגי וינה לבקשה: 26.4; 26.11; 27.5
+            רשימת סחורות בעברית: >-
+              בירות; מים מינראליים ומוגזים ומשקאות אחרים ללא אלכוהול; משקאות מפירות ומיצי
+              פירות; סירופים ותכשירים אחרים להכנת משקאות; הנכללים כולם בסוג 32.
+            רשימת סחורות באנגלית: >-
+              Beers; mineral and aerated waters and other non-alcoholic drinks; fruit drinks
+              and fruit juices; syrups and other non-alcoholic preparations for making
+              beverages; all included in class 32.
+            דין קדימה: כן
+            תאריך תום תוקף: 09/07/2031
+            שם מיופה כח: ד~ר שלמה כהן ושות'
+            שם מיופה כח אנגלית: Dr. Shlomo Cohen & Co.
+            שם בעל הסימן בעברית: ""
+            שם בעל הסימן באנגלית: The Coca-Cola Company
+            שם בעל הרשות בעברית: ""
+            שם בעל הרשות באנגלית: ""
+            שם מייצג לעניין אכיפת מכס: ""
+            מען למכס תאריך התחלה: ""
+            כתובת אימייל מייצג מכס: ""
+            טלפון מייצג מכס: ""
+            רישום חיצוני: לא
+            תאריך עדכון אחרון: 02/03/2022
+            rank תיאור סימן אנגלית: 0.08966844
+          - _id: 280348
+            מספור רץ: 280348
+            מספר הסימן: 314630
+            דמות: כן
+            קישור לנסח: https://trademarks.justice.gov
+            מצב: רשום
+            לאומי/בינלאומי: בינלאומי
+            מספר הסימן הבינלאומי: "1454482"
+            תיאור סימן עברית: ""
+            תיאור סימן אנגלית: COCA-COLA ENERGY
+            תאריך בקשה: 27/12/2018
+            תאריך רישום: 29/12/2019
+            סוג רישום: סימן מסחר/שירות
+            סוגי ניצה לבקשה: "32"
+            סוגי וינה לבקשה: ""
+            רשימת סחורות בעברית: ""
+            רשימת סחורות באנגלית: >-
+              Beverages~ namely drinking waters~ flavored waters~ mineral and aerated waters
+              and other non-alcoholic beverages~ namely~ soft drinks~ energy drinks and sports
+              drinks; fruit drinks and juices; syrups~ concentrates and powders for making
+              beverages~ namely flavoured waters~ mineral and aerated waters~ soft drinks~ energy
+              drinks~ sports drinks~ fruit drinks and juices.
+            דין קדימה: כן
+            תאריך תום תוקף: 27/12/2028
+            שם מיופה כח: ""
+            שם מיופה כח אנגלית: ""
+            שם בעל הסימן בעברית: ""
+            שם בעל הסימן באנגלית: The Coca-Cola Company
+            שם בעל הרשות בעברית: ""
+            שם בעל הרשות באנגלית: ""
+            שם מייצג לעניין אכיפת מכס: ""
+            מען למכס תאריך התחלה: ""
+            כתובת אימייל מייצג מכס: ""
+            טלפון מייצג מכס: ""
+            רישום חיצוני: לא
+            תאריך עדכון אחרון: 29/12/2019
+            rank תיאור סימן אנגלית: 0.08966844
+          - _id: 280288
+            מספור רץ: 280288
+            מספר הסימן: 314570
+            דמות: כן
+            קישור לנסח: https://trademarks.justice.gov
+            מצב: רשום
+            לאומי/בינלאומי: בינלאומי
+            מספר הסימן הבינלאומי: "1453732"
+            תיאור סימן עברית: ""
+            תיאור סימן אנגלית: Coca-Cola ENERGY
+            תאריך בקשה: 27/12/2018
+            תאריך רישום: 29/12/2019
+            סוג רישום: סימן מסחר/שירות
+            סוגי ניצה לבקשה: "32"
+            סוגי וינה לבקשה: 26.1; 27.5
+            רשימת סחורות בעברית: ""
+            רשימת סחורות באנגלית: >-
+              Beverages~ namely drinking waters~ flavored waters~ mineral and aerated waters
+              and other non-alcoholic beverages~ namely~ soft drinks~ energy drinks and sports
+              drinks; fruit drinks and juices; syrups~ concentrates and powders for making
+              beverages~ namely flavoured waters~ mineral and aerated waters~ soft drinks~ energy
+              drinks~ sports drinks~ fruit drinks and juices.
+            דין קדימה: כן
+            תאריך תום תוקף: 27/12/2028
+            שם מיופה כח: ""
+            שם מיופה כח אנגלית: ""
+            שם בעל הסימן בעברית: ""
+            שם בעל הסימן באנגלית: The Coca-Cola Company
+            שם בעל הרשות בעברית: ""
+            שם בעל הרשות באנגלית: ""
+            שם מייצג לעניין אכיפת מכס: ""
+            מען למכס תאריך התחלה: ""
+            כתובת אימייל מייצג מכס: ""
+            טלפון מייצג מכס: ""
+            רישום חיצוני: לא
+            תאריך עדכון אחרון: 29/12/2019
+            rank תיאור סימן אנגלית: 0.08966844
+          fields:
+          - id: _id
+            type: int
+          - id: מספור רץ
+            type: numeric
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: מספר הסימן
+            type: numeric
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: דמות
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: קישור לנסח
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: מצב
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: לאומי/בינלאומי
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: מספר הסימן הבינלאומי
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: תיאור סימן עברית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: תיאור סימן אנגלית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: תאריך בקשה
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: תאריך רישום
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: סוג רישום
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: סוגי ניצה לבקשה
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: סוגי וינה לבקשה
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: רשימת סחורות בעברית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: רשימת סחורות באנגלית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: דין קדימה
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: תאריך תום תוקף
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: שם מיופה כח
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: שם מיופה כח אנגלית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: שם בעל הסימן בעברית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: שם בעל הסימן באנגלית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: שם בעל הרשות בעברית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: שם בעל הרשות באנגלית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: שם מייצג לעניין אכיפת מכס
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: מען למכס תאריך התחלה
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: כתובת אימייל מייצג מכס
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: טלפון מייצג מכס
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: רישום חיצוני
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: תאריך עדכון אחרון
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: rank תיאור סימן אנגלית
+            type: float
+          _links:
+            start: >-
+              /api/3/action/datastore_search?resource_id=6284d4a9-fdd4-45c9-a1d6-58143c7d8127&limit=3&q=%7B%22%D7%AA%D7%99%D7%90%D7%95%D7%A8+%D7%A1%D7%99%D7%9E%D7%9F+%D7%90%D7%A0%D7%92%D7%9C%D7%99%D7%AA%22%3A%22coca%3A%2A+%26+cola%3A%2A%22%7D&plain=false&sort=%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%94%D7%A1%D7%99%D7%9E%D7%9F%22+desc
+            next: >-
+              /api/3/action/datastore_search?resource_id=6284d4a9-fdd4-45c9-a1d6-58143c7d8127&limit=3&offset=3&q=%7B%22%D7%AA%D7%99%D7%90%D7%95%D7%A8+%D7%A1%D7%99%D7%9E%D7%9F+%D7%90%D7%A0%D7%92%D7%9C%D7%99%D7%AA%22%3A%22coca%3A%2A+%26+cola%3A%2A%22%7D&plain=false&sort=%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%94%D7%A1%D7%99%D7%9E%D7%9F%22+desc
+          total: 63
+          total_was_estimated: false
+  recorded_at: 2026-10-26T21:18:32.458Z

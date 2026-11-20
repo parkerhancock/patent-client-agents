@@ -29,18 +29,27 @@ export {
 export * from "./cafc.js";
 export * from "./canada-federal-court.js";
 export * from "./china-spc-ip-court.js";
+export * from "./ckan.js";
+export * from "./cnipa-statutes.js";
 export * from "./copyright.js";
 export * from "./dpma-statutes.js";
 export * from "./epo-legal.js";
 export * from "./epo-ops.js";
 export * from "./epo-ops-resources.js";
+export * from "./euipo-guidelines.js";
+export * from "./eurlex.js";
 export * from "./fees/index.js";
 export * from "./google-patents/index.js";
+export * from "./ilpo-register.js";
 export * from "./ilpo-statutes.js";
+export * from "./inpi-ar-statutes.js";
 export * from "./inpi-br-statutes.js";
 export * from "./ipo-in.js";
+export * from "./ipophl-statutes.js";
 export * from "./ipos.js";
 export * from "./japan-ip-high-court.js";
+export * from "./jpo.js";
+export * from "./kipo-statutes.js";
 export * from "./kipris.js";
 export * from "./legifrance-ip.js";
 export * from "./models.js";
@@ -49,10 +58,13 @@ export * from "./mpep-release.js";
 export * from "./office-action-analytics.js";
 export * from "./office-actions.js";
 export * from "./petitions.js";
+export * from "./prh.js";
+export * from "./prv.js";
 export * from "./ptab.js";
 export * from "./publications.js";
 export * from "./register-models.js";
 export * from "./relay.js";
+export * from "./rospatent-statutes.js";
 export {
   type PdfTextItem,
   pdfPageItems,
@@ -67,8 +79,11 @@ export {
   type XlsWorkbook,
   xlsSerialDate,
 } from "./runtime/xls.js";
+export * from "./thai-dip-statutes.js";
+export * from "./tipo.js";
 export * from "./tmep.js";
 export * from "./trademark-assignments.js";
+export * from "./trademark-decisions.js";
 export * from "./trademark-search.js";
 export {
   ApiError,
@@ -89,4 +104,5 @@ export * from "./unified.js";
 export * from "./upc-statutes.js";
 export * from "./usitc.js";
 export * from "./uspto-resources.js";
+export * from "./wipo-6ter.js";
 export * from "./wipo-lex.js";

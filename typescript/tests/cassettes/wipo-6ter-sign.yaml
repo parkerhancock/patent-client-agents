@@ -1,0 +1,95 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://6ter.wipo.int/api/v1/signs/QO0088
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-credentials:
+      - "true"
+      access-control-allow-headers:
+      - "*"
+      access-control-allow-methods:
+      - DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Mon, 26 Oct 2026 21:58:39 GMT
+      via:
+      - 1.1 f0ddd258f2befca309faaacbbff6459e.cloudfront.net (CloudFront)
+      x-amz-apigw-id:
+      - F3z6eGJ2liAEJYQ=
+      x-amz-cf-id:
+      - ORSRU43t4dxR681ZP4qhl90cx0movDKfEOqgipo9nw7kM6my3rJjAQ==
+      x-amz-cf-pop:
+      - DFW56-P11
+      x-amzn-requestid:
+      - 66bc126a-9123-4337-97e1-3bc6a68af475
+      x-amzn-trace-id:
+      - >-
+        Root=1-6adfcd0f-7c8989576316be0b596fba6f;Parent=5072e9ba6656fe4a;Sampled=0;Lineage=1:7e0f53df:0
+      x-cache:
+      - Miss from cloudfront
+      x-requested-with:
+      - "*"
+    body:
+      type: json
+      content:
+        responseTimeMs: 0
+        details:
+          number: "88"
+          indexedAt: 2026-09-30T06:08:57.860475Z
+          stateOrg: QO
+          metadata:
+            hash: 6768968ebc0ac5696210ab44fa0f243f19b195dedf5b5c3e1c908105c15ae2ed
+          fileName: qo0088.xml
+          protectedSign:
+            text: UNESCO
+            languageCode: EN
+          nature:
+            code: ABBREVIATION
+            type:
+              en: Abbreviation
+              fr: Sigle
+              es: Sigla
+          numberAlias: QO0088
+          language:
+            code: EN
+            name:
+              en: English
+              fr: Anglais
+              es: Inglés
+          publicationDate: "19650202"
+          communicatingParty:
+            code: QO
+            address:
+              address: 7, place de Fontenoy
+              city: Paris
+              countryCode: FR
+              postCode: "75352"
+              countryName: France
+            name:
+              en: UNITED NATIONS EDUCATIONAL, SCIENTIFIC AND CULTURAL ORGANIZATION
+              fr: ORGANISATION DES NATIONS UNIES POUR L'EDUCATION, LA SCIENCE ET LA CULTURE
+            countryName:
+              en: Organization without ST.3 code
+              fr: Organisation n'ayant pas de code ST.3
+              es: Organización sin código ST.3
+            type: ORG
+          circulars:
+          - date: "19661205"
+            number: "0645"
+          responseTimeMs: 0
+  recorded_at: 2026-10-26T21:58:39.471Z

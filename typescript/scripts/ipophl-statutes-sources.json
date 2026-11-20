@@ -1,0 +1,71 @@
+{
+  "source": "The LawPhil Project (https://lawphil.net/), Arellano Law Foundation: one HTML page per Act, as enacted",
+  "user_agent": "patent-client-agents (+https://github.com/parkerhancock/patent-client-agents)",
+  "retrieved_at": "2026-10-26T22:44:19Z",
+  "acts": [
+    {
+      "statute": "ra8293",
+      "short_name": "RA 8293",
+      "title": "Intellectual Property Code of the Philippines (Republic Act No. 8293)",
+      "role": "code",
+      "approved": "1997-06-06",
+      "url": "https://lawphil.net/statutes/repacts/ra1997/ra_8293_1997.html",
+      "page_title": "AN ACT PRESCRIBING THE INTELLECTUAL PROPERTY CODE AND ESTABLISHING THE INTELLECTUAL PROPERTY OFFICE, PROVIDING FOR ITS POWERS AND FUNCTIONS, AND FOR OTHER PURPOSES",
+      "last_modified": "2024-07-13T01:09:09Z",
+      "retrieved_at": "2026-10-26T22:44:19Z",
+      "encoding": "windows-1252",
+      "sha256": "9da8e412db30cb6cb76ec0713236d131589bd095262a90e471a9bc5b0323e52b",
+      "bytes": 221963,
+      "section_count": 241,
+      "missing_sections": []
+    },
+    {
+      "statute": "ra9150",
+      "short_name": "RA 9150",
+      "title": "Republic Act No. 9150 (protection of layout-designs of integrated circuits)",
+      "role": "amendment",
+      "approved": "2001-08-06",
+      "url": "https://lawphil.net/statutes/repacts/ra2001/ra_9150_2001.html",
+      "page_title": "AN ACT PROVIDING FOR THE PROTECTlON OF LAYOUT-DESIGNS (TOPOGRAPHIES) OF INTEGRATED CIRCUITS, AMENDING FOR THE PURPOSE CERTAIN SECTIONS OF REPUBLIC ACT NO. 8293, OTHERWISE KNOWN AS THE INTELLECTUAL PROPERTY CODE OF THE PHILIPPINES AND FOR OTHER PURPOSES",
+      "last_modified": "2021-12-01T04:05:20Z",
+      "retrieved_at": "2026-10-26T22:44:20Z",
+      "encoding": "windows-1252",
+      "sha256": "7ba003bf7a4ad94eb856c2ca68fd8eecbd4300f9820ad44c4ce5bb9818f5926a",
+      "bytes": 20760,
+      "section_count": 6,
+      "missing_sections": []
+    },
+    {
+      "statute": "ra9502",
+      "short_name": "RA 9502",
+      "title": "Universally Accessible Cheaper and Quality Medicines Act of 2008 (Republic Act No. 9502)",
+      "role": "amendment",
+      "approved": "2008-06-06",
+      "url": "https://lawphil.net/statutes/repacts/ra2008/ra_9502_2008.html",
+      "page_title": "AN ACT PROVIDING FOR CHEAPER AND QUALITY MEDICINES, AMENDING FOR THE PURPOSE REPUBLIC ACT NO. 8293 OR THE INTELLECTUAL PROPERTY CODE, REPUBLIC ACT NO. 6675 OR THE GENERICS ACT OF 1988, AND REPUBLIC ACT NO. 5921 OR THE PHARMACY LAW, AND FOR OTHER PURPOSES",
+      "last_modified": "2021-11-24T08:40:38Z",
+      "retrieved_at": "2026-10-26T22:44:22Z",
+      "encoding": "windows-1252",
+      "sha256": "2a6b39eec0efe4765df1930f99259e883005e5c080444302bbbd6e5130737b79",
+      "bytes": 65359,
+      "section_count": 48,
+      "missing_sections": ["8"]
+    },
+    {
+      "statute": "ra10372",
+      "short_name": "RA 10372",
+      "title": "Republic Act No. 10372 (amending certain provisions of the Intellectual Property Code)",
+      "role": "amendment",
+      "approved": "2013-02-28",
+      "url": "https://lawphil.net/statutes/repacts/ra2013/ra_10372_2013.html",
+      "page_title": "AN ACT AMENDING CERTAIN PROVISIONS OF REPUBLIC ACT NO. 8293, OTHERWISE KNOWN AS THE \"INTELLECTUAL PROPERTY CODE OF THE PHILIPPINES\", AND FOR OTHER PURPOSES",
+      "last_modified": "2021-11-19T05:12:36Z",
+      "retrieved_at": "2026-10-26T22:44:23Z",
+      "encoding": "windows-1252",
+      "sha256": "79ea0130cef8567116bb7d1359edc218cd5a2568fd6f248252fd20c6d6193d5a",
+      "bytes": 30331,
+      "section_count": 32,
+      "missing_sections": []
+    }
+  ]
+}

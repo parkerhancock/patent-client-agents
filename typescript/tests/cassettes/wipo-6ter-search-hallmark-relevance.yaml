@@ -1,0 +1,157 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://6ter.wipo.int/api/v1/signs?keywords=hallmark&searchType=ANY&sortBy=REL&limit=2&offset=10
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-credentials:
+      - "true"
+      access-control-allow-headers:
+      - "*"
+      access-control-allow-methods:
+      - DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Mon, 26 Oct 2026 21:58:38 GMT
+      via:
+      - 1.1 f0ddd258f2befca309faaacbbff6459e.cloudfront.net (CloudFront)
+      x-amz-apigw-id:
+      - F3z6TH3fFiAEaDA=
+      x-amz-cf-id:
+      - oMCpxRn-ChuIaKmxvLz20WluLyyu3uIPdE5_O4i4ZpsYHh1CC8XZtQ==
+      x-amz-cf-pop:
+      - DFW56-P11
+      x-amzn-requestid:
+      - f1097bfb-6db1-41d2-be4f-606c63c7b13a
+      x-amzn-trace-id:
+      - >-
+        Root=1-6adfcd0e-547255ea1f679c421496aeae;Parent=1beeeb6a9a11473d;Sampled=0;Lineage=1:5408b530:0
+      x-cache:
+      - Miss from cloudfront
+      x-requested-with:
+      - "*"
+    body:
+      type: json
+      content:
+        responseTimeMs: 4
+        count: 1066
+        limit: "2"
+        offset: "10"
+        records:
+        - indexedAt: 2026-09-30T06:09:00.355338Z
+          stateOrg: CH
+          metadata:
+            hash: 92e84bf02dd06ea4d0e295b7dcebcae3f9a91a25bf0b94da0cf2e53f4543bf3c
+          fileName: ch0008.xml
+          protectedSign:
+            image: ch8.jpg
+            thumbnailImageUrl: https://6ter.wipo.int/images/THUMB/ch8-th.jpg
+            imageUrl: https://6ter.wipo.int/images/ch8.jpg
+            languageCode: ""
+            thumbnailImage: ch8-th.jpg
+          nature:
+            code: OFFICIAL_SIGN
+            goods:
+            - name:
+                en: GOLD
+            - name:
+                fr: OR
+            type:
+              en: Official sign / Hallmark
+              fr: Signe / Poinçon officiel
+              es: Signo / Punzón oficial
+          number: "8"
+          numberAlias: CH0008
+          details:
+          - code: FR
+            name:
+              en: French
+              fr: Français
+              es: Francés
+            text: OR À BAS TITRES "MORGENSTERN"
+          vienna:
+            viennaClassifications:
+            - 23.1.25
+            - 24.17.25
+            - 26.5.1
+            - 26.5.16
+            viennaEdition: VCL (1-1973)
+          publicationDate: "19670201"
+          communicatingParty:
+            code: CH
+            countryName:
+              en: Switzerland
+              fr: Suisse
+              es: Suiza
+            type: STATE
+          circulars:
+          - date: "19670201"
+            number: "0651"
+        - number: "40"
+          indexedAt: 2026-09-30T06:09:00.360178Z
+          stateOrg: HU
+          metadata:
+            hash: 8b3c4444e0cce6f4467d17c17e22bbdb6baf1fb28fa3f41c90ed5e07fad1581e
+          fileName: hu0040.xml
+          protectedSign:
+            image: hu40.jpg
+            thumbnailImageUrl: https://6ter.wipo.int/images/THUMB/hu40-th.jpg
+            imageUrl: https://6ter.wipo.int/images/hu40.jpg
+            languageCode: ""
+            thumbnailImage: hu40-th.jpg
+          nature:
+            code: OFFICIAL_SIGN
+            goods:
+            - name:
+                en: PALLADIUM ARTICLES
+            - name:
+                fr: OUVRAGES DE PALLADIUM
+            type:
+              en: Official sign / Hallmark
+              fr: Signe / Poinçon officiel
+              es: Signo / Punzón oficial
+          numberAlias: HU0040
+          details:
+          - code: ""
+            name:
+              en: ""
+              fr: ""
+              es: ""
+            text: "950"
+          vienna:
+            viennaClassifications:
+            - 17.3.1
+            - 17.3.2
+            - 24.17.25
+            - 26.5.1
+            - 26.5.4
+            - 26.5.16
+            - 26.5.17
+            - 27.7.1
+            - 27.7.11
+            - 27.7.24
+            viennaEdition: VCL (6-2008)
+          publicationDate: "20100331"
+          communicatingParty:
+            code: HU
+            countryName:
+              en: Hungary
+              fr: Hongrie
+              es: Hungría
+            type: STATE
+  recorded_at: 2026-10-26T21:58:38.364Z

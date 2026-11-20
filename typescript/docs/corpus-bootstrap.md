@@ -60,6 +60,12 @@ reference only. Corpus ids and the reader variables they set:
 | `ipo_in_statutes` | `IPO_IN_STATUTES` |
 | `ipo_in_mppp` | `IPO_IN_MPPP` |
 | `ilpo_statutes` | `ILPO_STATUTES` |
+| `rospatent_statutes` | `ROSPATENT_STATUTES` |
+| `cnipa_statutes` | `CNIPA_STATUTES` |
+| `ipophl_statutes` | `IPOPHL_STATUTES` |
+| `inpi_ar_statutes` | `INPI_AR_STATUTES` |
+| `thai_dip_statutes` | `THAI_DIP_STATUTES` |
+| `kipo_statutes` | `KIPO_STATUTES` |
 
 Each prefix yields `<PREFIX>_CORPUS_PATH`, `<PREFIX>_CORPUS_SHA256` (decoded
 SQLite) and `<PREFIX>_CORPUS_FILE_SHA256` (distributed file). The mapping is
@@ -171,6 +177,12 @@ files left all twelve readers available from the returned variables.
 | `ipo_in_statutes` | 2026-10-22 | `ipo-in/ipo_in_statutes.db.zst` | 388,487 | `96aeed06437c05bdaef4f943c7b1b81599dd6f315ee433d158fe151a8bf9f55f` | 1,404,928 | `82bfaea2cabe9dda467590bed2af231edafaf683308f69f09015ee72b5314671` |
 | `ipo_in_mppp` | 2026-10-22 | `ipo-in/ipo_in_mppp.db.zst` | 199,121 | `00905acf0d481c4323fd8cd6ebb47915a49b7c55c515749c7b5a426770affe7d` | 688,128 | `b2e440776a7b45048ec20b37b5054d327cde309978cb87a4c2899911bc9f6b5b` |
 | `ilpo_statutes` | 2026-10-22 | `ilpo_statutes/ilpo_statutes.db.zst` | 250,922 | `2b78e6dec05ad9abaea1f6a292b683eeb75b81ae38a357cfc443ebfa69e2de68` | 892,928 | `733e534fbe2508af8bf4ff30e97d148e2fa400f7e0a70dc25050e1fd9cc3fe11` |
+
+`rospatent_statutes` (Part Four of the Russian Civil Code, added October 26)
+is in the bootstrap list but has not been published. Until its artifact and
+manifest entry are uploaded, a hosted image built with it refuses to start,
+as the bootstrap requires every listed corpus. Its local artifact and hashes
+are in [its doc](rospatent-statutes.md).
 
 On October 22 the ILPO, IPOS statutes, IPOS manuals, INPI Brazil and
 Légifrance corpora were added and published (2,328,516 bytes compressed in

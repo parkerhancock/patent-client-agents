@@ -1,0 +1,322 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://cloud.tipo.gov.tw/S220/opdataapi/api/PatentAppl?format=json&top=1&skip=0&tk=[FILTERED]
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cf-cache-status:
+      - DYNAMIC
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=UTF-8
+      date:
+      - Mon, 26 Oct 2026 19:47:00 GMT
+      server:
+      - cloudflare
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      transfer-encoding:
+      - chunked
+    body:
+      type: json
+      content:
+        version: "1.0"
+        status: sample
+        message: 驗證碼不通過，僅提供範例資料。驗證碼請洽智慧局申請。
+        top: 25
+        skip: 0
+        order-by: appl-no
+        total-count: 1474953
+        tw-patent-applI:
+          -page-count: 25
+          -create-date: 2026/10/27
+          patentcontent:
+          - -sequence: 1
+            appl-no: "06202104"
+            appl-date: 1972/07/26
+            appl-countrycode: TW
+            appl-country: 中華民國
+            classification-ipc:
+            - -sequence: 1
+              ipc-full: F23D
+              ipc-section: F
+              ipc-class: "23"
+              ipc-subclass: D
+              ipc-main-group: null
+              ipc-group: null
+              ipc-version: "06"
+            publish-flag: "2"
+          - -sequence: 2
+            appl-no: "06210001"
+            appl-date: 1973/01/03
+            appl-countrycode: null
+            appl-country: null
+            classification-ipc: []
+            publish-flag: "0"
+          - -sequence: 3
+            appl-no: "06210002"
+            appl-date: 1973/01/03
+            appl-countrycode: null
+            appl-country: null
+            classification-ipc: []
+            publish-flag: "0"
+          - -sequence: 4
+            appl-no: "06210003"
+            appl-date: 1973/01/03
+            appl-countrycode: null
+            appl-country: null
+            classification-ipc: []
+            publish-flag: "0"
+          - -sequence: 5
+            appl-no: "06210004"
+            appl-date: 1973/01/03
+            appl-countrycode: DE
+            appl-country: 德國
+            classification-ipc:
+            - -sequence: 1
+              ipc-full: A01N37/18
+              ipc-section: A
+              ipc-class: "01"
+              ipc-subclass: "N"
+              ipc-main-group: "37"
+              ipc-group: "18"
+              ipc-version: "06"
+            publish-flag: "2"
+          - -sequence: 6
+            appl-no: "06210005"
+            appl-date: 1973/01/03
+            appl-countrycode: null
+            appl-country: null
+            classification-ipc: []
+            publish-flag: "0"
+          - -sequence: 7
+            appl-no: "06210006"
+            appl-date: 1973/01/03
+            appl-countrycode: US
+            appl-country: 美國
+            classification-ipc:
+            - -sequence: 1
+              ipc-full: C07C17/38
+              ipc-section: C
+              ipc-class: "07"
+              ipc-subclass: C
+              ipc-main-group: "17"
+              ipc-group: "38"
+              ipc-version: "06"
+            publish-flag: "2"
+          - -sequence: 8
+            appl-no: "06210007"
+            appl-date: 1973/01/03
+            appl-countrycode: US
+            appl-country: 美國
+            classification-ipc:
+            - -sequence: 1
+              ipc-full: B65D
+              ipc-section: B
+              ipc-class: "65"
+              ipc-subclass: D
+              ipc-main-group: null
+              ipc-group: null
+              ipc-version: "06"
+            publish-flag: "2"
+          - -sequence: 9
+            appl-no: "06210008"
+            appl-date: 1973/01/04
+            appl-countrycode: null
+            appl-country: null
+            classification-ipc: []
+            publish-flag: "0"
+          - -sequence: 10
+            appl-no: "06210009"
+            appl-date: 1973/01/04
+            appl-countrycode: null
+            appl-country: null
+            classification-ipc: []
+            publish-flag: "0"
+          - -sequence: 11
+            appl-no: "06210010"
+            appl-date: 1973/01/04
+            appl-countrycode: null
+            appl-country: null
+            classification-ipc: []
+            publish-flag: "0"
+          - -sequence: 12
+            appl-no: "06210011"
+            appl-date: 1973/01/04
+            appl-countrycode: null
+            appl-country: null
+            classification-ipc: []
+            publish-flag: "0"
+          - -sequence: 13
+            appl-no: "06210012"
+            appl-date: 1973/01/04
+            appl-countrycode: null
+            appl-country: null
+            classification-ipc: []
+            publish-flag: "0"
+          - -sequence: 14
+            appl-no: "06210013"
+            appl-date: 1973/01/04
+            appl-countrycode: DE
+            appl-country: 德國
+            classification-ipc:
+            - -sequence: 1
+              ipc-full: G03D
+              ipc-section: G
+              ipc-class: "03"
+              ipc-subclass: D
+              ipc-main-group: null
+              ipc-group: null
+              ipc-version: "06"
+            publish-flag: "2"
+          - -sequence: 15
+            appl-no: "06210014"
+            appl-date: 1973/01/04
+            appl-countrycode: TW
+            appl-country: 中華民國
+            classification-ipc:
+            - -sequence: 1
+              ipc-full: C12P13/18
+              ipc-section: C
+              ipc-class: "12"
+              ipc-subclass: P
+              ipc-main-group: "13"
+              ipc-group: "18"
+              ipc-version: "06"
+            publish-flag: "2"
+          - -sequence: 16
+            appl-no: "06210015"
+            appl-date: 1973/01/04
+            appl-countrycode: TW
+            appl-country: 中華民國
+            classification-ipc:
+            - -sequence: 1
+              ipc-full: B28D
+              ipc-section: B
+              ipc-class: "28"
+              ipc-subclass: D
+              ipc-main-group: null
+              ipc-group: null
+              ipc-version: "06"
+            publish-flag: "2"
+          - -sequence: 17
+            appl-no: "06210016"
+            appl-date: 1973/01/04
+            appl-countrycode: US
+            appl-country: 美國
+            classification-ipc:
+            - -sequence: 1
+              ipc-full: C03C27/00
+              ipc-section: C
+              ipc-class: "03"
+              ipc-subclass: C
+              ipc-main-group: "27"
+              ipc-group: "00"
+              ipc-version: "06"
+            - -sequence: 2
+              ipc-full: C04B33/02
+              ipc-section: C
+              ipc-class: "04"
+              ipc-subclass: B
+              ipc-main-group: "33"
+              ipc-group: "02"
+              ipc-version: "06"
+            publish-flag: "2"
+          - -sequence: 18
+            appl-no: "06210017"
+            appl-date: 1973/01/05
+            appl-countrycode: TW
+            appl-country: 中華民國
+            classification-ipc:
+            - -sequence: 1
+              ipc-full: E04C2/02
+              ipc-section: E
+              ipc-class: "04"
+              ipc-subclass: C
+              ipc-main-group: "2"
+              ipc-group: "02"
+              ipc-version: "06"
+            publish-flag: "2"
+          - -sequence: 19
+            appl-no: "06210018"
+            appl-date: 1973/01/05
+            appl-countrycode: null
+            appl-country: null
+            classification-ipc: []
+            publish-flag: "0"
+          - -sequence: 20
+            appl-no: "06210019"
+            appl-date: 1973/01/05
+            appl-countrycode: null
+            appl-country: null
+            classification-ipc: []
+            publish-flag: "0"
+          - -sequence: 21
+            appl-no: "06210020"
+            appl-date: 1973/01/06
+            appl-countrycode: null
+            appl-country: null
+            classification-ipc: []
+            publish-flag: "0"
+          - -sequence: 22
+            appl-no: "06210022"
+            appl-date: 1973/01/08
+            appl-countrycode: US
+            appl-country: 美國
+            classification-ipc:
+            - -sequence: 1
+              ipc-full: B01D
+              ipc-section: B
+              ipc-class: "01"
+              ipc-subclass: D
+              ipc-main-group: null
+              ipc-group: null
+              ipc-version: "06"
+            publish-flag: "2"
+          - -sequence: 23
+            appl-no: "06210023"
+            appl-date: 1973/01/08
+            appl-countrycode: US
+            appl-country: 美國
+            classification-ipc:
+            - -sequence: 1
+              ipc-full: H02J9/08
+              ipc-section: H
+              ipc-class: "02"
+              ipc-subclass: J
+              ipc-main-group: "9"
+              ipc-group: "08"
+              ipc-version: "06"
+            publish-flag: "2"
+          - -sequence: 24
+            appl-no: "06210025"
+            appl-date: 1973/01/08
+            appl-countrycode: US
+            appl-country: 美國
+            classification-ipc:
+            - -sequence: 1
+              ipc-full: A01N43/24
+              ipc-section: A
+              ipc-class: "01"
+              ipc-subclass: "N"
+              ipc-main-group: "43"
+              ipc-group: "24"
+              ipc-version: "06"
+            publish-flag: "2"
+          - -sequence: 25
+            appl-no: "06210026"
+            appl-date: 1973/01/09
+            appl-countrycode: null
+            appl-country: null
+            classification-ipc: []
+            publish-flag: "0"
+  recorded_at: 2026-10-26T19:47:00.902Z

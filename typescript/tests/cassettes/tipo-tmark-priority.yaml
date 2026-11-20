@@ -1,0 +1,58 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://cloud.tipo.gov.tw/S220/opdataapi/api/TmarkPriority?format=json&top=100&skip=0&applno=112000113&tk=[FILTERED]
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cf-cache-status:
+      - DYNAMIC
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=UTF-8
+      date:
+      - Mon, 26 Oct 2026 19:46:55 GMT
+      server:
+      - cloudflare
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      transfer-encoding:
+      - chunked
+    body:
+      type: json
+      content:
+        version: "1.0"
+        status: ok
+        message: ""
+        top: 100
+        skip: 0
+        order-by: appl-no
+        total-count: 1
+        tmarkpriority:
+          -page-count: 1
+          -create-date: 2026/10/27
+          tmarkrightscontents:
+          - -sequence: 1
+            -tmark-right-url: ftps://ftp.tipo.gov.tw/ftp/TmarkRights/023/TmarkRights_1_02353221.xml
+            tmarkcontent:
+            - -sequence: 1
+              appl-no: "112000113"
+              tmark-class: "1"
+              tmark-class-desc: 商標
+              exam-no: "02353221"
+              tmark-name: LION HEAD (device mark)
+              priorities:
+                priority-date: 2022/07/29
+                priority-type: "1"
+                priority-country-code: GB
+                priority-country: 英國
+                priority-remark: null
+  recorded_at: 2026-10-26T19:46:55.475Z

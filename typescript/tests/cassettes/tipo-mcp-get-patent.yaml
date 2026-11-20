@@ -1,0 +1,115 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://cloud.tipo.gov.tw/S220/opdataapi/api/PatentAppl?format=json&top=100&skip=0&applno=000000000&tk=[FILTERED]
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cf-cache-status:
+      - DYNAMIC
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=UTF-8
+      date:
+      - Mon, 26 Oct 2026 19:47:05 GMT
+      server:
+      - cloudflare
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      transfer-encoding:
+      - chunked
+    body:
+      type: json
+      content:
+        version: "1.0"
+        status: ok
+        message: 輸入條件查無資料
+        top: 100
+        skip: 0
+        order-by: appl-no
+        total-count: 0
+        tw-patent-applI:
+          -page-count: 0
+          -create-date: 2026/10/27
+          patentcontent: []
+  recorded_at: 2026-10-26T19:47:05.152Z
+- request:
+    method: GET
+    uri: >-
+      https://cloud.tipo.gov.tw/S220/opdataapi/api/PatentAppl?format=json&top=100&skip=0&applno=113105712&tk=[FILTERED]
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cf-cache-status:
+      - DYNAMIC
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=UTF-8
+      date:
+      - Mon, 26 Oct 2026 19:47:04 GMT
+      server:
+      - cloudflare
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      transfer-encoding:
+      - chunked
+    body:
+      type: json
+      content:
+        version: "1.0"
+        status: ok
+        message: ""
+        top: 100
+        skip: 0
+        order-by: appl-no
+        total-count: 1
+        tw-patent-applI:
+          -page-count: 1
+          -create-date: 2026/10/27
+          patentcontent:
+          - -sequence: 1
+            appl-no: "113105712"
+            appl-date: 2024/02/19
+            appl-countrycode: JP
+            appl-country: 日本
+            classification-ipc:
+            - -sequence: 1
+              ipc-full: F16L53/38
+              ipc-section: F
+              ipc-class: "16"
+              ipc-subclass: L
+              ipc-main-group: "53"
+              ipc-group: "38"
+              ipc-version: "201801"
+            - -sequence: 2
+              ipc-full: H05B3/20
+              ipc-section: H
+              ipc-class: "05"
+              ipc-subclass: B
+              ipc-main-group: "3"
+              ipc-group: "20"
+              ipc-version: "200601"
+            - -sequence: 3
+              ipc-full: H05B3/40
+              ipc-section: H
+              ipc-class: "05"
+              ipc-subclass: B
+              ipc-main-group: "3"
+              ipc-group: "40"
+              ipc-version: "200601"
+            publish-flag: "3"
+  recorded_at: 2026-10-26T19:47:04.554Z

@@ -1,0 +1,166 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://6ter.wipo.int/api/v1/signs?keywords=united+nations&searchType=PHRASE&sortBy=KEY&limit=2&offset=0
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-credentials:
+      - "true"
+      access-control-allow-headers:
+      - "*"
+      access-control-allow-methods:
+      - DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Mon, 26 Oct 2026 21:58:37 GMT
+      via:
+      - 1.1 f0ddd258f2befca309faaacbbff6459e.cloudfront.net (CloudFront)
+      x-amz-apigw-id:
+      - F3z6GEoIFiAENLQ=
+      x-amz-cf-id:
+      - VjaWZES7Bo_2wpY7EFDTe6gJAEYdR9QNumkDgTnLP69evjtI2q41pQ==
+      x-amz-cf-pop:
+      - DFW56-P11
+      x-amzn-requestid:
+      - c0999b9f-8f48-4be3-a967-06a37a31a2b8
+      x-amzn-trace-id:
+      - >-
+        Root=1-6adfcd0c-36b0ad42625f1b13328dd810;Parent=79fcce95cca316ee;Sampled=0;Lineage=1:5408b530:0
+      x-cache:
+      - Miss from cloudfront
+      x-requested-with:
+      - "*"
+    body:
+      type: json
+      content:
+        responseTimeMs: 4
+        count: 175
+        limit: "2"
+        offset: "0"
+        records:
+        - number: "1"
+          indexedAt: 2026-09-30T06:09:00.750346Z
+          stateOrg: SC
+          metadata:
+            hash: d4d9dcc54e19046858e04b718bd823c5b0f14a7829788dabc29ddf89dc71dfe8
+          fileName: sc0001.xml
+          protectedSign:
+            image: sc1.jpg
+            thumbnailImageUrl: https://6ter.wipo.int/images/THUMB/sc1-th.jpg
+            imageUrl: https://6ter.wipo.int/images/sc1.jpg
+            text: ""
+            languageCode: ""
+            thumbnailImage: sc1-th.jpg
+          nature:
+            code: ARMORIAL_BEARINGS
+            type:
+              en: Armorial bearings
+              fr: Armoiries
+              es: Escudo de armas
+          numberAlias: SC0001
+          vienna:
+            viennaClassifications:
+            - 3.7.9
+            - 3.7.16
+            - 3.7.19
+            - 3.9.1
+            - 3.9.5
+            - 3.11.11
+            - 5.1.3
+            - 5.1.12
+            - 6.3.1
+            - 6.3.5
+            - 18.3.2
+            - 23.5.1
+            - 23.5.5
+            - 24.1.5
+            - 24.1.9
+            - 24.1.10
+            - 24.1.11
+            - 24.1.12
+            - 25.1.6
+            - 29.1.15
+            viennaEdition: VCL (9-2023)
+          publicationDate: "20230331"
+          communicatingParty:
+            code: SC
+            address:
+              address: >-
+                Permanent Mission of the Republic of Seychelles to the United Nations Office,
+                WTO, and other International Organisations in Geneva - Nations Business Center - 1
+                Rue du Pre-de-La-Bichette
+              city: Geneva
+              countryCode: CH
+              postCode: "1201"
+              countryName: Switzerland
+            name: {}
+            countryName:
+              en: Seychelles
+              fr: Seychelles
+              es: Seychelles
+            type: STATE
+        - number: "2"
+          indexedAt: 2026-09-30T06:09:03.922867Z
+          stateOrg: SC
+          metadata:
+            hash: 1a71eed8478e78feb763be31892f0f6cec30be324686067f939bb77d28bd70c7
+          fileName: sc0002.xml
+          protectedSign:
+            image: sc2.jpg
+            thumbnailImageUrl: https://6ter.wipo.int/images/THUMB/sc2-th.jpg
+            imageUrl: https://6ter.wipo.int/images/sc2.jpg
+            text: ""
+            languageCode: ""
+            thumbnailImage: sc2-th.jpg
+          nature:
+            code: FLAG
+            type:
+              en: Flag
+              fr: Drapeau
+              es: Bandera
+          numberAlias: SC0002
+          vienna:
+            viennaClassifications:
+            - 24.7.1
+            - 26.1.2
+            - 26.3.4
+            - 26.4.4
+            - 29.1.1
+            - 29.1.3
+            - 29.1.4
+            - 29.1.6
+            viennaEdition: VCL (9-2023)
+          publicationDate: "20230331"
+          communicatingParty:
+            code: SC
+            address:
+              address: >-
+                Permanent Mission of the Republic of Seychelles to the United Nations Office,
+                WTO, and other International Organisations in Geneva - Nations Business Center - 1
+                Rue du Pre-de-La-Bichette
+              city: Geneva
+              countryCode: CH
+              postCode: "1201"
+              countryName: Switzerland
+            name: {}
+            countryName:
+              en: Seychelles
+              fr: Seychelles
+              es: Seychelles
+            type: STATE
+  recorded_at: 2026-10-26T21:58:37.099Z

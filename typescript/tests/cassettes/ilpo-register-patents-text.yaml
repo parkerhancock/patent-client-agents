@@ -1,0 +1,156 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://data.gov.il/api/3/action/datastore_search?resource_id=adca9a88-bf91-462a-8a49-62381af9b588&limit=2&offset=0&q=graphene%3A*&plain=false
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - public, max-age=0, must-revalidate
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=utf-8
+      date:
+      - Mon, 26 Oct 2026 21:18:36 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding
+      via:
+      - 1.1 d09facc1a33a23ae0ece49f16f368ae6.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - Bb8sDaGZ9wxmRqr_6gIXBC3zvmtioGewpn-vrG6ewydt0YEZvlykew==
+      x-amz-cf-pop:
+      - DFW57-P4
+      x-cache:
+      - Miss from cloudfront
+    body:
+      type: json
+      content:
+        help: https://data.gov.il/api/3/action/help_show?name=datastore_search
+        success: true
+        result:
+          include_total: true
+          limit: 2
+          offset: 0
+          plain: false
+          q: graphene:*
+          records_format: objects
+          resource_id: adca9a88-bf91-462a-8a49-62381af9b588
+          total_estimation_threshold: null
+          records:
+          - _id: 170284
+            מספר בקשה: 232667
+            תאריך הבקשה: 19/11/2012
+            תאריך הגשה: 18/05/2014
+            שם האמצאה בעברית: חומרים היברידים ננו צינורות של גרפן–פחמן והשימוש בהם כאלקטרודות
+            שם האמצאה באנגלית: GRAPHENE-CARBON NANOTUBE HYBRID MATERIALS AND USE AS ELECTRODES
+            מספר בקשה בינלאומי: US/2012/065894
+            מספר פרסום בינלאומי: /2013/119295
+            תאריך פרסום ראשון: 31/07/2014
+            תאריך פרסום שני: 30/06/2014
+            תאריך מתן פטנט: 29/05/2019
+            סטטוס בקשה/פטנט: פטנט
+            rank: 0.108404964
+          - _id: 152980
+            מספר בקשה: 215613
+            תאריך הבקשה: 13/04/2010
+            תאריך הגשה: 06/10/2011
+            שם האמצאה בעברית: התקני ספיגה הניתנים לרוויה מבוססי–גרפן ושיטות
+            שם האמצאה באנגלית: GRAPHENE-BASED SATURABLE ABSORBER DEVICES AND METHODS
+            מספר בקשה בינלאומי: SG/2010/000148
+            מספר פרסום בינלאומי: /2010/120246
+            תאריך פרסום ראשון: 29/12/2011
+            תאריך פרסום שני: 03/02/2013
+            תאריך מתן פטנט: 30/05/2016
+            סטטוס בקשה/פטנט: פקיעת תוקף
+            rank: 0.108404964
+          fields:
+          - id: _id
+            type: int
+          - id: מספר בקשה
+            type: numeric
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: תאריך הבקשה
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: תאריך הגשה
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: שם האמצאה בעברית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: שם האמצאה באנגלית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: מספר בקשה בינלאומי
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: מספר פרסום בינלאומי
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: תאריך פרסום ראשון
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: תאריך פרסום שני
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: תאריך מתן פטנט
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: סטטוס בקשה/פטנט
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: rank
+            type: float
+          _links:
+            start: >-
+              /api/3/action/datastore_search?resource_id=adca9a88-bf91-462a-8a49-62381af9b588&limit=2&q=graphene%3A%2A&plain=false
+            next: >-
+              /api/3/action/datastore_search?resource_id=adca9a88-bf91-462a-8a49-62381af9b588&limit=2&offset=2&q=graphene%3A%2A&plain=false
+          total: 90
+          total_was_estimated: false
+  recorded_at: 2026-10-26T21:18:36.710Z

@@ -1,0 +1,255 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://data.gov.il/api/3/action/datastore_search?resource_id=3343e150-79b5-4927-adad-50ebe14925b5&limit=3&offset=0&q=%7B%22IPC+%D7%A1%D7%99%D7%95%D7%95%D7%92%22%3A%22H01M%3A*+%26+4%3A*%22%7D&plain=false&sort=%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%91%D7%A7%D7%A9%D7%94%22+desc
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - public, max-age=0, must-revalidate
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=utf-8
+      date:
+      - Mon, 26 Oct 2026 21:19:06 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding
+      via:
+      - 1.1 d09facc1a33a23ae0ece49f16f368ae6.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - 70OAvPUL0Dj8oezGsrsXR-e3fbaG7ERFZ7gte0PzF8_00eELJEsHkA==
+      x-amz-cf-pop:
+      - DFW57-P4
+      x-cache:
+      - Miss from cloudfront
+    body:
+      type: json
+      content:
+        help: https://data.gov.il/api/3/action/help_show?name=datastore_search
+        success: true
+        result:
+          include_total: true
+          limit: 3
+          offset: 0
+          plain: false
+          q:
+            IPC סיווג: H01M:* & 4:*
+          records_format: objects
+          resource_id: 3343e150-79b5-4927-adad-50ebe14925b5
+          sort: "\"מספר בקשה\" desc"
+          total_estimation_threshold: null
+          records:
+          - _id: 218735
+            מספר בקשה: 331471
+            שם האמצאה בעברית: שיטה לבקרת תגובות סלקטיביות לספין מרובות אלקטרונים וציפוי שלהן
+            שם האמצאה באנגלית: >-
+              A METHOD FOR CONTROLLING MULTI ELECTRONS SPIN SELECTIVE REACTIONS AND A COATING
+              THEREFOR
+            IPC סיווג: H01M 4/86
+            ראשי: ""
+            rank IPC סיווג: 0.09016734
+          - _id: 693215
+            מספר בקשה: 331471
+            שם האמצאה בעברית: שיטה לבקרת תגובות סלקטיביות לספין מרובות אלקטרונים וציפוי שלהן
+            שם האמצאה באנגלית: >-
+              A METHOD FOR CONTROLLING MULTI ELECTRONS SPIN SELECTIVE REACTIONS AND A COATING
+              THEREFOR
+            IPC סיווג: H01M 4/90
+            ראשי: ""
+            rank IPC סיווג: 0.09016734
+          - _id: 764572
+            מספר בקשה: 331403
+            שם האמצאה בעברית: אלקטרוליט לבטריה מוצקה
+            שם האמצאה באנגלית: ELECTROLYTE MATERIAL FOR AN ALL-SOLID-STATE BATTERY
+            IPC סיווג: H01M 4/525
+            ראשי: ""
+            rank IPC סיווג: 0.09016734
+          fields:
+          - id: _id
+            type: int
+          - id: מספר בקשה
+            type: numeric
+          - id: שם האמצאה בעברית
+            type: text
+          - id: שם האמצאה באנגלית
+            type: text
+          - id: IPC סיווג
+            type: text
+          - id: ראשי
+            type: text
+          - id: rank IPC סיווג
+            type: float
+          _links:
+            start: >-
+              /api/3/action/datastore_search?resource_id=3343e150-79b5-4927-adad-50ebe14925b5&limit=3&q=%7B%22IPC+%D7%A1%D7%99%D7%95%D7%95%D7%92%22%3A%22H01M%3A%2A+%26+4%3A%2A%22%7D&plain=false&sort=%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%91%D7%A7%D7%A9%D7%94%22+desc
+            next: >-
+              /api/3/action/datastore_search?resource_id=3343e150-79b5-4927-adad-50ebe14925b5&limit=3&offset=3&q=%7B%22IPC+%D7%A1%D7%99%D7%95%D7%95%D7%92%22%3A%22H01M%3A%2A+%26+4%3A%2A%22%7D&plain=false&sort=%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%91%D7%A7%D7%A9%D7%94%22+desc
+          total: 1109
+          total_was_estimated: false
+  recorded_at: 2026-10-26T21:19:06.599Z
+- request:
+    method: GET
+    uri: >-
+      https://data.gov.il/api/3/action/datastore_search?resource_id=adca9a88-bf91-462a-8a49-62381af9b588&limit=1000&offset=0&filters=%7B%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%91%D7%A7%D7%A9%D7%94%22%3A%5B331471%2C331403%5D%7D
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - public, max-age=0, must-revalidate
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=utf-8
+      date:
+      - Mon, 26 Oct 2026 21:19:06 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding
+      via:
+      - 1.1 d09facc1a33a23ae0ece49f16f368ae6.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - Bm_n0LNxgVFEhju9lTduNgF_tDYKXdSbP2385blzfKimmqaS1GQG2Q==
+      x-amz-cf-pop:
+      - DFW57-P4
+      x-cache:
+      - Miss from cloudfront
+    body:
+      type: json
+      content:
+        help: https://data.gov.il/api/3/action/help_show?name=datastore_search
+        success: true
+        result:
+          filters:
+            מספר בקשה:
+            - 331471
+            - 331403
+          include_total: true
+          limit: 1000
+          offset: 0
+          records_format: objects
+          resource_id: adca9a88-bf91-462a-8a49-62381af9b588
+          total_estimation_threshold: null
+          records:
+          - _id: 285456
+            מספר בקשה: 331471
+            תאריך הבקשה: 25/02/2024
+            תאריך הגשה: 24/08/2026
+            שם האמצאה בעברית: שיטה לבקרת תגובות סלקטיביות לספין מרובות אלקטרונים וציפוי שלהן
+            שם האמצאה באנגלית: >-
+              A METHOD FOR CONTROLLING MULTI ELECTRONS SPIN SELECTIVE REACTIONS AND A COATING
+              THEREFOR
+            מספר בקשה בינלאומי: IL/2024/050213
+            מספר פרסום בינלאומי: /2025/177265
+            תאריך פרסום ראשון: 01/10/2026
+            תאריך פרסום שני: 01/10/2026
+            תאריך מתן פטנט: ""
+            סטטוס בקשה/פטנט: בקשה חדשה
+          - _id: 285477
+            מספר בקשה: 331403
+            תאריך הבקשה: 05/02/2025
+            תאריך הגשה: 19/08/2026
+            שם האמצאה בעברית: אלקטרוליט לבטריה מוצקה
+            שם האמצאה באנגלית: ELECTROLYTE MATERIAL FOR AN ALL-SOLID-STATE BATTERY
+            מספר בקשה בינלאומי: EP/2025/052912
+            מספר פרסום בינלאומי: /2025/176462
+            תאריך פרסום ראשון: 01/10/2026
+            תאריך פרסום שני: 01/10/2026
+            תאריך מתן פטנט: ""
+            סטטוס בקשה/פטנט: בקשה חדשה
+          fields:
+          - id: _id
+            type: int
+          - id: מספר בקשה
+            type: numeric
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: תאריך הבקשה
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: תאריך הגשה
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: שם האמצאה בעברית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: שם האמצאה באנגלית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: מספר בקשה בינלאומי
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: מספר פרסום בינלאומי
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: תאריך פרסום ראשון
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: תאריך פרסום שני
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: תאריך מתן פטנט
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: סטטוס בקשה/פטנט
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          _links:
+            start: >-
+              /api/3/action/datastore_search?resource_id=adca9a88-bf91-462a-8a49-62381af9b588&limit=1000&filters=%7B%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%91%D7%A7%D7%A9%D7%94%22%3A%5B331471%2C331403%5D%7D
+            next: >-
+              /api/3/action/datastore_search?resource_id=adca9a88-bf91-462a-8a49-62381af9b588&limit=1000&offset=1000&filters=%7B%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%91%D7%A7%D7%A9%D7%94%22%3A%5B331471%2C331403%5D%7D
+          total: 2
+          total_was_estimated: false
+  recorded_at: 2026-10-26T21:19:06.994Z

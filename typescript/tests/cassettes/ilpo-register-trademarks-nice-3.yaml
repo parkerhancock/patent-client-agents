@@ -1,0 +1,423 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://data.gov.il/api/3/action/datastore_search?resource_id=6284d4a9-fdd4-45c9-a1d6-58143c7d8127&limit=3&offset=0&q=%7B%22%D7%A1%D7%95%D7%92%D7%99+%D7%A0%D7%99%D7%A6%D7%94+%D7%9C%D7%91%D7%A7%D7%A9%D7%94%22%3A%223%22%7D&plain=false&sort=%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%94%D7%A1%D7%99%D7%9E%D7%9F%22+desc
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - public, max-age=0, must-revalidate
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=utf-8
+      date:
+      - Mon, 26 Oct 2026 21:18:33 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding
+      via:
+      - 1.1 d09facc1a33a23ae0ece49f16f368ae6.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - -0xN-RKle7Epsd78Dm7-L3bIQj9UiWEWzCFM9I9kpy_FAftMVPhJ4A==
+      x-amz-cf-pop:
+      - DFW57-P4
+      x-cache:
+      - Miss from cloudfront
+    body:
+      type: json
+      content:
+        help: https://data.gov.il/api/3/action/help_show?name=datastore_search
+        success: true
+        result:
+          include_total: true
+          limit: 3
+          offset: 0
+          plain: false
+          q:
+            סוגי ניצה לבקשה: "3"
+          records_format: objects
+          resource_id: 6284d4a9-fdd4-45c9-a1d6-58143c7d8127
+          sort: "\"מספר הסימן\" desc"
+          total_estimation_threshold: null
+          records:
+          - _id: 363799
+            מספור רץ: 363799
+            מספר הסימן: 398091
+            דמות: לא
+            קישור לנסח: https://trademarks.justice.gov
+            מצב: ממתין לבחינה
+            לאומי/בינלאומי: לאומי
+            מספר הסימן הבינלאומי: ""
+            תיאור סימן עברית: ""
+            תיאור סימן אנגלית: MAISON MÉEQARA
+            תאריך בקשה: 26/10/2026
+            תאריך רישום: ""
+            סוג רישום: סימן מסחר/שירות
+            סוגי ניצה לבקשה: 3; 35
+            סוגי וינה לבקשה: ""
+            רשימת סחורות בעברית: >-
+              הפרטה לא מופיעה במלואה -  בשמים; מוצרי קוסמטיקה; תמרוקים; מוצרים לטיפול וטיפוח
+              לגוף~ לפנים ולשיער; תכשירים לטיפול וטיפוח לגוף~ לפנים ולשיער; סבונים; סבוני פנים;
+              תחליבי רחצה; קרמים לגוף~ לפנים ולשיער; תכשירי לחות; שמפואים; מרככים; סרומים
+              לגוף~ לפנים ולשיער; קרמים להגנה מהשמש; תרסיסים להגנה מהשמש; דיאודורנטים; שמנים
+              ריחניים; שמני גוף; שמני עיסוי; שמנים אתריים; מלחי רחצה; מסכות גוף; מסכות פנים; משחות
+              שיניים; צבעים לשיער; ג'לים לניקוי ידיים; תרסיסים לניקוי ידיים; ג'לים לניקוי הגוף
+              והפנים; תרסיסים לניקוי הגוף והפנים; מפיצי ריח; נרות עיסוי; מוצרי ניקוי; חומרי
+              ניקוי; תכשירי ניקוי; הנכללים כולם בסוג 3.; חנויות וחנויות מקוונות לממכר בשמים~ מוצרי
+              קוסמטיקה~ תמרוקים~ מוצרים לטיפול וטיפוח לגוף~ לפנים ולשיער~ תכשירים לטיפול וטיפוח
+              לגוף~ לפנים ולשיער~ סבונים~ סבוני פנים~ תחליבי רחצה~ קרמים לגוף~ לפנים ולשיער~
+              תכשירי לחות~ שמפואים~ מרככים~ סרומים לגוף~ לפנים ולשיער~ קרמים להגנה מהשמש~ תרסיסים
+              להגנה מהשמש~ דיאודורנטים~ שמנים ריחניים~ שמני גוף~ שמני עיסוי~ שמנים אתריים~
+              מלחי רחצה~ מסכות גוף~ מסכות פנים~ משחות שיניים~ צבעים לשיער~ ג'לים לניקוי ידיים~
+              תרסיסים לניקוי ידיים~ ג'לים לניקוי הגוף והפנים~ תרסיסים לניקוי הגוף והפנים~ מפיצי
+              ריח~ נרות עיסוי~ נרות מבושמים~ נרות ריחניים~ מוצרי ניקוי~ חומרי ניקוי ותכשירי
+              ניקוי; נקודות שיווק ומכירה ונקודות מקוונות לשיווק ומכירת בשמים~ מוצרי קוסמטיקה~
+              תמרוקים~ מוצרים לטיפול וטיפוח לגוף~ לפנים ולשיער~ תכשירים לטיפול וטיפוח לגוף~ לפנים
+              ולשיער~ סבונים~ סבוני פנים~ תחליבי רחצה~ קרמים לגוף~ לפנים ולשיער~ תכשירי לחות~
+              שמפואים~ מרככים~ סרומים לגוף~ לפנים ולשיער~ קרמים להגנה מהשמש~ תרסיסים להגנה מהשמש~
+              דיאודורנטים~ שמנים ריחניים~ שמני גוף~ שמני עיסוי~ שמנים אתריים~ מלחי רחצה~ מסכות
+              גוף~ מסכות פנים~ משחות שיניים~ צבעים לשיער~ ג'לים לניקוי ידיים~ תרסיסים לניקוי
+              ידיים~ ג'לים לניקוי הגוף והפנים~ תרסיסים לניקוי הגוף והפנים~ מפיצי ריח~ נרות עיסוי~
+              נרות מבושמים~ נרות ריחניים~ מוצרי ניקוי~ חומרי ניקוי ותכשירי ניקוי; רשתות ורשתות
+              מקוונות לממכר בשמים~ מוצרי קוסמטיקה~ תמרוקים~ מוצרים לטיפול וטיפוח לגוף~ לפנים
+              ולשיער~ תכשירים לטיפול וטיפוח לגוף~ לפנים ולשיער~ סבוני
+            רשימת סחורות באנגלית: >-
+              Details are not fully displayed -  Perfumes; cosmetics; toiletry preparations;
+              products for the care and grooming of the body~ face and hair; preparations for
+              the care and grooming of the body~ face and hair; soaps; facial soaps; bath
+              lotions; creams for the body~ face and hair; moisturizers; shampoos; hair conditioners;
+              serums for the body~ face and hair; sun protection creams; sprays for sun
+              protection; deodorants; scented oils; body oils; massage oils; essential oils; bath
+              salts; body masks; face masks; toothpastes; hair dyes; hand cleaning gels; sprays
+              for cleaning hands; body and face cleaning gels; sprays for cleaning body and face;
+              reed diffusers; massage candles; cleaning products; cleaning agents; cleaning
+              preparations; all included in class 3.; Stores and online stores for the sales of
+              perfumes~ cosmetics~ toiletry preparations~ products for the care and grooming of
+              the body~ face and hair~ preparations for the care and grooming of the body~ face
+              and hair~ soaps~ facial soaps~ bath lotions~ creams for the body~ face and hair~
+              moisturizers~ shampoos~ hair conditioners~ serums for the body~ face and hair~
+              sun protection creams~ sprays for sun protection~ deodorants~ scented oils~ body
+              oils~ massage oils~ essential oils~ bath salts~ body masks~ face masks~
+              toothpastes~ hair dyes~ hand cleaning gels~ sprays for cleaning hands~ body and face
+              cleaning gels~ sprays for cleaning body and face~ reed diffusers~ massage candles~
+              perfumed candles~ scented candles~ cleaning products~ cleaning agents and cleaning
+              preparations; marketing and sales points and online marketing and sales points of
+              perfumes~ cosmetics~ toiletry preparations~ products for the care and grooming of
+              the body~ face and hair~ preparations for the care and grooming of the body~ face
+              and hair~ soaps~ facial soaps~ bath lotions~ creams for the body~ face and hair~
+              moisturizers~ shampoos~ hair conditioners~ serums for the body~ face and hair~
+              sun protection creams~ sprays for sun protection~ deodorant
+            דין קדימה: לא
+            תאריך תום תוקף: ""
+            שם מיופה כח: עמית וולף, עו~ד
+            שם מיופה כח אנגלית: Amit Wolf, ADV.
+            שם בעל הסימן בעברית: עידו בוטבול
+            שם בעל הסימן באנגלית: Ido Botbol
+            שם בעל הרשות בעברית: ""
+            שם בעל הרשות באנגלית: ""
+            שם מייצג לעניין אכיפת מכס: ""
+            מען למכס תאריך התחלה: ""
+            כתובת אימייל מייצג מכס: ""
+            טלפון מייצג מכס: ""
+            רישום חיצוני: לא
+            תאריך עדכון אחרון: 26/10/2026
+            rank סוגי ניצה לבקשה: 0.057308756
+          - _id: 363792
+            מספור רץ: 363792
+            מספר הסימן: 398084
+            דמות: כן
+            קישור לנסח: https://trademarks.justice.gov
+            מצב: ממתין לבחינה
+            לאומי/בינלאומי: לאומי
+            מספר הסימן הבינלאומי: ""
+            תיאור סימן עברית: رؤوف
+            תיאור סימן אנגלית: Raof Magic
+            תאריך בקשה: 25/10/2026
+            תאריך רישום: ""
+            סוג רישום: סימן מסחר/שירות
+            סוגי ניצה לבקשה: "3"
+            סוגי וינה לבקשה: 24.17; 28.1
+            רשימת סחורות בעברית: >-
+              תכשירי קוסמטיקה ותמרוקים שאינם רפואיים; משחות שיניים שאינן רפואיות; בשמים;
+              תכשירי הלבנה וחומרים אחרים המשמשים לכביסה; תכשירי ניקוי~ צחצוח ושפשוף; הנכללים כולם
+              בסוג 3.
+            רשימת סחורות באנגלית: >-
+              Non-medicated cosmetics and toiletry preparations; non-medicated dentifrices;
+              perfumes; bleaching preparations and other substances for laundry use; cleaning~
+              polishing and abrasive preparations; all included in class 3.
+            דין קדימה: לא
+            תאריך תום תוקף: ""
+            שם מיופה כח: ""
+            שם מיופה כח אנגלית: ""
+            שם בעל הסימן בעברית: אוסאמה שחאדה
+            שם בעל הסימן באנגלית: OSAMA SHEHADA
+            שם בעל הרשות בעברית: ""
+            שם בעל הרשות באנגלית: ""
+            שם מייצג לעניין אכיפת מכס: ""
+            מען למכס תאריך התחלה: ""
+            כתובת אימייל מייצג מכס: ""
+            טלפון מייצג מכס: ""
+            רישום חיצוני: לא
+            תאריך עדכון אחרון: 26/10/2026
+            rank סוגי ניצה לבקשה: 0.057308756
+          - _id: 363758
+            מספור רץ: 363758
+            מספר הסימן: 398050
+            דמות: כן
+            קישור לנסח: https://trademarks.justice.gov
+            מצב: ממתין לבחינה
+            לאומי/בינלאומי: בינלאומי
+            מספר הסימן הבינלאומי: "1684078"
+            תיאור סימן עברית: ""
+            תיאור סימן אנגלית: ZOLA
+            תאריך בקשה: 07/09/2026
+            תאריך רישום: ""
+            סוג רישום: סימן מסחר/שירות
+            סוגי ניצה לבקשה: 21; 3
+            סוגי וינה לבקשה: 26.1; 27.5
+            רשימת סחורות בעברית: ;
+            רשימת סחורות באנגלית: >-
+              Details are not fully displayed -  Amber [perfume]; antiperspirants
+              [toiletries]; balms~ other than for medical purposes; basma [cosmetic dye]; whiting; lip
+              glosses; petroleum jelly for cosmetic purposes; cotton wool for cosmetic purposes;
+              cotton swabs for cosmetic purposes; bleaching preparations [decolorants] for
+              cosmetic purposes; decorative transfers for cosmetic purposes; moustache wax; make-up;
+              lipsticks; scented water; extracts of flowers [perfumes]; herbal extracts for
+              cosmetic purposes; ethereal essences; essential oils; greases for cosmetic
+              purposes; hair dyes; ionone [perfumery]; adhesives for affixing false eyelashes;
+              adhesives for affixing false hair; adhesives for cosmetic purposes; collagen preparations
+              for cosmetic purposes; hair conditioners; cosmetics; eyebrow cosmetics;
+              cosmetics for children; beauty masks; cosmetic preparations for eyelashes; cosmetic
+              preparations for skin care; tailors' wax; skin whitening creams; cosmetic creams; hair
+              lotions; lotions for cosmetic purposes; deodorant soap; cakes of toilet soap;
+              almond soap; soap; musk [perfumery]; mint for perfumery; mint essence [essential
+              oil]; cosmetic kits; eyebrow pencils; cosmetic pencils; oils for toilet purposes;
+              oils for perfumes and scents; oils for cosmetic purposes; oil of turpentine for
+              degreasing; bases for floral perfumes; cleansing milk for toilet purposes;
+              degreasing products for cleaning purposes; scouring solutions; perfumery; perfumery for
+              cosmetics; perfumes; gel eye patches for cosmetic purposes; polishing wax; pomades
+              for cosmetic purposes; hair straightening preparations; depilatory preparations;
+              hair waving preparations; sun-tanning preparations [cosmetics]; make-up removing
+              preparations; make-up preparations; shining preparations [polish]; aloe vera
+              preparations for cosmetic purposes; make-up powder; tissues impregnated with
+              cosmetic lotions; tissues impregnated with make-up removing preparations; turpentine for
+              degreasing; rose oil; toilet water; mascara; cosmetic dye
+            דין קדימה: לא
+            תאריך תום תוקף: 24/05/2032
+            שם מיופה כח: ""
+            שם מיופה כח אנגלית: ""
+            שם בעל הסימן בעברית: ""
+            שם בעל הסימן באנגלית: Kobrusieva Tetiana Borysivna
+            שם בעל הרשות בעברית: ""
+            שם בעל הרשות באנגלית: ""
+            שם מייצג לעניין אכיפת מכס: ""
+            מען למכס תאריך התחלה: ""
+            כתובת אימייל מייצג מכס: ""
+            טלפון מייצג מכס: ""
+            רישום חיצוני: לא
+            תאריך עדכון אחרון: 22/10/2026
+            rank סוגי ניצה לבקשה: 0.057308756
+          fields:
+          - id: _id
+            type: int
+          - id: מספור רץ
+            type: numeric
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: מספר הסימן
+            type: numeric
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: דמות
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: קישור לנסח
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: מצב
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: לאומי/בינלאומי
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: מספר הסימן הבינלאומי
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: תיאור סימן עברית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: תיאור סימן אנגלית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: תאריך בקשה
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: תאריך רישום
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: סוג רישום
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: סוגי ניצה לבקשה
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: סוגי וינה לבקשה
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: רשימת סחורות בעברית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: רשימת סחורות באנגלית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: דין קדימה
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: תאריך תום תוקף
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: שם מיופה כח
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: שם מיופה כח אנגלית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: שם בעל הסימן בעברית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: שם בעל הסימן באנגלית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: שם בעל הרשות בעברית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: שם בעל הרשות באנגלית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: שם מייצג לעניין אכיפת מכס
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: מען למכס תאריך התחלה
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: כתובת אימייל מייצג מכס
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: טלפון מייצג מכס
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: רישום חיצוני
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: תאריך עדכון אחרון
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: rank סוגי ניצה לבקשה
+            type: float
+          _links:
+            start: >-
+              /api/3/action/datastore_search?resource_id=6284d4a9-fdd4-45c9-a1d6-58143c7d8127&limit=3&q=%7B%22%D7%A1%D7%95%D7%92%D7%99+%D7%A0%D7%99%D7%A6%D7%94+%D7%9C%D7%91%D7%A7%D7%A9%D7%94%22%3A%223%22%7D&plain=false&sort=%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%94%D7%A1%D7%99%D7%9E%D7%9F%22+desc
+            next: >-
+              /api/3/action/datastore_search?resource_id=6284d4a9-fdd4-45c9-a1d6-58143c7d8127&limit=3&offset=3&q=%7B%22%D7%A1%D7%95%D7%92%D7%99+%D7%A0%D7%99%D7%A6%D7%94+%D7%9C%D7%91%D7%A7%D7%A9%D7%94%22%3A%223%22%7D&plain=false&sort=%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%94%D7%A1%D7%99%D7%9E%D7%9F%22+desc
+          total: 27138
+          total_was_estimated: false
+  recorded_at: 2026-10-26T21:18:33.739Z

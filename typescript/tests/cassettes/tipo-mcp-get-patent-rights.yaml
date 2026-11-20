@@ -1,0 +1,182 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://cloud.tipo.gov.tw/S220/opdataapi/api/PatentRights?format=json&top=100&skip=0&applno=113105712&tk=[FILTERED]
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cf-cache-status:
+      - DYNAMIC
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=UTF-8
+      date:
+      - Mon, 26 Oct 2026 19:47:06 GMT
+      server:
+      - cloudflare
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      transfer-encoding:
+      - chunked
+    body:
+      type: json
+      content:
+        version: "1.0"
+        status: ok
+        message: ""
+        top: 100
+        skip: 0
+        order-by: appl-no
+        total-count: 1
+        tw-patent-rightsI:
+          -page-count: 1
+          -create-date: 2026/10/27
+          patentcontent:
+          - -sequence: 1
+            publication-reference:
+              notice-no: 202447125
+              notice-volno: 22
+              notice-isuno: 23
+              notice-date: 2024/12/01
+              publish-no: I912706
+              publish-volno: 53
+              publish-isuno: 3
+              publish-date: 2026/01/21
+            application-reference:
+              appl-no: "113105712"
+              appl-date: 2024/02/19
+              first-date: 2024/02/19
+              foreign-language: "01"
+              foreign-language-desc: 日文
+              appl-class: "1"
+              appl-class-desc: 發明
+              material-appl-date: 2024/02/19
+              material-flag: "1"
+              faplexm-date: 2025/11/05
+              reappl-date: null
+              raplexam-date: null
+              agree-flag: null
+              twins-flag: "0"
+            patent-title:
+              patent-name-chinese: 加熱器裝置、加熱部及加熱器裝置的製造方法
+              patent-name-english: null
+            patent-right:
+              licence-date: 2026/01/21
+              relicence-date: null
+              patent-no: I912706
+              patent-bdate: 2026/01/21
+              patent-edate: 2044/02/18
+              charge-expir-date: 2029/01/20
+              charge-expir-year: "3"
+              rent-status: null
+              mortgage-status: null
+              transfer-status: null
+              inherit-status: null
+              trust-status: null
+              opposition-status: null
+              nullity-status: null
+              continue-status: null
+              expand-status: null
+              cancel-date: null
+              cancel-result: null
+              revoke-date: null
+              revoke-code: null
+              dep-patent-class: ""
+              dep-appl-no: null
+            parties:
+              applicants:
+              - -sequence: 1
+                chinese-name: 日商霓佳斯股份有限公司
+                english-name: NICHIAS CORPORATION
+                address: 日本
+                english-country: JP
+                chinese-country: 日本
+                english-address: 6-1, HATCHOBORI 1-CHOME, CHUO-KU, TOKYO, JAPAN
+              - -sequence: 2
+                chinese-name: 日商泰默斯股份有限公司
+                english-name: THERMOS CORPORATION
+                address: 日本
+                english-country: JP
+                chinese-country: 日本
+                english-address: 283-1, SHIGI-CHO, YAMATOKORIYAMA-SHI, NARA 6391039 JAPAN
+              inventors:
+              - -sequence: 1
+                chinese-name: 佐佐木章
+                english-name: SASAKI, AKIRA
+                english-country: JP
+                chinese-country: 日本
+              - -sequence: 2
+                chinese-name: 福田啓一
+                english-name: FUKUDA, KEIICHI
+                english-country: JP
+                chinese-country: 日本
+              - -sequence: 3
+                chinese-name: 石大作
+                english-name: SEKI, DAISAKU
+                english-country: JP
+                chinese-country: 日本
+              - -sequence: 4
+                chinese-name: 飯田研二
+                english-name: IIDA, KENJI
+                english-country: JP
+                chinese-country: 日本
+              - -sequence: 5
+                chinese-name: 田口進
+                english-name: TAGUCHI, SUSUMU
+                english-country: JP
+                chinese-country: 日本
+              agents:
+              - -sequence: 1
+                chinese-name: 李世章
+                english-name: null
+                address: 臺北市中山區松江路148號11樓
+                english-country: TW
+                chinese-country: 中華民國
+              - -sequence: 2
+                chinese-name: 彭國洋
+                english-name: null
+                address: 臺北市中山區松江路148號11樓
+                english-country: TW
+                chinese-country: 中華民國
+            classification-ipc:
+            - -sequence: 1
+              ipc-full: F16L53/38
+              ipc-section: F
+              ipc-class: "16"
+              ipc-subclass: L
+              ipc-main-group: "53"
+              ipc-group: "38"
+              ipc-version: "201801"
+            - -sequence: 2
+              ipc-full: H05B3/20
+              ipc-section: H
+              ipc-class: "05"
+              ipc-subclass: B
+              ipc-main-group: "3"
+              ipc-group: "20"
+              ipc-version: "200601"
+            - -sequence: 3
+              ipc-full: H05B3/40
+              ipc-section: H
+              ipc-class: "05"
+              ipc-subclass: B
+              ipc-main-group: "3"
+              ipc-group: "40"
+              ipc-version: "200601"
+            link:
+              patentisuregspecxmla-url: >-
+                ftps://ftp.tipo.gov.tw/PatentIsuRegSpecXMLA/115/PatentIsuRegSpecXMLA_053003/113105712.xml
+              patentpubmtiff-url: ftps://ftp.tipo.gov.tw/PatentPubMTIFF/115/PatentPubMTIFF_053003/I912706.zip
+              patentpubxml-url: >-
+                ftps://ftp.tipo.gov.tw/PatentPubXML/115/PatentPubXML_053003/5303I912706/113105712-A0305.xml
+              patentisuregspecmtiff-url: >-
+                ftps://ftp.tipo.gov.tw/PatentIsuRegSpecMTIFF/115/PatentIsuRegSpecMTIFF_053003/113105712.tif
+  recorded_at: 2026-10-26T19:47:06.251Z

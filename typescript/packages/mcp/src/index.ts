@@ -6,6 +6,7 @@ import {
   CafcClient,
   CanadaFederalCourtClient,
   ChinaSpcIpCourtClient,
+  CnipaStatutesClient,
   ConfigurationError,
   CopyrightClient,
   DataWebClient,
@@ -17,17 +18,26 @@ import {
   EpoOpsClient,
   EpoPctGuidelinesClient,
   EpoUpGuidelinesClient,
+  EuipoGuidelinesClient,
+  EurlexClient,
   FeesClient,
   GooglePatentsClient,
   HtsClient,
   IdsClient,
+  IlpoRegisterClient,
   IlpoStatutesClient,
+  IlpoTmClient,
+  InpiArStatutesClient,
   InpiBrStatutesClient,
+  IpAustraliaBulkClient,
   IpoInMpppClient,
   IpoInStatutesClient,
+  IpophlStatutesClient,
   IposManualsClient,
   IposStatutesClient,
   JapanIpHighCourtClient,
+  JpoClient,
+  KipoStatutesClient,
   KiprisClient,
   LegifranceIpClient,
   MoppClient,
@@ -35,17 +45,24 @@ import {
   OfficeActionAnalyticsClient,
   OfficeActionsClient,
   PetitionsClient,
+  PrhClient,
+  PrvClient,
   PtabAppealsClient,
   PtabInterferencesClient,
   PtabTrialsClient,
   PublicationsClient,
+  RospatentStatutesClient,
   SearchOptionsSchema,
+  ThaiDipStatutesClient,
+  TipoClient,
   TmepClient,
   TrademarkAssignmentClient,
+  TrademarkDecisionsClient,
   TrademarkSearchClient,
   TsdrClient,
   TwTradeSecretsClient,
   UpcStatutesClient,
+  Wipo6terClient,
   WipoLexClient,
 } from "@patent-client-agents/client";
 import {
@@ -65,6 +82,11 @@ import { registerApplicationExtraTools } from "./applications-extra.js";
 import { registerCafcTools } from "./cafc.js";
 import { registerCanadaFederalCourtTools } from "./canada-federal-court.js";
 import { registerChinaSpcIpCourtTools } from "./china-spc-ip-court.js";
+import { registerIlpoTmTools, registerIpaBulkTools } from "./ckan-catalogs.js";
+import {
+  type CnipaStatutesReader,
+  registerCnipaStatutesTools,
+} from "./cnipa-statutes.js";
 import { registerCopyrightTools } from "./copyright.js";
 import {
   type DownloadOptions,
@@ -77,29 +99,44 @@ import {
 } from "./dpma-statutes.js";
 import { registerEpoTools } from "./epo.js";
 import { type EpoLegalClients, registerEpoLegalTools } from "./epo-legal.js";
+import { registerEuipoGuidelinesTools } from "./euipo-guidelines.js";
+import { registerEurlexTools } from "./eurlex.js";
 import { registerFacadeTools } from "./facade/index.js";
 import { registerFeeTools } from "./fees.js";
 import { registerGooglePatentsTools } from "./google-patents.js";
+import { registerIlpoRegisterTools } from "./ilpo-register.js";
 import {
   type IlpoStatutesReader,
   registerIlpoStatutesTools,
 } from "./ilpo-statutes.js";
 import {
+  type InpiArStatutesReader,
+  registerInpiArStatutesTools,
+} from "./inpi-ar-statutes.js";
+import {
   type InpiBrStatutesReader,
   registerInpiBrStatutesTools,
 } from "./inpi-br-statutes.js";
-
 import {
   type IpoInMpppReader,
   type IpoInStatutesReader,
   registerIpoInTools,
 } from "./ipo-in.js";
 import {
+  type IpophlStatutesReader,
+  registerIpophlStatutesTools,
+} from "./ipophl-statutes.js";
+import {
   type IposManualsReader,
   type IposStatutesReader,
   registerIposTools,
 } from "./ipos.js";
 import { registerJapanIpHighCourtTools } from "./japan-ip-high-court.js";
+import { registerJpoTools } from "./jpo.js";
+import {
+  type KipoStatutesReader,
+  registerKipoStatutesTools,
+} from "./kipo-statutes.js";
 import { registerKiprisTools } from "./kipris.js";
 import {
   type LegifranceIpReader,
@@ -108,6 +145,8 @@ import {
 import { registerMpepTools } from "./mpep.js";
 import { registerOdpRecordTools } from "./odp-records.js";
 import { registerOfficeActionTools } from "./office-actions.js";
+import { registerPrhTools } from "./prh.js";
+import { registerPrvTools } from "./prv.js";
 import { registerRegisterTools } from "./registers.js";
 import {
   createRelayHandler,
@@ -117,7 +156,16 @@ import {
   relayCredentialsFromEnv,
 } from "./relay.js";
 import { registerUsptoResources } from "./resources.js";
+import {
+  type RospatentStatutesReader,
+  registerRospatentStatutesTools,
+} from "./rospatent-statutes.js";
 import { registerPortalSearchTools } from "./search-portals.js";
+import {
+  registerThaiDipStatutesTools,
+  type ThaiDipStatutesReader,
+} from "./thai-dip-statutes.js";
+import { registerTipoTools } from "./tipo.js";
 import { registerTmepTools } from "./tmep.js";
 import {
   registerTwTradeSecretsTools,
@@ -129,6 +177,7 @@ import {
   type UpcStatutesReader,
 } from "./upc-statutes.js";
 import { registerUsitcTools, usitcTokenFromEnv } from "./usitc.js";
+import { registerWipo6terTools } from "./wipo-6ter.js";
 import { registerWipoLexTools } from "./wipo-lex.js";
 
 export type {
@@ -149,6 +198,7 @@ export interface UsptoClients {
   analytics: OfficeActionAnalyticsClient;
   assignments: AssignmentCenterClient;
   trademarkAssignments: TrademarkAssignmentClient;
+  trademarkDecisions: TrademarkDecisionsClient;
   tsdr: TsdrClient;
   publications: PublicationsClient;
   trademarkSearch: TrademarkSearchClient;
@@ -156,12 +206,15 @@ export interface UsptoClients {
   tmep: TmepClient;
   mopp: MoppClient;
   epoOps: EpoOpsClient;
+  euipoGuidelines: EuipoGuidelinesClient;
+  eurlex: EurlexClient;
   fees: FeesClient;
   googlePatents: GooglePatentsClient;
   cafc: CafcClient;
   canadaFederalCourt: CanadaFederalCourtClient;
   chinaSpcIpCourt: ChinaSpcIpCourtClient;
   copyright: CopyrightClient;
+  wipo6ter: Wipo6terClient;
   wipoLex: WipoLexClient;
   /** USITC EDIS; served only when a client is provided or USITC_EDIS_TOKEN(_FILE) is set. */
   edis: EdisClient;
@@ -170,6 +223,15 @@ export interface UsptoClients {
   dataweb: DataWebClient;
   kipris: KiprisClient;
   japanIpHighCourt: JapanIpHighCourtClient;
+  /** JPO Patent Information Retrieval API; served only when a client is provided or JPO_API_USERNAME and JPO_API_PASSWORD are set. */
+  jpo: JpoClient;
+  /** TIPO OpenData; served only when a client is provided or TIPO_API_KEY is set. */
+  tipo: TipoClient;
+  ilpoRegister: IlpoRegisterClient;
+  ilpoTm: IlpoTmClient;
+  ipaBulk: IpAustraliaBulkClient;
+  prh: PrhClient;
+  prv: PrvClient;
 }
 /** Instantiate a connector only when a tool invokes it, keeping optional credentials local to that family. */
 function lazyClient<T extends object>(factory: () => T): T {
@@ -201,13 +263,25 @@ export interface ServerOptions {
   ipoInMppp?: IpoInMpppReader;
   /** ILPO Israel statutes corpus reader; omitted, it uses the default artifact path. */
   ilpoStatutes?: IlpoStatutesReader;
+  /** CNIPA China statutes corpus reader; omitted, it uses the default artifact path. */
+  cnipaStatutes?: CnipaStatutesReader;
+  /** IPOPHL Philippines statutes corpus reader; omitted, it uses the default artifact path. */
+  ipophlStatutes?: IpophlStatutesReader;
+  /** KIPO Korea statutes corpus reader; omitted, it uses the default artifact path. */
+  kipoStatutes?: KipoStatutesReader;
   /** IPOS Singapore statutes and manuals corpus readers; omitted, they use their default artifact paths. */
   iposStatutes?: IposStatutesReader;
   iposManuals?: IposManualsReader;
   /** INPI Brazil LPI corpus reader; omitted, it uses the default artifact path. */
   inpiBrStatutes?: InpiBrStatutesReader;
+  /** INPI Argentina statutes corpus reader; omitted, it uses the default artifact path. */
+  inpiArStatutes?: InpiArStatutesReader;
   /** Légifrance IP corpus reader; omitted, it uses the default artifact path. */
   legifranceIp?: LegifranceIpReader;
+  /** Russian Civil Code Part Four corpus reader; omitted, it uses the default artifact path. */
+  rospatentStatutes?: RospatentStatutesReader;
+  /** Thailand IP statutes corpus reader; omitted, it uses the default artifact path. */
+  thaiDipStatutes?: ThaiDipStatutesReader;
   /** Download URLs; pass `blobStore` (for example a GcsBlobStore) for URLs that outlive the process. */
   downloads?: DownloadOptions;
   /** Defaults to MCP identity settings; audience must intentionally cover document REST access. */
@@ -487,11 +561,21 @@ export function createServer(options: ServerOptions = {}): FastMCP {
   const ipoInStatutes = options.ipoInStatutes ?? own(new IpoInStatutesClient());
   const ipoInMppp = options.ipoInMppp ?? own(new IpoInMpppClient());
   const ilpoStatutes = options.ilpoStatutes ?? own(new IlpoStatutesClient());
+  const cnipaStatutes = options.cnipaStatutes ?? own(new CnipaStatutesClient());
+  const ipophlStatutes =
+    options.ipophlStatutes ?? own(new IpophlStatutesClient());
+  const kipoStatutes = options.kipoStatutes ?? own(new KipoStatutesClient());
   const iposStatutes = options.iposStatutes ?? own(new IposStatutesClient());
   const iposManuals = options.iposManuals ?? own(new IposManualsClient());
   const inpiBrStatutes =
     options.inpiBrStatutes ?? own(new InpiBrStatutesClient());
+  const inpiArStatutes =
+    options.inpiArStatutes ?? own(new InpiArStatutesClient());
   const legifranceIp = options.legifranceIp ?? own(new LegifranceIpClient());
+  const rospatentStatutes =
+    options.rospatentStatutes ?? own(new RospatentStatutesClient());
+  const thaiDipStatutes =
+    options.thaiDipStatutes ?? own(new ThaiDipStatutesClient());
   const applications =
     provided.applications ?? lazyClient(() => new ApplicationsClient());
   const client = options.client ?? applications;
@@ -636,6 +720,15 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     (edisToken ? new EdisClient({ token: edisToken }) : undefined);
   const datawebToken = usitcTokenFromEnv("USITC_DATAWEB_TOKEN");
   // KIPRIS is BYOK (ToS §11). KIPO_KIPRIS_BASE_URL is an optional HTTPS-only override.
+  // JPO credentials are JPO-issued; the public demo carries none, per JPO's terms.
+  const jpoClient =
+    provided.jpo ??
+    (process.env.JPO_API_USERNAME && process.env.JPO_API_PASSWORD
+      ? lazyClient(() => new JpoClient())
+      : undefined);
+  const tipoClient =
+    provided.tipo ??
+    (process.env.TIPO_API_KEY ? lazyClient(() => new TipoClient()) : undefined);
   const kiprisClient =
     provided.kipris ??
     (process.env.KIPO_KIPRIS_API_KEY &&
@@ -660,6 +753,9 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     trademarkAssignments:
       provided.trademarkAssignments ??
       lazyClient(() => new TrademarkAssignmentClient()),
+    trademarkDecisions:
+      provided.trademarkDecisions ??
+      lazyClient(() => new TrademarkDecisionsClient()),
     publications:
       provided.publications ?? lazyClient(() => new PublicationsClient()),
     trademarkSearch:
@@ -675,6 +771,7 @@ export function createServer(options: ServerOptions = {}): FastMCP {
       provided.canadaFederalCourt ?? new CanadaFederalCourtClient(),
     chinaSpcIpCourt: provided.chinaSpcIpCourt ?? new ChinaSpcIpCourtClient(),
     copyright: provided.copyright ?? new CopyrightClient(),
+    wipo6ter: provided.wipo6ter ?? new Wipo6terClient(),
     wipoLex: provided.wipoLex ?? new WipoLexClient(),
     epoLegal,
     upcStatutes,
@@ -684,6 +781,8 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     ipoInMppp,
     tsdr: tsdrClient,
     epoOps: epoOpsClient,
+    euipoGuidelines: provided.euipoGuidelines ?? new EuipoGuidelinesClient(),
+    eurlex: provided.eurlex ?? new EurlexClient(),
     edis: edisClient,
     hts: provided.hts ?? new HtsClient(),
     ids: provided.ids ?? new IdsClient(),
@@ -692,6 +791,13 @@ export function createServer(options: ServerOptions = {}): FastMCP {
       new DataWebClient(datawebToken ? { token: datawebToken } : {}),
     kipris: kiprisClient,
     japanIpHighCourt: provided.japanIpHighCourt ?? new JapanIpHighCourtClient(),
+    jpo: jpoClient,
+    tipo: tipoClient,
+    ilpoRegister: provided.ilpoRegister ?? new IlpoRegisterClient(),
+    ilpoTm: provided.ilpoTm ?? new IlpoTmClient(),
+    ipaBulk: provided.ipaBulk ?? new IpAustraliaBulkClient(),
+    prh: provided.prh ?? new PrhClient(),
+    prv: provided.prv ?? new PrvClient(),
   };
   if ((options.toolset ?? toolsetFromEnv(process.env)) === "curated") {
     registerFacadeTools(
@@ -913,6 +1019,11 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     clients.copyright,
     options.auth ? requireScopes("copyright:read") : undefined,
   );
+  registerWipo6terTools(
+    server,
+    clients.wipo6ter,
+    options.auth ? requireScopes("wipo:read") : undefined,
+  );
   registerWipoLexTools(
     server,
     clients.wipoLex,
@@ -935,6 +1046,16 @@ export function createServer(options: ServerOptions = {}): FastMCP {
       kiprisClient,
       options.auth ? requireScopes("kipo:read") : undefined,
     );
+  registerEurlexTools(
+    server,
+    clients.eurlex,
+    options.auth ? requireScopes("eurlex:read") : undefined,
+  );
+  registerEuipoGuidelinesTools(
+    server,
+    clients.euipoGuidelines,
+    options.auth ? requireScopes("euipo:read") : undefined,
+  );
   registerEpoLegalTools(
     server,
     epoLegal,
@@ -965,6 +1086,21 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     ilpoStatutes,
     options.auth ? requireScopes("ilpo:read") : undefined,
   );
+  registerCnipaStatutesTools(
+    server,
+    cnipaStatutes,
+    options.auth ? requireScopes("cnipa:read") : undefined,
+  );
+  registerIpophlStatutesTools(
+    server,
+    ipophlStatutes,
+    options.auth ? requireScopes("ipophl:read") : undefined,
+  );
+  registerKipoStatutesTools(
+    server,
+    kipoStatutes,
+    options.auth ? requireScopes("kipo:read") : undefined,
+  );
   registerIposTools(
     server,
     { statutes: iposStatutes, manuals: iposManuals },
@@ -975,10 +1111,25 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     inpiBrStatutes,
     options.auth ? requireScopes("inpibr:read") : undefined,
   );
+  registerInpiArStatutesTools(
+    server,
+    inpiArStatutes,
+    options.auth ? requireScopes("inpi_ar:read") : undefined,
+  );
   registerLegifranceIpTools(
     server,
     legifranceIp,
     options.auth ? requireScopes("legifrance:read") : undefined,
+  );
+  registerRospatentStatutesTools(
+    server,
+    rospatentStatutes,
+    options.auth ? requireScopes("rospatent:read") : undefined,
+  );
+  registerThaiDipStatutesTools(
+    server,
+    thaiDipStatutes,
+    options.auth ? requireScopes("thai_dip:read") : undefined,
   );
   registerUsitcTools(
     server,
@@ -990,6 +1141,43 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     },
     options.auth ? requireScopes("usitc:read") : undefined,
   );
+  if (jpoClient)
+    registerJpoTools(
+      server,
+      jpoClient,
+      options.auth ? requireScopes("jpo:read") : undefined,
+    );
+  registerIlpoRegisterTools(
+    server,
+    clients.ilpoRegister,
+    options.auth ? requireScopes("ilpo:read") : undefined,
+  );
+  registerIlpoTmTools(
+    server,
+    clients.ilpoTm,
+    options.auth ? requireScopes("ilpo:read") : undefined,
+  );
+  registerIpaBulkTools(
+    server,
+    clients.ipaBulk,
+    options.auth ? requireScopes("ipaustralia:read") : undefined,
+  );
+  registerPrhTools(
+    server,
+    clients.prh,
+    options.auth ? requireScopes("prh:read") : undefined,
+  );
+  registerPrvTools(
+    server,
+    clients.prv,
+    options.auth ? requireScopes("prv:read") : undefined,
+  );
+  if (tipoClient)
+    registerTipoTools(
+      server,
+      tipoClient,
+      options.auth ? requireScopes("tipo:read") : undefined,
+    );
   registerJapanIpHighCourtTools(
     server,
     clients.japanIpHighCourt,

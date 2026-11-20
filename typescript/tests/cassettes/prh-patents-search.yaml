@@ -1,0 +1,2029 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://patenttitietopalvelu.prh.fi/nis-api-gateway-pat/patent
+    headers:
+      accept:
+      - application/json
+      content-type:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com; contact avoindata@prh.fi)
+    body:
+      type: json
+      content:
+        patentTitle: ""
+        applicationNumber: ""
+        registrationNumber: ""
+        priorityNumber: ""
+        applicant: Nokia
+        assignee: ""
+        inventor: ""
+        representative: ""
+        applicationStartDate: ""
+        applicationEndDate: ""
+        filingStartDate: 2024-02-01
+        filingEndDate: 2024-02-29
+        oppositionPeriodStartStartDate: ""
+        oppositionPeriodStartEndDate: ""
+        grantStartDate: ""
+        grantEndDate: ""
+        openStartDate: ""
+        openEndDate: ""
+        publicationStartDate: ""
+        publicationEndDate: ""
+        priorityStartDate: ""
+        priorityEndDate: ""
+        ipcClassification: ""
+        cpcClassification: ""
+        basicSearch: ""
+        noAuthoAppm: ""
+        spcBasePatentNumber: ""
+        dossierStatus:
+        - Application_refused
+        - Application_dismissed
+        - Expired
+        - Renounced
+        - Annulled
+        - Opposition
+        - UMopposition
+        - Appeal
+        - Patent_revoked
+        - Application_withdrawn
+        - Application_filed
+        - Valid
+        - Appeal
+        - Limited
+        - Approved
+        - Basic_patent_has_lapsed
+        - EP_660_notvalidated
+        - EP_630_oppo_B2
+        - EP_620_grant_B1
+        - EP_632_limit_B3
+        - EP_700_applrefused
+        - EP_800_application_dismissed
+        - EP_600_imported
+        - EP_640_revoked
+        - EP_631_oppo_T4
+        - EP_635_limit_T6
+        - EP_650_appwthdr
+        - EP_621_valid_T3
+        - EP_625_opposition
+        - EP_610_provisional_T1
+        - Opposition_filed
+        - Opposition_closed
+        - Opposition_dismissed
+        - Opposition_withdrawn
+        - Appeal_filed
+        - Appeal_closed
+        - Appeal_dismissed
+        - Appeal_withdrawn
+        - Revival_requested
+        - application_filed
+        - application_withdrawn
+        - application_dismissed
+        - application_refused
+        - application_deemed_not_filed
+        - annulled
+        - request_suspended
+        - valid
+        - limited
+        - patent_revoked
+        - continued_PCT_canceled
+        - renounced
+        - lapsed
+        - expired
+        - completed
+        - appeal
+        - kho_appeal
+        - revival_requested
+        - nato
+        - opposition
+        - application_filed
+        - application_withdrawn
+        - application_dismissed
+        - application_refused
+        - application_deemed_not_filed
+        - annulled
+        - request_suspended
+        - valid
+        - limited
+        - continued_PCT_canceled
+        - renounced
+        - lapsed
+        - expired
+        - completed
+        - appeal
+        - kho_appeal
+        - revival_requested
+        - um_opposition
+        - application_filed
+        - application_withdrawn
+        - application_dismissed
+        - application_refused
+        - valid
+        - approved
+        - lapsed
+        - spc_expired
+        - spc_discontinued
+        - renounced
+        - application_annulled
+        - basic_patent_has_lapsed
+        - revival_requested
+        - appeal
+        - filed
+        - closed
+        - dismissed
+        - withdrawn
+        - application_lapsed_due_annual_subscription
+        - patentutility_valid
+        - patentutility_annulled
+        - request_suspended
+        - patent_restricted
+        - patent_limited
+        - extended_international_application_is_canceled
+        - patent_corrected
+        - patent_changes
+        - application_refused
+        - application_not_deemed_to_been_made
+        - completed
+        - application_withdrawn
+        - ro_filed
+        - ro_finished
+        - isa_filed
+        - isa_finished
+        - ipea_filed
+        - ipea_finished
+        - sisa_filed
+        - sisa_finished
+        - ep_removed
+        patentTypes:
+        - PatentDossier
+        - PatentDossierUtilityModel
+        - PatentEurope
+        - Spc
+        publicationTypes:
+        - UM_Revoked
+        - UM_Notification
+        - UM_Granted_Y1
+        - UM_Corrected_Y8
+        - UM_AvailableToPublic_U1
+        - UM_AnnulledPartial_Z1
+        - PT_Transferred
+        - PT_SPCWithdrawn
+        - PT_SPCRefused
+        - PT_SPCLapsed
+        - PT_SPCGranted_Certificate
+        - PT_SPCFiled
+        - PT_SPCDismissed
+        - PT_SPCContinuationGranted
+        - PT_SPCContinuationFiled
+        - PT_Revoked
+        - PT_Reinstated
+        - PT_Refused
+        - PT_OppositionAmended_B2
+        - PT_Opposition_Refused
+        - PT_Notification
+        - PT_Limited_B3
+        - PT_Lapsed
+        - PT_Granted_B1
+        - PT_Granted_B
+        - PT_Expired
+        - PT_EPTraslationAmended_T5
+        - PT_EPTranslationValidation_T3
+        - PT_EPTranslationOppositionAmended_T4
+        - PT_EPTranslationLimitedFI_T7
+        - PT_EPTranslationLimited_T6
+        - PT_EPTranslationClaimsAmended_T2
+        - PT_EPTranslationClaims_T1
+        - PT_EPCorrectedLimited_T9
+        - PT_Dismissed
+        - PT_Corrected_B9
+        - PT_Corrected_B8
+        - PT_Corrected_A9
+        - PT_Corrected_A8
+        - PT_ClaimsCorrected_B1
+        - PT_AvailableToPublic_A1
+        - PT_Annulled
+  response:
+    status: 200
+    headers:
+      access-control-allow-methods:
+      - GET, HEAD, POST
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - close
+      content-security-policy:
+      - "default-src 'self'; img-src 'self' data: ; media-src 'self' ; child-src 'none'; manifest-src 'self'; object-src 'none'; worker-src 'none'; connect-src 'self' https://asiointi.prh.fi;"
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Mon, 26 Oct 2026 20:34:56 GMT
+      strict-transport-security:
+      - max-age=63072000; includeSubdomains;
+      x-content-type-options:
+      - nosniff
+      x-dns-prefetch-control:
+      - "off"
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - SAMEORIGIN
+      x-permitted-cross-domain-policies:
+      - none
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      type: json
+      content:
+        totalResults: 84
+        results:
+        - applicationNumber: "20245238"
+          registrationNumber: null
+          dossierStatus: Application_filed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-26
+          statusDate: 2024-02-26
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 1
+        - applicationNumber: "20245149"
+          registrationNumber: null
+          dossierStatus: Application_filed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-13
+          statusDate: 2024-02-13
+          applicants:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          classifications:
+          - classification: H04L 5/00
+          - classification: H04W 72/541
+          - classification: H04W 52/14
+          - classification: H04L 27/00
+          - classification: H04L 5/00
+          titles:
+          - title: NOUSEVAN SIIRTOTIEN INTERFERENSSIN KÄSITTELY VIESTINNÄSSÄ
+            language: FI
+            ordinal: 1
+          - title: HANTERING AV UPPLÄNKSINTERFERENS I KOMMUNIKATION
+            language: SV
+            ordinal: 2
+          - title: HANDLING UPLINK INTERFERENCE IN COMMUNICATIONS
+            language: EN
+            ordinal: 3
+          owners:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          appms: []
+          publications:
+          - publicationDate: 2025-09-04
+            type: A1
+            publicationSection: PT_AvailableToPublic_A1
+            ordinal: 1
+          ordinal: 2
+        - applicationNumber: "20245192"
+          registrationNumber: null
+          dossierStatus: Application_filed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-16
+          statusDate: 2024-02-16
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 3
+        - applicationNumber: "20245224"
+          registrationNumber: null
+          dossierStatus: Application_filed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-23
+          statusDate: 2024-02-23
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 4
+        - applicationNumber: "20245190"
+          registrationNumber: null
+          dossierStatus: Application_filed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-16
+          statusDate: 2024-02-16
+          applicants:
+          - name: null
+            companyName: NOKIA TECHNOLOGIES OY
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: NOKIA TECHNOLOGIES OY
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 5
+        - applicationNumber: "20245136"
+          registrationNumber: null
+          dossierStatus: Application_filed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-09
+          statusDate: 2024-02-09
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 6
+        - applicationNumber: "20245139"
+          registrationNumber: null
+          dossierStatus: Application_filed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-12
+          statusDate: 2024-02-12
+          applicants:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          classifications:
+          - classification: G06F 8/70
+          - classification: G06F 8/30
+          - classification: G06N 20/00
+          - classification: G06F 8/20
+          - classification: G06Q 10/10
+          - classification: G06Q 10/0633
+          - classification: G06N 3/08
+          titles:
+          - title: >-
+              Menetelmä, laitteisto ja tietokoneohjelmatuote työnkulun luomistyökalun
+              aikaansaamiseksi koneoppimistoimintoja varten
+            language: FI
+            ordinal: 1
+          - title: >-
+              Förfarande, apparatur och datorprogramprodukt för att tillhandahålla ett
+              verktyg för att skapa arbetsflöden för maskininlärningsoperationer
+            language: SV
+            ordinal: 2
+          - title: >-
+              A method, an apparatus and a computer program product for providing a workflow
+              authoring tool for machine learning operations
+            language: EN
+            ordinal: 3
+          owners:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          appms: []
+          publications:
+          - publicationDate: 2025-08-13
+            type: A1
+            publicationSection: PT_AvailableToPublic_A1
+            ordinal: 1
+          ordinal: 7
+        - applicationNumber: "20245203"
+          registrationNumber: "131976"
+          dossierStatus: Valid
+          dossierType: PatentDossier
+          applicationDate: 2024-02-19
+          statusDate: 2026-03-20
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications:
+          - classification: H04W 72/04
+          - classification: H04L 5/00
+          - classification: H04J 13/18
+          titles:
+          - title: MERKINANTOMENETELMÄT OCC-AKTIVOIDULLE PUSCHILLE
+            language: FI
+            ordinal: 1
+          - title: |
+              SIGNALERINGSMETOD FÖR OCC-AKTIVERAD PUSCH
+            language: SV
+            ordinal: 2
+          - title: SIGNALING METHODS FOR OCC-ENABLED PUSCH
+            language: EN
+            ordinal: 3
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications:
+          - publicationDate: 2025-08-20
+            type: A1
+            publicationSection: PT_AvailableToPublic_A1
+            ordinal: 1
+          - publicationDate: 2026-03-20
+            type: B1
+            publicationSection: PT_Granted_B1
+            ordinal: 2
+          ordinal: 8
+        - applicationNumber: "20245137"
+          registrationNumber: null
+          dossierStatus: Application_filed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-09
+          statusDate: 2024-02-09
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 9
+        - applicationNumber: "20245122"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-07
+          statusDate: 2024-12-05
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 10
+        - applicationNumber: "20245205"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-19
+          statusDate: 2025-01-11
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 11
+        - applicationNumber: "20245187"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-16
+          statusDate: 2025-01-12
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 12
+        - applicationNumber: "20245170"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-15
+          statusDate: 2025-02-04
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 13
+        - applicationNumber: "20245237"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-26
+          statusDate: 2025-02-10
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 14
+        - applicationNumber: "20247021"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-16
+          statusDate: 2025-03-19
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 15
+        - applicationNumber: "20245171"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-15
+          statusDate: 2024-12-26
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 16
+        - applicationNumber: "20245108"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-02
+          statusDate: 2024-12-27
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 17
+        - applicationNumber: "20245178"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-16
+          statusDate: 2024-12-29
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 18
+        - applicationNumber: "20245133"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-09
+          statusDate: 2024-12-22
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 19
+        - applicationNumber: "20245167"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-15
+          statusDate: 2025-11-08
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications:
+          - classification: H04W 72/1268
+          - classification: H04W 72/0446
+          - classification: H04L 1/1867
+          - classification: H04L 1/1812
+          - classification: H04L 1/08
+          titles:
+          - title: REDUNDANSSIN MÄÄRITYS PUSCH-TOISTOISSA, JOISSA ON ORTOGONAALINEN PEITEKOODI
+            language: FI
+            ordinal: 1
+          - title: BESTÄMNING AV REDUNDANS I PUSCH-UPPREPNINGAR MED EN ORTOGONAL SKYDDSKOD
+            language: SV
+            ordinal: 2
+          - title: REDUNDANCY DETERMINATION IN PUSCH REPETITIONS WITH ORTHOGONAL COVER CODE
+            language: EN
+            ordinal: 3
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications:
+          - publicationDate: 2025-08-19
+            type: A1
+            publicationSection: PT_AvailableToPublic_A1
+            ordinal: 1
+          - publicationDate: 2026-03-16
+            type: ""
+            publicationSection: PT_Dismissed
+            ordinal: 2
+          ordinal: 20
+        - applicationNumber: "20245111"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-02
+          statusDate: 2024-10-28
+          applicants:
+          - name: null
+            companyName: NOKIA TECHNOLOGIES OY
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: NOKIA TECHNOLOGIES OY
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 21
+        - applicationNumber: "20245198"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-19
+          statusDate: 2025-01-16
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 22
+        - applicationNumber: "20245186"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-16
+          statusDate: 2025-01-26
+          applicants:
+          - name: null
+            companyName: NOKIA TECHNOLOGIES OY
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: NOKIA TECHNOLOGIES OY
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 23
+        - applicationNumber: "20245185"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-16
+          statusDate: 2025-01-26
+          applicants:
+          - name: null
+            companyName: NOKIA TECHNOLOGIES OY
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: NOKIA TECHNOLOGIES OY
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 24
+        - applicationNumber: "20245180"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-16
+          statusDate: 2025-01-27
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 25
+        - applicationNumber: "20245184"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-16
+          statusDate: 2025-01-25
+          applicants:
+          - name: null
+            companyName: NOKIA TECHNOLOGIES OY
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: NOKIA TECHNOLOGIES OY
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 26
+        - applicationNumber: "20245242"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-27
+          statusDate: 2025-01-26
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 27
+        - applicationNumber: "20245107"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-02
+          statusDate: 2024-12-01
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 28
+        - applicationNumber: "20245188"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-16
+          statusDate: 2025-01-11
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 29
+        - applicationNumber: "20245194"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-16
+          statusDate: 2025-07-22
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 30
+        - applicationNumber: "20245193"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-16
+          statusDate: 2025-07-22
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 31
+        - applicationNumber: "20245241"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-27
+          statusDate: 2025-05-20
+          applicants:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 32
+        - applicationNumber: "20245226"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-23
+          statusDate: 2025-03-01
+          applicants:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 33
+        - applicationNumber: "20245141"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-12
+          statusDate: 2025-08-04
+          applicants:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 34
+        - applicationNumber: "20245140"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-12
+          statusDate: 2025-08-11
+          applicants:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 35
+        - applicationNumber: "20245156"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-14
+          statusDate: 2025-01-12
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 36
+        - applicationNumber: "20245161"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-14
+          statusDate: 2025-01-11
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 37
+        - applicationNumber: "20245191"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-16
+          statusDate: 2025-01-13
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 38
+        - applicationNumber: "20245147"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-13
+          statusDate: 2024-12-12
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 39
+        - applicationNumber: "20245131"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-09
+          statusDate: 2024-12-12
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 40
+        - applicationNumber: "20245109"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-02
+          statusDate: 2024-12-13
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 41
+        - applicationNumber: "20245245"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-27
+          statusDate: 2024-12-28
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 42
+        - applicationNumber: "20245159"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-14
+          statusDate: 2025-01-02
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 43
+        - applicationNumber: "20245112"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-02
+          statusDate: 2024-10-28
+          applicants:
+          - name: null
+            companyName: NOKIA TECHNOLOGIES OY
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: NOKIA TECHNOLOGIES OY
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 44
+        - applicationNumber: "20245189"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-16
+          statusDate: 2024-12-22
+          applicants:
+          - name: null
+            companyName: NOKIA TECHNOLOGIES OY
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: NOKIA TECHNOLOGIES OY
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 45
+        - applicationNumber: "20245101"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-01
+          statusDate: 2024-09-02
+          applicants:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 46
+        - applicationNumber: "20245120"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-05
+          statusDate: 2025-01-05
+          applicants:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 47
+        - applicationNumber: "20245103"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-02
+          statusDate: 2025-08-12
+          applicants:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          classifications:
+          - classification: H04W 88/12
+          - classification: H04L 41/0833
+          - classification: H04W 24/10
+          - classification: H04W 52/02
+          - classification: H04W 92/12
+          - classification: H04W 24/02
+          titles:
+          - title: Energianhallintakehys radioliityntäverkon älykästä ohjainalustapalvelua varten
+            language: FI
+            ordinal: 1
+          - title: >-
+              Energihanteringsramverk för en intelligent styrenhetsplattformstjänst i ett
+              radioaccessnät 
+            language: SV
+            ordinal: 2
+          - title: >-
+              ENERGY MANAGEMENT FRAMEWORK FOR RADIO ACCESS NETWORK INTELLIGENT CONTROLLER
+              PLATFORM SERVICE
+            language: EN
+            ordinal: 3
+          owners:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          appms: []
+          publications:
+          - publicationDate: 2025-08-15
+            type: A1
+            publicationSection: PT_AvailableToPublic_A1
+            ordinal: 1
+          - publicationDate: 2025-12-11
+            type: ""
+            publicationSection: PT_Dismissed
+            ordinal: 2
+          ordinal: 48
+        - applicationNumber: "20245172"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-15
+          statusDate: 2026-05-12
+          applicants:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          classifications:
+          - classification: H04W 28/02
+          - classification: H04W 28/02
+          - classification: G06N 3/092
+          - classification: G06N 3/098
+          - classification: G06N 20/00
+          - classification: G06N 3/084
+          - classification: H04L 67/101
+          - classification: H04L 67/1008
+          titles:
+          - title: KONEOPPIMISMALLIN KOLLABORATIIVINEN OPETUS ARVIOITU ENERGIANKULUTUS HUOMIOIDEN
+            language: FI
+            ordinal: 1
+          - title: >-
+              KOLLABORATIV TRÄNING AV EN MASKININLÄRNINGSMODELL MED BEAKTANDE AV UPPSKATTAD
+              ENERGIKONSUMTION
+            language: SV
+            ordinal: 2
+          - title: >-
+              COLLABORATIVE TRAINING OF A MACHINE LEARNING MODEL CONSIDERING ESTIMATED ENERGY
+              CONSUMPTION
+            language: EN
+            ordinal: 3
+          owners:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          appms: []
+          publications:
+          - publicationDate: 2025-08-18
+            type: A1
+            publicationSection: PT_AvailableToPublic_A1
+            ordinal: 1
+          - publicationDate: 2026-09-21
+            type: ""
+            publicationSection: PT_Dismissed
+            ordinal: 2
+          ordinal: 49
+        - applicationNumber: "20245106"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-02
+          statusDate: 2024-11-19
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 50
+        - applicationNumber: "20245104"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-02
+          statusDate: 2024-11-10
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 51
+        - applicationNumber: "20245132"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-09
+          statusDate: 2024-12-16
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 52
+        - applicationNumber: "20245183"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-16
+          statusDate: 2025-01-02
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 53
+        - applicationNumber: "20245113"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-02
+          statusDate: 2024-11-02
+          applicants:
+          - name: null
+            companyName: NOKIA TECHNOLOGIES OY
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: NOKIA TECHNOLOGIES OY
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 54
+        - applicationNumber: "20245164"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-14
+          statusDate: 2025-01-13
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 55
+        - applicationNumber: "20245158"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-14
+          statusDate: 2025-01-13
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 56
+        - applicationNumber: "20245219"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-22
+          statusDate: 2025-02-28
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 57
+        - applicationNumber: "20245175"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-16
+          statusDate: 2025-07-14
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 58
+        - applicationNumber: "20245206"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-20
+          statusDate: 2025-02-01
+          applicants:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 59
+        - applicationNumber: "20245209"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-21
+          statusDate: 2025-02-03
+          applicants:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 60
+        - applicationNumber: "20245223"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-22
+          statusDate: 2025-05-18
+          applicants:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 61
+        - applicationNumber: "20245124"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-07
+          statusDate: 2025-07-15
+          applicants:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 62
+        - applicationNumber: "20245199"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-19
+          statusDate: 2025-12-22
+          applicants:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          classifications:
+          - classification: H04W 52/02
+          - classification: H04W 24/02
+          titles:
+          - title: >-
+              YHDEN TAI USEAMMAN VERKKOELEMENTIN ENERGIANKULUTUKSEN JA/TAI
+              HIILIDIOKSIDIPÄÄSTÖJEN OPTIMOINTI
+            language: FI
+            ordinal: 1
+          - title: >-
+              OPTIMERING AV ENERGIFÖRBRUKNING OCH/ELLER KOLDIOXIDUTSLÄPP FÖR ETT ELLER FLERA
+              NÄTVERKSELEMENT
+            language: SV
+            ordinal: 2
+          - title: >-
+              OPTIMIZING ENERGY CONSUMPTION AND/OR CARBON DIOXIDE EMISSIONS OF ONE OR MORE
+              NETWORK ELEMENTS
+            language: EN
+            ordinal: 3
+          owners:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          appms: []
+          publications:
+          - publicationDate: 2025-09-01
+            type: A1
+            publicationSection: PT_AvailableToPublic_A1
+            ordinal: 1
+          - publicationDate: 2026-04-29
+            type: ""
+            publicationSection: PT_Dismissed
+            ordinal: 2
+          ordinal: 63
+        - applicationNumber: "20245195"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-16
+          statusDate: 2025-07-22
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 64
+        - applicationNumber: "20245105"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-02
+          statusDate: 2024-11-11
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 65
+        - applicationNumber: "20245094"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-01
+          statusDate: 2024-10-26
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 66
+        - applicationNumber: "20245146"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-13
+          statusDate: 2024-12-08
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 67
+        - applicationNumber: "20245145"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-13
+          statusDate: 2024-12-06
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 68
+        - applicationNumber: "20245179"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-16
+          statusDate: 2025-01-27
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 69
+        - applicationNumber: "20245168"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-15
+          statusDate: 2025-01-27
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 70
+        - applicationNumber: "20245138"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-09
+          statusDate: 2025-01-09
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 71
+        - applicationNumber: "20245160"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-14
+          statusDate: 2025-01-11
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 72
+        - applicationNumber: "20245231"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-23
+          statusDate: 2025-01-11
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 73
+        - applicationNumber: "20245154"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-14
+          statusDate: 2025-01-06
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 74
+        - applicationNumber: "20245197"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-19
+          statusDate: 2025-02-18
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 75
+        - applicationNumber: "20245165"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-14
+          statusDate: 2024-12-19
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 76
+        - applicationNumber: "20245110"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-02
+          statusDate: 2024-12-21
+          applicants:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Technologies Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 77
+        - applicationNumber: "20245157"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-14
+          statusDate: 2025-07-29
+          applicants:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 78
+        - applicationNumber: "20245152"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-13
+          statusDate: 2025-05-27
+          applicants:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 79
+        - applicationNumber: "20245249"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-29
+          statusDate: 2025-04-24
+          applicants:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 80
+        - applicationNumber: "20245213"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-21
+          statusDate: 2026-05-03
+          applicants:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          classifications:
+          - classification: H04B 7/08
+          - classification: H04W 52/14
+          - classification: H04W 52/24
+          titles:
+          - title: |+
+              Laite ja menetelmä verkkolaitetta varten
+              
+            language: FI
+            ordinal: 1
+          - title: Anordning och förfarande för en nätverksenhet
+            language: SV
+            ordinal: 2
+          - title: Apparatus and Method for a Network Device
+            language: EN
+            ordinal: 3
+          owners:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          appms: []
+          publications:
+          - publicationDate: 2025-08-25
+            type: A1
+            publicationSection: PT_AvailableToPublic_A1
+            ordinal: 1
+          - publicationDate: 2026-09-10
+            type: ""
+            publicationSection: PT_Dismissed
+            ordinal: 2
+          ordinal: 81
+        - applicationNumber: "20245099"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-01
+          statusDate: 2025-04-08
+          applicants:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 82
+        - applicationNumber: "20245232"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-23
+          statusDate: 2025-02-17
+          applicants:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 83
+        - applicationNumber: "20245210"
+          registrationNumber: null
+          dossierStatus: Application_dismissed
+          dossierType: PatentDossier
+          applicationDate: 2024-02-21
+          statusDate: 2025-08-13
+          applicants:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          classifications: []
+          titles: []
+          owners:
+          - name: null
+            companyName: Nokia Solutions and Networks Oy
+            ordinal: 1
+          appms: []
+          publications: []
+          ordinal: 84
+  recorded_at: 2026-10-26T20:34:56.349Z

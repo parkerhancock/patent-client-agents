@@ -1,0 +1,102 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://dv-search-api.prv.se/searchtrademark/tmsimplesearch/
+    headers:
+      accept:
+      - application/json
+      content-type:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com; contact data@prv.se)
+    body:
+      type: json
+      content:
+        page: 0
+        pageSize: 2
+        sortColumn: filingDate
+        sortOrder: DESC
+        simpleSearchText: IKEA
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      content-type:
+      - application/json
+      date:
+      - Mon, 26 Oct 2026 20:25:04 GMT
+      expires:
+      - "0"
+      pragma:
+      - no-cache
+      server:
+      - Microsoft-IIS/10.0
+      vary:
+      - Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - DENY
+      x-powered-by:
+      - ARR/3.0
+      x-xss-protection:
+      - "0"
+    body:
+      type: json
+      content:
+        totalHits: 89
+        totalPages: 44
+        hits: 2
+        page: 0
+        trademarks:
+        - idTrademark: 4907387
+          applicants:
+          - name: IKEA Älmhult AB
+            address: c/o IKEA of Sweden AB 343 81 Älmhult, SE, 559070-5058
+          applicationNumber: 2025-05038
+          classes:
+          - "35"
+          - "36"
+          - "41"
+          dossierTypeEn: National trademark
+          dossierTypeSv: Nationellt varumärke
+          expiryDate: 2035-10-01
+          filingDate: 2025-10-01
+          markFeatureEn: Figurative
+          markFeatureSv: Figur
+          markSpecification: form hult
+          registrationNumber: "639377"
+          representatives:
+          - name: Advokatfirman Lindahl KB
+            address: Pråmplatsen 4 211 19 Malmö, SE, 916629-0834
+          statusEn: Registered
+          statusSv: Registrerad
+        - idTrademark: 4709243
+          applicants:
+          - name: IKEA Centres A/S
+            address: Amager Strandvej 390 DK-2770 Kastrup, DK
+          applicationNumber: 2016-00749
+          classes:
+          - "35"
+          - "36"
+          - "37"
+          - "39"
+          - "41"
+          - "42"
+          - "43"
+          dossierTypeEn: National trademark
+          dossierTypeSv: Nationellt varumärke
+          expiryDate: null
+          filingDate: 2016-02-02
+          markFeatureEn: Word
+          markFeatureSv: Ord
+          markSpecification: ÄLV SHOPPING
+          registrationNumber: null
+          representatives:
+          - name: Advokatbyrån Gulliksson AB
+            address: Box 4171 203 13 Malmö, SE, 556733-5319
+          statusEn: Dismissed
+          statusSv: Avskriven
+  recorded_at: 2026-10-26T20:25:05.348Z

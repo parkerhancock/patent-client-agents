@@ -1,0 +1,93 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://ip-data.jpo.go.jp/auth/token
+    headers:
+      accept:
+      - application/json
+    body:
+      type: text
+      content: grant_type=password&username=[FILTERED]&password=[FILTERED]
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - no-store
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Thu, 07 May 2026 15:22:57 GMT
+      referrer-policy:
+      - no-referrer
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      via:
+      - 1.1 cdb593e085c35596a44093f23350a6a2.cloudfront.net (CloudFront)
+      x-cache:
+      - Miss from cloudfront
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      type: text
+      content: '{"access_token": "[FILTERED]", "expires_in": 3600, "refresh_expires_in": 28800, "refresh_token":
+        "[FILTERED]", "token_type": "Bearer", "id_token": "[FILTERED]", "not-before-policy": 0, "session_state":
+        "[FILTERED]", "scope": "openid profile"}'
+  recorded_at: '2026-05-07T15:22:57.000Z'
+- request:
+    method: GET
+    uri: https://ip-data.jpo.go.jp/api/design/v1/app_doc_cont_refusal_reason/2021019500
+    headers:
+      accept:
+      - application/json, application/zip
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      allow:
+      - GET, HEAD, OPTIONS
+      connection:
+      - keep-alive
+      content-disposition:
+      - attachment;filename=docContRefusalReason_2021019500.zip
+      content-type:
+      - application/zip
+      cross-origin-opener-policy:
+      - same-origin
+      date:
+      - Thu, 07 May 2026 15:23:00 GMT
+      referrer-policy:
+      - same-origin
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      vary:
+      - Cookie
+      via:
+      - 1.1 aca99b28083d8a34e20c40dbd89ecfce.cloudfront.net (CloudFront)
+      x-cache:
+      - Miss from cloudfront
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - DENY
+      x-xss-protection:
+      - 1; mode=block
+      x-amzn-remapped-connection:
+      - keep-alive
+      x-amzn-remapped-content-length:
+      - '1677'
+      x-amzn-remapped-date:
+      - Thu, 07 May 2026 15:23:00 GMT
+      x-amzn-remapped-server:
+      - gunicorn
+    body:
+      type: binary
+      content: 504b0304140000000800e002a85cec48b9020b060000620c0000100000003036333232303133373234502e48544dad57ef4f13671c7fdfa4ff43d3f7a6d32c7bb11542d11a9c68a154d1b9f99332ea50aa5437c517dcd7c4b5d75eafd7bbde75c9344a4c56308c2941e68f6afc01a3ac752e2cbed06d34e810d8c64ac8ccc2f662dfef733d2c15f7c3c0a5b9bbe79ee7f3fd3c9fefaf077b8d67536da5d964af713ad6d17d93d3e3b0b40402fe55de43477c472bac6bdb0e06bc0703ab3cc7fc5eab659ffe56610d783f0ad85a02075adfb2ec6bd973b8dd1ba86868f1350776bdbda1c14a403603b1dab56ebba5c1b3bdd659616dc6e5abda7dc7bd6fae5ee30fb079756e27de2c2bf9b7da66319bb8aae52efb7ad7668fa561c33b48e60d6b65588a4d68a735777c347e4094ec36fa8a6ce8e2aa8263e259b92db9536ce3a720ab7c279c3250826338520f2efcd57127f05e07dbc0837717ad936f85d5f8b9985bf892ef5b6a5d3e97dfca55c5e289f5e5bcc08d581ef0d0faf0e6e05d796139f6da78720fce6d5036d38a4814edbae48572aeb1d6d235bc12fd3cf45bf43ef4c2cfd0035f0b35c22f22afb5eabb34f60a1721bb64bf19b80d5d7017729c233812ba0a591886144c710e9aa11d8d885050cf401afa6104ba4842c43e6b36c1147c0f83387b08d7219e5a254d923a620186c44ecd8fdfa6491f368e8ae17836bc318ef6f859b803173807b90206100971b86a831bb350e4141c8b74933598817b9c83beeaee8382d22b693000697901bae12934903ac111390f99e098d914e9a639f139b18d58e0ba614419820b2596462045bcd9cc2c9b49766ee13e87715e86d4806b9095f39a170a42ab7699ac898f69b7a40b6443b79547c8bdc8946200ef699c55b4f1b2b82cf1f169fcb95fe215f666b0a011c905197941ed102439af2a90e35d8284d653645db99f388efe99413e69fe33a13d91824cb8567848639066dec1157253786d7c34b6293417fb0bd51985cb7037f24c445c2da9f9713fefe2de474883d055b3295c5be490d17e8c6a4cc73cc586b21ec651f19965bcef160b140342273d0ba79003fa1b39e15a9ac3f96293423b6423cfe207ca90d330aee3306d0bd179e82bfa2dcbfc8691477e458cfd183fdb65f5ffe88c7956abcfd3f355e92516642df22c31473a9562182c58346fc1c8dd86d9de085b85534b2cf9f41d441a613a914af890fd63ed8ee68ffda0fc1efd53d9a1f927ce485964cbece8d6d50e7e8aadca96ed7412cee34e51878492e8c1a76ba86e46ba173ac394fb43f3ebabf4afa8674179c21f66ba0d730ee9bc3a1a0d27be89ec969e44768bf350e067e3971005e335742e3ea8eea23154709018a1fa34a727f2453c49d11b3e8f713080d9cf325ebbae475d34ccb7c91b82f3e223e4f113e92f0c424eed875e9c433ecb2ab9600e0a9835e819c823525964e89eb1d7b82d8e56dffb072bacaddee680d5d2e86b0ab4603d7efd35eb4ab7823536e7628963c9fd424af52c4a59503bd89d89ce3f483a96ba452f8b66536222d6cf52681a11bf42171beb7b4a0a9e8b057dbdd04929864f8d42a71ef884adb3309b96a6363f2bed3592d278d6436991cbb0dc179ca1ef468a44bb2323065289d4d3e28cf0312bdd06b75c6c6b7863ec82fc093ae95abc59b7c6127b3a2a6937a95c8a9ff2d8be68673a3fa337422e54106f19a9854979030638c7734e14282f24691a91c68b05f345c597e8043d862ecb6352681ba88899a5e6133e06df520994ae97a44db6a42d51f07661ea6cd48eb212ceda124641b59ea2ac39cf8a9d1cb1389250b04d166d7355d17a7198dbbfd81a4faccc659473bd5571cee887da383519d64a8c669b5227d06f57c8c3ea68ec21a6cf257e5e7d6f710798bcf014bdcd1a72d2a109b149780097e809dbfb0df45d17572d37450f9de4b81d27c3e8ed218a563c4ea0df252d11c0324078fd7a8c984d7a949092d11350909b927bb1b0a6b0013f852bcf11f5fc21cda4c9e00ca925ce26e6386704db85ae59c9c1c60763d842fae157dc6f1ae3ea3e5c2435f1ad1d9ae0036e1d164e371e9adc58441bd9f1a98ee2009faae43cb6a07a2cad7550bf92caffd3f5b2e660df52f9ef1da46c896d4be57fe93b252648d3f820b7537aac9da6e525c37cdf2be0853bd40ef4ce4903ab38fcdc3daf80899e72e151aaae0cd338b1ea88769b7e8eb7dbe8b8af9ffff5ff2cfe06504b01021403140000000800e002a85cec48b9020b060000620c0000100000000000000000000000a481000000003036333232303133373234502e48544d504b050600000000010001003e000000390600000000
+  recorded_at: '2026-05-07T15:23:00.000Z'

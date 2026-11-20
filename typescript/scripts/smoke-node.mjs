@@ -10,6 +10,7 @@ import { gunzipSync, zstdCompressSync } from "node:zlib";
 import {
   ApiError,
   CachedClient,
+  CnipaStatutesClient,
   DpmaStatutesClient,
   downloadPatentPdfClean,
   EpcClient,
@@ -19,14 +20,19 @@ import {
   GooglePatentsClient,
   getPatentClaims,
   IlpoStatutesClient,
+  InpiArStatutesClient,
   InpiBrStatutesClient,
   IpoInStatutesClient,
+  IpophlStatutesClient,
   IposStatutesClient,
+  KipoStatutesClient,
   LegifranceIpClient,
   MoppClient,
   MpepClient,
   parseHearingNotice,
   parseJapanIpHighCourtWorkbook,
+  RospatentStatutesClient,
+  ThaiDipStatutesClient,
   TmepClient,
   TwTradeSecretsClient,
   UpcStatutesClient,
@@ -106,6 +112,67 @@ assert.equal(
   results.ilpo_section,
   "Prohibition against misappropriation of a trade secret",
 );
+const rospatent = new RospatentStatutesClient({
+  source: new Uint8Array(
+    zstdCompressSync(
+      await readFile(fixture("rospatent-statutes/rospatent_statutes.db")),
+    ),
+  ),
+});
+results.rospatent_article = (
+  await rospatent.getArticleByCitation("Civil Code Art. 1350(1)")
+)?.title;
+assert.equal(
+  results.rospatent_article,
+  "The Conditions for Patentability of an Invention",
+);
+const cnipa = new CnipaStatutesClient({
+  source: new Uint8Array(
+    zstdCompressSync(
+      await readFile(fixture("cnipa-statutes/cnipa_statutes.db")),
+    ),
+  ),
+});
+results.cnipa_section = (
+  await cnipa.getSectionByCitation("Patent Law Art. 22(3)")
+)?.title;
+assert.equal(
+  results.cnipa_section,
+  "Chapter II Requirements for Granting Patent Rights",
+);
+const ipophl = new IpophlStatutesClient({
+  source: new Uint8Array(
+    zstdCompressSync(
+      await readFile(fixture("ipophl-statutes/ipophl_statutes.db")),
+    ),
+  ),
+});
+const ipophlSection = await ipophl.getSectionByCitation("Sec. 22.1 RA 8293");
+results.ipophl_section = `${ipophlSection?.title}:${ipophlSection?.amended_by.join(",")}`;
+assert.equal(
+  results.ipophl_section,
+  "Non-Patentable Inventions:Section 5 RA 9502",
+);
+const inpiAr = new InpiArStatutesClient({
+  source: new Uint8Array(
+    zstdCompressSync(
+      await readFile(fixture("inpi-ar-statutes/inpi_ar_statutes.db")),
+    ),
+  ),
+});
+results.inpi_ar_section = (
+  await inpiAr.getSectionByCitation("art. 36 quater ley 11723")
+)?.section_label;
+assert.equal(results.inpi_ar_section, "Artículo 36 quáter Ley 11.723");
+const kipo = new KipoStatutesClient({
+  source: new Uint8Array(
+    zstdCompressSync(await readFile(fixture("kipo-statutes/kipo_statutes.db"))),
+  ),
+});
+results.kipo_section = (
+  await kipo.getSectionByCitation("Patent Act Art. 29(1)")
+)?.title;
+assert.equal(results.kipo_section, "Requirements for Patent Registration");
 const inpiBr = new InpiBrStatutesClient({
   source: new Uint8Array(
     zstdCompressSync(
@@ -124,6 +191,17 @@ results.legifrance_section = (
   await legifrance.getSection("L. 151-1 Code de commerce")
 ).statute;
 assert.equal(results.legifrance_section, "Code de commerce");
+const thai = new ThaiDipStatutesClient({
+  source: new Uint8Array(
+    zstdCompressSync(
+      await readFile(fixture("thai-dip-statutes/thai_dip_statutes.db")),
+    ),
+  ),
+});
+results.thai_section = (
+  await thai.getSectionByCitation("Section 36 bis Patent Act")
+)?.section_label;
+assert.equal(results.thai_section, "Section 36bis Patent Act");
 const tmep = new TmepClient({
   source: new Uint8Array(await readFile(fixture("tmep/tmep.db"))),
 });
@@ -330,8 +408,14 @@ for (const client of [
   mopp,
   dpma,
   ilpo,
+  rospatent,
+  cnipa,
+  ipophl,
+  inpiAr,
+  kipo,
   inpiBr,
   legifrance,
+  thai,
   tw,
 ])
   client.close();

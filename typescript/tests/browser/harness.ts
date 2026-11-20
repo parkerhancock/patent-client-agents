@@ -1,6 +1,7 @@
 // Bundled for the browser by scripts/smoke-browser.ts. Exercises the client
 // with no Node or Bun APIs available and reports results on window.
 import {
+  CnipaStatutesClient,
   configureWasm,
   createRelayFetch,
   DpmaStatutesClient,
@@ -10,13 +11,18 @@ import {
   GooglePatentsClient,
   getPatentClaims,
   IlpoStatutesClient,
+  InpiArStatutesClient,
   InpiBrStatutesClient,
   IpoInMpppClient,
+  IpophlStatutesClient,
   IposManualsClient,
+  KipoStatutesClient,
   LegifranceIpClient,
   MpepClient,
   parseHearingNotice,
   parseJapanIpHighCourtWorkbook,
+  RospatentStatutesClient,
+  ThaiDipStatutesClient,
   TwTradeSecretsClient,
   UpcStatutesClient,
 } from "../../packages/client/src/index.js";
@@ -87,6 +93,44 @@ try {
   });
   results.ilpo_section = (
     await ilpo.getSectionByCitation("Article 13 Commercial Torts Law")
+  )?.section_label;
+  const rospatent = new RospatentStatutesClient({
+    source: () => bytes("/fixtures/rospatent-statutes/rospatent_statutes.db"),
+  });
+  results.rospatent_article = (
+    await rospatent.getArticleByCitation("Art. 1484 CC RF")
+  )?.section_label;
+  const cnipa = new CnipaStatutesClient({
+    source: () => bytes("/fixtures/cnipa-statutes/cnipa_statutes.db"),
+  });
+  results.cnipa_section = (
+    await cnipa.getSectionByCitation("Rule 20 Implementing Regulations")
+  )?.section_label;
+  const ipophl = new IpophlStatutesClient({
+    source: () => bytes("/fixtures/ipophl-statutes/ipophl_statutes.db"),
+  });
+  results.ipophl_section = (
+    await ipophl.getSectionByCitation("Section 3 RA 10372")
+  )?.section_label;
+  const argentina = new InpiArStatutesClient({
+    source: () => bytes("/fixtures/inpi-ar-statutes/inpi_ar_statutes.db"),
+  });
+  results.inpi_ar_hits = (
+    await argentina.search({ query: "informacion secreta" })
+  ).hits
+    .map((hit) => hit.section_label)
+    .join(",");
+  const thai = new ThaiDipStatutesClient({
+    source: () => bytes("/fixtures/thai-dip-statutes/thai_dip_statutes.db"),
+  });
+  results.thai_section = (
+    await thai.getSectionByCitation("Trademark Act s. 109/1")
+  )?.section_label;
+  const kipo = new KipoStatutesClient({
+    source: () => bytes("/fixtures/kipo-statutes/kipo_statutes.db"),
+  });
+  results.kipo_section = (
+    await kipo.getSectionByCitation("Article 7-2 of the Patent Act")
   )?.section_label;
   const singapore = new IposManualsClient({
     source: () => bytes("/fixtures/ipos/ipos_manuals.db"),

@@ -1,0 +1,306 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://data.gov.il/api/3/action/datastore_search?resource_id=6284d4a9-fdd4-45c9-a1d6-58143c7d8127&limit=25&offset=0&filters=%7B%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%94%D7%A1%D7%99%D7%9E%D7%9F%22%3A%5B55359%2C9%5D%7D
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - public, max-age=0, must-revalidate
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=utf-8
+      date:
+      - Mon, 26 Oct 2026 21:18:34 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding
+      via:
+      - 1.1 d09facc1a33a23ae0ece49f16f368ae6.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - SpEhQAh9VDSMr0C1lL0CtqnyAgsLZCwaoeZKloHucyLng3g5ABRXBg==
+      x-amz-cf-pop:
+      - DFW57-P4
+      x-cache:
+      - Miss from cloudfront
+    body:
+      type: json
+      content:
+        help: https://data.gov.il/api/3/action/help_show?name=datastore_search
+        success: true
+        result:
+          filters:
+            מספר הסימן:
+            - 55359
+            - 9
+          include_total: true
+          limit: 25
+          offset: 0
+          records_format: objects
+          resource_id: 6284d4a9-fdd4-45c9-a1d6-58143c7d8127
+          total_estimation_threshold: null
+          records:
+          - _id: 1
+            מספור רץ: 1
+            מספר הסימן: 9
+            דמות: לא
+            קישור לנסח: https://trademarks.justice.gov
+            מצב: רשום
+            לאומי/בינלאומי: לאומי
+            מספר הסימן הבינלאומי: ""
+            תיאור סימן עברית: ""
+            תיאור סימן אנגלית: KOH-I-NOOR
+            תאריך בקשה: 24/12/1920
+            תאריך רישום: 24/03/1921
+            סוג רישום: סימן מסחר/שירות
+            סוגי ניצה לבקשה: "16"
+            סוגי וינה לבקשה: ""
+            רשימת סחורות בעברית: ""
+            רשימת סחורות באנגלית: Pencils etc.
+            דין קדימה: לא
+            תאריך תום תוקף: 24/12/2030
+            שם מיופה כח: ריינהולד כהן ושותפיו
+            שם מיופה כח אנגלית: Reinhold Cohn and Partners
+            שם בעל הסימן בעברית: ""
+            שם בעל הסימן באנגלית: ETABLISSEMENT INTERNATIONAL CRAYOMINE
+            שם בעל הרשות בעברית: ""
+            שם בעל הרשות באנגלית: ""
+            שם מייצג לעניין אכיפת מכס: ""
+            מען למכס תאריך התחלה: ""
+            כתובת אימייל מייצג מכס: ""
+            טלפון מייצג מכס: ""
+            רישום חיצוני: לא
+            תאריך עדכון אחרון: 20/08/2026
+          - _id: 144190
+            מספור רץ: 144190
+            מספר הסימן: 55359
+            דמות: לא
+            קישור לנסח: https://trademarks.justice.gov
+            מצב: סגור
+            לאומי/בינלאומי: לאומי
+            מספר הסימן הבינלאומי: ""
+            תיאור סימן עברית: טוב יותר עם קוקה-קולה
+            תיאור סימן אנגלית: TOV YOTER IM COCA-COLA
+            תאריך בקשה: 16/12/1982
+            תאריך רישום: 07/08/1986
+            סוג רישום: סימן מסחר/שירות
+            סוגי ניצה לבקשה: "32"
+            סוגי וינה לבקשה: "28.9"
+            רשימת סחורות בעברית: ""
+            רשימת סחורות באנגלית: ""
+            דין קדימה: לא
+            תאריך תום תוקף: ""
+            שם מיופה כח: ד~ר שלמה כהן ושות'
+            שם מיופה כח אנגלית: Dr. Shlomo Cohen & Co.
+            שם בעל הסימן בעברית: ""
+            שם בעל הסימן באנגלית: The Coca-Cola Company
+            שם בעל הרשות בעברית: ""
+            שם בעל הרשות באנגלית: ""
+            שם מייצג לעניין אכיפת מכס: ""
+            מען למכס תאריך התחלה: ""
+            כתובת אימייל מייצג מכס: ""
+            טלפון מייצג מכס: ""
+            רישום חיצוני: לא
+            תאריך עדכון אחרון: 18/07/2023
+          fields:
+          - id: _id
+            type: int
+          - id: מספור רץ
+            type: numeric
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: מספר הסימן
+            type: numeric
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: דמות
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: קישור לנסח
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: מצב
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: לאומי/בינלאומי
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: מספר הסימן הבינלאומי
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: תיאור סימן עברית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: תיאור סימן אנגלית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: תאריך בקשה
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: תאריך רישום
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: סוג רישום
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: סוגי ניצה לבקשה
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: סוגי וינה לבקשה
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: רשימת סחורות בעברית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: רשימת סחורות באנגלית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: דין קדימה
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: תאריך תום תוקף
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          - id: שם מיופה כח
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: שם מיופה כח אנגלית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: שם בעל הסימן בעברית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: שם בעל הסימן באנגלית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: שם בעל הרשות בעברית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: שם בעל הרשות באנגלית
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: שם מייצג לעניין אכיפת מכס
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: מען למכס תאריך התחלה
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: כתובת אימייל מייצג מכס
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: טלפון מייצג מכס
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: רישום חיצוני
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: ""
+          - id: תאריך עדכון אחרון
+            type: text
+            info:
+              label: ""
+              notes: ""
+              type_override: text
+          _links:
+            start: >-
+              /api/3/action/datastore_search?resource_id=6284d4a9-fdd4-45c9-a1d6-58143c7d8127&limit=25&filters=%7B%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%94%D7%A1%D7%99%D7%9E%D7%9F%22%3A%5B55359%2C9%5D%7D
+            next: >-
+              /api/3/action/datastore_search?resource_id=6284d4a9-fdd4-45c9-a1d6-58143c7d8127&limit=25&offset=25&filters=%7B%22%D7%9E%D7%A1%D7%A4%D7%A8+%D7%94%D7%A1%D7%99%D7%9E%D7%9F%22%3A%5B55359%2C9%5D%7D
+          total: 2
+          total_was_estimated: false
+  recorded_at: 2026-10-26T21:18:35.034Z

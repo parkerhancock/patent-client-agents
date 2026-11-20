@@ -1,0 +1,127 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://cloud.tipo.gov.tw/S220/opdataapi/api/TmarkAppl?format=json&top=2&skip=0&tmarkname=LATEX&tk=[FILTERED]
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cf-cache-status:
+      - DYNAMIC
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=UTF-8
+      date:
+      - Mon, 26 Oct 2026 19:46:52 GMT
+      server:
+      - cloudflare
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      transfer-encoding:
+      - chunked
+    body:
+      type: json
+      content:
+        version: "1.0"
+        status: ok
+        message: ""
+        top: 2
+        skip: 0
+        order-by: appl-no
+        total-count: 110
+        tmarkappl:
+          -page-count: 2
+          -create-date: 2026/10/27
+          tmarkcontent:
+          - -sequence: 1
+            appl-no: "000017079"
+            appl-date: 1962/10/15
+            tmark-name: 麗大漆 LATEX
+            tmark-class: "2"
+            tmark-class-desc: 商標(原聯合商標)
+            tmark-image-url:
+            - image-data-1: >-
+                https://cloud.tipo.gov.tw/S282/S282WV1/pic/20160227/000/017/079/pic_000017079_20110105_1.jpg
+              image-data-2: null
+              image-data-3: null
+              image-data-4: null
+              image-data-5: null
+              image-data-6: null
+              audio-filename: null
+            tmark-type: null
+            tmark-type-desc: null
+            tmark-color: "4"
+            tmark-color-desc: 藍色
+            tmark-draft-c: null
+            tmark-draft-e: null
+            tmark-draft-j: null
+            tmark-sign: null
+            word-description: null
+            out-off-draft: null
+            tmark-desc: null
+            receive-date: null
+            goodsclasses:
+            - -sequence: 1
+              goodsclass-code: "023"
+              goods-name: 麗達漆商品
+              goods-group: ""
+            parties:
+              applicants:
+              - -sequence: 1
+                chinese-name: 東方油漆廠股份有限公司
+                english-name: null
+                japanese-name: null
+                address: 高雄市三民區自立橫巷113號
+                country-code: TW
+                chinese-country-name: 中華民國
+              agents: []
+          - -sequence: 2
+            appl-no: "000017080"
+            appl-date: 1962/10/15
+            tmark-name: 麗特漆 LATEX
+            tmark-class: "2"
+            tmark-class-desc: 商標(原聯合商標)
+            tmark-image-url:
+            - image-data-1: >-
+                https://cloud.tipo.gov.tw/S282/S282WV1/pic/20160227/000/017/080/pic_000017080_20110105_1.jpg
+              image-data-2: null
+              image-data-3: null
+              image-data-4: null
+              image-data-5: null
+              image-data-6: null
+              audio-filename: null
+            tmark-type: null
+            tmark-type-desc: null
+            tmark-color: "4"
+            tmark-color-desc: 藍色
+            tmark-draft-c: null
+            tmark-draft-e: null
+            tmark-draft-j: null
+            tmark-sign: null
+            word-description: null
+            out-off-draft: null
+            tmark-desc: null
+            receive-date: null
+            goodsclasses:
+            - -sequence: 1
+              goodsclass-code: "023"
+              goods-name: 麗達漆商品
+              goods-group: ""
+            parties:
+              applicants:
+              - -sequence: 1
+                chinese-name: 東方油漆廠股份有限公司
+                english-name: null
+                japanese-name: null
+                address: 高雄市三民區自立橫巷113號
+                country-code: TW
+                chinese-country-name: 中華民國
+              agents: []
+  recorded_at: 2026-10-26T19:46:52.064Z

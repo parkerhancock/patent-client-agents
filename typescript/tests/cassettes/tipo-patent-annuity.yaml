@@ -1,0 +1,56 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://cloud.tipo.gov.tw/S220/opdataapi/api/PatentAnnuity?format=json&top=100&skip=0&applno=113105712&tk=[FILTERED]
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cf-cache-status:
+      - DYNAMIC
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=UTF-8
+      date:
+      - Mon, 26 Oct 2026 19:46:45 GMT
+      server:
+      - cloudflare
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+      transfer-encoding:
+      - chunked
+    body:
+      type: json
+      content:
+        version: "1.0"
+        status: ok
+        message: ""
+        top: 100
+        skip: 0
+        order-by: appl-no
+        total-count: 1
+        tw-patent-annuity:
+          -page-count: 1
+          -create-date: 2026/10/27
+          patentcontent:
+          - -sequence: 1
+            appl-no: "113105712"
+            licence-date: 2026/01/21
+            relicence-date: null
+            patent-no: I912706
+            publish-no: I912706
+            charge-expir-date: 2029/01/20
+            charge-expir-year: "3"
+            charges:
+            - -sequence: 1
+              annuity-date: 2025/12/23
+              annuity-beg: 1
+              annuity-end: 3
+  recorded_at: 2026-10-26T19:46:45.693Z

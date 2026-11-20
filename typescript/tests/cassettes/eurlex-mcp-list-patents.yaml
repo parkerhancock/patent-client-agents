@@ -1,0 +1,155 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://publications.europa.eu/webapi/rdf/sparql
+    headers:
+      accept:
+      - application/sparql-results+json
+      content-type:
+      - application/x-www-form-urlencoded;charset=UTF-8
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: text
+      content: >-
+        query=PREFIX+cdm%3A+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fontology%2Fcdm%23%3E%0ASELECT+%3Fcelex+%28SAMPLE%28%3Ft%29+AS+%3Ftitle%29+%28SAMPLE%28%3Fd%29+AS+%3Fdate%29+%28SAMPLE%28%3Ff%29+AS+%3Finforce%29+%28MAX%28%3Fc%29+AS+%3Fconsolidated%29+WHERE+%7B%0A++VALUES+%3Fcelex+%7B+%2232012R1257%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23string%3E+%2232012R1260%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23string%3E+%2232009R0469%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23string%3E+%2231996R1610%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23string%3E+%2231998L0044%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23string%3E+%7D%0A++%3Fwork+cdm%3Aresource_legal_id_celex+%3Fcelex+.%0A++OPTIONAL+%7B+%3Fwork+cdm%3Awork_date_document+%3Fd+%7D%0A++OPTIONAL+%7B+%3Fwork+cdm%3Aresource_legal_in-force+%3Ff+%7D%0A++OPTIONAL+%7B+%3Fexpr+cdm%3Aexpression_belongs_to_work+%3Fwork+%3B+cdm%3Aexpression_uses_language+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Flanguage%2FENG%3E+%3B+cdm%3Aexpression_title+%3Ft+%7D%0A++OPTIONAL+%7B+%3Fcw+cdm%3Aact_consolidated_consolidates_resource_legal+%3Fwork+%3B+cdm%3Aresource_legal_id_celex+%3Fc+.+FILTER%28STRSTARTS%28STR%28%3Fc%29%2C+CONCAT%28%220%22%2C+SUBSTR%28STR%28%3Fcelex%29%2C+2%29%2C+%22-%22%29%29%29+%7D%0A%7D+GROUP+BY+%3Fcelex
+  response:
+    status: 200
+    headers:
+      accept-ranges:
+      - bytes
+      connection:
+      - keep-alive
+      content-disposition:
+      - filename=sparql_2026-10-26_22-08-54Z.json
+      content-type:
+      - application/sparql-results+json
+      date:
+      - Mon, 26 Oct 2026 22:08:54 GMT
+    body:
+      type: json
+      content:
+        head:
+          link: []
+          vars:
+          - celex
+          - title
+          - date
+          - inforce
+          - consolidated
+        results:
+          distinct: false
+          ordered: true
+          bindings:
+          - celex:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 31996R1610
+            title:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: >-
+                Regulation (EC) No 1610/96 of the European Parliament and of the Council of 23
+                July 1996 concerning the creation of a supplementary protection certificate for
+                plant protection products
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 1996-07-23
+            inforce:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#boolean"
+              value: "1"
+            consolidated:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 01996R1610-20070101
+          - celex:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 32009R0469
+            title:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: >-
+                Regulation (EC) No 469/2009 of the European Parliament and of the Council of 6
+                May 2009 concerning the supplementary protection certificate for medicinal
+                products (Codified version) (Text with EEA relevance )
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 2009-05-06
+            inforce:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#boolean"
+              value: "1"
+            consolidated:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 02009R0469-20130701
+          - celex:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 32012R1257
+            title:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: >-
+                Regulation (EU) No 1257/2012 of the European Parliament and of the Council of
+                17 December 2012 implementing enhanced cooperation in the area of the creation of
+                unitary patent protection
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 2012-12-17
+            inforce:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#boolean"
+              value: "1"
+            consolidated:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 02012R1257-20130120
+          - celex:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 32012R1260
+            title:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: >-
+                Council Regulation (EU) No 1260/2012 of 17 December 2012 implementing enhanced
+                cooperation in the area of the creation of unitary patent protection with regard
+                to the applicable translation arrangements
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 2012-12-17
+            inforce:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#boolean"
+              value: "1"
+          - celex:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 31998L0044
+            title:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: >-
+                Directive 98/44/EC of the European Parliament and of the Council of 6 July 1998
+                on the legal protection of biotechnological inventions
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 1998-07-06
+            inforce:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#boolean"
+              value: "1"
+            consolidated:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: 01998L0044-19980730
+  recorded_at: 2026-10-26T22:08:54.424Z

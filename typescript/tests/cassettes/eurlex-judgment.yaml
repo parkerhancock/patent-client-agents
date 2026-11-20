@@ -1,0 +1,692 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://publications.europa.eu/resource/celex/62007CJ0252
+    headers:
+      accept:
+      - application/xhtml+xml, text/html;q=0.9
+      accept-language:
+      - eng
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: none
+  response:
+    status: 303
+    headers:
+      cache-control:
+      - no-store
+      connection:
+      - keep-alive
+      content-security-policy:
+      - script-src 'self';
+      content-type:
+      - text/html;charset=UTF-8
+      date:
+      - Mon, 26 Oct 2026 22:08:43 GMT
+      location:
+      - >-
+        http://publications.europa.eu/resource/cellar/310f668b-a6a5-4631-bb55-b50a3e545b85.0002.01/DOC_1
+      transfer-encoding:
+      - chunked
+    body:
+      type: none
+  recorded_at: 2026-10-26T22:08:43.745Z
+- request:
+    method: GET
+    uri: >-
+      https://publications.europa.eu/resource/cellar/310f668b-a6a5-4631-bb55-b50a3e545b85.0002.01/DOC_1
+    headers:
+      accept:
+      - application/xhtml+xml, text/html;q=0.9
+      accept-language:
+      - eng
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - no-cache
+      connection:
+      - keep-alive
+      content-language:
+      - ""
+      content-security-policy:
+      - script-src 'self';
+      content-type:
+      - text/html;charset=UTF-8
+      date:
+      - Mon, 26 Oct 2026 22:08:43 GMT
+      etag:
+      - W/"Con-20191112110027000"
+      last-modified:
+      - Tue, 12 Nov 2019 10:00:27 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding
+    body:
+      type: text
+      content: |
+        <HTML>
+           <HEAD>
+              <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+           
+              <!--Filename : BDU@TRA-DOC-EN-ARRET-C-0252-2007-200808001-06_00-->
+              <!-- Feuille de style -->
+              <LINK HREF="coj-arr-c-fr.css" REL="stylesheet" TYPE="text/css">
+              <LINK HREF="coj-arr-c-en.css" REL="stylesheet" TYPE="text/css">
+              <!-- Titre du document -->
+              <TITLE></TITLE>
+              <LINK HREF="coj-som-c-fr.css" REL="stylesheet" TYPE="text/css">
+              <LINK HREF="coj-som-c-en.css" REL="stylesheet" TYPE="text/css">
+           </HEAD>
+           <BODY>
+              <P class="S73Alineacentregras"><B>Case C-252/07</B></P>
+              <P class="S73Alineacentregras"><B>Intel Corporation Inc.</B></P>
+              <P class="S73Alineacentregras"><B>v</B></P>
+              <P class="S73Alineacentregras"><B>CPM United Kingdom Ltd</B></P>
+              <P class="S39Centre">(Reference for a preliminary ruling from the Court of Appeal </P>
+              <P class="S39Centre">(England and Wales) (Civil Division))</P>
+              <P class="S71Indicateur">(Directive 89/104/EEC &#8211; Trade marks &#8211; Article 4(4)(a) &#8211; Well-known trade marks &#8211; Protection against the use of a later identical or similar mark &#8211; Use which takes or would take unfair advantage of, or is or would be detrimental to, the distinctive character or the repute
+                 of the earlier trade mark)
+              </P>
+              <P class="S40Titre">Summary of the Judgment</P>
+              <P class="S35MotClenumerote">1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Approximation of laws &#8211; Trade marks &#8211; Directive 89/104 &#8211; Well-known trade mark &#8211; Extended protection of non-similar goods
+                    or services (Article 4(4)(a) of the Directive) &#8211; Condition for the extended protection</I></P>
+              <P class="S37MotCleFinretrait1"><I>(Council Directive 89/104, Art. 4(4)(a))</I></P>
+              <P class="S35MotClenumerote">2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Approximation of laws &#8211; Trade marks &#8211; Directive 89/104 &#8211; Well-known trade mark &#8211; Extended protection of non-similar goods
+                    or services (Article 4(4)(a) of the Directive) &#8211; Condition for the  extended protection</I></P>
+              <P class="S37MotCleFinretrait1"><I>(Council Directive 89/104, Art. 4(4)(a))</I></P>
+              <P class="S35MotClenumerote">3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Approximation of laws &#8211; Trade marks &#8211; Directive 89/104 &#8211; Well-known trade mark &#8211; Extended protection of non-similar goods
+                    or services (Article 4(4)(a) of the Directive) &#8211; Condition for the extended protection</I></P>
+              <P class="S37MotCleFinretrait1"><I>(Council Directive 89/104, Art. 4(4)(a))</I></P>
+              <P class="S01PointAltN"><A NAME="point1">1.</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Article 4(4)(a) of First Directive 89/104 on trade marks must be interpreted as meaning that whether there is a link, within
+                 the meaning of Case C&#8209;408/01 <I>Adidas-Salomon and Adidas Benelux</I>, between the earlier mark with a reputation and the later mark must be assessed globally, taking into account all factors
+                 relevant to the circumstances of the case. 
+              </P>
+              <P class="S01PointAltN">The fact that, for the average consumer, who is reasonably well informed and reasonably observant and circumspect, the later
+                 mark calls the earlier mark with a reputation to mind is tantamount to the existence of such a link, within the meaning of
+                 the judgment in that case, between the conflicting marks. 
+              </P>
+              <P class="S19Marge1">The fact that:</P>
+              <P class="S19Marge1">&#8211; the earlier mark has a considerable reputation for certain specific types of goods or services, and </P>
+              <P class="S19Marge1">&#8211; those goods or services and the goods or services for which the later mark is registered are dissimilar or dissimilar to
+                 a substantial degree, and 
+              </P>
+              <P class="S19Marge1">&#8211; the earlier mark is unique in respect of any goods or services, </P>
+              <P class="S19Marge1">does not necessarily imply that there is a link, within the meaning of <I>Adidas-Salomon and Adidas Benelux</I>, between the marks at issue.
+              </P>
+              <P class="S36Renvoi">(see paras 62-64, operative part 1-3)</P>
+              <P class="S01PointAltN"><A NAME="point3">2.</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Article 4(4)(a) of First Directive 89/104 on trade marks must be interpreted as meaning that whether a use of the later mark
+                 takes or would take unfair advantage of, or is or would be detrimental to, the distinctive character or the repute of the
+                 earlier mark must be assessed globally, taking into account all factors relevant to the circumstances of the case. 
+              </P>
+              <P class="S19Marge1">The fact that:</P>
+              <P class="S19Marge1">&#8211; the earlier mark has a considerable reputation for certain specific types of goods or services, and </P>
+              <P class="S19Marge1">&#8211; those goods or services and the goods or services for which the later mark is registered are dissimilar or dissimilar to
+                 a substantial degree, and
+              </P>
+              <P class="S19Marge1">&#8211; the earlier mark is unique in respect of any goods or services, and</P>
+              <P class="S19Marge1">&#8211; for the average consumer, who is reasonably well informed and reasonably observant and circumspect, the later mark calls
+                 the earlier mark to mind,
+              </P>
+              <P class="S19Marge1">is not sufficient to establish that the use of the later mark takes or would take unfair advantage of, or is or would be detrimental
+                 to, the distinctive character or the repute of the earlier mark, within the meaning of Article 4(4)(a) of Directive 89/104.
+                 
+              </P>
+              <P class="S36Renvoi">(see paras 79-80, operative part 4-5)</P>
+              <P class="S01PointAltN"><A NAME="point4">3.</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Article 4(4)(a) of Directive 89/104 on trade marks must be interpreted as meaning that: 
+              </P>
+              <P class="S19Marge1">&#8211; the use of the later mark may be detrimental to the distinctive character of the earlier mark with a reputation even if
+                 that mark is not unique;
+              </P>
+              <P class="S19Marge1">&#8211; a first use of the later mark may suffice to be detrimental to the distinctive character of the earlier mark; </P>
+              <P class="S19Marge1">&#8211; proof that the use of the later mark is or would be detrimental to the distinctive character of the earlier mark requires
+                 evidence of a change in the economic behaviour of the average consumer of the goods or services for which the earlier mark
+                 was registered consequent on the use of the later mark, or a serious likelihood that such a change will occur in the future.
+                 
+              </P>
+              <P class="S36Renvoi">(see para. 81, operative part 6)</P>
+        <br> <br> <br>
+        <br> <br> <br>
+              <P class="C19Centre">JUDGMENT OF THE COURT (First Chamber)</P>
+              <P class="C19Centre">27 November 2008&nbsp;(<A HREF="#Footnote*" NAME="Footref*">*</A>)
+              </P>
+              <P class="C71Indicateur">(Directive 89/104/EEC &#8211; Trade marks &#8211; Article 4(4)(a) &#8211; Trade marks with a reputation &#8211; Protection against the use of a later identical or similar mark &#8211; Use which takes or would take unfair advantage of, or is or would be detrimental to, the distinctive character or the repute
+                 of the earlier trade mark)
+              </P>
+              <P class="C02AlineaAltA">In Case C&#8209;252/07,</P>
+              <P class="C02AlineaAltA">REFERENCE for a preliminary ruling under Article 234 EC from the Court of Appeal (England and Wales) (Civil Division), made
+                 by decision of 15 May 2007, received at the Court on 29 May 2007, in the proceedings
+              </P>
+              <P class="C02AlineaAltA"><B>Intel Corporation Inc.</B></P>
+              <P class="C02AlineaAltA">v</P>
+              <P class="C02AlineaAltA"><B>CPM United Kingdom Ltd,</B></P>
+              <P class="C19Centre">THE COURT (First Chamber),</P>
+              <P class="C02AlineaAltA">composed of P.&nbsp;Jann, President of the Chamber, M.&nbsp;Ile&#353;i&#269; (Rapporteur), A.&nbsp;Tizzano, A.&nbsp;Borg Barthet and E.&nbsp;Levits, Judges,</P>
+              <P class="C02AlineaAltA">Advocate General: E.&nbsp;Sharpston,</P>
+              <P class="C02AlineaAltA">Registrar: L.&nbsp;Hewlett, Principal Administrator,</P>
+              <P class="C02AlineaAltA">having regard to the written procedure and further to the hearing on 16&nbsp;April 2008,</P>
+              <P class="C02AlineaAltA">after considering the observations submitted on behalf of:</P>
+              <P class="C03Tiretlong">&#8211;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Intel Corporation Inc., by J.&nbsp;Mellor QC, instructed by CMS Cameron McKenna LLP,</P>
+              <P class="C03Tiretlong">&#8211;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CPM United Kingdom Ltd, by M.&nbsp;Engelman, Barrister, and M.&nbsp;Bilewycz, registered trade mark attorney,</P>
+              <P class="C03Tiretlong">&#8211;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the United Kingdom Government, by V.&nbsp;Jackson, acting as Agent, and S.&nbsp;Malynicz, Barrister,</P>
+              <P class="C03Tiretlong">&#8211;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the Italian Government, by I.M.&nbsp;Braguglia, acting as Agent, and G.&nbsp;Aiello, avvocato dello Stato,</P>
+              <P class="C03Tiretlong">&#8211;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the Commission of the European Communities, by W.&nbsp;Wils, acting as Agent,</P>
+              <P class="C02AlineaAltA">after hearing the Opinion of the Advocate General at the sitting on 26&nbsp;June 2008,</P>
+              <P class="C02AlineaAltA">gives the following</P>
+              <P class="C75Debutdesmotifs"><B>Judgment</B></P>
+              <P class="C01PointnumeroteAltN"><A NAME="point1">1</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This reference for a preliminary ruling concerns the interpretation of Article 4(4)(a) of First Council Directive 89/104/EEC
+                 of 21 December 1988 to approximate the laws of the Member States relating to trade marks (OJ 1989 L 40, p.&nbsp;1, &#8216;the Directive&#8217;).
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point2">2</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The reference was made in proceedings in which Intel Corporation Inc. (&#8216;Intel Corporation&#8217;) is applying for a declaration
+                 of invalidity against the registration of the INTELMARK trade mark owned by CPM United Kingdom Ltd.
+              </P>
+              <P class="C02AlineaAltA"><B>Relevant provisions</B></P>
+              <P class="C05Titre2">&nbsp;<I>Community law</I></P>
+              <P class="C01PointnumeroteAltN"><A NAME="point3">3</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Article 4 of the Directive, entitled &#8216;Further grounds for refusal or invalidity concerning conflicts with earlier rights&#8217;,
+                 provides:
+              </P>
+              <P class="C02AlineaAltA">&#8216;1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A trade mark shall not be registered or, if registered, shall be liable to be declared invalid:</P>
+              <P class="C09Marge0avecretrait">(a)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if it is identical with an earlier trade mark, and the goods or services for which the trade mark is applied for or is registered
+                 are identical with the goods or services for which the earlier trade mark is protected;
+              </P>
+              <P class="C09Marge0avecretrait">(b)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if because of its identity with, or similarity to, the earlier trade mark and the identity or similarity of the goods or services
+                 covered by the trade marks, there exists a likelihood of confusion on the part of the public, which includes the likelihood
+                 of association with the earlier trade mark.
+              </P>
+              <P class="C02AlineaAltA">2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8220;Earlier trade marks&#8221; within the meaning of paragraph 1 means:</P>
+              <P class="C09Marge0avecretrait">(a)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;trade marks of the following kinds with a date of application for registration which is earlier than the date of application
+                 for registration of the trade mark, taking account, where appropriate, of the priorities claimed in respect of those trade
+                 marks; 
+              </P>
+              <P class="C10Marge1">&#8230;</P>
+              <P class="C10Marge1">(ii)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;trade marks registered in the Member State &#8230;</P>
+              <P class="C10Marge1">&#8230;</P>
+              <P class="C09Marge0avecretrait">&#8230;</P>
+              <P class="C02AlineaAltA">4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Any Member State may furthermore provide that a trade mark shall not be registered or, if registered, shall be liable to be
+                 declared invalid where, and to the extent that:
+              </P>
+              <P class="C09Marge0avecretrait">(a)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the trade mark is identical with, or similar to, an earlier national trade mark within the meaning of paragraph 2 and is to
+                 be, or has been, registered for goods or services which are not similar to those for which the earlier trade mark is registered,
+                 where the earlier trade mark has a reputation in the Member State concerned and where the use of the later trade mark without
+                 due cause would take unfair advantage of, or be detrimental to, the distinctive character or the repute of the earlier trade
+                 mark;
+              </P>
+              <P class="C09Marge0avecretrait">&#8230;&#8217;</P>
+              <P class="C01PointnumeroteAltN"><A NAME="point4">4</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Article 5(2) of the Directive, entitled &#8216;Rights conferred by a trade mark&#8217;, provides:
+              </P>
+              <P class="C02AlineaAltA">&#8216;Any Member State may also provide that the proprietor shall be entitled to prevent all third parties not having his consent
+                 from using in the course of trade any sign which is identical with, or similar to, the trade mark in relation to goods or
+                 services which are not similar to those for which the trade mark is registered, where the latter has a reputation in the Member
+                 State and where use of that sign without due cause takes unfair advantage of, or is detrimental to, the distinctive character
+                 or the repute of the trade mark.&#8217;
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point5">5</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Court has interpreted that provision as follows in paragraphs 29 and 30 of its judgment in Case C&#8209;408/01 <I>Adidas-Salomon and Adidas</I><I>Benelux</I> [2003] ECR I&#8209;12537:
+              </P>
+              <P class="C09Marge0avecretrait">&#8216;29&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The infringements referred to in Article 5(2) of [Directive 89/104], where they occur, are the consequence of a certain degree
+                 of similarity between the mark and the sign, by virtue of which the relevant section of the public makes a connection between
+                 the sign and the mark, that is to say, establishes a link between them even though it does not confuse them (see, to that
+                 effect, Case C&#8209;375/97 <I>General Motors</I> [1999] ECR I&#8209;5421, paragraph 23).
+              </P>
+              <P class="C09Marge0avecretrait">30&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The existence of such a link must, just like a likelihood of confusion in the context of Article 5(1)(b) of Directive [89/104],
+                 be appreciated globally, taking into account all factors relevant to the circumstances of the case (see, in respect of the
+                 likelihood of confusion, [Case C&#8209;251/95] <I>SABEL</I> [[1997] ECR I-6191], paragraph 22, and [Case C-425/98] <I>Marca Mode</I> [[2000] ECR I&#8209;4861], paragraph 40).&#8217;
+              </P>
+              <P class="C05Titre2">&nbsp;<I>National law</I></P>
+              <P class="C01PointnumeroteAltN"><A NAME="point6">6</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Directive was transposed in the United Kingdom of Great Britain and Northern Ireland by the Trade Marks Act 1994.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point7">7</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Under section 5(3)(a) of the Trade Marks Act, &#8216;[a] trade mark which &#8230; is identical with or similar to an earlier trade mark
+                 &#8230; shall not be registered if, or to the extent that, the earlier trade mark has a reputation in the United Kingdom (or, in
+                 the case of a Community trade mark [or international trade mark (EC)] in the European Community) and the use of the later
+                 mark without due cause would take unfair advantage of, or be detrimental to, the distinctive character or the repute of the
+                 earlier trade mark&#8217;.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point8">8</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Section 47(2)(a) of the Trade Marks Act provides that &#8216;[t]he registration of a trade mark may be declared invalid on the ground
+                 &#8230; that there is an earlier trade mark in relation to which the conditions set out in section 5(1), (2) or (3) obtain&#8217;.
+              </P>
+              <P class="C04Titre1">&nbsp;<B>The dispute in the main proceedings and the questions referred for a preliminary ruling</B></P>
+              <P class="C01PointnumeroteAltN"><A NAME="point9">9</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Intel Corporation is, inter alia, the proprietor of the national word mark INTEL, registered in the United Kingdom, as well
+                 as of various other national and Community trade marks consisting of or including the word &#8216;Intel&#8217;. The goods and services
+                 in respect of which those marks were registered are, essentially, computers and computer-linked goods and services in Classes
+                 9, 16, 38 and 42 under the Nice Agreement Concerning the International Classification of Goods and Services for the Purposes
+                 of the Registration of Marks of 15 June 1957, as revised and amended.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point10">10</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;According to the order for reference, the INTEL mark has a huge reputation in the United Kingdom for microprocessor products
+                 (chips and peripherals) and multimedia and business software.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point11">11</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CPM United Kingdom Ltd is the proprietor of the national word mark INTELMARK, registered in the United Kingdom with effect
+                 from 31&nbsp;January 1997 for &#8216;marketing and telemarketing services&#8217; in Class 35 under the Nice Agreement.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point12">12</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;On 31 October 2003 Intel Corporation filed at the United Kingdom Trade Mark Registry an application for a declaration of invalidity
+                 against the registration of the INTELMARK trade mark on the basis of section 47(2) of the Trade Marks Act, claiming that the
+                 use of that mark would take unfair advantage of, or be detrimental to, the distinctive character or the repute of the earlier
+                 INTEL trade mark within the meaning of section 5(3) of that act.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point13">13</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Its application was dismissed by decision of the Hearing Officer of 1&nbsp;February 2006.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point14">14</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The appeal brought by Intel Corporation to the High Court of Justice of England and Wales, Chancery Division (Intellectual
+                 Property), was dismissed on 26 July 2006.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point15">15</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Intel Corporation then appealed to the Court of Appeal (England and Wales) (Civil Division).
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point16">16</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Intel Corporation argued before that court that both Article 4(4)(a) and Article 5(2) of the Directive seek to protect a proprietor
+                 of a trade mark with a reputation against the risk of dilution.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point17">17</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Relying on the judgment in <I>Adidas-Salomon and Adidas Benelux</I>, it considers that, in order to enjoy the protection conferred by Article 4(4)(a) of the Directive, it is sufficient that
+                 the degree of similarity between the earlier mark with a reputation and the later mark has the effect that the relevant section
+                 of the public establishes a link between those two marks. A &#8216;link&#8217; means any kind of mental association between those two
+                 marks, so a mere bringing to mind of the earlier mark is enough.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point18">18</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Furthermore, relying on paragraph 30 of the judgment in <I>General Motors</I>, Intel Corporation submits that, where the earlier mark both is unique and has a strong distinctive character, it must be
+                 accepted that detriment to it will be caused by virtually any use for any other goods or services. It adds that, where the
+                 earlier mark is unique and well known, it is important to stop any encroachment at the outset, otherwise that mark will suffer
+                 a death by a thousand cuts.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point19">19</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The national court states, first, that &#8216;Intel&#8217; is an invented word with no meaning or significance beyond the products which
+                 it identifies, that the INTEL mark is unique in the sense that the word of which it consists has not been used by anyone for
+                 any goods or services other than those marketed by Intel Corporation and, finally, that that mark has a huge reputation in
+                 the United Kingdom for computers and computer-linked products.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point20">20</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Secondly, the national court considers that the INTEL and INTELMARK trade marks are similar, but starts from the premiss that
+                 the use of INTELMARK does not suggest a trade connection with Intel Corporation.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point21">21</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thirdly, the national court states that the goods &#8211; essentially, computers and computer-linked products &#8211; and services for
+                 which Intel Corporation&#8217;s national and Community marks consisting of or including the word &#8216;Intel&#8217; were registered are dissimilar
+                 to the services covered by the registration of the INTELMARK trade mark.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point22">22</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It is uncertain whether, in such factual circumstances, the proprietor of the earlier mark with a reputation is entitled to
+                 the protection provided for in Article 4(4)(a) of the Directive. More generally, it raises the question of the conditions
+                 and scope of that protection.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point23">23</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accordingly, the Court of Appeal (England and Wales) (Civil Division) decided to stay the proceedings and to refer the following
+                 questions to the Court for a preliminary ruling:
+              </P>
+              <P class="C02AlineaAltA">&#8216;(1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For the purposes of Article 4(4)(a) of the [Directive], where: </P>
+              <P class="C11Marge1avecretrait">(a)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the earlier mark has a huge reputation for certain specific types of goods or services, </P>
+              <P class="C11Marge1avecretrait">(b)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;those goods or services are dissimilar or dissimilar to a substantial degree to the goods or services of the later mark, </P>
+              <P class="C11Marge1avecretrait">(c)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the earlier mark is unique in respect of any goods or services,</P>
+              <P class="C11Marge1avecretrait">(d)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the earlier mark would be brought to mind by the average consumer when he or she encounters the later mark used for the services
+                 of the later mark, 
+              </P>
+              <P class="C10Marge1">are those facts sufficient in themselves to establish (i) &#8220;a link&#8221; within the meaning of paragraphs 29 and 30 of [<I>Adidas-Salomon and Adidas Benelux</I>], and/or (ii) unfair advantage and/or detriment within the meaning of that Article? 
+              </P>
+              <P class="C09Marge0avecretrait">(2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If no, what factors is the national court to take into account in deciding whether such is sufficient? Specifically, in the
+                 global appreciation to determine whether there is a &#8220;link&#8221;, what significance is to be attached to the goods or services in
+                 the specification of the later mark?
+              </P>
+              <P class="C09Marge0avecretrait">(3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In the context of Article 4(4)(a) [of the Directive], what is required in order to satisfy the condition of detriment to distinctive
+                 character? Specifically, (i) does the earlier mark have to be unique, (ii) is a first conflicting use sufficient to establish
+                 detriment to distinctive character and (iii) does the element of detriment to distinctive character of the earlier mark require
+                 an effect on the economic behaviour of the consumer?&#8217;
+              </P>
+              <P class="C04Titre1">&nbsp;<B>The questions</B></P>
+              <P class="C05Titre2">&nbsp;<I>Preliminary observations </I></P>
+              <P class="C01PointnumeroteAltN"><A NAME="point24">24</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It should be noted that the wording of Articles 4(4)(a) and 5(2) of the Directive is essentially identical and is designed
+                 to give trade marks with a reputation the same protection.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point25">25</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accordingly, the interpretation of Article 5(2) of the Directive given by the Court in <I>Adidas-Salomon and Adidas Benelux</I>, applies equally to Article 4(4)(a) of the Directive (see, to that effect, Case C&#8209;292/00 <I>Davidoff</I> [2003] ECR I-389, paragraph 17).
+              </P>
+              <P class="C06Titre3">&nbsp;The protection given by Article 4(4)(a) of the Directive </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point26">26</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Article 4(4)(a) of the Directive establishes, for the benefit of trade marks with a reputation, a wider form of protection
+                 than that provided for in Article 4(1). The specific condition of that protection consists of a use of the later mark without
+                 due cause which takes or would take unfair advantage of, or is or would be detrimental to, the distinctive character or the
+                 repute of the earlier mark (see, to that effect, in respect of Article 5(2) of the Directive, <I>Marca Mode</I>, paragraph 36; <I>Adidas-Salomon and Adidas Benelux</I>, paragraph 27, and Case C-102/07 <I>adidas and adidas Benelux </I>[2008] ECR I-0000, paragraph 40).
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point27">27</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The types of injury against which Article 4(4)(a) of the Directive ensures such protection for the benefit of trade marks
+                 with a reputation are, first, detriment to the distinctive character of the earlier mark, secondly, detriment to the repute
+                 of that mark and, thirdly, unfair advantage taken of the distinctive character or the repute of that mark.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point28">28</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Just one of those three types of injury suffices for that provision to apply.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point29">29</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;As regards, in particular, detriment to the distinctive character of the earlier mark, also referred to as &#8216;dilution&#8217;, &#8216;whittling
+                 away&#8217; or &#8216;blurring&#8217;, such detriment is caused when that mark&#8217;s ability to identify the goods or services for which it is registered
+                 and used as coming from the proprietor of that mark is weakened, since use of the later mark leads to dispersion of the identity
+                 and hold upon the public mind of the earlier mark. That is notably the case when the earlier mark, which used to arouse immediate
+                 association with the goods and services for which it is registered, is no longer capable of doing so.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point30">30</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The types of injury referred to in Article 4(4)(a) of the Directive, where they occur, are the consequence of a certain degree
+                 of similarity between the earlier and later marks, by virtue of which the relevant section of the public makes a connection
+                 between those two marks, that is to say, establishes a link between them even though it does not confuse them (see, in relation
+                 to Article 5(2) of the Directive, <I>General Motors</I>, paragraph 23; <I>Adidas-Salomon and Adidas Benelux</I>, paragraph 29, and <I>adidas and adidas Benelux</I>, paragraph 41).
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point31">31</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In the absence of such a link in the mind of the public, the use of the later mark is not likely to take unfair advantage
+                 of, or be detrimental to, the distinctive character or the repute of the earlier mark.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point32">32</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;However, the existence of such a link is not sufficient, in itself, to establish that there is one of the types of injury
+                 referred to in Article&nbsp;4(4)(a) of the Directive, which constitute, as was stated in paragraph 26 of this judgment, the specific
+                 condition of the protection of trade marks with a reputation laid down by that provision.
+              </P>
+              <P class="C06Titre3">&nbsp;The relevant public </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point33">33</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The public to be taken into account in order to determine whether registration of the later mark may be declared invalid pursuant
+                 to Article 4(4)(a) of the Directive varies depending on the type of injury alleged by the proprietor of the earlier trade
+                 mark.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point34">34</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First, both a trade mark&#8217;s distinctiveness and its reputation must be assessed, first, by reference to the perception of the
+                 relevant public, which consists of average consumers of the goods or services for which that mark is registered, who are reasonably
+                 well informed and reasonably observant and circumspect (as regards distinctive character, see Case C&#8209;363/99 <I>Koninklijke KPN Nederland</I> [2004] ECR I&#8209;1619, paragraph 34; as regards reputation, see, to that effect, <I>General Motors</I>, paragraph 24).
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point35">35</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accordingly, the existence of injury consisting of detriment to the distinctive character or the repute of the earlier mark
+                 must be assessed by reference to average consumers of the goods and services for which that mark is registered, who are reasonably
+                 well informed and reasonably observant and circumspect.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point36">36</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Secondly, as regards injury consisting of unfair advantage taken of the distinctive character or the repute of the earlier
+                 mark, in so far as what is prohibited is the drawing of benefit from that mark by the proprietor of the later mark, the existence
+                 of such injury must be assessed by reference to average consumers of the goods or services for which the later mark is registered,
+                 who are reasonably well informed and reasonably observant and circumspect.
+              </P>
+              <P class="C06Titre3">&nbsp;Proof</P>
+              <P class="C01PointnumeroteAltN"><A NAME="point37">37</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In order to benefit from the protection introduced by Article 4(4)(a) of the Directive, the proprietor of the earlier mark
+                 must adduce proof that the use of the later mark &#8216;would take unfair advantage of, or be detrimental to, the distinctive character
+                 or the repute of the earlier trade mark&#8217;.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point38">38</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The proprietor of the earlier trade mark is not required, for that purpose, to demonstrate actual and present injury to its
+                 mark for the purposes of Article 4(4)(a) of the Directive. When it is foreseeable that such injury will ensue from the use
+                 which the proprietor of the later mark may be led to make of its mark, the proprietor of the earlier mark cannot be required
+                 to wait for it actually to occur in order to be able to prohibit that use. The proprietor of the earlier mark must, however,
+                 prove that there is a serious risk that such an injury will occur in the future.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point39">39</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When the proprietor of the earlier mark has shown that there is either actual and present injury to its mark for the purposes
+                 of Article&nbsp;4(4)(a) of the Directive or, failing that, a serious risk that such injury will occur in the future, it is for
+                 the proprietor of the later mark to establish that there is due cause for the use of that mark.
+              </P>
+              <P class="C05Titre2">&nbsp;<I>Point (i) of Question 1 and Question 2</I></P>
+              <P class="C01PointnumeroteAltN"><A NAME="point40">40</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By point (i) of Question 1 and Question 2, the national court asks, essentially, what the relevant criteria are for the purposes
+                 of establishing whether there is a link, within the meaning of the judgment in <I>Adidas Salomon and Adidas Benelux</I> (&#8216;a link&#8217;), between the earlier mark with a reputation and the later mark in respect of which a declaration of invalidity
+                 is sought.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point41">41</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The existence of such a link must be assessed globally, taking into account all factors relevant to the circumstances of the
+                 case (see, in respect of Article 5(2) of the Directive, <I>Adidas-Salomon and Adidas Benelux</I>, paragraph 30, and <I>adidas and adidas Benelux</I>, paragraph 42).
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point42">42</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Those factors include:
+              </P>
+              <P class="C03Tiretlong">&#8211;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the degree of similarity between the conflicting marks;</P>
+              <P class="C03Tiretlong">&#8211;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the nature of the goods or services for which the conflicting marks were registered, including the degree of closeness or
+                 dissimilarity between those goods or services, and the relevant section of the public;
+              </P>
+              <P class="C03Tiretlong">&#8211;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the strength of the earlier mark&#8217;s reputation;</P>
+              <P class="C03Tiretlong">&#8211;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the degree of the earlier mark&#8217;s distinctive character, whether inherent or acquired through use;</P>
+              <P class="C03Tiretlong">&#8211;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the existence of the likelihood of confusion on the part of the public.</P>
+              <P class="C01PointnumeroteAltN"><A NAME="point43">43</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In that respect, the following points must be made.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point44">44</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;As regards the degree of similarity between the conflicting marks, the more similar they are, the more likely it is that the
+                 later mark will bring the earlier mark with a reputation to the mind of the relevant public. That is particularly the case
+                 where those marks are identical.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point45">45</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;However, the fact that the conflicting marks are identical, and even more so if they are merely similar, is not sufficient
+                 for it to be concluded that there is a link between those marks.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point46">46</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It is possible that the conflicting marks are registered for goods or services in respect of which the relevant sections of
+                 the public do not overlap.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point47">47</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The reputation of a trade mark must be assessed in relation to the relevant section of the public as regards the goods or
+                 services for which that mark was registered. That may be either the public at large or a more specialised public (see <I>General Motors</I>, paragraph 24).
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point48">48</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It is therefore conceivable that the relevant section of the public as regards the goods or services for which the earlier
+                 mark was registered is completely distinct from the relevant section of the public as regards the goods or services for which
+                 the later mark was registered and that the earlier mark, although it has a reputation, is not known to the public targeted
+                 by the later mark. In such a case, the public targeted by each of the two marks may never be confronted with the other mark,
+                 so that it will not establish any link between those marks.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point49">49</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Furthermore, even if the relevant section of the public as regards the goods or services for which the conflicting marks are
+                 registered is the same or overlaps to some extent, those goods or services may be so dissimilar that the later mark is unlikely
+                 to bring the earlier mark to the mind of the relevant public.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point50">50</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accordingly, the nature of the goods or services for which the conflicting marks are registered must be taken into consideration
+                 for the purposes of assessing whether there is a link between those marks.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point51">51</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It must also be pointed out that certain marks may have acquired such a reputation that it goes beyond the relevant public
+                 as regards the goods or services for which those marks were registered.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point52">52</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In such a case, it is possible that the relevant section of the public as regards the goods or services for which the later
+                 mark is registered will make a connection between the conflicting marks, even though that public is wholly distinct from the
+                 relevant section of the public as regards goods or services for which the earlier mark was registered.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point53">53</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For the purposes of assessing where there is a link between the conflicting marks, it may therefore be necessary to take into
+                 account the strength of the earlier mark&#8217;s reputation in order to determine whether that reputation extends beyond the public
+                 targeted by that mark.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point54">54</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Likewise, the stronger the distinctive character of the earlier mark, whether inherent or acquired through the use which has
+                 been made of it, the more likely it is that, confronted with a later identical or similar mark, the relevant public will call
+                 that earlier mark to mind.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point55">55</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accordingly, for the purposes of assessing whether there is a link between the conflicting marks, the degree of the earlier
+                 mark&#8217;s distinctive character must be taken into consideration.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point56">56</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In that regard, in so far as the ability of a trade mark to identify the goods or services for which it is registered and
+                 used as coming from the proprietor of that mark and, therefore, its distinctive character are all the stronger if that mark
+                 is unique &#8211; that is to say, as regards a word mark such as INTEL, if the word of which it consists has not been used by anyone
+                 for any goods or services other than by the proprietor of the mark for the goods and services it markets &#8211; it must be ascertained
+                 whether the earlier mark is unique or essentially unique.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point57">57</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Finally, a link between the conflicting marks is necessarily established when there is a likelihood of confusion, that is
+                 to say, when the relevant public believes or might believe that the goods or services marketed under the earlier mark and
+                 those marketed under the later mark come from the same undertaking or from economically-linked undertakings (see to that effect,
+                 inter alia, Case C&#8209;342/97 <I>Lloyd Schuhfabrik Meyer</I> [1999] ECR I&#8209;3819, paragraph 17, and Case C&#8209;533/06 <I>O2 Holdings and O2 (UK) </I>[2008] ECR I&#8209;0000, paragraph 59). 
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point58">58</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;However, as is apparent from paragraphs 27 to 31 of the judgment in <I>Adidas-Salomon and Adidas Benelux</I>, implementation of the protection introduced by Article 4(4)(a) of the Directive does not require the existence of a likelihood
+                 of confusion.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point59">59</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The national court asks, in particular, whether the circumstances set out in points (a) to (d) of Question 1 referred for
+                 a preliminary ruling are sufficient to establish a link between the conflicting marks.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point60">60</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;As regards the circumstance referred to in point (d) of that question, the fact that, for the average consumer, who is reasonably
+                 well informed and reasonably observant and circumspect, the later mark would call the earlier mark to mind is tantamount to
+                 the existence of such a link.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point61">61</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;As regards the circumstances referred to in paragraphs (a) to (c) of that question, as is apparent from paragraph 41 to 58
+                 of this judgment, they do not necessarily imply the existence of a link between the conflicting marks, but they do not exclude
+                 one either. It is for the national court to base its analysis on all the facts of the case in the main proceedings.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point62">62</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The answer to point (i) of Question 1 and to Question 2 must therefore be that Article 4(4)(a) of the Directive must be interpreted
+                 as meaning that whether there is a link, within the meaning of <I>Adidas-Salomon and Adidas Benelux</I>, between the earlier mark with a reputation and the later mark must be assessed globally, taking into account all factors
+                 relevant to the circumstances of the case.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point63">63</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The fact that for the average consumer, who is reasonably well informed and reasonably observant and circumspect, the later
+                 mark calls the earlier mark with a reputation to mind is tantamount to the existence of such a link, within the meaning of
+                 <I>Adidas-Salomon and Adidas Benelux</I>, between the conflicting marks.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point64">64</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The fact that:
+              </P>
+              <P class="C03Tiretlong">&#8211;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the earlier mark has a huge reputation for certain specific types of goods or services, and</P>
+              <P class="C03Tiretlong">&#8211;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;those goods or services and the goods or services for which the later mark is registered are dissimilar or dissimilar to a
+                 substantial degree, and
+              </P>
+              <P class="C03Tiretlong">&#8211;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the earlier mark is unique in respect of any goods or services, </P>
+              <P class="C02AlineaAltA">does not necessarily imply that there is a link, within the meaning of <I>Adidas-Salomon and Adidas Benelux</I>, between the conflicting marks.
+              </P>
+              <P class="C05Titre2">&nbsp;<I>Point (ii) of Question 1 and Question 3</I></P>
+              <P class="C01PointnumeroteAltN"><A NAME="point65">65</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By point (ii) of Question 1, the national court asks whether the circumstances set out in points (a) to (d) are sufficient
+                 to establish that the use of the later mark takes or would take unfair advantage of, or is or would be detrimental to, the
+                 distinctive character or the repute of the earlier mark. By Question 3, the national court asks, essentially, what the relevant
+                 criteria are for the purposes of assessing whether the use of the later mark is or would be detrimental to the distinctive
+                 character of the earlier mark.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point66">66</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First, as was pointed out in paragraph 30 of this judgment, the types of injury referred to in Article 4(4)(a) of the Directive,
+                 where they occur, are the consequence of a certain degree of similarity between the earlier and later marks, by virtue of
+                 which the relevant section of the public makes a connection between those two marks, that is to say, establishes a link between
+                 them even though it does not confuse them.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point67">67</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The more immediately and strongly the earlier mark is brought to mind by the later mark, the greater the likelihood that the
+                 current or future use of the later mark is taking unfair advantage of, or is detrimental to, the distinctive character or
+                 the repute of the earlier mark.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point68">68</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It follows that, like the existence of a link between the conflicting marks, the existence of one of the types of injury referred
+                 to in Article&nbsp;4(4)(a) of the Directive, or a serious likelihood that such an injury will occur in the future, must be assessed
+                 globally, taking into account all factors relevant to the circumstances of the case, which include the criteria listed in
+                 paragraph 42 of this judgment.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point69">69</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;As regards the strength of the reputation and the degree of distinctive character of the earlier mark, the Court has already
+                 held that the stronger the earlier mark&#8217;s distinctive character and reputation the easier it will be to accept that detriment
+                 has been caused to it (see, regarding Article 5(2) of the Directive, <I>General Motors</I>, paragraph 30). 
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point70">70</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Secondly, the circumstances listed in points (a) to (d) of Question 1 are not sufficient to establish the existence of unfair
+                 advantage and/or detriment within the meaning of Article 4(4)(a) of the Directive.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point71">71</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;So far as concerns, in particular, the fact referred to in point (d) of that question, as follows from paragraph 32 of this
+                 judgment, the existence of a link between the conflicting marks does not dispense the proprietor of the earlier trade mark
+                 from having to prove actual and present injury to its mark, for the purposes of Article 4(4)(a) of the Directive, or a serious
+                 likelihood that such an injury will occur in the future.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point72">72</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lastly, as regards, more particularly, detriment to the distinctive character of the earlier mark, the answer to the second
+                 part of the third question must be that, first, it is not necessary for the earlier mark to be unique in order to establish
+                 such injury or a serious likelihood that it will occur in the future.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point73">73</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A trade mark with a reputation necessarily has distinctive character, at the very least acquired through use. Therefore, even
+                 if an earlier mark with a reputation is not unique, the use of a later identical or similar mark may be such as to weaken
+                 the distinctive character of that earlier mark.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point74">74</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;However, the more &#8216;unique&#8217; the earlier mark appears, the greater the likelihood that the use of a later identical or similar
+                 mark will be detrimental to its distinctive character.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point75">75</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Secondly, a first use of an identical or similar mark may suffice, in some circumstances, to cause actual and present detriment
+                 to the distinctive character of the earlier mark or to give rise to a serious likelihood that such detriment will occur in
+                 the future.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point76">76</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thirdly, as was stated on paragraph 29 of this judgment, detriment to the distinctive character of the earlier mark is caused
+                 when that mark&#8217;s ability to identify the goods or services for which it is registered and used as coming from the proprietor
+                 of that mark is weakened, since use of the later mark leads to dispersion of the identity and hold upon the public mind of
+                 the earlier mark. 
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point77">77</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It follows that proof that the use of the later mark is or would be detrimental to the distinctive character of the earlier
+                 mark requires evidence of a change in the economic behaviour of the average consumer of the goods or services for which the
+                 earlier mark was registered consequent on the use of the later mark, or a serious likelihood that such a change will occur
+                 in the future.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point78">78</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It is immaterial, however, for the purposes of assessing whether the use of the later mark is or would be detrimental to the
+                 distinctive character of the earlier mark, whether or not the proprietor of the later mark draws real commercial benefit from
+                 the distinctive character of the earlier mark.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point79">79</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The answer to point (ii) of Question 1 and to Question 3 must therefore be that Article 4(4)(a) of the Directive is to be
+                 interpreted as meaning that whether a use of the later mark takes or would take unfair advantage of, or is or would be detrimental
+                 to, the distinctive character or the repute of the earlier mark must be assessed globally, taking into account all factors
+                 relevant to the circumstances of the case.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point80">80</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The fact that:
+              </P>
+              <P class="C03Tiretlong">&#8211;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the earlier mark has a huge reputation for certain specific types of goods or services, and</P>
+              <P class="C03Tiretlong">&#8211;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;those goods or services and the goods or services for which the later mark is registered are dissimilar or dissimilar to a
+                 substantial degree, and
+              </P>
+              <P class="C03Tiretlong">&#8211;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the earlier mark is unique in respect of any goods or services, and</P>
+              <P class="C03Tiretlong">&#8211;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for the average consumer, who is reasonably well informed and reasonably observant and circumspect, the later mark calls the
+                 earlier mark to mind,
+              </P>
+              <P class="C02AlineaAltA">is not sufficient to establish that the use of the later mark takes or would take unfair advantage of, or is or would be detrimental
+                 to, the distinctive character or the repute of the earlier mark, within the meaning of Article 4(4)(a) of the Directive.
+              </P>
+              <P class="C01PointnumeroteAltN"><A NAME="point81">81</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Article 4(4)(a) of the Directive must be interpreted as meaning that:
+              </P>
+              <P class="C03Tiretlong">&#8211;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the use of the later mark may be detrimental to the distinctive character of the earlier mark with a reputation even if that
+                 mark is not unique;
+              </P>
+              <P class="C03Tiretlong">&#8211;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a first use of the later mark may suffice to be detrimental to the distinctive character of the earlier mark;</P>
+              <P class="C03Tiretlong">&#8211;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;proof that the use of the later mark is or would be detrimental to the distinctive character of the earlier mark requires
+                 evidence of a change in the economic behaviour of the average consumer of the goods or services for which the earlier mark
+                 was registered consequent on the use of the later mark, or a serious likelihood that such a change will occur in the future.
+              </P>
+              <P class="C04Titre1">&nbsp;<B>Costs</B></P>
+              <P class="C01PointnumeroteAltN"><A NAME="point82">82</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Since these proceedings are, for the parties to the main proceedings, a step in the action pending before the national court,
+                 the decision on costs is a matter for that court. Costs incurred in submitting observations to the Court, other than the costs
+                 of those parties, are not recoverable.
+              </P>
+              <P class="C41DispositifIntroduction">On those grounds, the Court (First Chamber) hereby rules:</P>
+              <P class="C08Dispositif">1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Article 4(4)(a) of First Council Directive 89/104/EEC of 21&nbsp;December 1988 to approximate the laws of the Member States relating
+                    to trade marks must be interpreted as meaning that whether there is a link, within the meaning of Case C&#8209;408/01 <I>Adidas-Salomon and Adidas Benelux</I>, between the earlier mark with a reputation and the later mark must be assessed globally, taking into account all factors
+                    relevant to the circumstances of the case.</B></P>
+              <P class="C08Dispositif">2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>The fact that, for the average consumer, who is reasonably well informed and reasonably observant and circumspect, the later
+                    mark calls the earlier mark with a reputation to mind is tantamount to the existence of such a link, within the meaning of
+                    <I>Adidas-Salomon and Adidas Benelux</I>, between the conflicting marks.</B></P>
+              <P class="C08Dispositif">3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>The fact that:</B></P>
+              <P class="C34Dispositifmarge1avectiretlong">&#8211;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>the earlier mark has a huge reputation for certain specific types of goods or services, and</B></P>
+              <P class="C34Dispositifmarge1avectiretlong">&#8211;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>those goods or services and the goods or services for which the later mark is registered are dissimilar or dissimilar to a
+                    substantial degree, and</B></P>
+              <P class="C34Dispositifmarge1avectiretlong">&#8211;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>the earlier mark is unique in respect of any goods or services, </B></P>
+              <P class="C08Dispositif"><B>does not necessarily imply that there is a link, within the meaning of <I>Adidas-Salomon and Adidas Benelux</I>, between the conflicting marks.</B></P>
+              <P class="C08Dispositif">4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Article 4(4)(a) of Directive 89/104 must be interpreted as meaning that whether a use of the later mark takes or would take
+                    unfair advantage of, or is or would be detrimental to, the distinctive character or the repute of the earlier mark must be
+                    assessed globally, taking into account all factors relevant to the circumstances of the case.</B></P>
+              <P class="C08Dispositif">5.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>The fact that:</B></P>
+              <P class="C34Dispositifmarge1avectiretlong">&#8211;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>the earlier mark has a huge reputation for certain specific types of goods or services, and</B></P>
+              <P class="C34Dispositifmarge1avectiretlong">&#8211;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>those goods or services and the goods or services for which the later mark is registered are dissimilar or dissimilar to a
+                    substantial degree, and</B></P>
+              <P class="C34Dispositifmarge1avectiretlong">&#8211;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>the earlier mark is unique in respect of any goods or services, and</B></P>
+              <P class="C34Dispositifmarge1avectiretlong">&#8211;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>for the average consumer, who is reasonably well informed and reasonably observant and circumspect, the later mark calls the
+                    earlier mark to mind,</B></P>
+              <P class="C08Dispositif"><B>is not sufficient to establish that the use of the later mark takes or would take unfair advantage of, or is or would be detrimental
+                    to, the distinctive character or the repute of the earlier mark, within the meaning of Article 4(4)(a) of Directive 89/104.</B></P>
+              <P class="C08Dispositif">6.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Article 4(4)(a) of Directive 89/104 must be interpreted as meaning that:</B></P>
+              <P class="C34Dispositifmarge1avectiretlong">&#8211;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>the use of the later mark may be detrimental to the distinctive character of the earlier mark with a reputation even if that
+                    mark is not unique;</B></P>
+              <P class="C34Dispositifmarge1avectiretlong">&#8211;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>a first use of the later mark may suffice to be detrimental to the distinctive character of the earlier mark;</B></P>
+              <P class="C34Dispositifmarge1avectiretlong">&#8211;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>proof that the use of the later mark is or would be detrimental to the distinctive character of the earlier mark requires
+                    evidence of a change in the economic behaviour of the average consumer of the goods or services for which the earlier mark
+                    was registered consequent on the use of the later mark, or a serious likelihood that such a change will occur in the future.</B></P>
+              <P class="C77Signatures">[Signatures]</P>
+              <HR>
+              <P class="C42FootnoteLangue"><A HREF="#Footref*" NAME="Footnote*">*</A> Language of the case: English.
+              </P>
+           </BODY>
+        </HTML>
+  recorded_at: 2026-10-26T22:08:43.995Z
+- request:
+    method: POST
+    uri: https://publications.europa.eu/webapi/rdf/sparql
+    headers:
+      accept:
+      - application/sparql-results+json
+      content-type:
+      - application/x-www-form-urlencoded;charset=UTF-8
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com)
+    body:
+      type: text
+      content: >-
+        query=PREFIX+cdm%3A+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fontology%2Fcdm%23%3E%0ASELECT+%3Ftitle+%3Fdate+%3Fecli+%3Finforce+%3Fconsolidated+%3FconsolidatedDate+WHERE+%7B%0A++%3Fwork+cdm%3Aresource_legal_id_celex+%2262007CJ0252%22%5E%5E%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23string%3E+.%0A++OPTIONAL+%7B+%3Fwork+cdm%3Awork_date_document+%3Fdate+%7D%0A++OPTIONAL+%7B+%3Fwork+cdm%3Acase-law_ecli+%3Fecli+%7D%0A++OPTIONAL+%7B+%3Fwork+cdm%3Aresource_legal_in-force+%3Finforce+%7D%0A++OPTIONAL+%7B+%3Fexpr+cdm%3Aexpression_belongs_to_work+%3Fwork+%3B+cdm%3Aexpression_uses_language+%3Chttp%3A%2F%2Fpublications.europa.eu%2Fresource%2Fauthority%2Flanguage%2FENG%3E+%3B+cdm%3Aexpression_title+%3Ftitle+%7D%0A++OPTIONAL+%7B+%3Fc+cdm%3Aact_consolidated_consolidates_resource_legal+%3Fwork+%3B+cdm%3Aresource_legal_id_celex+%3Fconsolidated+.+FILTER%28STRSTARTS%28STR%28%3Fconsolidated%29%2C+%2202007CJ0252-%22%29%29+OPTIONAL+%7B+%3Fc+cdm%3Aact_consolidated_date+%3FconsolidatedDate+%7D+%7D%0A%7D+ORDER+BY+DESC%28%3Fconsolidated%29+LIMIT+1
+  response:
+    status: 200
+    headers:
+      accept-ranges:
+      - bytes
+      connection:
+      - keep-alive
+      content-disposition:
+      - filename=sparql_2026-10-26_22-08-43Z.json
+      content-type:
+      - application/sparql-results+json
+      date:
+      - Mon, 26 Oct 2026 22:08:43 GMT
+    body:
+      type: json
+      content:
+        head:
+          link: []
+          vars:
+          - title
+          - date
+          - ecli
+          - inforce
+          - consolidated
+          - consolidatedDate
+        results:
+          distinct: false
+          ordered: true
+          bindings:
+          - title:
+              type: literal
+              "xml:lang": en
+              value: "Judgment of the Court (First Chamber) of 27 November 2008.#Intel Corporation Inc. v CPM United Kingdom Ltd.#Reference for a preliminary ruling: Court of Appeal (England & Wales) (Civil Division) - United Kingdom.#Directive 89/104/EEC - Trade marks - Article 4(4)(a) - Trade marks with a reputation - Protection against the use of a later identical or similar mark - Use which takes or would take unfair advantage of, or is or would be detrimental to, the distinctive character or the repute of the earlier trade mark.#Case C-252/07."
+            date:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#date"
+              value: 2008-11-27
+            ecli:
+              type: literal
+              datatype: "http://www.w3.org/2001/XMLSchema#string"
+              value: ECLI:EU:C:2008:655
+  recorded_at: 2026-10-26T22:08:43.705Z

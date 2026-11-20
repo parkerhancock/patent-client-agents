@@ -182,6 +182,12 @@ try {
     ipo_in_mppp?: string;
     jp_court?: string;
     ilpo_section?: string;
+    rospatent_article?: string;
+    cnipa_section?: string;
+    ipophl_section?: string;
+    inpi_ar_hits?: string;
+    thai_section?: string;
+    kipo_section?: string;
     ipos_manual?: string;
     idb_cache?: string;
     default_cache?: string;
@@ -200,6 +206,12 @@ try {
     checked.jp_court !== "34/219:令和7年（行ケ）第10084号" ||
     checked.ipo_in_mppp !== "09.03.05.04" ||
     checked.ilpo_section !== "Section 13 Commercial Torts Law" ||
+    checked.rospatent_article !== "Article 1484 Civil Code" ||
+    checked.cnipa_section !== "Rule 20 Patent Implementing Regulations" ||
+    checked.ipophl_section !== "Section 3 RA 10372" ||
+    checked.inpi_ar_hits !== "Artículo 1° Ley 24.766" ||
+    checked.thai_section !== "Section 109/1 Trademark Act" ||
+    checked.kipo_section !== "Article 7-2 Patent Act" ||
     checked.ipos_manual !== "Discoveries" ||
     checked.idb_cache !== "indexeddb:1:1:135.00" ||
     checked.default_cache !== "memory"
