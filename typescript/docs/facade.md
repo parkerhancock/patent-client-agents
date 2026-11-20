@@ -26,7 +26,9 @@ commit `b06f8077`, the ODP 5.1 release that law-tools pins. That release added
 `section` and the `trademark_decision` dataset to `get_uspto`, the
 `office_actions`, `trademark_decisions` and `status_codes` datasets to
 `search_uspto`, and the `trademark_decision` source to `download_document`; all
-are served here ([tests](../tests/facade-uspto-odp51.test.ts)). To refresh,
+are served here ([tests](../tests/facade-uspto-odp51.test.ts)). The same release
+made `get_uspto(dataset='office_action')` accept an identifier from either
+office-action search, with no schema change; this server does too. To refresh,
 list the tools of `patent_client_agents.facade.facade_mcp` with a FastMCP
 client and write each tool's name, title, description and input schema.
 

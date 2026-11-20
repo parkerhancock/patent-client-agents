@@ -4,6 +4,7 @@ import {
   AssignmentCenterClient,
   EpoOpsClient,
   OfficeActionAnalyticsClient,
+  OfficeActionsClient,
   PetitionsClient,
   PublicationsClient,
 } from "@patent-client-agents/client";
@@ -316,6 +317,9 @@ function fakeUpstreams() {
           ),
         );
     }
+    // The Office Action Search API knows none of this fixture's identifiers.
+    if (path.startsWith("/api/v1/patent/office-action/"))
+      return json({ message: "Not Found" }, 404);
     return json({ error: `unexpected ${url.hostname}${path}` }, 500);
   };
   return { fetch: handler as typeof fetch, seen, noGrant };
@@ -338,6 +342,7 @@ async function connect(fake: ReturnType<typeof fakeUpstreams>, epo = true) {
         applications: new ApplicationsClient({ ...options, apiKey: "k" }),
         petitions: new PetitionsClient({ ...options, apiKey: "k" }),
         analytics: new OfficeActionAnalyticsClient({ ...options, apiKey: "k" }),
+        officeActions: new OfficeActionsClient({ ...options, apiKey: "k" }),
         publications: new PublicationsClient(options),
         assignments: new AssignmentCenterClient(options),
         ...(epo

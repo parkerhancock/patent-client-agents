@@ -1,6 +1,7 @@
 import { afterAll, beforeAll, expect, test } from "bun:test";
 import {
   ApplicationsClient,
+  OfficeActionAnalyticsClient,
   OfficeActionsClient,
   TrademarkDecisionsClient,
 } from "@patent-client-agents/client";
@@ -65,7 +66,8 @@ const upstream = (async (input: RequestInfo | URL, init?: RequestInit) => {
   seen.push({
     method: request.method,
     path,
-    body: text ? JSON.parse(text) : null,
+    // The legacy analytics dataset posts a form, not JSON.
+    body: text.startsWith("{") ? JSON.parse(text) : null,
   });
   if (path === "/api/v1/patent/applications/16123456/continuity")
     return json({
@@ -89,6 +91,31 @@ const upstream = (async (input: RequestInfo | URL, init?: RequestInit) => {
         },
       ],
     });
+  // The legacy analytics dataset knows none of the new API's identifiers.
+  if (path.startsWith("/api/v1/patent/oa/"))
+    return json({ response: { numFound: 0, start: 0, docs: [] } });
+  if (path === "/api/v1/patent/office-action/oa1/download/officeActionText")
+    return new Response("The whole action text.", {
+      headers: { "Content-Type": "text/plain" },
+    });
+  if (path === "/api/v1/patent/office-action/oa1")
+    return json({
+      count: 1,
+      officeActionDataBag: [
+        {
+          officeActionRecordIdentifier: "oa1",
+          applicationNumberText: "17950760",
+          documentCode: "CTFR",
+          submissionDate: "2026-10-09",
+          officeActionText: "The whole",
+        },
+      ],
+    });
+  if (
+    path.startsWith("/api/v1/patent/office-action/") &&
+    path !== "/api/v1/patent/office-action/search"
+  )
+    return json({ message: "Not Found" }, 404);
   if (path === "/api/v1/patent/office-action/search")
     return json({
       count: 9,
@@ -132,6 +159,7 @@ beforeAll(async () => {
     clients: {
       applications: new ApplicationsClient(options),
       officeActions: new OfficeActionsClient(options),
+      analytics: new OfficeActionAnalyticsClient(options),
       trademarkDecisions: new TrademarkDecisionsClient(options),
     },
   });
@@ -267,4 +295,18 @@ test("download_document fetches an administrative order and explains the rest", 
       identifier: "reexam1",
     }),
   ).rejects.toThrow("only 'Administrative' records have one");
+});
+
+test("get_uspto reads an office action found by the full-text search", async () => {
+  const result = await call("get_uspto", {
+    dataset: "office_action",
+    identifier: "oa1",
+  });
+  expect(result.summary).toStartWith(
+    "**Office action oa1** — application 17950760, type CTFR",
+  );
+  expect(result.items[0]?.officeActionText).toBe("The whole action text.");
+  await expect(
+    call("get_uspto", { dataset: "office_action", identifier: "nope" }),
+  ).rejects.toThrow("search_uspto(dataset='office_actions')");
 });

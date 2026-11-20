@@ -541,7 +541,8 @@ const LUCENE = new Set('+-&|!(){}[]^"~*?:\\/'.split(""));
 const escapeLucene = (value: string) =>
   Array.from(value, (char) => (LUCENE.has(char) ? `\\${char}` : char)).join("");
 function summarizeOfficeAction(record: Record<string, unknown>): string {
-  return `**Office action ${record.id || "(no id)"}** — application ${record.patentApplicationNumber || "(no appl#)"}, type ${record.legacyDocumentCodeIdentifier || "?"}\nMailed ${record.submissionDate || "?"}; art unit ${record.groupArtUnitNumber || "?"}; title: ${record.inventionTitle || "(no title)"}.`;
+  // Reads either record shape: legacy oa_actions or the Office Action Search API.
+  return `**Office action ${record.id || record.officeActionRecordIdentifier || "(no id)"}** — application ${record.patentApplicationNumber || record.applicationNumberText || "(no appl#)"}, type ${record.legacyDocumentCodeIdentifier || record.documentCode || "?"}\nMailed ${record.submissionDate || "?"}; art unit ${record.groupArtUnitNumber || "?"}; title: ${record.inventionTitle || "(no title)"}.`;
 }
 
 // ── Assignment Center ────────────────────────────────────────────────
@@ -944,11 +945,30 @@ export function registerUsptoFacade(
         const record = response.results[0] as
           | Record<string, unknown>
           | undefined;
-        return record ? { ...record, provenance: response.provenance } : null;
+        if (record) return { ...record, provenance: response.provenance };
+        // The two APIs issue unrelated identifiers; try the newer one.
+        try {
+          const found = await clients.officeActions.get(id);
+          const action = found.officeActionDataBag[0] as
+            | Record<string, unknown>
+            | undefined;
+          if (!action) return null;
+          // The record carries a 500-character excerpt; the text endpoint
+          // has the whole action.
+          const text = await clients.officeActions.downloadText(id);
+          return {
+            ...action,
+            officeActionText: text.data,
+            provenance: found.provenance,
+          };
+        } catch (error) {
+          if (isNotFound(error)) return null;
+          throw error;
+        }
       });
       if (single && !batch.found.length)
         throw new Error(
-          `Office action '${ids[0]}' not found. Use search_office_actions with result_type='text' to discover valid document identifiers.`,
+          `Office action '${ids[0]}' not found. Use search_uspto(dataset='office_actions') or search_office_actions (result_type='text') to discover valid document identifiers.`,
         );
       const items = batch.found.map(withoutProvenance);
       return batchEnvelope(
