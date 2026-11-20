@@ -57,6 +57,7 @@ import {
   TipoClient,
   TmepClient,
   TrademarkAssignmentClient,
+  TrademarkDecisionsClient,
   TrademarkSearchClient,
   TsdrClient,
   TwTradeSecretsClient,
@@ -197,6 +198,7 @@ export interface UsptoClients {
   analytics: OfficeActionAnalyticsClient;
   assignments: AssignmentCenterClient;
   trademarkAssignments: TrademarkAssignmentClient;
+  trademarkDecisions: TrademarkDecisionsClient;
   tsdr: TsdrClient;
   publications: PublicationsClient;
   trademarkSearch: TrademarkSearchClient;
@@ -751,6 +753,9 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     trademarkAssignments:
       provided.trademarkAssignments ??
       lazyClient(() => new TrademarkAssignmentClient()),
+    trademarkDecisions:
+      provided.trademarkDecisions ??
+      lazyClient(() => new TrademarkDecisionsClient()),
     publications:
       provided.publications ?? lazyClient(() => new PublicationsClient()),
     trademarkSearch:

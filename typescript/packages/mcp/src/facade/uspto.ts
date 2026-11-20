@@ -21,27 +21,29 @@ const DOC = {
   search_uspto: {
     title: null,
     description:
-      "Search USPTO records — application metadata, full-text publications, or petition decisions.\n\nRoutes to the right USPTO index by ``dataset``. NOTE: 'applications'\nsearches metadata only; for claim/specification text use\n'publications'. For one record by identifier use ``get_uspto``; for\nprosecution documents use ``get_file_history``; for office actions or\nassignments use the dedicated ``search_office_actions`` /\n``search_patent_assignments``.\n\nRelated tools: get_uspto, get_file_history, search_office_actions, search_patent_assignments.",
+      "Search USPTO records — applications, publications, petitions, office actions, trademark decisions.\n\nRoutes to the right USPTO index by ``dataset``. NOTE: 'applications'\nsearches metadata only; for claim/specification text use\n'publications'. 'office_actions' searches what examiners wrote; for\nstructured per-claim rejection flags or the prior art cited in an action\nuse the dedicated ``search_office_actions``. For one record by identifier\nuse ``get_uspto``; for prosecution documents use ``get_file_history``;\nfor assignments use ``search_patent_assignments``; for trademark\nregister records use ``search_trademarks``.\n\nRelated tools: get_uspto, get_file_history, search_office_actions,\nsearch_patent_assignments, search_trademarks.",
     params: {
       dataset:
-        "Which USPTO index to search. 'applications' = ODP application metadata (title, CPC, dates, status — NOT claim/spec text). 'publications' = Public Search (PPUBS) full text (claims, specification, abstract). 'petitions' = decided petition records.",
+        "Which USPTO index to search. 'applications' = ODP application metadata (title, CPC, dates, status — NOT claim/spec text). 'publications' = Public Search (PPUBS) full text (claims, specification, abstract). 'petitions' = decided patent petition records. 'office_actions' = full text of examiner office actions (rejections, allowances, restrictions; applications filed 2001+). 'trademark_decisions' = trademark expungement/reexamination proceedings, petitions to the Director, and administrative sanctions orders. 'status_codes' = what a numeric application status code means.",
       query:
-        "Search query. Applications/petitions: Lucene over metadata fields. Publications: PPUBS syntax with field codes (CLM/SPEC/AB/TTL/IN/AS). Example (applications): 'applicationMetaData.inventionTitle:\"neural\"'. Example (publications): '\"machine learning\" AND neural.CLM.'",
+        "Search query. Publications: PPUBS syntax with field codes (CLM/SPEC/AB/TI/IN/AS). Every other dataset: free text plus Lucene field:value terms (AND/OR, quoted phrases, [a TO b] ranges). Fields by dataset — applications: applicationMetaData.inventionTitle, .filingDate, .cpcClassificationBag, .examinerNameText. petitions: decidedPetitionTypeCodeDescriptionText (GRANTED | DENIED | DISMISSED), decisionPetitionTypeCodeDescriptionText, applicationNumberText, decisionDate, finalDecidingOfficeName. office_actions: officeActionText, applicationNumberText, documentCode (CTNF | CTFR | NOA | CTRS), rejectionTypeBag (101 | 102 | 103 | 112 | DoublePatent), groupArtUnitNumber, submissionDate. trademark_decisions: decisionProceedingCategory (ExpungReexam | PetitionsToDirector | Administrative), serialNumber, registrationNumber, markLiteralText, registrantName, decisionActionDate, precedentialIndicator. status_codes: applicationStatusCode, applicationStatusDescriptionText. Example (applications): 'applicationMetaData.inventionTitle:\"neural\"'. Example (publications): '\"machine learning\" AND neural.CLM.'. Example (office_actions): 'officeActionText:\"abstract idea\" AND documentCode:CTFR AND groupArtUnitNumber:3689'. Example (trademark_decisions): 'registrationNumber:6458316'.",
       limit: "Maximum results to return (1-20 for publications).",
       offset:
-        "Result offset for pagination. Applies to applications and petitions; PPUBS publications paginate by limit only (offset ignored).",
-      full: "False (default) = lean stub per hit (small). True = full record per hit (large; prefer get_uspto for a single record).",
+        "Result offset for pagination. PPUBS publications paginate by limit only (offset ignored).",
+      full: "False (default) = lean stub per hit (small). True = full record per hit (large; prefer get_uspto for a single record). Ignored for status_codes.",
     },
   },
   get_uspto: {
     title: null,
     description:
-      "Fetch one USPTO record by identifier — application, publication, petition, office action, or assignment.\n\nAlways returns a ``ListEnvelope`` (stable shape whether you pass one id\nor many). For status/dates use dataset='application'; for claim/spec\ntext use dataset='publication'. Find identifiers with ``search_uspto``\n(or ``search_office_actions`` / ``search_patent_assignments``).\n\nRelated tools: search_uspto, get_file_history.",
+      "Fetch USPTO records by identifier — application, publication, petition, office action, assignment, trademark decision.\n\nAlways returns a ``ListEnvelope`` (stable shape whether you pass one id\nor many). For status/dates use dataset='application'; for claim/spec\ntext use dataset='publication'. Find identifiers with ``search_uspto``\n(or ``search_office_actions`` / ``search_patent_assignments``).\n\nRelated tools: search_uspto, get_file_history.",
     params: {
       dataset:
-        "What kind of record the identifier names. 'application' = ODP application metadata. 'publication' = PPUBS patent text. 'petition' = petition decision record. 'office_action' = office-action document. 'assignment' = recorded assignments for an application.",
+        "What kind of record the identifier names. 'application' = ODP application metadata. 'publication' = PPUBS patent text. 'petition' = petition decision record. 'office_action' = office-action document with its complete body text. 'assignment' = recorded assignments for an application. 'trademark_decision' = trademark decision or proceeding record (text excerpt, TSDR link, whether a PDF exists).",
       identifier:
-        "The record identifier, or a list for portfolio workflows. By dataset: application/assignment → application number (8+ digits, e.g. '16123456'); publication → publication or patent number (e.g. 'US20230012345A1', 'US10123456B2'); petition → petition record id (from search); office_action → office-action document id (from search_office_actions).",
+        "The record identifier, or a list for portfolio workflows. By dataset: application/assignment → application number (8+ digits, e.g. '16123456'); publication → publication or patent number (e.g. 'US20230012345A1', 'US10123456B2'); petition → petition record id (from search); office_action → document_identifier from search_uspto(dataset='office_actions') or search_office_actions; trademark_decision → document_identifier from search_uspto(dataset='trademark_decisions').",
+      section:
+        "dataset='application' only: return one part of the file wrapper instead of the full record. 'meta-data' = bibliographic data; 'adjustment' = patent term adjustment and its history; 'attorney' = correspondence address and attorneys of record; 'continuity' = parent/child applications; 'foreign-priority' = priority claims; 'transactions' = dated prosecution events; 'associated-documents' = PGPub and grant XML file metadata.",
     },
   },
   get_file_history: {
@@ -310,6 +312,75 @@ function summarizeApplication(record: Record<string, unknown>): string {
   else line += ".";
   return `${head}\n${line}`;
 }
+/** Python ApplicationSection: the file-wrapper parts get_uspto can return alone. */
+const APPLICATION_SECTIONS = [
+  "meta-data",
+  "adjustment",
+  "attorney",
+  "continuity",
+  "foreign-priority",
+  "transactions",
+  "associated-documents",
+] as const;
+/** Python _FULL_TEXT_STUB_FIELDS. */
+const FULL_TEXT_STUB_FIELDS = [
+  "officeActionRecordIdentifier",
+  "applicationNumberText",
+  "patentNumber",
+  "inventionTitle",
+  "documentCode",
+  "documentCodeDescriptionText",
+  "submissionDate",
+  "groupArtUnitNumber",
+  "rejectionTypeBag",
+] as const;
+/** Python _stub_full_text. */
+function stubFullText(record: Record<string, unknown>) {
+  return {
+    document_identifier: record.officeActionRecordIdentifier ?? null,
+    application_number: record.applicationNumberText ?? null,
+    patent_number: record.patentNumber ?? null,
+    mail_date: record.submissionDate ?? null,
+    document_code: record.documentCode ?? null,
+    document_description: record.documentCodeDescriptionText ?? null,
+    rejection_types: record.rejectionTypeBag ?? null,
+    invention_title: record.inventionTitle ?? null,
+    art_unit: record.groupArtUnitNumber ?? null,
+  };
+}
+/** Python _prepare_trademark_decision: say whether a PDF exists, then drop the key-gated URL. */
+function prepareTrademarkDecision(
+  record: Record<string, unknown>,
+): Record<string, unknown> {
+  const { fileDownloadURI, ...rest } = record;
+  return { ...rest, pdf_available: Boolean(fileDownloadURI) };
+}
+/** Python _stub_trademark_decision. */
+function stubTrademarkDecision(record: Record<string, unknown>) {
+  return {
+    document_identifier: record.documentIdentifier ?? null,
+    category: record.decisionProceedingCategory ?? null,
+    proceeding_type: record.proceedingTypeCategory ?? null,
+    document_type: record.documentTypeDescriptionText ?? null,
+    decision_date: record.decisionActionDate ?? null,
+    mark: record.markLiteralText ?? null,
+    serial_number: record.serialNumber ?? null,
+    registration_number: record.registrationNumber ?? null,
+    party: record.partyName || record.registrantName || null,
+    petitioner: record.petitionerName ?? null,
+    petition_number: record.petitionNumber ?? null,
+    proceeding_number: record.proceedingNumber ?? null,
+    precedential: record.precedentialIndicator ?? null,
+    tsdr_url: record.documentURI ?? null,
+    pdf_available: record.pdf_available ?? null,
+  };
+}
+/** Python _summarize_trademark_decision. */
+function summarizeTrademarkDecision(record: Record<string, unknown>): string {
+  const subject =
+    record.markLiteralText || record.partyName || "(no mark or party)";
+  return `**USPTO trademark decision** — ${record.documentTypeDescriptionText || "(no document type)"}\n${subject}. Category ${record.decisionProceedingCategory || "?"}; dated ${record.decisionActionDate || "?"}.`;
+}
 /** Python _stub_petition. */
 function stubPetition(record: Record<string, unknown>) {
   return {
@@ -538,7 +609,14 @@ export function registerUsptoFacade(
       ...inputOf(
         z.object({
           dataset: z
-            .enum(["applications", "publications", "petitions"])
+            .enum([
+              "applications",
+              "publications",
+              "petitions",
+              "office_actions",
+              "trademark_decisions",
+              "status_codes",
+            ])
             .describe(d("search_uspto", "dataset")),
           query: z.string().min(1).describe(d("search_uspto", "query")),
           limit: z
@@ -581,6 +659,69 @@ export function registerUsptoFacade(
           more_available: Boolean(total && items.length + input.offset < total),
         };
       }
+      if (input.dataset === "office_actions") {
+        const result = await clients.officeActions.search({
+          query: input.query,
+          ...(input.full
+            ? { full: true }
+            : { fields: [...FULL_TEXT_STUB_FIELDS] }),
+          limit: input.limit,
+          offset: input.offset,
+        });
+        const rows = result.officeActionDataBag as Record<string, unknown>[];
+        const items = input.full ? rows : rows.map(stubFullText);
+        const total = result.count ?? items.length;
+        return {
+          ...listEnvelope(
+            `USPTO office actions (full text) — \`${input.query}\`: ${items.length} of ${total} hits.`,
+            items,
+            result.provenance,
+          ),
+          more_available: items.length + input.offset < total,
+        };
+      }
+      if (input.dataset === "trademark_decisions") {
+        const result = await clients.trademarkDecisions.search({
+          query: input.query,
+          limit: input.limit,
+          offset: input.offset,
+        });
+        const records = result.trademarkDecisionsDataBag.map(
+          prepareTrademarkDecision,
+        );
+        const items = input.full ? records : records.map(stubTrademarkDecision);
+        return {
+          ...listEnvelope(
+            `USPTO trademark decisions — \`${input.query}\`: ${items.length} of ${result.count} hits.`,
+            items,
+            result.provenance,
+          ),
+          more_available: items.length + input.offset < result.count,
+        };
+      }
+      if (input.dataset === "status_codes") {
+        const result = await clients.applications.getStatusCodes({
+          q: input.query,
+          pagination: { limit: input.limit, offset: input.offset },
+        });
+        const bag = result.data.statusCodeBag;
+        const items = (Array.isArray(bag) ? bag : []).map((code) => {
+          const row = code as Record<string, unknown>;
+          return {
+            status_code: row.applicationStatusCode ?? null,
+            description: row.applicationStatusDescriptionText ?? null,
+          };
+        });
+        const total = Number(result.data.count ?? items.length);
+        return {
+          ...listEnvelope(
+            `USPTO application status codes — \`${input.query}\`: ${items.length} of ${total} hits.`,
+            items,
+            result.provenance,
+          ),
+          more_available: items.length + input.offset < total,
+        };
+      }
       const result = await clients.petitions.search({
         query: input.query,
         limit: input.limit,
@@ -613,18 +754,94 @@ export function registerUsptoFacade(
               "petition",
               "office_action",
               "assignment",
+              "trademark_decision",
             ])
             .describe(d("get_uspto", "dataset")),
           identifier: identifierInput.describe(d("get_uspto", "identifier")),
+          section: z
+            .enum(APPLICATION_SECTIONS)
+            .nullable()
+            .default(null)
+            .describe(d("get_uspto", "section")),
         }),
       ),
     },
-    async ({ dataset, identifier }) => {
+    async ({ dataset, identifier, section }) => {
       const single = typeof identifier === "string";
+      if (section !== null && dataset !== "application")
+        throw new Error(
+          `get_uspto(section='${section}') applies only to dataset='application', not dataset='${dataset}'.`,
+        );
+      if (dataset === "trademark_decision") {
+        const ids = idList(
+          identifier,
+          "trademark decision document identifier",
+        );
+        const batch = await fanOut(ids, single, async (id) => {
+          const response = await clients.trademarkDecisions.get(id);
+          const record = response.trademarkDecisionsDataBag[0];
+          return record
+            ? {
+                ...prepareTrademarkDecision(record),
+                provenance: response.provenance,
+              }
+            : null;
+        });
+        if (single && !batch.found.length)
+          throw new ApiError(
+            `Trademark decision ${ids[0]} was not found.`,
+            404,
+            "NOT_FOUND",
+          );
+        const items = batch.found.map(withoutProvenance);
+        return batchEnvelope(
+          ids.length === 1 && items[0]
+            ? summarizeTrademarkDecision(items[0])
+            : fetchedSummary(
+                items.length,
+                ids.length,
+                "USPTO trademark decisions",
+                batch.notFound,
+              ),
+          items,
+          batch.first ??
+            staticProvenance(
+              `${ODP}/api/v1/trademark/decision-proceeding/search`,
+              ODP_NAME,
+            ),
+          batch.notFound,
+        );
+      }
       if (dataset === "publication")
         return getPublications(clients, identifier);
       if (dataset === "application" || dataset === "assignment")
         requireApplicationNumbers(dataset, identifier);
+      if (dataset === "application" && section !== null) {
+        const ids = idList(identifier, "application number");
+        const batch = await fanOut(ids, single, async (id) => {
+          const response = await clients.applications.getData(id, section);
+          const bag = response.data.patentFileWrapperDataBag;
+          if (!Array.isArray(bag) || !bag.length)
+            throw new ApiError(
+              `Application ${id} was not found.`,
+              404,
+              "NOT_FOUND",
+            );
+          return { ...response.data, provenance: response.provenance };
+        });
+        return batchEnvelope(
+          fetchedSummary(
+            batch.found.length,
+            ids.length,
+            `USPTO application ${section} sections`,
+            batch.notFound,
+          ),
+          batch.found.map(withoutProvenance),
+          batch.first ??
+            staticProvenance(`${ODP}/api/v1/patent/applications`, ODP_NAME),
+          batch.notFound,
+        );
+      }
       if (dataset === "application") {
         const ids = idList(identifier, "application number");
         const batch = await fanOut(ids, single, async (id) => {

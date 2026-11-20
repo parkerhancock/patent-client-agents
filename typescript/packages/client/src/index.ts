@@ -83,6 +83,7 @@ export * from "./thai-dip-statutes.js";
 export * from "./tipo.js";
 export * from "./tmep.js";
 export * from "./trademark-assignments.js";
+export * from "./trademark-decisions.js";
 export * from "./trademark-search.js";
 export {
   ApiError,

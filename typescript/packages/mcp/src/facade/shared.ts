@@ -19,6 +19,7 @@ import type {
   PublicationsClient,
   TmepClient,
   TrademarkAssignmentClient,
+  TrademarkDecisionsClient,
   TrademarkSearchClient,
   TsdrClient,
   WipoLexClient,
@@ -59,6 +60,7 @@ export interface FacadeClients {
   bulk: BulkDataClient;
   assignments: AssignmentCenterClient;
   trademarkAssignments: TrademarkAssignmentClient;
+  trademarkDecisions: TrademarkDecisionsClient;
   publications: PublicationsClient;
   trademarkSearch: TrademarkSearchClient;
   mpep: MpepClient;

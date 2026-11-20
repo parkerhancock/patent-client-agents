@@ -1,5 +1,6 @@
 import { createHash } from "node:crypto";
 import {
+  ApiError,
   downloadPatentPdfClean,
   type Provenance,
 } from "@patent-client-agents/client";
@@ -61,6 +62,34 @@ async function patentPdf(clients: FacadeClients, number: string) {
   return downloadResult(
     pdf.data,
     pdf.filename,
+    "application/pdf",
+    pdf.provenance,
+  );
+}
+
+/** Python _fetch_trademark_decision_document: only Administrative records have a PDF. */
+async function trademarkDecisionPdf(clients: FacadeClients, id: string) {
+  const documentId = id.trim();
+  const response = await clients.trademarkDecisions.get(documentId);
+  const record = response.trademarkDecisionsDataBag[0];
+  if (!record)
+    throw new ApiError(
+      `Trademark decision '${documentId}' not found.`,
+      404,
+      "NOT_FOUND",
+    );
+  if (!record.fileDownloadURI)
+    throw new ApiError(
+      `USPTO serves no PDF for trademark decision '${documentId}' (category ${record.decisionProceedingCategory ?? "unknown"}); only 'Administrative' records have one.${record.documentURI ? ` Read it on TSDR: ${record.documentURI}` : ""}`,
+      404,
+      "NOT_FOUND",
+    );
+  const pdf = await clients.trademarkDecisions.downloadPdf(
+    record.fileDownloadURI,
+  );
+  return downloadResult(
+    pdf.data,
+    record.fileName || `trademark_decision_${documentId}.pdf`,
     "application/pdf",
     pdf.provenance,
   );
@@ -372,9 +401,10 @@ export function registerDocumentsFacade(
                 "usitc_attachment",
                 "usitc_investigation",
                 "ipa_bulk",
+                "trademark_decision",
               ])
               .describe(
-                "Which document repository to download from. 'patent_pdf' = a patent/publication PDF (USPTO PPUBS → EPO OPS cascade). 'cafc' = a Federal Circuit opinion PDF. 'ptab_appeal'/'ptab_interference' = PTAB ex parte appeal / pre-AIA interference decisions. 'ptab_trial' = AIA trial board decisions; 'ptab_trial_docs' = AIA trial party filings. 'usitc_attachment' = one EDIS attachment; 'usitc_investigation' = all attachments for a 337 investigation. 'ipa_bulk' = resolve an IP Australia IP RAPID release to its URL (not yet available).",
+                "Which document repository to download from. 'patent_pdf' = a patent/publication PDF (USPTO PPUBS → EPO OPS cascade). 'cafc' = a Federal Circuit opinion PDF. 'ptab_appeal'/'ptab_interference' = PTAB ex parte appeal / pre-AIA interference decisions. 'ptab_trial' = AIA trial board decisions; 'ptab_trial_docs' = AIA trial party filings. 'usitc_attachment' = one EDIS attachment; 'usitc_investigation' = all attachments for a 337 investigation. 'ipa_bulk' = resolve an IP Australia IP RAPID release to its URL (not yet available). 'trademark_decision' = a USPTO trademark administrative order PDF.",
               )
           : z
               .enum([
@@ -385,9 +415,10 @@ export function registerDocumentsFacade(
                 "ptab_trial",
                 "ptab_trial_docs",
                 "ipa_bulk",
+                "trademark_decision",
               ])
               .describe(
-                "Which document repository to download from. 'patent_pdf' = a patent/publication PDF (USPTO PPUBS → EPO OPS cascade). 'cafc' = a Federal Circuit opinion PDF. 'ptab_appeal'/'ptab_interference' = PTAB ex parte appeal / pre-AIA interference decisions. 'ptab_trial' = AIA trial board decisions; 'ptab_trial_docs' = AIA trial party filings. 'ipa_bulk' = resolve an IP Australia IP RAPID release to its URL (not yet available).",
+                "Which document repository to download from. 'patent_pdf' = a patent/publication PDF (USPTO PPUBS → EPO OPS cascade). 'cafc' = a Federal Circuit opinion PDF. 'ptab_appeal'/'ptab_interference' = PTAB ex parte appeal / pre-AIA interference decisions. 'ptab_trial' = AIA trial board decisions; 'ptab_trial_docs' = AIA trial party filings. 'ipa_bulk' = resolve an IP Australia IP RAPID release to its URL (not yet available). 'trademark_decision' = a USPTO trademark administrative order PDF.",
               )) as z.ZodType<
           | "patent_pdf"
           | "cafc"
@@ -398,6 +429,7 @@ export function registerDocumentsFacade(
           | "usitc_attachment"
           | "usitc_investigation"
           | "ipa_bulk"
+          | "trademark_decision"
         >,
         identifier: z
           .string()
@@ -406,8 +438,8 @@ export function registerDocumentsFacade(
           .default(null)
           .describe(
             edis
-              ? "Primary key for the source. patent_pdf → patent/publication number ('US10123456B2'); cafc → appeal number ('2023-1234') or the opinion's PDF URL; ptab_trial/ptab_trial_docs → AIA trial number ('IPR2024-00001'); ptab_appeal → application number ('16123456'); ptab_interference → interference number; usitc_investigation → investigation number in EDIS format ('337-1234'); ipa_bulk → CKAN release id. Not used for usitc_attachment (uses document_id/attachment_id)."
-              : "Primary key for the source. patent_pdf → patent/publication number ('US10123456B2'); cafc → appeal number ('2023-1234') or the opinion's PDF URL; ptab_trial/ptab_trial_docs → AIA trial number ('IPR2024-00001'); ptab_appeal → application number ('16123456'); ptab_interference → interference number; ipa_bulk → CKAN release id.",
+              ? "Primary key for the source. patent_pdf → patent/publication number ('US10123456B2'); cafc → appeal number ('2023-1234') or the opinion's PDF URL; ptab_trial/ptab_trial_docs → AIA trial number ('IPR2024-00001'); ptab_appeal → application number ('16123456'); ptab_interference → interference number; usitc_investigation → investigation number in EDIS format ('337-1234'); ipa_bulk → CKAN release id; trademark_decision → document_identifier of a record with pdf_available=true (from search_uspto dataset='trademark_decisions'). Not used for usitc_attachment (uses document_id/attachment_id)."
+              : "Primary key for the source. patent_pdf → patent/publication number ('US10123456B2'); cafc → appeal number ('2023-1234') or the opinion's PDF URL; ptab_trial/ptab_trial_docs → AIA trial number ('IPR2024-00001'); ptab_appeal → application number ('16123456'); ptab_interference → interference number; ipa_bulk → CKAN release id; trademark_decision → document_identifier of a record with pdf_available=true (from search_uspto dataset='trademark_decisions').",
           ),
         document_id: z
           .number()
@@ -479,6 +511,8 @@ export function registerDocumentsFacade(
         return patentPdf(clients, input.identifier);
       if (input.source === "cafc")
         return downloadCafcPdf(clients.cafc, input.identifier);
+      if (input.source === "trademark_decision")
+        return trademarkDecisionPdf(clients, input.identifier);
       if (input.source === "usitc_investigation" && edis)
         return downloadUsitcInvestigation(edis, {
           investigation_number: input.identifier,
