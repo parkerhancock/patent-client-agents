@@ -71,7 +71,7 @@ export interface FacadeClients {
   wipoLex: WipoLexClient;
   epoLegal: EpoLegalClients;
   upcStatutes: UpcStatutesReader;
-  upcDecisions: Pick<UpcDecisionsClient, "search">;
+  upcDecisions: Pick<UpcDecisionsClient, "search" | "getDecisions">;
   dpmaStatutes: DpmaStatutesReader;
   twTradeSecrets: TwTradeSecretsReader;
   ipoInStatutes: IpoInStatutesReader;

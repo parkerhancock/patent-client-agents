@@ -324,6 +324,57 @@ export class UpcDecisionsClient extends CachedClient {
     return { data: { page, ...parsed }, provenance: result.provenance };
   }
 
+  /**
+   * Find decisions by case id, walking the listing from page 0 until every id
+   * is found or the pager's last page is read. Ids are canonicalized first
+   * (UPC-CFI-478/2025 finds UPC_CFI_478/2025). The result maps each input id
+   * to its row, or null when no row matches across the whole listing. Python
+   * walks the listing once per id; this walks it once for all of them.
+   */
+  async getDecisions(
+    caseIds: readonly string[],
+    options: TransportRequestOptions = {},
+  ): Promise<UpcDecisionsResult<Map<string, UpcDecision | null>>> {
+    const wanted = new Map(caseIds.map((id) => [id, canonicalUpcCaseId(id)]));
+    const found = new Map<string, UpcDecision>();
+    const remaining = new Set(wanted.values());
+    const first = await this.search({ page: 0 }, options);
+    const collect = (hits: UpcDecision[]) => {
+      for (const hit of hits)
+        if (remaining.delete(hit.case_id)) found.set(hit.case_id, hit);
+    };
+    collect(first.data.hits);
+    for (
+      let page = 1;
+      remaining.size && page < first.data.total_pages;
+      page += 1
+    ) {
+      options.signal?.throwIfAborted();
+      collect((await this.search({ page }, options)).data.hits);
+    }
+    return {
+      data: new Map(
+        [...wanted].map(([id, canonical]) => [
+          id,
+          found.get(canonical) ?? null,
+        ]),
+      ),
+      provenance: first.provenance,
+    };
+  }
+
+  /** One decision by case id, or null; see getDecisions. */
+  async getDecision(
+    caseId: string,
+    options: TransportRequestOptions = {},
+  ): Promise<UpcDecisionsResult<UpcDecision | null>> {
+    const result = await this.getDecisions([caseId], options);
+    return {
+      data: result.data.get(caseId) ?? null,
+      provenance: result.provenance,
+    };
+  }
+
   async listDivisions(
     options: TransportRequestOptions = {},
   ): Promise<UpcDecisionsResult<UpcFilterOption[]>> {

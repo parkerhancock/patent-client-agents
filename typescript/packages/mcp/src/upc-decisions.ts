@@ -297,3 +297,55 @@ export async function searchUpcDecisions(
     next_cursor: null,
   };
 }
+
+/** Python's _summarize_decision. */
+function summarizeUpcDecision(record: UpcDecision): string {
+  const caseId = record.case_id || "(no case id)";
+  const court = record.court || "(unknown court)";
+  const type = record.type_of_action || "(unknown action)";
+  let line = `Type: ${type}.`;
+  if (record.parties.length)
+    line += ` Parties: ${record.parties.join(" v. ")}.`;
+  return `**UPC ${caseId}** — ${court}\n${line}`;
+}
+
+/** Python's get_upc_decision, behind get_litigation(forum='upc'). */
+export async function getUpcDecisions(
+  client: Pick<UpcDecisionsClient, "getDecisions">,
+  identifier: string | string[],
+) {
+  const ids = (typeof identifier === "string" ? [identifier] : identifier)
+    .map((id) => id.trim())
+    .filter(Boolean);
+  if (!ids.length) throw new Error("Provide at least one UPC case identifier.");
+  if (ids.length > 50)
+    throw new Error(
+      `Too many UPC case identifiers: ${ids.length} (limit 50 per call). Split the list into batches of 50 or fewer.`,
+    );
+  const { data, provenance } = await client.getDecisions(ids);
+  const items: Record<string, unknown>[] = [];
+  const notFound: string[] = [];
+  for (const id of ids) {
+    const record = data.get(id);
+    if (record) items.push({ ...record });
+    else notFound.push(id);
+  }
+  const first = items[0] as UpcDecision | undefined;
+  const summary =
+    ids.length === 1
+      ? first
+        ? summarizeUpcDecision(first)
+        : `UPC decision ${ids[0]} — not found.`
+      : `Fetched ${items.length} of ${ids.length} UPC decisions.${notFound.length ? ` Not found: ${notFound.join(", ")}.` : ""}`;
+  return {
+    ...listEnvelope(summary, items, {
+      ...provenance,
+      source_url:
+        UPC_DECISIONS_LISTING_URL +
+        (ids.length === 1 ? `?case_id=${ids[0]}` : ""),
+      source_name: UPC_DECISIONS_SOURCE,
+    }),
+    more_available: false,
+    not_found: notFound,
+  };
+}

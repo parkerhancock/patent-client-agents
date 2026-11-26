@@ -321,3 +321,140 @@ test("search_upc_decisions returns Python's lean envelope and full rows", async 
     await session.close();
   }
 });
+
+/** Page 0 is LISTING; page n (1..37) holds one row, UPC_CFI_<1000+n>/2024. */
+function pagedSite() {
+  const pages: number[] = [];
+  const client = new UpcDecisionsClient({
+    useCache: false,
+    retryLimit: 0,
+    fetch: (async (input: RequestInfo | URL) => {
+      const url = new URL(input instanceof Request ? input.url : input);
+      const page = Number(url.searchParams.get("page") ?? 0);
+      pages.push(page);
+      const body =
+        page === 0
+          ? LISTING
+          : `<table><tbody><tr><td headers="view-field-judgement-application-no-1">UPC_CFI_${1000 + page}/2024</td><td headers="view-field-location">Munich (DE) Local Division</td></tr></tbody></table><li class="pager__item--last"><a href="?page=37">Last</a></li>`;
+      return new Response(body, {
+        headers: { "content-type": "text/html; charset=utf-8" },
+      });
+    }) as typeof fetch,
+  });
+  return { client, pages };
+}
+
+test("getDecisions walks the listing once, canonicalizes ids and stops when all are found", async () => {
+  const site = pagedSite();
+  const { data } = await site.client.getDecisions([
+    "UPC-CFI-478/2025",
+    "UPC_CFI_1003/2024",
+  ]);
+  expect(data.get("UPC-CFI-478/2025")?.case_id).toBe("UPC_CFI_478/2025");
+  expect(data.get("UPC_CFI_1003/2024")?.court).toBe(
+    "Munich (DE) Local Division",
+  );
+  expect(site.pages).toEqual([0, 1, 2, 3]);
+
+  const missing = pagedSite();
+  expect((await missing.client.getDecision("UPC_CFI_9999/2099")).data).toBe(
+    null,
+  );
+  expect(missing.pages).toHaveLength(38);
+});
+
+test("get_litigation(forum='upc') returns Python's get_upc_decision envelope", async () => {
+  const site = pagedSite();
+  const server = createServer({
+    toolset: "curated",
+    clients: { upcDecisions: site.client },
+  });
+  const client = await Client.connect(server, {
+    versionNegotiation: { mode: "legacy" },
+  });
+  type Envelope = {
+    summary: string;
+    items: Record<string, unknown>[];
+    not_found: string[];
+    more_available: boolean;
+    provenance: Record<string, unknown>;
+  };
+  const call = async (identifier: string | string[]) =>
+    (await client.callTool("get_litigation", { forum: "upc", identifier }))
+      .structuredContent as Envelope;
+  try {
+    const one = await call("UPC_CoA_0000053/2026");
+    expect(one.summary).toBe(
+      "**UPC UPC_CoA_0000053/2026** — Luxembourg (LU)\nType: Request for a discretionary review (RoP 220.3). Parties: Huawei Technologies Co. Ltd. v. Quinn Emanuel Urquhart & Sullivan, LLP.",
+    );
+    expect(one.items[0]).toHaveProperty("pdf_urls");
+    expect(one.items[0]).toHaveProperty("raw_references");
+    expect(one.not_found).toEqual([]);
+    expect(one.provenance).toMatchObject({
+      source_url:
+        "https://www.unifiedpatentcourt.org/en/decisions-and-orders?case_id=UPC_CoA_0000053/2026",
+      source_name: "Unified Patent Court",
+    });
+
+    const batch = await call([
+      "ACT_551054/2023",
+      "UPC_CFI_9999/2099",
+      "UPC_CFI_1747/2025",
+    ]);
+    expect(batch.items.map((item) => item.case_id)).toEqual([
+      "ACT_551054/2023",
+      "UPC_CFI_1747/2025",
+    ]);
+    expect(batch.not_found).toEqual(["UPC_CFI_9999/2099"]);
+    expect(batch.summary).toBe(
+      "Fetched 2 of 3 UPC decisions. Not found: UPC_CFI_9999/2099.",
+    );
+    expect(batch.more_available).toBe(false);
+    expect(batch.provenance.source_url).toBe(
+      "https://www.unifiedpatentcourt.org/en/decisions-and-orders",
+    );
+
+    const absent = await call("UPC_CFI_9999/2099");
+    expect(absent.summary).toBe("UPC decision UPC_CFI_9999/2099 — not found.");
+    expect(absent.items).toEqual([]);
+    expect(absent.not_found).toEqual(["UPC_CFI_9999/2099"]);
+  } finally {
+    await client.close();
+    await server.close();
+  }
+});
+
+test("get_litigation's description and parameter docs match Python's", async () => {
+  const python = (
+    JSON.parse(
+      readFileSync(
+        join(import.meta.dir, "fixtures", "facade", "python-facade-tools.json"),
+        "utf8",
+      ),
+    ) as {
+      name: string;
+      description: string;
+      inputSchema: { properties: Record<string, { description?: string }> };
+    }[]
+  ).find((tool) => tool.name === "get_litigation");
+  const session = await curated(stubSite());
+  try {
+    const tool = (await session.client.listTools()).find(
+      (candidate) => candidate.name === "get_litigation",
+    );
+    expect(tool?.description).toBe(python?.description);
+    const properties = tool?.inputSchema.properties as Record<
+      string,
+      { description?: string }
+    >;
+    for (const [name, schema] of Object.entries(
+      python?.inputSchema.properties ?? {},
+    ))
+      expect([name, properties[name]?.description]).toEqual([
+        name,
+        schema.description,
+      ]);
+  } finally {
+    await session.close();
+  }
+});

@@ -211,7 +211,7 @@ export interface UsptoClients {
   googlePatents: GooglePatentsClient;
   cafc: CafcClient;
   /** UPC decisions-and-orders listing (curated toolset only). */
-  upcDecisions: Pick<UpcDecisionsClient, "search">;
+  upcDecisions: Pick<UpcDecisionsClient, "search" | "getDecisions">;
   canadaFederalCourt: CanadaFederalCourtClient;
   chinaSpcIpCourt: ChinaSpcIpCourtClient;
   copyright: CopyrightClient;
