@@ -6,6 +6,15 @@ import {
   searchCafcOpinions,
   searchCafcPatentOpinions,
 } from "../cafc.js";
+import { listEnvelopeSchema } from "../shared.js";
+import {
+  SEARCH_UPC_DECISIONS_DESCRIPTION,
+  SEARCH_UPC_DECISIONS_INPUT_SCHEMA,
+  SEARCH_UPC_DECISIONS_OUTPUT_SCHEMA,
+  searchUpcDecisions,
+  searchUpcDecisionsSchema,
+  UPC_DECISIONS_ANNOTATIONS,
+} from "../upc-decisions.js";
 import {
   getUsitcInvestigations,
   LIST_USITC_ATTACHMENTS_DESCRIPTION,
@@ -212,7 +221,7 @@ export function registerLitigationFacade(
       ...facadeToolOptions(auth),
       name: "search_litigation",
       description:
-        "Search a patent tribunal's records by free text — PTAB proceedings/decisions or Federal Circuit opinions.\n\nRoutes to the right tribunal by ``forum``. Only the two free-text searches fold here; for Federal Circuit patent-opinions-by-date use the dedicated ``search_cafc_patent_opinions`` (UPC decisions are not yet available on this server). For one record by identifier use ``get_litigation``.\n\nRelated tools: get_litigation, search_cafc_patent_opinions, list_ptab_children.",
+        "Search a patent tribunal's records by free text — PTAB proceedings/decisions or Federal Circuit opinions.\n\nRoutes to the right tribunal by ``forum``. Only the two free-text searches fold here; for UPC decisions or Federal Circuit patent-opinions-by-date use the dedicated ``search_upc_decisions`` / ``search_cafc_patent_opinions``. For one record by identifier use ``get_litigation``.\n\nRelated tools: get_litigation, search_upc_decisions, search_cafc_patent_opinions, list_ptab_children.",
       input: z.object({
         forum: z
           .enum(["ptab", "cafc"])
@@ -306,6 +315,20 @@ export function registerLitigationFacade(
       input: cafcPatentSearchSchema,
     },
     (input) => searchCafcPatentOpinions(clients.cafc, input),
+  );
+
+  server.tool(
+    {
+      name: "search_upc_decisions",
+      description: SEARCH_UPC_DECISIONS_DESCRIPTION,
+      input: searchUpcDecisionsSchema,
+      inputSchema: SEARCH_UPC_DECISIONS_INPUT_SCHEMA,
+      output: listEnvelopeSchema,
+      outputSchema: SEARCH_UPC_DECISIONS_OUTPUT_SCHEMA,
+      annotations: UPC_DECISIONS_ANNOTATIONS,
+      ...(auth ? { auth } : {}),
+    },
+    (input) => searchUpcDecisions(clients.upcDecisions, input),
   );
 
   server.tool(

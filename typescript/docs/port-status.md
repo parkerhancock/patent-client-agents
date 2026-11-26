@@ -191,7 +191,9 @@ throttled; nothing is deployed.
 ## Curated facade
 
 October 21, 2026. The [curated toolset](facade.md) serves the deployed facade's
-tool surface with identical inputs. Twenty-nine of the thirty Python tools are
-served; `search_upc_decisions` waits on access to the UPC decisions site, which
-now sits behind a Cloudflare challenge. All
-served tools and modes passed a live check on October 21; not deployed.
+tool surface with identical inputs. All thirty Python tools are served. The
+other twenty-nine passed a live check on October 21. `search_upc_decisions`
+(November 26) is tested only against an inline listing fixture: the UPC
+decisions site answers automated requests with a Cloudflare challenge, so live
+calls fail with `UPSTREAM_BLOCKED`, as the deployed Python tool's do. Not
+deployed.
