@@ -42,13 +42,13 @@ client and write each tool's name, title, description and input schema.
 | `search_trademarks`, `get_trademark`, `search_trademark_assignments` | Served; TSDR views need `USPTO_TSDR_API_KEY` |
 | `classify_cpc` | Served; needs EPO OPS credentials. USCLS mapping is rejected (OPS maps CPC, IPC and ECLA). |
 | `get_fees` | Served for every office the client ports (see [fees](fees.md)); EUIPO reports not yet ported. The JPO refuses this server's honest user agent, so JPO schedules fail live and `mode='jurisdictions'` lists them as unavailable |
-| `search_litigation`, `get_litigation`, `list_ptab_children`, `search_cafc_patent_opinions` | PTAB and CAFC served; UPC decisions not ported (the site now sits behind a Cloudflare challenge); USITC appears only with `USITC_EDIS_TOKEN`, matching the Python EDIS-enabled build (checked by a second contract fixture) |
+| `search_litigation`, `get_litigation`, `list_ptab_children`, `search_cafc_patent_opinions` | PTAB, CAFC and UPC served (`get_litigation(forum='upc')` walks the decisions listing once for all requested ids, where Python walks it once per id, and is blocked live like `search_upc_decisions`); USITC appears only with `USITC_EDIS_TOKEN`, matching the Python EDIS-enabled build (checked by a second contract fixture) |
 | `search_legal_reference`, `get_legal_reference` | All corpora served: MPEP, TMEP, UKIPO MoPP, DPMA, the India statutes and MPPP, the Taiwan Trade Secrets Act and the five EPO corpora. India returns its own hit shape, as Python forwards it. For the statute corpora (`dpma`, `india_statutes`, `tw_trade_secrets`) an omitted `syntax` means all terms, as the description says; Python sent phrase. See [DPMA statutes](dpma-statutes.md), [IPO India](ipo-in.md) and [Taiwan Trade Secrets Act](tw-trade-secrets.md) |
 | `search_bulk_data`, `download_document` | ODP bulk data, patent PDFs, PTAB documents, CAFC opinions and trademark administrative orders served; USITC attachments with `USITC_EDIS_TOKEN`; IP Australia not ported |
 | `search_upc_statutes`, `get_upc_section` | Served from the UPC statutes corpus. See [UPC statutes](upc-statutes.md) |
 | `search_wipo_lex_legislation`, `get_wipo_lex_legislation` | Served. See [WIPO Lex](wipo-lex.md) |
 | `copyright` | Served. See [copyright](copyright.md) |
-| `search_upc_decisions` | Not registered; listed by `patent_client_status` |
+| `search_upc_decisions` | Served with the Python input and output schemas and annotations verbatim. The UPC site now answers automated requests with a Cloudflare challenge, which the tool reports as `UPSTREAM_BLOCKED` (the deployed Python tool fails the same way); tests use an inline listing fixture and stub fetch, as Python's do |
 
 Sub-modes without a TypeScript connector fail with "… is not yet available on
 the TypeScript server"; credential-gated families say which variable to set.

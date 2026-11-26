@@ -61,6 +61,7 @@ import {
   TrademarkSearchClient,
   TsdrClient,
   TwTradeSecretsClient,
+  UpcDecisionsClient,
   UpcStatutesClient,
   Wipo6terClient,
   WipoLexClient,
@@ -211,6 +212,8 @@ export interface UsptoClients {
   fees: FeesClient;
   googlePatents: GooglePatentsClient;
   cafc: CafcClient;
+  /** UPC decisions-and-orders listing (curated toolset only). */
+  upcDecisions: Pick<UpcDecisionsClient, "search" | "getDecisions">;
   canadaFederalCourt: CanadaFederalCourtClient;
   chinaSpcIpCourt: ChinaSpcIpCourtClient;
   copyright: CopyrightClient;
@@ -767,6 +770,8 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     fees: provided.fees ?? new FeesClient(),
     googlePatents: provided.googlePatents ?? new GooglePatentsClient(),
     cafc: provided.cafc ?? new CafcClient(),
+    upcDecisions:
+      provided.upcDecisions ?? lazyClient(() => new UpcDecisionsClient()),
     canadaFederalCourt:
       provided.canadaFederalCourt ?? new CanadaFederalCourtClient(),
     chinaSpcIpCourt: provided.chinaSpcIpCourt ?? new ChinaSpcIpCourtClient(),

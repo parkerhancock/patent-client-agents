@@ -22,6 +22,7 @@ import type {
   TrademarkDecisionsClient,
   TrademarkSearchClient,
   TsdrClient,
+  UpcDecisionsClient,
   WipoLexClient,
 } from "@patent-client-agents/client";
 import { z } from "zod";
@@ -72,6 +73,7 @@ export interface FacadeClients {
   wipoLex: WipoLexClient;
   epoLegal: EpoLegalClients;
   upcStatutes: UpcStatutesReader;
+  upcDecisions: Pick<UpcDecisionsClient, "search" | "getDecisions">;
   dpmaStatutes: DpmaStatutesReader;
   twTradeSecrets: TwTradeSecretsReader;
   ipoInStatutes: IpoInStatutesReader;
@@ -92,7 +94,7 @@ export type FacadeRegistrar = (
  * Python facade tools that have no TypeScript connector yet. They are not
  * registered; patent_client_status lists them.
  */
-export const UNPORTED_FACADE_TOOLS = ["search_upc_decisions"] as const;
+export const UNPORTED_FACADE_TOOLS: readonly string[] = [];
 
 /** A facade sub-mode whose connector is not ported yet. */
 export function notPorted(feature: string, alternative?: string): never {

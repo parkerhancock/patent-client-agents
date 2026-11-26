@@ -1,8 +1,21 @@
 {
   "name": "@patent-client-agents/waf-session",
   "version": "0.1.0",
-  "private": true,
+  "description": "Delivers browser-minted USPTO WAF session tokens to @patent-client-agents/client.",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parkerhancock/patent-client-agents.git",
+    "directory": "typescript/packages/waf-session"
+  },
+  "homepage": "https://github.com/parkerhancock/patent-client-agents/tree/main/typescript",
   "type": "module",
+  "files": [
+    "dist",
+    "!dist/**/*.tsbuildinfo",
+    "src",
+    "LICENSE"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -10,7 +23,13 @@
       "default": "./dist/index.js"
     }
   },
+  "scripts": {
+    "prepack": "tsc -b --force"
+  },
   "dependencies": {
-    "@patent-client-agents/client": "workspace:*"
+    "@patent-client-agents/client": "workspace:^"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

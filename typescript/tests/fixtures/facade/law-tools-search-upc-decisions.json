@@ -1,0 +1,188 @@
+{
+  "annotations": {
+    "openWorldHint": true,
+    "readOnlyHint": true
+  },
+  "description": "Search Unified Patent Court (UPC) decisions and orders by court, division, or language.\n\nReturns a page of decisions with canonical case IDs (``UPC_CFI_<n>/<yyyy>``,\n``UPC_CoA_<n>/<yyyy>``, or ``ACT_<n>/<yyyy>``), court, type of action,\nparties, and direct URLs to the PDF/A document(s). Lean stubs by default;\npass ``full=True`` for the upstream-shaped row. Pagination via the\n``page`` arg; ``more_available`` reflects ``total_pages`` from the pager.\n\nRelated tools: get_upc_decision, list_upc_divisions, list_upc_languages,\nsearch_upc_statutes.",
+  "inputSchema": {
+    "additionalProperties": false,
+    "properties": {
+      "court_type": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "description": "Court-type ID: '1' = Court of Appeal, '2' = Central CFI, '3' = Local CFI, '4' = Regional CFI. Omit for all."
+      },
+      "division": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "description": "Specific division ID — use list_upc_divisions to discover."
+      },
+      "full": {
+        "default": false,
+        "description": "When False (default), each hit is a lean stub: case_id, court, type_of_action, parties, detail_url, primary_pdf_url. When True, every hit carries the upstream row (with full pdf_urls list and raw_references) — prefer ``get_upc_decision`` for one record.",
+        "type": "boolean"
+      },
+      "judgement_type": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "description": "Filter to 'order' or 'decision'; omit for both"
+      },
+      "page": {
+        "default": 0,
+        "description": "0-indexed page number, default 0 (most recent)",
+        "type": "integer"
+      },
+      "proceedings_lang": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "description": "Procedural-language ID — use list_upc_languages to discover."
+      }
+    },
+    "type": "object"
+  },
+  "name": "search_upc_decisions",
+  "outputSchema": {
+    "properties": {
+      "items": {
+        "items": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "more_available": {
+        "default": false,
+        "type": "boolean"
+      },
+      "next_cursor": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "provenance": {
+        "description": "Per-response provenance metadata.\n\nSurfaces on every envelope. See CONNECTOR_STANDARDS.md §1 for the\nfour-category model and per-category provenance contracts:\n\n- ``registered_ip``       : ``retrieved_at`` + ``source_url``\n- ``adjudicative_records``: ``retrieved_at`` + ``as_of_status``\n                            (status of the proceeding at fetch time)\n- ``substantive_law``     : ``retrieved_at`` + ``corpus_synced_at``\n                            + ``corpus_version``\n- ``fees``                : ``retrieved_at`` + ``effective_date``\n                            (effective date of the fee schedule)\n\nAll category-specific fields are model-optional; the per-category\nCI compliance test enforces which categories must set which fields.",
+        "properties": {
+          "as_of_status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Proceeding status at retrieval time (adjudicative_records only). Free-text upstream label (e.g., 'Instituted', 'Final Written Decision', 'Terminated-Settled'). Snapshot semantics: dockets change; this records what we saw when retrieved_at fired."
+          },
+          "cache_hit": {
+            "default": false,
+            "description": "True if served from the local HTTP cache.",
+            "type": "boolean"
+          },
+          "connector_version": {
+            "description": "patent_client_agents package version that produced the response.",
+            "type": "string"
+          },
+          "corpus_synced_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "When the bundled corpus was last refreshed (substantive_law only)."
+          },
+          "corpus_version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Vendor-style corpus version string (substantive_law only)."
+          },
+          "effective_date": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Effective date of the fee schedule (fees category only). The office's most recent revision date. CI requires this on every fees-category response so agents can quote fees with provenance."
+          },
+          "retrieved_at": {
+            "description": "UTC timestamp of the original upstream fetch. When cache_hit is True, this is the cached fetch time.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "source_name": {
+            "description": "Human-readable upstream name (mirrors coverage/sources.yaml).",
+            "type": "string"
+          },
+          "source_url": {
+            "description": "Canonical upstream URL.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "retrieved_at",
+          "source_url",
+          "source_name",
+          "connector_version"
+        ],
+        "type": "object"
+      },
+      "summary": {
+        "type": "string"
+      }
+    },
+    "required": ["summary", "items", "provenance"],
+    "type": "object"
+  },
+  "title": "Search Upc Decisions"
+}

@@ -6,6 +6,16 @@ import {
   searchCafcOpinions,
   searchCafcPatentOpinions,
 } from "../cafc.js";
+import { listEnvelopeSchema } from "../shared.js";
+import {
+  getUpcDecisions,
+  SEARCH_UPC_DECISIONS_DESCRIPTION,
+  SEARCH_UPC_DECISIONS_INPUT_SCHEMA,
+  SEARCH_UPC_DECISIONS_OUTPUT_SCHEMA,
+  searchUpcDecisions,
+  searchUpcDecisionsSchema,
+  UPC_DECISIONS_ANNOTATIONS,
+} from "../upc-decisions.js";
 import {
   getUsitcInvestigations,
   LIST_USITC_ATTACHMENTS_DESCRIPTION,
@@ -24,7 +34,6 @@ import {
   type FacadeClients,
   facadeToolOptions,
   listEnvelope,
-  notPorted,
 } from "./shared.js";
 
 export const PTAB_TYPES = [
@@ -212,7 +221,7 @@ export function registerLitigationFacade(
       ...facadeToolOptions(auth),
       name: "search_litigation",
       description:
-        "Search a patent tribunal's records by free text — PTAB proceedings/decisions or Federal Circuit opinions.\n\nRoutes to the right tribunal by ``forum``. Only the two free-text searches fold here; for Federal Circuit patent-opinions-by-date use the dedicated ``search_cafc_patent_opinions`` (UPC decisions are not yet available on this server). For one record by identifier use ``get_litigation``.\n\nRelated tools: get_litigation, search_cafc_patent_opinions, list_ptab_children.",
+        "Search a patent tribunal's records by free text — PTAB proceedings/decisions or Federal Circuit opinions.\n\nRoutes to the right tribunal by ``forum``. Only the two free-text searches fold here; for UPC decisions or Federal Circuit patent-opinions-by-date use the dedicated ``search_upc_decisions`` / ``search_cafc_patent_opinions``. For one record by identifier use ``get_litigation``.\n\nRelated tools: get_litigation, search_upc_decisions, search_cafc_patent_opinions, list_ptab_children.",
       input: z.object({
         forum: z
           .enum(["ptab", "cafc"])
@@ -310,22 +319,35 @@ export function registerLitigationFacade(
 
   server.tool(
     {
+      name: "search_upc_decisions",
+      description: SEARCH_UPC_DECISIONS_DESCRIPTION,
+      input: searchUpcDecisionsSchema,
+      inputSchema: SEARCH_UPC_DECISIONS_INPUT_SCHEMA,
+      output: listEnvelopeSchema,
+      outputSchema: SEARCH_UPC_DECISIONS_OUTPUT_SCHEMA,
+      annotations: UPC_DECISIONS_ANNOTATIONS,
+      ...(auth ? { auth } : {}),
+    },
+    (input) => searchUpcDecisions(clients.upcDecisions, input),
+  );
+
+  server.tool(
+    {
       ...facadeToolOptions(auth),
       name: "get_litigation",
-      description: edis
-        ? "Fetch one tribunal record by identifier — a PTAB record, USITC investigation, or UPC decision.\n\nAlways returns a ``ListEnvelope`` (stable shape whether you pass one id or many). On this server forum='ptab' and forum='usitc' are available; UPC decisions are not yet ported. Find identifiers with ``search_litigation`` or ``search_usitc_investigations``. For child records of a PTAB trial use ``list_ptab_children``.\n\nRelated tools: search_litigation, list_ptab_children, search_usitc_investigations, search_usitc_documents."
-        : "Fetch one tribunal record by identifier — a PTAB record, USITC investigation, or UPC decision.\n\nAlways returns a ``ListEnvelope`` (stable shape whether you pass one id or many). On this server only forum='ptab' is available; UPC decisions are not yet ported. Find identifiers with ``search_litigation``. For child records of a PTAB trial use ``list_ptab_children``.\n\nRelated tools: search_litigation, list_ptab_children.",
+      description:
+        "Fetch one tribunal record by identifier — a PTAB record, USITC investigation, or UPC decision.\n\nAlways returns a ``ListEnvelope`` (stable shape whether you pass one id\nor many). Find identifiers with ``search_litigation`` (PTAB/CAFC) or the\nstructured-filter search ``search_upc_decisions``. For child records of a\nPTAB trial use ``list_ptab_children``.\n\nRelated tools: search_litigation, list_ptab_children, search_upc_decisions.",
       input: z.object({
         forum: (edis
           ? z
               .enum(["ptab", "usitc", "upc"])
               .describe(
-                "Which tribunal the identifier names. 'ptab' = USPTO Patent Trial and Appeal Board record. 'usitc' = U.S. International Trade Commission Section 337 investigation. 'upc' = Unified Patent Court decision (not yet available on this server).",
+                "Which tribunal the identifier names. 'ptab' = USPTO Patent Trial and Appeal Board record. 'usitc' = U.S. International Trade Commission Section 337 investigation. 'upc' = Unified Patent Court decision.",
               )
           : z
               .enum(["ptab", "upc"])
               .describe(
-                "Which tribunal the identifier names. 'ptab' = USPTO Patent Trial and Appeal Board record. 'upc' = Unified Patent Court decision (not yet available on this server).",
+                "Which tribunal the identifier names. 'ptab' = USPTO Patent Trial and Appeal Board record. 'upc' = Unified Patent Court decision.",
               )) as z.ZodType<"ptab" | "usitc" | "upc">,
         identifier: z
           .union([z.string().min(1), z.array(z.string().min(1)).min(1).max(50)])
@@ -343,10 +365,7 @@ export function registerLitigationFacade(
     },
     async (input) => {
       if (input.forum === "upc")
-        notPorted(
-          "Unified Patent Court (UPC) decision retrieval",
-          "Use forum='ptab'.",
-        );
+        return getUpcDecisions(clients.upcDecisions, input.identifier);
       if (input.forum === "usitc" && edis)
         return getUsitcInvestigations(edis, input.identifier);
       const type = input.ptab_type;

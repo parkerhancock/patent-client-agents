@@ -376,6 +376,7 @@ test("the group's tools are registered with the deployed parameter names", async
     "get_legal_reference",
     "search_bulk_data",
     "download_document",
+    "search_upc_decisions",
   ]) {
     const tool = tools.find((t) => t.name === name);
     const python = contract.find((t) => t.name === name);
@@ -384,8 +385,6 @@ test("the group's tools are registered with the deployed parameter names", async
       Object.keys(python?.inputSchema.properties ?? {}).sort(),
     );
   }
-  for (const absent of ["search_upc_decisions"])
-    expect(tools.map((t) => t.name)).not.toContain(absent);
 });
 
 test("search_litigation routes PTAB record kinds and pages by cursor", async () => {
@@ -503,12 +502,6 @@ test("get_litigation fetches PTAB records, reports missing list members, and ref
       identifier: "IPR2099-99999",
     }),
   ).rejects.toThrow();
-  await expect(
-    client.callTool("get_litigation", {
-      forum: "upc",
-      identifier: "UPC_CFI_1/2025",
-    }),
-  ).rejects.toThrow("not yet available");
 });
 
 test("list_ptab_children covers trials, appeals with no decisions, and interferences", async () => {

@@ -1,8 +1,21 @@
 {
   "name": "@patent-client-agents/client",
   "version": "0.1.0",
-  "private": true,
+  "description": "Typed TypeScript clients for patent, trademark and IP-law data sources (USPTO, EPO, WIPO and more). Runs in Bun, Node and browsers.",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parkerhancock/patent-client-agents.git",
+    "directory": "typescript/packages/client"
+  },
+  "homepage": "https://github.com/parkerhancock/patent-client-agents/tree/main/typescript",
   "type": "module",
+  "files": [
+    "dist",
+    "!dist/**/*.tsbuildinfo",
+    "src",
+    "LICENSE"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -14,6 +27,9 @@
       "bun": "./src/corpus/bootstrap.ts",
       "default": "./dist/corpus/bootstrap.js"
     }
+  },
+  "scripts": {
+    "prepack": "tsc -b --force"
   },
   "dependencies": {
     "@bokuweb/zstd-wasm": "0.0.27",
@@ -47,5 +63,8 @@
       "bun": "./src/runtime/cache-sqlite.ts",
       "default": "./dist/runtime/cache-sqlite.js"
     }
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
