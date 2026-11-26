@@ -35,6 +35,23 @@ library's ESM JavaScript and declarations for package consumption. Dependency
 versions and the Bun version are pinned; installs have a seven-day minimum
 release age. No lifecycle scripts are explicitly trusted by this workspace.
 
+## Publishing
+
+`@patent-client-agents/client`, `@patent-client-agents/waf-session` and
+`@patent-client-agents/mcp` publish to public npm; `hosted` and `waf-worker`
+stay private. Each package ships `src` (Bun resolves it through the `bun`
+export condition) and a freshly built `dist` for Node; `prepack` runs
+`tsc -b --force`, so a stale build never ships. Internal dependencies use
+`workspace:^`, which `bun publish` rewrites to `^<version>`. `npm pack` doesn't
+rewrite them, so publish with Bun.
+
+The three packages release together. Bump `version` in all three
+`package.json` files (and the MCP `connector_version` literal, still `0.1.0`),
+merge to main, and push a `ts-vX.Y.Z` tag. The
+[npm workflow](../.github/workflows/publish-npm.yml) checks the tag against the
+versions, runs `bun run check` and publishes with the `NPM_TOKEN` secret.
+`ts-v` tags don't trigger the PyPI release, which uses `vX.Y.Z`.
+
 ## Library
 
 ```ts
